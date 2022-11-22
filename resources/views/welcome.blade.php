@@ -13,6 +13,12 @@
     <div class="alert alert-success" role="alert">
         This is a success alert—check it out!
     </div>
+    <div>
+        <a href="{{ url('testRoute') }}">Go to secondPageTest</a>
+    </div>
+    <div>
+        <a href="{{ url('testVue') }}">Go to testVueJSPage</a>
+    </div>
 </div>
 
 </body>
