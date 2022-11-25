@@ -1,8 +1,31 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
+//@import url('https://fonts.googleapis.com/css2?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;600;900&display=swap');
+// Note:
+// Instead of the import, we can manually add the non-variable OFL licensed
+// version of the font, build for all platforms and all the weights and styles
+// proposed on the mock-ups. @see https://github.com/rsms/inter-gf-tight ...
+// Please @see "_fonts.scss" for more information about this implementation.
+// @import "fonts";
+//
+// Sass Variables
 @import 'variables';
-
+//
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+//
+// Base theme & CSS Variables
+@import 'base';
+//
+body {
+  background-color: var(--trv-c-background);
+  color: var(--trv-c-text);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 900;
+}

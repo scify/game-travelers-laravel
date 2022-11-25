@@ -1,7 +1,20 @@
 // Body
-$body-bg: #f8fafc;
-
+// Using Bootstrap's default, but keeping the option open for a Travelers green.
+$body-bg: #f8fafc; // # Traveler Green: #c3d0c9 as of Nov 25, 2022.
+//
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+// Falling back to the default values instead of the overrides but setting
+// Inter Tight as the default font for all sans-serifs.
+// @see https://getbootstrap.com/docs/5.2/utilities/text/#variables
+$font-family-sans-serif: 'Inter Tight', 'Nunito', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans","Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-size-base: 1rem; // default: 1rem (instead of 0.9rem), at about ~16px
+$line-height-base: 1.5; // default: 1.5 (instead of 1.6)
+//
+// Note:
+// Web design is thankfully moving back to CSS and its variables which have
+// become far more popular than their Sass counterparts as they are far more
+// easier to debug and manipulate on any modern browser. In fact, even the
+// latest (and hopefully not last) versions of Bootstrap push towards the use of
+// CSS variables for customisation. Thus, the edits on this this file have been
+// kept to a bare minimum.
+// @see https://getbootstrap.com/docs/5.2/customize/css-variables/

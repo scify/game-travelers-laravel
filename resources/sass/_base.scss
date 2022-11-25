@@ -1,0 +1,28 @@
+/* Imported colors from Travelers mock-ups */
+:root {
+  // Let's not stick with unnamed colors, please?
+  --unnamed-color-383735: #383735;
+  --unnamed-color-faf9f8: #FAF9F8;
+  --unnamed-color-f8e2ce: #F8E2CE;
+  --unnamed-color-dfdae7: #DFDAE7;
+  --unnamed-color-c3d0c9: #C3D0C9;
+  --unnamed-color-d8c46f: #D8C46F;
+  --unnamed-color-e88080: #E88080;
+  --unnamed-color-c0ceeb: #C0CEEB;
+  --unnamed-color-000000: #000000;
+}
+
+/* Traveler's default colour scheme */
+:root {
+  --trv-c-background: var(--unnamed-color-c3d0c9);
+  --trv-c-text: var(--unnamed-color-383735);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    // ok, just joking...
+    --trv-c-background: var(--unnamed-color-c3d0c9);
+    // or not?
+  }
+}
+

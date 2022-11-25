@@ -24,3 +24,8 @@ Route::get('/testRoute', function () {
 Route::get('/testVue', function () {
     return view('testVueJSPage');
 });
+
+// Routes used on the first batch of screens:
+Route::get('/login', function () {
+    return view('login');
+});
