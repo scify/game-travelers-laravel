@@ -1,7 +1,11 @@
 window._ = require('lodash');
 
 try {
-    require('bootstrap');
+    // Note that "bootstrap" defaults to boostrap.esm.js. The bundle instead
+    // includes popper and follows the non-esm syntax (=same as the one used
+    // in this script). No idea if window is really needed so a plain require
+    // might be sufficient.
+    window.bootstrap = require('bootstrap/dist/js/bootstrap.bundle');
 } catch (e) {}
 
 /**

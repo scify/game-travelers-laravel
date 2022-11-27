@@ -10900,6 +10900,10 @@ div.trvl-form {
   }
 }
 
+div.trvl-offcanvas {
+  --bs-offcanvas-height: 8rem;
+}
+
 div.trvl-flower input:not([type=checkbox]) {
   background-color: hsla(var(--trvl-c-background-hsl), 0.2);
 }

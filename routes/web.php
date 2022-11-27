@@ -25,15 +25,18 @@ Route::get('/testVue', function () {
     return view('testVueJSPage');
 });
 
-// Variable width
+// Variable width templates:
 Route::get('/login', function () {
     return view('varLogin');
+});
+Route::get('/login/error', function () {
+    return view('varLoginOffCanvasError');
 });
 Route::get('/register', function () {
     return view('varRegister');
 });
 
-// Fixed size
+// Fixed size templates:
 Route::get('/fixedRegister', function () {
     return view('fixedRegister');
 });
