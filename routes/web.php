@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,7 +25,15 @@ Route::get('/testVue', function () {
     return view('testVueJSPage');
 });
 
-// Routes used on the first batch of screens:
+// Variable width
 Route::get('/login', function () {
-    return view('login');
+    return view('varLogin');
+});
+Route::get('/register', function () {
+    return view('varRegister');
+});
+
+// Fixed size
+Route::get('/fixedRegister', function () {
+    return view('fixedRegister');
 });

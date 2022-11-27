@@ -6,6 +6,7 @@
   --unnamed-color-f8e2ce: #F8E2CE;
   --unnamed-color-dfdae7: #DFDAE7;
   --unnamed-color-c3d0c9: #C3D0C9;
+  --unnamed-color-c3d0c9: hsl(148, 12%, 79%);
   --unnamed-color-d8c46f: #D8C46F;
   --unnamed-color-e88080: #E88080;
   --unnamed-color-c0ceeb: #C0CEEB;
@@ -14,14 +15,30 @@
 
 /* Traveler's default colour scheme */
 :root {
-  --trv-c-background: var(--unnamed-color-c3d0c9);
-  --trv-c-text: var(--unnamed-color-383735);
+  --trvl-c-background: var(--unnamed-color-c3d0c9);
+  --trvl-c-background-hsl: 148, 12%, 79%;
+  --trvl-c-text: var(--unnamed-color-383735);
+  --trvl-c-link: var(--unnamed-color-383735);
+  --trvl-btn-bg: var(--unnamed-color-faf9f8);
+  --trvl-btn-color: var(--unnamed-color-000000);
+  --trvl-btn-border-color: var(--unnamed-color-383735);
+  --trvl-btn-hover-bg: var(--unnamed-color-faf9f8);
+  --trvl-btn-hover-color: var(--unnamed-color-000000);
+  --trvl-btn-hover-border-color: var(--unnamed-color-383735);
+  --trvl-btn-active-bg: var(--unnamed-color-faf9f8);
+  --trvl-btn-active-color: var(--unnamed-color-000000);
+  --trvl-btn-active-border-color: var(--unnamed-color-383735);
+  --trvl-btn-disabled-bg: var(--unnamed-color-faf9f8);
+  --trvl-btn-disabled-color: var(--unnamed-color-000000);
+  --trvl-btn-disabled-border-color: var(--unnamed-color-383735);
+  --trvl-btn-focus-shadow-rgb: 160, 160, 160;
+  --trvl-c-black: var(--unnamed-color-000000);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     // ok, just joking...
-    --trv-c-background: var(--unnamed-color-c3d0c9);
+    --trvl-c-background: var(--unnamed-color-c3d0c9);
     // or not?
   }
 }
