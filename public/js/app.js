@@ -2162,8 +2162,8 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 try {
   // Note that "bootstrap" defaults to boostrap.esm.js. The bundle instead
   // includes popper and follows the non-esm syntax (=same as the one used
-  // in this script). No idea if window is really needed so a plain require
-  // might be sufficient.
+  // in this script). window.bootstrap = was required to access bootstrap
+  // object via JavaScript and create custom interactive elements.
   window.bootstrap = __webpack_require__(/*! bootstrap/dist/js/bootstrap.bundle */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
 } catch (e) {}
 

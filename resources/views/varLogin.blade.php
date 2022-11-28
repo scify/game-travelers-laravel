@@ -11,18 +11,9 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
   </head>
   <body>
-    <!-- header -->
-    <header class="container-xxl clearfix trvl-header p-4">
-      <div class="logo float-start">
-        <a href="{{ url('/') }}">
-          <img src="{{ asset('images/logo.svg') }}" width="145" height="79" alt="Ταξιδιώτες" />
-        </a>
-      </div>
-      <div class="user float-end">
-        <!--[[-->User<!--]]-->
-      </div>
-    </header>
-    <!-- end of header -->
+
+    <x-header/>
+
     <!-- main-content -->
     <div class="container-xxl ps-4 pe-4 trvl-main-content trvl-flower trvl-flower-12">
       <div class="row">
@@ -67,19 +58,13 @@
         </div>
 
       </div>
-      <!-- footer -->
-      <div class="row">
-        <footer class="container-xxl p-4 trvl-footer">
-          <div class="scify float-start">
-            <a href="http://www.scify.org/" target="_blank">
-              <img src="{{ asset('images/scify.png') }}" width="105" height="53" alt="Created by SciFY" />
-            </a>
-          </div>
-        </footer>
-      </div>
-      <!-- end of footer -->
+
+      <!-- OFF-CANVAS-ERROR-MESSAGE GOES HERE -->
 
     </div>
     <!-- end of main content -->
+
+    <x-footer/>
+
   </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
   <head>
-    <title>Login</title>
+    <title>Εγγραφή | Ταξιδιώτες</title>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <!-- Scripts -->
     <script src="{{ mix('js/main.js') }}" defer></script>
@@ -26,7 +26,7 @@
               <form>
                 <div>
                   <label class="extended" for="email">Email</label>
-                  <input class="extended" type="email" id="email" />
+                  <input class="extended" value="{{ $patates }}@gmail.com" type="email" id="email" />
                 </div>
                 <div>
                   <label class="extended" for="password1">Συνθηματικό</label>

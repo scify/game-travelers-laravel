@@ -34,21 +34,12 @@ h6 {
   font-weight: 900;
 }
 
+// Main Content
 div.trvl-main-content {
   h1 {
     font-size: 2em;
     color: var(--trvl-c-black);
   }
-}
-div.trvl-form {
-  padding: 0 8em; // v h -- t e b s
-  @media (max-width: 767.98px) {
-    padding: 0;
-  }
-}
-div.trvl-offcanvas {
-  // enough for at least 2 lines of text as we can't really be responsive.
-  --bs-offcanvas-height: 8rem;
 }
 // Flowers
 div.trvl-flower {
@@ -62,6 +53,46 @@ div.trvl-flower-12 {
   background-repeat: no-repeat;
   background-position-x: right 1rem;
   background-position-y: top;
+  @media (max-width: 575.98px) {
+    &.responsive-hide {
+      background-image: url("../images/bg-side-color-12.png");
+    }
+  }
+}
+// Success
+body.trvl-middle {
+  overflow: hidden;
+}
+div.trvl-middle {
+  height: calc(100vh - 180px);
+  width: calc(100vw - 4rem);
+  &--content {
+    min-height: 50%;
+    text-align: center;
+    position: relative;
+    top: 30%;
+    transform: translateY(-50%);
+    @media (max-height: 500px) {
+      transform: translateY(0);
+      top: 0;
+    }
+    h1 {
+      font-weight: 600;
+      color: var(--trvl-c-text);
+      font-size: 2.1rem;
+      margin-bottom: 3rem;
+    }
+  }
+}
+
+// Footer
+footer.trvl-footer {
+  position:relative; bottom: 75px;
+}
+// Off-canvas messages
+div.trvl-offcanvas {
+  // enough for at least 2 lines of text as we can't really be responsive.
+  --bs-offcanvas-height: 8rem;
 }
 
 // Links
@@ -76,6 +107,12 @@ a:visited {
 }
 
 // Forms
+div.trvl-form {
+  padding: 0 8em; // v h -- t e b s
+  @media (max-width: 767.98px) {
+    padding: 0;
+  }
+}
 input[type=checkbox] {
   background-color: var(--trvl-btn-bg);
   border-color: var(--trvl-c-text);
@@ -132,7 +169,6 @@ button.btn-primary {
   --bs-btn-disabled-color: var(--trvl-btn-disabled-color);
   --bs-btn-disabled-border-color: var(--trvl-btn-disabled-border-color);
   --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
-
   border: 1px solid var(--trvl-c-text);
   outline: none; // @TODO: Outlines for focus & states for active/hover
 }
@@ -145,6 +181,9 @@ div.text-start-end {
   div.actions.expand button,
   button.expand {
     width: 100%;
+  }
+  div.trvl-main-content {
+    margin-bottom: 25px;
   }
   div.trvl-flower input:not([type='checkbox']) {
     background-color: hsla(var(--trvl-c-background-hsl), 0.4);

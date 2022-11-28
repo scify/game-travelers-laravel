@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -26,6 +27,7 @@ Route::get('/testVue', function () {
 });
 
 // Variable width templates:
+// Login | Onboarding
 Route::get('/login', function () {
     return view('varLogin');
 });
@@ -35,8 +37,18 @@ Route::get('/login/error', function () {
 Route::get('/register', function () {
     return view('varRegister');
 });
+Route::get('/password/reset', function () {
+    return view('varPasswordReset');
+});
+Route::get('/password/reset/change', function () {
+    return view('varPasswordResetChange');
+});
+Route::get('/success', function () {
+    return view('varSuccess');
+});
 
 // Fixed size templates:
 Route::get('/fixedRegister', function () {
-    return view('fixedRegister');
+    $patates = "patates";
+    return view('fixedRegister', ['patates' => $patates]);
 });

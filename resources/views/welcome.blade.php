@@ -21,14 +21,16 @@
   </style>
 </head>
 <body>
-<div class="container">
+    <div class="container">
     <div class="alert alert-success" role="alert">
         Success! Please select one of the following routes:
     </div>
     <div>
 
         <h2>Variable width & height HTML</h2>
-            <small style="border-bottom: 1px solid #000;">Honestly, make your browsers window as small as this line of text...</small>
+            <small style="border-bottom: 1px solid #000;">Honestly, make your browser's window as small as this line of text...</small>
+        <h3 class="mt-4">Login & on-boarding</h3>
+            <small>Privacy icon on password fields has been removed as it should be controlled by browser.</small>
         <dl>
             <dt><a href="{{ url('register') }}">Registration page</a></dt>
             <dd>✔️ Variable width & height interpretation of the mock-up with an additional h1 header (Νέος χρήστης). Background retained. Fully responsive (320px - 1320px).</dd>
@@ -36,13 +38,19 @@
             <dd>✔️ Variable width & height interpretation of the mock-up with an additional h1 header (Καλωσόρισες!). Same layout as login page. Fully responsive (320px - 1320px).</dd>
             <dt><a href="{{ url('login/error') }}">Login page with error modal</a></dt>
             <dd>✔️ Same as the login page with an additional off-canvas bottom-bar that displays an imaginary login error. Includes demo JavaScript that sets and triggers the off-canvas element.</dd>
+            <dt><a href="{{ url('password/reset') }}">Password reset</a></dt>
+            <dd>✔️ Same as the login page with additional text and partially hidden decoration on small viewports.</dd>
+            <dt><a href="{{ url('password/reset/change') }}">Password reset: Change password</a></dt>
+            <dd>✔️ Same as the login page with additional text and partially hidden decoration on small viewports. Text should probably be rephrased.</dd>
+            <dt><a href="{{ url('success') }}">Success!</a></dt>
+            <dd>✔️ Successfull message. @TODO: Background image.</dd>
         </dl>
 
         <h2 class="mt-4">Fixed width & height HTML</h2>
             <small>Maximize your browser's window (~1320 pixels).</small>
         <dl>
             <dt><a href="{{ url('fixedRegister') }}">Registration page</a></dt>
-            <dd>This is an accurate recreation of the mock-up, exluding the privacy setting for passwords which probably should not be implemented.</dd>
+            <dd>This is an accurate recreation of the mock-up, exluding the privacy icon on password fields.</dd>
         </dl>
 
         <hr />
@@ -85,15 +93,29 @@
             <option value="100px">100px</option>
             <option value="120px">120px</option>
         </select>
-        <small>Well, I will leave that here as a tester. It's also a very
-          nice example of JavaScript altering CSS variables in real-time. Yes,
-          the font's kerning of Greek characters is wrong. It's open-source so
-          in theory it can be fixed with the proper tools and time (~months).
+        <small>Notice the kerning on <span style="font-weight:800">λωωσσ</span>.
+          How about <span style="font-weight:800">κωωδ</span>. No there's no
+          space between the ω and the other letters: This font has issues with
+          the kerning of its Greek characters. So, I will leave this test here
+          until we find a proper replacement for the black/heavy weight, cause
+          after all this JavaScript demonstrates the altering CSS variables in
+          real-time.
         </small>
 
+        <hr />
+        <h1>How to use this repository</h1>
+        <p class="lead">Some notes about the use of this repository.</p>
+        <p>
+          I am pretty sure I will forget everything in a week, so here's
+          some useful notes in case you are still reading this document.
+        </p>
+        <p>
+          <ul>
+          <li>Start webserver: <code>php artisan serve</code></li>
+          <li>Run and build, continiously: <code>npm run watch</code></li>
+        </p>
 
         <hr />
-
 
     </div>
     <div>
