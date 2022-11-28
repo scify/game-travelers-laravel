@@ -15,7 +15,7 @@
     <x-header/>
 
     <!-- main-content -->
-    <div class="container-xxl ps-4 pe-4 trvl-main-content trvl-flower trvl-flower-12">
+    <div class="container-xxl ps-4 pe-4 trvl-main-content trvl-bg trvl-bg--flower-12">
       <div class="row">
 
         <div class="col-md-3 order-md-2">

@@ -41,13 +41,19 @@ div.trvl-main-content {
     color: var(--trvl-c-black);
   }
 }
-// Flowers
-div.trvl-flower {
+// Backgrounds: Flowers & Mountains & Trrees
+.trvl-bg {
   input:not([type='checkbox']) {
     background-color: hsla(var(--trvl-c-background-hsl), 0.2);
   }
 }
-div.trvl-flower-12 {
+.trvl-bg--mountains {
+  background-image: url("../images/bg-wide-trees.png");
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: bottom;
+}
+.trvl-bg--flower-12 {
   min-height: 632px;
   background-image: url("../images/bg-side-color-flower-12.png");
   background-repeat: no-repeat;
@@ -87,7 +93,8 @@ div.trvl-middle {
 
 // Footer
 footer.trvl-footer {
-  position:relative; bottom: 75px;
+  position:relative;
+  bottom: 50px;
 }
 // Off-canvas messages
 div.trvl-offcanvas {
@@ -185,10 +192,10 @@ div.text-start-end {
   div.trvl-main-content {
     margin-bottom: 25px;
   }
-  div.trvl-flower input:not([type='checkbox']) {
-    background-color: hsla(var(--trvl-c-background-hsl), 0.4);
-  }
   div.text-start-end {
     text-align: left;
+  }
+  .trvl-bg input:not([type='checkbox']) {
+    background-color: hsla(var(--trvl-c-background-hsl), 0.4);
   }
 }

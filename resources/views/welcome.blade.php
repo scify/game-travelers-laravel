@@ -43,7 +43,7 @@
             <dt><a href="{{ url('password/reset/change') }}">Password reset: Change password</a></dt>
             <dd>✔️ Same as the login page with additional text and partially hidden decoration on small viewports. Text should probably be rephrased.</dd>
             <dt><a href="{{ url('success') }}">Success!</a></dt>
-            <dd>✔️ Successfull message. @TODO: Background image.</dd>
+            <dd>✔️ Successfull message with a responsive "full screen" background.</dd>
         </dl>
 
         <h2 class="mt-4">Fixed width & height HTML</h2>

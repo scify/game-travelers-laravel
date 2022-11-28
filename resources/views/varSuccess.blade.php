@@ -10,10 +10,7 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
   </head>
-  <body class="trvl-middle">
-<style type="text/css">
-</style>
-
+  <body class="trvl-middle trvl-bg trvl-bg--mountains">
 
     <x-header/>
 
