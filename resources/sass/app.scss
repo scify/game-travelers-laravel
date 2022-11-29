@@ -1,6 +1,11 @@
+/* Travelers - Ταξιδιώτες Main SCSS Structure */
+
+/* Imports */
+//
 // Fonts
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap');
+//@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;900&display=swap');
 //@import url('https://fonts.googleapis.com/css2?family=Nunito');
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;900&display=swap');
 // Note:
 // Instead of the import, we can manually add the non-variable OFL licensed
 // version of the font, build for all platforms and all the weights and styles
@@ -8,15 +13,18 @@
 // Please @see "_fonts.scss" for more information about this implementation.
 // @import "fonts";
 //
-// Sass Variables
+// Bootstrap's variables
 @import 'variables';
-//
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 //
 // Base theme & CSS Variables
 @import 'base';
 //
+// Components
+@import 'components/buttons';
+
+
 body {
   background-color: var(--trvl-c-background);
   color: var(--trvl-c-text);
@@ -25,13 +33,56 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-weight: 900;
+  font-weight: 800;
+}
+.container,
+.container-fluid,
+.container-xxl {
+  min-width: 340px;
+}
+// Vertical-aligned middle elements
+/* FLEXBOX SOLUTION */
+.trvl-middleflex--container {
+  display: flex;
+  align-items: center;
+  height: calc(100vh - 80px);
+  width: 100%;
+  @media (max-height: 910px) {
+    height: auto;
+  }
+}
+.trvl-middleflex--contents {
+  width: 100%;
+}
+/* TRANSFORM SOLUTION (=not suitable for grid contents) */
+.trvl-middletrans--contents {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+/* CALC SOLUTION (=needs to have accurate height contents */
+.trvl-middlestick--container {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+.trvl-middlestick--contents {
+  height: calc(100vh - (632px - 125px)/2); /* = 50% */
+  width: 100%;
+  vertical-align: middle;
+  position: absolute;
+  top: 0;
+  bottom: 0%;
+  margin: auto;
 }
 
 // Main Content
@@ -57,7 +108,7 @@ div.trvl-main-content {
   min-height: 632px;
   background-image: url("../images/bg-side-color-flower-12.png");
   background-repeat: no-repeat;
-  background-position-x: right 1rem;
+  background-position-x: right;
   background-position-y: top;
   @media (max-width: 575.98px) {
     &.responsive-hide {
@@ -105,12 +156,16 @@ div.trvl-offcanvas {
 // Links
 a,
 a:hover,
-a:focus,
 a:active,
 a:visited {
   color: var(--trvl-c-link);
-  // @TODO:  Outline, focus, active, visited states for buttons
   outline: none;
+  // @TODO:  Outline, focus, active, visited states for buttons
+}
+a:focus-visible {
+  outline-color: hsla(var(--trvl-shadow-focus-hsl), 0.75);
+  outline-width: 0.2rem;
+  outline-style: solid;
 }
 
 // Forms
@@ -129,7 +184,9 @@ input[type=checkbox] {
   }
   &:focus {
     border-color: var(--trvl-c-text);
-    box-shadow: 0 0 0 0.25rem rgba(var(--trvl-btn-focus-shadow-rgb), 0.55);
+    // box-shadow: 0 0 0 0.25rem rgba(var(--trvl-btn-focus-shadow-rgb), 0.55);
+    box-shadow: 0 0 0 0.25em hsla(var(--trvl-shadow-focus-hsl), 0.5);
+
   }
 }
 
@@ -145,6 +202,11 @@ input {
     border-right: none;
     border-top: none;
   }
+  &:focus,
+  &:focus-visible,
+  &:focus-within {
+    box-shadow: inset 0 -0.25em hsla(var(--trvl-shadow-focus-hsl), 0.4);
+  }
 }
 label {
   font-weight: 400; // make sure we have a regular/normal weight
@@ -154,41 +216,13 @@ label {
   }
 }
 
-// Buttons
-button.btn-primary {
-  // Calibrated on "Εγγραφή" for a target of 144x44 pixels:
-  font-size: 1.2em; // a little bit bigger than the default 1em
-  font-weight: 500; // a little bit bolder than the normal (400)
-  border-radius: 1.4em; // pill shaped button: border-radius = line-height
-  line-height: 1.4em; // pill shaped button: border-radius = line-height
-  padding: 0.4em 1.7em;
-  --bs-btn-bg: var(--trvl-btn-bg);
-  --bs-btn-color: var(--trvl-btn-color);
-  --bs-btn-border-color: var(--trvl-btn-border-color);
-  // @TODO: Hover, active, disabled & focus states for buttons?!
-  --bs-btn-hover-bg: var(--trvl-btn-hover-bg);
-  --bs-btn-hover-color: var(--trvl-btn-hover-color);
-  --bs-btn-hover-border-color: var(--trvl-btn-hover-border-color);
-  --bs-btn-active-bg: var(--trvl-btn-active-bg);
-  --bs-btn-active-color: var(--trvl-btn-active-color);
-  --bs-btn-active-border-color: var(--trvl-btn-active-border-color);
-  --bs-btn-disabled-bg: var(--trvl-btn-disabled-bg);
-  --bs-btn-disabled-color: var(--trvl-btn-disabled-color);
-  --bs-btn-disabled-border-color: var(--trvl-btn-disabled-border-color);
-  --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
-  border: 1px solid var(--trvl-c-text);
-  outline: none; // @TODO: Outlines for focus & states for active/hover
-}
-
+// Custom new things
 div.text-start-end {
   text-align: right;
 }
 
+// Responsiveness
 @media (max-width: 575.98px) {
-  div.actions.expand button,
-  button.expand {
-    width: 100%;
-  }
   div.trvl-main-content {
     margin-bottom: 25px;
   }

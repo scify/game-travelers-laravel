@@ -15,40 +15,40 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
 Route::get('/testRoute', function () {
-    return view('secondPageTest');
+  return view('secondPageTest');
 });
 
 Route::get('/testVue', function () {
-    return view('testVueJSPage');
+  return view('testVueJSPage');
 });
 
 // Variable width templates:
-// Login | Onboarding
+// Login | Onboarding:
 Route::get('/login', function () {
-    return view('varLogin');
+  return view('varLogin');
 });
 Route::get('/login/error', function () {
-    return view('varLoginOffCanvasError');
+  return view('varLoginOffCanvasError');
 });
 Route::get('/register', function () {
-    return view('varRegister');
+  return view('varRegister');
 });
 Route::get('/password/reset', function () {
-    return view('varPasswordReset');
+  return view('varPasswordReset');
 });
 Route::get('/password/reset/change', function () {
-    return view('varPasswordResetChange');
+  return view('varPasswordResetChange');
 });
 Route::get('/success', function () {
-    return view('varSuccess');
+  return view('varSuccess');
 });
 
 // Fixed size templates:
 Route::get('/fixedRegister', function () {
-    $patates = "patates";
-    return view('fixedRegister', ['patates' => $patates]);
+  $patates = "patates";
+  return view('fixedRegister', ['patates' => $patates]);
 });

@@ -16,7 +16,7 @@
 /* Traveler's default colour scheme */
 :root {
   --trvl-c-background: var(--unnamed-color-c3d0c9);
-  --trvl-c-background-hsl: 148, 12%, 79%;
+  --trvl-c-background-hsl: 148deg, 12%, 79%;
   --trvl-c-text: var(--unnamed-color-383735);
   --trvl-c-link: var(--unnamed-color-383735);
   --trvl-btn-bg: var(--unnamed-color-faf9f8);
@@ -31,8 +31,10 @@
   --trvl-btn-disabled-bg: var(--unnamed-color-faf9f8);
   --trvl-btn-disabled-color: var(--unnamed-color-000000);
   --trvl-btn-disabled-border-color: var(--unnamed-color-383735);
+  --trvl-btn-hover-shadow-rgb: 90, 90, 90;
   --trvl-btn-focus-shadow-rgb: 160, 160, 160;
   --trvl-c-black: var(--unnamed-color-000000);
+  --trvl-shadow-focus-hsl: 148deg, 29%, 59%;
 }
 
 @media (prefers-color-scheme: dark) {
