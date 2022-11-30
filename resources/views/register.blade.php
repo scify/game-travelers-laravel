@@ -25,7 +25,8 @@
 
             <div class="col-md-3 order-md-2">
               <div class="ps-4 ps-md-0 pt-4">
-                Είστε ήδη χρήστης; <a href="{{ url('/login') }}">Συνδεθείτε</a>
+                Είστε ήδη χρήστης;<br />
+                <a href="{{ url('/login') }}">Σύνδεση</a>
               </div>
             </div>
 
