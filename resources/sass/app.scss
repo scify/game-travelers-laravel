@@ -9,7 +9,6 @@
 // Note:
 // Instead of the import, we can manually add the non-variable OFL licensed
 // version of the font, build for all platforms and all the weights and styles
-// proposed on the mock-ups. @see https://github.com/rsms/inter-gf-tight ...
 // Please @see "_fonts.scss" for more information about this implementation.
 // @import "fonts";
 //
@@ -23,7 +22,9 @@
 //
 // Components
 @import 'components/buttons';
-
+//
+// Misc
+@import "decoration";
 
 body {
   background-color: var(--trvl-c-background);
@@ -61,29 +62,6 @@ h6 {
 .trvl-middleflex--contents {
   width: 100%;
 }
-/* TRANSFORM SOLUTION (=not suitable for grid contents) */
-.trvl-middletrans--contents {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-/* CALC SOLUTION (=needs to have accurate height contents */
-.trvl-middlestick--container {
-  height: 100vh;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-}
-.trvl-middlestick--contents {
-  height: calc(100vh - (632px - 125px)/2); /* = 50% */
-  width: 100%;
-  vertical-align: middle;
-  position: absolute;
-  top: 0;
-  bottom: 0%;
-  margin: auto;
-}
 
 // Main Content
 div.trvl-main-content {
@@ -92,30 +70,7 @@ div.trvl-main-content {
     color: var(--trvl-c-black);
   }
 }
-// Backgrounds: Flowers & Mountains & Trrees
-.trvl-bg {
-  input:not([type='checkbox']) {
-    background-color: hsla(var(--trvl-c-background-hsl), 0.2);
-  }
-}
-.trvl-bg--mountains {
-  background-image: url("../images/bg-wide-trees.png");
-  background-repeat: no-repeat;
-  background-position-x: right;
-  background-position-y: bottom;
-}
-.trvl-bg--flower-12 {
-  min-height: 632px;
-  background-image: url("../images/bg-side-color-flower-12.png");
-  background-repeat: no-repeat;
-  background-position-x: right;
-  background-position-y: top;
-  @media (max-width: 575.98px) {
-    &.responsive-hide {
-      background-image: url("../images/bg-side-color-12.png");
-    }
-  }
-}
+
 // Success
 body.trvl-middle {
   overflow: hidden;

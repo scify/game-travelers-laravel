@@ -10910,6 +10910,51 @@ textarea.form-control-lg {
     width: 100%;
   }
 }
+.trvl-bg input:not([type=checkbox]) {
+  background-color: hsla(var(--trvl-c-background-hsl), 0.2);
+}
+
+.trvl-bg--mountains {
+  background-image: url(/images/bg-wide-trees.png?6e42756ef887c694789c32784a68581f);
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: bottom;
+}
+
+/* Group 1 contains:
+ * (group) group #1
+ * (abstract) back #2
+ * (decoration) flowers #3
+ */
+.trvl-bg--group-1 {
+  min-height: 632px;
+  background-image: url(/images/bg-g1-side-group-1.png?3d9e28210961efe268d45c96d52d3483);
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: top;
+  background-size: 351px 632px;
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 2dppx) {
+  .trvl-bg--group-1 {
+    background-image: url(/images/bg-g1-side-group-1@2x.png?24ef6b88acce56f4be24d16ea4cba2c9);
+  }
+}
+@media (max-width: 575.98px) {
+  .trvl-bg--group-1.responsive-hide {
+    background-image: url(/images/bg-g1-side-back-2.png?83697717b89f6c619bebdff05e1fe497);
+  }
+}
+@media only screen and (max-width: 575.98px) and (-webkit-min-device-pixel-ratio: 2), only screen and (max-width: 575.98px) and (min-device-pixel-ratio: 2), only screen and (max-width: 575.98px) and (min-resolution: 2dppx) {
+  .trvl-bg--group-1.responsive-hide {
+    background-image: url(/images/bg-g1-side-back-2@2x.png?46ca1c9ff289dfa3c5d1edac0c747a61);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .trvl-bg input:not([type=checkbox]) {
+    background-color: hsla(var(--trvl-c-background-hsl), 0.4);
+  }
+}
 body {
   background-color: var(--trvl-c-background);
   color: var(--trvl-c-text);
@@ -10960,59 +11005,9 @@ h6,
   width: 100%;
 }
 
-/* TRANSFORM SOLUTION (=not suitable for grid contents) */
-.trvl-middletrans--contents {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-/* CALC SOLUTION (=needs to have accurate height contents */
-.trvl-middlestick--container {
-  height: 100vh;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-}
-
-.trvl-middlestick--contents {
-  height: calc(100vh - 253.5px); /* = 50% */
-  width: 100%;
-  vertical-align: middle;
-  position: absolute;
-  top: 0;
-  bottom: 0%;
-  margin: auto;
-}
-
 div.trvl-main-content h1, div.trvl-main-content .h1 {
   font-size: 2em;
   color: var(--trvl-c-black);
-}
-
-.trvl-bg input:not([type=checkbox]) {
-  background-color: hsla(var(--trvl-c-background-hsl), 0.2);
-}
-
-.trvl-bg--mountains {
-  background-image: url(/images/bg-wide-trees.png?6e42756ef887c694789c32784a68581f);
-  background-repeat: no-repeat;
-  background-position-x: right;
-  background-position-y: bottom;
-}
-
-.trvl-bg--flower-12 {
-  min-height: 632px;
-  background-image: url(/images/bg-side-color-flower-12.png?509342fd9665e6a525c0be8dd65fe8fe);
-  background-repeat: no-repeat;
-  background-position-x: right;
-  background-position-y: top;
-}
-@media (max-width: 575.98px) {
-  .trvl-bg--flower-12.responsive-hide {
-    background-image: url(/images/bg-side-color-12.png?31c23be93e67ea15497ec428cf15e65c);
-  }
 }
 
 body.trvl-middle {

@@ -20,12 +20,12 @@
         <x-header/>
 
         <!-- main-content -->
-        <div class="container-xxl ps-4 pe-4 trvl-main-content trvl-bg trvl-bg--flower-12">
+        <div class="container-xxl ps-4 pe-4 trvl-main-content trvl-bg trvl-bg--group-1">
           <div class="row">
 
             <div class="col-md-3 order-md-2">
               <div class="ps-4 ps-md-0 pt-4">
-                Είστε ήδη χρήστης; <a href="/login">Συνδεθείτε</a>
+                Είστε ήδη χρήστης; <a href="{{ url('/login') }}">Συνδεθείτε</a>
               </div>
             </div>
 

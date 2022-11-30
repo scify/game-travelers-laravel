@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Contains App's web routes.
+ */
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,42 +18,55 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-
+// From the "obsolete" pages, this still acts as the index, so please don't
+// delete this blade until we have a brand new front-page to replace it. Also
+// has important comments, as Manos decided to use this as a notebook :).
 Route::get('/', function () {
-  return view('welcome');
+    return view('obsolete/laravelWelcome');
 });
 
-Route::get('/testRoute', function () {
-  return view('secondPageTest');
-});
-
-Route::get('/testVue', function () {
-  return view('testVueJSPage');
-});
-
-// Variable width templates:
-// Login | Onboarding:
+/*
+ * Login | Onboarding.
+ * Last update: November 29, 2022.
+ * @todo Fix font-weights, currently under-dev by Anna.
+ */
 Route::get('/login', function () {
-  return view('varLogin');
+    return view('login');
 });
 Route::get('/login/error', function () {
-  return view('varLoginOffCanvasError');
+    return view('loginError');
 });
 Route::get('/register', function () {
-  return view('varRegister');
+    return view('register');
 });
 Route::get('/password/reset', function () {
-  return view('varPasswordReset');
+    return view('passwordReset');
 });
 Route::get('/password/reset/change', function () {
-  return view('varPasswordResetChange');
+    return view('passwordResetNewPassword');
 });
 Route::get('/success', function () {
-  return view('varSuccess');
+    return view('success');
+});
+/*
+ * Stepper 2 | Profiles?
+ * Last update: November 29, 2022.
+ * @todo Fix grids, currently under-dev by Anna.
+ */
+Route::get('/profile/new', function () {
+    return view('profileNew');
 });
 
+// Obsolete pages:
+// Moved to obsolete.
+Route::get('/testRoute', function () {
+    return view('obsolete/secondPageTest');
+});
+Route::get('/testVue', function () {
+    return view('obsolete/testVueJSPage');
+});
 // Fixed size templates:
 Route::get('/fixedRegister', function () {
-  $patates = "patates";
-  return view('fixedRegister', ['patates' => $patates]);
+    $patates = "patates";
+    return view('obsolete/fixedRegister', ['patates' => $patates]);
 });
