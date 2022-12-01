@@ -4,6 +4,21 @@
         background-color: hsla(var(--trvl-c-background-hsl), 0.2);
     }
 }
+.trvl-bg--step1 {
+    min-height: 67px;
+    &-left {
+        background-image: url("../images/bg-l1-step-1-left.svg");
+        background-repeat: no-repeat;
+        background-position-x: right;
+        background-position-y: center;
+    }
+    &-right {
+        background-image: url("../images/bg-l1-step-1-right.svg");
+        background-repeat: no-repeat;
+        background-position-x: left;
+    }
+}
+
 .trvl-bg--mountains {
     background-image: url("../images/bg-wide-trees.png");
     background-repeat: no-repeat;

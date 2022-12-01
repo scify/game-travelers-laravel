@@ -38,10 +38,11 @@
   line-height: 1.4em; // pill shaped button: border-radius = line-height
 }
 
-// Responsiveness
+// Media Query: Responsiveness
 @media (max-width: 575.98px) {
   div.actions.responsive-expand button,
   button.responsive-expand {
     width: 100%;
   }
 }
+

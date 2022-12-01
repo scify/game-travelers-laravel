@@ -10914,6 +10914,21 @@ textarea.form-control-lg {
   background-color: hsla(var(--trvl-c-background-hsl), 0.2);
 }
 
+.trvl-bg--step1 {
+  min-height: 67px;
+}
+.trvl-bg--step1-left {
+  background-image: url(/images/bg-l1-step-1-left.svg?56544f27d9f28d44aa4f23f06ca8355e);
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: center;
+}
+.trvl-bg--step1-right {
+  background-image: url(/images/bg-l1-step-1-right.svg?3f6ff2e36422d01430240359ec5ea07f);
+  background-repeat: no-repeat;
+  background-position-x: left;
+}
+
 .trvl-bg--mountains {
   background-image: url(/images/bg-wide-trees.png?6e42756ef887c694789c32784a68581f);
   background-repeat: no-repeat;
@@ -10996,6 +11011,11 @@ h6,
   width: 100%;
 }
 @media (max-height: 910px) {
+  .trvl-middleflex--container {
+    height: auto;
+  }
+}
+@media (max-width: 575.98px) {
   .trvl-middleflex--container {
     height: auto;
   }
@@ -11086,6 +11106,9 @@ input[type=checkbox]:focus {
 input {
   outline: none;
 }
+input:focus, input:focus-visible, input:focus-within {
+  box-shadow: inset 0 -0.25em hsla(var(--trvl-shadow-focus-hsl), 0.4);
+}
 input.extended {
   width: 100%;
   font-weight: 300;
@@ -11096,8 +11119,12 @@ input.extended {
   border-right: none;
   border-top: none;
 }
-input:focus, input:focus-visible, input:focus-within {
-  box-shadow: inset 0 -0.25em hsla(var(--trvl-shadow-focus-hsl), 0.4);
+input.big {
+  font-size: 2em;
+  line-height: inherit;
+}
+input.big:focus, input.big:focus-visible, input.big:focus-within {
+  box-shadow: inset 0 -0.15em hsla(var(--trvl-shadow-focus-hsl), 0.4);
 }
 
 label {
@@ -11107,8 +11134,16 @@ label.extended {
   display: block;
   padding-bottom: 0.5em;
 }
+label.big {
+  font-size: 2em;
+  font-weight: bold;
+}
 
 div.text-start-end {
+  text-align: right;
+}
+
+div.text-center-end {
   text-align: right;
 }
 
@@ -11118,6 +11153,9 @@ div.text-start-end {
   }
   div.text-start-end {
     text-align: left;
+  }
+  div.text-center-end {
+    text-align: center;
   }
   .trvl-bg input:not([type=checkbox]) {
     background-color: hsla(var(--trvl-c-background-hsl), 0.4);
