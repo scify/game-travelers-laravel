@@ -26,8 +26,8 @@
     "input your name" input) and then +1 should be added for each listed avatar.
     - avatarKey is the unique ID for each avatar which should be passed to a
     hidden form input or somewhere else, when user clicks a button.
-    - avatarTitle should be a description of the actual image. e.g. "Άβαταρ
-    γάτας", "Άβαταρ σκύλου", "Άβαταρ αγοριού με καστανά μαλιά" etc.
+    - avatarTitle should be a description of the actual image. e.g. "Φατσούλα
+    γάτας", "Φατσούλα σκύλου", "Φατσούλα αγοριού #1" etc.
 
     Notes:
     - I haven't tested yet if both the img alt and the (hidden from view at

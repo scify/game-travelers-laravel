@@ -26,47 +26,61 @@
 // Misc
 @import "decoration";
 
+/* Global constants and Bootstrap extensions */
 body {
-  background-color: var(--trvl-c-background);
-  color: var(--trvl-c-text);
-  min-height: 100vh;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    background-color: var(--trvl-c-background);
+    color: var(--trvl-c-text);
+    min-height: 100vh;
+    min-width: 340px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 800;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 800;
+a, a:hover, a:active, a:visited {
+  color: var(--trvl-c-link);
+  outline: none;
+  // @TODO:  Outline, focus, active, visited states for buttons
 }
-.container,
-.container-fluid,
-.container-xxl {
-  min-width: 340px;
+a:focus, a:focus-visible {
+  outline-color: hsla(var(--trvl-shadow-focus-hsl), 0.75);
+  outline-width: 0.2rem;
+  outline-style: solid;
 }
-// Vertical-aligned middle elements
-/* FLEXBOX SOLUTION */
+
+header img,
+footer img {
+    display:block;
+}
+
+/* Main Content (absolute center & middle via flexbox). */
+.travelers,
 .trvl-middleflex--container {
-  display: flex;
-  align-items: center;
-  height: calc(100vh - 80px);
-  width: 100%;
-  @media (max-height: 910px) {
-    height: auto;
-  }
-  @media (max-width: 575.98px) {
-    height: auto;
-  }
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    /*
+    width: 100%;
+    height: calc(100vh - 80px);
+    @media (max-height: 910px) {
+        height: auto;
+    }
+    @media (max-width: 575.98px) {
+        height: auto;
+    }
+    */
 }
+.content,
 .trvl-middleflex--contents {
-  width: 100%;
+    width: 100%;
 }
 
+/* Sections */
 // Main Content
+.section,
 div.trvl-main-content {
   h1 {
     font-size: 2em;
@@ -105,25 +119,32 @@ footer.trvl-footer {
   position:relative;
   bottom: 50px;
 }
-// Off-canvas messages
-div.trvl-offcanvas {
-  // enough for at least 2 lines of text as we can't really be responsive.
-  --bs-offcanvas-height: 8rem;
-}
 
-// Links
-a,
-a:hover,
-a:active,
-a:visited {
-  color: var(--trvl-c-link);
-  outline: none;
-  // @TODO:  Outline, focus, active, visited states for buttons
+// Off-canvas messages
+.offcanvas.is-invalid {
+    // enough for at least 2 lines of text as we can't really be responsive.
+    --bs-offcanvas-height: 8rem;
+    --bs-offcanvas-bg: #f9c5bf;
+    font-weight: 800;
+    .btn-close {
+        width: 1.2em;
+        height: 1.2em;
+        background-size: 1.2em;
+    }
 }
-a:focus-visible {
-  outline-color: hsla(var(--trvl-shadow-focus-hsl), 0.75);
-  outline-width: 0.2rem;
-  outline-style: solid;
+.field.is-invalid {
+    .field-label {
+        color: #880606;
+    }
+    .field-input.extended {
+        box-shadow: inset 0 -0.25em hsla(0, 92%, 28%, 0.1);
+        border-bottom-color: #880606;
+        &:focus,
+        &:focus-visible,
+        &:focus-within {
+          box-shadow: inset 0 -0.25em hsla(0, 92%, 28%, 0.2);
+        }
+    }
 }
 
 // Forms
@@ -176,7 +197,7 @@ input {
   }
 }
 label {
-  font-weight: 400; // make sure we have a regular/normal weight
+  font-weight: 600; // make sure we have a regular/normal weight
   &.extended {
     display: block;
     padding-bottom: 0.5em;
@@ -188,26 +209,36 @@ label {
 }
 
 // Custom new utilities
-div.text-start-end {
-  text-align: right;
-}
-div.text-center-end {
+.text-start-end,
+.text-start-end-start-end,
+.text-center-end {
     text-align: right;
-  }
+}
 
-
-// Responsiveness
+/* Responsiveness */
+// Portrait phones
 @media (max-width: 575.98px) {
+  .section,
   div.trvl-main-content {
     margin-bottom: 25px;
   }
-  div.text-start-end {
+  .text-start-end,
+  .text-start-end-start-end {
     text-align: left;
   }
-  div.text-center-end {
+  .text-center-end {
     text-align: center;
   }
-  .trvl-bg input:not([type='checkbox']) {
-    background-color: hsla(var(--trvl-c-background-hsl), 0.4);
-  }
+}
+// Landscape phones
+@media (min-width: 576px) and (max-width: 767.98px){
+    .text-start-end-start-end {
+        text-align: right;
+      }
+}
+// Tablets
+@media (min-width: 767px) and (max-width: 991.98px) {
+    .text-start-end-start-end {
+        text-align: left;
+      }
 }

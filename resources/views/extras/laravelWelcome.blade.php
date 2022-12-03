@@ -49,7 +49,7 @@
             <dt><a href="{{ url('login') }}">Login page</a></dt>
             <dd>✔️ Variable width & height interpretation of the mock-up with an additional h1 header (Καλωσόρισες!). Same layout as login page. Fully responsive (320px - 1320px).
                 <dl>
-                    <dt><a href="{{ url('login/error') }}">Variation: Login page with <span class="error">ERROR</span> (modal)</a></dt>
+                    <dt><a href="{{ url('demo/login/error') }}">Variation: Login page with <span class="error">ERROR</span> (modal)</a></dt>
                     <dd>✔️ Same as the login page with an additional, triggered off-canvas bottom-bar that displays an imaginary login error. Fully responsive. Includes demo JavaScript that sets and triggers the off-canvas element.</dd>
                 </dl>
             </dd>

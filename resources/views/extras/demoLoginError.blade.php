@@ -65,9 +65,8 @@
         @error('email', 'login')
             <errorOfCanvas :message=$message/>
         @enderror
-        {{--
+
         <x-errorOfCanvas :message="'Το email ή το συνθηματικό που εισάγατε είναι λάθος!'"/>
-        --}}
 
     </div>
     <!-- end of login content -->

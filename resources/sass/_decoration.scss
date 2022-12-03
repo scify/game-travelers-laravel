@@ -1,9 +1,11 @@
 // Backgrounds: Flowers & Mountains & Trrees
+.background,
 .trvl-bg {
     input:not([type='checkbox']) {
         background-color: hsla(var(--trvl-c-background-hsl), 0.2);
     }
 }
+
 .trvl-bg--step1 {
     min-height: 67px;
     &-left {
@@ -25,11 +27,13 @@
     background-position-x: right;
     background-position-y: bottom;
 }
+
 /* Group 1 contains:
  * (group) group #1
  * (abstract) back #2
  * (decoration) flowers #3
  */
+.background-group-1,
 .trvl-bg--group-1 {
     min-height: 632px;
     background-image: url("../images/bg-g1-side-group-1.png");
@@ -58,9 +62,10 @@
     }
 }
 
-// Responsive
+/* Responsiveness */
+// Portrait phones
 @media (max-width: 575.98px) {
-    .trvl-bg input:not([type='checkbox']) {
+    .background input:not([type='checkbox']) {
         background-color: hsla(var(--trvl-c-background-hsl), 0.4);
     }
 }

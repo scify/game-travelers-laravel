@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- @see https://github.com/fossbarrow/laravel-phpcs -->
+<ruleset>
+    <arg name="basepath" value="."/>
+
+    <file>./app</file>
+    <file>./config</file>
+    <file>./resources</file>
+    <file>./routes</file>
+    <file>./tests</file>
+
+    <rule ref="./vendor/fossbarrow/laravel-phpcs/phpcs.xml"/>
+</ruleset>

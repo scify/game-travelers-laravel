@@ -4,11 +4,25 @@ $body-bg: #f8fafc; // # Travelers Green: #c3d0c9 as of Nov 25, 2022.
 //
 // Typography
 // Falling back to the default values instead of the overrides but setting
-// Inter Tight as the default font for all sans-serifs.
+// Manrope as the default font for all sans-serifs and a few more system fonts.
 // @see https://getbootstrap.com/docs/5.2/utilities/text/#variables
-$font-family-sans-serif: 'Manrope', 'Nunito', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans","Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-sans-serif: 'Manrope', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans","Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $font-size-base: 1rem; // default: 1rem (instead of 0.9rem), at about ~16px
 $line-height-base: 1.5; // default: 1.5 (instead of 1.6)
+//
+// Spacers
+// Using the default values for spacer, but adding 6 to the array for 6rem.
+// @see https://getbootstrap.com/docs/5.0/utilities/spacing/
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  6: $spacer * 6,
+);
 //
 // Note:
 // Web design is thankfully moving back to CSS and its variables which have

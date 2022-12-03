@@ -3,6 +3,9 @@
 /**
  * @file
  * Contains App's web routes.
+ *
+ * These are the default web routes for the app and they should eventually be
+ * replaced with a Controller. Until then, enjoy!
  */
 
 use Illuminate\Support\Facades\Route;
@@ -36,8 +39,8 @@ Route::get('/extras/font-tester', function () {
 Route::get('/login', function () {
     return view('login');
 });
-Route::get('/login/error', function () {
-    return view('loginError');
+Route::get('demo/login/error', function () {
+    return view('extras/demoLoginError');
 });
 Route::get('/register', function () {
     return view('register');

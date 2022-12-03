@@ -38,7 +38,8 @@
   line-height: 1.4em; // pill shaped button: border-radius = line-height
 }
 
-// Media Query: Responsiveness
+/* Responsiveness */
+// Portrait phones
 @media (max-width: 575.98px) {
   div.actions.responsive-expand button,
   button.responsive-expand {
