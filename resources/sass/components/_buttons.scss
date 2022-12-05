@@ -26,6 +26,10 @@
   --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
   border: 1px solid var(--trvl-c-text);
 }
+// Round button
+.btn-round {
+    border-radius: 50%;
+}
 /* Large, Medium and Small buttons */
 // Large button
 .btn-lg {
@@ -41,7 +45,7 @@
 /* Responsiveness */
 // Portrait phones
 @media (max-width: 575.98px) {
-  div.actions.responsive-expand button,
+  div.form-actions.responsive-expand button,
   button.responsive-expand {
     width: 100%;
   }

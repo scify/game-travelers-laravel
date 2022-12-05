@@ -32,6 +32,10 @@
             color: white;
             background-color:darkturquoise;
         }
+        .upd {
+            color: white;
+            background-color: darkslategray;
+        }
     </style>
 </head>
 <body>
@@ -45,20 +49,20 @@
         <small>Privacy icon on password fields has been removed as it should be controlled by browser.</small>
         <dl>
             <dt><a href="{{ url('register') }}">Registration page</a></dt>
-            <dd>✔️ <span class="todo">Add CAPTCHA.</span> Variable width & height interpretation of the mock-up with an additional h1 header (Νέος χρήστης). Background retained. Fully responsive (320px - 1320px).</dd>
+            <dd>✔️ <span class="upd">Final</span> Variable width interpretation of the mock-up with an additional h1 header (Νέος χρήστης), error responses & CAPTCHA! Background retained. Fully responsive (320px - 1320px).</dd>
             <dt><a href="{{ url('login') }}">Login page</a></dt>
-            <dd>✔️ Variable width & height interpretation of the mock-up with an additional h1 header (Καλωσόρισες!). Same layout as login page. Fully responsive (320px - 1320px).
+            <dd>✔️ <span class="upd">Final</span> Variable width interpretation of the mock-up with an additional h1 header (Καλωσόρισες!), error handling and custom JavaScript as a component to trigger the proposed off-canvas error. Fully responsive (320px - 1320px).
                 <dl>
-                    <dt><a href="{{ url('demo/login/error') }}">Variation: Login page with <span class="error">ERROR</span> (modal)</a></dt>
-                    <dd>✔️ Same as the login page with an additional, triggered off-canvas bottom-bar that displays an imaginary login error. Fully responsive. Includes demo JavaScript that sets and triggers the off-canvas element.</dd>
+                    <dt><a href="{{ url('demo/login/error') }}">Variation: Login page with <span class="error">ERROR</span> (off-canvas)</a></dt>
+                    <dd>✔️ <span class="upd">Final</span> Same as the login page with an additional, triggered off-canvas bottom-bar that displays an imaginary login error. Fully responsive.</dd>
                 </dl>
             </dd>
             <dt><a href="{{ url('password/reset') }}">Password reset</a></dt>
-            <dd>✔️ Same as the login page with additional text and partially hidden decoration on small viewports. Fully responsive.</dd>
+            <dd>✔️ <span class="upd">Final</span> Same as the login page with additional text and partially hidden decoration on small viewports. Error handling added. Fully responsive.</dd>
             <dt><a href="{{ url('password/reset/change') }}">Password reset: Change password</a></dt>
-            <dd>✔️ Same as the login page with additional text and partially hidden decoration on small viewports. Text should probably be rephrased. Fully responsive.</dd>
+            <dd>✔️ <span class="upd">Final</span> Same as the login page with additional text and partially hidden decoration on small viewports. Error handling added. Fully responsive.</dd>
             <dt><a href="{{ url('success') }}">Success!</a></dt>
-            <dd>✔️ <span class="todo">Needs small adjustments.</span> Successfull message with a fully responsive "full screen" background.</dd>
+            <dd>✔️ <span class="todo">Assets</span> Successfull action message. Background restricted to 1366x768 pixels as requested.</dd>
         </dl>
         <h3 class="mt-4">Create new player</h3>
         <small>Privacy icon on password fields has been removed as it should be controlled by browser.</small>
@@ -72,9 +76,9 @@
                     <dd>✔️ <span class="todo">Under construction.</span></dd>
                 </dl>
             </dd>
-            <dt><a href="{{ url('/') }}">New player profile Step 2 of 3</a></dt>
+            <dt><a href="{{ url('/profiles/new/2') }}">New player profile Step 2 of 3</a></dt>
             <dd>✔️ <span class="todo">Under construction.</span></dd>
-            <dt><a href="{{ url('/') }}">New player profile Step 3 of 3</a></dt>
+            <dt><a href="{{ url('/profiles/new/3') }}">New player profile Step 3 of 3</a></dt>
             <dd>✔️ <span class="todo">Under construction.</span></dd>
         </dl>
         <hr />

@@ -21,7 +21,10 @@
 @import 'base';
 //
 // Components
+@import 'components/avatars';
 @import 'components/buttons';
+@import 'components/forms';
+@import 'components/stepper';
 //
 // Misc
 @import "decoration";
@@ -56,62 +59,57 @@ footer img {
     display:block;
 }
 
+// Alerts
+.alert-danger {
+    font-weight: 500;
+    --bs-alert-color: var(--trvl-danger-color);
+    --bs-alert-bg: var(--trvl-danger-bg);
+    --bs-alert-border-color: var(--trvl-danger-border-color);
+}
+
+
 /* Main Content (absolute center & middle via flexbox). */
-.travelers,
-.trvl-middleflex--container {
+.travelers {
     display: flex;
     align-items: center;
     min-height: 100vh;
-    /*
-    width: 100%;
-    height: calc(100vh - 80px);
-    @media (max-height: 910px) {
-        height: auto;
-    }
-    @media (max-width: 575.98px) {
-        height: auto;
-    }
-    */
 }
-.content,
-.trvl-middleflex--contents {
+.content {
     width: 100%;
 }
 
 /* Sections */
 // Main Content
-.section,
-div.trvl-main-content {
+.section {
   h1 {
     font-size: 2em;
     color: var(--trvl-c-black);
   }
 }
 
-// Success
-body.trvl-middle {
-  overflow: hidden;
-}
-div.trvl-middle {
-  height: calc(100vh - 180px);
-  width: calc(100vw - 4rem);
-  &--content {
-    min-height: 50%;
-    text-align: center;
-    position: relative;
-    top: 30%;
-    transform: translateY(-50%);
-    @media (max-height: 500px) {
-      transform: translateY(0);
-      top: 0;
-    }
+// Profiles
+.profiles {
+    min-height: 502px;
     h1 {
-      font-weight: 600;
-      color: var(--trvl-c-text);
-      font-size: 2.1rem;
-      margin-bottom: 3rem;
+        font-size: 2.43em;
     }
-  }
+    .profiles-row:first-child {
+        margin-bottom: 2.5em;
+    }
+    .profiles-row:last-child {
+        margin-bottom: 5em;
+    }
+}
+
+// Success
+.confirmation-page {
+    min-height: 632px;
+    h1 {
+        font-weight: 600;
+        font-size: 2.1rem;
+        margin-bottom: 3rem;
+        color: var(--trvl-c-text);
+    }
 }
 
 // Footer
@@ -132,81 +130,6 @@ footer.trvl-footer {
         background-size: 1.2em;
     }
 }
-.field.is-invalid {
-    .field-label {
-        color: #880606;
-    }
-    .field-input.extended {
-        box-shadow: inset 0 -0.25em hsla(0, 92%, 28%, 0.1);
-        border-bottom-color: #880606;
-        &:focus,
-        &:focus-visible,
-        &:focus-within {
-          box-shadow: inset 0 -0.25em hsla(0, 92%, 28%, 0.2);
-        }
-    }
-}
-
-// Forms
-div.trvl-form {
-  padding: 0 8em; // v h -- t e b s
-  @media (max-width: 767.98px) {
-    padding: 0;
-  }
-}
-input[type=checkbox] {
-  background-color: var(--trvl-btn-bg);
-  border-color: var(--trvl-c-text);
-  &:checked {
-    border-color: var(--trvl-c-text);
-    background-color: var(--trvl-c-text);
-  }
-  &:focus {
-    border-color: var(--trvl-c-text);
-    // box-shadow: 0 0 0 0.25rem rgba(var(--trvl-btn-focus-shadow-rgb), 0.55);
-    box-shadow: 0 0 0 0.25em hsla(var(--trvl-shadow-focus-hsl), 0.5);
-
-  }
-}
-
-input {
-  outline: none; // @TODO: Outlines for focus
-  &:focus,
-  &:focus-visible,
-  &:focus-within {
-    box-shadow: inset 0 -0.25em hsla(var(--trvl-shadow-focus-hsl), 0.4);
-  }
-  &.extended {
-    width: 100%;
-    font-weight: 300; // a little bit less bolder than the normal (400)
-    line-height: 2.5;
-    background-color: var(--trvl-c-background);
-    border-bottom: 2px solid var(--trvl-c-text);
-    border-left: none;
-    border-right: none;
-    border-top: none;
-  }
-  &.big {
-    font-size: 2em;
-    line-height: inherit;
-    &:focus,
-    &:focus-visible,
-    &:focus-within {
-      box-shadow: inset 0 -0.15em hsla(var(--trvl-shadow-focus-hsl), 0.4);
-    }
-  }
-}
-label {
-  font-weight: 600; // make sure we have a regular/normal weight
-  &.extended {
-    display: block;
-    padding-bottom: 0.5em;
-  }
-  &.big {
-    font-size: 2em;
-    font-weight: bold;
-  }
-}
 
 // Custom new utilities
 .text-start-end,
@@ -220,7 +143,7 @@ label {
 @media (max-width: 575.98px) {
   .section,
   div.trvl-main-content {
-    margin-bottom: 25px;
+    margin-bottom: 4rem;
   }
   .text-start-end,
   .text-start-end-start-end {

@@ -1,73 +1,94 @@
 <x-layout :title="'Σύνδεση | Ταξιδιώτες'">
+    {{-- Notes: An off-canvas generic alert (#offcanvasMessage) is displayed
+        in case of error. More notes for implementation are provided below. --}}
     @section('scripts')
-    {{-- Custom JS scripts for authentication / error handling --}}
+    {{-- Optional: Custom JS scripts for authentication --}}
     @endsection
 
     <!-- login content -->
-    <div class="container-xxl px-4 section background background-group-1">
+    <div class="section background background-group-1 container-xxl px-4">
         <div class="row">
             <div class="col-md-3 order-md-2">
                 <div class="ps-4 ps-md-0 pt-4">
                     Νέος χρήστης;<br />
-                    <a href="{{ url('/register') }}">Δημιουργία λογαριασμού</a>
+                    <a href="{{ url('/register') }}" tabindex="6">Δημιουργία λογαριασμού</a>
                 </div>
             </div>
             <div class="col-md-9 order-md-1">
-                <div class="px-0 px-md-6">
-                    <div class="p-4">
-                        <h1>Καλώς ήρθες!</h1>
-                    </div>
-                    <form method="post" action="">
-                        @csrf
-                        <div class="p-4 field">
+                <!-- form -->
+                <form method="post" action="">
+                    @csrf
+                    <div class="form px-0 px-md-6">
+                        <div class="form-header p-4">
+                            <h1>Καλώς ήρθατε!</h1>
+                        </div>
+                        <div class="field p-4">
                             <label class="field-label extended" for="email">Email</label>
-                            <input class="field-input extended" type="email" name="email" tabindex="1" id="email" />
+                            <input
+                                class="field-input underlined extended"
+                                type="email"
+                                name="email"
+                                required="required"
+                                autocomplete="email"
+                                autocapitalize="off"
+                                spellcheck="false"
+                                tabindex="1"
+                                id="email" />
                         </div>
-                        <div class="p-4 field">
-                            <label class="field-label extended" for="password1">Συνθηματικό</label>
-                            <input class="field-input extended" type="password" name="password1" tabindex="2" id="password1" />
+                        <div class="field p-4">
+                            <label class="field-label extended" for="password">Συνθηματικό</label>
+                            <input
+                                class="field-input underlined extended"
+                                type="password"
+                                name="password"
+                                required="required"
+                                autocomplete="current-password"
+                                autocapitalize="off"
+                                spellcheck="false"
+                                aria-label="Κωδικός πρόσβασης"
+                                tabindex="2"
+                                id="password"
+                            />
                         </div>
-                        <div class="px-4 py-2 container-fluid" style="justify-items: center">
+                        <div class="form-options px-4 py-2 container-fluid">
                             <div class="row">
-                                <div class="col-sm-6 col-md-12 col-lg-6 text-start text-nowrap">
-                                    <label class="form-check-label field-label" for="cookie">Μείνετε συνδεδεμένοι</label>
-                                    <input class="form-check-input field-input ms-2 ms-sm-0 ms-md-2 ms-lg-0" type="checkbox" tabindex="3" value="" id="cookie">
+                                <div class="field col-sm-6 col-md-12 col-lg-6 text-start text-nowrap">
+                                    <label class="field-label form-check-label" for="cookie">Μείνετε συνδεδεμένοι</label>
+                                    <input class="field-input form-check-input ms-2" type="checkbox" tabindex="3" name="cookie" id="cookie">
                                 </div>
                                 <div class="col-sm-6 col-md-12 col-lg-6 pt-2 pt-sm-0 pt-md-2 pt-lg-0 text-start-end-start-end">
-                                    <a href="{{ url('/password/reset') }}" tabindex="5" >Ξέχασες το συνθηματικό;</a>
+                                    <a href="{{ url('/password/reset') }}" tabindex="5">Ξεχάσατε το συνθηματικό;</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="actions p-4 text-center">
-                            <button class="btn btn-lg btn-primary text-nowrap responsive-expand" tabindex="4" type="submit">Σύνδεση</button>
+                        <div class="form-actions p-4 text-center">
+                            <button class="btn btn-lg btn-primary text-nowrap responsive-expand" tabindex="4" type="submit" id="submit">Σύνδεση</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
+                <!-- / form -->
             </div>
         </div>
 
-        {{-- Note: Σύμφωνα με τα mock-ups το λάθος επιστρέφεται σε off-canvas.
-            Αν και πιστεύω ότι τα λάθη πρέπει να εμφανίζονται απευθείας στη
-            φόρμα, ενώ δεν ξέρω πώς λειτουργεί το authentication στη Laravel εδώ
-            έχουμε μια εν μέρει σωστή εξαίρεση: Πιστεύω ότι για λόγους ασφαλείας
-            είναι καλό να μην προδίδεται αν ο χρήστης έκανε λάθος το username ή
-            το password του ώστε κάποιος που προσπαθεί να μαντέψει κωδικό ή
-            email τρίτου να έχει ένα λιγότερο στοιχείο που θα τον βοηθάει.
-            Οπότε, είμαι υπέρ της άποψης ότι το μήνυμα λάθους σε αυτή τη φόρμα
-            θα πρέπει να είναι γενικό ("λάθος email ή συνθηματικό") και κατά
-            συνέπεια υλοποιώ αυτούσια την πρόταση του mock-up με off-canvas
-            εμφανίζοντας μόνο εδώ το λάθος...
-            Σε κάθε περίπτωση σε κάθε φόρμα το class="field"> μπορεί να δεχθεί
-            το class "is-invalid" σε περίπτωση λάθους ώστε να υποδειχθεί το
-            λάθος με κόκκινο χρώμα π.χ. εδώ:
-            <div class="p-4 field @error('email') is-invalid @enderror">
+        {{-- Note: Σύμφωνα με το mock-up τα λάθη σε αυτή τη φόρμα είναι αόριστα
+            (δεν υποδεικνύουν συγκεκριμένο πεδίο): Π.χ. "λάθος email ή
+            συνθηματικό"). Συμφωνώ με αυτήν την άποψη για λόγους ασφαλείας, αν
+            και ίσως να μην έπρεπε να υλοποιηθεί με off-canvas. Σε κάθε
+            περίπτωση το errorOffCanvas υλοποιεί αυτήν την πρόταση και περιέχει
+            και ό,τι απαιτείται από JavaScript για να εμφανίζεται σε Bootstrap
+            templates.
+            Ανεξάρτητα από το offCanvas, σε κάθε φόρμα το class="field"> μπορεί
+            να δεχθεί το class "is-invalid" που υποδεικνύει το λάθος με κόκκινο
+            χρώμα τόσο στο label όσο και στο input field. π.χ. εδώ θα ήταν:
+            <div class="field p-4 @error('email') is-invalid @enderror">
         --}}
-        @error('email', 'login')
-            <errorOfCanvas :message=$message/>
-        @enderror
-
-        <x-errorOfCanvas :message="'Το email ή το συνθηματικό που εισάγατε είναι λάθος!'"/>
+        {{-- Παράδειγμα: --}}
+        {{-- @see https://laravel.com/docs/9.x/validation#quick-displaying-the-validation-errors --}}
+        {{-- @if($errors->any()) --}}
+            <x-errorOffCanvas :message="'Το email ή το συνθηματικό που εισάγατε είναι λάθος!'"/>
+        {{-- @endif --}}
 
     </div>
     <!-- end of login content -->
+
 </x-layout>

@@ -1,0 +1,44 @@
+.avatars-col {
+    min-height: 150px;
+    /* border: 1px solid #000; */
+}
+
+.btn-round.btn-avatar {
+    --bs-btn-active-bg: #edf9dd;
+    --bs-btn-hover-bg: var(--trvl-btn-hover-bg);
+    background-color: var(--trvl-btn-bg);
+    transition: all .2s ease-out;
+    padding: 0;
+    border: none;
+    width: 100px;
+    height: 100px;
+    &:focus, &:focus-visible:not(:hover) {
+        scale: 1.04;
+    }
+    &:hover {
+        scale: 1.1;
+    }
+    @media (prefers-reduced-motion) {
+        scale: 1 !important;
+    }
+}
+
+.btn-avatar img {
+    position: relative;
+    display: inline-block;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100px;
+    height: 100px;
+}
+.btn-avatar > .btn-text {
+    display: block;
+    position: relative;
+    top: 0px;
+    z-index: 98;
+    text-align: center;
+}
+.btn-avatar > .btn-text.hidden {
+    left: -2000px;
+    right: -2000px;
+}
