@@ -10,12 +10,21 @@
                 <!-- empty -->
             </div>
             <div class="step2-2 col-4">
-                <button class="btn btn-round past" type="button">1</button>
+                <button
+                    class="btn btn-round past"
+                    title="Προφίλ παίκτη"
+                    aria-label="Προφίλ παίκτη"
+                    type="submit"
+                >
+                    1
+                </button>
             </div>
             <div class="step2-3 col-7">
                 <button
                 class="btn btn-round current"
-                aria-label="Χειρισμός"
+                title="Ρυθμίσεις χειρισμού"
+                aria-label="Ρυθμίσεις χειρισμού"
+                aria-describedby="currentPageDescription"
                 aria-current="page"
                 aria-readonly="true"
                 tabindex="-1"
@@ -23,12 +32,14 @@
                 value="controls"
                 type="submit"
                 disabled
+                id="currentPageButton"
                 >
                     2
                 </button>
             </div>
         </div>
     </div>
+    <!-- step counter 2/3 -->
 
     <!-- profile step 2 content -->
     <div class="section profiles container-xxl px-4 px-sm-5 px-xl-6">

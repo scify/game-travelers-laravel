@@ -22,7 +22,8 @@
                 <div class="step1-2 col-11">
                     <button
                         class="btn btn-round current"
-                        aria-label="Προφίλ"
+                        title="Προφίλ παίκτη"
+                        aria-label="Προφίλ παίκτη"
                         aria-describedby="currentPageDescription"
                         aria-current="page"
                         aria-readonly="true"
@@ -46,7 +47,7 @@
                 <div class="col-1">
                     <x-buttonBack :label="'Ακύρωση και επιστροφή στο προηγούμενο μενού'" />
                 </div>
-                <div class="col-10 text-center">
+                <div class="col-10 text-center" id="currentPageDescription">
                     <h1>Νέος παίκτης</h1>
                     <p><strong>Διάλεξε ένα όνομα και μια φατσούλα για να
                         δημιουργήσεις το προφίλ σου.

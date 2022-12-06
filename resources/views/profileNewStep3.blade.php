@@ -10,15 +10,31 @@
                 <!-- empty -->
             </div>
             <div class="step3-2 col-4">
-                <button class="btn btn-round past" type="button">1</button>
+                <button
+                    class="btn btn-round past"
+                    title="Προφίλ παίκτη"
+                    aria-label="Προφίλ παίκτη"
+                    type="submit"
+                >
+                    1
+                </button>
             </div>
             <div class="step3-3 col-5">
-                <button class="btn btn-round past" type="button">2</button>
+                <button
+                    class="btn btn-round past"
+                    title="Ρυθμίσεις χειρισμού"
+                    aria-label="Ρυθμίσεις χειρισμού"
+                    type="submit"
+                >
+                    2
+                </button>
             </div>
             <div class="step3-4 col-2">
                 <button
                 class="btn btn-round current"
-                aria-label="Δυσκολία"
+                title="Ρυθμίσεις δυσκολίας"
+                aria-label="Ρυθμίσεις δυσκολίας"
+                aria-describedby="currentPageDescription"
                 aria-current="page"
                 aria-readonly="true"
                 tabindex="-1"
@@ -26,12 +42,14 @@
                 value="difficulty"
                 type="submit"
                 disabled
+                id="currentPageButton"
                 >
                     3
                 </button>
             </div>
         </div>
     </div>
+    <!-- / step counter 3/3 -->
 
     <!-- profile step 3 content -->
     <div class="section profiles container-xxl px-4 px-sm-5 px-xl-6">
