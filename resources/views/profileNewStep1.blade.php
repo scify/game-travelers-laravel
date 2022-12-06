@@ -1,82 +1,129 @@
-<x-layout :title="'Νέο προφίλ παίκτη: 1ο βήμα | Ταξιδιώτες'">
+<x-layout :title="'Προφίλ | Νέος παίκτης - Βήμα 1ο | Ταξιδιώτες'">
+    {{-- Inline error on field name PLUS an explanatory message just beneath
+        the field name which appears in bold red.
+        Avatar selection (required) is done via JavaScript with buttons which
+        act as radios. Avatar ID is passed to the #playerAvatarId hidden input
+        element (name="avatar", value="{integer}"). Note that submit is also
+        possible in theory via the Stepper's buttons, even though the one on
+        this page (#currentPageButton) is set to "disabled" (submits name=page,
+        value="profile"). --}}
     @section('scripts')
-    {{-- Optional: Custom JS scripts for profiles --}}
+        <script src="{{ mix('js/extras/profile-new.js') }}" defer></script>
     @endsection
 
-    <!-- step counter 1/3 -->
-    <div class="stepper container-xxl">
-        <div class="step1 row">
-            <div class="step1-1 col col-1">
-                <!-- empty -->
-            </div>
-            <div class="step1-2 col col-11">
-                <button class="btn btn-round current" type="button">1</button>
+    <!-- profile step 1 content -->
+    <form method="post" action="" id="profileNewStep1">
+        @csrf
+
+        <!-- step counter 1/3 -->
+        <div class="stepper container-xxl">
+            <div class="step1 row">
+                <div class="step1-1 col-1"></div>
+                <div class="step1-2 col-11">
+                    <button
+                        class="btn btn-round current"
+                        aria-label="Προφίλ"
+                        aria-describedby="currentPageDescription"
+                        aria-current="page"
+                        aria-readonly="true"
+                        tabindex="-1"
+                        name="page"
+                        value="profile"
+                        type="submit"
+                        disabled
+                        id="currentPageButton"
+                    >
+                        1
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
+        <!-- / step counter 1/3 -->
 
-    <!-- profile step 1 content -->
-    <div class="section profiles container-xxl px-4 px-sm-5 px-xl-6">
+        <!-- section header -->
+        <div class="profiles-header container-xxl px-4 px-sm-4 mb-2 mb-lg-5">
+            <div class="row">
+                <div class="col-1">
+                    <x-buttonBack :label="'Ακύρωση και επιστροφή στο προηγούμενο μενού'" />
+                </div>
+                <div class="col-10 text-center">
+                    <h1>Νέος παίκτης</h1>
+                    <p><strong>Διάλεξε ένα όνομα και μια φατσούλα για να
+                        δημιουργήσεις το προφίλ σου.
+                    </strong>
+                </div>
+                <div class="col-1"></div>
+           </div>
+        </div>
+        <!-- / section header -->
 
-        <form>
-
-            <div id="nameRow" class="field profiles-row row">
+        <div class="section profiles container-xxl px-4 px-sm-5 px-xl-6">
+            <div id="nameGroup" class="field @error('name') is-invalid @enderror profiles-row row mb-5">
                 <div class="col-md-3">
-                    <label class="extended big" for="playerName">
-                        Ονομα παίκτη
+                    <label class="field-label extended big" for="playerName">
+                        Όνομα παίκτη
                     </label>
                 </div>
                 <div class="col-md-9">
                     <input
-                        class="extended underlined big"
+                        class="field-input extended underlined big"
                         type="text"
                         name="name"
                         maxlength="50"
                         required="true"
-                        autocomplete="nickname"
+                        autocomplete="given-name"
                         autocapitalize="on"
                         spellcheck="false"
                         tabindex="1"
-                        id="playerName" />
-                    <div class="alert" id="alertName">{{-- Message of alertName goes here --}}</div>
+                        id="playerName"
+                    />
+                    @error('name')
+                    <div class="field-description big" id="alert">
+                        <strong id="alertMessage">
+                            Ουπς! Αυτό το όνομα είναι «πιασμένο». Συνέχισε με το
+                            προτεινόμενο ή δοκίμασε κάποιο διαφορετικό.
+                        </strong>
+                    </div>
+                    @enderror
                 </div>
             </div>
 
-            <div id="avatarRow" class="field profiles-row row">
+            <div
+                class="field profiles-row row mb-2"
+                role="radiogroup"
+                aria-labelledby="avatarGroupLabel"
+                id="avatarGroup"
+            >
                 <div class="col-md-3">
-                    <label class="extended big" for="">
+                    <legend class="field-label extended big" id="avatarGroupLabel">
                         Διάλεξε φατσούλα
-                    </label>
+                    </legend>
                 </div>
                 <div class="col-md-9">
-
+                    <!-- avatar container -->
                     <div class="avatars container-lg text-center">
-                        <div class="row trvl-avatars--row">
+                        <div class="row avatars-row">
                             <x-profileNewAvatar :avatar=$avatarData[0] />
                             <x-profileNewAvatar :avatar=$avatarData[1] />
                             <x-profileNewAvatar :avatar=$avatarData[2] />
                             <x-profileNewAvatar :avatar=$avatarData[3] />
                             <x-profileNewAvatar :avatar=$avatarData[4] />
-                            <x-profileNewAvatar :avatar=$avatarData[5]/>
+                            <x-profileNewAvatar :avatar=$avatarData[5] />
+
+                            <input type="hidden" name="avatar" value="0" id="playerAvatarId" />
                         </div>
                     </div>
-
                 </div>
+
             </div>
 
-            <div id="nextRow" class="profiles-row row">
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-9 text-center-end">
-                    <strong>
-                        Διάλεξε ένα όνομα και ένα άβαταρ για να συνεχίσεις!
-                    </strong>
-                </div>
+            <div id="navGroup" class="d-flex align-items-end flex-column">
+                <button class="btn btn-primary btn-lg responsive-expand" type="submit" id="submitButton" disabled>δημιουργία προφίλ</button>
             </div>
 
-        </form>
+        </div>
 
-    </div>
+    </form>
     <!-- / profile step 1 content -->
 
 </x-layout>

@@ -19,7 +19,10 @@
   --black: #000000;
   --gray-rgb: 160, 160, 160;
   --dark-gray-rgb: 90, 90, 90;
+  --light-green: #edf9dd;
+  --light-green-dark: #22241f;
   --pale-green: #78b594;
+  --pale-green-rgb: 120, 181, 148;
   --pale-green-hsl: 148deg, 29%, 59%;
 }
 
@@ -29,20 +32,21 @@
     --trvl-c-background-hsl: var(--unnamed-color-c3d0c9-hsl);
     --trvl-c-text: var(--unnamed-color-383735);
     --trvl-c-link: var(--unnamed-color-383735);
+    // Buttons
     --trvl-btn-bg: var(--unnamed-color-faf9f8);
     --trvl-btn-color: var(--unnamed-color-000000);
     --trvl-btn-border-color: var(--unnamed-color-383735);
     --trvl-btn-hover-bg: var(--unnamed-color-faf9f8);
     --trvl-btn-hover-color: var(--unnamed-color-000000);
     --trvl-btn-hover-border-color: var(--unnamed-color-383735);
-    --trvl-btn-active-bg: var(--unnamed-color-faf9f8);
-    --trvl-btn-active-color: var(--unnamed-color-000000);
-    --trvl-btn-active-border-color: var(--unnamed-color-383735);
+    --trvl-btn-active-bg: var(--light-green);
+    --trvl-btn-active-color: var(--light-green-dark);
+    --trvl-btn-active-border-color: var(--light-green-dark);
     --trvl-btn-disabled-bg: var(--unnamed-color-faf9f8);
     --trvl-btn-disabled-color: var(--unnamed-color-000000);
     --trvl-btn-disabled-border-color: var(--unnamed-color-383735);
     --trvl-btn-hover-shadow-rgb: var(--dark-gray-rgb);
-    --trvl-btn-focus-shadow-rgb: var(--gray-rgb);
+    --trvl-btn-focus-shadow-rgb: var(--pale-green-rgb);
     --trvl-shadow-focus-hsl: var(--pale-green-hsl);
     // Extensions
     --trvl-c-bright: var(--white);

@@ -12,18 +12,24 @@
         font-weight: 600;
     }
     .field-input.underlined {
-        box-shadow: inset 0 -0.25em hsla(var(--trvl-danger-hsl), 0.1);
+        box-shadow: inset 0 -0.25rem hsla(var(--trvl-danger-hsl), 0.1);
         border-bottom-color: var(--trvl-danger);
         &:focus,
         &:focus-visible,
         &:focus-within {
-          box-shadow: inset 0 -0.25em hsla(var(--trvl-danger-hsl), 0.2);
+          box-shadow: inset 0 -0.25rem hsla(var(--trvl-danger-hsl), 0.2);
         }
+    }
+    .field-description.big {
+        background-color: hsla(var(--salmon-red-hsl), 0.01);
     }
 }
 .field-description {
     padding-top: 1rem;
     font-size: 0.9em;
+    &.big {
+        font-size: 1rem;
+    }
 }
 
 .captcha .captcha-prompt {
@@ -84,6 +90,7 @@ input {
 }
 
 // Labels
+legend,
 label {
     font-weight: 600; // make sure we have a regular/normal weight
     &.extended {
@@ -91,7 +98,7 @@ label {
       padding-bottom: 0.5em;
     }
     &.big {
-      font-size: 2em;
+      font-size: 1.25em;
       font-weight: bold;
     }
   }

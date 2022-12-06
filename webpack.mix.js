@@ -13,6 +13,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/main.js', 'public/js') // no vue dependency
+    .js('resources/js/extras/*.js', 'public/js/extras') // single use js
     .vue()
     .sass('resources/sass/app.scss', 'public/css')
     // .sass('resources/sass/fixedwh.scss', 'public/css')

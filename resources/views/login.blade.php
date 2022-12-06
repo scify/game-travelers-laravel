@@ -29,6 +29,7 @@
                                 type="email"
                                 name="email"
                                 required="required"
+                                aria-required="true"
                                 autocomplete="email"
                                 autocapitalize="off"
                                 spellcheck="false"
@@ -42,6 +43,7 @@
                                 type="password"
                                 name="password"
                                 required="required"
+                                aria-required="true"
                                 autocomplete="current-password"
                                 autocapitalize="off"
                                 spellcheck="false"
@@ -62,7 +64,7 @@
                             </div>
                         </div>
                         <div class="form-actions p-4 text-center">
-                            <button class="btn btn-lg btn-primary text-nowrap responsive-expand" tabindex="4" type="submit" id="submit">Σύνδεση</button>
+                            <button class="btn btn-primary btn-lg text-nowrap responsive-expand" tabindex="4" type="submit" id="submit">Σύνδεση</button>
                         </div>
                     </div>
                 </form>

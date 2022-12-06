@@ -1,45 +1,46 @@
 /* Buttons */
-
+// Base
 .btn {
-  --bs-btn-bg: var(--trvl-btn-bg);
-  --bs-btn-color: var(--trvl-btn-color);
-  // --bs-btn-focus-box-shadow: 0 0 0 0.25em rgba(var(--bs-btn-focus-shadow-rgb), .5);
-  --bs-btn-focus-box-shadow: 0 0 0 0.25em hsla(var(--trvl-shadow-focus-hsl), 0.5);
+    --bs-btn-focus-box-shadow: 0 0 0 0.3rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5);
 }
 .btn:hover {
-  box-shadow: 0 0.25em rgba(var(--trvl-btn-hover-shadow-rgb), .1);
+    box-shadow: 0 0.3rem rgba(var(--trvl-btn-hover-shadow-rgb), .1);
 }
+
 /* Primary & Secondary buttons */
 // Primary button
 .btn-primary {
-  --bs-btn-border-color: var(--trvl-btn-border-color);
-  --bs-btn-hover-bg: var(--trvl-btn-hover-bg);
-  // @TODO: Colors for Hover, Active, Disabled States
-  --bs-btn-hover-color: var(--trvl-btn-hover-color);
-  --bs-btn-hover-border-color: var(--trvl-btn-hover-border-color);
-  --bs-btn-active-bg: var(--trvl-btn-active-bg);
-  --bs-btn-active-color: var(--trvl-btn-active-color);
-  --bs-btn-active-border-color: var(--trvl-btn-active-border-color);
-  --bs-btn-disabled-bg: var(--trvl-btn-disabled-bg);
-  --bs-btn-disabled-color: var(--trvl-btn-disabled-color);
-  --bs-btn-disabled-border-color: var(--trvl-btn-disabled-border-color);
-  --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
-  border: 1px solid var(--trvl-c-text);
+    --bs-btn-color: var(--trvl-btn-color);
+    --bs-btn-bg: var(--trvl-btn-bg);
+    --bs-btn-border-color: var(--trvl-btn-border-color);
+    --bs-btn-hover-color: var(--trvl-btn-hover-color);
+    --bs-btn-hover-bg: var(--trvl-btn-hover-bg);
+    --bs-btn-hover-border-color: var(--trvl-btn-hover-border-color);
+    --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
+    --bs-btn-active-color: var(--trvl-btn-active-color);
+    --bs-btn-active-bg: var(--trvl-btn-active-bg);
+    --bs-btn-active-border-color: var(--trvl-btn-active-border-color);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: var(--trvl-btn-disabled-color);
+    --bs-btn-disabled-bg: var(--trvl-btn-disabled-bg);
+    --bs-btn-disabled-border-color: var(--trvl-btn-disabled-border-color);
 }
+
 // Round button
 .btn-round {
-    border-radius: 50%;
+    --bs-btn-border-radius: 50%;
 }
-/* Large, Medium and Small buttons */
+
+/* Button sizes */
 // Large button
 .btn-lg {
-  // Calibrated on "Εγγραφή" for a target of 144x44 pixels:
-  --bs-btn-font-size: 1.25em; // a little bit bigger than the default 1em
-  --bs-btn-padding-y: 0.4em; // default
-  --bs-btn-padding-x: 1.6em; // default
-  font-weight: 600; // a little bit bolder than the normal (400)
-  border-radius: 1.4em; // pill shaped button: border-radius = line-height
-  line-height: 1.4em; // pill shaped button: border-radius = line-height
+    // Calibrated on "Εγγραφή" for a target of 144x44 pixels:
+    --bs-btn-font-size: 1.25em; // a little bit bigger than the default 1em
+    --bs-btn-font-weight: 600; // a little bit bolder than the default
+    --bs-btn-padding-y: 0.4em; // default
+    --bs-btn-padding-x: 1.6em; // default
+    --bs-btn-line-height: 1.4em;
+    --bs-btn-border-radius: 1.4em;
 }
 
 /* Responsiveness */

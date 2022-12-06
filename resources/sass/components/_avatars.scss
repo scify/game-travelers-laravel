@@ -1,22 +1,40 @@
-.avatars-col {
+.avatar-col {
     min-height: 150px;
-    /* border: 1px solid #000; */
 }
 
-.btn-round.btn-avatar {
+.btn-avatar {
     --bs-btn-active-bg: #edf9dd;
     --bs-btn-hover-bg: var(--trvl-btn-hover-bg);
+    --bs-btn-focus-box-shadow: 0 0 0 0.3rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5);
+    --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
     background-color: var(--trvl-btn-bg);
     transition: all .2s ease-out;
     padding: 0;
     border: none;
-    width: 100px;
-    height: 100px;
+    &.btn-round {
+        width: 100px;
+        height: 100px;
+    }
     &:focus, &:focus-visible:not(:hover) {
-        scale: 1.04;
+        scale: 1.1;
     }
     &:hover {
         scale: 1.1;
+    }
+    &.selected {
+        scale: 1.2;
+        &:hover {
+            scale: 1.2;
+        }
+        &:focus, &:focus-visible:not(:hover) {
+            scale: 1.2;
+        }
+    }
+    &.faded {
+        opacity: 0.8;
+        img {
+            filter: grayscale(90%);
+        }
     }
     @media (prefers-reduced-motion) {
         scale: 1 !important;

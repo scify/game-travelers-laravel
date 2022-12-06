@@ -6,6 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap');
 //@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;900&display=swap');
 //@import url('https://fonts.googleapis.com/css2?family=Nunito');
+//@import url('https://fonts.googleapis.com/css2?family=Mansalva:wght@400&display=swap');
 // Note:
 // Instead of the import, we can manually add the non-variable OFL licensed
 // version of the font, build for all platforms and all the weights and styles
@@ -88,17 +89,51 @@ footer img {
 }
 
 // Profiles
-.profiles {
-    min-height: 502px;
+.profiles-header {
     h1 {
-        font-size: 2.43em;
+        font-size: 2em;
+        line-height: 1;
     }
-    .profiles-row:first-child {
+    a.back-link {
+        transition: all .3s ease-in-out;
+        display:inline-block;
+        width: 2em;
+        height: 2em;
+        line-height: 1;
+        padding: 0;
+        margin: 0;
+        outline: 0;
+        border: none;
+        border-radius: 50%;
+        background: transparent;
+    }
+    a.back-link:hover {
+        color: #383735;
+        background: hsla(40, 3%, 21%, 0.1);
+    }
+    a.back-link:focus-visible {
+        --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
+        box-shadow: 0 0 0 0.2rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5);
+    }
+    a.back-link svg {
+        margin-top: 4px;
+        margin-left: 6px;
+    }
+}
+.profiles {
+    min-height: 398px;
+    h1 {
+        font-size: 2em;
+        color: var(--trvl-c-text);
+    }
+    /*
+    .profiles-row:nth-child(2) {
         margin-bottom: 2.5em;
     }
     .profiles-row:last-child {
         margin-bottom: 5em;
     }
+    */
 }
 
 // Success
@@ -141,27 +176,34 @@ footer.trvl-footer {
 /* Responsiveness */
 // Portrait phones
 @media (max-width: 575.98px) {
-  .section,
-  div.trvl-main-content {
-    margin-bottom: 4rem;
-  }
-  .text-start-end,
-  .text-start-end-start-end {
-    text-align: left;
-  }
-  .text-center-end {
-    text-align: center;
-  }
+    .section,
+    div.trvl-main-content {
+        margin-bottom: 4rem;
+    }
+    .text-start-end,
+    .text-start-end-start-end {
+        text-align: left;
+    }
+    .text-center-end {
+        text-align: center;
+    }
+
 }
 // Landscape phones
 @media (min-width: 576px) and (max-width: 767.98px){
     .text-start-end-start-end {
         text-align: right;
-      }
+    }
+    .text-center-end {
+        text-align: center;
+    }
 }
 // Tablets
 @media (min-width: 767px) and (max-width: 991.98px) {
     .text-start-end-start-end {
         text-align: left;
-      }
+    }
+      .text-center-end {
+        text-align: center;
+    }
 }

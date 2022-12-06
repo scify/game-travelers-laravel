@@ -1,4 +1,4 @@
-<x-layout :title="'Νέο προφίλ παίκτη: 2ο βήμα | Ταξιδιώτες'">
+<x-layout :title="'Χειρισμός | Νέος παίκτης - Βήμα 2ο | Ταξιδιώτες'">
     @section('scripts')
     {{-- Optional: Custom JS scripts for profiles --}}
     @endsection
@@ -13,7 +13,19 @@
                 <button class="btn btn-round past" type="button">1</button>
             </div>
             <div class="step2-3 col-7">
-                <button class="btn btn-round current" type="button">2</button>
+                <button
+                class="btn btn-round current"
+                aria-label="Χειρισμός"
+                aria-current="page"
+                aria-readonly="true"
+                tabindex="-1"
+                name="page"
+                value="controls"
+                type="submit"
+                disabled
+                >
+                    2
+                </button>
             </div>
         </div>
     </div>
