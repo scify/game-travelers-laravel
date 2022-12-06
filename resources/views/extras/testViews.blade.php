@@ -45,7 +45,7 @@
 <body>
     <div class="container">
         <div class="alert alert-success" role="alert">
-            Success! Last update: December 6, 2022. Please select one of the following routes.
+            Success! Updated December 6, 2022. Please select one of the following routes.
         </div>
         <h1>Routes</h2>
         <small style="border-bottom: 1px solid #000;">Make your browser's window as small as this little line of text...</small>
