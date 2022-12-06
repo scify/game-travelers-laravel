@@ -88,8 +88,8 @@ footer img {
   }
 }
 
-// Profiles
-.profiles-header {
+// Settings & Profiles
+.settings-header {
     h1 {
         font-size: 2em;
         line-height: 1;
@@ -120,17 +120,17 @@ footer img {
         margin-left: 6px;
     }
 }
-.profiles {
+.settings {
     min-height: 398px;
     h1 {
         font-size: 2em;
         color: var(--trvl-c-text);
     }
     /*
-    .profiles-row:nth-child(2) {
+    .settings-row:nth-child(2) {
         margin-bottom: 2.5em;
     }
-    .profiles-row:last-child {
+    .settings-row:last-child {
         margin-bottom: 5em;
     }
     */

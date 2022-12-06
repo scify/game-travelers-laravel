@@ -8,10 +8,10 @@
         this page (#currentPageButton) is set to "disabled" (submits name=page,
         value="profile"). --}}
     @section('scripts')
-        <script src="{{ mix('js/extras/profile-new.js') }}" defer></script>
+        <script src="{{ mix('js/functions/profile-new.js') }}" defer></script>
     @endsection
 
-    <!-- profile step 1 content -->
+    <!-- new player step 1/3 content -->
     <form method="post" action="" id="profileNewStep1">
         @csrf
 
@@ -42,7 +42,7 @@
         <!-- / step counter 1/3 -->
 
         <!-- section header -->
-        <div class="profiles-header container-xxl px-4 px-sm-4 mb-2 mb-lg-5">
+        <div class="settings-header container-xxl px-4 px-sm-4 mb-2 mb-lg-5">
             <div class="row">
                 <div class="col-1">
                     <x-buttonBack :label="'Ακύρωση και επιστροφή στο προηγούμενο μενού'" />
@@ -58,8 +58,8 @@
         </div>
         <!-- / section header -->
 
-        <div class="section profiles container-xxl px-4 px-sm-5 px-xl-6">
-            <div id="nameGroup" class="field @error('name') is-invalid @enderror profiles-row row mb-5">
+        <div class="section settings container-xxl px-4 px-sm-5 px-xl-6">
+            <div id="nameGroup" class="field @error('name') is-invalid @enderror settings-row row mb-5">
                 <div class="col-md-3">
                     <label class="field-label extended big" for="playerName">
                         Όνομα παίκτη
@@ -70,6 +70,7 @@
                         class="field-input extended underlined big"
                         type="text"
                         name="name"
+                        minlength="2"
                         maxlength="50"
                         required="true"
                         autocomplete="given-name"
@@ -90,7 +91,7 @@
             </div>
 
             <div
-                class="field profiles-row row mb-2"
+                class="field settings-row row mb-2"
                 role="radiogroup"
                 aria-labelledby="avatarGroupLabel"
                 id="avatarGroup"
@@ -110,7 +111,7 @@
                             <x-profileNewAvatar :avatar=$avatarData[3] />
                             <x-profileNewAvatar :avatar=$avatarData[4] />
                             <x-profileNewAvatar :avatar=$avatarData[5] />
-
+                            {{-- default value = "0"  (no avatar selected --}}
                             <input type="hidden" name="avatar" value="0" id="playerAvatarId" />
                         </div>
                     </div>
@@ -118,13 +119,28 @@
 
             </div>
 
-            <div id="navGroup" class="d-flex align-items-end flex-column">
+            {{-- Γιατί δημιουργία προφίλ; Θεωρώ ότι σε αυτό το πρώτο βήμα
+                το οποίο είναι και το μόνο στο οποίο ο χρήστης καλείται
+                υποχρεωτικά να κάνει επιλογές, πρέπει να δημιουργείται το
+                προφίλ του. Τα επόμενα 2 βήματα που αφορούν στις ρυθμίσεις
+                χειρισμού και δυσκολίας θα πρέπει να προτείνουν τις default
+                παραμέτρους τις οποίες θα μπορεί φυσικά αν θέλει να αλλάξει
+                ο χρήστης. Με αυτόν τον τρόπο διευκολύνουμε τον χρήστη στο
+                on-boarding και του επιτρέπουμε να κατανοήσει τις δυνατότητες
+                που αυτό το παιχνίδι παρέχει. Ωστόσο, εδώ, σε αυτό το πρώτο
+                βήμα δημιουργείται το προφίλ και αποθηκεύεται στη βάση με τις
+                default ρυθμίσεις του. Έτσι γίνεται πολύ πιο εύκολος και ο
+                έλεχος στο back-end χωρίς πολύπλοκους ελέγχους. Ναι, μπορεί
+                να ξαναγυρίσει σε αυτό το βήμα ο χρήστης, αλλά τότε θα πρέπει
+                να βρει αυτή εδώ τη φόρμα συμπληρωμένη.
+            --}}
+            <div id="navGroup" class="form-actions d-flex align-items-end flex-column">
                 <button class="btn btn-primary btn-lg responsive-expand" type="submit" id="submitButton" disabled>δημιουργία προφίλ</button>
             </div>
 
         </div>
 
     </form>
-    <!-- / profile step 1 content -->
+    <!-- / new player step 1/3 content -->
 
 </x-layout>

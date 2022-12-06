@@ -7,10 +7,10 @@ window.addEventListener("load", function() {
         const playerAvatarInput = document.getElementById("playerAvatarId");
         const submitButton = document.getElementById("submitButton");
 
-        function enableSubmitButton() {
+        function updateSubmitButtonState() {
             const playerName = playerNameInput.value;
             const playerAvatarId = parseInt(playerAvatarInput.value);
-            if (playerName.length >= 3 && !isNaN(playerAvatarId) && playerAvatarId > 0) {
+            if (playerName.length >= 2 && !isNaN(playerAvatarId) && playerAvatarId > 0) {
                 submitButton.disabled = false;
             } else {
                 submitButton.disabled = true;
@@ -18,11 +18,28 @@ window.addEventListener("load", function() {
         }
 
         if (buttons.length) {
-            // Reset playerAvatarInput to default state (0)
-            playerAvatarInput.value = 0;
-            enableSubmitButton();
-            // Add listeners.
-            playerNameInput.addEventListener('input', enableSubmitButton);
+            // Reset playerAvatarInput to either the filled or default state (0)
+            filledAvatarId = parseInt(playerAvatarInput.value);
+            if (filledAvatarId === 0) {
+                updateSubmitButtonState();
+            } else {
+                console.log(playerAvatarInput.value);
+                for (const btn of buttons) {
+                    const avatarId = btn.getAttribute("data-avatar-id");
+                    if (parseInt(avatarId) === filledAvatarId) {
+                        btn.classList.remove("faded");
+                        btn.classList.add("selected");
+                        btn.setAttribute("aria-checked", "true");
+                    } else {
+                        btn.classList.add("faded");
+                        btn.classList.remove("selected");
+                        btn.setAttribute("aria-checked", "false");
+                    }
+                }
+                updateSubmitButtonState();
+            }
+            // Add listeners to the buttons
+            playerNameInput.addEventListener('input', updateSubmitButtonState);
             for (const btn of buttons) {
                 btn.addEventListener("click", function() {
                     // Get the selected avatar id:
@@ -39,7 +56,7 @@ window.addEventListener("load", function() {
                     btn.classList.remove("faded");
                     btn.classList.add("selected");
                     btn.setAttribute("aria-checked", "true");
-                    enableSubmitButton();
+                    updateSubmitButtonState();
                 })
             }
         }

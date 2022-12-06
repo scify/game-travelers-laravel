@@ -11726,11 +11726,11 @@ footer img {
   color: var(--trvl-c-black);
 }
 
-.profiles-header h1, .profiles-header .h1 {
+.settings-header h1, .settings-header .h1 {
   font-size: 2em;
   line-height: 1;
 }
-.profiles-header a.back-link {
+.settings-header a.back-link {
   transition: all 0.3s ease-in-out;
   display: inline-block;
   width: 2em;
@@ -11743,31 +11743,31 @@ footer img {
   border-radius: 50%;
   background: transparent;
 }
-.profiles-header a.back-link:hover {
+.settings-header a.back-link:hover {
   color: #383735;
   background: hsla(40deg, 3%, 21%, 0.1);
 }
-.profiles-header a.back-link:focus-visible {
+.settings-header a.back-link:focus-visible {
   --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
   box-shadow: 0 0 0 0.2rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5);
 }
-.profiles-header a.back-link svg {
+.settings-header a.back-link svg {
   margin-top: 4px;
   margin-left: 6px;
 }
 
-.profiles {
+.settings {
   min-height: 398px;
   /*
-  .profiles-row:nth-child(2) {
+  .settings-row:nth-child(2) {
       margin-bottom: 2.5em;
   }
-  .profiles-row:last-child {
+  .settings-row:last-child {
       margin-bottom: 5em;
   }
   */
 }
-.profiles h1, .profiles .h1 {
+.settings h1, .settings .h1 {
   font-size: 2em;
   color: var(--trvl-c-text);
 }
