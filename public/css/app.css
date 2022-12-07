@@ -11211,6 +11211,7 @@ textarea.form-control-lg {
 
 /* Traveler's default colour scheme */
 :root {
+  --trvl-header-height: calc(145px - 1rem);
   --trvl-c-background: var(--unnamed-color-c3d0c9);
   --trvl-c-background-hsl: var(--unnamed-color-c3d0c9-hsl);
   --trvl-c-text: var(--unnamed-color-383735);
@@ -11426,7 +11427,7 @@ input[type=checkbox]:focus {
 input {
   outline: none;
 }
-input:focus, input:focus-visible, input:focus-within {
+input:focus:not([type=range]), input:focus-visible:not([type=range]), input:focus-within:not([type=range]) {
   box-shadow: inset 0 -0.25em hsla(var(--trvl-shadow-focus-hsl), 0.4);
 }
 input.underlined {
@@ -11617,6 +11618,7 @@ label.big {
 @media (max-width: 1199.98px) {
   .background-mountains {
     background-position-x: left;
+    min-height: 100vh;
   }
 }
 
@@ -11780,6 +11782,51 @@ footer img {
   font-size: 2.1rem;
   margin-bottom: 3rem;
   color: var(--trvl-c-text);
+}
+@media (max-width: 1199.98px) {
+  .confirmation-page {
+    min-height: calc(100vh - var(--trvl-header-height));
+  }
+}
+.confirmation-page a.confirmation-link {
+  display: flex;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 0.3rem rgba(0, 0, 0, 0.05);
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: rgba(238, 235, 235, 0.8);
+  border-color: var(--trvl-btn-border-color);
+}
+.confirmation-page a.confirmation-animation {
+  animation: animation-confirm-button 1.2s;
+  animation-iteration-count: 2;
+}
+@media (prefers-reduced-motion) {
+  .confirmation-page a.confirmation-animation {
+    animation: none !important;
+    scale: 1 !important;
+  }
+}
+.confirmation-page a.confirmation-link:hover {
+  background-color: var(--trvl-btn-bg);
+  box-shadow: 0 0.3rem rgba(0, 0, 0, 0.1);
+  border-color: var(--trvl-btn-border-color);
+}
+@keyframes animation-confirm-button {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 footer.trvl-footer {

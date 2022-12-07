@@ -59,7 +59,7 @@
         <div class="settings-header container-xxl px-4 px-sm-4 mb-2 mb-lg-5">
             <div class="row">
                 <div class="col-1">
-                    <x-buttonBack :label="'Ολοκλήρωση και επιστροφή στο προηγούμενο μενού'" />
+                    <x-buttonBack :label="'Επιστροφή στο προηγούμενο μενού'" />
                 </div>
                 <div class="col-10 text-center" id="currentPageDescription">
                     <h1>Δυσκολία</h1>
@@ -74,8 +74,105 @@
 
         <div class="section settings container-xxl px-4 px-sm-5 px-xl-6">
 
+            <div id="settingsGroup" class="row">
+                <fieldset class="col-lg-9">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <legend>Ζάρι</legend>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="container=fluid">
+                                    <div class="row">
+                                        <div class="col form-check">
+                                            <input class="form-check-input" type="radio" name="dice" value="10" tabindex="1" id="dice1" required checked>
+                                            <label class="form-check-label" for="dice1">Νούμερα</label>
+                                        </div>
+                                        <div class="col form-check">
+                                            <input class="form-check-input" type="radio" name="dice" value="20" tabindex="2" id="dice2">
+                                            <label class="form-check-label" for="dice2">Κουκίδες</label>
+                                        </div>
+                                        <div class="col form-check">
+                                            <input class="form-check-input" type="radio" name="dice" value="30" tabindex="3" id="dice3">
+                                            <label class="form-check-label" for="dice3">Χρώμα</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="col-lg-4">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <legend>Διάρκεια παιχνιδιού</legend>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 form-check">
+                                <input class="form-check-input" type="radio" name="gameDuration" value="40" tabindex="4" id="gameDuration1" required />
+                                <label class="form-check-label" for="gameDuration1">Σύντομη (15 θέσεις)</label>
+                            </div>
+                            <div class="col-12 form-check">
+                                <input class="form-check-input" type="radio" name="gameDuration" value="50" tabindex="5" id="gameDuration2" checked />
+                                <label class="form-check-label" for="gameDuration2">Κανονική (30 θέσεις)</label>
+                            </div>
+                            <div class="col-12 form-check">
+                                <input class="form-check-input" type="radio" name="gameDuration" value="60" tabindex="6" id="gameDuration3" />
+                                <label class="form-check-label" for="gameDuration3">Μεγάλη (45 θέσεις)</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="col-lg-4">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <legend>Επίπεδο</legend>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 form-check">
+                                <input class="form-check-input" type="radio" name="level" value="1" tabindex="70" id="level1" required checked />
+                                <label class="form-check-label" for="level1">Κανονικό</label>
+                            </div>
+                            <div class="col-12 form-check">
+                                <input class="form-check-input" type="radio" name="level" value="2" tabindex="80" id="level2" />
+                                <label class="form-check-label" for="level2">Δύσκολο</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="col-lg-4">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <legend>Μετακίνηση</legend>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 form-check">
+                                <input class="form-check-input" type="radio" name="movement" value="1" tabindex="90" id="movement1" required  />
+                                <label class="form-check-label" for="movement1">Αυτόματη</label>
+                            </div>
+                            <div class="col-12 form-check">
+                                <input class="form-check-input" type="radio" name="movement" value="2" tabindex="100" id="movement2" checked />
+                                <label class="form-check-label" for="movement2">Με υπόδειξη</label>
+                            </div>
+                            <div class="col-12 form-check">
+                                <input class="form-check-input" type="radio" name="movement" value="3" tabindex="110" id="movement3" />
+                                <label class="form-check-label" for="movement3">Χωρίς υπόδειξη</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
             <div id="navGroup" class="form-actions d-flex align-items-end flex-column">
-                <button class="btn btn-primary btn-lg responsive-expand" type="submit" id="submitButton">ολοκλήρωση ρυθμίσεων</button>
+                <button class="btn btn-primary btn-lg responsive-expand" type="submit" id="submitButton" tabindex="120">ολοκλήρωση ρυθμίσεων</button>
             </div>
 
         </div>

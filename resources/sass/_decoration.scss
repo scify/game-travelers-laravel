@@ -15,6 +15,7 @@
     background-size: 1366px 768px;
     @media (max-width: 1199.98px) {
         background-position-x: left;
+        min-height: 100vh;
     }
 }
 

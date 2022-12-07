@@ -8,7 +8,7 @@
         this page (#currentPageButton) is set to "disabled" (submits name=page,
         value="profile"). --}}
     @section('scripts')
-        <script src="{{ mix('js/functions/profile-new.js') }}" defer></script>
+        <script src="{{ mix('js/functions/settings.js') }}" defer></script>
     @endsection
 
     <!-- new player step 1/3 content -->
@@ -135,7 +135,7 @@
                 να βρει αυτή εδώ τη φόρμα συμπληρωμένη.
             --}}
             <div id="navGroup" class="form-actions d-flex align-items-end flex-column">
-                <button class="btn btn-primary btn-lg responsive-expand" type="submit" id="submitButton" disabled>δημιουργία προφίλ</button>
+                <button class="btn btn-primary btn-lg responsive-expand" type="submit" id="submitButton" tabindex="120" disabled>δημιουργία προφίλ</button>
             </div>
 
         </div>

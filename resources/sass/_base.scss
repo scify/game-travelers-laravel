@@ -28,6 +28,8 @@
 
 /* Traveler's default colour scheme */
 :root {
+    // Variables
+    --trvl-header-height: calc(145px - 1rem);
     --trvl-c-background: var(--unnamed-color-c3d0c9);
     --trvl-c-background-hsl: var(--unnamed-color-c3d0c9-hsl);
     --trvl-c-text: var(--unnamed-color-383735);
