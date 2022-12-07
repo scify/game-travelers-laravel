@@ -65,8 +65,8 @@
             <dd>✔️ <span class="upd">Final</span> Same as the login page with additional text and partially hidden decoration on small viewports. Laravel @@error handling added. Fully responsive.</dd>
             <dt><a href="{{ url('password/reset/change') }}">Password reset: Change password</a></dt>
             <dd>✔️ <span class="upd">Final</span> Same as the login page with additional text and partially hidden decoration on small viewports. Laravel @@error handling added. Fully responsive.</dd>
-            <dt><a href="{{ url('success') }}">Success!</a></dt>
-            <dd>✔️ <span class="todo">Assets</span> Successfull action message. Background restricted to 1366x768 pixels as requested.</dd>
+            <dt><a href="{{ url('password/reset/success') }}">Password reset: Success!</a></dt>
+            <dd>✔️ <span class="upd">Final</span> <span class="todo">Assets</span> Successfull action message via a customizable component. Background restricted to 1366x768 pixels as requested.</dd>
         </dl>
         <h3 class="mt-4">Create new player</h3>
         <small>Privacy icon on password fields has been removed as it should be controlled by browser.</small>

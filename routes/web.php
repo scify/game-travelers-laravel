@@ -45,8 +45,8 @@ Route::get('/password/reset', function () {
 Route::get('/password/reset/change', function () {
     return view('passwordResetNewPassword');
 });
-Route::get('/success', function () {
-    return view('success');
+Route::get('/password/reset/success', function () {
+    return view('passwordResetComplete');
 });
 
 /*
