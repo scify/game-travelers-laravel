@@ -64,46 +64,70 @@
 
         <div class="section settings container-xxl px-4 px-sm-5 px-xl-6">
             <div id="settingsGroup" class="row">
-                <fieldset class="col-lg-8">
+                <fieldset class="col-lg-8 field-group indicate-status">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col">
-                                <legend>Στυλ πλοήγησης</legend>
+                                <legend class="field-legend fw-bold">
+                                    Τρόπος χειρισμού
+                                </legend>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6 form-check">
-                                <input class="form-check-input" type="radio" name="navigationType" value="0" tabindex="10" id="navigationType1" checked>
-                                <label class="form-check-label" for="navigationType1">Αυτόματο</label>
-                                <div class="container-fluid">
+                        <div class="row ms-1 mt-2">
+                            <div class="col-lg-6 form-check">
+                                <input class="form-check-input field-input" type="radio" name="controlType" value="1" data-role="groupSetter" data-enables="controlType1Group" data-disables="controlType2Group" tabindex="10" id="controlType1" checked />
+                                <label class="form-check-label field-label medium" for="controlType1">Αυτόματος</label>
+                                <div class="field-subgroup container-fluid gx-0 gy-5 pt-3" id="controlType1Group">
                                     <div class="row">
                                         <div class="col">
                                             επιλογή
                                         </div>
                                         <div class="col">
-                                            <button type="button" class="btn btn-sm btn-light key-assigner" data-role="keyAssigner" data-keycode="" tabindex="11">όρισε πλήκτρο</button>
+                                            <!-- @TODO: Accessibility -->
+                                            <button
+                                                type="button"
+                                                class="btn btn-sm btn-light rounded-pill key-assigner"
+                                                data-role="keyAssigner"
+                                                data-key-default="Space"
+                                                data-key-selected="Space"
+                                                data-sets-input="controlAutomaticSelectionButton"
+                                                tabindex="11"
+                                            >
+                                                Space
+                                            </button>
+                                            <input
+                                                id="controlAutomaticSelectionButton"
+                                                data-role="keyAssignerInput"
+                                                type="hidden"
+                                                name="controlAutomaticSelectionButton"
+                                                value="Space"
+                                            />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6 form-check">
-                                <input class="form-check-input" type="radio" name="navigationType" value="1" tabindex="20" id="navigationType2">
-                                <label class="form-check-label" for="navigationType2">Χειροκίνητο</label>
-                                <div class="container-fluid">
+                            <div class="col-lg-6 mt-4 mt-lg-0 form-check">
+                                <input class="form-check-input field-input" type="radio" name="controlType" value="2" data-role="groupSetter" data-enables="controlType2Group" data-disables="controlType1Group" tabindex="20" id="controlType2" />
+                                <label class="form-check-label field-label medium" for="controlType2">Χειροκίνητος</label>
+                                <div class="field-subgroup container-fluid gx-0 gy-5 pt-3" id="controlType2Group">
                                     <div class="row">
                                         <div class="col">
                                             επιλογή
                                         </div>
-                                        <div class="col">
-                                            <button type="button" class="btn btn-sm btn-light key-assigner" data-role="keyAssigner" data-keycode="" tabindex="-1" disabled>όρισε πλήκτρο</button>
+                                        <div class="col pb-1">
+                                            <!-- @TODO: Accessibility -->
+                                            <button type="button" class="btn btn-sm btn-light rounded-pill key-assigner" data-role="keyAssigner" data-key-default="Space" data-key-selected="Space" data-sets-input="controlManualSelectionButton" tabindex="21" disabled>όρισε πλήκτρο</button>
+                                            <input id="controlManualSelectionButton" data-role="keyAssignerInput" type="hidden" name="controlManualSelectionButton" value="Space" />
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row mt-2">
                                         <div class="col">
                                             πλοήγηση
                                         </div>
-                                        <div class="col">
-                                            <button type="button" class="btn btn-sm btn-light key-assigner" data-role="keyAssigner" data-keycode="" tabindex="-1" disabled>όρισε πλήκτρο</button>
+                                        <div class="col pb-1">
+                                            <!-- @TODO: Accessibility -->
+                                            <button type="button" class="btn btn-sm btn-light rounded-pill key-assigner" data-role="keyAssigner" data-key-default="Enter" data-key-selected="Enter" data-sets-input="controlManualNavigationButton" tabindex="22" disabled>όρισε πλήκτρο</button>
+                                            <input id="controlManualNavigationButton" data-role="keyAssignerInput" type="hidden" name="controlManualNavigationButton" value="Enter" />
                                         </div>
                                     </div>
                                 </div>
@@ -111,45 +135,64 @@
                         </div>
                     </div>
                 </fieldset>
-                <fieldset class="col-lg-4">
+                <fieldset class="col-lg-4 mt-4 mt-lg-0">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col">
-                                <legend>Βοήθεια μετά από λάθος</legend>
+                                <legend class="field-legend fw-bold">
+                                    Βοήθεια μετά από λάθος
+                                </legend>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row ms-1 mt-2">
                             <div class="col-12 form-check">
-                                <input class="form-check-input" type="radio" name="helpAfterTries" value="1" tabindex="30" id="helpAfterTries1">
+                                <input class="form-check-input" type="radio" name="helpAfterTries" value="1" tabindex="30" id="helpAfterTries1" />
                                 <label class="form-check-label" for="helpAfterTries1">1 προσπάθεια</label>
                             </div>
-                            <div class="col-12 form-check">
-                                <input class="form-check-input" type="radio" name="helpAfterTries" value="2" tabindex="40" id="helpAfterTries2">
+                            <div class="col-12 form-check mt-1">
+                                <input class="form-check-input" type="radio" name="helpAfterTries" value="2" tabindex="40" id="helpAfterTries2" />
                                 <label class="form-check-label" for="helpAfterTries2">2 προσπάθειες</label>
                             </div>
-                            <div class="col-12 form-check">
-                                <input class="form-check-input" type="radio" name="helpAfterTries" value="3" tabindex="50" id="helpAfterTries3" checked>
+                            <div class="col-12 form-check mt-1">
+                                <input class="form-check-input" type="radio" name="helpAfterTries" value="3" tabindex="50" id="helpAfterTries3" checked />
                                 <label class="form-check-label" for="helpAfterTries3">3 προσπάθειες</label>
                             </div>
                         </div>
                     </div>
                 </fieldset>
-                <fieldset class="col-lg-12">
+                <fieldset class="col-lg-12 mt-4 mt-lg-2 mb-4">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col">
-                                <legend>Ταχύτητα σάρωσης</legend>
+                                <legend class="field-legend fw-bold">
+                                    Ταχύτητα σάρωσης
+                                </legend>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mt-2">
                             <div class="col col-md-6">
                                 <label class="form-label" for="scanningSpeed"><span>2</span> δευτερόλεπτα</label>
-                                <input class="form-range" type="range" name="scanningSpeed" value="2" min="1" max="8" step="1" tabindex="60" id="scanningSpeed">
+                                <input class="form-range" type="range" name="scanningSpeed" value="2" min="1" max="8" step="1" tabindex="60" id="scanningSpeed" />
+                                <!-- decorative ruler -->
+                                <div class="d-flex flex-nowrap justify-content-between form-range-ruler user-select-none" aria-hidden="true">
+                                    <div class="rule">1</div>
+                                    <div class="rule">2</div>
+                                    <div class="rule">3</div>
+                                    <div class="rule">4</div>
+                                    <div class="rule">5</div>
+                                    <div class="rule">6</div>
+                                    <div class="rule">7</div>
+                                    <div class="rule">8</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </fieldset>
             </div>
+
+<style type="text/css">
+
+</style>
 
             <div id="navGroup" class="form-actions d-flex align-items-end flex-column">
                 <button class="btn btn-primary btn-lg responsive-expand" type="submit" id="submitButton" tabindex="200">αποθήκευση επιλογών</button>

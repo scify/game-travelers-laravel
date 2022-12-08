@@ -3,6 +3,7 @@
 // Fields
 .field.is-invalid,
 .field-group.is-invalid {
+    .field-legend,
     .field-label,
     .field-description,
     .captcha-prompt {
@@ -44,6 +45,79 @@
     width: 8rem;
 }
 
+// Inputs: Indicated field-groups with multiple sub-options
+.field-group.indicate-status {
+    transition: 240ms transform ease-in-out;
+    input[type="radio"]:checked + label {
+        // text-decoration: underline;
+        box-shadow: 0 0.15rem rgba(0, 0, 0, 0.8);
+    }
+    input[type="radio"]:not(:checked) + label {
+        opacity: 0.5;
+    }
+}
+
+// Inputs: Ranges
+.form-range::-moz-range-thumb {
+    background-color: var(--trvl-c-text);
+}
+.form-range::-webkit-slider-thumb {
+    background-color: var(--trvl-c-text);
+}
+.form-range-ruler {
+    opacity: 0.9;
+    top: -5px;
+    position: relative;
+    margin-left: 0.35rem;
+    margin-right: 0.35rem;
+}
+.form-range-ruler > .rule {
+    font-size: 0.9em;
+}
+
+// Inputs: Radios
+input[type="radio"] {
+    // Importants fights with Bootstrap
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    background-color: var(--trvl-c-background) !important;
+    border-color: currentColor !important;
+    background-image: none !important;
+    filter: none !important;
+    margin: 0;
+    margin-right: 0.5em;
+    font: inherit;
+    color: currentColor;
+    width: 1em;
+    height: 1em;
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
+    transform: translateY(0.3em);
+    display: grid;
+    place-content: center;
+    float: left;
+}
+input[type="radio"]::before {
+    content: "";
+    width: 0.75em;
+    height: 0.75em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 240ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--trvl-c-text);
+}
+input[type="radio"]:checked::before {
+    transform: scale(0.7);
+}
+input[type="radio"]:focus {
+   // Importants fights with Bootstrap;
+     box-shadow: none !important;
+}
+input[type="radio"]:focus-visible {
+    // Importants fights with Bootstrap;
+    box-shadow: 0 0 0 0.25em rgba(var(--trvl-btn-focus-shadow-rgb), 0.5) !important;
+}
+
 // Inputs: Checkboxes
 input[type=checkbox] {
     background-color: var(--trvl-btn-bg);
@@ -58,6 +132,7 @@ input[type=checkbox] {
       box-shadow: 0 0 0 0.25em hsla(var(--trvl-shadow-focus-hsl), 0.5);
     }
 }
+
 // Inputs: Text & numeric
 input {
     outline: none; // @TODO: Outlines for focus
@@ -97,8 +172,12 @@ label {
       display: block;
       padding-bottom: 0.5em;
     }
+    &.medium {
+        font-size: 1.125em;
+        font-weight: 700;
+    }
     &.big {
       font-size: 1.25em;
-      font-weight: bold;
+      font-weight: 700;
     }
   }

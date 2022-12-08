@@ -45,7 +45,7 @@
 <body>
     <div class="container">
         <div class="alert alert-success" role="alert">
-            Success! Updated December 6, 2022. Please select one of the following routes.
+            Success! Updated December 8, 2022, 04:59. Please select one of the following routes.
         </div>
         <h1>Routes</h2>
         <small style="border-bottom: 1px solid #000;">Make your browser's window as small as this little line of text...</small>
@@ -66,7 +66,7 @@
             <dt><a href="{{ url('password/reset/change') }}">Password reset: Change password</a></dt>
             <dd>✔️ <span class="upd">Final</span> Same as the login page with additional text and partially hidden decoration on small viewports. Laravel @@error handling added. Fully responsive.</dd>
             <dt><a href="{{ url('password/reset/success') }}">Password reset: Success!</a></dt>
-            <dd>✔️ <span class="upd">Final</span> <span class="todo">Assets</span> Successfull action message via a customizable component. Background restricted to 1366x768 pixels as requested.</dd>
+            <dd>✔️ <span class="upd">Final</span> <span class="todo">Assets</span> Successfull action message via a customizable component. Background restricted to 1366x768 pixels as requested (yet extends to full width/height on smaller viewports, so yes, responsive).</dd>
         </dl>
         <h3 class="mt-4">Create new player</h3>
         <small>Privacy icon on password fields has been removed as it should be controlled by browser.</small>
@@ -81,7 +81,7 @@
                 </dl>
             </dd>
             <dt><a href="{{ url('/profiles/new/2') }}">New player profile Step 2 of 3</a></dt>
-            <dd>✔️ <span class="todo">Under construction.</span></dd>
+            <dd>✔️ <span class="new">New</span> Lovely custom-made checkboxes, awesome input ranges and JavaScript to support hide and seek of different radio-groups and even reliable keypress readings, while making sure that the values could be easily stored and retrieved from the hidden and ready-to-use-on-the-back-end forms. Fully responsive.</dd>
             <dt><a href="{{ url('/profiles/new/3') }}">New player profile Step 3 of 3</a></dt>
             <dd>✔️ <span class="todo">Under construction.</span></dd>
         </dl>

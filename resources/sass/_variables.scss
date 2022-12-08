@@ -1,6 +1,6 @@
 // Body
 // Using Bootstrap's default, but keeping the option open for a Travelers green.
-$body-bg: #f8fafc; // # Travelers Green: #c3d0c9 as of Nov 25, 2022.
+$body-bg: #c3d0c9; // # Travelers Green: #c3d0c9 as of Nov 25, 2022. Def: #f8fafc;
 //
 // Typography
 // Falling back to the default values instead of the overrides but setting
@@ -23,6 +23,21 @@ $spacers: (
   5: $spacer * 3,
   6: $spacer * 6,
 );
+// Rangers
+// As 5.1 at least doesn't allow full customisation via CSS, here is what we
+// can do via the Sass variables:
+$form-range-track-bg:             rgba(0, 0, 0, 0.1);
+$form-range-track-border-radius:  2rem;
+
+$form-range-thumb-width:                   1.1rem;
+$form-range-thumb-height:                  1.1rem;
+$form-range-thumb-border:                  0;
+$form-range-thumb-border-radius:           2rem;
+$form-range-thumb-box-shadow:              0 .1rem .25rem rgba(#000, .1);
+$form-range-thumb-focus-box-shadow:        0 0 0 1px $body-bg, 0 0 0 0.3rem rgb(120, 181, 148);
+// $form-range-thumb-focus-box-shadow-width:  $input-focus-width; // For focus box shadow issue in Edge
+$form-range-thumb-active-bg:               tint-color(#383735, 70%);
+// $form-range-thumb-disabled-bg:             $gray-500;
 //
 // Note:
 // Web design is thankfully moving back to CSS and its variables which have

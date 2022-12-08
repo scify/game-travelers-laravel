@@ -1,3 +1,6 @@
+/*
+ * Avatar Selection Functions.
+ */
 window.addEventListener("load", function() {
     // Functions for New Profile form, Step 1.
     const thisPage = document.getElementById("profileNewStep1");
