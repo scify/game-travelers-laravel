@@ -12,95 +12,103 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
  * Avatar Selection Functions.
  */
 window.addEventListener("load", function () {
-  // Functions for New Profile form, Step 1.
-  var thisPage = document.getElementById("profileNewStep1");
-  if (thisPage) {
+  // Should only run on pages with buttons with data-avatar=true attribute.
+  var buttons = document.querySelectorAll("button[data-avatar='true']");
+  // Variables for reading and parsing various form elements.
+  var playerNameInput = document.getElementById("playerName");
+  var playerAvatarIdInput = document.getElementById("selectedAvatarId");
+  var submitButton = document.getElementById("submitButton");
+  if (buttons.length) {
     (function () {
+      /** Enables Submit Button on profileNewStep1 view. */
       var updateSubmitButtonState = function updateSubmitButtonState() {
-        var playerName = playerNameInput.value;
-        var playerAvatarId = parseInt(playerAvatarInput.value);
-        if (playerName.length >= 2 && !isNaN(playerAvatarId) && playerAvatarId > 0) {
-          submitButton.disabled = false;
-        } else {
-          submitButton.disabled = true;
-        }
-      };
-      var buttons = document.querySelectorAll("button[data-avatar='true']");
-      var playerNameInput = document.getElementById("playerName");
-      var playerAvatarInput = document.getElementById("playerAvatarId");
-      var submitButton = document.getElementById("submitButton");
-      if (buttons.length) {
-        // Reset playerAvatarInput to either the filled or default state (0)
-        filledAvatarId = parseInt(playerAvatarInput.value);
-        if (filledAvatarId === 0) {
-          updateSubmitButtonState();
-        } else {
-          console.log(playerAvatarInput.value);
-          var _iterator = _createForOfIteratorHelper(buttons),
-            _step;
-          try {
-            for (_iterator.s(); !(_step = _iterator.n()).done;) {
-              var btn = _step.value;
-              var avatarId = btn.getAttribute("data-avatar-id");
-              if (parseInt(avatarId) === filledAvatarId) {
-                btn.classList.remove("faded");
-                btn.classList.add("selected");
-                btn.setAttribute("aria-checked", "true");
-              } else {
-                btn.classList.add("faded");
-                btn.classList.remove("selected");
-                btn.setAttribute("aria-checked", "false");
-              }
-            }
-          } catch (err) {
-            _iterator.e(err);
-          } finally {
-            _iterator.f();
+        var nameInput = document.getElementById("playerName");
+        var avatarIdInput = document.getElementById("selectedAvatarId");
+        var avatarId = parseInt(avatarIdInput.value);
+        var submit = document.getElementById("submit");
+        if (nameInput) {
+          var nameValue = nameInput.value;
+          if (playerName.length >= 2 && !isNaN(playerAvatarId) && playerAvatarId > 0) {
+            submit.disabled = false;
+          } else {
+            submit.disabled = true;
           }
-          updateSubmitButtonState();
+        } else {
+          if (!isNaN(avatarId) && avatarId > 0) {
+            submit.disabled = false;
+          } else {
+            submit.disabled = true;
+          }
         }
-        // Add listeners to the buttons
-        playerNameInput.addEventListener('input', updateSubmitButtonState);
-        var _iterator2 = _createForOfIteratorHelper(buttons),
-          _step2;
+      }; // Reset playerAvatarInput to either the filled or default state (0)
+      filledAvatarId = parseInt(playerAvatarIdInput.value);
+      if (filledAvatarId === 0) {
+        updateSubmitButtonState();
+      } else {
+        var _iterator = _createForOfIteratorHelper(buttons),
+          _step;
         try {
-          var _loop = function _loop() {
-            var btn = _step2.value;
-            btn.addEventListener("click", function () {
-              // Get the selected avatar id:
-              var avatarId = btn.getAttribute("data-avatar-id");
-              var input = document.getElementById("playerAvatarId");
-              input.value = avatarId;
-              // Add the faded class to all avatars:
-              var _iterator3 = _createForOfIteratorHelper(buttons),
-                _step3;
-              try {
-                for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-                  var b = _step3.value;
-                  b.classList.remove("selected");
-                  b.classList.add("faded");
-                  b.setAttribute("aria-checked", "false");
-                }
-                // Add the selected class to the clicked avatar:
-              } catch (err) {
-                _iterator3.e(err);
-              } finally {
-                _iterator3.f();
-              }
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var btn = _step.value;
+            var avatarId = btn.getAttribute("data-avatar-id");
+            if (parseInt(avatarId) === filledAvatarId) {
               btn.classList.remove("faded");
               btn.classList.add("selected");
               btn.setAttribute("aria-checked", "true");
-              updateSubmitButtonState();
-            });
-          };
-          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-            _loop();
+            } else {
+              btn.classList.add("faded");
+              btn.classList.remove("selected");
+              btn.setAttribute("aria-checked", "false");
+            }
           }
         } catch (err) {
-          _iterator2.e(err);
+          _iterator.e(err);
         } finally {
-          _iterator2.f();
+          _iterator.f();
         }
+        updateSubmitButtonState();
+      }
+      // Add listeners to the buttons
+      playerNameInput.addEventListener('input', updateSubmitButtonState);
+      var _iterator2 = _createForOfIteratorHelper(buttons),
+        _step2;
+      try {
+        var _loop = function _loop() {
+          var btn = _step2.value;
+          btn.addEventListener("click", function () {
+            // Get the selected avatar id:
+            var avatarId = btn.getAttribute("data-avatar-id");
+            var input = document.getElementById("playerAvatarId");
+            input.value = avatarId;
+            // Add the faded class to all avatars:
+            var _iterator3 = _createForOfIteratorHelper(buttons),
+              _step3;
+            try {
+              for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+                var b = _step3.value;
+                b.classList.remove("selected");
+                b.classList.add("faded");
+                b.setAttribute("aria-checked", "false");
+              }
+              // Add the selected class to the clicked avatar:
+            } catch (err) {
+              _iterator3.e(err);
+            } finally {
+              _iterator3.f();
+            }
+            btn.classList.remove("faded");
+            btn.classList.add("selected");
+            btn.setAttribute("aria-checked", "true");
+            updateSubmitButtonState();
+          });
+        };
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          _loop();
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
       }
     })();
   }
@@ -121,7 +129,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 window.addEventListener('load', function () {
   // First, select all of the input fields with the data-role="groupSetter" attribute
   var groupSetters = document.querySelectorAll("input[data-role='groupSetter']");
-  if (groupSetters) {
+  if (groupSetters.length) {
     (function () {
       // Function
       var setGroupSetterStates = function setGroupSetterStates(groupSetter) {
@@ -213,7 +221,7 @@ window.addEventListener("load", function () {
   var keyAssigners = document.querySelectorAll("[data-role='keyAssigner']");
   var keyAssignersInputs = document.querySelectorAll("[data-role='keyAssignerInput']");
   var returnKey = "Error";
-  if (keyAssigners) {
+  if (keyAssigners.length) {
     var _iterator = _createForOfIteratorHelper(keyAssigners),
       _step;
     try {
@@ -352,19 +360,19 @@ window.addEventListener("load", function () {
 /*
  * Range Labels Functions.
  */
-window.addEventListener('load', function () {
-  var rangeElements = document.querySelectorAll('[type="range"]');
-  if (rangeElements.length > 0) {
+window.addEventListener("load", function () {
+  var rangeElements = document.querySelectorAll("input[type=\"range\"]");
+  if (rangeElements.length) {
     var _loop = function _loop(i) {
       var element = rangeElements[i];
-      var elementId = element.getAttribute('id');
+      var elementId = element.getAttribute("id");
       var label = document.querySelector("[for=\"".concat(elementId, "\"]"));
       if (parseInt(element.value) === 1) {
         label.textContent = "".concat(element.value, " \u03B4\u03B5\u03C5\u03C4\u03B5\u03C1\u03CC\u03BB\u03B5\u03C0\u03C4\u03BF");
       } else {
         label.textContent = "".concat(element.value, " \u03B4\u03B5\u03C5\u03C4\u03B5\u03C1\u03CC\u03BB\u03B5\u03C0\u03C4\u03B1");
       }
-      element.addEventListener('change', function (event) {
+      element.addEventListener("change", function (event) {
         if (parseInt(element.value) === 1) {
           label.textContent = "".concat(element.value, " \u03B4\u03B5\u03C5\u03C4\u03B5\u03C1\u03CC\u03BB\u03B5\u03C0\u03C4\u03BF");
         } else {

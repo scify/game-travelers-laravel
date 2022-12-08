@@ -4,7 +4,7 @@
 window.addEventListener('load', function() {
     // First, select all of the input fields with the data-role="groupSetter" attribute
     const groupSetters = document.querySelectorAll("input[data-role='groupSetter']");
-    if (groupSetters) {
+    if (groupSetters.length) {
         // Function
         function setGroupSetterStates(groupSetter) {
             const enables = groupSetter.getAttribute("data-enables");

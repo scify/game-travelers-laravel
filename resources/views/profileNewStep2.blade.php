@@ -17,7 +17,9 @@
                     <button
                         class="btn btn-round past"
                         title="Προφίλ παίκτη"
-                        aria-label="Προφίλ παίκτη"
+                        aria-label="Αποθήκευση και επιστροφή στο προφίλ παίκτη"
+                        name="page"
+                        value="profile"
                         type="submit"
                     >
                         1
@@ -195,7 +197,16 @@
 </style>
 
             <div id="navGroup" class="form-actions d-flex align-items-end flex-column">
-                <button class="btn btn-primary btn-lg responsive-expand" type="submit" id="submitButton" tabindex="200">αποθήκευση επιλογών</button>
+                <button
+                    class="btn btn-primary btn-lg responsive-expand"
+                    id="submitButton"
+                    tabindex="200"
+                    type="submit"
+                    name="submit"
+                    value="save"
+                >
+                    αποθήκευση επιλογών
+                </button>
             </div>
 
         </div>
