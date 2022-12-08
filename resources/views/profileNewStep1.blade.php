@@ -77,7 +77,7 @@
                         autocapitalize="on"
                         spellcheck="false"
                         tabindex="1"
-                        id="playerName"
+                        id="playerName" {{-- Read by JS --}}
                     />
                     @error('name')
                     <div class="field-description big" id="alert">
@@ -112,7 +112,12 @@
                             <x-profileNewAvatar :avatar=$avatarData[4] />
                             <x-profileNewAvatar :avatar=$avatarData[5] />
                             {{-- default value = "0"  (no avatar selected --}}
-                            <input type="hidden" name="avatar" value="0" id="playerAvatarId" />
+                            <input
+                                type="hidden"
+                                name="avatarId"
+                                value="0" {{-- Read by JS (none = 0) --}}
+                                id="selectedAvatarId" {{-- Read by JS --}}
+                            />
                         </div>
                     </div>
                 </div>
@@ -135,7 +140,15 @@
                 να βρει αυτή εδώ τη φόρμα συμπληρωμένη.
             --}}
             <div id="navGroup" class="form-actions d-flex align-items-end flex-column">
-                <button class="btn btn-primary btn-lg responsive-expand" type="submit" id="submitButton" tabindex="120" disabled>δημιουργία προφίλ</button>
+                <button
+                    class="btn btn-primary btn-lg responsive-expand"
+                    type="submit"
+                    id="submitButton" {{-- Read by JS --}}
+                    tabindex="120"
+                    disabled
+                >
+                    δημιουργία προφίλ
+                </button>
             </div>
 
         </div>

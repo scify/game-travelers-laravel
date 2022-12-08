@@ -6,7 +6,7 @@ window.addEventListener("load", function() {
     const keyAssigners = document.querySelectorAll("[data-role='keyAssigner']");
     const keyAssignersInputs = document.querySelectorAll("[data-role='keyAssignerInput']");
     let returnKey = "Error";
-    if (keyAssigners) {
+    if (keyAssigners.length) {
 
         for (const keyAssigner of keyAssigners) {
 

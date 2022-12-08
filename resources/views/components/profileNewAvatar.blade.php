@@ -3,7 +3,7 @@
     <button
         type="button"
         class="btn btn-round btn-avatar"
-        data-avatar="true"
+        data-avatar="true" {{-- Read by JS --}}
         data-avatar-id="{{ $avatar['id'] ?? 0 }}"
         data-avatar-selected="{{ $avatar['selected'] ?? 'false' }}"
         role="radio"

@@ -17,7 +17,9 @@
                     <button
                         class="btn btn-round past"
                         title="Προφίλ παίκτη"
-                        aria-label="Προφίλ παίκτη"
+                        aria-label="Αποθήκευση και επιστροφή στο προφίλ παίκτη"
+                        name="page"
+                        value="profile"
                         type="submit"
                     >
                         1
@@ -27,7 +29,9 @@
                     <button
                         class="btn btn-round past"
                         title="Ρυθμίσεις χειρισμού"
-                        aria-label="Ρυθμίσεις χειρισμού"
+                        aria-label="Αποθήκευση και επιστροφή στις ρυθμίσεις χειρισμού"
+                        name="page"
+                        value="controls"
                         type="submit"
                     >
                         2
@@ -82,7 +86,7 @@
                                 <legend>Ζάρι</legend>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row ms-1 mt-2">
                             <div class="col">
                                 <div class="container=fluid">
                                     <div class="row">
@@ -108,10 +112,12 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col">
-                                <legend>Διάρκεια παιχνιδιού</legend>
+                                <legend class="field-legend fw-bold">
+                                    Διάρκεια παιχνιδιού
+                                </legend>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row ms-1 mt-2">
                             <div class="col-12 form-check">
                                 <input class="form-check-input" type="radio" name="gameDuration" value="40" tabindex="4" id="gameDuration1" required />
                                 <label class="form-check-label" for="gameDuration1">Σύντομη (15 θέσεις)</label>
@@ -131,10 +137,12 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col">
-                                <legend>Επίπεδο</legend>
+                                <legend class="field-legend fw-bold">
+                                    Επίπεδο
+                                </legend>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row ms-1 mt-2">
                             <div class="col-12 form-check">
                                 <input class="form-check-input" type="radio" name="level" value="1" tabindex="70" id="level1" required checked />
                                 <label class="form-check-label" for="level1">Κανονικό</label>
@@ -150,10 +158,12 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col">
-                                <legend>Μετακίνηση</legend>
+                                <legend class="field-legend fw-bold">
+                                    Μετακίνηση
+                                </legend>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row ms-1 mt-2">
                             <div class="col-12 form-check">
                                 <input class="form-check-input" type="radio" name="movement" value="1" tabindex="90" id="movement1" required  />
                                 <label class="form-check-label" for="movement1">Αυτόματη</label>
@@ -172,7 +182,16 @@
             </div>
 
             <div id="navGroup" class="form-actions d-flex align-items-end flex-column">
-                <button class="btn btn-primary btn-lg responsive-expand" type="submit" id="submitButton" tabindex="120">ολοκλήρωση ρυθμίσεων</button>
+                <button
+                    class="btn btn-primary btn-lg responsive-expand"
+                    id="submitButton"
+                    tabindex="120"
+                    type="submit"
+                    name="submit"
+                    value="save"
+                >
+                    ολοκλήρωση ρυθμίσεων
+                </button>
             </div>
 
         </div>
