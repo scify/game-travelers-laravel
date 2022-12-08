@@ -27,10 +27,17 @@
   --pale-green-hsl: 148deg, 29%, 59%;
 }
 
+/* Traveler's default variables */
+:root {
+  --trvl-header-height: calc(145px - 1rem);
+  --trvl-footer-width: 105px;
+  --trvl-footer-height: 53px;
+  --trvl-footer-height-negative: calc(-1 * var(--trvl-footer-height));
+}
+
 /* Traveler's default colour scheme */
 :root {
-    // Variables
-    --trvl-header-height: calc(145px - 1rem);
+    // Main colors
     --trvl-c-background: var(--unnamed-color-c3d0c9);
     --trvl-c-background-hsl: var(--unnamed-color-c3d0c9-hsl);
     --trvl-c-text: var(--unnamed-color-383735);

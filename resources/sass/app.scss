@@ -135,7 +135,8 @@ footer img {
         margin-bottom: 5em;
     }
     */
-    .field-subgroup {
+    @media (max-width: 575.98px) {
+        padding-bottom: 2rem;
     }
 }
 
@@ -193,9 +194,16 @@ footer img {
 }
 
 // Footer
-footer.trvl-footer {
-  position:relative;
-  bottom: 50px;
+.trvl-footer {
+    // position:relative;
+    // bottom: 50px;
+    position: relative;
+    .scify {
+        position: absolute;
+        top: -53px; // --trvl-footer-height-negative (hard-coded for compatibility)
+        top: var(--trvl-footer-height-negative);
+        float: left;
+    }
 }
 
 // Off-canvas messages
@@ -219,6 +227,7 @@ footer.trvl-footer {
 }
 
 /* Responsiveness */
+
 // Portrait phones
 @media (max-width: 575.98px) {
     .section,
@@ -232,8 +241,14 @@ footer.trvl-footer {
     .text-center-end {
         text-align: center;
     }
-
+    .trvl-footer  {
+        .scify {
+            left: calc(100vw - 1.25rem - var(--trvl-footer-width));
+            top: calc(var(--trvl-footer-height-negative) - 1rem);
+        }
+    }
 }
+
 // Landscape phones
 @media (min-width: 576px) and (max-width: 767.98px){
     .text-start-end-start-end {
@@ -243,6 +258,7 @@ footer.trvl-footer {
         text-align: center;
     }
 }
+
 // Tablets
 @media (min-width: 767px) and (max-width: 991.98px) {
     .text-start-end-start-end {

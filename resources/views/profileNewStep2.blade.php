@@ -175,14 +175,14 @@
                                 <input class="form-range" type="range" name="scanningSpeed" value="2" min="1" max="8" step="1" tabindex="60" id="scanningSpeed" />
                                 <!-- decorative ruler -->
                                 <div class="d-flex flex-nowrap justify-content-between form-range-ruler user-select-none" aria-hidden="true">
-                                    <div class="rule">1</div>
-                                    <div class="rule">2</div>
-                                    <div class="rule">3</div>
-                                    <div class="rule">4</div>
-                                    <div class="rule">5</div>
-                                    <div class="rule">6</div>
-                                    <div class="rule">7</div>
-                                    <div class="rule">8</div>
+                                    <div class="ruler">1</div>
+                                    <div class="ruler">2</div>
+                                    <div class="ruler">3</div>
+                                    <div class="ruler">4</div>
+                                    <div class="ruler">5</div>
+                                    <div class="ruler">6</div>
+                                    <div class="ruler">7</div>
+                                    <div class="ruler">8</div>
                                 </div>
                             </div>
                         </div>

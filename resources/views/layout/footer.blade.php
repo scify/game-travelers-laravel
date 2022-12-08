@@ -1,6 +1,6 @@
 <!-- /resources/views/footer.blade.php -->
 <footer class="container-xxl ps-4 trvl-footer">
-  <div class="scify float-start">
+  <div class="scify"> {{-- float-start --}}
      <a href="http://www.scify.org" target="_blank">
       <img
         srcset="{{ asset('images/SciFY@2x.png') }} 2x"

@@ -11210,9 +11210,16 @@ textarea.form-control-lg {
   --pale-green-hsl: 148deg, 29%, 59%;
 }
 
-/* Traveler's default colour scheme */
+/* Traveler's default variables */
 :root {
   --trvl-header-height: calc(145px - 1rem);
+  --trvl-footer-width: 105px;
+  --trvl-footer-height: 53px;
+  --trvl-footer-height-negative: calc(-1 * var(--trvl-footer-height));
+}
+
+/* Traveler's default colour scheme */
+:root {
   --trvl-c-background: var(--unnamed-color-c3d0c9);
   --trvl-c-background-hsl: var(--unnamed-color-c3d0c9-hsl);
   --trvl-c-text: var(--unnamed-color-383735);
@@ -11465,7 +11472,7 @@ button.key-assigner.active {
   margin-right: 0.35rem;
 }
 
-.form-range-ruler > .rule {
+.form-range-ruler > .ruler {
   font-size: 0.9em;
 }
 
@@ -11724,7 +11731,6 @@ label.big {
 }
 @media (max-width: 1199.98px) {
   .background-mountains {
-    background-position-x: left;
     min-height: 100vh;
   }
 }
@@ -11881,6 +11887,12 @@ footer img {
   font-size: 2em;
   color: var(--trvl-c-text);
 }
+@media (max-width: 575.98px) {
+  .settings {
+    padding-bottom: 2rem;
+  }
+}
+
 .confirmation-page {
   min-height: 632px;
 }
@@ -11936,9 +11948,14 @@ footer img {
   }
 }
 
-footer.trvl-footer {
+.trvl-footer {
   position: relative;
-  bottom: 50px;
+}
+.trvl-footer .scify {
+  position: absolute;
+  top: -53px;
+  top: var(--trvl-footer-height-negative);
+  float: left;
 }
 
 .offcanvas.is-invalid {
@@ -11970,6 +11987,10 @@ footer.trvl-footer {
   }
   .text-center-end {
     text-align: center;
+  }
+  .trvl-footer .scify {
+    left: calc(100vw - 1.25rem - var(--trvl-footer-width));
+    top: calc(var(--trvl-footer-height-negative) - 1rem);
   }
 }
 @media (min-width: 576px) and (max-width: 767.98px) {

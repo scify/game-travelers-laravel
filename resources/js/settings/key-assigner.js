@@ -26,30 +26,26 @@ window.addEventListener("load", function() {
             }
             // Add click events to all buttons in order to set-up keyup events.
             keyAssigner.addEventListener("click", () => {
-                function abortByClick(event) {
-                    // Abort only if the click is NOT triggered by clicking
-                    // the actual keyAssigner.
+                /** Removes active assignerKeyUpHandler events. */
+                function assignerClickHandler(event) {
+                    // Should not abort if the click is on the actual trigger.
                     if (event.target !== keyAssigner) {
+                        console.log("event logged");
                         event.stopPropagation();
                         console.log("aborted", event);
                         keyAssigner.classList.remove("active");
                         // Revert to default though :(
                         keyAssigner.textContent = keyAssigner.getAttribute("data-key-default");
-                        // Cancel just one thing, not EVERYTHING.
-                        window.removeEventListener("click", abortByClick);
+                        window.removeEventListener("keyup", assignerKeyUpHandler);
+                        window.removeEventListener("click", assignerClickHandler);
                     }
                 }
-                keyAssigner.textContent = "όρισε πλήκτρο";
-                keyAssigner.classList.add("active");
-                // Cancel the whole thing by a single click of a button...
-                window.addEventListener("click", abortByClick);
-                // When a button is clicked, ask user to press a key
-                window.addEventListener("keyup", event => {
-                    // Override default browser's behavior for keys as e.g. Tab
-                    // would cause the selection of the next input element.
+                /** KeyUp event listener for Key Assigner. */
+                function assignerKeyUpHandler(event) {
+                    // Override the default behavior of keys.
                     event.preventDefault();
-                    // If we still run an active click listener, abort it...
-                    window.removeEventListener("click", abortByClick);
+                    // Click event listeners are not needed anymore.
+                    window.removeEventListener("click", assignerClickHandler);
                     // When a key is pressed, get its key value.
                     // Note: Even if extremely useful, `event.which` and
                     // `event.keyCode` are deprecated. Instead we rely on
@@ -97,19 +93,26 @@ window.addEventListener("load", function() {
                                 returnKey = event.key;
                             }
                         }
-                        // console.log('key: "', event.key, '" code: ', event.code, ' charcode: ', charCode);
                     }
                     if (returnKey === "Error") {
                         returnKey = keyAssigner.getAttribute("data-key-default");
                     }
-                    // Sets and returns button's input to form.
                     keyAssigner.textContent = returnKey;
                     keyAssigner.setAttribute("data-key-selected", returnKey);
                     setInputId = keyAssigner.getAttribute("data-sets-input");
                     setInput = document.getElementById(setInputId);
                     setInput.value = returnKey;
                     keyAssigner.classList.remove('active');
-                });
+                    // Removes self (like once() used to do).
+                    window.removeEventListener("keyup", assignerKeyUpHandler);
+                }
+
+                keyAssigner.textContent = "όρισε πλήκτρο";
+                keyAssigner.classList.add("active");
+                // Cancel the whole thing by a single click of a button...
+                window.addEventListener("click", assignerClickHandler);
+                // When a button is clicked, ask user to press a key
+                window.addEventListener("keyup", assignerKeyUpHandler);
             });
         }
     }
