@@ -56,16 +56,16 @@
                         <!-- passwords -->
                         <div class="
                             field-group px-4 py-2 container-fluid
-                            @error('password1') is-invalid @enderror
-                            @error('password2') is-invalid @enderror
+                            @error('password') is-invalid @enderror
+                            @error('password_confirmation') is-invalid @enderror
                         ">
                             <div class="row">
                                 <div class="field col-lg-6">
-                                    <label class="field-label extended" for="password1">Συνθηματικό</label>
+                                    <label class="field-label extended" for="password">Συνθηματικό</label>
                                     <input
                                         class="field-input underlined extended"
                                         type="password"
-                                        name="password1"
+                                        name="password"
                                         required="required"
                                         aria-required="true"
                                         aria-label="Επιθυμητός κωδικός πρόσβασης"
@@ -74,15 +74,15 @@
                                         autocapitalize="off"
                                         spellcheck="false"
                                         tabindex="2"
-                                        id="password1"
+                                        id="password"
                                     />
                                 </div>
                                 <div class="field col-lg-6 pt-4 pt-lg-0 ">
-                                    <label class="field-label extended text-nowrap text-truncate" for="password2">Επαλήθευση συνθηματικού</label>
+                                    <label class="field-label extended text-nowrap text-truncate" for="password_confirmation">Επαλήθευση συνθηματικού</label>
                                     <input
                                         class="field-input underlined extended"
                                         type="password"
-                                        name="password2"
+                                        name="password_confirmation"
                                         required="required"
                                         aria-required="true"
                                         aria-label="Επαλήθευση επιθυμητού κωδικού πρόσβασης"
@@ -91,7 +91,7 @@
                                         autocapitalize="off"
                                         spellcheck="false"
                                         tabindex="3"
-                                        id="password2"
+                                        id="password_confirmation"
                                     />
                                 </div>
                             </div>

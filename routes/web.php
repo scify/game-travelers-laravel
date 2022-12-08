@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
+require __DIR__.'/auth.php';
 
 // From the "obsolete" pages, this still acts as the index, so please don't
 // delete this blade until we have a brand new front-page to replace it. Also
@@ -30,15 +31,15 @@ Route::get('/', function () {
  * Last update: December 5, 2022.
  * @todo Are we happy with the non-full-screen mountains on success?
  */
-Route::get('/login', function () {
+/*Route::get('/login', function () {
     return view('login');
-});
+});*/
 Route::get('demo/login/error', function () {
     return view('extras/demoLoginError');
 });
-Route::get('/register', function () {
+/*Route::get('/register', function () {
     return view('register');
-});
+});*/
 Route::get('/password/reset', function () {
     return view('passwordReset');
 });
