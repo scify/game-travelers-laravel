@@ -61,22 +61,6 @@ Route::get('/password/reset/success', function () {
  * Demos added.
  */
 Route::get('/profiles/new', function () {
-    // Starting with tabindex 2, as 1 is the player's name input.
-    // Note: The asset's name is the file's name without it's .extension:
-    //  - For example: "boy-1"
-    //  - Template will  display 1 out of 3 possible files depending on
-    //    web browser's pixel density: boy-1.png, boy-1@2x.png or boy-1.svg.
-    //    All these files should be under: "/public/images/avatars".
-    //
-    // Please read the comments on views/components/profileNewAvatar.blade.php
-    // for detailed instructions on how to use...
-    //
-    // Αυτό παραμένει Under Contstruction μέχρι να δούμε στα mock-ups τι
-    // άλλο θα μπορούσε δυνητικά να περιέχει το τελικό class. Για εμένα αυτή
-    // τη στιγμή είναι χρήσιμο για να δοκιμάζω τα states των avatar buttons και
-    // να γράψω μερικές γραμμές JavaScript ώστε τα πλήκτρα να καθορίζουν την
-    // τιμή σε checkbox και να αλλάζουν τα states τους.
-
     return view('profileNewStep1');
 });
 Route::get('demo/profile/error', function () {
