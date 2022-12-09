@@ -57,6 +57,10 @@
     }
 }
 
+fieldset input[type="radio"]:not(:checked) + label {
+    font-weight: 300;
+}
+
 // Inputs: Ranges
 .form-range::-moz-range-thumb {
     background-color: var(--trvl-c-text);
@@ -70,9 +74,14 @@
     position: relative;
     margin-left: 0.35rem;
     margin-right: 0.35rem;
-}
-.form-range-ruler > .ruler {
-    font-size: 0.9em;
+    margin-bottom: 0.1rem; // needed for perfect alignment with other pages.
+    &>.ruler {
+        transition: all 0.15s ease-in-out;
+        font-size: 0.9em;
+        &.selected {
+            color: var(--trvl-c-black);
+        }
+    }
 }
 
 // Inputs: Radios

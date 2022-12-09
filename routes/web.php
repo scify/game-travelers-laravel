@@ -26,10 +26,15 @@ Route::get('/', function () {
     return view('extras/testViews');
 });
 
+// Sample Data used on profileNewStep1 and its 2 demos. Sorry for keeping them
+// here for the time being, at least they have been moved to an external file.
+require __DIR__.'/sampleData.php';
+View::share('avatarData', $sampleAvatarData);
+
 /*
  * Login | Onboarding.
  * Last update: December 5, 2022.
- * @todo Are we happy with the non-full-screen mountains on success?
+ * @todo Pending fully transparent and extended asset for success page.
  */
 /*Route::get('/login', function () {
     return view('login');
@@ -52,8 +57,8 @@ Route::get('/password/reset/success', function () {
 
 /*
  * Stepper 2 | New player profiles
- * Last update: December 5, 2022.
- * @todo Componentisation in progress.
+ * Last update: December 9, 2022.
+ * Demos added.
  */
 Route::get('/profiles/new', function () {
     // Starting with tabindex 2, as 1 is the player's name input.
@@ -72,65 +77,13 @@ Route::get('/profiles/new', function () {
     // να γράψω μερικές γραμμές JavaScript ώστε τα πλήκτρα να καθορίζουν την
     // τιμή σε checkbox και να αλλάζουν τα states τους.
 
-    $tabIndex = 2;
-    $avatarData = array(
-        0 => [
-            "id" => "1",
-            "tabindex" => $tabIndex++,
-            "label" => "Φατσούλα",
-            "description" => "Φατσούλα αγοριού με καστανά μαλιά",
-            "asset" => "boy-1",
-            "selected" => null, // <button data-avatar-selected="false">
-            "showLabel" => null,
-        ],
-        1 => [
-            "id" => "2", // <button data-avatar-id="2">
-            "tabindex" => $tabIndex++,
-            "label" => "Φατσούλα", // displayed name e.g. Γιώργος
-            "description" => "Φατσούλα αγοριού με μαύρα μαλιά", // alt-text
-            "asset" => "boy-2",
-            "selected" => true, // <button data-avatar-selected="1">
-            "showLabel" => null,
-        ],
-        2 => [
-            "id" => "3",
-            "tabindex" => $tabIndex++,
-            "label" => "Φατσούλα",
-            "description" => "Φατσούλα κοριτσιού με μαύρα μαλιά",
-            "asset" => "girl-1",
-            "selected" => null,
-            "showLabel" => null,
-        ],
-        3 => [
-            "id" => "4",
-            "tabindex" => $tabIndex++,
-            "label" => "Φατσούλα",
-            "description" => "Φατσούλα κοριτσιού με ξανθά μαλιά",
-            "asset" => "girl-2",
-            "selected" => null,
-            "showLabel" => null,
-        ],
-        4 => [
-            "id" => "5",
-            "tabindex" => $tabIndex++,
-            "label" => "Φατσούλα",
-            "description" => "Φατσούλα σκύλου",
-            "asset" => "dog",
-            "selected" => null,
-            "showLabel" => null,
-        ],
-        5 => [
-            "id" => "6",
-            "tabindex" => $tabIndex++,
-            "label" => "Φατσούλα",
-            "description" => "Φατσούλα γατούλας",
-            "asset" => "cat",
-            "selected" => null,
-            "showLabel" => null,
-        ],
-    );
-    view()->share('avatarData', $avatarData);
     return view('profileNewStep1');
+});
+Route::get('demo/profile/error', function () {
+    return view('extras/demoProfileNewError');
+});
+Route::get('demo/profile/success', function () {
+    return view('extras/demoProfileNewSuccess');
 });
 Route::get('/profiles/new/2', function () {
     return view('profileNewStep2');

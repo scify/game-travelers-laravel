@@ -45,7 +45,7 @@
 <body>
     <div class="container">
         <div class="alert alert-success" role="alert">
-            Success! Updated December 8, 2022, 04:59. Please select one of the following routes.
+            Success! Updated December 9, 2022, 04:29. Please select one of the following routes.
         </div>
         <h1>Routes</h2>
         <small style="border-bottom: 1px solid #000;">Make your browser's window as small as this little line of text...</small>
@@ -58,7 +58,7 @@
             <dd>✔️ <span class="upd">Final</span> Variable width interpretation of the mock-up with an additional h1 header (Καλωσόρισες!), Laravel @@error handling and custom JavaScript as a component to trigger the proposed off-canvas error. Fully responsive (320px - 1320px).
                 <dl>
                     <dt><a href="{{ url('demo/login/error') }}">Variation: Login page with <span class="error">ERROR</span> (off-canvas)</a></dt>
-                    <dd>✔️ <span class="upd">Final</span> Same as the login page with an additional, forcefully triggered off-canvas bottom-bar that displays an imaginary login error. Fully responsive.</dd>
+                    <dd>✔️ <span class="upd">Demo</span> Same as the login page with an additional, forcefully triggered off-canvas bottom-bar that displays an imaginary login error. Fully responsive.</dd>
                 </dl>
             </dd>
             <dt><a href="{{ url('password/reset') }}">Password reset</a></dt>
@@ -74,16 +74,16 @@
             <dt><a href="{{ url('/profiles/new') }}">New player profile Step 1 of 3</a></dt>
             <dd>✔️ <span class="new">New</span> Step 1 out of 3 for creating a new individual player profile, custom interpretation of the original mock-up with working stepper, back and forward buttons, interactive JavaScript elements, Laravel @@errors support and more. Utilises various components. Requires avatar data which are provided as an example on the routes. Developer notes. Very complex. Fully responsive. </span>
                 <dl>
-                    <dt><a href="{{ url('/profiles/new/error') }}">Variation: New player profile Step 1 of 3 with <span class="error">ERROR</span></a></dt>
-                    <dd>✔️ <span class="new">New</span> See above. Page integrates Laravel @@errors.</dd>
-                    <dt><a href="{{ url('/profiles/new/error') }}">Variation: New player profile Step 1 of 3 (no error)</a></dt>
-                    <dd>✔️ <span class="new">New</span> See above. Form validation in attached ready-for-production JavaScript.</dd>
+                    <dt><a href="{{ url('/demo/profile/error') }}">Variation: New player profile Step 1 of 3 with <span class="error">ERROR</span></a></dt>
+                    <dd>✔️ <span class="new">Demo</span> See above. Page integrates Laravel @@errors.</dd>
+                    <dt><a href="{{ url('/demo/profile/success') }}">Variation: New player profile Step 1 of 3 (no error)</a></dt>
+                    <dd>✔️ <span class="new">Demo</span> See above. Form validation in attached ready-for-production JavaScript.</dd>
                 </dl>
             </dd>
             <dt><a href="{{ url('/profiles/new/2') }}">New player profile Step 2 of 3</a></dt>
             <dd>✔️ <span class="new">New</span> Lovely custom-made checkboxes, awesome input ranges and JavaScript to support hide and seek of different radio-groups and even reliable keypress readings, while making sure that the values could be easily stored and retrieved from the hidden and ready-to-use-on-the-back-end forms. Fully responsive.</dd>
             <dt><a href="{{ url('/profiles/new/3') }}">New player profile Step 3 of 3</a></dt>
-            <dd>✔️ <span class="todo">Under construction.</span></dd>
+            <dd>✔️ <span class="new">New</span> Even dices can be clicked to be selected. Fully responsive. </dd>
         </dl>
         <hr />
         <h1>How to use this repository</h1>

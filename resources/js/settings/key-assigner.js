@@ -3,8 +3,8 @@
  */
 window.addEventListener("load", function() {
     // Get a reference to all the buttons with the 'keyAssigner' data-role
-    const keyAssigners = document.querySelectorAll("[data-role='keyAssigner']");
-    const keyAssignersInputs = document.querySelectorAll("[data-role='keyAssignerInput']");
+    const keyAssigners = document.querySelectorAll("button[data-role='keyAssigner']");
+    const keyAssignersInputs = document.querySelectorAll("input[data-role='keyAssignerInput']");
     let returnKey = "Error";
     if (keyAssigners.length) {
 

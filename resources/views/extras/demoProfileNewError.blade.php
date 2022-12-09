@@ -1,13 +1,8 @@
 <x-layout :title="'Προφίλ | Νέος παίκτης - Βήμα 1ο | Ταξιδιώτες'">
-    {{-- Inline error on field name PLUS an explanatory message just beneath
-        the field name which appears in bold red.
-        Avatar selection (required) is done via JavaScript with buttons which
-        act as radios. Avatar ID is passed to the #playerAvatarId hidden input
-        element (name="avatar", value="{integer}"). Note that submit is also
-        possible in theory via the Stepper's buttons, even though the one on
-        this page (#currentPageButton) is set to "disabled" (submits name=page,
-        value="profile"). For avatar selection JS and front-end validation see:
-        @see resources/js/settings/avatar-selection.js
+    {{--
+        For the demo, this works by removing the @@errors from the template.
+        Note the error in the class of #nameGroup (it can easily be missed)
+        and the alert message on #alert.
     --}}
     @section('scripts')
         <script src="{{ mix('js/functions/settings.js') }}" defer></script>
@@ -61,7 +56,7 @@
         <!-- / section header -->
 
         <div class="section settings container-xxl px-4 px-sm-5 px-xl-6">
-            <div id="nameGroup" class="field @error('name') is-invalid @enderror settings-row row mb-5">
+            <div id="nameGroup" class="field {{-- @error('name') --}} is-invalid {{-- @enderror --}} settings-row row mb-5">
                 <div class="col-md-3">
                     <label class="field-label extended big" for="playerName">
                         Όνομα παίκτη
@@ -73,7 +68,7 @@
                         class="field-input extended underlined big"
                         type="text"
                         name="name"
-                        value="" {{-- Read by JS --}}
+                        value="Λανθασμένος Γιωργάκης" {{-- Read by JS --}}
                         minlength="2" {{-- JS form validation --}}
                         maxlength="50"
                         required="true"
@@ -83,14 +78,14 @@
                         tabindex="1"
                         id="playerName" {{-- Used by JS --}}
                     />
-                    @error('name')
+                    {{-- @error('name') --}}
                     <div class="field-description big" id="alert">
                         <strong id="alertMessage">
                             Ουπς! Αυτό το όνομα είναι «πιασμένο». Συνέχισε με το
                             προτεινόμενο ή δοκίμασε κάποιο διαφορετικό.
                         </strong>
                     </div>
-                    @enderror
+                    {{-- @enderror --}}
                 </div>
             </div>
 
@@ -119,7 +114,7 @@
                             <input
                                 type="hidden"
                                 name="avatarId"
-                                value="0" {{-- Read by JS --}}
+                                value="5" {{-- Read by JS --}}
                                 id="selectedAvatarId" {{-- Used by JS --}}
                             />
                         </div>

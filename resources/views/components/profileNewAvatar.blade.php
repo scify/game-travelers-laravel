@@ -4,11 +4,11 @@
         type="button"
         class="btn btn-round btn-avatar"
         data-avatar="true" {{-- Read by JS --}}
-        data-avatar-id="{{ $avatar['id'] ?? 0 }}"
-        data-avatar-selected="{{ $avatar['selected'] ?? 'false' }}"
+        data-avatar-id="{{ $avatar['id'] ?? 0 }}" {{-- Read by JS --}}
+        data-avatar-selected="{{ $avatar['selected'] ?? 'false' }}" {{-- Read by JS --}}
         role="radio"
         aria-label="{{ $avatar['description'] ?? 'Φατσούλα' }}"
-        aria-checked="{{ $avatar['selected'] ?? 'false' }}"
+        aria-checked="{{ $avatar['selected'] ?? 'false' }}" {{-- Altered by JS --}}
         tabindex="{{ $avatar['tabindex'] ?? 2 }}"
         id="avatar-{{ $avatar['id'] ?? 0 }}"
     >

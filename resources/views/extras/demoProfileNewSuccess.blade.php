@@ -1,13 +1,12 @@
 <x-layout :title="'Προφίλ | Νέος παίκτης - Βήμα 1ο | Ταξιδιώτες'">
-    {{-- Inline error on field name PLUS an explanatory message just beneath
-        the field name which appears in bold red.
-        Avatar selection (required) is done via JavaScript with buttons which
-        act as radios. Avatar ID is passed to the #playerAvatarId hidden input
-        element (name="avatar", value="{integer}"). Note that submit is also
-        possible in theory via the Stepper's buttons, even though the one on
-        this page (#currentPageButton) is set to "disabled" (submits name=page,
-        value="profile"). For avatar selection JS and front-end validation see:
-        @see resources/js/settings/avatar-selection.js
+    {{--
+        By setting the value of input #playerName to Γιωργάκης and the value
+        of #selectedAvatarId to "2" (an integer for a unique avatar id), JS
+        takes care of both "checking" (selecting) the correct avatar (which
+        is a actually a button) and validating the form thus enabling its
+        submission. Everything works as expected - you can try to change
+        the avatar and reloading this page... it will still behave as a normal
+        form.
     --}}
     @section('scripts')
         <script src="{{ mix('js/functions/settings.js') }}" defer></script>
@@ -73,7 +72,7 @@
                         class="field-input extended underlined big"
                         type="text"
                         name="name"
-                        value="" {{-- Read by JS --}}
+                        value="Γιωργάκης" {{-- Read by JS --}}
                         minlength="2" {{-- JS form validation --}}
                         maxlength="50"
                         required="true"
@@ -119,7 +118,7 @@
                             <input
                                 type="hidden"
                                 name="avatarId"
-                                value="0" {{-- Read by JS --}}
+                                value="2" {{-- Read by JS --}}
                                 id="selectedAvatarId" {{-- Used by JS --}}
                             />
                         </div>

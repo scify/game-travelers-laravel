@@ -8,50 +8,96 @@ var __webpack_exports__ = {};
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-/*
- * Avatar Selection Functions.
- */
+/**
+  * Avatar Selection Functions.
+  * Requirements:
+  * - Avatar <buttons> with the data-avatar=true and other data-attributes.
+  * - A hidden input element with id=#selectedAvatarId.
+  * - A submit button with the id=#submitButton.
+  */
 window.addEventListener("load", function () {
   // Should only run on pages with buttons with data-avatar=true attribute.
   var buttons = document.querySelectorAll("button[data-avatar='true']");
-  // Variables for reading and parsing various form elements.
-  var playerNameInput = document.getElementById("playerName");
-  var playerAvatarIdInput = document.getElementById("selectedAvatarId");
-  var submitButton = document.getElementById("submitButton");
+  // Variables for reading/validating/processing various form elements.
+  var formAvatarIdInput = document.getElementById("selectedAvatarId");
+  var formPlayerNameInput = document.getElementById("playerName");
+  // Checking values...
+  var formAvatarId = formAvatarIdInput ? parseInt(formAvatarIdInput.value) : 0;
+  // Let the fun begin!
   if (buttons.length) {
     (function () {
-      /** Enables Submit Button on profileNewStep1 view. */
+      /**
+       * Form validation function.
+       *
+       * Allows submission of aform only if a valid avatar is selected.
+       * Reads selected avatarId from a hidden #selectedAvatarId input.
+       * If an #playerName input is on the same page, then it's value is also
+       * take under consideration for validation.
+       */
       var updateSubmitButtonState = function updateSubmitButtonState() {
         var nameInput = document.getElementById("playerName");
         var avatarIdInput = document.getElementById("selectedAvatarId");
+        var submitButton = document.getElementById("submitButton");
         var avatarId = parseInt(avatarIdInput.value);
-        var submit = document.getElementById("submit");
         if (nameInput) {
           var nameValue = nameInput.value;
-          if (playerName.length >= 2 && !isNaN(playerAvatarId) && playerAvatarId > 0) {
-            submit.disabled = false;
+          if (nameValue.length >= 2 && !isNaN(avatarId) && avatarId > 0) {
+            submitButton.disabled = false;
           } else {
-            submit.disabled = true;
+            submitButton.disabled = true;
           }
         } else {
           if (!isNaN(avatarId) && avatarId > 0) {
-            submit.disabled = false;
+            submitButton.disabled = false;
           } else {
-            submit.disabled = true;
+            submitButton.disabled = true;
           }
         }
-      }; // Reset playerAvatarInput to either the filled or default state (0)
-      filledAvatarId = parseInt(playerAvatarIdInput.value);
-      if (filledAvatarId === 0) {
-        updateSubmitButtonState();
-      } else {
+      };
+      /**
+       * Avatar handler function.
+       */
+      var handleAvatarState = function handleAvatarState(btn) {
+        // Get the selected avatar id:
+        var avatar = btn.getAttribute("data-avatar-id");
+        var input = document.getElementById("selectedAvatarId");
+        input.value = avatar;
+        // Add the faded class to all avatars:
         var _iterator = _createForOfIteratorHelper(buttons),
           _step;
         try {
           for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var btn = _step.value;
+            var b = _step.value;
+            b.classList.remove("selected");
+            b.classList.add("faded");
+            b.setAttribute("aria-checked", "false");
+          }
+          // Add the selected class to the clicked avatar:
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+        btn.classList.remove("faded");
+        btn.classList.add("selected");
+        btn.setAttribute("aria-checked", "true");
+        updateSubmitButtonState();
+      };
+      ;
+
+      // Form initialization:
+      // Reset playerAvatarInput to either the filled or default state (0) &
+      // set the proper classes to the initialized avatar buttons.
+      if (formAvatarId === 0) {
+        updateSubmitButtonState();
+      } else {
+        var _iterator2 = _createForOfIteratorHelper(buttons),
+          _step2;
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var btn = _step2.value;
             var avatarId = btn.getAttribute("data-avatar-id");
-            if (parseInt(avatarId) === filledAvatarId) {
+            if (parseInt(avatarId) === formAvatarId) {
               btn.classList.remove("faded");
               btn.classList.add("selected");
               btn.setAttribute("aria-checked", "true");
@@ -62,55 +108,75 @@ window.addEventListener("load", function () {
             }
           }
         } catch (err) {
-          _iterator.e(err);
+          _iterator2.e(err);
         } finally {
-          _iterator.f();
+          _iterator2.f();
         }
         updateSubmitButtonState();
       }
-      // Add listeners to the buttons
-      playerNameInput.addEventListener('input', updateSubmitButtonState);
-      var _iterator2 = _createForOfIteratorHelper(buttons),
-        _step2;
+
+      // Add event listeners:
+      // Add an event listener to playerName input to trigger form validation.
+      if (formPlayerNameInput) {
+        formPlayerNameInput.addEventListener("input", updateSubmitButtonState);
+      }
+      // Add event listeners to the avatar buttons.
+      var _iterator3 = _createForOfIteratorHelper(buttons),
+        _step3;
       try {
         var _loop = function _loop() {
-          var btn = _step2.value;
+          var btn = _step3.value;
           btn.addEventListener("click", function () {
-            // Get the selected avatar id:
-            var avatarId = btn.getAttribute("data-avatar-id");
-            var input = document.getElementById("playerAvatarId");
-            input.value = avatarId;
-            // Add the faded class to all avatars:
-            var _iterator3 = _createForOfIteratorHelper(buttons),
-              _step3;
-            try {
-              for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-                var b = _step3.value;
-                b.classList.remove("selected");
-                b.classList.add("faded");
-                b.setAttribute("aria-checked", "false");
-              }
-              // Add the selected class to the clicked avatar:
-            } catch (err) {
-              _iterator3.e(err);
-            } finally {
-              _iterator3.f();
-            }
-            btn.classList.remove("faded");
-            btn.classList.add("selected");
-            btn.setAttribute("aria-checked", "true");
-            updateSubmitButtonState();
+            return handleAvatarState(btn);
           });
         };
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
           _loop();
         }
       } catch (err) {
-        _iterator2.e(err);
+        _iterator3.e(err);
       } finally {
-        _iterator2.f();
+        _iterator3.f();
       }
     })();
+  }
+});
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!*************************************************!*\
+  !*** ./resources/js/settings/dice-selection.js ***!
+  \*************************************************/
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+/**
+  * Dice Selection Functions.
+  */
+window.addEventListener("load", function () {
+  var diceImages = document.querySelectorAll("img[data-role='dice']");
+  if (diceImages.length) {
+    var _iterator = _createForOfIteratorHelper(diceImages),
+      _step;
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var img = _step.value;
+        img.addEventListener('click', function (event) {
+          var checkboxId = event.target.getAttribute("data-for");
+          if (checkboxId) {
+            var checkbox = document.getElementById(checkboxId);
+            if (checkbox) {
+              checkbox.checked = true;
+            }
+          }
+        });
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
   }
 });
 })();
@@ -218,8 +284,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
  */
 window.addEventListener("load", function () {
   // Get a reference to all the buttons with the 'keyAssigner' data-role
-  var keyAssigners = document.querySelectorAll("[data-role='keyAssigner']");
-  var keyAssignersInputs = document.querySelectorAll("[data-role='keyAssignerInput']");
+  var keyAssigners = document.querySelectorAll("button[data-role='keyAssigner']");
+  var keyAssignersInputs = document.querySelectorAll("input[data-role='keyAssignerInput']");
   var returnKey = "Error";
   if (keyAssigners.length) {
     var _iterator = _createForOfIteratorHelper(keyAssigners),
@@ -377,6 +443,14 @@ window.addEventListener("load", function () {
           label.textContent = "".concat(element.value, " \u03B4\u03B5\u03C5\u03C4\u03B5\u03C1\u03CC\u03BB\u03B5\u03C0\u03C4\u03BF");
         } else {
           label.textContent = "".concat(element.value, " \u03B4\u03B5\u03C5\u03C4\u03B5\u03C1\u03CC\u03BB\u03B5\u03C0\u03C4\u03B1");
+        }
+        var ruler = document.querySelector("div[data-role=\"ruler\"][data-value=\"".concat(element.value, "\"]"));
+        if (ruler) {
+          ruler.classList.add("selected");
+          // Remove the "selected" class after 2 seconds
+          setTimeout(function () {
+            ruler.classList.remove("selected");
+          }, 2000);
         }
       });
     };

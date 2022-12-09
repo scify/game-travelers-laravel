@@ -11456,6 +11456,10 @@ button.key-assigner.active {
   opacity: 0.5;
 }
 
+fieldset input[type=radio]:not(:checked) + label {
+  font-weight: 300;
+}
+
 .form-range::-moz-range-thumb {
   background-color: var(--trvl-c-text);
 }
@@ -11470,10 +11474,14 @@ button.key-assigner.active {
   position: relative;
   margin-left: 0.35rem;
   margin-right: 0.35rem;
+  margin-bottom: 0.1rem;
 }
-
 .form-range-ruler > .ruler {
+  transition: all 0.15s ease-in-out;
   font-size: 0.9em;
+}
+.form-range-ruler > .ruler.selected {
+  color: var(--trvl-c-black);
 }
 
 input[type=radio] {
@@ -11886,6 +11894,15 @@ footer img {
 .settings h1, .settings .h1 {
   font-size: 2em;
   color: var(--trvl-c-text);
+}
+.settings .dices .dice-field--img img {
+  display: block;
+  position: relative;
+  left: -1rem;
+  cursor: pointer;
+}
+.settings .dices .dice-field--check {
+  padding-left: 0.2rem;
 }
 @media (max-width: 575.98px) {
   .settings {

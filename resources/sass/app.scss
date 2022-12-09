@@ -135,6 +135,21 @@ footer img {
         margin-bottom: 5em;
     }
     */
+    .dices {
+        .dice-field {
+            &--img {
+                img {
+                    display:block;
+                    position: relative;
+                    left: -1rem;
+                    cursor: pointer;
+                }
+            }
+            &--check {
+                padding-left: 0.2rem;
+            }
+        }
+    }
     @media (max-width: 575.98px) {
         padding-bottom: 2rem;
     }
