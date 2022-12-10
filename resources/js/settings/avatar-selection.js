@@ -6,8 +6,8 @@
   * - A submit button with the id=#submitButton.
   */
 window.addEventListener("load", function() {
-    // Should only run on pages with buttons with data-avatar=true attribute.
-    const buttons = document.querySelectorAll("button[data-avatar='true']");
+    // Should only run on pages with buttons with data-role=avatar attribute.
+    const buttons = document.querySelectorAll(`button[data-role="avatar"]`);
     // Variables for reading/validating/processing various form elements.
     const formAvatarIdInput = document.getElementById("selectedAvatarId");
     const formPlayerNameInput = document.getElementById("playerName");
@@ -64,11 +64,33 @@ window.addEventListener("load", function() {
             updateSubmitButtonState();
         };
 
+        function animateAvatarButtons(buttons) {
+            const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+            if (reducedMotionQuery.media !== 'not all' && !reducedMotionQuery.matches) {
+                for (let i = 0; i < buttons.length; i++) {
+                    let anBtn = buttons[i];
+                    const anDelay = 300+i * 50;
+                    setTimeout(() => {
+                        anBtn.style.transform = "scale(1)";
+                        anBtn.style.transition = "0.2s linear";
+                        requestAnimationFrame(() => {
+                            anBtn.style.transform = "scale(1.2)";
+                        });
+                        setTimeout(() => {
+                            anBtn.style.transform = 'scale(1)';
+                        }, anDelay);
+                    }, anDelay);
+                }
+            }
+        };
+
         // Form initialization:
         // Reset playerAvatarInput to either the filled or default state (0) &
         // set the proper classes to the initialized avatar buttons.
         if (formAvatarId === 0) {
             updateSubmitButtonState();
+            // Animate on (initial) load!
+            // animateAvatarButtons(buttons);
         } else {
             for (const btn of buttons) {
                 const avatarId = btn.getAttribute("data-avatar-id");

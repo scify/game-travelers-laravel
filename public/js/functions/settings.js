@@ -16,8 +16,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   * - A submit button with the id=#submitButton.
   */
 window.addEventListener("load", function () {
-  // Should only run on pages with buttons with data-avatar=true attribute.
-  var buttons = document.querySelectorAll("button[data-avatar='true']");
+  // Should only run on pages with buttons with data-role=avatar attribute.
+  var buttons = document.querySelectorAll("button[data-role=\"avatar\"]");
   // Variables for reading/validating/processing various form elements.
   var formAvatarIdInput = document.getElementById("selectedAvatarId");
   var formPlayerNameInput = document.getElementById("playerName");
@@ -83,6 +83,29 @@ window.addEventListener("load", function () {
         btn.setAttribute("aria-checked", "true");
         updateSubmitButtonState();
       };
+      var animateAvatarButtons = function animateAvatarButtons(buttons) {
+        var reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (reducedMotionQuery.media !== 'not all' && !reducedMotionQuery.matches) {
+          var _loop = function _loop(i) {
+            var anBtn = buttons[i];
+            var anDelay = 300 + i * 50;
+            setTimeout(function () {
+              anBtn.style.transform = "scale(1)";
+              anBtn.style.transition = "0.2s linear";
+              requestAnimationFrame(function () {
+                anBtn.style.transform = "scale(1.2)";
+              });
+              setTimeout(function () {
+                anBtn.style.transform = 'scale(1)';
+              }, anDelay);
+            }, anDelay);
+          };
+          for (var i = 0; i < buttons.length; i++) {
+            _loop(i);
+          }
+        }
+      };
+      ;
       ;
 
       // Form initialization:
@@ -90,6 +113,8 @@ window.addEventListener("load", function () {
       // set the proper classes to the initialized avatar buttons.
       if (formAvatarId === 0) {
         updateSubmitButtonState();
+        // Animate on (initial) load!
+        // animateAvatarButtons(buttons);
       } else {
         var _iterator2 = _createForOfIteratorHelper(buttons),
           _step2;
@@ -124,14 +149,14 @@ window.addEventListener("load", function () {
       var _iterator3 = _createForOfIteratorHelper(buttons),
         _step3;
       try {
-        var _loop = function _loop() {
+        var _loop2 = function _loop2() {
           var btn = _step3.value;
           btn.addEventListener("click", function () {
             return handleAvatarState(btn);
           });
         };
         for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-          _loop();
+          _loop2();
         }
       } catch (err) {
         _iterator3.e(err);

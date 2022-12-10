@@ -26,10 +26,13 @@ Route::get('/', function () {
     return view('extras/testViews');
 });
 
-// Sample Data used on profileNewStep1 and its 2 demos. Sorry for keeping them
-// here for the time being, at least they have been moved to an external file.
-require __DIR__.'/sampleData.php';
-View::share('avatarData', $sampleAvatarData);
+// Sample Data used on profileNewStep1 and its 2 demos. The exampleData contains
+// the $avatar array, which contains all available modules. It's the output of
+// the proposed (untested) Avatar model, which also resides in the same folder.
+// @see ../docs/examples/exampleData.php Avatar Data Model
+// @example ../docs/examples/exampleDataAvatarModel.php Avatar Data Model
+require __DIR__.'/../docs/examples/exampleData.php';
+View::share('avatars', $avatars);
 
 /*
  * Login | Onboarding.
@@ -61,6 +64,7 @@ Route::get('/password/reset/success', function () {
  * Demos added.
  */
 Route::get('/profiles/new', function () {
+    // Requires View::share('avatars', $avatars)
     return view('profileNewStep1');
 });
 Route::get('demo/profile/error', function () {
@@ -70,9 +74,11 @@ Route::get('demo/profile/success', function () {
     return view('extras/demoProfileNewSuccess');
 });
 Route::get('/profiles/new/2', function () {
+    // Requires View::share('avatars', $avatars)
     return view('profileNewStep2');
 });
 Route::get('/profiles/new/3', function () {
+    // Requires View::share('avatars', $avatars)
     return view('profileNewStep3');
 });
 
