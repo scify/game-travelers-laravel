@@ -49,14 +49,29 @@
     width: 100px;
     height: 100px;
 }
-.btn-avatar > .btn-text {
+
+.btn-avatar > .label-avatar {
     display: block;
     position: relative;
-    top: 0px;
+    top: 2px;
     z-index: 98;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--trvl-c-text);
     text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    max-width: 100px;
 }
-.btn-avatar > .btn-text.hidden {
-    left: -2000px;
-    right: -2000px;
+.btn-avatar:hover > .label-avatar {
+    // scale: 0.9;
+}
+.btn-avatar.selected > .label-avatar {
+    // scale: 0.9;
+    font-weight: 600;
+}
+.btn-avatar > .label-avatar.hidden {
+    left: -3000px;
+    right: -3000px;
 }

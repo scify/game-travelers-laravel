@@ -80,7 +80,7 @@
                         autocapitalize="on"
                         spellcheck="false"
                         tabindex="1"
-                        id="playerName" {{-- Used by JS --}}
+                        id="playerNameInput" {{-- Used by JS --}}
                     />
                     @error('name')
                     <div class="field-description big" id="alert">
@@ -105,24 +105,11 @@
                     </legend>
                 </div>
                 <div class="col-md-9">
-                    <!-- avatar container -->
-                    <div class="avatars container-lg text-center">
-                        <div class="row avatars-row">
-                            <x-profileNewAvatar :avatar=$avatarData[0] />
-                            <x-profileNewAvatar :avatar=$avatarData[1] />
-                            <x-profileNewAvatar :avatar=$avatarData[2] />
-                            <x-profileNewAvatar :avatar=$avatarData[3] />
-                            <x-profileNewAvatar :avatar=$avatarData[4] />
-                            <x-profileNewAvatar :avatar=$avatarData[5] />
-                            {{-- default value = "0"  (no avatar selected --}}
-                            <input
-                                type="hidden"
-                                name="avatarId"
-                                value="2" {{-- Read by JS --}}
-                                id="selectedAvatarId" {{-- Used by JS --}}
-                            />
-                        </div>
-                    </div>
+                    <x-selectAvatar
+                        :avatars=$avatars
+                        :tabindex=2
+                        :selectedAvatarId=2
+                    />
                 </div>
 
             </div>

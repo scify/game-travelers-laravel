@@ -16,15 +16,15 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   * - A submit button with the id=#submitButton.
   */
 window.addEventListener("load", function () {
-  // Should only run on pages with buttons with data-role=avatar attribute.
-  var buttons = document.querySelectorAll("button[data-role=\"avatar\"]");
-  // Variables for reading/validating/processing various form elements.
-  var formAvatarIdInput = document.getElementById("selectedAvatarId");
-  var formPlayerNameInput = document.getElementById("playerName");
-  // Checking values...
-  var formAvatarId = formAvatarIdInput ? parseInt(formAvatarIdInput.value) : 0;
+  // Should only run on pages with avatarsContainer & for related buttons.
+  var avatarsContainer = document.getElementById("avatarsContainer");
+  var buttons = avatarsContainer.querySelectorAll("button[data-avatar=\"true\"]");
+
   // Let the fun begin!
   if (buttons.length) {
+    var btnRole;
+    var btnId;
+    var btnId;
     (function () {
       /**
        * Form validation function.
@@ -35,19 +35,23 @@ window.addEventListener("load", function () {
        * take under consideration for validation.
        */
       var updateSubmitButtonState = function updateSubmitButtonState() {
-        var nameInput = document.getElementById("playerName");
-        var avatarIdInput = document.getElementById("selectedAvatarId");
         var submitButton = document.getElementById("submitButton");
-        var avatarId = parseInt(avatarIdInput.value);
+        var idValue = idInput ? parseInt(idInput.value) : 0;
+        // Nothing to update if Submit Button does not exist.
+        if (!submitButton) {
+          return false;
+        }
+        // If nameInput, then we are on the create new profile page.
         if (nameInput) {
           var nameValue = nameInput.value;
-          if (nameValue.length >= 2 && !isNaN(avatarId) && avatarId > 0) {
+          if (nameValue.length >= 2 && !isNaN(idValue) && idValue > 0) {
             submitButton.disabled = false;
           } else {
             submitButton.disabled = true;
           }
+          // If !nameInput, then we are just updating an existing profile.
         } else {
-          if (!isNaN(avatarId) && avatarId > 0) {
+          if (!isNaN(idValue) && idValue > 0) {
             submitButton.disabled = false;
           } else {
             submitButton.disabled = true;
@@ -58,10 +62,15 @@ window.addEventListener("load", function () {
        * Avatar handler function.
        */
       var handleAvatarState = function handleAvatarState(btn) {
-        // Get the selected avatar id:
-        var avatar = btn.getAttribute("data-avatar-id");
-        var input = document.getElementById("selectedAvatarId");
-        input.value = avatar;
+        // Get the button's role:
+        var role = btn.getAttribute("data-role");
+        if (role && role === "player") {
+          var id = btn.getAttribute("data-player-id");
+        } else {
+          var id = btn.getAttribute("data-avatar-id");
+        }
+        // Get the selected avatar id and update the linked input field:
+        idInput.value = id;
         // Add the faded class to all avatars:
         var _iterator = _createForOfIteratorHelper(buttons),
           _step;
@@ -105,13 +114,17 @@ window.addEventListener("load", function () {
           }
         }
       };
+      // Variables for reading/validating/processing various form elements.
+      var idInput = document.getElementById("avatarsContainerInput");
+      var nameInput = document.getElementById("playerNameInput");
+      var initialFormIdValue = idInput ? parseInt(idInput.value) : 0;
       ;
       ;
 
       // Form initialization:
       // Reset playerAvatarInput to either the filled or default state (0) &
       // set the proper classes to the initialized avatar buttons.
-      if (formAvatarId === 0) {
+      if (initialFormIdValue === 0) {
         updateSubmitButtonState();
         // Animate on (initial) load!
         // animateAvatarButtons(buttons);
@@ -121,8 +134,13 @@ window.addEventListener("load", function () {
         try {
           for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
             var btn = _step2.value;
-            var avatarId = btn.getAttribute("data-avatar-id");
-            if (parseInt(avatarId) === formAvatarId) {
+            btnRole = btn.getAttribute("data-role");
+            if (btnRole === "player") {
+              btnId = btn.getAttribute("data-player-id");
+            } else {
+              btnId = btn.getAttribute("data-avatar-id");
+            }
+            if (parseInt(btnId) === initialFormIdValue) {
               btn.classList.remove("faded");
               btn.classList.add("selected");
               btn.setAttribute("aria-checked", "true");
@@ -142,8 +160,8 @@ window.addEventListener("load", function () {
 
       // Add event listeners:
       // Add an event listener to playerName input to trigger form validation.
-      if (formPlayerNameInput) {
-        formPlayerNameInput.addEventListener("input", updateSubmitButtonState);
+      if (nameInput) {
+        nameInput.addEventListener("input", updateSubmitButtonState);
       }
       // Add event listeners to the avatar buttons.
       var _iterator3 = _createForOfIteratorHelper(buttons),

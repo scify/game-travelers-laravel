@@ -6,7 +6,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Profile; // I guess a Profile Model is needed.
+use App\Models\Player; // I guess a Player Model (aka Profile) is needed.
 
 /**
  * Avatar model represents an avatar data record.
@@ -27,7 +27,7 @@ use App\Models\Profile; // I guess a Profile Model is needed.
  */
 class Avatar extends Model
 {
-    use Profile;
+    use Player;
 
     /**
      * The table associated with the model.
@@ -60,6 +60,8 @@ class Avatar extends Model
     /**
      * The default values for the model's attributes.
      *
+     * Should this be public static as well, I wonder.
+     *
      * @var array<string, mixed>
      */
     protected $attributes = [
@@ -80,27 +82,22 @@ class Avatar extends Model
         "id" => "required|integer|unique:avatars", // why (not)
         "asset" => "required",
         "description" => "required",
+        "public_path" => "required",
         "width" => "integer|min:50|max:200|same:height", // 1:1!
         "height" => "integer|min:50|max:200|same:width", // 1:1!
     ];
 
     /**
-     * Get the profiles that the avatar is associated with.
+     * Get the players that the avatar is associated with.
      *
-     * Note that avatars are assigned to profiles of users, not directly to
-     * users. Why could we possibly need this function I don't really know, but
-     * my thought experiment has no actual limits. The reverse relationship on
-     * the Profile class Model could be defined like this:
-     * public function avatar()
-     * {
-     *    return $this->hasOne(Avatar::class);
-     * }
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * Note that avatars are assigned to player profiles made by users and not
+     * directly to the users themselves. Why could we possibly need this
+     * function I don't really know, but my thought experiment has no actual
+     * limits.
      */
-    public function profiles()
+    public function players()
     {
-        return $this->hasMany(Profile::class);
+        return $this->hasMany(Player::class);
     }
 
     /**
@@ -117,6 +114,14 @@ class Avatar extends Model
     /**
      * Returns an array of all avatars.
      *
+     * Example usage:
+     * <code>
+     * <?php
+     * use App\Models\Avatar;
+     * $avatars = Avatar:getAllAvatars();
+     * ?>
+     * </code>
+     *
      * @return array<int, array<string, mixed>>
      */
     public static function getAllAvatars()
@@ -128,7 +133,7 @@ class Avatar extends Model
                 "id" => $avatar->id,
                 "asset" => $avatar->asset,
                 "description" => $avatar->description,
-                "publicPath" => $avatar->public_path,
+                "public_path" => $avatar->public_path,
                 "width" => $avatar->width,
                 "height" => $avatar->height,
             ];

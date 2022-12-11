@@ -11308,17 +11308,28 @@ textarea.form-control-lg {
   height: 100px;
 }
 
-.btn-avatar > .btn-text {
+.btn-avatar > .label-avatar {
   display: block;
   position: relative;
-  top: 0px;
+  top: 2px;
   z-index: 98;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--trvl-c-text);
   text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+  max-width: 100px;
 }
 
-.btn-avatar > .btn-text.hidden {
-  left: -2000px;
-  right: -2000px;
+.btn-avatar.selected > .label-avatar {
+  font-weight: 600;
+}
+
+.btn-avatar > .label-avatar.hidden {
+  left: -3000px;
+  right: -3000px;
 }
 
 /* Buttons */
@@ -11849,11 +11860,14 @@ footer img {
   color: var(--trvl-c-black);
 }
 
-.settings-header h1, .settings-header .h1 {
+.settings-header h1, .settings-header .h1,
+.gamesettings-header h1,
+.gamesettings-header .h1 {
   font-size: 2em;
   line-height: 1;
 }
-.settings-header a.back-link {
+.settings-header a.back-link,
+.gamesettings-header a.back-link {
   transition: all 0.3s ease-in-out;
   display: inline-block;
   width: 2em;
@@ -11866,16 +11880,19 @@ footer img {
   border-radius: 50%;
   background: transparent;
 }
-.settings-header a.back-link:hover {
+.settings-header a.back-link:hover,
+.gamesettings-header a.back-link:hover {
   color: #383735;
   background: hsla(40deg, 3%, 21%, 0.1);
   box-shadow: 0 0 0 0.2rem hsla(40deg, 3%, 21%, 0.1);
 }
-.settings-header a.back-link:focus-visible {
+.settings-header a.back-link:focus-visible,
+.gamesettings-header a.back-link:focus-visible {
   --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
   box-shadow: 0 0 0 0.2rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5);
 }
-.settings-header a.back-link svg {
+.settings-header a.back-link svg,
+.gamesettings-header a.back-link svg {
   margin-top: 4px;
   margin-left: 6px;
 }

@@ -33,10 +33,12 @@ Route::get('/', function () {
 // @example ../docs/examples/exampleDataAvatarModel.php Avatar Data Model
 require __DIR__.'/../docs/examples/exampleData.php';
 View::share('avatars', $avatars);
+View::share('players', $players_with_avatars);
 
 /*
- * Login | Onboarding.
+ * Flow 1 | Login | Onboarding.
  * Last update: December 5, 2022.
+ * @link https://xd.adobe.com/view/1f4fac3e-a8eb-4948-ab4b-b52f898a095d-4a1c/
  * @todo Pending fully transparent and extended asset for success page.
  */
 /*Route::get('/login', function () {
@@ -59,27 +61,63 @@ Route::get('/password/reset/success', function () {
 });
 
 /*
- * Stepper 2 | New player profiles
- * Last update: December 9, 2022.
- * Demos added.
+ * Stepper 2 | New player profiles.
+ * Last update: December 10, 2022.
+ * @link https://xd.adobe.com/view/881b8987-9d56-443d-9e00-c2edcb5a6671-dd48/
  */
 Route::get('/profiles/new', function () {
-    // Requires View::share('avatars', $avatars)
+    // Requires View::share('avatars', $avatars);
     return view('profileNewStep1');
 });
+Route::get('/profiles/new/2', function () {
+    // Requires View::share('avatars', $avatars);
+    return view('profileNewStep2');
+});
+Route::get('/profiles/new/3', function () {
+    // Requires View::share('avatars', $avatars);
+    return view('profileNewStep3');
+});
+// Demos
 Route::get('demo/profile/error', function () {
     return view('extras/demoProfileNewError');
 });
 Route::get('demo/profile/success', function () {
     return view('extras/demoProfileNewSuccess');
 });
-Route::get('/profiles/new/2', function () {
-    // Requires View::share('avatars', $avatars)
-    return view('profileNewStep2');
+
+/*
+ * Travellers | Step 1. New game
+ * Last update: December 10, 2022.
+ * @link https://xd.adobe.com/view/d308b3ee-c123-48d3-87ff-5304ebdaa85a-865b/
+ */
+Route::get('/select/player', function () {
+    // Requires View::share('players', $players_with_avatars);
+    return view('gameSelectPlayer');
 });
-Route::get('/profiles/new/3', function () {
-    // Requires View::share('avatars', $avatars)
-    return view('profileNewStep3');
+Route::get('/select/level', function () {
+    // Requires View::share('players', $players_with_avatars);
+    return view('gameSelectLevel');
+});
+Route::get('/select/mode', function () {
+    // Requires View::share('players', $players_with_avatars);
+    return view('gameSelectMode');
+});
+Route::get('/select/help', function () {
+    // Requires View::share('players', $players_with_avatars);
+    return view('gameSelectHelp');
+});
+Route::get('/select/pawn', function () {
+    // Requires View::share('players', $players_with_avatars);
+    return view('gameSelectPawn');
+});
+// Demos
+Route::get('/demo/select/player/more', function () {
+    // Requires View::share('players', $players_with_avatars);
+    return view('extras/demo/selectPlayerMore');
+});
+Route::get('/demo/select/player/start', function () {
+    // Requires View::share('players', $players_with_avatars);
+    return view('extras/demo/selectPlayerStart');
 });
 
 

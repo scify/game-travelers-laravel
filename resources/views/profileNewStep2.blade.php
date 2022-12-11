@@ -59,11 +59,13 @@
                 <div class="col-1">
                     <x-buttonBack :label="'Επιστροφή στο προηγούμενο μενού'" />
                 </div>
-                <div class="col-10 text-center" id="currentPageDescription">
-                    <h1>Χειρισμός</h1>
-                    <p><strong>Επίλεξε τον τρόπο με τον οποίο επιθυμείς να
-                        χειρίζεσαι το παιχνίδι.
-                    </strong>
+                <div class="col-10 text-center" id="currentPageHeader">
+                    <h1 id="currentPageLabel">Χειρισμός</h1>
+                    <p>
+                        <strong id="currentPageDescription">
+                            Επίλεξε τον τρόπο με τον οποίο επιθυμείς να χειρίζεσαι το παιχνίδι.
+                        </strong>
+                    </p>
                 </div>
                 <div class="col-1"></div>
            </div>

@@ -73,11 +73,13 @@
                 <div class="col-1">
                     <x-buttonBack :label="'Επιστροφή στο προηγούμενο μενού'" />
                 </div>
-                <div class="col-10 text-center" id="currentPageDescription">
-                    <h1>Δυσκολία</h1>
-                    <p><strong>Επίλεξε πόσο εύκολο ή δύσκολο θέλεις να είναι
-                        το παιχνίδι.
-                    </strong>
+                <div class="col-10 text-center" id="currentPageHeader">
+                    <h1 id="currentPageLabel">Δυσκολία</h1>
+                    <p>
+                        <strong id="currentPageDescription">
+                            Επίλεξε πόσο εύκολο ή δύσκολο θέλεις να είναι το παιχνίδι.
+                        </strong>
+                    </p>
                 </div>
                 <div class="col-1"></div>
            </div>

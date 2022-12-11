@@ -14,7 +14,7 @@
     @endsection
 
     <!-- new player step 1/3 content -->
-    <form method="post" action="" id="profileNewStep1">
+    <form method="post" action="" id="profileNewStep1"> {{-- unused id --}}
         @csrf
 
         <!-- step counter 1/3 -->
@@ -49,11 +49,13 @@
                 <div class="col-1">
                     <x-buttonBack :label="'Ακύρωση και επιστροφή στο προηγούμενο μενού'" />
                 </div>
-                <div class="col-10 text-center" id="currentPageDescription">
-                    <h1>Νέος παίκτης</h1>
-                    <p><strong>Διάλεξε ένα όνομα και μια φατσούλα για να
-                        δημιουργήσεις το προφίλ σου.
-                    </strong>
+                <div class="col-10 text-center" id="currentPageHeader">
+                    <h1 id="currentPageLabel">Νέος παίκτης</h1>
+                    <p>
+                        <strong id="currentPageDescription">
+                            Διάλεξε ένα όνομα και μια φατσούλα για να δημιουργήσεις το προφίλ σου.
+                        </strong>
+                    </p>
                 </div>
                 <div class="col-1"></div>
            </div>
@@ -81,7 +83,7 @@
                         autocapitalize="on"
                         spellcheck="false"
                         tabindex="1"
-                        id="playerName" {{-- Used by JS --}}
+                        id="playerNameInput" {{-- ID Used by JS --}}
                     />
                     @error('name')
                     <div class="field-description big" id="alert">
@@ -134,7 +136,7 @@
                 <button
                     class="btn btn-primary btn-lg responsive-expand"
                     type="submit"
-                    id="submitButton" {{-- Used by JS --}}
+                    id="submitButton" {{-- ID Used by JS --}}
                     tabindex="120"
                     disabled {{-- Altered via JS (form validation) --}}
                 >
