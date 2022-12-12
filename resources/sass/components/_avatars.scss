@@ -1,16 +1,24 @@
+.gamesettings .avatar-col {
+    min-height: 160px;
+    min-width: 140px;
+    .btn-avatar > .label-avatar {
+    }
+}
+
+.avatars-row {
+    justify-content: start;
+}
+
 .avatar-col {
     min-height: 150px;
 }
 
-.btn-avatar {
-    --bs-btn-active-bg: #edf9dd;
-    --bs-btn-hover-bg: var(--trvl-btn-hover-bg);
+.btn-avatar,
+.btn-avatar-options {
     --bs-btn-focus-box-shadow: 0 0 0 0.3rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5);
     --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
-    background-color: var(--trvl-btn-bg);
     transition: all .2s ease-out;
     padding: 0;
-    border: none;
     &.btn-round {
         width: 100px;
         height: 100px;
@@ -40,6 +48,36 @@
         scale: 1 !important;
     }
 }
+.btn-avatar {
+    --bs-btn-active-bg: var(--trvl-btn-active-bg);
+    --bs-btn-hover-bg: var(--trvl-btn-hover-bg);
+    background-color: var(--trvl-btn-bg);
+    border: none;
+}
+.btn-avatar-options {
+    --bs-btn-active-bg: var(--trvl-btn-active-bg);
+    --bs-btn-border-color: var(--trvl-btn-border-color);
+    --bs-btn-hover-border-color: var(--trvl-btn-border-color);
+    --bs-btn-border-width: 5px;
+    background-color: transparent;
+    box-shadow: inset 0 0.3rem 0.1rem rgba(var(--trvl-btn-hover-shadow-rgb), 0.1) !important;
+    display: block;
+    margin: 0 auto;
+    &:hover {
+        box-shadow:
+            inset 0 0.3rem 0.1rem rgba(var(--trvl-btn-hover-shadow-rgb), 0.5),
+            0 0.3rem rgba(var(--trvl-btn-hover-shadow-rgb), 0.1)
+            !important;
+    }
+    &:focus, &:focus-visible {
+        --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
+        box-shadow:
+            inset 0 0.3rem 0.1rem rgba(var(--trvl-btn-hover-shadow-rgb), 0.5),
+            0 0.3rem rgba(var(--trvl-btn-hover-shadow-rgb), 0.1),
+            0 0 0 0.3rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5)
+            !important;
+    }
+}
 
 .btn-avatar img {
     position: relative;
@@ -49,27 +87,45 @@
     width: 100px;
     height: 100px;
 }
+.btn-avatar-options img {
+    position: relative;
+    display: inline-block;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 90px;
+    height: 90px;
+}
 
-.btn-avatar > .label-avatar {
+.btn-avatar > .label-avatar,
+.btn-avatar-options > .label-avatar-options {
     display: block;
     position: relative;
-    top: 2px;
     z-index: 98;
     font-size: 1rem;
-    font-weight: 500;
-    color: var(--trvl-c-text);
+    font-weight: 600;
+    color: rgba(var(--trvl-c-text-rgb), 0.92);
     text-align: center;
     white-space: nowrap;
-    text-overflow: ellipsis;
+}
+.btn-avatar > .label-avatar {
+    top: 0.3rem;
     overflow-x: hidden;
+    text-overflow: ellipsis;
     max-width: 100px;
 }
-.btn-avatar:hover > .label-avatar {
+.btn-avatar-options > .label-avatar-options {
+    top: calc(0.3rem + 5px);
+    left: -0.1rem;
+}
+
+.btn-avatar:hover > .label-avatar,
+.btn-avatar-options:hover > .label-avatar-options {
     // scale: 0.9;
+    color: rgba(var(--trvl-c-text-rgb), 1);
 }
 .btn-avatar.selected > .label-avatar {
-    // scale: 0.9;
-    font-weight: 600;
+    scale: 0.9;
+    color: rgba(var(--trvl-c-text-rgb), 1);
 }
 .btn-avatar > .label-avatar.hidden {
     left: -3000px;

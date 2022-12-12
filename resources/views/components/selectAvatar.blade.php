@@ -1,9 +1,9 @@
 <!-- /resources/views/selectAvatar.blade.php -->
 {{--
     - Component which allows the user to select one of the available Avatars.
-      All the Avatars are returned as <buttons> which act as radios. In order
-      to use this component in your template, you have to make sure to include
-      the related JavaScript asset:
+      All the Avatars are returned as <buttons> which act as radios in a virtual
+      and accessible radiogroup. In order to use this component in your
+      template, you have to make sure to include the related JavaScript asset:
       <script src="{{ mix('js/functions/settings.js') }}" defer></script>
     - Example usage in a template:
       <x-selectAvatar :avatars=$avatars :tabindex=2 :selectedAvatarId=0 />
@@ -17,15 +17,14 @@
         while the rest will get the tabindex of the previous avatar + 1. Default
         value is 2 (second element in a form).
       @var int selectedAvatarId [optional]
-        Forms. Equals to the unique Avatar ID of a "checked" (aka selected)
-        Avatar. For example, in a form, this would be the profile's avatar id.
-        Default value is 0 (user has not selected any avatars).
+        Forms. Equals to the unique avatar ID of a "checked" (aka selected)
+        Avatar. Default value is 0 (user has not selected any avatars).
     - Instructions of use in a form:
-      The component contains a hidden <input>  with the attribute:
-      data-role="selected-avatar-input-field". The input's value is set to 0
-      if no avatar is selected. If the user selects an avatar, then the input
-      value is set to be equal to the unique avatar's avatar id (e.g. 4) which
-      is an integer. JS automates this process.
+      The component contains a hidden <input>  with the id of
+      #avatarsContainerInput. The input's value is set to $selectedAvatarId
+      (or 0 if no avatar is selected). If the user selects an avatar, then the
+      input value is set to be equal to the unique avatars's avatar id (e.g. 4)
+      which should be an integer. JS automates this process.
     --}}
 <!-- avatar container -->
 <div class="avatars container-lg text-center" id="avatarsContainer"> {{-- ID used by JS --}}

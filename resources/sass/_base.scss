@@ -2,6 +2,7 @@
 :root {
   // Let's not stick with unnamed colors, please?
   --unnamed-color-383735: #383735;
+  --unnamed-color-383735-rgb: 56, 55, 53;
   --unnamed-color-faf9f8: #FAF9F8;
   --unnamed-color-faf9f8-rgb: 250, 249, 248;
   --unnamed-color-f8e2ce: #F8E2CE;
@@ -41,6 +42,7 @@
     --trvl-c-background: var(--unnamed-color-c3d0c9);
     --trvl-c-background-hsl: var(--unnamed-color-c3d0c9-hsl);
     --trvl-c-text: var(--unnamed-color-383735);
+    --trvl-c-text-rgb: var(--unnamed-color-383735-rgb);
     --trvl-c-link: var(--unnamed-color-383735);
     // Buttons
     --trvl-btn-bg: var(--unnamed-color-faf9f8);

@@ -29,15 +29,16 @@ window.addEventListener("load", function () {
       /**
        * Form validation function.
        *
-       * Allows submission of aform only if a valid avatar is selected.
-       * Reads selected avatarId from a hidden #selectedAvatarId input.
-       * If an #playerName input is on the same page, then it's value is also
-       * take under consideration for validation.
+       * Allows submission of a form only if a valid avatar is selected.
+       * Reads selected id value from a hidden #avatarsContainerInput input.
+       * If an #playerNameInput input is on the same page, then it's value is
+       * also take under consideration for validation.
        */
       var updateSubmitButtonState = function updateSubmitButtonState() {
         var submitButton = document.getElementById("submitButton");
+        var secondaryButton = document.getElementById("secondaryButton");
         var idValue = idInput ? parseInt(idInput.value) : 0;
-        // Nothing to update if Submit Button does not exist.
+        // Nothing to update if (primary) Submit Button does not exist.
         if (!submitButton) {
           return false;
         }
@@ -53,8 +54,14 @@ window.addEventListener("load", function () {
         } else {
           if (!isNaN(idValue) && idValue > 0) {
             submitButton.disabled = false;
+            if (secondaryButton) {
+              secondaryButton.disabled = false;
+            }
           } else {
             submitButton.disabled = true;
+            if (secondaryButton) {
+              secondaryButton.disabled = true;
+            }
           }
         }
       };

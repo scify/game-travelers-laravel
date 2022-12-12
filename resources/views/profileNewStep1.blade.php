@@ -47,7 +47,7 @@
         <div class="settings-header container-xxl px-4 px-sm-4 mb-2 mb-lg-5">
             <div class="row">
                 <div class="col-1">
-                    <x-buttonBack :label="'Ακύρωση και επιστροφή στο προηγούμενο μενού'" />
+                    <x-buttonBack :label="'Ακύρωση και επιστροφή στο προηγούμενο μενού'" :align="'right'" />
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">
                     <h1 id="currentPageLabel">Νέος παίκτης</h1>
@@ -109,9 +109,9 @@
                 </div>
                 <div class="col-md-9">
                     <x-selectAvatar
-                        :avatars=$avatars
-                        :tabindex=2
+                        :avatars=$avatars {{-- @see ../../docs/exampleData.php --}}
                         :selectedAvatarId=0
+                        :tabindex=2
                     />
                 </div>
 
@@ -135,6 +135,8 @@
             <div id="navGroup" class="form-actions d-flex align-items-end flex-column">
                 <button
                     class="btn btn-primary btn-lg responsive-expand"
+                    name="submit"
+                    value="submit"
                     type="submit"
                     id="submitButton" {{-- ID Used by JS --}}
                     tabindex="120"

@@ -11,7 +11,7 @@ $font-size-base: 1rem; // default: 1rem (instead of 0.9rem), at about ~16px
 $line-height-base: 1.5; // default: 1.5 (instead of 1.6)
 //
 // Spacers
-// Using the default values for spacer, but adding 6 to the array for 6rem.
+// Using the default values, but adding 6 & 7 to the array for 6rem and 12rem.
 // @see https://getbootstrap.com/docs/5.0/utilities/spacing/
 $spacer: 1rem;
 $spacers: (
@@ -22,6 +22,7 @@ $spacers: (
   4: $spacer * 1.5,
   5: $spacer * 3,
   6: $spacer * 6,
+  7: $spacer * 12,
 );
 // Rangers
 // As 5.1 at least doesn't allow full customisation via CSS, here is what we

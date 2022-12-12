@@ -1,0 +1,29 @@
+a.kicon {
+    transition: all .3s ease-in-out;
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+    outline: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--trvl-c-text);
+}
+a.kicon:hover {
+    color: var(--black);
+    background: hsla(40, 3%, 21%, 0.1);
+    box-shadow: 0 0 0 0.2rem hsla(40, 3%, 21%, 0.1);
+}
+
+a.kicon:focus-visible {
+    --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
+    box-shadow: 0 0 0 0.2rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5);
+}
+
+a.kicon-left svg {
+    margin-top: 4px;
+    margin-left: 6px;
+}

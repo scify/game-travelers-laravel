@@ -25,6 +25,7 @@
 @import 'components/avatars';
 @import 'components/buttons';
 @import 'components/forms';
+@import 'components/icons';
 @import 'components/stepper';
 //
 // Misc
@@ -94,32 +95,6 @@ footer img {
     h1 {
         font-size: 2em;
         line-height: 1;
-    }
-    a.back-link {
-        transition: all .3s ease-in-out;
-        display:inline-block;
-        width: 2em;
-        height: 2em;
-        line-height: 1;
-        padding: 0;
-        margin: 0;
-        outline: 0;
-        border: none;
-        border-radius: 50%;
-        background: transparent;
-    }
-    a.back-link:hover {
-        color: #383735;
-        background: hsla(40, 3%, 21%, 0.1);
-        box-shadow: 0 0 0 0.2rem hsla(40, 3%, 21%, 0.1);
-    }
-    a.back-link:focus-visible {
-        --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
-        box-shadow: 0 0 0 0.2rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5);
-    }
-    a.back-link svg {
-        margin-top: 4px;
-        margin-left: 6px;
     }
 }
 .settings {
@@ -236,6 +211,16 @@ footer img {
 }
 
 // Custom new utilities
+.w-11,
+.w-144 {
+    width: 11rem;
+}
+.w-22 {
+    width: 22rem;
+}
+.w-25 {
+    width: 25rem;
+}
 .text-start-end,
 .text-start-end-start-end,
 .text-center-end {

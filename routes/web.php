@@ -33,7 +33,7 @@ Route::get('/', function () {
 // @example ../docs/examples/exampleDataAvatarModel.php Avatar Data Model
 require __DIR__.'/../docs/examples/exampleData.php';
 View::share('avatars', $avatars);
-View::share('players', $players_with_avatars);
+View::share('players_with_avatars', $players_with_avatars);
 
 /*
  * Flow 1 | Login | Onboarding.
@@ -91,32 +91,32 @@ Route::get('demo/profile/success', function () {
  * @link https://xd.adobe.com/view/d308b3ee-c123-48d3-87ff-5304ebdaa85a-865b/
  */
 Route::get('/select/player', function () {
-    // Requires View::share('players', $players_with_avatars);
+    // Requires View::share('players_with_avatars', $players_with_avatars);
     return view('gameSelectPlayer');
 });
 Route::get('/select/level', function () {
-    // Requires View::share('players', $players_with_avatars);
+    // Requires View::share('players_with_avatars', $players_with_avatars);
     return view('gameSelectLevel');
 });
 Route::get('/select/mode', function () {
-    // Requires View::share('players', $players_with_avatars);
+    // Requires View::share('players_with_avatars', $players_with_avatars);
     return view('gameSelectMode');
 });
 Route::get('/select/help', function () {
-    // Requires View::share('players', $players_with_avatars);
+    // Requires View::share('players_with_avatars', $players_with_avatars);
     return view('gameSelectHelp');
 });
 Route::get('/select/pawn', function () {
-    // Requires View::share('players', $players_with_avatars);
+    // Requires View::share('players_with_avatars', $players_with_avatars);
     return view('gameSelectPawn');
 });
 // Demos
 Route::get('/demo/select/player/more', function () {
-    // Requires View::share('players', $players_with_avatars);
+    // Requires View::share('players_with_avatars', $players_with_avatars);
     return view('extras/demo/selectPlayerMore');
 });
 Route::get('/demo/select/player/start', function () {
-    // Requires View::share('players', $players_with_avatars);
+    // Requires View::share('players_with_avatars', $players_with_avatars);
     return view('extras/demo/selectPlayerStart');
 });
 

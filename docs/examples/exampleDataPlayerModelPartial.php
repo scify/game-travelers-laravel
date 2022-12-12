@@ -26,6 +26,16 @@ class Player extends Model
      */
     protected $fillable = [
         "name",
+        "colour", // @TODO: Colour: int|random|1-5. Basically, each new player
+                  // will get a randomly assigned number from 1 to 6. Then it's
+                  // avatar will be displayed the corresponding colour as the
+                  // background in its circle, INSTEAD of the default white (0).
+                  // This would help a lot in the select a Player screen and in
+                  // other parts of the UI to distinguish players more easily.
+                  // This color could also be used in pawns, or even in the
+                  // board itself. This will be a good feature for a future so
+                  // let's at least introduce this field in the database for
+                  // now?
     ];
 
     /**
@@ -34,6 +44,12 @@ class Player extends Model
      * @var array
      */
     public static $rules = [
+        // Note that 50 characters is the maximum allowed via the form. In
+        // practice though, the real limit for the (first) name  should be even
+        // lower as only 8-10 characters can fit under the 100x100 buttons on
+        // the UI and the rest characters are ellipsed. I would say "10" to
+        // enforce names similar to the ones provided in the ideal scenario of
+        // the mock-ups.
         "name" => "required|string|max:50",
         "avatar_id" => "required|integer|exists:avatars,id",
     ];

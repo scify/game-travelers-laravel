@@ -1,35 +1,39 @@
 <!-- /resources/views/selectPlayer.blade.php -->
 {{--
     - Component which allows the user to select one of the available Players.
-      All the Players are returned as <buttons> which act as radios. In order
-      to use this component in your template, you have to make sure to include
-      the related JavaScript asset:
+      All the Players are returned as <buttons> which act as radios in a virtual
+      and accessible radiogroup. In order to use this component in your
+      template, you have to make sure to include the related JavaScript asset:
       <script src="{{ mix('js/functions/settings.js') }}" defer></script>
     - Example use in a template:
-      <x-selectPlayer :players=$players :tabindex=1 :selected-player-id=0 />
+      <x-selectPlayer :avatars=$players_with_avatars :selected-player-id=0 :tabindex=1 />
     - Parameters:
-      @var array<int, array<string, mixed>> $profiles_with_avatars
-        An array of the the User's Profiles with their Avatars.
+      @var array<int, array<string, mixed>> $players_with_avatars
+        An array of the the User's Players with their Avatars.
         @example ../../../docs/examples/exampleData.php
+      @var int selectedPlayerId [optional]
+        Forms. Equals to the unique player ID of a "checked" (aka selected)
+        Player. Default value is 0 (user has not selected any players).
       @var int $tabindex [optional]
         Accessibility. The given tabindex will assigned to the first avatar,
         while the rest will get the tabindex of the previous avatar + 1. Default
         value is 2 (second element in a form).
-      @var int selectedPlayerId [optional]
-        Forms. Equals to the unique Avatar ID of a "checked" (aka selected)
-        Avatar. For example, in a form, this would be the profile's avatar id.
-        Default value is 0 (user has not selected any avatars).
+      @var null|true $showAddPlayer [optional]
+        Set to TRUE if the "Add New Player" button should be added as the last
+        item of the Avatars container. Set it to NULL or don't even set it at
+        all to not add the button. This could be useful in case i.e. there is
+        a limit on the total amount of players each user can have.
     - Instructions of use in a form:
-      The component contains a hidden <input>  with the attribute:
-      data-role="selected-avatar-input-field". The input's value is set to 0
-      if no player is selected. If the user selects a player, then the input
-      value is set to be equal to the unique player's player id (e.g. 4) which
-      is an integer. JS automates this process.
+      The component contains a hidden <input>  with the id of
+      #avatarsContainerInput. The input's value is set to $selectedPlayerId
+      (or 0 if no player is selected). If the user selects a player, then the
+      input value is set to be equal to the unique player's player id (e.g. 4)
+      which should be an integer. JS automates this process.
     --}}
 <!-- avatar container -->
 <div class="avatars container-lg text-center" id="avatarsContainer"> {{-- ID used by JS --}}
-    <div class="row avatars-row">
-        @foreach ($players as $player)
+    <div class="avatars-row row">
+        @foreach ($avatars as $player)
             @php
                 // Make sure we have a starting tab to index...
                 $tabindex = $tabindex ?? $loop->index; $tabindex++;
@@ -42,7 +46,7 @@
                     }
                 }
             @endphp
-            <div class="avatar-col col col-lg-2">
+            <div class="avatar-col col-6 col-sm-4 col-md-3 col-lg-2 align-self-start">
                 <x-displayAvatar
                     :avatar='$player["avatar"]'
                     :id='$player["id"]'
@@ -56,6 +60,26 @@
                 unset($avatarChecked);
             @endphp
         @endforeach
+        @isset($showAddPlayer)
+            <div class="avatar-col col-6 col-sm-4 col-md-3 col-lg-2 align-self-start">
+                <a
+                    class="btn btn-round btn-avatar-options"
+                    data-role="button-add-player"
+                    aria-label="Προσθήκη νέου παίκτη"
+                    tabindex="{{ $tabindex ?? '-1' }}"
+                    href="{{ url('/profiles/new') }}"
+                >
+                    <img
+                        src="{{ asset('images/icons/plus90.svg') }}"
+                        width="90" height="90"
+                        alt="Σύμβολο πρόσθεσης"
+                    />
+                    <span class="label-avatar-options">Νέο προφίλ</span>
+                </a>
+            </div>
+        @endisset
+
+
         {{-- default value = "0"  (no avatar selected --}}
         <input
             data-role="selected-avatar-input"
