@@ -75,11 +75,12 @@
                             value="submit"
                             type="submit"
                             id="submitButton" {{-- ID Used by JS --}}
-                            tabindex="10"
+                            tabindex="1000"
                             disabled {{-- Altered via JS (form validation) --}}
                         >
                             παίξε
                         </button>
+                    </div>
                     <div class="mt-3 d-flex justify-content-center">
                         <button
                             data-role="submit-form-button"
@@ -88,7 +89,7 @@
                             value="submit"
                             type="submit"
                             id="secondaryButton" {{-- ID Used by JS --}}
-                            tabindex="20"
+                            tabindex="1001"
                             disabled {{-- Altered via JS (form validation) --}}
                         >
                             ρυθμίσεις

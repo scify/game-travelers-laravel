@@ -11617,8 +11617,8 @@ textarea.form-control-lg {
 }
 .gamesettings .avatar-col {
   min-height: 160px;
-  min-width: 140px;
 }
+
 .avatars-row {
   justify-content: start;
 }
@@ -11634,8 +11634,17 @@ textarea.form-control-lg {
   transition: all 0.2s ease-out;
   padding: 0;
 }
-.btn-avatar.btn-round,
-.btn-avatar-options.btn-round {
+.btn-avatar.btn-sm, .btn-group-sm > .btn-avatar.btn, .btn-avatar.btn-sm img, .btn-group-sm > .btn-avatar.btn img,
+.btn-avatar-options.btn-sm,
+.btn-group-sm > .btn-avatar-options.btn,
+.btn-avatar-options.btn-sm img,
+.btn-group-sm > .btn-avatar-options.btn img {
+  width: 88px;
+  height: 88px;
+}
+.btn-avatar.btn-md, .btn-avatar.btn-md img,
+.btn-avatar-options.btn-md,
+.btn-avatar-options.btn-md img {
   width: 100px;
   height: 100px;
 }
@@ -11660,6 +11669,23 @@ textarea.form-control-lg {
 .btn-avatar-options.selected:focus,
 .btn-avatar-options.selected:focus-visible:not(:hover) {
   scale: 1.2;
+}
+.btn-avatar.btn-sm.selected, .btn-group-sm > .btn-avatar.selected.btn,
+.btn-avatar-options.btn-sm.selected,
+.btn-group-sm > .btn-avatar-options.selected.btn {
+  scale: 1.15;
+}
+.btn-avatar.btn-sm.selected:hover, .btn-group-sm > .btn-avatar.selected.btn:hover,
+.btn-avatar-options.btn-sm.selected:hover,
+.btn-group-sm > .btn-avatar-options.selected.btn:hover {
+  scale: 1.15;
+}
+.btn-avatar.btn-sm.selected:focus, .btn-group-sm > .btn-avatar.selected.btn:focus, .btn-avatar.btn-sm.selected:focus-visible:not(:hover), .btn-group-sm > .btn-avatar.selected.btn:focus-visible:not(:hover),
+.btn-avatar-options.btn-sm.selected:focus,
+.btn-group-sm > .btn-avatar-options.selected.btn:focus,
+.btn-avatar-options.btn-sm.selected:focus-visible:not(:hover),
+.btn-group-sm > .btn-avatar-options.selected.btn:focus-visible:not(:hover) {
+  scale: 1.15;
 }
 .btn-avatar.faded,
 .btn-avatar-options.faded {
@@ -11706,11 +11732,18 @@ textarea.form-control-lg {
   display: inline-block;
   margin: 0 !important;
   padding: 0 !important;
-  width: 100px;
-  height: 100px;
 }
 
-.btn-avatar-options img {
+.btn-sm.btn-avatar-options img, .btn-group-sm > .btn-avatar-options.btn img {
+  position: relative;
+  display: inline-block;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 78px;
+  height: 78px;
+}
+
+.btn-md.btn-avatar-options img {
   position: relative;
   display: inline-block;
   margin: 0 !important;
@@ -11719,28 +11752,32 @@ textarea.form-control-lg {
   height: 90px;
 }
 
-.btn-avatar > .label-avatar,
-.btn-avatar-options > .label-avatar-options {
+.label-avatar,
+.label-avatar-options {
   display: block;
+  margin: 0 auto;
   position: relative;
   z-index: 98;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   color: rgba(var(--trvl-c-text-rgb), 0.92);
   text-align: center;
   white-space: nowrap;
 }
 
-.btn-avatar > .label-avatar {
-  top: 0.3rem;
+.label-avatar {
+  top: 0.5rem;
   overflow-x: hidden;
   text-overflow: ellipsis;
-  max-width: 100px;
+  max-width: 120px;
 }
 
-.btn-avatar-options > .label-avatar-options {
-  top: calc(0.3rem + 5px);
-  left: -0.1rem;
+.label-avatar-options {
+  top: 0.5rem;
+}
+
+button[role=radio].selected + label {
+  font-weight: 600;
 }
 
 .btn-avatar:hover > .label-avatar,

@@ -38,6 +38,9 @@
                 // Make sure we have a starting tab to index...
                 $tabindex = $tabindex ?? $loop->index; $tabindex++;
                 // Determine if this avatar is the selected one.
+                // @TODO: Implement avatar/width calcs in Controller/Model.
+                $player['avatar']['width'] = 88;
+                $player['avatar']['height'] = 88;
                 // @TODO: Implement avatarChecked = true in Controller/Model.
                 $avatarChecked = false;
                 if (isset($selectedPlayerId)) {
@@ -46,24 +49,26 @@
                     }
                 }
             @endphp
-            <div class="avatar-col col-6 col-sm-4 col-md-3 col-lg-2 align-self-start">
+            <div class="avatar-col col-4 col-sm-3 col-md-2 col-lg-2 align-self-start">
                 <x-displayAvatar
                     :avatar='$player["avatar"]'
                     :id='$player["id"]'
                     :name='$player["name"]'
                     :avatar-checked=$avatarChecked
                     :tabindex=$tabindex
+                    :button-size='"btn-sm"'
                     :role='"player"'
                 />
+
             </div>
             @php
                 unset($avatarChecked);
             @endphp
         @endforeach
         @isset($showAddPlayer)
-            <div class="avatar-col col-6 col-sm-4 col-md-3 col-lg-2 align-self-start">
+            <div class="avatar-col col-3 col-sm-3 col-md-2 col-lg-2 align-self-start">
                 <a
-                    class="btn btn-round btn-avatar-options"
+                    class="btn btn-round btn-sm btn-avatar-options"
                     data-role="button-add-player"
                     aria-label="Προσθήκη νέου παίκτη"
                     tabindex="{{ $tabindex ?? '-1' }}"
@@ -74,8 +79,8 @@
                         width="90" height="90"
                         alt="Σύμβολο πρόσθεσης"
                     />
-                    <span class="label-avatar-options">Νέο προφίλ</span>
                 </a>
+                <span class="label-avatar-options">Νέο προφίλ</span>
             </div>
         @endisset
 
