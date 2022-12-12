@@ -1,29 +1,43 @@
 a.kicon {
+    position: relative;
     transition: all .3s ease-in-out;
     display: inline-block;
-    width: 2em;
-    height: 2em;
+    width: 1.7rem;
+    height: 1.7rem;
     line-height: 1;
     padding: 0;
     margin: 0;
-    outline: 0;
+    outline: none !important;
     border: none;
     border-radius: 50%;
     background: transparent;
     color: var(--trvl-c-text);
+    @media (max-width: 575.98px) {
+        &-right {
+            left:-0.5rem;
+        }
+    }
 }
 a.kicon:hover {
     color: var(--black);
     background: hsla(40, 3%, 21%, 0.1);
-    box-shadow: 0 0 0 0.2rem hsla(40, 3%, 21%, 0.1);
+    box-shadow: 0 0 0 0.5rem hsla(40, 3%, 21%, 0.1);
 }
 
-a.kicon:focus-visible {
+a.kicon:focus:not(:hover),
+a.kicon:focus-visible:not(:hover) {
     --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
-    box-shadow: 0 0 0 0.2rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5);
+    box-shadow: 0 0 0 0.3rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5);
 }
 
-a.kicon-left svg {
-    margin-top: 4px;
-    margin-left: 6px;
+a.kicon-chevron-left svg {
+    margin-left: 0.15rem;
+}
+
+a.kicon svg {
+    width: 1.7rem; // 25px
+    height: 1.7rem;
+}
+a.kicon svg {
+    box-shadow: none !important;
 }

@@ -1,7 +1,7 @@
 <!-- /views/components/buttonBack.blade.php -->
 <a
-    class="kicon kicon-left kicon-chevron-{{ $align ?? 'left' }}"
-    href="{{ $url ?? '/' }}"
+    class="kicon kicon-{{ $align ?? 'left' }} kicon-chevron-left"
+    href="{{ $route ?? '/' }}"
     aria-label="{{ $label ?? 'Επιστροφή στο προηγούμενο μενού' }}"
     title="{{ $label ?? 'Επιστροφή στο προηγούμενο μενού' }}"
     id="kIconChevronBack"

@@ -49,7 +49,7 @@
                     }
                 }
             @endphp
-            <div class="avatar-col col-4 col-sm-3 col-md-2 col-lg-2 align-self-start">
+            <div class="avatar-col col-4 col-sm-3 col-xl-2 align-self-start">
                 <x-displayAvatar
                     :avatar='$player["avatar"]'
                     :id='$player["id"]'
@@ -66,13 +66,13 @@
             @endphp
         @endforeach
         @isset($showAddPlayer)
-            <div class="avatar-col col-3 col-sm-3 col-md-2 col-lg-2 align-self-start">
+            <div class="avatar-col col-4 col-sm-3 col-md-3 col-xl-2 align-self-start">
                 <a
                     class="btn btn-round btn-sm btn-avatar-options"
                     data-role="button-add-player"
                     aria-label="Προσθήκη νέου παίκτη"
                     tabindex="{{ $tabindex ?? '-1' }}"
-                    href="{{ url('/profiles/new') }}"
+                    href="{{ url('/profile/new') }}"
                 >
                     <img
                         src="{{ asset('images/icons/plus90.svg') }}"

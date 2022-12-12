@@ -18,6 +18,43 @@
     }
 }
 
+@media (min-width: 1400px) {
+    .col-xxl-8.background-group-2--col  {
+        width: 78% !important;
+    }
+    .col-xxl-2.background-group-2--col {
+        width: 11% !important;
+    }
+}
+
+.background-group-2--tree-1 { // the left one
+    background-image: url("../images/bg-g2-side-tree-2.png");
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: bottom;
+    background-size: 136px 208px;
+    position: relative;
+    bottom: -3rem;
+    left: -2rem;
+    // min-width:136px;
+}
+.background-group-2--tree-2 { // the right one
+    background-image: url("../images/bg-g2-side-tree-1.png");
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: top;
+    background-size: 116px 179px;
+    position: relative;
+    top: -5rem;
+    // min-width:136px;
+}
+
+.background-dash-down {
+    background-image: url("../images/bg-g2-dash-down.png");
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+}
+
 /* Group 1 contains:
  * (group) group #1
  * (abstract) back #2

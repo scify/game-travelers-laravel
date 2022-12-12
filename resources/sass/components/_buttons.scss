@@ -12,18 +12,31 @@
 .btn-primary {
     --bs-btn-color: var(--trvl-btn-color);
     --bs-btn-bg: var(--trvl-btn-bg);
-    --bs-btn-border-color: var(--trvl-btn-border-color);
     --bs-btn-hover-color: var(--trvl-btn-hover-color);
     --bs-btn-hover-bg: var(--trvl-btn-hover-bg);
+    --bs-btn-disabled-color: var(--trvl-btn-disabled-color);
+    --bs-btn-disabled-bg: var(--trvl-btn-disabled-bg);
+    --bs-btn-disabled-border-color: var(--trvl-btn-disabled-border-color);
+}
+// Secondary button
+.btn-secondary {
+    --bs-btn-color: var(--trvl-btn-color);
+    --bs-btn-bg: #bfcfd0;
+    --bs-btn-hover-color: var(--trvl-btn-color);
+    --bs-btn-hover-bg: #bacaca;
+    --bs-btn-disabled-color: var(--trvl-btn-color);
+    --bs-btn-disabled-bg: #bacaca;
+    --bs-btn-disabled-border-color: var(--trvl-btn-border-color);
+}
+.btn-primary,
+.btn-secondary {
+    --bs-btn-border-color: var(--trvl-btn-border-color);
     --bs-btn-hover-border-color: var(--trvl-btn-hover-border-color);
     --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
     --bs-btn-active-color: var(--trvl-btn-active-color);
     --bs-btn-active-bg: var(--trvl-btn-active-bg);
     --bs-btn-active-border-color: var(--trvl-btn-active-border-color);
     --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-    --bs-btn-disabled-color: var(--trvl-btn-disabled-color);
-    --bs-btn-disabled-bg: var(--trvl-btn-disabled-bg);
-    --bs-btn-disabled-border-color: var(--trvl-btn-disabled-border-color);
 }
 
 // Round button
