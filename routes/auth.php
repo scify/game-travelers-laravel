@@ -32,9 +32,19 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
                 ->name('password.update');
+
+    Route::get('/password/reset/success', function () {
+        return view('auth/passwordResetSuccess');
+    })->name('password.reset.success');
+    Route::get('/password/request/success', function () {
+        return view('auth/passwordRequestSuccess');
+    })->name('password.request.success');
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('home', function () {
+        return view('home');
+    });
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
                 ->name('verification.notice');
 
@@ -53,4 +63,5 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+
 });

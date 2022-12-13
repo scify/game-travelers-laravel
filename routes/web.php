@@ -35,30 +35,6 @@ require __DIR__.'/../docs/examples/exampleData.php';
 View::share('avatars', $avatars);
 View::share('players_with_avatars', $players_with_avatars);
 
-/*
- * Flow 1 | Login | Onboarding.
- * Last update: December 5, 2022.
- * @link https://xd.adobe.com/view/1f4fac3e-a8eb-4948-ab4b-b52f898a095d-4a1c/
- * @todo Pending fully transparent and extended asset for success page.
- */
-/*Route::get('/login', function () {
-    return view('login');
-});*/
-Route::get('demo/login/error', function () {
-    return view('extras/demoLoginError');
-});
-/*Route::get('/register', function () {
-    return view('register');
-});*/
-Route::get('/password/reset', function () {
-    return view('passwordReset');
-});
-Route::get('/password/reset/change', function () {
-    return view('passwordResetNewPassword');
-});
-Route::get('/password/reset/success', function () {
-    return view('passwordResetComplete');
-});
 
 /*
  * Stepper 2 | New player profiles.
@@ -128,11 +104,6 @@ Route::get('/testRoute', function () {
 });
 Route::get('/testVue', function () {
     return view('extras/obsolete/testVueJSPage');
-});
-// Fixed size templates:
-Route::get('/fixedRegister', function () {
-    $patates = "patates";
-    return view('extras/obsolete/fixedRegister', ['patates' => $patates]);
 });
 // Font-tester
 Route::get('/extras/font-tester', function () {

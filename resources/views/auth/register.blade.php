@@ -3,7 +3,7 @@
         form's header. Additionally, each field with an error is highlighted.
     --}}
     @section('scripts')
-    {{-- Optional: Custom JS scripts for authentication --}}
+        {{-- Optional: Custom JS scripts for authentication --}}
     @endsection
 
     <!-- register content -->
@@ -11,8 +11,8 @@
         <div class="row">
             <div class="col-lg-3 order-lg-2">
                 <div class="ps-4 ps-md-6 ps-lg-0 pt-4">
-                    Είστε ήδη χρήστης;<br />
-                    <a href="{{ url('/register') }}" tabindex="6">Σύνδεση</a>
+                    Είστε ήδη χρήστης;<br/>
+                    <a href="{{ route('login') }}" tabindex="6">Σύνδεση</a>
                 </div>
             </div>
             <div class="col-lg-9 order-lg-1">
@@ -26,13 +26,34 @@
 
                         {{-- @see https://laravel.com/docs/9.x/validation#quick-displaying-the-validation-errors --}}
                         @if($errors->any())
-                        <!-- errors -->
-                        <div class="alert alert-danger mx-4" id="form-alert">
-                            Για να ολοκληρωθεί επιτυχώς η διαδικασία θα πρέπει
-                            να συμπληρώσετε τα επισημασμένα πεδία σύμφωνα με τις
-                            σχετικές υποδείξεις.
-                        </div>
-                        <!-- errors -->
+                            <!-- errors -->
+                            <div class="alert alert-danger mx-4" id="form-alert">
+                                Για να ολοκληρωθεί επιτυχώς η διαδικασία θα πρέπει
+                                να συμπληρώσετε τα επισημασμένα πεδία σύμφωνα με τις
+                                σχετικές υποδείξεις:
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        @if ($error == "The email has already been taken.")
+                                            <li>Υπάρχει ήδη λογαριασμός με αυτό το email.</li>
+                                        @elseif($error == "The password must be at least 8 characters.")
+                                            <li>Ο κωδικός πρέπει να είναι τουλάχιστον 8 χαρακτήρες.</li>
+                                        @elseif($error == "The password must contain at least one letter.")
+                                            <li>Ο κωδικός πρέπει να περιέχει τουλάχιστον ένα γράμμα.</li>
+                                        @elseif($error == "The password must contain at least one symbol.")
+                                            <li>Ο κωδικός πρέπει να περιέχει τουλάχιστον ένα σύμβολο.</li>
+                                        @elseif($error == "The password must contain at least one number.")
+                                            <li>Ο κωδικός πρέπει να περιέχει τουλάχιστον έναν αριθμό.</li>
+                                        @elseif($error == "The password confirmation does not match.")
+                                            <li>Οι δυο κωδικοί δεν είναι ίδιοι.</li>
+                                        @elseif(Str::startsWith($error, "The captcha"))
+                                            <li>To άθροισμα είναι λάθος!</li>
+                                        @else
+                                            <li>{{ $error }}</li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <!-- errors -->
                         @endif
 
                         <!-- email -->
@@ -78,7 +99,8 @@
                                     />
                                 </div>
                                 <div class="field col-lg-6 pt-4 pt-lg-0 ">
-                                    <label class="field-label extended text-nowrap text-truncate" for="password_confirmation">Επαλήθευση συνθηματικού</label>
+                                    <label class="field-label extended text-nowrap text-truncate"
+                                           for="password_confirmation">Επαλήθευση συνθηματικού</label>
                                     <input
                                         class="field-input underlined extended"
                                         type="password"
@@ -97,7 +119,7 @@
                             </div>
                             <div class="row">
                                 <div class="field-description" id="password-description">
-                                    Χρησιμοποιείστε 8 ή περισσότερους χαρακτήρες με έναν συνδυασμό γραμμάτων, αριθμών και συμβόλων.
+                                    Χρησιμοποιείστε 8 ή περισσότερους χαρακτήρες με έναν συνδυασμό από τουλάχιστον ένα γράμμα και αριθμό.
                                 </div>
                             </div>
                         </div>
@@ -108,18 +130,22 @@
                             @error('captcha') is-invalid @enderror
                         ">
                             <label class="field-label extended" for="captcha">Επιβεβαίωση ασφαλείας</label>
-                            <div class="captcha-prompt" id="captcha-prompt">12 + 10 =</div>
+                            <div class="captcha-prompt" id="captcha-prompt">{{ $captchaNumbers[0] }}
+                                + {{ $captchaNumbers[1] }} =
+                            </div>
+                            <input type="hidden" name="captchaNumber1" value="{{ $captchaNumbers[0] }}">
+                            <input type="hidden" name="captchaNumber2" value="{{ $captchaNumbers[1] }}">
                             <input
                                 class="field-input field-captcha underlined"
                                 type="text"
                                 name="captcha"
                                 inputmode="numeric"
                                 pattern="[0-9]*"
-                                maxlength="4"
-                                placeholder="άθροισμα;"
+                                maxlength="2"
+                                placeholder="άθροισμα"
                                 required="required"
                                 aria-required="true"
-                                aria-placeholder="άθροισμα;"
+                                aria-placeholder="άθροισμα"
                                 aria-labelledby="captcha-prompt"
                                 aria-describedby="captcha-description"
                                 autocomplete="off"
@@ -134,7 +160,9 @@
                         </div>
                         <!-- / captcha -->
                         <div class="form-actions p-4 text-center">
-                            <button class="btn btn-lg btn-primary text-nowrap responsive-expand" tabindex="5" type="submit" id="submit">Εγγραφή</button>
+                            <button class="btn btn-lg btn-primary text-nowrap responsive-expand" tabindex="5"
+                                    type="submit" id="submit">Εγγραφή
+                            </button>
                         </div>
                     </div>
                 </form>

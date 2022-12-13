@@ -14,7 +14,7 @@
             </div>
             <div class="col-lg-9 order-md-1">
                 <!-- form -->
-                <form method="post" action="">
+                <form method="post" action="{{ route('password.update') }}">
                     @csrf
                     <div class="form px-0 px-md-6">
                         <div class="form-header p-4 mb-4">
@@ -31,7 +31,30 @@
                             <div class="alert alert-danger" id="form-alert">
                                 Για να ολοκληρωθεί επιτυχώς η διαδικασία θα πρέπει
                                 να συμπληρώσετε τα πεδία σύμφωνα με τις σχετικές
-                                υποδείξεις.
+                                υποδείξεις:
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        @if ($error == "The email has already been taken.")
+                                            <li>Υπάρχει ήδη λογαριασμός με αυτό το email.</li>
+                                        @elseif($error == "The password must be at least 8 characters.")
+                                            <li>Ο κωδικός πρέπει να είναι τουλάχιστον 8 χαρακτήρες.</li>
+                                        @elseif($error == "The password must contain at least one letter.")
+                                            <li>Ο κωδικός πρέπει να περιέχει τουλάχιστον ένα γράμμα.</li>
+                                        @elseif($error == "The password must contain at least one symbol.")
+                                            <li>Ο κωδικός πρέπει να περιέχει τουλάχιστον ένα σύμβολο.</li>
+                                        @elseif($error == "The password must contain at least one number.")
+                                            <li>Ο κωδικός πρέπει να περιέχει τουλάχιστον έναν αριθμό.</li>
+                                        @elseif($error == "The password confirmation does not match.")
+                                            <li>Οι δυο κωδικοί δεν είναι ίδιοι.</li>
+                                        @elseif($error == "This password reset token is invalid.")
+                                            <li>Tο token έχει λήξει. <a href="{{ route('password.request') }}">Ζητήστε πάλι αλλαγή κωδικού.</a></li>
+                                        @elseif(Str::startsWith($error, "The captcha"))
+                                            <li>To άθροισμα είναι λάθος!</li>
+                                        @else
+                                            <li>{{ $error }}</li>
+                                        @endif
+                                    @endforeach
+                                </ul>
                             </div>
                             <!-- errors -->
                             @endif
@@ -41,16 +64,16 @@
                         <!-- passwords -->
                         <div class="
                             field-group px-4 py-2 container-fluid
-                            @error('password1') is-invalid @enderror
-                            @error('password2') is-invalid @enderror
+                            @error('password') is-invalid @enderror
+                            @error('password_confirmation') is-invalid @enderror
                         ">
                             <div class="row">
                                 <div class="field col-lg-6">
-                                    <label class="field-label extended" for="password1">Νέο συνθηματικό</label>
+                                    <label class="field-label extended" for="password">Νέο συνθηματικό</label>
                                     <input
                                         class="field-input underlined extended"
                                         type="password"
-                                        name="password1"
+                                        name="password"
                                         required="required"
                                         aria-label="Επιθυμητός κωδικός πρόσβασης"
                                         aria-describedby="password-description"
@@ -58,15 +81,17 @@
                                         autocapitalize="off"
                                         spellcheck="false"
                                         tabindex="1"
-                                        id="password1"
+                                        id="password"
                                     />
                                 </div>
+                                <input type="hidden" name="token" value="{{ request()->route('token') }}">
+                                <input type="hidden" name="email" value="{{ request()->request->all()['email'] }}">
                                 <div class="field col-lg-6 pt-4 pt-lg-0 ">
-                                    <label class="field-label extended text-nowrap text-truncate" for="password2">Επαλήθευση νέου συνθηματικού</label>
+                                    <label class="field-label extended text-nowrap text-truncate" for="password_confirmation">Επαλήθευση νέου συνθηματικού</label>
                                     <input
                                         class="field-input underlined extended"
                                         type="password"
-                                        name="password2"
+                                        name="password_confirmation"
                                         required="required"
                                         aria-label="Επαλήθευση επιθυμητού κωδικού πρόσβασης"
                                         aria-describedby="password-description"
@@ -74,13 +99,13 @@
                                         autocapitalize="off"
                                         spellcheck="false"
                                         tabindex="2"
-                                        id="password2"
+                                        id="password_confirmation"
                                     />
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="field-description" id="password-description">
-                                    Χρησιμοποιείστε 8 ή περισσότερους χαρακτήρες με έναν συνδυασμό γραμμάτων, αριθμών και συμβόλων.
+                                    Χρησιμοποιείστε 8 ή περισσότερους χαρακτήρες με έναν συνδυασμό από τουλάχιστον ένα γράμμα και αριθμό.
                                 </div>
                             </div>
                         </div>

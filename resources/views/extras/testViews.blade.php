@@ -83,26 +83,6 @@
             <dd>✔️ <span class="upd">Final</span> Even dices can be clicked to be selected. Fully responsive. </dd>
         </dl>
 
-        <h3 class="mt-4">Login & on-boarding</h3>
-        <small>Privacy icon on password fields has been removed as it should be controlled by browser.</small>
-        <dl>
-            <dt><a href="{{ url('register') }}">Registration page</a></dt>
-            <dd>✔️ <span class="upd">Final</span> Variable width interpretation of the mock-up with an additional h1 header (Νέος χρήστης), Laravel @@error responses & CAPTCHA! Background retained. Fully responsive (320px - 1320px).</dd>
-            <dt><a href="{{ url('login') }}">Login page</a></dt>
-            <dd>✔️ <span class="upd">Final</span> Variable width interpretation of the mock-up with an additional h1 header (Καλωσόρισες!), Laravel @@error handling and custom JavaScript as a component to trigger the proposed off-canvas error. Fully responsive (320px - 1320px).
-                <dl>
-                    <dt><a href="{{ url('demo/login/error') }}">Variation: Login page with <span class="error">ERROR</span> (off-canvas)</a></dt>
-                    <dd>✔️ <span class="upd">Demo</span> Same as the login page with an additional, forcefully triggered off-canvas bottom-bar that displays an imaginary login error. Fully responsive.</dd>
-                </dl>
-            </dd>
-            <dt><a href="{{ url('password/reset') }}">Password reset</a></dt>
-            <dd>✔️ <span class="upd">Final</span> Same as the login page with additional text and partially hidden decoration on small viewports. Laravel @@error handling added. Fully responsive.</dd>
-            <dt><a href="{{ url('password/reset/change') }}">Password reset: Change password</a></dt>
-            <dd>✔️ <span class="upd">Final</span> Same as the login page with additional text and partially hidden decoration on small viewports. Laravel @@error handling added. Fully responsive.</dd>
-            <dt><a href="{{ url('password/reset/success') }}">Password reset: Success!</a></dt>
-            <dd>✔️ <span class="upd">Final</span> <span class="todo">Assets</span> Successfull action message via a customizable component. Background restricted to 1366x768 pixels as requested (yet extends to full width/height on smaller viewports, so yes, responsive).</dd>
-        </dl>
-
         <hr />
         <h1>How to use this repository</h1>
         <p class="lead">Some notes about the use of this repository.</p>
