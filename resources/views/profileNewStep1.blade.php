@@ -44,10 +44,14 @@
         <!-- / step counter 1/3 -->
 
         <!-- section header -->
-        <div class="settings-header container-xxl px-4 px-sm-4 mb-2 mb-lg-5">
+        <div class="settings-header container-lg px-4 px-sm-4 mb-2 mb-lg-5">
             <div class="row">
                 <div class="col-1">
-                    <x-buttonBack :label="'Ακύρωση και επιστροφή στο προηγούμενο μενού'" :align="'right'" />
+                    <x-buttonBack
+                        :label="'Ακύρωση και επιστροφή στην επιλογή παίκτη'"
+                        :align="'left'"
+                        :url="'select/player'"
+                    />
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">
                     <h1 id="currentPageLabel">Νέος παίκτης</h1>

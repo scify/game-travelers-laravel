@@ -138,7 +138,13 @@ $players = [
         "name" => "Φώτης Οικ.", // Example name.
         "settings" => [], // Settings // Not used on templates doesn't have to be an array it could be various config options.
     ],
-
+    92 => [ // Player's Unique ID
+        "id" => 92,  // Repeating ID for convenience
+        "user_id" => 1, // Attached User ID // Not used on templates
+        "avatar_id" => 2, // Attached Avatar ID
+        "name" => "Δημήτρης Γ.", // Example name.
+        "settings" => [], // Settings // Not used on templates doesn't have to be an array it could be various config options.
+    ],
 ];
 
 /**

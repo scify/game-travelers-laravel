@@ -12,7 +12,7 @@
         @csrf
 
             <!-- section header -->
-        <div class="gamesettings-header container-xxl px-4 px-sm-4 mb-2 mb-lg-1">
+        <div class="gamesettings-header container-xxl px-4 mt-lg-n4 mb-2 mb-lg-1">
             <div class="row">
                 <div class="col-1">
                     {{-- @TODO: Return to nowhere? --}}
@@ -26,17 +26,17 @@
                     </p>
                 </div>
                 <div class="col-1">
-                    {{-- @TODO: Fix alignment, create another button --}}
+                    {{-- @TODO: ELI5 Logging-out without selecting a player. --}}
                 </div>
             </div>
         </div>
         <!-- / section header -->
 
-        <div class="section gamesettings container-xxl px-4">
-            <div class="row">
-                <div class="col-1 d-none d-lg-block d-print-none" role="presentation">
+        <div class="section gamesettings container-xxl px-4 background-dash-down ">
+            <div class="row gx-0">
+                <div class="background background-group-2--col background-group-2--tree-1 col-2 col-xxl-2 d-none d-lg-block d-print-none" role="presentation">
                 </div>
-                <div class="col-12 col-lg-10">
+                <div class="background-group-2--col col-12 col-lg-8 col-xxl-8 pt-0 pt-lg-5">
                     <!-- new game: select player content -->
                     <div class="container-fluid"> {{--  px-4 px-sm-5 px-xl-7 --}}
                         <div
@@ -60,42 +60,37 @@
                     </div>
                     <!-- / new game: select player content -->
                 </div>
-                <div class="col-1 d-none d-lg-block d-print-none" role="presentation">
+                <div class="background-group-2--col background background-group-2 background-group-2--tree-2 col-2 col-xxl-2 d-none d-lg-block d-print-none" role="presentation">
                 </div>
             </div>
-            <div class="action-buttons row">
-                <div class="col-1 d-none d-lg-block d-print-none" role="presentation">
-                </div>
-                <div class="col-12 col-lg-10 align-self-center text-center">
-                    <div class="">
+            <div class="row gx-0">
+                <div class="col-12">
+                    <div class="vstack gap-3 col-12 col-sm-4 col-md-3 mt-2 mb-4 mb-sm-0 mx-auto">
                         <button
                             data-role="submit-form-button"
-                            class="btn btn-primary btn-lg w-11 responsive-expand"
+                            class="btn btn-primary btn-lg"
                             name="submit"
-                            value="submit"
+                            value="start"
                             type="submit"
                             id="submitButton" {{-- ID Used by JS --}}
-                            tabindex="10"
+                            tabindex="1000"
                             disabled {{-- Altered via JS (form validation) --}}
                         >
                             παίξε
                         </button>
-                    <div class="mt-3 d-flex justify-content-center">
                         <button
                             data-role="submit-form-button"
-                            class="btn btn-secondary btn-lg w-11 responsive-expand"
+                            class="btn btn-secondary btn-lg"
                             name="submit"
-                            value="submit"
+                            value="settings"
                             type="submit"
                             id="secondaryButton" {{-- ID Used by JS --}}
-                            tabindex="20"
+                            tabindex="1001"
                             disabled {{-- Altered via JS (form validation) --}}
                         >
                             ρυθμίσεις
                         </button>
                     </div>
-                </div>
-                <div class="col-1 d-none d-lg-block d-print-none" role="presentation">
                 </div>
             </div>
         </div>

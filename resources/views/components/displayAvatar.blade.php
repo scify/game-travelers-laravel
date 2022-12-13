@@ -10,7 +10,7 @@
 @if ($avatar)
 <button
     type="button"
-    class="btn btn-round btn-avatar btn-avatar--{{ $avatar['id'] ?? 0}}"
+    class="btn {{ $buttonSize ?? 'btn-md' }} btn-round btn-avatar btn-avatar--{{ $avatar['id'] ?? 0}}"
     data-role="{{ $role ?? 'avatar' }}" {{-- Read by JS [avatar|player] --}}
     data-avatar="true" {{-- Read by JS --}}
     data-avatar-id="{{ $avatar['id'] ?? 0 }}" {{-- Read by JS --}}
@@ -22,6 +22,7 @@
     role="radio"
     aria-label="{{ $avatar['description'] ?? 'Φατσούλα' }}"
     aria-checked="{{ $avatarChecked ?? 'false' }}" {{-- Altered by JS --}}
+    id="radio-avatar-button-{{ $tabindex ?? 0 }}"
     tabindex="{{ $tabindex ?? '-1' }}"
 >
     <img
@@ -32,11 +33,12 @@
         height="{{ $avatar['height'] ?? '100'}}"
         alt="{{ $avatar['description'] ?? 'Φατσούλα' }}"
     />
+</button>
     <label
         class="btn-text label-avatar @isset($hideLabel) hidden @endisset @isset($role) @if ($role == 'player') label-player label-player--{{ $id ?? 0 }} @endif @endisset"
+        for="radio-avatar-button-{{ $tabindex ?? 0 }}"
         @isset($hideLabel)hidden @endisset
-    >
+        >
         {{ $name ?? 'Φατσούλα' }}
     </label>
-</button>
 @endif

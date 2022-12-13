@@ -1,8 +1,6 @@
 .gamesettings .avatar-col {
     min-height: 160px;
-    min-width: 140px;
-    .btn-avatar > .label-avatar {
-    }
+    // min-width: 140px;
 }
 
 .avatars-row {
@@ -19,7 +17,13 @@
     --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
     transition: all .2s ease-out;
     padding: 0;
-    &.btn-round {
+    &.btn-sm,
+    &.btn-sm img {
+        width: 88px;
+        height: 88px;
+    }
+    &.btn-md,
+    &.btn-md img {
         width: 100px;
         height: 100px;
     }
@@ -38,8 +42,17 @@
             scale: 1.2;
         }
     }
+    &.btn-sm.selected {
+        scale: 1.15;
+        &:hover {
+            scale: 1.15;
+        }
+        &:focus, &:focus-visible:not(:hover) {
+            scale: 1.15;
+        }
+    }
     &.faded {
-        opacity: 0.8;
+        opacity: 0.7;
         img {
             filter: grayscale(90%);
         }
@@ -84,10 +97,16 @@
     display: inline-block;
     margin: 0 !important;
     padding: 0 !important;
-    width: 100px;
-    height: 100px;
 }
-.btn-avatar-options img {
+.btn-sm.btn-avatar-options img {
+    position: relative;
+    display: inline-block;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 78px;
+    height: 78px;
+}
+.btn-md.btn-avatar-options img {
     position: relative;
     display: inline-block;
     margin: 0 !important;
@@ -96,26 +115,30 @@
     height: 90px;
 }
 
-.btn-avatar > .label-avatar,
-.btn-avatar-options > .label-avatar-options {
+.label-avatar,
+.label-avatar-options {
     display: block;
+    margin: 0 auto;
     position: relative;
     z-index: 98;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 500;
     color: rgba(var(--trvl-c-text-rgb), 0.92);
     text-align: center;
     white-space: nowrap;
 }
-.btn-avatar > .label-avatar {
-    top: 0.3rem;
+.label-avatar {
+    top: 0.5rem;
     overflow-x: hidden;
     text-overflow: ellipsis;
-    max-width: 100px;
+    max-width: 120px;
 }
-.btn-avatar-options > .label-avatar-options {
-    top: calc(0.3rem + 5px);
-    left: -0.1rem;
+.label-avatar-options {
+    top: 0.5rem;
+}
+
+button[role="radio"].selected + label {
+    font-weight: 600;
 }
 
 .btn-avatar:hover > .label-avatar,

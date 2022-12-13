@@ -41,15 +41,15 @@ View::share('players_with_avatars', $players_with_avatars);
  * Last update: December 10, 2022.
  * @link https://xd.adobe.com/view/881b8987-9d56-443d-9e00-c2edcb5a6671-dd48/
  */
-Route::get('/profiles/new', function () {
+Route::get('/profile/new', function () {
     // Requires View::share('avatars', $avatars);
     return view('profileNewStep1');
 });
-Route::get('/profiles/new/2', function () {
+Route::get('/profile/new/2', function () {
     // Requires View::share('avatars', $avatars);
     return view('profileNewStep2');
 });
-Route::get('/profiles/new/3', function () {
+Route::get('/profile/new/3', function () {
     // Requires View::share('avatars', $avatars);
     return view('profileNewStep3');
 });
