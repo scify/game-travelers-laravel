@@ -26,7 +26,8 @@
                     </p>
                 </div>
                 <div class="col-1">
-                    {{-- @TODO: ELI5 Logging-out without selecting a player. --}}
+                    {{-- @TODO: ELI5 Logging-out without selecting a player.
+                        Note that this side conflicts with random trees. --}}
                 </div>
             </div>
         </div>
@@ -73,7 +74,7 @@
                             value="start"
                             type="submit"
                             id="submitButton" {{-- ID Used by JS --}}
-                            tabindex="1000"
+                            tabindex="1000" {{--- Shall we set a 999 player limit? --}}
                             disabled {{-- Altered via JS (form validation) --}}
                         >
                             παίξε

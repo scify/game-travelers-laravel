@@ -13293,33 +13293,12 @@ a.kicon svg {
   }
 }
 
-@media (min-width: 1400px) {
-  .col-xxl-8.background-group-2--col {
-    width: 78% !important;
-  }
-  .col-xxl-2.background-group-2--col {
-    width: 11% !important;
-  }
-}
-.background-group-2--tree-1 {
-  background-image: url(/images/bg-g2-side-tree-2.png?e3539a8b50cb2c66b9e15b95f7b1a952);
+.background-dash-up {
+  background-image: url(/images/bg-head-dash-2.png?22fdf1758d392cd27ba4ac0f128a643a);
   background-repeat: no-repeat;
-  background-position-x: center;
   background-position-y: bottom;
-  background-size: 136px 208px;
-  position: relative;
-  bottom: -3rem;
-  left: -2rem;
-}
-
-.background-group-2--tree-2 {
-  background-image: url(/images/bg-g2-side-tree-1.png?7a4c27e5e698c9aa07a70ae9a40a5023);
-  background-repeat: no-repeat;
   background-position-x: center;
-  background-position-y: top;
-  background-size: 116px 179px;
-  position: relative;
-  top: -5rem;
+  min-height: 194px;
 }
 
 .background-dash-down {
@@ -13328,7 +13307,8 @@ a.kicon svg {
   background-position-y: bottom;
 }
 
-/* Group 1 contains:
+/*
+ * Background Group 1 contains:
  * (group) group #1
  * (abstract) back #2
  * (decoration) flowers #3
@@ -13371,6 +13351,40 @@ a.kicon svg {
   .trvl-bg--group-1.responsive-hide-sm {
     background-image: url(/images/bg-g1-side-back-2@2x.png?46ca1c9ff289dfa3c5d1edac0c747a61);
   }
+}
+
+/*
+ * Background Group 2
+ * (decoration) Trees to the left  & the right of the page.
+ * (queries) Media queries to hide trees in less than XXL sizes.
+ */
+@media (min-width: 1400px) {
+  .col-xxl-8.background-group-2--col {
+    width: 78% !important;
+  }
+  .col-xxl-2.background-group-2--col {
+    width: 11% !important;
+  }
+}
+.background-group-2--tree-1 {
+  background-image: url(/images/bg-g2-side-tree-2.png?e3539a8b50cb2c66b9e15b95f7b1a952);
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: bottom;
+  background-size: 136px 208px;
+  position: relative;
+  bottom: -3rem;
+  left: -2rem;
+}
+
+.background-group-2--tree-2 {
+  background-image: url(/images/bg-g2-side-tree-1.png?7a4c27e5e698c9aa07a70ae9a40a5023);
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: top;
+  background-size: 116px 179px;
+  position: relative;
+  top: -5rem;
 }
 
 /* Responsiveness */

@@ -1,4 +1,4 @@
-<x-layout :title="'Επίλεξε πίστα | Νέο παιχνίδι | Ταξιδιώτες'" :hasUserMenu=true>
+<x-layout :title="'Επίλεξε πίστα | Νέο παιχνίδι | Ταξιδιώτες'" :hasUserMenu=true :background="'background-dash-up'">
     @section('scripts')
     @endsection
 
@@ -24,7 +24,7 @@
                     </p>
                 </div>
                 <div class="col-1">
-                    {{-- @TODO: ELI5 Logging-out without selecting a player. --}}
+                    {{-- We do have this one. --}}
                 </div>
             </div>
         </div>
