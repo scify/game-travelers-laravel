@@ -55,6 +55,14 @@
         <dl>
             <dt><a href="{{ url('/select/player') }}">New game: Select player (1/5)</a></dt>
             <dd>✔️ <span class="new">New</span> Step 1 of playing a New game: Select a new player. Fully responsive. Avatars have been reduced in size to fit this screen, labels have been introduced and everything acts as a virtual radiogroup with radios that is fully accessible. Custom flex-grid to allow trees to grow. The dash line at the bottom runs very wild. Remove player has been removed and will go to Settings. A secondary button was created. There is no way to log-out until the user has selected a Player. Fully responsive.</span>
+            <dt><a href="{{ url('/select/level') }}">New game: Select level (2/5)</a></dt>
+            <dd>✔️ <span class="new">New</span> Step 2 of playing a New game.</span>
+            <dt><a href="{{ url('/select/mode') }}">New game: Select mode (3/5)</a></dt>
+            <dd>✔️ <span class="new">New</span> Step 3 of playing a New game.</span>
+            <dt><a href="{{ url('/select/help') }}">New game: Select help (4/5)</a></dt>
+            <dd>✔️ <span class="new">New</span> Step 4 of playing a New game.</span>
+            <dt><a href="{{ url('/select/pawn') }}">New game: Select pawn (5/5)</a></dt>
+            <dd>✔️ <span class="new">New</span> Step 5 of playing a New game.</span>
         </dl>
 
         <h3 class="mt-4">Create new player</h3>

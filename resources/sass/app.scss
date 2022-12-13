@@ -92,6 +92,7 @@ footer img {
 // Settings & Profiles
 .settings-header,
 .gamesettings-header {
+    max-width: 900px;
     h1 {
         font-size: 2em;
         line-height: 1;
@@ -132,6 +133,77 @@ footer img {
 }
 .gamesettings {
     min-height: 566px;
+}
+
+/* User */
+.user {
+    width: 100px;
+    height: 100px;
+}
+.user-button {
+    --bs-btn-padding-x: 0;
+    --bs-btn-padding-y: 0;
+    --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
+    border: none !important;
+    &:hover {
+        box-shadow: none;
+    }
+    &::after { // dropdown triangle
+        z-index: 2001;
+        position: absolute;
+        margin-left: 0;
+        left: 70px;
+        bottom: 22px;
+        // vertical-align: 0.75em;
+    }
+    &[aria-expanded=true] img {
+        scale: 1.1;
+    }
+    &:hover img {
+        scale: 1.1;
+    }
+    @media (prefers-reduced-motion) {
+        scale: 1 !important;
+    }
+    img {
+        transition: all .2s ease-out;
+        margin: 0 auto;
+        padding: 0;
+        background: #fff;
+        border-radius: 50%;
+        z-index: 2001;
+        position: relative;
+    }
+}
+
+.user-label {
+    display: block; // block/inline-block for ellipsis.
+    font-weight: 600;
+    z-index: 2001;
+    position: relative; // for z-index
+    font-size: 1rem;
+    width: 90px;
+    min-width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.user-menu {
+    padding-top: 2.75rem;
+    padding-bottom: 1rem;
+    --bs-dropdown-zindex: 1000;
+    --bs-dropdown-bg: var(--trvl-dropdown-bg);
+    --bs-dropdown-color: var(--trvl-c-text);
+    --bs-dropdown-border-radius: 10%;
+    --bs-dropdown-border-width: 0;
+    --bs-dropdown-link-hover-bg: #faefe4;
+    font-weight: 600;
+    box-shadow: 0 0.2em rgba(0,0,0,0.1);
+}
+.user-menu li a {
+    transition: all 0.1s ease-in;
+}
+.user-menu-item:active {
+    background-color: var(--trvl-c-text);
 }
 
 // Success
@@ -226,9 +298,6 @@ footer img {
 }
 .w-22 {
     width: 22rem;
-}
-.w-25 {
-    width: 25rem;
 }
 .text-start-end,
 .text-start-end-start-end,
