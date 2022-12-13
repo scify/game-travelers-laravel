@@ -16,7 +16,7 @@
             </div>
             <div class="col-md-9 order-md-1">
                 <!-- form -->
-                <form method="post" action="">
+                <form method="post" action="{{ route('login') }}">
                     @csrf
                     <div class="form px-0 px-md-6">
                         <div class="form-header p-4">
@@ -55,11 +55,11 @@
                         <div class="form-options px-4 py-2 container-fluid">
                             <div class="row">
                                 <div class="field col-sm-6 col-md-12 col-lg-6 text-start text-nowrap">
-                                    <label class="field-label form-check-label" for="cookie">Μείνετε συνδεδεμένοι</label>
-                                    <input class="field-input form-check-input ms-2" type="checkbox" tabindex="3" name="cookie" id="cookie">
+                                    <label class="field-label form-check-label" for="remember">Μείνετε συνδεδεμένοι</label>
+                                    <input class="field-input form-check-input ms-2" type="checkbox" tabindex="3" name="remember" id="remember">
                                 </div>
                                 <div class="col-sm-6 col-md-12 col-lg-6 pt-2 pt-sm-0 pt-md-2 pt-lg-0 text-start-end-start-end">
-                                    <a href="{{ url('/password/reset') }}" tabindex="5">Ξεχάσατε το συνθηματικό;</a>
+                                    <a href="{{ route('password.request') }}" tabindex="5">Ξεχάσατε το συνθηματικό;</a>
                                 </div>
                             </div>
                         </div>
