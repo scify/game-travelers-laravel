@@ -14,11 +14,7 @@
     <div class="travelers">
         <div class="content">
 
-            @include('layout.header')
-
             {{ $slot }}
-
-            @include('layout.footer')
 
         </div>
     </div>

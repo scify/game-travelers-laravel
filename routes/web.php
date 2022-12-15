@@ -19,11 +19,15 @@ use Illuminate\Support\Facades\Route;
  */
 require __DIR__.'/auth.php';
 
+Route::get('/', function () {
+    return view('splash');
+});
+
 // From the "obsolete" pages, this still acts as the index, so please don't
 // delete this blade until we have a brand new front-page to replace it. Also
 // has important comments, as Manos decided to use this as a notebook :).
-Route::get('/', function () {
-    return view('extras/testViews');
+Route::get('/log', function () {
+    return view('extras/logViews');
 });
 
 // Sample Data used on profileNewStep1 and its 2 demos. The exampleData contains
@@ -35,35 +39,9 @@ require __DIR__.'/../docs/examples/exampleData.php';
 View::share('avatars', $avatars);
 View::share('players_with_avatars', $players_with_avatars);
 
-
-/*
- * Stepper 2 | New player profiles.
- * Last update: December 10, 2022.
- * @link https://xd.adobe.com/view/881b8987-9d56-443d-9e00-c2edcb5a6671-dd48/
- */
-Route::get('/profile/new', function () {
-    // Requires View::share('avatars', $avatars);
-    return view('profileNewStep1');
-});
-Route::get('/profile/new/2', function () {
-    // Requires View::share('avatars', $avatars);
-    return view('profileNewStep2');
-});
-Route::get('/profile/new/3', function () {
-    // Requires View::share('avatars', $avatars);
-    return view('profileNewStep3');
-});
-// Demos
-Route::get('demo/profile/error', function () {
-    return view('extras/demoProfileNewError');
-});
-Route::get('demo/profile/success', function () {
-    return view('extras/demoProfileNewSuccess');
-});
-
 /*
  * Travellers | Step 1. New game
- * Last update: December 10, 2022.
+ * Last update: December 15, 2022.
  * @link https://xd.adobe.com/view/d308b3ee-c123-48d3-87ff-5304ebdaa85a-865b/
  */
 Route::get('/select/player', function () {
@@ -90,6 +68,31 @@ Route::get('/select/pawn', function () {
 Route::get('/demo/select/board/form', function () {
     // Select Board page with buttons in a form for passing data via POST/GET.
     return view('extras/demoGameSelectBoardForm');
+});
+
+/*
+ * Stepper 2 | New player profiles.
+ * Last update: December 10, 2022.
+ * @link https://xd.adobe.com/view/881b8987-9d56-443d-9e00-c2edcb5a6671-dd48/
+ */
+Route::get('/profile/new', function () {
+    // Requires View::share('avatars', $avatars);
+    return view('profileNewStep1');
+});
+Route::get('/profile/new/2', function () {
+    // Requires View::share('avatars', $avatars);
+    return view('profileNewStep2');
+});
+Route::get('/profile/new/3', function () {
+    // Requires View::share('avatars', $avatars);
+    return view('profileNewStep3');
+});
+// Demos
+Route::get('demo/profile/error', function () {
+    return view('extras/demoProfileNewError');
+});
+Route::get('demo/profile/success', function () {
+    return view('extras/demoProfileNewSuccess');
 });
 
 

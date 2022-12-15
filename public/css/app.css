@@ -13600,6 +13600,26 @@ footer img {
   --bs-alert-border-color: var(--trvl-danger-border-color);
 }
 
+img.splash {
+  aspect-ratio: 2/1.09;
+  max-width: 80vh;
+  margin: 0 auto;
+  animation: splashFadeIn 2s;
+  animation-fill-mode: forwards;
+  color: #fff;
+  fill: #fff;
+}
+
+@keyframes splashFadeIn {
+  0% {
+    opacity: 0;
+    color: #000;
+  }
+  100% {
+    opacity: 1;
+    color: #fff;
+  }
+}
 /* Main Content (absolute center & middle via flexbox). */
 .travelers {
   display: flex;
