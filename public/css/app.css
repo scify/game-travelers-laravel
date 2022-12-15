@@ -13604,6 +13604,7 @@ img.splash {
   aspect-ratio: 2/1.09;
   max-width: 80vh;
   margin: 0 auto;
+  display: block !important;
   animation: splashFadeIn 2s;
   animation-fill-mode: forwards;
   color: #fff;
