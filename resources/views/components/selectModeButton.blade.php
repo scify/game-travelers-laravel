@@ -1,13 +1,13 @@
-<!-- /resources/views/components/selectBoardButton.blade.php -->
+<!-- /resources/views/components/selectModeButton.blade.php -->
 <div class="col board">
     <button
         class="btn btn-board board-button @isset($comingsoon)disabled @endisset"
         tabindex="{{ $tabindex ?? '-1' }}"
         data-tabindex="{{ $tabindex ?? '-1' }}"
-        name="board"
-        value="{{ $boardId ?? '0' }}"
+        name="mode"
+        value="{{ $modeId ?? '0' }}"
         type="submit"
-        label="{{ $title ?? 'Πίστα' }}"
+        label="{{ $title ?? 'Τύπος παιχνιδιού' }}"
         @isset($comingsoon)
         {{-- For not yet available boards add atribute 'disabled': --}}
         disabled
@@ -15,12 +15,12 @@
     >
         <img
             class="board-img"
-            srcset="{{ asset('images/boards/' . $asset . '@@2x.png') }} 2x"
-            src="{{ asset('images/boards/' . $asset . '.png') }}"
+            srcset="{{ asset('images/modes/' . $asset . '@@2x.png') }} 2x"
+            src="{{ asset('images/modes/' . $asset . '.png') }}"
             width="352" height="244"
-            alt="{{ $alt ?? 'Προεπισκόπηση πίστας' }}"
+            alt="{{ $alt ?? 'Προεπισκόπηση τύπου παιχνιδιού' }}"
         />
-        <span class="board-label">{{ $title ?? 'Πίστα' }}</span>
+        <span class="board-label">{{ $title ?? 'Τύπος παιχνιδιού' }}</span>
         @isset($comingsoon)
         <span class="coming-soon"><strong>ΠΡΟΣΕΧΩΣ!</strong></span>
         @endisset

@@ -2,6 +2,8 @@
     {{-- This page was designed responsively in order to support any amount of
          boards, therefore, you can simply use the x-selectLevel[Link/Button]
          component as many times as needed (e.g. 1, 2, 3 or even more times).
+         If one of the boards is not available for any reason, it can be
+         disabled by setting :comingsoon=true (instead of the default null).
         -GET Example using <a> links:
          This page demonstrates the layout for a GET page where data are passed
          via simple links. The selectLevelLink component is used, while each
@@ -28,6 +30,10 @@
                 <h1 id="currentPageLabel">Διάλεξε πίστα</h1>
                 <p>
                     <strong class="fs-5" id="currentPageDescription">
+                        {{-- If a description is REALLY not needed, please
+                            replace the following line with an &nbsp;
+                            DO NOT LEAVE EMPTY!
+                        --}}
                         Νησί, βουνό ή πόλη; Που θα ήθελες να ταξιδέψεις;
                     </strong>
                 </p>
@@ -72,6 +78,7 @@
                         class="btn btn-primary btn-circle ms-auto responsive-expand"
                         href="#"
                         id="backButton"
+                        data-tabindex="1000"
                         tabindex="1000"
                     >
                         <span>πίσω</span>

@@ -85,6 +85,7 @@
                             class="btn btn-primary btn-circle ms-auto responsive-expand"
                             href="#"
                             id="backButton"
+                            data-tabindex="1000"
                             tabindex="1000"
                         >
                             <span>πίσω</span>

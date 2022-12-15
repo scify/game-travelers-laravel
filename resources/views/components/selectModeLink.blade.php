@@ -1,4 +1,4 @@
-<!-- /resources/views/components/selectBoardLink.blade.php -->
+<!-- /resources/views/components/selectModeLink.blade.php -->
 <div class="col board">
     <a
         class="btn btn-board board-button @isset($comingsoon)disabled @endisset"
@@ -8,12 +8,12 @@
     >
         <img
             class="board-img"
-            srcset="{{ asset('images/boards/' . $asset . '@@2x.png') }} 2x"
-            src="{{ asset('images/boards/' . $asset . '.png') }}"
+            srcset="{{ asset('images/modes/' . $asset . '@@2x.png') }} 2x"
+            src="{{ asset('images/modes/' . $asset . '.png') }}"
             width="352" height="244"
-            alt="{{ $alt ?? 'Προεπισκόπηση πίστας' }}"
+            alt="{{ $alt ?? 'Προεπισκόπηση τύπου παιχνιδιού' }}"
         />
-        <span class="board-label">{{ $title ?? 'Πίστα' }}</span>
+        <span class="board-label">{{ $title ?? 'Τύπος παιχνιδιού' }}</span>
         @isset($comingsoon)
         <span class="coming-soon"><strong>ΠΡΟΣΕΧΩΣ!</strong></span>
         @endisset
