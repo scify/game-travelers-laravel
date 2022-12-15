@@ -6,57 +6,26 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style type="text/css">
-        :root {
-            --demo-weight: 900;
-            --demo-size: 44px;
-        }
-        .variable-font-weight {
-            font-size: var(--demo-size);
-            font-weight: var(--demo-weight);
-        }
-        dd > dl { margin-left: 2rem; }
-        dl {
-            margin-top: 1em;
-        }
-        dl, dd {font-size: 0.9rem;}
-        .error {
-            color: white;
-            background-color :crimson;
-            opacity: 0.9;
-        }
-        .todo::before {
-            content: "@";
-        }
-        .todo {
-            color: white;
-            background-color:darkturquoise;
-        }
-        .upd {
-            color: white;
-            background-color: darkslategray;
-        }
-        .new {
-            color: white;
-            background-color: darkseagreen;
-        }
-    </style>
-</head>
+ </head>
 <body>
     <div class="container">
         <div class="alert alert-success" role="alert">
-            Success! Updated December 12, 2022, 21:00. Please select one of the following routes.
+            Success! Updated December 15, 2022, 05:00. Please select one of the following routes.
         </div>
         <h1>Demo Routes</h2>
         <small style="border-bottom: 1px solid #000;">Make your browser's window as small as this little line of text...</small>
 
-        <h3 class="mt-4">New game</h3>
+        <h3 class="mt-4">Start New Game</h3>
         <small>No notes yet.</small>
         <dl>
             <dt><a href="{{ url('/select/player') }}">New game: Select player (1/5)</a></dt>
             <dd>✔️ <span class="new">New</span> Step 1 of playing a New game: Select a new player. Fully responsive. Avatars have been reduced in size to fit this screen, labels have been introduced and everything acts as a virtual radiogroup with radios that is fully accessible. Custom flex-grid to allow trees to grow. The dash line at the bottom runs very wild. Remove player has been removed and will go to Settings. A secondary button was created. There is no way to log-out until the user has selected a Player. Fully responsive.</span>
-            <dt><a href="{{ url('/select/level') }}">New game: Select level (2/5)</a></dt>
-            <dd>✔️ <span class="new">New</span> Step 2 of playing a New game.</span>
+            <dt><a href="{{ url('/select/board') }}">New game: Select board (2/5)</a></dt>
+            <dd>✔️ <span class="new">New</span> Step 2 of playing a New game: Select board. Fully responsive. Supports 1 to N amount of boards where N equals to the integer limit of the MySQL database. Extra attention to detail has been give to have buttons with strong and distinctive hover, focus and active states based on combinations of shadows. Bonus: ΠΡΟΣΕΧΩΣ! for unreleased boards. This is the suggested version, using direct links with GET parameters. As always the documentation has been added in the template.</span>
+                <dl>
+                    <dt><a href="{{ url('/demo/select/board/form') }}">Variation: Select board page as a form (2/5)</a></dt>
+                    <dd>✔️ <span class="new">New</span> Step 2 of playing a New game: Select board based on a GET/POST form with hidden fields.</span>
+                </dl>
             <dt><a href="{{ url('/select/mode') }}">New game: Select mode (3/5)</a></dt>
             <dd>✔️ <span class="new">New</span> Step 3 of playing a New game.</span>
             <dt><a href="{{ url('/select/help') }}">New game: Select help (4/5)</a></dt>
@@ -65,7 +34,7 @@
             <dd>✔️ <span class="new">New</span> Step 5 of playing a New game.</span>
         </dl>
 
-        <h3 class="mt-4">Create new player</h3>
+        <h3 class="mt-4">Create New Player</h3>
         <small>The beautiful hand-drawn image-button for moving to the "next step" was not utilised (even though it's code is still somewhere in the views), as it would have required 8 additional assets to provide the basic acesesibility that the HTML button provides.</small>
         <dl>
             <dt><a href="{{ url('/profile/new') }}">New player profile Step 1 of 3</a></dt>
@@ -107,5 +76,43 @@
             <a href="{{ url('testVue') }}" style="text-decoration:line-through">Go to testVueJSPage</a>
         </div>
     </div>
+
+<!-- Not valid in this place but acceptable for easier editing of the Table of Contents. -->
+<style type="text/css">
+    :root {
+        --demo-weight: 900;
+        --demo-size: 44px;
+    }
+    .variable-font-weight {
+        font-size: var(--demo-size);
+        font-weight: var(--demo-weight);
+    }
+    dd > dl { margin-left: 2rem; }
+    dl {
+        margin-top: 1em;
+    }
+    dl, dd {font-size: 0.9rem;}
+    .error {
+        color: white;
+        background-color :crimson;
+        opacity: 0.9;
+    }
+    .todo::before {
+        content: "@";
+    }
+    .todo {
+        color: white;
+        background-color:darkturquoise;
+    }
+    .upd {
+        color: white;
+        background-color: darkslategray;
+    }
+    .new {
+        color: white;
+        background-color: darkseagreen;
+    }
+</style>
+
 </body>
 </html>

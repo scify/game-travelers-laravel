@@ -70,9 +70,9 @@ Route::get('/select/player', function () {
     // Requires View::share('players_with_avatars', $players_with_avatars);
     return view('gameSelectPlayer');
 });
-Route::get('/select/level', function () {
-    // Requires View::share('players_with_avatars', $players_with_avatars);
-    return view('gameSelectLevel');
+Route::get('/select/board', function () {
+    // Select Board page with links for passing data via GET.
+    return view('gameSelectBoard');
 });
 Route::get('/select/mode', function () {
     // Requires View::share('players_with_avatars', $players_with_avatars);
@@ -87,13 +87,9 @@ Route::get('/select/pawn', function () {
     return view('gameSelectPawn');
 });
 // Demos
-Route::get('/demo/select/player/more', function () {
-    // Requires View::share('players_with_avatars', $players_with_avatars);
-    return view('extras/demo/selectPlayerMore');
-});
-Route::get('/demo/select/player/start', function () {
-    // Requires View::share('players_with_avatars', $players_with_avatars);
-    return view('extras/demo/selectPlayerStart');
+Route::get('/demo/select/board/form', function () {
+    // Select Board page with buttons in a form for passing data via POST/GET.
+    return view('extras/demoGameSelectBoardForm');
 });
 
 

@@ -23,13 +23,15 @@
     background-repeat: no-repeat;
     background-position-y: bottom;
     background-position-x: center;
-    min-height: 194px;
+    background-size: 1370px 142px;
+    min-height: 195px;
 }
 
 .background-dash-down {
     background-image: url("../images/bg-g2-dash-down.png");
     background-repeat: no-repeat;
     background-position-y: bottom;
+    background-size: 1368px 139px;
 }
 
 /*
@@ -57,11 +59,11 @@
         @media (max-width: 575.98px) {
             background-image: url("../images/bg-g1-side-back-2.png");
             @media
-            only screen and (-webkit-min-device-pixel-ratio: 2),
-            only screen and (min--moz-device-pixel-ratio: 2),
-            only screen and (min-device-pixel-ratio: 2),
-            only screen and (min-resolution: 2dppx) {
-                background-image: url("../images/bg-g1-side-back-2@2x.png");
+                only screen and (-webkit-min-device-pixel-ratio: 2),
+                only screen and (min--moz-device-pixel-ratio: 2),
+                only screen and (min-device-pixel-ratio: 2),
+                only screen and (min-resolution: 2dppx) {
+                    background-image: url("../images/bg-g1-side-back-2@2x.png");
             }
         }
     }
@@ -69,11 +71,11 @@
         @media (max-width: 767.98px) {
             background-image: url("../images/bg-g1-side-back-2.png");
             @media
-            only screen and (-webkit-min-device-pixel-ratio: 2),
-            only screen and (min--moz-device-pixel-ratio: 2),
-            only screen and (min-device-pixel-ratio: 2),
-            only screen and (min-resolution: 2dppx) {
-                background-image: url("../images/bg-g1-side-back-2@2x.png");
+                only screen and (-webkit-min-device-pixel-ratio: 2),
+                only screen and (min--moz-device-pixel-ratio: 2),
+                only screen and (min-device-pixel-ratio: 2),
+                only screen and (min-resolution: 2dppx) {
+                    background-image: url("../images/bg-g1-side-back-2@2x.png");
             }
         }
     }

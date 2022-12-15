@@ -48,7 +48,6 @@ h1, h2, h3, h4, h5, h6 {
 a, a:hover, a:active, a:visited {
   color: var(--trvl-c-link);
   outline: none;
-  // @TODO:  Outline, focus, active, visited states for buttons
 }
 a:focus, a:focus-visible {
   outline-color: hsla(var(--trvl-shadow-focus-hsl), 0.75);
@@ -91,7 +90,8 @@ footer img {
 
 // Settings & Profiles
 .settings-header,
-.gamesettings-header {
+.gamesettings-header,
+.gameselect-header {
     max-width: 900px;
     h1 {
         font-size: 2em;
@@ -131,8 +131,12 @@ footer img {
         padding-bottom: 2rem;
     }
 }
+// Manual height calculations based on the background heights.
 .gamesettings {
     min-height: 566px;
+}
+.gameselect {
+    min-height: 495px
 }
 
 /* User */
@@ -159,8 +163,8 @@ footer img {
     &[aria-expanded=true] img {
         scale: 1.1;
     }
-    &:hover img {
-        scale: 1.1;
+    &:hover:not([aria-expanded=true]) img {
+        scale: 1.05;
     }
     @media (prefers-reduced-motion) {
         scale: 1 !important;
@@ -308,6 +312,37 @@ footer img {
 /* Responsiveness */
 
 // Portrait phones
+
+// Game board buttons responsiveness.
+@media (max-width: 400px) {
+    .gameselect {
+        padding: 0 !important;
+        margin-left: 0!important;
+        margin-right: 0!important;
+    }
+    .gameselect .col {
+       width: 100%;
+    }
+
+    .btn-board {
+        border-radius: 0 !important;
+        border-left: none!important;
+        border-right: none!important;
+        border-top: 0.3rem solid transparent;
+        border-bottom: 0.3rem solid transparent;
+    }
+    .board-img {
+        width: 100% !important;
+        height: auto !important;
+        border-radius: 0 !important;
+        margin: 0 auto;
+    }
+    .btn-board .coming-soon {
+        border-start-end-radius: 0;
+    }
+}
+
+
 @media (max-width: 575.98px) {
     .section,
     div.trvl-main-content {

@@ -36,7 +36,7 @@
     --bs-btn-active-color: var(--trvl-btn-active-color);
     --bs-btn-active-bg: var(--trvl-btn-active-bg);
     --bs-btn-active-border-color: var(--trvl-btn-active-border-color);
-    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(var(--trvl-c-dark-rgb), 0.125);
 }
 
 // Round button
@@ -61,7 +61,7 @@
         --bs-btn-active-color: var(--black);
         --bs-btn-active-bg: var(--white);
         --bs-btn-active-border-color: var(--white);
-        --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        --bs-btn-active-shadow: inset 0 3px 5px rgba(var(--trvl-c-dark-rgb), 0.125);
         --bs-btn-disabled-color: var(--trvl-btn-disabled-color);
         --bs-btn-disabled-bg: rgba(var(--unnamed-color-faf9f8-rgb), 0.5);
         --bs-btn-disabled-border-color: rgba(var(--unnamed-color-faf9f8-rgb), 0.1);
@@ -70,6 +70,145 @@
 button.key-assigner.active {
     box-shadow: 0 0 0 0.3rem rgba(244, 156, 41, 0.56);
 }
+
+// Game select fully-accessible buttons
+
+// Board buttons
+.board {
+    // Allows the absolute placement of other elements on top of these buttons.
+    max-height: 252px;
+}
+.btn-board {
+    --bs-btn-disabled-opacity: 1;
+    --bs-btn-disabled-border-color: transparent;
+    display:block;
+    position: relative;
+    box-sizing: initial;
+    margin: 0 auto;
+    padding: 0;
+    width: 352px;
+    height: 244px;
+    border-radius: 42px;
+    background-color: transparent;
+    border: 0.3rem solid transparent;
+    transition: all 0.3s ease-in-out;
+    outline: none !important;
+    &:hover {
+        border: 0.3rem solid var(--trvl-c-dark);
+        box-shadow: 0 1em 1em rgba(var(--trvl-c-dark-rgb), 0.1);
+    }
+    &:focus,
+    &:focus-visible {
+        border: 0.3rem solid var(--trvl-c-dark);
+    }
+    &:active {
+        border: 0.3rem solid var(--trvl-c-dark);
+        box-shadow: 0 1em 1em rgba(var(--trvl-c-dark-rgb), 0.2);
+    }
+}
+// Board images
+.board-img {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    border-radius: 42px;
+    box-shadow:
+        inset 0 1em 1em rgba(var(--trvl-c-dark-rgb), 0.333),
+        0 0.3em 0.6em rgba(var(--trvl-c-dark-rgb), 0.161),
+        0 0.1em 0.1em rgba(var(--trvl-c-dark-rgb), 0.333);
+}
+// Board labels
+.board-label {
+    display: block;
+    position: relative;
+    top: 1rem;
+    font-weight:bold;
+}
+.btn-board:hover .board-label,
+.btn-board:focus .board-label,
+.btn-board:focus-visible .board-label {
+    /* font-size: 1.8rem; */
+    scale: 1.6;
+    font-weight: 800;
+    @media (prefers-reduced-motion) {
+        scale: 1 !important;
+    }
+}
+// Disabled board
+.btn-board.disabled:focus,
+.btn-board.disabled:focus-visible {
+    border: 0.3rem solid transparent;
+}
+.btn-board.disabled:focus .board-label,
+.btn-board.disabled:focus-visible .board-label {
+    /* font-size: 1.8rem; */
+    scale: 1.0;
+    font-weight: bold;
+}
+// Coming soon (on top of a disabled board)
+.btn-board .coming-soon {
+    content: "";
+    display: block;
+    position: relative;
+    border-style: solid;
+    border-width: 0 105px 105px 0;
+    border-color: transparent #287971 transparent transparent;
+    text-align: center;
+    bottom: calc(244px + 1.5rem);
+    border-start-end-radius: 42px;
+    opacity: 0.9;
+    float: right;
+    z-index: 200;
+}
+.btn-board .coming-soon strong {
+    content: "ΠΡΟΣΕΧΩΣ!";
+    display: block;
+    position: absolute;
+    border-style: solid;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    border: none;
+    font-weight: 800;
+    z-index: 201;
+    color: #fff;
+    top: 1.9rem;
+    left: 1.1rem;
+}
+.btn-board.disabled .board-img {
+    opacity: 0.5;
+    filter: grayscale(0.9);
+}
+
+// Circular button used for moving "Back"
+.btn-circle {
+    --bs-btn-hover-border-color: var(--trvl-c-dark);
+    --bs-btn-bg: #dedede;
+    width: 5.2rem;
+    height: 5.2rem;
+    line-height: 5.2;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    border: 0.3rem solid #7d7f8a;
+    span {
+        display: block;
+        position: relative;
+        bottom: 0.8rem;
+    }
+    &:focus,
+    &:focus-visible {
+        outline: none !important;
+        box-shadow: none;
+    }
+    &:hover {
+        border: 0.3rem solid var(--trvl-c-dark);
+        box-shadow:
+        0 2px 2px rgba(var(--trvl-c-dark-rgb), 0.1);
+    }
+}
+
 
 
 /* Button sizes */
@@ -88,8 +227,22 @@ button.key-assigner.active {
 // Portrait phones
 @media (max-width: 575.98px) {
   div.form-actions.responsive-expand button,
-  button.responsive-expand {
+  button.responsive-expand,
+  a.responsive-expand {
     width: 100%;
+  }
+  a.btn-circle.responsive-expand {
+    border-radius: 1rem;
+    height: auto;
+    line-height: 1;
+    padding: 0.75rem;
+    margin-top: -2rem;
+    margin-bottom: 2rem;
+    span {
+        display: inline;
+        position: initial;
+        bottom: 0;
+    }
   }
 }
 

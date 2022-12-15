@@ -1,4 +1,4 @@
-<!-- /resources/views/selectPlayer.blade.php -->
+<!-- /resources/views/components/selectPlayer.blade.php -->
 {{--
     - Component which allows the user to select one of the available Players.
       All the Players are returned as <buttons> which act as radios in a virtual
@@ -37,11 +37,20 @@
             @php
                 // Make sure we have a starting tab to index...
                 $tabindex = $tabindex ?? $loop->index; $tabindex++;
-                // Determine if this avatar is the selected one.
                 // @TODO: Implement avatar/width calcs in Controller/Model.
+                // Regardless of the actual avatar's width and height (100x100),
+                // this template requires an 88x88 pixels avatar, while the
+                // Create new player requires them to be at 100x100 pixels. The
+                // model should store the actual width/height, and the Route
+                // should provide the rendered width and height. In other news
+                // these two overrides should happen at the Route for now and
+                // they shall be removed from this template.
                 $player['avatar']['width'] = 88;
                 $player['avatar']['height'] = 88;
-                // @TODO: Implement avatarChecked = true in Controller/Model.
+                // Determine if this avatar is the selected one.
+                // @TODO: Implement avatarChecked = true in Controller/Route.
+                // This check should/could also be done on the Route. People
+                // say that it's not good practice to add php to the templates.
                 $avatarChecked = false;
                 if (isset($selectedPlayerId)) {
                     if ($player['id'] == $selectedPlayerId) {
