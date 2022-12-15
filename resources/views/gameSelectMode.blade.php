@@ -1,4 +1,4 @@
-<x-layout :title="'Επίλεξε τύπο παιχνιδιού | Νέο παιχνίδι | Ταξιδιώτες'" :hasUserMenu=true :background="'background-dash-up'">
+<x-layout :title="'Διάλεξε τύπο παιχνιδιού | Νέο παιχνίδι | Ταξιδιώτες'" :hasUserMenu=true :background="'background-dash-up'">
     {{-- This page was designed responsively in order to support any amount of
          modes, therefore, you can simply use the x-selectMode[Link/Button]
          component as many times as needed (e.g. 1, 2, 3 or even more times).
@@ -60,7 +60,7 @@
                 {{-- if using a form add :mode-id=X here --}}
                 :alt="'Μονό παιχνίδι'" {{-- alt image desc --}}
                 :tabindex=1 {{-- first board should be 1 (default: -1) --}}
-                :url="'#'" {{-- e.g. select/pawn?player=1&board=1&mode=1pawn=0 --}}
+                :url="'/select/pawn'" {{-- e.g. select/pawn?player=1&board=1&mode=1pawn=0 --}}
                 :comingsoon=null {{-- If set to true disables link, adds ΠΡΟΣΕΧΩΣ teaser. --}}
             />
             <x-selectModeLink
@@ -69,7 +69,7 @@
                 {{-- if using a form add :mode-id=X here --}}
                 :alt="'Διπλό παιχνίδι'" {{-- alt image desc --}}
                 :tabindex=2
-                :url="'#'"
+                :url="'/select/pawn'"
                 :comingsoon=null {{-- If set to true disables link, adds ΠΡΟΣΕΧΩΣ teaser. --}}
             />
             <x-selectModeLink
@@ -78,7 +78,7 @@
                 {{-- if using a form add :mode-id=X here --}}
                 :alt="'Παιχνίδι με υπολογιστή'" {{-- alt image desc --}}
                 :tabindex=3
-                :url="'#'"
+                :url="'/select/pawn'"
                 :comingsoon=null {{-- If set to true disables link, adds ΠΡΟΣΕΧΩΣ teaser. --}}
             />
         </div>
@@ -88,7 +88,7 @@
                     {{-- in case of form use button instead of <a> --}}
                     <a
                         class="btn btn-primary btn-circle ms-auto responsive-expand"
-                        href="#"
+                        href="{{ url('/select/board' )}}"
                         id="backButton"
                         data-tabindex="1000"
                         tabindex="1000"

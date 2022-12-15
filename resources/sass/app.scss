@@ -187,9 +187,6 @@ img.splash {
     &:hover:not([aria-expanded=true]) img {
         scale: 1.05;
     }
-    @media (prefers-reduced-motion) {
-        scale: 1 !important;
-    }
     img {
         transition: all .2s ease-out;
         margin: 0 auto;
@@ -198,6 +195,9 @@ img.splash {
         border-radius: 50%;
         z-index: 2001;
         position: relative;
+    }
+    @media (prefers-reduced-motion) {
+        scale: 1 !important;
     }
 }
 
@@ -329,6 +329,11 @@ img.splash {
 .text-center-end {
     text-align: right;
 }
+.fix-pawn-margin {
+    // Due to pawn selection biggest than usual height,
+    // the button has to move inside the grid :(.
+    margin-top: -3.3rem !important;
+}
 
 /* Responsiveness */
 
@@ -362,7 +367,6 @@ img.splash {
         border-start-end-radius: 0;
     }
 }
-
 
 @media (max-width: 575.98px) {
     .section,

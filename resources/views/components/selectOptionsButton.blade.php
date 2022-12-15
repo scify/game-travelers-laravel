@@ -9,7 +9,7 @@
         type="submit"
         label="{{ $title ?? 'Επιλογή' }}"
         @isset($comingsoon)
-        {{-- For not yet available boards add atribute 'disabled': --}}
+        {{-- For not yet available options add attribute 'disabled': --}}
         disabled
         @endisset
     >

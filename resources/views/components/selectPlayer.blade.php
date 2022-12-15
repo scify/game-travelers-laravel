@@ -100,7 +100,7 @@
             data-value="{{ $selectedPlayerId ?? 0 }}" {{-- Original value --}}
             id="avatarsContainerInput" {{-- ID used by JS --}}
             type="hidden"
-            name="playerId"
+            name="player" {{-- Feel free to change the name if needed. --}}
             value="{{ $selectedPlayerId ?? 0 }}" {{-- Read/Altered by JS --}}
         />
     </div>

@@ -1,4 +1,4 @@
-<x-layout :title="'Επίλεξε πίστα | Νέο παιχνίδι | Ταξιδιώτες'" :hasUserMenu=true :background="'background-dash-up'">
+<x-layout :title="'Διάλεξε πίστα | Νέο παιχνίδι | Ταξιδιώτες'" :hasUserMenu=true :background="'background-dash-up'">
     {{-- This page was designed responsively in order to support any amount of
          boards, therefore, you can simply use the x-selectLevel[Link/Button]
          component as many times as needed (e.g. 1, 2, 3 or even more times).
@@ -52,14 +52,14 @@
                 :title="'Νησί'"
                 :alt="'Προεπισκόπηση πίστας νησιού'" {{-- alt image desc --}}
                 :tabindex=1 {{-- first board should be 1 (default: -1) --}}
-                :url="'#'" {{-- e.g. select/mode?player=1&board=1&mode=0pawn=0 --}}
+                :url="'/select/mode'" {{-- e.g. select/mode?player=1&board=1&mode=0pawn=0 --}}
             />
             <x-selectBoardLink
                 :asset="'board-island'"
                 :title="'Βουνό'"
                 :alt="'Προεπισκόπηση πίστας βουνού'" {{-- alt image desc --}}
                 :tabindex=2
-                :url="'#'"
+                :url="'/select/mode'"
                 :comingsoon=true {{-- Disables link, adds ΠΡΟΣΕΧΩΣ teaser --}}
             />
             <x-selectBoardLink
@@ -67,7 +67,7 @@
                 :title="'Πόλη'"
                 :alt="'Προεπισκόπηση πίστας πόλης'" {{-- alt image desc --}}
                 :tabindex=3
-                :url="'#'"
+                :url="'/select/mode'"
                 :comingsoon=true {{-- Disables link, adds ΠΡΟΣΕΧΩΣ teaser --}}
             />
         </div>
@@ -76,7 +76,7 @@
                 <div class="d-flex flex-auto">
                     <a
                         class="btn btn-primary btn-circle ms-auto responsive-expand"
-                        href="#"
+                        href="{{ url('/select/player' )}}"
                         id="backButton"
                         data-tabindex="1000"
                         tabindex="1000"

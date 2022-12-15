@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-    <title>Ευρετήριο</title>
+    <title>Ευρετήριο σελίδων</title>
     <!-- Scripts -->
     <script src="{{ asset('/js/app.js') }}" defer></script>
     <!-- Styles -->
@@ -10,13 +10,13 @@
 <body>
     <div class="container">
         <div class="alert alert-success" role="alert">
-            Success! Updated December 15, 2022, 15:49. Please select one of the following routes.
+            Success! Updated December 16, 2022, 01:00. Please select one of the following routes.
         </div>
         <h1>Demo Routes</h2>
         <small style="border-bottom: 1px solid #000;">Make your browser's window as small as this little line of text...</small>
 
         <h3 class="mt-4">Start New Game</h3>
-        <small>No notes yet.</small>
+        <small>A standard pill-shaped rectangle box was used for the User Menu as the abstract background image couldn't be aligned properly in relation with the always-on-top player's name. In addition, a constant "default" state has been set for almost all buttons on all pages except the Select Pawn list due to some strong contrast issues.</small>
         <dl>
             <dt><a href="{{ url('/select/player') }}">New game: Select player (1/5)</a></dt>
             <dd>✔️ <span class="new">New</span> Step 1. Fully responsive. Avatars have been reduced in size to fit this screen, labels have been introduced and everything acts as a virtual radiogroup with radios that is fully accessible. Custom flex-grid to allow trees to grow. The dash line at the bottom runs very wild. Remove player has been removed and will go to Settings. A secondary button was created. There is no way to log-out until the user has selected a Player. Fully responsive.</span>
@@ -27,11 +27,11 @@
                     <dd>✔️ <span class="new">New</span> Step 2 based on a GET/POST form with hidden fields.</span>
                 </dl>
             <dt><a href="{{ url('/select/mode') }}">New game: Select mode (3/5)</a></dt>
-            <dd>✔️ <span class="new">New</span> Step 3. Select mode. Supports 1 to N amount of modes, even if we will only have 3. Any mode can be easily disabled with a simple :comingsoon=true and that will add a nice ΠΡΟΣΕΧΩΣ! As rapid development demands re-usable components and because I really don't want to cause a visual conflict with the previous step, shadows have been applied to these buttons as well. Read the notes for the previous step for more info regarding implementation. Added a data-tabindex element in case we need an alternative to tabindex, which includes ALL the elements of the page and not just the ones which are part of the game. Fully responsive. </span>
-                <dt><a href="{{ url('/select/options') }}">New game: Select options (4 or 5/5)</a></dt>
-                <dd>✔️ <span class="new">New</span> Step 4. Start tutorial or Start game? That's the question. And to do that we had to insert a blank span, make it block and paint it almost white. Uses the same components as the ones on the previous steps. Same guidelines for passing selected options. Fully responsive. An option can be disabled via :comingsoon and of course no teaser is added. This is responsive as well.</span>
-                <dt><a href="{{ url('/select/pawn') }}">New game: Select pawn (5 or 4/5)</a></dt>
-            <dd>✔️ <span class="new">New</span> Step 5 of playing a New game.</span>
+            <dd>✔️ <span class="new">New</span> Step 3. Select mode. Supports 1 to N amount of modes, even if we will only have 3. Any mode can be easily disabled with a simple :comingsoon=true and that will add a nice ΠΡΟΣΕΧΩΣ! Read the notes for the previous step for more info regarding implementation. Added a data-tabindex element in case we need an alternative to tabindex, which includes ALL the elements of the page and not just the ones which are part of the game. Fully responsive. </span>
+            <dt><a href="{{ url('/select/pawn') }}">New game: Select pawn (4 or 5/5)</a></dt>
+            <dd>✔️ <span class="new">New</span> Step 4. Different orientation of "options" demanded another new element, the pawn button. Keep in mind that switching from a soft background green to a bright white caused serious eye-strain so a softer highlight was preferred. Fully responsive. </span>
+            <dt><a href="{{ url('/select/options') }}">New game: Select options (5 or 4/5)</a></dt>
+            <dd>✔️ <span class="new">New</span> Step 5. Start tutorial or Start game? That's the question. And to do that we had to insert a blank span, make it block and paint it almost white. Uses the same components as the ones on the previous steps. Same guidelines for passing selected options. Fully responsive. An option can be disabled via :comingsoon and of course no teaser is added. Responsive as well.</span>
         </dl>
 
         <h3 class="mt-4">Create New Player</h3>

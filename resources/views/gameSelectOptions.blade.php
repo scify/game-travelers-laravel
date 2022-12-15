@@ -1,4 +1,4 @@
-<x-layout :title="'Νέο παιχνίδι | Ταξιδιώτες'" :hasUserMenu=true :background="'background-dash-up'">
+<x-layout :title="'Διάλεξε παιχνίδι | Ταξιδιώτες'" :hasUserMenu=true :background="'background-dash-up'">
     {{-- This page was designed responsively in order to support any amount of
          options, therefore, you can simply use the x-selectOptions[Link/Button]
          component as many times as needed (e.g. 1, 2, 3 or even more times).
@@ -34,8 +34,9 @@
                 {{-- Reserved for header navigation buttons.  --}}
             </div>
             <div class="col-10 text-center" id="currentPageHeader">
-                {{-- @TODO: Ίδιος τίτλος ακριβώς με εκείνον του προπροηγούμενου
-                    βήματος, see @sgameSelectMode.blade.php . Αλλαγή; --}}
+                {{-- @TODO: Μμμμμ. Δεν είναι ικανοποιητικά σαφής ο τίτλος
+                    επίσης επαναλαμβάνει όσα αναφέρονται στη σελίδα του τύπου:
+                    see @sgameSelectMode.blade.php . Αλλαγή; --}}
                 <h1 id="currentPageLabel">Διάλεξε παιχνίδι</h1>
                 <p>
                     <strong class="fs-5" id="currentPageDescription">
@@ -77,7 +78,7 @@
                     {{-- in case of form use button instead of <a> --}}
                     <a
                         class="btn btn-primary btn-circle ms-auto responsive-expand"
-                        href="#"
+                        href="{{ url('/select/pawn') }}"
                         id="backButton"
                         data-tabindex="1000"
                         tabindex="1000"

@@ -1,4 +1,4 @@
-<x-layout :title="'Επίλεξε παίκτη | Νέο παιχνίδι | Ταξιδιώτες'">
+<x-layout :title="'Διάλεξε παίκτη | Νέο παιχνίδι | Ταξιδιώτες'">
     {{-- To be fair this would have been a nice Vue app. For now it's a form
          with custom JS. Note that as in the profileNewStep1 form, the buttons
          container acts as a radiogroup and each button is a radio (with the
@@ -10,7 +10,7 @@
         <script src="{{ mix('js/functions/settings.js') }}" defer></script>
     @endsection
 
-    <form method="???" action="" id="newGame"> {{-- unused id --}}
+    <form method="get" action="{{ url('/select/board') }}" id="newGame"> {{-- unused id --}}
         @csrf
 
             <!-- section header -->
@@ -35,7 +35,7 @@
         </div>
         <!-- / section header -->
 
-        <div class="section gamesettings container-xxl px-4 background-dash-down ">
+        <div class="section gamesettings container-xxl px-4"> {{-- background-dash-down removed --}}
             <div class="row gx-0">
                 <div class="background background-group-2--col background-group-2--tree-1 col-2 col-xxl-2 d-none d-lg-block d-print-none" role="presentation">
                 </div>
