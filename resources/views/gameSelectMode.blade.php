@@ -82,7 +82,7 @@
                 :comingsoon=null {{-- If set to true disables link, adds ΠΡΟΣΕΧΩΣ teaser. --}}
             />
         </div>
-        <div class="row gx-0 pt-6 pt-sm-0 pt-md-0 pt-lg-0 pt-xxl-6">
+        <div class="row gx-0 pt-6 pt-sm-0 pt-md-0 pt-lg-0 pt-xl-6 pt-xxl-6">
             <div class="col-12">
                 <div class="d-flex flex-auto">
                     {{-- in case of form use button instead of <a> --}}

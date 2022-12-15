@@ -117,6 +117,11 @@ button.key-assigner.active {
         // inset 0 0.1em 1em rgba(var(--trvl-c-dark-rgb), 0.111),
         0 0.3em 0.6em rgba(var(--trvl-c-dark-rgb), 0.161),
         0 0.1em 0.1em rgba(var(--trvl-c-dark-rgb), 0.222);
+    &.blank {
+        display:block;
+        width: 352px;
+        height: 244px;
+    }
 }
 // Board labels
 .board-label {
@@ -124,6 +129,10 @@ button.key-assigner.active {
     position: relative;
     top: 1rem;
     font-weight:bold;
+    &.blank {
+        font-size: 1.3rem;
+        top: -8.5rem;
+    }
 }
 .btn-board:hover .board-label,
 .btn-board:focus .board-label,
@@ -131,6 +140,9 @@ button.key-assigner.active {
     /* font-size: 1.8rem; */
     scale: 1.6;
     font-weight: 800;
+    &.blank {
+        scale: 1.3;
+    }
     @media (prefers-reduced-motion) {
         scale: 1 !important;
     }
@@ -183,7 +195,7 @@ button.key-assigner.active {
 // Circular button used for moving "Back"
 .btn-circle {
     --bs-btn-hover-border-color: var(--trvl-c-dark);
-    --bs-btn-bg: #dedede;
+    --bs-btn-bg: #eaeaea;
     width: 5.2rem;
     height: 5.2rem;
     line-height: 5.2;

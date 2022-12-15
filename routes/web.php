@@ -75,12 +75,12 @@ Route::get('/select/board', function () {
     return view('gameSelectBoard');
 });
 Route::get('/select/mode', function () {
-    // Requires View::share('players_with_avatars', $players_with_avatars);
+    // Select Mode (single player et.) page with links for passing data via GET.
     return view('gameSelectMode');
 });
-Route::get('/select/help', function () {
-    // Requires View::share('players_with_avatars', $players_with_avatars);
-    return view('gameSelectHelp');
+Route::get('/select/options', function () {
+    // Select Options (tutorial, etc.) page with links for passing data via GET.
+    return view('gameSelectOptions');
 });
 Route::get('/select/pawn', function () {
     // Requires View::share('players_with_avatars', $players_with_avatars);

@@ -77,7 +77,7 @@
                     :comingsoon=true {{-- Disables link, adds ΠΡΟΣΕΧΩΣ teaser --}}
                 />
             </div>
-            <div class="row gx-0 pt-6 pt-sm-0 pt-md-0 pt-lg-0 pt-xxl-6">
+            <div class="row gx-0 pt-6 pt-sm-0 pt-md-0 pt-lg-0 pt-xl-6 pt-xxl-6">
                 <div class="col-12">
                     <div class="d-flex flex-auto">
                         {{-- Maybe this has to be part of the form as well. Oh well. I suppose making it a button works but haven't tested it yet. --}}

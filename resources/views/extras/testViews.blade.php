@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <div class="alert alert-success" role="alert">
-            Success! Updated December 15, 2022, 05:00. Please select one of the following routes.
+            Success! Updated December 15, 2022, 15:49. Please select one of the following routes.
         </div>
         <h1>Demo Routes</h2>
         <small style="border-bottom: 1px solid #000;">Make your browser's window as small as this little line of text...</small>
@@ -28,9 +28,9 @@
                 </dl>
             <dt><a href="{{ url('/select/mode') }}">New game: Select mode (3/5)</a></dt>
             <dd>✔️ <span class="new">New</span> Step 3. Select mode. Supports 1 to N amount of modes, even if we will only have 3. Any mode can be easily disabled with a simple :comingsoon=true and that will add a nice ΠΡΟΣΕΧΩΣ! As rapid development demands re-usable components and because I really don't want to cause a visual conflict with the previous step, shadows have been applied to these buttons as well. Read the notes for the previous step for more info regarding implementation. Added a data-tabindex element in case we need an alternative to tabindex, which includes ALL the elements of the page and not just the ones which are part of the game. Fully responsive. </span>
-            <dt><a href="{{ url('/select/help') }}">New game: Select help (4/5)</a></dt>
-            <dd>✔️ <span class="new">New</span> Step 4 of playing a New game.</span>
-            <dt><a href="{{ url('/select/pawn') }}">New game: Select pawn (5/5)</a></dt>
+                <dt><a href="{{ url('/select/options') }}">New game: Select options (4 or 5/5)</a></dt>
+                <dd>✔️ <span class="new">New</span> Step 4. Start tutorial or Start game? That's the question. And to do that we had to insert a blank span, make it block and paint it almost white. Uses the same components as the ones on the previous steps. Same guidelines for passing selected options. Fully responsive. An option can be disabled via :comingsoon and of course no teaser is added. This is responsive as well.</span>
+                <dt><a href="{{ url('/select/pawn') }}">New game: Select pawn (5 or 4/5)</a></dt>
             <dd>✔️ <span class="new">New</span> Step 5 of playing a New game.</span>
         </dl>
 
