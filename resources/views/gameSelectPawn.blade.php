@@ -48,49 +48,49 @@
                 :alt="'Προεπισκόπηση πιονιού Ιάσωνα'" {{-- alt image desc --}}
                 {{-- add :pawn-id=$pawnId }} for if using PawnButton buttons --}}
                 :tabindex=1 {{-- first pawn should be 1 (default: -1) --}}
-                :url="'/select/options'" {{-- e.g. game?player=1&board=1&mode=1&pawn=1 --}}
+                :url="url('/select/options')" {{-- e.g. game?player=1&board=1&mode=1&pawn=1 --}}
             />
             <x-selectPawnLink
                 :asset="'pawn-myrto'"
                 :title="'Μυρτώ'"
                 :alt="'Προεπισκόπηση πιονιού Μυρτούς'" {{-- alt image desc --}}
                 :tabindex=2 {{-- first pawn should be 1 (default: -1) --}}
-                :url="'/select/options'" {{-- e.g. game?player=1&board=1&mode=1&pawn=1 --}}
+                :url="url('/select/options')" {{-- e.g. game?player=1&board=1&mode=1&pawn=1 --}}
             />
             <x-selectPawnLink
                 :asset="'pawn-katerina'"
                 :title="'Κατερίνα'"
                 :alt="'Προεπισκόπηση πιονιού Κατερίνας'" {{-- alt image desc --}}
                 :tabindex=3 {{-- first pawn should be 1 (default: -1) --}}
-                :url="'/select/options'" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
+                :url="url('/select/options')" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
             />
             <x-selectPawnLink
                 :asset="'pawn-dimitris'"
                 :title="'Δημήτρης'"
                 :alt="'Προεπισκόπηση πιονιού Δημήτρη'" {{-- alt image desc --}}
                 :tabindex=4 {{-- first pawn should be 1 (default: -1) --}}
-                :url="'/select/options'" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
+                :url="url('/select/options')" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
             />
             <x-selectPawnLink
                 :asset="'pawn-vasilis'"
                 :title="'Βασίλης'"
                 :alt="'Προεπισκόπηση πιονιού Βασίλη'" {{-- alt image desc --}}
                 :tabindex=5 {{-- first pawn should be 1 (default: -1) --}}
-                :url="'/select/options'" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
+                :url="url('/select/options')" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
             />
             <x-selectPawnLink
                 :asset="'pawn-zoumpoulia'"
                 :title="'Ζουμπουλία'"
                 :alt="'Προεπισκόπηση πιονιού Ζουμπουλίας'" {{-- alt image desc --}}
                 :tabindex=6 {{-- first pawn should be 1 (default: -1) --}}
-                :url="'/select/options'" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
+                :url="url('/select/options')" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
             />
             <x-selectPawnLink
                 :asset="'pawn-vrasidas'"
                 :title="'Βρασίδας'"
                 :alt="'Προεπισκόπηση πιονιού Βρασίδα'" {{-- alt image desc --}}
                 :tabindex=7 {{-- first pawn should be 1 (default: -1) --}}
-                :url="'/select/options'" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
+                :url="url('/select/options')" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
             />
 
         </div>

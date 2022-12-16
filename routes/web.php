@@ -19,13 +19,14 @@ use Illuminate\Support\Facades\Route;
  */
 require __DIR__.'/auth.php';
 
+// Temporary splash screen implementation to hide the /log diary out of sight.
 Route::get('/', function () {
     return view('splash');
 });
 
 // From the "obsolete" pages, this still acts as the index, so please don't
 // delete this blade until we have a brand new front-page to replace it. Also
-// has important comments, as Manos decided to use this as a notebook :).
+// has important comments, as some of us decided to use this as a notebook.
 Route::get('/log', function () {
     return view('extras/logViews');
 });
@@ -49,20 +50,26 @@ Route::get('/select/player', function () {
     return view('gameSelectPlayer');
 });
 Route::get('/select/board', function () {
+    // Requires Implementation of "User Menu".
     // Select Board page with links for passing data via GET.
+    // This is indeed fully implemented and has :comingsoon=true support.
     return view('gameSelectBoard');
 });
 Route::get('/select/mode', function () {
+    // Requires Implementation of "User Menu".
     // Select Mode (single player et.) page with links for passing data via GET.
+    // Individual modes can be disabled with the :comingsoon=true attribute.
     return view('gameSelectMode');
 });
+Route::get('/select/pawn', function () {
+    // Requires Implementation of "User Menu".
+    // Select Pawn (tutorial, etc.) page with links for passing data via GET.
+    return view('gameSelectPawn');
+});
 Route::get('/select/options', function () {
+    // Requires Implementation of "User Menu".
     // Select Options (tutorial, etc.) page with links for passing data via GET.
     return view('gameSelectOptions');
-});
-Route::get('/select/pawn', function () {
-    // Requires View::share('players_with_avatars', $players_with_avatars);
-    return view('gameSelectPawn');
 });
 // Demos
 Route::get('/demo/select/board/form', function () {
@@ -71,7 +78,7 @@ Route::get('/demo/select/board/form', function () {
 });
 
 /*
- * Stepper 2 | New player profiles.
+ * Stepper 2 | New player profiles & settings.
  * Last update: December 10, 2022.
  * @link https://xd.adobe.com/view/881b8987-9d56-443d-9e00-c2edcb5a6671-dd48/
  */
@@ -95,6 +102,14 @@ Route::get('demo/profile/success', function () {
     return view('extras/demoProfileNewSuccess');
 });
 
+/*
+ * Travellers | Settings
+ * Last update: December 16, 2022.
+ * @link https://xd.adobe.com/view/d308b3ee-c123-48d3-87ff-5304ebdaa85a-865b/
+ */
+Route::get('/settings', function () {
+    return view('settings');
+});
 
 // Obsolete pages:
 // No longer needed, yet they might be useful during development.

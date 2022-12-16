@@ -61,7 +61,7 @@
                 :title="'Μάθε μου να παίζω'"
                 {{-- if using a form add :option-id=X here --}}
                 :tabindex=1 {{-- first option should be 1 (default: -1) --}}
-                :url="'#'" {{-- e.g. select/pawn?player=1&board=1&mode=1pawn=0 --}}
+                :url="'#'" {{-- e.g. game?player=1&board=1&mode=1&pawn=0 --}}
                 :comingsoon=null {{-- If set to true disables link. --}}
             />
             <x-selectOptionsLink

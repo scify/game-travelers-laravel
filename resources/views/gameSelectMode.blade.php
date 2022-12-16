@@ -60,7 +60,7 @@
                 {{-- if using a form add :mode-id=X here --}}
                 :alt="'Μονό παιχνίδι'" {{-- alt image desc --}}
                 :tabindex=1 {{-- first board should be 1 (default: -1) --}}
-                :url="'/select/pawn'" {{-- e.g. select/pawn?player=1&board=1&mode=1pawn=0 --}}
+                :url="url('/select/pawn')" {{-- e.g. select/pawn?player=1&board=1&mode=1&pawn=0 --}}
                 :comingsoon=null {{-- If set to true disables link, adds ΠΡΟΣΕΧΩΣ teaser. --}}
             />
             <x-selectModeLink
@@ -69,7 +69,7 @@
                 {{-- if using a form add :mode-id=X here --}}
                 :alt="'Διπλό παιχνίδι'" {{-- alt image desc --}}
                 :tabindex=2
-                :url="'/select/pawn'"
+                :url="url('/select/pawn')"
                 :comingsoon=null {{-- If set to true disables link, adds ΠΡΟΣΕΧΩΣ teaser. --}}
             />
             <x-selectModeLink
@@ -78,7 +78,7 @@
                 {{-- if using a form add :mode-id=X here --}}
                 :alt="'Παιχνίδι με υπολογιστή'" {{-- alt image desc --}}
                 :tabindex=3
-                :url="'/select/pawn'"
+                :url="url('/select/pawn')"
                 :comingsoon=null {{-- If set to true disables link, adds ΠΡΟΣΕΧΩΣ teaser. --}}
             />
         </div>

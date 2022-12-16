@@ -52,14 +52,14 @@
                 :title="'Νησί'"
                 :alt="'Προεπισκόπηση πίστας νησιού'" {{-- alt image desc --}}
                 :tabindex=1 {{-- first board should be 1 (default: -1) --}}
-                :url="'/select/mode'" {{-- e.g. select/mode?player=1&board=1&mode=0pawn=0 --}}
+                :url="url('/select/mode')" {{-- e.g. select/mode?player=1&board=1&mode=0pawn=0 --}}
             />
             <x-selectBoardLink
                 :asset="'board-island'"
                 :title="'Βουνό'"
                 :alt="'Προεπισκόπηση πίστας βουνού'" {{-- alt image desc --}}
                 :tabindex=2
-                :url="'/select/mode'"
+                :url="url('/select/mode')"
                 :comingsoon=true {{-- Disables link, adds ΠΡΟΣΕΧΩΣ teaser --}}
             />
             <x-selectBoardLink
@@ -67,7 +67,7 @@
                 :title="'Πόλη'"
                 :alt="'Προεπισκόπηση πίστας πόλης'" {{-- alt image desc --}}
                 :tabindex=3
-                :url="'/select/mode'"
+                :url="url('/select/mode')"
                 :comingsoon=true {{-- Disables link, adds ΠΡΟΣΕΧΩΣ teaser --}}
             />
         </div>
