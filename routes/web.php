@@ -31,7 +31,7 @@ Route::get('/log', function () {
     return view('extras/logViews');
 });
 
-// Sample Data used on profileNewStep1 and its 2 demos. The exampleData contains
+// Sample Data used on playerProfileNew and 2 demos. The exampleData contains
 // the $avatar array, which contains all available modules. It's the output of
 // the proposed (untested) Avatar model, which also resides in the same folder.
 // @see ../docs/examples/exampleData.php Avatar Data Model
@@ -42,7 +42,7 @@ View::share('players_with_avatars', $players_with_avatars);
 
 /*
  * Travellers | Step 1. New game
- * Last update: December 15, 2022.
+ * Last update: December 18, 2022.
  * @link https://xd.adobe.com/view/d308b3ee-c123-48d3-87ff-5304ebdaa85a-865b/
  */
 Route::get('/select/player', function () {
@@ -79,27 +79,32 @@ Route::get('/demo/select/board/form', function () {
 
 /*
  * Stepper 2 | New player profiles & settings.
- * Last update: December 10, 2022.
+ * Last update: December 18, 2022.
  * @link https://xd.adobe.com/view/881b8987-9d56-443d-9e00-c2edcb5a6671-dd48/
  */
-Route::get('/profile/new', function () {
+Route::get('/player/new', function () {
+    // New Player Step 1: Player's Profile
     // Requires View::share('avatars', $avatars);
-    return view('profileNewStep1');
+    return view('playerProfileNew');
 });
-Route::get('/profile/new/2', function () {
-    // Requires View::share('avatars', $avatars);
-    return view('profileNewStep2');
+Route::get('/player/controls/new', function () {
+    // New Player Step 2: Player's Control Settings
+    return view('playerControlsNew');
 });
-Route::get('/profile/new/3', function () {
-    // Requires View::share('avatars', $avatars);
-    return view('profileNewStep3');
+Route::get('/player/difficulty/new', function () {
+    // New Player Step 3: Player's Difficulty Settings
+    return view('playerDifficultyNew');
 });
 // Demos
-Route::get('demo/profile/error', function () {
-    return view('extras/demoProfileNewError');
+Route::get('demo/player/new/error', function () {
+    // DEMO - Error - New Player Step 1: Player's Profile
+    // Requires View::share('avatars', $avatars);
+    return view('extras/demoPlayerProfileNewError');
 });
-Route::get('demo/profile/success', function () {
-    return view('extras/demoProfileNewSuccess');
+Route::get('demo/player/new/success', function () {
+    // DEMO - Success - New Player Step 1: Player's Profile
+    // Requires View::share('avatars', $avatars);
+    return view('extras/demoPlayerProfileNewSuccess');
 });
 
 /*

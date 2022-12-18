@@ -81,7 +81,7 @@
                     data-role="button-add-player"
                     aria-label="Προσθήκη νέου παίκτη"
                     tabindex="{{ $tabindex ?? '-1' }}"
-                    href="{{ url('/profile/new') }}"
+                    href="{{ url('/player/new') }}"
                 >
                     <img
                         src="{{ asset('images/icons/plus90.svg') }}"
@@ -92,7 +92,6 @@
                 <span class="label-avatar-options">Νέο προφίλ</span>
             </div>
         @endisset
-
 
         {{-- default value = "0"  (no avatar selected --}}
         <input

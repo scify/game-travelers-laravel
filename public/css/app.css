@@ -13110,31 +13110,41 @@ button.key-assigner.active {
   }
 }
 /* Buttons */
+.form.is-invalid .field-legend,
+.form.is-invalid .field-label:is(:not(.form-header)),
+.form.is-invalid .field-description,
+.form.is-invalid .captcha-prompt,
 .field.is-invalid .field-legend,
-.field.is-invalid .field-label,
+.field.is-invalid .field-label:is(:not(.form-header)),
 .field.is-invalid .field-description,
 .field.is-invalid .captcha-prompt,
 .field-group.is-invalid .field-legend,
-.field-group.is-invalid .field-label,
+.field-group.is-invalid .field-label:is(:not(.form-header)),
 .field-group.is-invalid .field-description,
 .field-group.is-invalid .captcha-prompt {
   color: var(--trvl-danger);
 }
+.form.is-invalid .captcha-prompt,
 .field.is-invalid .captcha-prompt,
 .field-group.is-invalid .captcha-prompt {
   font-weight: 600;
 }
+.form.is-invalid .field-input.underlined,
 .field.is-invalid .field-input.underlined,
 .field-group.is-invalid .field-input.underlined {
   box-shadow: inset 0 -0.25rem hsla(var(--trvl-danger-hsl), 0.1);
   border-bottom-color: var(--trvl-danger);
 }
-.field.is-invalid .field-input.underlined:focus, .field.is-invalid .field-input.underlined:focus-visible, .field.is-invalid .field-input.underlined:focus-within,
+.form.is-invalid .field-input.underlined:focus, .form.is-invalid .field-input.underlined:focus-visible, .form.is-invalid .field-input.underlined:focus-within,
+.field.is-invalid .field-input.underlined:focus,
+.field.is-invalid .field-input.underlined:focus-visible,
+.field.is-invalid .field-input.underlined:focus-within,
 .field-group.is-invalid .field-input.underlined:focus,
 .field-group.is-invalid .field-input.underlined:focus-visible,
 .field-group.is-invalid .field-input.underlined:focus-within {
   box-shadow: inset 0 -0.25rem hsla(var(--trvl-danger-hsl), 0.2);
 }
+.form.is-invalid .field-description.big,
 .field.is-invalid .field-description.big,
 .field-group.is-invalid .field-description.big {
   background-color: hsla(var(--salmon-red-hsl), 0.01);

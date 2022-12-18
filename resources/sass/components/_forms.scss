@@ -1,10 +1,11 @@
 /* Buttons */
 
 // Fields
+.form.is-invalid,
 .field.is-invalid,
 .field-group.is-invalid {
     .field-legend,
-    .field-label,
+    .field-label:is(:not(.form-header)),
     .field-description,
     .captcha-prompt {
         color: var(--trvl-danger);

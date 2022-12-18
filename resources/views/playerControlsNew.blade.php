@@ -10,7 +10,11 @@
     @endsection
 
     <!-- new player step 2/3 content -->
-    <form method="post" action="" id="profileNewStep2">
+    <form
+        method="get" {{-- should be post, get is for testing --}}
+        action="{{ url('/player/difficulty/new') }}"
+        id="playerControlsNew" {{-- unused id --}}
+    >
         @csrf
 
         <!-- step counter 2/3 -->
@@ -57,7 +61,11 @@
         <div class="settings-header container-xxl px-4 px-sm-4 mb-2 mb-lg-1">
             <div class="row">
                 <div class="col-1">
-                    <x-buttonBack :label="'Επιστροφή στο προηγούμενο μενού'" />
+                    <x-buttonBack
+                        :label="'Επιστροφή στην επιλογή παίκτη'"
+                        :align="'left'"
+                        :url="url('/select/player')"
+                    />
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">
                     <h1 id="currentPageLabel">Χειρισμός</h1>

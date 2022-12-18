@@ -14,7 +14,11 @@
     @endsection
 
     <!-- new player step 1/3 content -->
-    <form method="post" action="" id="profileNewStep1"> {{-- unused id --}}
+    <form
+        method="get" {{-- should be post, get is for testing --}}
+        action="{{ url('/player/controls/new') }}"
+        id="playerProfileNew" {{-- unused id --}}
+    >
         @csrf
 
         <!-- step counter 1/3 -->
@@ -50,7 +54,7 @@
                     <x-buttonBack
                         :label="'Ακύρωση και επιστροφή στην επιλογή παίκτη'"
                         :align="'left'"
-                        :url="'select/player'"
+                        :url="url('/select/player')"
                     />
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">
