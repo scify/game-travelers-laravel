@@ -1,7 +1,7 @@
 /* Buttons */
 // Base
 .btn {
-    --bs-btn-focus-box-shadow: 0 0 0 0.3rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5);
+    --bs-btn-focus-box-shadow: 0 0 0 0.3rem rgba(var(--bs-btn-focus-shadow-rgb), 0.6);
 }
 .btn:hover {
     box-shadow: 0 0.3rem rgba(var(--trvl-btn-hover-shadow-rgb), .1);
@@ -24,19 +24,19 @@
     --bs-btn-bg: #bfcfd0;
     --bs-btn-hover-color: var(--trvl-btn-color);
     --bs-btn-hover-bg: #bacaca;
-    --bs-btn-disabled-color: var(--trvl-btn-color);
+    --bs-btn-disabled-color: var(--trvl-btn-disabled-color);
     --bs-btn-disabled-bg: #bacaca;
-    --bs-btn-disabled-border-color: var(--trvl-btn-border-color);
+    --bs-btn-disabled-border-color: var(--trvl-btn-disabled-border-color);
 }
 .btn-primary,
 .btn-secondary {
     --bs-btn-border-color: var(--trvl-btn-border-color);
     --bs-btn-hover-border-color: var(--trvl-btn-hover-border-color);
-    --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
     --bs-btn-active-color: var(--trvl-btn-active-color);
     --bs-btn-active-bg: var(--trvl-btn-active-bg);
     --bs-btn-active-border-color: var(--trvl-btn-active-border-color);
     --bs-btn-active-shadow: inset 0 3px 5px rgba(var(--trvl-c-dark-rgb), 0.125);
+    --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
 }
 
 // Round button
@@ -45,6 +45,23 @@
 }
 
 // Special buttons
+
+// Danger-danger!
+.btn-danger {
+    --bs-btn-color: var(--trvl-danger-light-text);
+    --bs-btn-bg: var(--trvl-danger-light-bg);
+    --bs-btn-border-color: var(--trvl-danger-light-text);
+    // @TODO: Implement hover/active /disabled states.
+    --bs-btn-hover-color: var(--trvl-danger-light-text);
+    --bs-btn-hover-bg: var(--trvl-danger-light-bg);
+    --bs-btn-active-color: var(--trvl-danger-light-text);
+    --bs-btn-active-bg: var(--trvl-danger-light-bg);
+    --bs-btn-disabled-color: var(--trvl-btn-disabled-color);
+    --bs-btn-disabled-bg: var(--trvl-danger-light-bg);
+    --bs-btn-disabled-border-color: var(--trvl-danger-light-text);
+}
+
+// The small ones for key-capturing.
 .btn-light {
     &.key-assigner {
         transition: all .5s ease-in-out;
@@ -258,7 +275,6 @@ button.key-assigner.active {
         0 2px 2px rgba(var(--trvl-c-dark-rgb), 0.1);
     }
 }
-
 
 
 /* Button sizes */

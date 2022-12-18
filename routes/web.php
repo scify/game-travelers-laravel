@@ -109,11 +109,13 @@ Route::get('demo/player/new/success', function () {
 
 /*
  * Travellers | Settings
- * Last update: December 16, 2022.
+ * Last update: December 18, 2022.
  * @link https://xd.adobe.com/view/d308b3ee-c123-48d3-87ff-5304ebdaa85a-865b/
  */
-Route::get('/settings', function () {
-    return view('settings');
+Route::get('/player/settings', function () {
+    // Should be /player/{playerid}/settings allowing easier access via userMenu
+    // without having to have a 2nd form on each individual page.
+    return view('playerSettings');
 });
 
 // Obsolete pages:

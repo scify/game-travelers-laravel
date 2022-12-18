@@ -27,13 +27,6 @@
     min-height: 195px;
 }
 
-.background-dash-down {
-    background-image: url("../images/bg-g2-dash-down.png");
-    background-repeat: no-repeat;
-    background-position-y: bottom;
-    background-size: 1368px 139px;
-}
-
 /*
  * Background Group 1 contains:
  * (group) group #1
@@ -114,6 +107,54 @@
     position: relative;
     top: -5rem;
     // min-width:136px;
+}
+
+/*
+ * Background Group 3
+ * (decoration) Flowers (δάφνες;) to the right of the page
+ *
+ */
+.background-group-3--dash {
+    background-image: url("../images/bg-g2-dash-down.png");
+    background-repeat: no-repeat;
+    background-position: 0% 75%;
+    background-size: 1368px 139px;
+    @media
+        only screen and (-webkit-min-device-pixel-ratio: 2),
+        only screen and (min--moz-device-pixel-ratio: 2),
+        only screen and (min-device-pixel-ratio: 2),
+        only screen and (min-resolution: 2dppx) {
+            background-image: url("../images/bg-g2-dash-down@2x.png");
+    }
+}
+.background-group-3--abstract {
+    background-image: url("../images/bg-g3-abstract.png");
+    background-repeat: no-repeat;
+    background-position: 0% 20%;
+    background-size: 83px 159px;
+    @media
+        only screen and (-webkit-min-device-pixel-ratio: 2),
+        only screen and (min--moz-device-pixel-ratio: 2),
+        only screen and (min-device-pixel-ratio: 2),
+        only screen and (min-resolution: 2dppx) {
+            background-image: url("../images/bg-g3-abstract@2x.png");
+    }
+}
+.background-group-3--flowers {
+    background-image: url("../images/bg-g3-side-flowers.png");
+    background-repeat: no-repeat;
+    background-position: 100% 20%;
+    background-size: 323px 541px;
+    @media
+        only screen and (-webkit-min-device-pixel-ratio: 2),
+        only screen and (min--moz-device-pixel-ratio: 2),
+        only screen and (min-device-pixel-ratio: 2),
+        only screen and (min-resolution: 2dppx) {
+            background-image: url("../images/bg-g3-side-flowers@2x.png");
+    }
+    @media (max-width: 575.98px) {
+        background-image: none;
+    }
 }
 
 /* Responsiveness */

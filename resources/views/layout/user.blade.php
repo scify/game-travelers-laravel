@@ -32,7 +32,7 @@
             </li>
             <li>
                 {{-- href could be url('/player/{playerid}/settings/ --}}
-                <a class="user-menu-item dropdown-item" href="#" aria-description="Ρυθμίσεις για τον παίκτη">
+                <a class="user-menu-item dropdown-item" href="{{ url('/player/settings') }}" aria-description="Ρυθμίσεις για τον παίκτη">
                     Ρυθμίσεις
                 </a>
             </li>

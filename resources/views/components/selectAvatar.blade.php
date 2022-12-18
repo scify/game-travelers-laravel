@@ -1,4 +1,4 @@
-<!-- /resources/views/selectAvatar.blade.php -->
+<!-- /resources/views/components/selectAvatar.blade.php -->
 {{--
     - Component which allows the user to select one of the available Avatars.
       All the Avatars are returned as <buttons> which act as radios in a virtual

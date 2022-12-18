@@ -41,7 +41,7 @@
     <!-- / section header -->
 
     <div class="section gameselect container-xxl pt-3 px-4 px-lg-6">
-        <div class="row text-center justify-content-center gy-2">
+        <div class="row text-center justify-content-center gy-4 gy-xxl-2">
             <x-selectPawnLink
                 :asset="'pawn-iasonas'"
                 :title="'Ιάσωνας'"
@@ -96,7 +96,7 @@
         </div>
         <div class="row gx-0 pt-6 pt-sm-0 fix-pawn-margin">
             <div class="col-12">
-                <div class="d-flex flex-auto">
+                <div class="d-flex flex-auto mt-4 mt-sm-0">
                     <a
                         class="btn btn-primary btn-circle ms-auto responsive-expand"
                         href="{{ url('/select/mode' )}}"

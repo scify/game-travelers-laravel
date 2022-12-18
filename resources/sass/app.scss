@@ -50,8 +50,8 @@ a, a:hover, a:active, a:visited {
   outline: none;
 }
 a:focus, a:focus-visible {
-  outline-color: hsla(var(--trvl-shadow-focus-hsl), 0.75);
-  outline-width: 0.2rem;
+  outline-color: hsla(0, 0%, 0%, 0.7); // hsla(var(--trvl-shadow-focus-hsl), 0.75)
+  outline-width: 0.3rem;
   outline-style: solid;
 }
 
@@ -174,7 +174,7 @@ img.splash {
         box-shadow: none;
     }
     &::after { // dropdown triangle
-        z-index: 2001;
+        z-index: 1001; // @see https://getbootstrap.com/docs/5.0/layout/z-index/
         position: absolute;
         margin-left: 0;
         left: 70px;
@@ -193,7 +193,7 @@ img.splash {
         padding: 0;
         background: #fff;
         border-radius: 50%;
-        z-index: 2001;
+        z-index: 1001;
         position: relative;
     }
     @media (prefers-reduced-motion) {
@@ -229,6 +229,13 @@ img.splash {
 }
 .user-menu-item:active {
     background-color: var(--trvl-c-text);
+}
+
+// Modals
+.modal-content {
+    --bs-modal-bg: var(--trvl-modal-bg);
+    --bs-modal-header-border-color: var(--trvl-modal-bg);
+    --bs-modal-footer-border-color: var(--trvl-modal-bg);
 }
 
 // Success
