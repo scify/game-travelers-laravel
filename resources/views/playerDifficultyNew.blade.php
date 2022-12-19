@@ -100,7 +100,10 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col">
-                                <legend>Ζάρι</legend>
+                                <legend>
+                                    Ζάρι
+                                    <button class="btn-help" type="button" data-bs-toggle="modal" data-bs-target="#modalSettingsDice" aria-label="Πληροφορίες"></button>
+                                </legend>
                             </div>
                         </div>
                         <div class="row mt-2">
@@ -189,6 +192,7 @@
                             <div class="col">
                                 <legend class="field-legend fw-bold">
                                     Διάρκεια παιχνιδιού
+                                    <button class="btn-help" type="button" data-bs-toggle="modal" data-bs-target="#modalSettingsDuration" aria-label="Πληροφορίες"></button>
                                 </legend>
                             </div>
                         </div>
@@ -214,6 +218,7 @@
                             <div class="col">
                                 <legend class="field-legend fw-bold">
                                     Επίπεδο
+                                    <button class="btn-help" type="button" data-bs-toggle="modal" data-bs-target="#modalSettingsLevel" aria-label="Πληροφορίες"></button>
                                 </legend>
                             </div>
                         </div>
@@ -235,6 +240,7 @@
                             <div class="col">
                                 <legend class="field-legend fw-bold">
                                     Μετακίνηση
+                                    <button class="btn-help" type="button" data-bs-toggle="modal" data-bs-target="#modalSettingsMovement" aria-label="Πληροφορίες"></button>
                                 </legend>
                             </div>
                         </div>
@@ -273,5 +279,9 @@
 
     </form>
     <!-- / new player step 3/3 content -->
+
+    <!-- help modals -->
+    @include('help.helpSettingsDifficulty')
+    <!-- / help modals -->
 
 </x-layout>

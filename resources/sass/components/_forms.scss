@@ -179,15 +179,20 @@ legend,
 label {
     font-weight: 600; // make sure we have a regular/normal weight
     &.extended {
-      display: block;
-      padding-bottom: 0.5em;
+          display: block;
+        padding-bottom: 0.5em;
     }
     &.medium {
         font-size: 1.125em;
         font-weight: 700;
     }
     &.big {
-      font-size: 1.25em;
-      font-weight: 700;
+        font-size: 1.25em;
+        font-weight: 700;
     }
-  }
+}
+
+legend {
+    display: block;
+    position: relative;
+}

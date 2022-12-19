@@ -54,6 +54,16 @@
     --bs-btn-disabled-border-color: var(--trvl-danger-light-text);
 }
 
+// Close button adjustments
+
+.btn-close {
+    opacity: 0.8;
+    background-size: 18px 18px;
+}
+.btn-close:hover {
+    opacity: 1;
+}
+
 // Round button
 .btn-round {
     --bs-btn-border-radius: 50%;
@@ -98,6 +108,23 @@
             opacity: 0.9;
         }
     }
+}
+
+.btn-help {
+    display: inline-block;
+    line-height: 2rem;
+    position: absolute;
+    top: -0.2em;
+    cursor: help;
+    padding: 0;
+    margin: 0;
+    width: 22px;
+    height: 22px;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22' fill='%23383735'%3E%3Cpath d='M10.825 1.457A9.364 9.364 0 1 1 4.2 4.2a9.306 9.306 0 0 1 6.625-2.743m0-1.457a10.825 10.825 0 1 0 10.824 10.825A10.823 10.823 0 0 0 10.825 0Z' data-name='circle'/%3E%3Cpath d='m12.435 8.806-3.125.392-.112.52.614.113c.4.1.48.24.393.64l-1.007 4.731c-.265 1.224.143 1.8 1.1 1.8a2.826 2.826 0 0 0 2-.816l.121-.568a1.512 1.512 0 0 1-.936.336c-.375 0-.512-.263-.415-.727Z' data-name='line'/%3E%3Ccircle cx='1.365' cy='1.365' r='1.365' data-name='dot' transform='translate(9.801 4.591)'/%3E%3C/svg%3E");
+    background-size: 22px 22px;
 }
 
 // The small ones for key-capturing.

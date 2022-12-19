@@ -88,6 +88,7 @@
                             <div class="col">
                                 <legend class="field-legend fw-bold">
                                     Τρόπος χειρισμού
+                                    <button class="btn-help" type="button" data-bs-toggle="modal" data-bs-target="#modalSettingsControlType" aria-label="Πληροφορίες"></button>
                                 </legend>
                             </div>
                         </div>
@@ -208,6 +209,7 @@
                             <div class="col">
                                 <legend class="field-legend fw-bold">
                                     Βοήθεια μετά από λάθος
+                                    <button class="btn-help" type="button" data-bs-toggle="modal" data-bs-target="#modalSettingsHelpAfter" aria-label="Πληροφορίες"></button>
                                 </legend>
                             </div>
                         </div>
@@ -233,6 +235,7 @@
                             <div class="col">
                                 <legend class="field-legend fw-bold">
                                     Ταχύτητα σάρωσης
+                                    <button class="btn-help" type="button" data-bs-toggle="modal" data-bs-target="#modalSettingsScanningSpeed" aria-label="Πληροφορίες"></button>
                                 </legend>
                             </div>
                         </div>
@@ -284,5 +287,9 @@
 
     </form>
     <!-- / new player step 2/3 content -->
+
+    <!-- help modals -->
+    @include('help.helpSettingsControls')
+    <!-- / help modals -->
 
 </x-layout>

@@ -236,6 +236,29 @@ img.splash {
     --bs-modal-bg: var(--trvl-modal-bg);
     --bs-modal-header-border-color: var(--trvl-modal-bg);
     --bs-modal-footer-border-color: var(--trvl-modal-bg);
+    --bs-modal-border-radius: 3rem;
+    --bs-modal-header-padding: 1.5rem 3rem;
+    --bs-modal-padding: 1rem 3rem;
+}
+.modal-title {
+    font-size: 1.6rem;
+}
+.modal-subheader {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+.modal-body {
+    font-size: 1.1rem;
+}
+
+.modal-footer {
+    --bs-modal-padding: 3rem;
+    padding-bottom: 2rem;
+    font-size: 1.1rem;
+    button {
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
 }
 
 // Success
