@@ -4,6 +4,7 @@
 <title>@yield('title') | Ταξιδιώτες</title>
 <!-- Icons -->
 <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="16x16">
+<link rel="icon" href="{{ asset('images/favicons/favicon-32.png') }}" sizes="32x32">
 {{-- @TODO: Favicons @see https://www.emergeinteractive.com/insights/detail/the-essentials-of-favicons/ --}}
 <!-- Scripts -->
 <script src="{{ mix('js/main.js') }}" defer></script>

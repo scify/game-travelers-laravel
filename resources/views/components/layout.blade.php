@@ -6,7 +6,10 @@
     <meta name="description" content="{{ $description ?? 'Ταξιδιώτες, ένα παιχνίδι από την SciFY.' }}">
     <meta name="keywords" content="">
     <title>{{ $title ?? 'Ταξιδιώτες' }}</title>
-    <link rel="icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" href="{{ asset('images/favicons/favicon-32.png') }}" sizes="32x32">
+    <link rel="icon" href="{{ asset('images/favicons/favicon-128.png') }}" sizes="128x128">
+    <link rel="icon" href="{{ asset('images/favicons/favicon-192.png') }}" sizes="192x192">
+    <link rel="apple-touch-icon" href="{{ asset('images/favicons/favicon-180.png') }}" sizes="180x180">
     <link rel="canonical" href="{{ url()->current() }}">
     <script src="{{ mix('js/main.js') }}" defer></script>
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
