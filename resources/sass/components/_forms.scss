@@ -50,11 +50,10 @@
 .field-group.indicate-status {
     transition: 240ms transform ease-in-out;
     input[type="radio"]:checked + label {
-        // text-decoration: underline;
-        box-shadow: 0 0.15rem rgba(0, 0, 0, 0.8);
+        box-shadow: 0 0.15rem rgba(var(--trvl-c-dark), 0.8);
     }
     input[type="radio"]:not(:checked) + label {
-        opacity: 0.5;
+        opacity: 1;
     }
 }
 

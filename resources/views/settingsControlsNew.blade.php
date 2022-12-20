@@ -1,4 +1,4 @@
-<x-layout :title="'Χειρισμός | Νέος παίκτης - Βήμα 2ο | Ταξιδιώτες'">
+<x-layout :title="'Πλοήγηση | Νέος παίκτης - Βήμα 2ο | Ταξιδιώτες'">
     {{-- Note: Various data-attributes linked with IDs are used for control of
         the elements via the front-end. The most complex functions are related
         with the buttons which are used to "capture" keyUp events. Furthermore,
@@ -12,8 +12,8 @@
     <!-- new player step 2/3 content -->
     <form
         method="get" {{-- should be post, get is for testing --}}
-        action="{{ url('/player/difficulty/new') }}"
-        id="playerControlsNew" {{-- unused id --}}
+        action="{{ url('/settings/difficulty/new') }}"
+        id="settingsControlsNew" {{-- unused id --}}
     >
         @csrf
 
@@ -68,14 +68,20 @@
                     />
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">
-                    <h1 id="currentPageLabel">Χειρισμός</h1>
+                    <h1 id="currentPageLabel">Πλοήγηση</h1>
                     <p>
                         <strong id="currentPageDescription">
-                            Επίλεξε τον τρόπο με τον οποίο ο παίκτης θα χειρίζεται το παιχνίδι.
+                            Επίλεξε τον τρόπο με τον οποίο ο παίκτης θα πλοηγείται στο παιχνίδι.
                         </strong>
                     </p>
                 </div>
-                <div class="col-1"></div>
+                <div class="col-1">
+                    <x-buttonForward
+                        :label="'Μετάβαση στις ρυθμίσεις δυσκολίας'"
+                        :align="'right'"
+                        :url="url('/settings/difficulty/new')"
+                    />
+                </div>
            </div>
         </div>
         <!-- / section header -->
@@ -86,9 +92,18 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col">
-                                <legend class="field-legend fw-bold">
-                                    Τρόπος πλοήγησης
-                                    <button class="btn-help" type="button" data-bs-toggle="modal" data-bs-target="#modalSettingsControlType" aria-label="Πληροφορίες"></button>
+                                <legend class="field-legend fw-bold text-nowrap">
+                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Ο τρόπος που «κινείται» ο παίκτης στο παιχνίδι">
+                                        Τρόπος πλοήγησης
+                                    </span>
+                                    <button
+                                        class="btn-help"
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalSettingsControlType"
+                                        aria-label="Πληροφορίες"
+                                        tabindex="-1"
+                                    ></button>
                                 </legend>
                             </div>
                         </div>
@@ -207,24 +222,33 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col">
-                                <legend class="field-legend fw-bold">
-                                    Βοήθεια μετά από λάθος
-                                    <button class="btn-help" type="button" data-bs-toggle="modal" data-bs-target="#modalSettingsHelpAfter" aria-label="Πληροφορίες"></button>
+                                <legend class="field-legend fw-bold text-nowrap">
+                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Αφού κάνει λάθος ο παίκτης, ο υπολογιστής του δίνει βοήθεια...">
+                                        Βοήθεια μετά από λάθος
+                                    </span>
+                                    <button
+                                        class="btn-help"
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalSettingsHelpAfter"
+                                        aria-label="Πληροφορίες"
+                                        tabindex="-1"
+                                    ></button>
                                 </legend>
                             </div>
                         </div>
                         <div class="row ms-1 mt-2">
                             <div class="col-12 form-check">
                                 <input class="form-check-input" type="radio" name="helpAfterTries" value="1" tabindex="30" id="helpAfterTries1" />
-                                <label class="form-check-label" for="helpAfterTries1">1 προσπάθεια</label>
+                                <label class="form-check-label" for="helpAfterTries1">Μετά από 1 λάθος</label>
                             </div>
                             <div class="col-12 form-check mt-1">
                                 <input class="form-check-input" type="radio" name="helpAfterTries" value="2" tabindex="40" id="helpAfterTries2" />
-                                <label class="form-check-label" for="helpAfterTries2">2 προσπάθειες</label>
+                                <label class="form-check-label" for="helpAfterTries2">Μετά από 2 λάθη</label>
                             </div>
                             <div class="col-12 form-check mt-1">
                                 <input class="form-check-input" type="radio" name="helpAfterTries" value="3" tabindex="50" id="helpAfterTries3" checked />
-                                <label class="form-check-label" for="helpAfterTries3">3 προσπάθειες</label>
+                                <label class="form-check-label" for="helpAfterTries3">Μετά από 3 λάθη</label>
                             </div>
                         </div>
                     </div>
@@ -233,9 +257,16 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col">
-                                <legend class="field-legend fw-bold">
-                                    Ταχύτητα σάρωσης
-                                    <button class="btn-help" type="button" data-bs-toggle="modal" data-bs-target="#modalSettingsScanningSpeed" aria-label="Πληροφορίες"></button>
+                                <legend class="field-legend fw-bold text-nowrap">
+                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Πόσο γρήγορα γίνεται η αυτόματη σάρωση">Ταχύτητα σάρωσης</span>
+                                    <button
+                                        class="btn-help"
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalSettingsScanningSpeed"
+                                        aria-label="Πληροφορίες"
+                                        tabindex="-1"
+                                    ></button>
                                 </legend>
                             </div>
                         </div>

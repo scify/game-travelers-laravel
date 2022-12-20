@@ -20,9 +20,9 @@ window.addEventListener("load", function () {
   var avatarsContainer = document.getElementById("avatarsContainer");
   // Let the fun begin!
 
-  if (avatarsContainer.length) {
+  if (avatarsContainer) {
     var buttons = avatarsContainer.querySelectorAll("button[data-avatar=\"true\"]");
-    if (buttons.length) {
+    if (buttons) {
       var btnRole;
       var btnId;
       var btnId;
@@ -320,6 +320,22 @@ window.addEventListener('load', function () {
       }
     })();
   }
+});
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!***************************************!*\
+  !*** ./resources/js/settings/help.js ***!
+  \***************************************/
+/*
+ * Help & Tooltips Functions.
+ */
+window.addEventListener('load', function () {
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl);
+  });
 });
 })();
 

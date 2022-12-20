@@ -18,7 +18,7 @@
         <h3 class="mt-4">Player Settings</h3>
         <small>Landing page for settings. Except music, other options <em>could be the same</em> as the ones for Create New Player with a different header.</small>
         <dl>
-            <dt><a href="{{ url('/player/settings') }}">Player Settings main/landing page</a>
+            <dt><a href="{{ url('/settings') }}">Player Settings main/landing page</a>
             <dd>✔️ <span class="new">New</span> A nice vertical stack of buttons of all types (including a disabled and a dangerous one). Balloon on hover, Delete Player implementation via a modal and a form, back to previous page button, fully responsive and nicely decorated with 3 different backgrounds.</dd>
         </dl>
 
@@ -44,18 +44,18 @@
         <h3 class="mt-4">Create New Player</h3>
         <small>Create new player settings. Shall we re-use these 3 forms for the main-game Settings with the same components & fields (but a different sub-header) for Profile, Controls & Difficulty for version 0.1 instead instead of re-implementing them from scratch?</small>
         <dl>
-            <dt><a href="{{ url('/player/new') }}">Create New Player Step 1/3: Profile</a></dt>
+            <dt><a href="{{ url('/settings/profile/new') }}">Create New Player Step 1/3: Profile</a></dt>
             <dd>✔️ <span class="upd">Upd</span> Step 1 out of 3 for creating a new individual player profile with working "stepper", back button, interactive JavaScript elements, Laravel @@errors support and more. Utilises various components. Requires avatar data which are provided as an example on the routes. Developer notes. Very complex. Fully responsive. </span>
                 <dl>
-                    <dt><a href="{{ url('/demo/player/new/error') }}">Variation: New player profile Step 1 of 3 with <span class="error">ERROR</span></a></dt>
+                    <dt><a href="{{ url('/demo/settings/profile/new/error') }}">Variation: New player profile Step 1 of 3 with <span class="error">ERROR</span></a></dt>
                     <dd>✔️ <span class="upd">Final</span> See above. Page integrates Laravel @@errors.</dd>
-                    <dt><a href="{{ url('/demo/player/new/success') }}">Variation: New player profile Step 1 of 3 (no error)</a></dt>
+                    <dt><a href="{{ url('/demo/settings/profile/new/success') }}">Variation: New player profile Step 1 of 3 (no error)</a></dt>
                     <dd>✔️ <span class="upd">Final</span> See above. Form validation in attached ready-for-production JavaScript.</dd>
                 </dl>
             </dd>
-            <dt><a href="{{ url('/player/controls/new') }}">Create New Player Step 2/3: Controls</a></dt>
+            <dt><a href="{{ url('/settings/controls/new') }}">Create New Player Step 2/3: Controls</a></dt>
             <dd>✔️ <span class="upd">Final</span> Lovely custom-made checkboxes, awesome input ranges and JavaScript to support hide and seek of different radio-groups and even reliable keypress readings, while making sure that the values could be easily stored and retrieved from the hidden and ready-to-use-on-the-back-end forms. Fully responsive.</dd>
-            <dt><a href="{{ url('/player/difficulty/new') }}">Create New Player Step 3/3: Difficulty</a></dt>
+            <dt><a href="{{ url('/settings/difficulty/new') }}">Create New Player Step 3/3: Difficulty</a></dt>
             <dd>✔️ <span class="upd">Final</span> Even dices can be clicked to be selected. Fully responsive. </dd>
         </dl>
 

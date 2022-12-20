@@ -10,10 +10,10 @@ window.addEventListener("load", function() {
     const avatarsContainer = document.getElementById("avatarsContainer");
     // Let the fun begin!
 
-    if (avatarsContainer.length) {
+    if (avatarsContainer) {
         const buttons = avatarsContainer.querySelectorAll(`button[data-avatar="true"]`);
 
-        if (buttons.length) {
+        if (buttons) {
             // Variables for reading/validating/processing various form elements.
             const idInput = document.getElementById("avatarsContainerInput");
             const nameInput = document.getElementById("playerNameInput");

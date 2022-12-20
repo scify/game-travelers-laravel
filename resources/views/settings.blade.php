@@ -44,7 +44,7 @@
                         <span class="balloon"></span> Μουσική & ήχος
                     </a>
                     <a class="btn btn-lg btn-primary" tabindex="3">
-                        <span class="balloon"></span> Τρόπος χειρισμού
+                        <span class="balloon"></span> Πλοήγηση
                     </a>
                     <a class="btn btn-lg btn-primary" tabindex="4">
                         <span class="balloon"></span> Επίπεδο δυσκολίας

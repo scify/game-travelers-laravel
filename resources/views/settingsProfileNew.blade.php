@@ -16,7 +16,7 @@
     <!-- new player step 1/3 content -->
     <form
         method="get" {{-- should be post, get is for testing --}}
-        action="{{ url('/player/controls/new') }}"
+        action="{{ url('/settings/controls/new') }}"
         id="playerProfileNew" {{-- unused id --}}
     >
         @csrf

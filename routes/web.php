@@ -78,44 +78,44 @@ Route::get('/demo/select/board/form', function () {
 });
 
 /*
- * Stepper 2 | New player profiles & settings.
- * Last update: December 18, 2022.
+ * Stepper 2 | New player settings.
+ * Last update: December 20, 2022.
  * @link https://xd.adobe.com/view/881b8987-9d56-443d-9e00-c2edcb5a6671-dd48/
  */
-Route::get('/player/new', function () {
+Route::get('/settings/profile/new', function () {
     // New Player Step 1: Player's Profile
     // Requires View::share('avatars', $avatars);
-    return view('playerProfileNew');
+    return view('settingsProfileNew');
 });
-Route::get('/player/controls/new', function () {
+Route::get('/settings/controls/new', function () {
     // New Player Step 2: Player's Control Settings
-    return view('playerControlsNew');
+    return view('settingsControlsNew');
 });
-Route::get('/player/difficulty/new', function () {
+Route::get('/settings/difficulty/new', function () {
     // New Player Step 3: Player's Difficulty Settings
-    return view('playerDifficultyNew');
+    return view('settingsDifficultyNew');
 });
 // Demos
-Route::get('demo/player/new/error', function () {
+Route::get('demo/settings/profile/new/error', function () {
     // DEMO - Error - New Player Step 1: Player's Profile
     // Requires View::share('avatars', $avatars);
     return view('extras/demoPlayerProfileNewError');
 });
-Route::get('demo/player/new/success', function () {
+Route::get('demo/settings/profile/new/success', function () {
     // DEMO - Success - New Player Step 1: Player's Profile
     // Requires View::share('avatars', $avatars);
     return view('extras/demoPlayerProfileNewSuccess');
 });
 
 /*
- * Travellers | Settings
+ * Travellers | Existing player settings.
  * Last update: December 18, 2022.
  * @link https://xd.adobe.com/view/d308b3ee-c123-48d3-87ff-5304ebdaa85a-865b/
  */
-Route::get('/player/settings', function () {
+Route::get('/settings', function () {
     // Should be /player/{playerid}/settings allowing easier access via userMenu
     // without having to have a 2nd form on each individual page.
-    return view('playerSettings');
+    return view('settings');
 });
 
 // Obsolete pages:

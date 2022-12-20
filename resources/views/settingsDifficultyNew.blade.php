@@ -15,7 +15,7 @@
     <form
         method="get" {{-- should be post, get is for testing --}}
         action="{{ url('/select/player') }}"
-        id="playerDifficultyNew" {{-- unused id --}}
+        id="settingsDifficultyNew" {{-- unused id --}}
     >
         @csrf
 
@@ -40,8 +40,8 @@
                 <div class="step3-3 col-5">
                     <button
                         class="btn btn-round past"
-                        title="Ρυθμίσεις χειρισμού"
-                        aria-label="Αποθήκευση και επιστροφή στις ρυθμίσεις χειρισμού"
+                        title="Ρυθμίσεις πλοήγησης"
+                        aria-label="Αποθήκευση και επιστροφή στις ρυθμίσεις πλοήγησης"
                         name="page"
                         value="controls"
                         type="submit"
@@ -76,9 +76,9 @@
             <div class="row">
                 <div class="col-1">
                     <x-buttonBack
-                        :label="'Επιστροφή στις ρυθμίσεις ελέγχου'"
+                        :label="'Επιστροφή στις ρυθμίσεις πλοήγησης'"
                         :align="'left'"
-                        :url="url('/player/controls/new')"
+                        :url="url('/settings/controls/new')"
                     />
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">
@@ -90,11 +90,7 @@
                     </p>
                 </div>
                 <div class="col-1">
-                    <x-buttonBack
-                        :label="'Ακύρωση και επιστροφή στην επιλογή παίκτη'"
-                        :align="'left'"
-                        :url="url('/select/player')"
-                    />
+                    {{-- Reserved for sub-header controls. --}}
                 </div>
            </div>
         </div>
@@ -106,9 +102,18 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col">
-                                <legend>
-                                    Ζάρι
-                                    <button class="btn-help" type="button" data-bs-toggle="modal" data-bs-target="#modalSettingsDice" aria-label="Πληροφορίες"></button>
+                                <legend class="field-lenged fw-bold text-nowrap">
+                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Το ζάρι καθορίζει τον τρόπο μετακίνησης στις θέσεις του παιχνιδιού">
+                                        Ζάρι
+                                    </span>
+                                    <button
+                                        class="btn-help"
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalSettingsDice"
+                                        aria-label="Πληροφορίες"
+                                        tabindex="-1"
+                                    ></button>
                                 </legend>
                             </div>
                         </div>
@@ -196,9 +201,18 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col">
-                                <legend class="field-legend fw-bold">
-                                    Διάρκεια παιχνιδιού
-                                    <button class="btn-help" type="button" data-bs-toggle="modal" data-bs-target="#modalSettingsDuration" aria-label="Πληροφορίες"></button>
+                                <legend class="field-legend fw-bold text-nowrap">
+                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Η διάρκεια του παιχνιδιού εξαρτάται από τον αριθμό των θέσεων στην πίστα">
+                                        Διάρκεια παιχνιδιού
+                                    </span>
+                                    <button
+                                        class="btn-help"
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalSettingsDuration"
+                                        aria-label="Πληροφορίες"
+                                        tabindex="-1"
+                                    ></button>
                                 </legend>
                             </div>
                         </div>
@@ -222,9 +236,18 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col">
-                                <legend class="field-legend fw-bold">
-                                    Επίπεδο δυσκολίας
-                                    <button class="btn-help" type="button" data-bs-toggle="modal" data-bs-target="#modalSettingsDifficultyLevel" aria-label="Πληροφορίες"></button>
+                                <legend class="field-legend fw-bold text-nowrap">
+                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title=" Το επίπεδο δυσκολίας για τον παίκτη">
+                                        Επίπεδο δυσκολίας
+                                    </span>
+                                    <button
+                                        class="btn-help"
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalSettingsDifficultyLevel"
+                                        aria-label="Πληροφορίες"
+                                        tabindex="-1"
+                                    ></button>
                                 </legend>
                             </div>
                         </div>
@@ -245,8 +268,17 @@
                         <div class="row">
                             <div class="col">
                                 <legend class="field-legend fw-bold">
-                                    Μετακίνηση
-                                    <button class="btn-help" type="button" data-bs-toggle="modal" data-bs-target="#modalSettingsMovement" aria-label="Πληροφορίες"></button>
+                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Ο τρόπος που «κινείται» ο παίκτης στο παιχνίδι">
+                                        Μετακίνηση
+                                    </span>
+                                    <button
+                                        class="btn-help"
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalSettingsMovement"
+                                        aria-label="Πληροφορίες"
+                                        tabindex="-1"
+                                    ></button>
                                 </legend>
                             </div>
                         </div>
