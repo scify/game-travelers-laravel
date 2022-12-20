@@ -486,15 +486,15 @@ window.addEventListener("load", function () {
       var elementId = element.getAttribute("id");
       var label = document.querySelector("[for=\"".concat(elementId, "\"]"));
       if (parseInt(element.value) === 1) {
-        label.textContent = "".concat(element.value, " \u03B4\u03B5\u03C5\u03C4\u03B5\u03C1\u03CC\u03BB\u03B5\u03C0\u03C4\u03BF");
+        label.textContent = "\u03BA\u03AC\u03B8\u03B5 ".concat(element.value, " \u03B4\u03B5\u03C5\u03C4\u03B5\u03C1\u03CC\u03BB\u03B5\u03C0\u03C4\u03BF");
       } else {
-        label.textContent = "".concat(element.value, " \u03B4\u03B5\u03C5\u03C4\u03B5\u03C1\u03CC\u03BB\u03B5\u03C0\u03C4\u03B1");
+        label.textContent = "\u03BA\u03AC\u03B8\u03B5 ".concat(element.value, " \u03B4\u03B5\u03C5\u03C4\u03B5\u03C1\u03CC\u03BB\u03B5\u03C0\u03C4\u03B1");
       }
       element.addEventListener("change", function (event) {
         if (parseInt(element.value) === 1) {
-          label.textContent = "".concat(element.value, " \u03B4\u03B5\u03C5\u03C4\u03B5\u03C1\u03CC\u03BB\u03B5\u03C0\u03C4\u03BF");
+          label.textContent = "\u03BA\u03AC\u03B8\u03B5 ".concat(element.value, " \u03B4\u03B5\u03C5\u03C4\u03B5\u03C1\u03CC\u03BB\u03B5\u03C0\u03C4\u03BF");
         } else {
-          label.textContent = "".concat(element.value, " \u03B4\u03B5\u03C5\u03C4\u03B5\u03C1\u03CC\u03BB\u03B5\u03C0\u03C4\u03B1");
+          label.textContent = "\u03BA\u03AC\u03B8\u03B5 ".concat(element.value, " \u03B4\u03B5\u03C5\u03C4\u03B5\u03C1\u03CC\u03BB\u03B5\u03C0\u03C4\u03B1");
         }
         var ruler = document.querySelector("div[data-role=\"ruler\"][data-value=\"".concat(element.value, "\"]"));
         if (ruler) {

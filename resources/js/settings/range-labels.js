@@ -9,15 +9,15 @@ window.addEventListener("load", function() {
             const elementId = element.getAttribute("id");
             const label = document.querySelector(`[for="${elementId}"]`);
             if (parseInt(element.value) === 1) {
-                label.textContent = `${element.value} δευτερόλεπτο`;
+                label.textContent = `κάθε ${element.value} δευτερόλεπτο`;
             } else {
-                label.textContent = `${element.value} δευτερόλεπτα`;
+                label.textContent = `κάθε ${element.value} δευτερόλεπτα`;
             }
             element.addEventListener("change", event => {
                 if (parseInt(element.value) === 1) {
-                    label.textContent = `${element.value} δευτερόλεπτο`;
+                    label.textContent = `κάθε ${element.value} δευτερόλεπτο`;
                 } else {
-                    label.textContent = `${element.value} δευτερόλεπτα`;
+                    label.textContent = `κάθε ${element.value} δευτερόλεπτα`;
                 }
                 const ruler = document.querySelector(`div[data-role="ruler"][data-value="${element.value}"]`);
                 if (ruler) {

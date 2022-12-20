@@ -49,7 +49,7 @@ a, a:hover, a:active, a:visited {
   color: var(--trvl-c-link);
   outline: none;
 }
-a:focus, a:focus-visible {
+a:focus-visible {
   outline-color: hsla(0, 0%, 0%, 0.7); // hsla(var(--trvl-shadow-focus-hsl), 0.75)
   outline-width: 0.3rem;
   outline-style: solid;

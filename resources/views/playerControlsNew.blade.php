@@ -71,7 +71,7 @@
                     <h1 id="currentPageLabel">Χειρισμός</h1>
                     <p>
                         <strong id="currentPageDescription">
-                            Επίλεξε τον τρόπο με τον οποίο επιθυμείς να χειρίζεσαι το παιχνίδι.
+                            Επίλεξε τον τρόπο με τον οποίο ο παίκτης θα χειρίζεται το παιχνίδι.
                         </strong>
                     </p>
                 </div>
@@ -87,7 +87,7 @@
                         <div class="row">
                             <div class="col">
                                 <legend class="field-legend fw-bold">
-                                    Τρόπος χειρισμού
+                                    Τρόπος πλοήγησης
                                     <button class="btn-help" type="button" data-bs-toggle="modal" data-bs-target="#modalSettingsControlType" aria-label="Πληροφορίες"></button>
                                 </legend>
                             </div>
@@ -229,7 +229,7 @@
                         </div>
                     </div>
                 </fieldset>
-                <fieldset class="col-lg-12 mt-4 mt-lg-3 mb-5">
+                <fieldset class="col-lg-12 mt-5 mt-sm-4 mt-lg-3 mb-5">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col">

@@ -1,4 +1,5 @@
 <!-- /resources/views/help/helpSettingsControls.blade.php -->
+{{-- based on https://xd.adobe.com/view/9059ce97-bf80-4c67-81c1-684de09acdf3-c50a/ --}}
 <x-modalSettings
     :help="'ControlType'"  {{-- id --}}
     :title="'Τρόπος χειρισμού'"

@@ -19,11 +19,7 @@
         <div class="modal-body">
             {{ $slot }}
         </div>
-        <div class="modal-footer">
-            <div class="d-grid gap-3 col-12">
-                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Έξοδος</button> -->
-            </div>
-        </div>
+
     </div>
     </div>
 </div>

@@ -13768,7 +13768,7 @@ a, a:hover, a:active, a:visited {
   outline: none;
 }
 
-a:focus, a:focus-visible {
+a:focus-visible {
   outline-color: hsla(0deg, 0%, 0%, 0.7);
   outline-width: 0.3rem;
   outline-style: solid;

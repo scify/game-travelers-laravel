@@ -76,9 +76,9 @@
             <div class="row">
                 <div class="col-1">
                     <x-buttonBack
-                        :label="'Ακύρωση και επιστροφή στην επιλογή παίκτη'"
+                        :label="'Επιστροφή στις ρυθμίσεις ελέγχου'"
                         :align="'left'"
-                        :url="url('/select/player')"
+                        :url="url('/player/controls/new')"
                     />
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">
@@ -89,7 +89,13 @@
                         </strong>
                     </p>
                 </div>
-                <div class="col-1"></div>
+                <div class="col-1">
+                    <x-buttonBack
+                        :label="'Ακύρωση και επιστροφή στην επιλογή παίκτη'"
+                        :align="'left'"
+                        :url="url('/select/player')"
+                    />
+                </div>
            </div>
         </div>
         <!-- / section header -->
@@ -186,7 +192,7 @@
                         </div>
                     </div>
                 </fieldset>
-                <fieldset class="col-lg-4 mt-4 mt-lg-0">
+                <fieldset class="col-lg-4 mt-5 mt-lg-0">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col">
@@ -217,8 +223,8 @@
                         <div class="row">
                             <div class="col">
                                 <legend class="field-legend fw-bold">
-                                    Επίπεδο
-                                    <button class="btn-help" type="button" data-bs-toggle="modal" data-bs-target="#modalSettingsLevel" aria-label="Πληροφορίες"></button>
+                                    Επίπεδο δυσκολίας
+                                    <button class="btn-help" type="button" data-bs-toggle="modal" data-bs-target="#modalSettingsDifficultyLevel" aria-label="Πληροφορίες"></button>
                                 </legend>
                             </div>
                         </div>
@@ -262,7 +268,7 @@
                 </fieldset>
             </div>
 
-            <div id="navGroup" class="form-actions d-flex align-items-end flex-column">
+            <div id="navGroup" class="form-actions d-flex align-items-end mt-4 mt-sm-0 flex-column">
                 <button
                     class="btn btn-primary btn-lg responsive-expand"
                     id="submitButton"
