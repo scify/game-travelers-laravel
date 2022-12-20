@@ -1,76 +1,51 @@
-<x-layout :title="'Προφίλ | Νέος παίκτης - Βήμα 1ο | Ταξιδιώτες'">
-    {{-- Inline error on field name PLUS an explanatory message just beneath
-        the field name which appears in bold red.
-        Avatar selection (required) is done via JavaScript with buttons which
-        act as radios. Avatar ID is passed to the #playerAvatarId hidden input
-        element (name="avatar", value="{integer}"). Note that submit is also
-        possible in theory via the Stepper's buttons, even though the one on
-        this page (#currentPageButton) is set to "disabled" (submits name=page,
-        value="profile"). For avatar selection JS and front-end validation see:
-        @see resources/js/settings/avatar-selection.js
-    --}}
+<x-layout :title="'Προφίλ παίκτη | Ταξιδιώτες'" :hasUserMenu=true :background="'background-dash-up'">
+    {{-- Note: This is the exact same page as the one for New Players BUT with
+        a modified header. According to the design these pages should be
+        different, yet they have the exact same form, fields and purpose. Their
+        only difference is on the layout. In order to considerably boost
+        development output and to give ourselves some time to debate if it is
+        useful or not for users to learn how to use two different pages instead
+        of one, this acts as a temporary page / placeholder that should be
+        very easy to implement on the back-end as it has the exact same
+        elements as the settingsProfileNew.blade.php view.
+        --}}
     @section('scripts')
         <script src="{{ mix('js/functions/settings.js') }}" defer></script>
     @endsection
 
-    <!-- new player step 1/3 content -->
     <form
         method="get" {{-- should be post, get is for testing --}}
-        action="{{ url('/settings/controls/new') }}"
-        id="settingsProfileNew" {{-- unused id --}}
+        action="{{ url('/settings') }}" {{-- should go to same page (/settings/{playerid}/profile) --}}
+        id="settingsProfile" {{-- unused id --}}
     >
-        @csrf
-
-        <!-- step counter 1/3 -->
-        <div class="stepper container-xxl">
-            <div class="step1 row">
-                <div class="step1-1 col-1"></div>
-                <div class="step1-2 col-11">
-                    <button
-                        class="btn btn-round current"
-                        title="Προφίλ παίκτη"
-                        aria-label="Προφίλ παίκτη"
-                        aria-describedby="currentPageDescription"
-                        aria-current="page"
-                        aria-readonly="true"
-                        tabindex="-1"
-                        name="page"
-                        value="profile"
-                        type="submit"
-                        disabled
-                        id="currentPageButton"
-                    >
-                        1
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- / step counter 1/3 -->
+    @csrf
 
         <!-- section header -->
-        <div class="settings-header container-lg px-4 px-sm-4 mb-2 mb-lg-5">
+        <div class="gamesettings-header container-xxl px-4 mb-2 mb-lg-5 mt-1 pb-2 pt-5"> {{-- New/Existing diff: mb-2 mb-lg-3 mt-3 pt-3 pb-3 --}}
             <div class="row">
                 <div class="col-1">
                     <x-buttonBack
-                        :label="'Ακύρωση και επιστροφή στην επιλογή παίκτη'"
-                        :align="'left'"
-                        :url="url('/select/player')"
-                    />
+                    :label="'Επιστροφή στις ρυθμίσεις'"
+                    :align="'left'"
+                    :url="url('/settings')"
+                />
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">
-                    <h1 id="currentPageLabel">Νέος παίκτης</h1>
+                    <h1 id="currentPageLabel">Διαμόρφωση προφίλ</h1>
                     <p>
                         <strong id="currentPageDescription">
-                            Διάλεξε ένα όνομα και μία φατσούλα για να δημιουργήσεις το προφίλ σου.
+                            Διάλεξε ένα όνομα και μία φατσούλα για το προφίλ του παίκτη <em>Μανώλης</em>. {{-- Player Name goes here. --}}
                         </strong>
                     </p>
                 </div>
-                <div class="col-1"></div>
-           </div>
+                <div class="col-1">
+                    {{-- Reserved for navigation buttons. --}}
+                </div>
+            </div>
         </div>
         <!-- / section header -->
 
-        <!-- settings profile -->
+        {{-- Note: EXACTLY THE SAME AS settingsProfileNew.blade.php <!-- settings profile --> --}}
         <div class="section settings container-xxl px-4 px-sm-5 px-xl-6">
             <div id="nameGroup" class="field @error('name') is-invalid @enderror settings-row row mb-5">
                 <div class="col-md-3">
@@ -84,7 +59,7 @@
                         class="field-input extended underlined big"
                         type="text"
                         name="name"
-                        value="" {{-- Read by JS --}}
+                        value="Μανώλης" {{-- Read by JS --}}
                         minlength="2" {{-- JS form validation --}}
                         maxlength="50"
                         required="true"
@@ -119,7 +94,7 @@
                 <div class="col-md-9">
                     <x-selectAvatar
                         :avatars=$avatars {{-- @see ../../docs/exampleData.php --}}
-                        :selectedAvatarId=0
+                        :selectedAvatarId=1 {{-- player['avatarid'] --}}
                         :tabindex=2
                     />
                 </div>
@@ -151,14 +126,13 @@
                     tabindex="120"
                     disabled {{-- Altered via JS (form validation) --}}
                 >
-                    δημιουργία προφίλ
+                   αποθήκευση
                 </button>
             </div>
 
         </div>
-        <!-- / settings profile -->
+        {{-- / Note: EXACTLY THE SAME AS settingsProfileNew.blade.php <!-- settings profile --> --}}
 
     </form>
-    <!-- / new player step 1/3 content -->
 
 </x-layout>

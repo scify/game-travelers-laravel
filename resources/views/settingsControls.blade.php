@@ -1,92 +1,51 @@
-<x-layout :title="'Πλοήγηση | Νέος παίκτης - Βήμα 2ο | Ταξιδιώτες'">
-    {{-- Note: Various data-attributes linked with IDs are used for control of
-        the elements via the front-end. The most complex functions are related
-        with the buttons which are used to "capture" keyUp events. Furthermore,
-        group-setter.js and range-labels.js are also utilised on this page.
-        @see resources/js/settings/key-assigner.js.
-    --}}
+<x-layout :title="'Ρυθμίσεις πλοήγησης | Ταξιδιώτες'" :hasUserMenu=true :background="'background-dash-up'">
+    {{-- Note: This is the exact same page as the one for New Players BUT with
+        a modified header. According to the design these pages should be
+        different, yet they have the exact same form, fields and purpose. Their
+        only difference is on the layout. In order to considerably boost
+        development output and to give ourselves some time to debate if it is
+        useful or not for users to learn how to use two different pages instead
+        of one, this acts as a temporary page / placeholder that should be
+        very easy to implement on the back-end as it has the exact same
+        elements as the settingsControlsNew.blade.php view.
+        --}}
     @section('scripts')
         <script src="{{ mix('js/functions/settings.js') }}" defer></script>
     @endsection
 
-    <!-- new player step 2/3 content -->
     <form
         method="get" {{-- should be post, get is for testing --}}
-        action="{{ url('/settings/difficulty/new') }}"
-        id="settingsControlsNew" {{-- unused id --}}
+        action="{{ url('/settings') }}" {{-- should go back to main Settings --}}
+        id="settingsControls" {{-- unused id --}}
     >
         @csrf
 
-        <!-- step counter 2/3 -->
-        <div class="stepper container-xxl">
-            <div class="step2 row">
-                <div class="step2-1 col-1">
-                    <!-- empty -->
-                </div>
-                <div class="step2-2 col-4">
-                    <button
-                        class="btn btn-round past"
-                        title="Προφίλ παίκτη"
-                        aria-label="Αποθήκευση και επιστροφή στο προφίλ παίκτη"
-                        name="page"
-                        value="profile"
-                        type="submit"
-                    >
-                        1
-                    </button>
-                </div>
-                <div class="step2-3 col-7">
-                    <button
-                    class="btn btn-round current"
-                    title="Ρυθμίσεις πλοήγησης"
-                    aria-label="Ρυθμίσεις πλοήγησης"
-                    aria-describedby="currentPageDescription"
-                    aria-current="page"
-                    aria-readonly="true"
-                    tabindex="-1"
-                    name="page"
-                    value="controls"
-                    type="submit"
-                    disabled
-                    id="currentPageButton"
-                    >
-                        2
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- step counter 2/3 -->
-
         <!-- section header -->
-        <div class="settings-header container-xxl px-4 px-sm-4 mb-2 mb-lg-1">
+        <div class="gamesettings-header container-xxl px-4 mb-2 mb-lg-3 mt-3 pt-3 pb-3"> {{-- New/Existing diff: mb-2 mb-lg-3 mt-3 pt-3 pb-3 --}}
             <div class="row">
                 <div class="col-1">
                     <x-buttonBack
-                        :label="'Επιστροφή στην επιλογή παίκτη'"
-                        :align="'left'"
-                        :url="url('/select/player')"
-                    />
+                    :label="'Επιστροφή στις ρυθμίσεις'"
+                    :align="'left'"
+                    :url="url('/settings')"
+                />
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">
-                    <h1 id="currentPageLabel">Πλοήγηση</h1>
+                    <h1 id="currentPageLabel">Ρυθμίσεις πλοήγησης</h1>
                     <p>
                         <strong id="currentPageDescription">
-                            Επίλεξε τον τρόπο με τον οποίο ο παίκτης θα πλοηγείται στο παιχνίδι.
+                            Επίλεξε τον τρόπο με τον οποίο ο παίκτης <em>Μανώλης</em> θα πλοηγείται στο παιχνίδι. {{-- Player Name goes here. --}}
                         </strong>
                     </p>
                 </div>
                 <div class="col-1">
-                    <x-buttonForward
-                        :label="'Μετάβαση στις ρυθμίσεις δυσκολίας'"
-                        :align="'right'"
-                        :url="url('/settings/difficulty/new')"
-                    />
+                    {{-- Reserved for navigation buttons. --}}
                 </div>
-           </div>
+            </div>
         </div>
         <!-- / section header -->
 
-        <!-- settings controls -->
+        {{-- Note: EXACTLY THE SAME AS settingsControlsNew.blade.php <!-- settings controls --> --}}
         <div class="section settings container-xxl px-4 px-sm-5 px-xl-6">
             <div id="settingsGroup" class="row">
                 <fieldset class="col-lg-8 field-group indicate-status">
@@ -316,13 +275,14 @@
             </div>
 
         </div>
-        <!-- / settings controls -->
+        {{-- / Note: EXACTLY THE SAME AS settingsControlsNew.blade.php <!-- settings controls --> --}}
 
     </form>
-    <!-- / new player step 2/3 content -->
 
+    {{-- Note: EXACTLY THE SAME AS settingsControlsNew.blade.php <!-- settings controls --> --}}
     <!-- help modals -->
     @include('help.helpSettingsControls')
     <!-- / help modals -->
+    {{-- / Note: EXACTLY THE SAME AS settingsControlsNew.blade.php <!-- settings controls --> --}}
 
 </x-layout>

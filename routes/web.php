@@ -31,9 +31,10 @@ Route::get('/log', function () {
     return view('extras/logViews');
 });
 
-// Sample Data used on playerProfileNew and 2 demos. The exampleData contains
-// the $avatar array, which contains all available modules. It's the output of
-// the proposed (untested) Avatar model, which also resides in the same folder.
+// Sample Data used on settingsProfile, settingsProfileNew and 2 demos.
+// The exampleData.php file contains the $avatar array will all the available
+// avatars. It's the (emulated) output of the proposed (untested) Avatar model,
+// which also resides in the same folder.
 // @see ../docs/examples/exampleData.php Avatar Data Model
 // @example ../docs/examples/exampleDataAvatarModel.php Avatar Data Model
 require __DIR__.'/../docs/examples/exampleData.php';
@@ -85,14 +86,17 @@ Route::get('/demo/select/board/form', function () {
 Route::get('/settings/profile/new', function () {
     // New Player Step 1: Player's Profile
     // Requires View::share('avatars', $avatars);
+    // Same form, fields, purpose as Existing Player Profile Settings.
     return view('settingsProfileNew');
 });
 Route::get('/settings/controls/new', function () {
     // New Player Step 2: Player's Control Settings
+    // Same form, fields, purpose as Existing Player Control Settings.
     return view('settingsControlsNew');
 });
 Route::get('/settings/difficulty/new', function () {
     // New Player Step 3: Player's Difficulty Settings
+    // Same form, fields, purpose as Existing Player Difficulty Settings.
     return view('settingsDifficultyNew');
 });
 // Demos
@@ -108,8 +112,8 @@ Route::get('demo/settings/profile/new/success', function () {
 });
 
 /*
- * Travellers | Existing player settings.
- * Last update: December 18, 2022.
+ * Travellers | Existing Player Settings.
+ * Last update: December 20, 2022.
  * @link https://xd.adobe.com/view/d308b3ee-c123-48d3-87ff-5304ebdaa85a-865b/
  */
 Route::get('/settings', function () {
@@ -117,6 +121,31 @@ Route::get('/settings', function () {
     // without having to have a 2nd form on each individual page.
     return view('settings');
 });
+Route::get('/settings/profile', function () {
+    // Should be /player/{playerid}/settings/profile allowing easier access
+    // via userMenu without having to have a 2nd form on each individual page.
+    // Same form, fields, purpose as New Player Control Settings.
+    // @see settingsProfileNew.blade.php
+    // Final version (might or might not) have a different layout.
+    return view('settingsProfile');
+});
+Route::get('/settings/controls', function () {
+    // Should be /player/{playerid}/settings/controls allowing easier access
+    // via userMenu without having to have a 2nd form on each individual page.
+    // Same form, fields, purpose as New Player Control Settings.
+    // @see settingsControlsNew.blade.php
+    // Final version (might or might not) have a different layout.
+    return view('settingsControls');
+});
+Route::get('/settings/difficulty', function () {
+    // Should be /player/{playerid}/settings/difficulty allowing easier access
+    // via userMenu without having to have a 2nd form on each individual page.
+    // Same form, fields, purpose as New Player Control Settings.
+    // @see settingsDifficultyNew.blade.php
+    // Final version (might or might not) have a different layout.
+    return view('settingsDifficulty');
+});
+
 
 // Obsolete pages:
 // No longer needed, yet they might be useful during development.

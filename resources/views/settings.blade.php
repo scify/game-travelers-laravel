@@ -37,16 +37,16 @@
             <div class="section gamesettings background-group-3--flowers container-xxl px-4">
 
                 <div class="buttonstack vstack gap-4 pt-4 mx-auto settings-options text-center">
-                    <a class="btn btn-lg btn-primary" tabindex="1">
+                    <a class="btn btn-lg btn-primary" href="{{ url('/settings/profile') }}" tabindex="1">
                         <span class="balloon"></span> Προφίλ παίκτη
                     </a>
                     <a class="btn btn-lg btn-primary disabled" tabindex="-1" >
                         <span class="balloon"></span> Μουσική & ήχος
                     </a>
-                    <a class="btn btn-lg btn-primary" tabindex="3">
+                    <a class="btn btn-lg btn-primary" href="{{ url('/settings/controls') }}" tabindex="3">
                         <span class="balloon"></span> Πλοήγηση
                     </a>
-                    <a class="btn btn-lg btn-primary" tabindex="4">
+                    <a class="btn btn-lg btn-primary" href="{{ url('/settings/difficulty') }}" tabindex="4">
                         <span class="balloon"></span> Επίπεδο δυσκολίας
                     </a>
                     <!-- delete player button -->

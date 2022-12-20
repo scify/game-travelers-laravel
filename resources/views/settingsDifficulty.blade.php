@@ -1,102 +1,51 @@
-<x-layout :title="'Δυσκολία | Νέος παίκτης - Βήμα 3ο | Ταξιδιώτες'">
-    {{-- Note: Dices are clickable of course. In other news, values on inputs
-         for dices, duration, diff. level and movement are indicative and not
-         crucial. In contrast, ids are crucual for both accessibility and JS,
-         so they shouldn't be altered for the time being. Dices images are
-         linked with a data-role and a data-for attribute with the #ID of the
-         related checkbox. No other automations or validation on this page.
-         @see resources/js/settings/dice-selection.js
-    --}}
+<x-layout :title="'Ρυθμίσεις δυσκολίας | Ταξιδιώτες'" :hasUserMenu=true :background="'background-dash-up'">
+    {{-- Note: This is the exact same page as the one for New Players BUT with
+        a modified header. According to the design these pages should be
+        different, yet they have the exact same form, fields and purpose. Their
+        only difference is on the layout. In order to considerably boost
+        development output and to give ourselves some time to debate if it is
+        useful or not for users to learn how to use two different pages instead
+        of one, this acts as a temporary page / placeholder that should be
+        very easy to implement on the back-end as it has the exact same
+        elements as the settingsDifficultyNew.blade.php view.
+        --}}
     @section('scripts')
         <script src="{{ mix('js/functions/settings.js') }}" defer></script>
     @endsection
 
-    <!-- new player step 3/3 content -->
     <form
         method="get" {{-- should be post, get is for testing --}}
-        action="{{ url('/select/player') }}"
+        action="{{ url('/settings') }}" {{-- should go back to main Settings --}}
         id="settingsDifficultyNew" {{-- unused id --}}
     >
         @csrf
 
-        <!-- step counter 3/3 -->
-        <div class="stepper container-xxl">
-            <div class="step3 row">
-                <div class="step3-1 col-1">
-                    <!-- empty -->
-                </div>
-                <div class="step3-2 col-4">
-                    <button
-                        class="btn btn-round past"
-                        title="Προφίλ παίκτη"
-                        aria-label="Αποθήκευση και επιστροφή στο προφίλ παίκτη"
-                        name="page"
-                        value="profile"
-                        type="submit"
-                    >
-                        1
-                    </button>
-                </div>
-                <div class="step3-3 col-5">
-                    <button
-                        class="btn btn-round past"
-                        title="Ρυθμίσεις πλοήγησης"
-                        aria-label="Αποθήκευση και επιστροφή στις ρυθμίσεις πλοήγησης"
-                        name="page"
-                        value="controls"
-                        type="submit"
-                    >
-                        2
-                    </button>
-                </div>
-                <div class="step3-4 col-2">
-                    <button
-                    class="btn btn-round current"
-                    title="Ρυθμίσεις δυσκολίας"
-                    aria-label="Ρυθμίσεις δυσκολίας"
-                    aria-describedby="currentPageDescription"
-                    aria-current="page"
-                    aria-readonly="true"
-                    tabindex="-1"
-                    name="page"
-                    value="difficulty"
-                    type="submit"
-                    disabled
-                    id="currentPageButton"
-                    >
-                        3
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- / step counter 3/3 -->
-
         <!-- section header -->
-        <div class="settings-header container-xxl px-4 px-sm-4 mb-2 mb-lg-1">
+        <div class="gamesettings-header container-xxl px-4 mb-2 mb-lg-3 mt-3 pt-3 pb-3"> {{-- New/Existing diff: mb-2 mb-lg-3 mt-3 pt-3 pb-3 --}}
             <div class="row">
                 <div class="col-1">
                     <x-buttonBack
-                        :label="'Επιστροφή στις ρυθμίσεις πλοήγησης'"
-                        :align="'left'"
-                        :url="url('/settings/controls/new')"
-                    />
+                    :label="'Επιστροφή στις ρυθμίσεις'"
+                    :align="'left'"
+                    :url="url('/settings')"
+                />
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">
-                    <h1 id="currentPageLabel">Δυσκολία</h1>
+                    <h1 id="currentPageLabel">Ρυθμίσεις δυσκολίας</h1>
                     <p>
                         <strong id="currentPageDescription">
-                            Επίλεξε πόσο εύκολο ή δύσκολο θέλεις να είναι το παιχνίδι.
+                            Επίλεξε πόσο εύκολο ή δύσκολο θέλεις να είναι το παιχνίδι. {{-- Player Name goes here? Somewhere? Where? --}}
                         </strong>
                     </p>
                 </div>
                 <div class="col-1">
-                    {{-- Reserved for sub-header controls. --}}
+                    {{-- Reserved for navigation buttons. --}}
                 </div>
-           </div>
+            </div>
         </div>
         <!-- / section header -->
 
-        <!-- settings difficulty -->
+        {{-- Note: EXACTLY THE SAME AS settingsDifficultyNew.blade.php <!-- settings difficulty --> --}}
         <div class="section settings container-xxl px-4 px-sm-5 px-xl-6">
             <div id="settingsGroup" class="row">
                 <fieldset class="col-lg-8">
@@ -310,18 +259,19 @@
                     name="submit"
                     value="save"
                 >
-                    ολοκλήρωση ρυθμίσεων
+                    αποθήκευση ρυθμίσεων
                 </button>
             </div>
 
         </div>
-        <!-- / settings difficulty -->
+        {{-- / Note: EXACTLY THE SAME AS settingsDifficultyNew.blade.php <!-- settings difficulty --> --}}
 
     </form>
-    <!-- / new player step 3/3 content -->
 
+    {{-- Note: EXACTLY THE SAME AS settingsDifficultyNew.blade.php <!-- settings difficulty --> --}}
     <!-- help modals -->
     @include('help.helpSettingsDifficulty')
     <!-- / help modals -->
+    {{-- / Note: EXACTLY THE SAME AS settingsDifficultyNew.blade.php <!-- settings difficulty --> --}}
 
 </x-layout>

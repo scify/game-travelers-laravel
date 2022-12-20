@@ -16,10 +16,16 @@
         <small style="border-bottom: 1px solid #000;">Make your browser's window as small as this little line of text...</small>
 
         <h3 class="mt-4">Player Settings</h3>
-        <small>Landing page for settings. Except music, other options <em>could be the same</em> as the ones for Create New Player with a different header.</small>
+        <small>Landing page for settings. Except music, other Settings pages <em>could be the exact same</em> as the ones for a New Player, but with a different header.</small>
         <dl>
             <dt><a href="{{ url('/settings') }}">Player Settings main/landing page</a>
             <dd>✔️ <span class="upd">Final</span> A nice vertical stack of buttons of all types (including a disabled and a dangerous one). Balloon on hover, Delete Player implementation via a modal and a form, back to previous page button, fully responsive and nicely decorated with 3 different backgrounds.</dd>
+            <dt><a href="{{ url('/settings/profile') }}">Existing Player Profile Settings</a>
+            <dd>✔️ <span class="upd">Final: α version</span> .</dd>
+            <dt><a href="{{ url('/settings/controls') }}">Existing Player Controls Settings</a>
+            <dd>✔️ <span class="upd">Final: α version</span> </dd>
+            <dt><a href="{{ url('/settings/difficulty') }}">Existing Player Difficulty Settings</a>
+            <dd>✔️ <span class="upd">Final: α version</span> A nice vertical stack of buttons of all types (including a disabled and a dangerous one). Balloon on hover, Delete Player implementation via a modal and a form, back to previous page button, fully responsive and nicely decorated with 3 different backgrounds.</dd>
         </dl>
 
         <h3 class="mt-4">Start New Game</h3>
