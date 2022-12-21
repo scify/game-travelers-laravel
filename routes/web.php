@@ -146,6 +146,17 @@ Route::get('/settings/difficulty', function () {
     return view('settingsDifficulty');
 });
 
+// Random x-layout component demos for No-Vue (default), Vue (optional):
+Route::get('/demo/noVue', function () {
+    return view('extras/demoNoVue');
+});
+Route::get('/demo/hasVue', function () {
+    return view('extras/demoHasVue');
+});
+Route::get('/demo/hasVueBlank', function () {
+    return view('extras/demoHasVueBlank');
+});
+
 
 // Obsolete pages:
 // No longer needed, yet they might be useful during development.

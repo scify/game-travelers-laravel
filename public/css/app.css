@@ -13815,8 +13815,12 @@ img.splash {
   min-height: 100vh;
 }
 
-.content {
+.travelers-container {
   width: 100%;
+}
+
+section.content {
+  min-height: 480px;
 }
 
 /* Sections */

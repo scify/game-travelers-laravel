@@ -1,23 +1,16 @@
-<!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
-<head>
-    <title>Second page</title>
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+{{-- Hint: You can check the Diff on this page to discover how easy it is to use
+    our own layout. Basically, all the HTML content inside <x-layout> goes to
+    the  {{slot}} of /views/components/layout.blade.php. That's all! --}}
+<x-layout :title="'Dummy home page | Ταξιδιώτες'" :description="'This is a dummy home page'">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>
-<div class="container">
-    <div class="alert alert-dark" role="alert">
-        Dummy home page
+    <div class="container">
+        <div class="alert alert-dark" role="alert">
+            Dummy home page
+        </div>
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button class="btn btn-primary" type="submit">logout</button>
+        </form>
     </div>
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button class="btn btn-primary" type="submit">logout</button>
-    </form>
-</div>
 
-</body>
-</html>
+</x-layout>
