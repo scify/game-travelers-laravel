@@ -159,7 +159,7 @@
                             </div>
                         </div>
                         <!-- / captcha -->
-                        <div class="form-actions p-4 text-center">
+                        <div class="form-actions p-2 text-center">
                             <button class="btn btn-lg btn-primary text-nowrap responsive-expand" tabindex="5"
                                     type="submit" id="submit">Εγγραφή
                             </button>
