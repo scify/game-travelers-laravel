@@ -58,7 +58,7 @@ If executed successfully, it will be set in the `APP_KEY` variable in the `.env`
 If you are using `nvm`, run this command in order to sync to the correct NodeJS version for the project:
 
 ```bash
-nvm use
+nvm install
 ```
 
 Install and compile the front-end dependencies:
