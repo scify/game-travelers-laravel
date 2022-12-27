@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\BusinessLogicLayer\User\UserRole\UserRoleManager;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\App;
 
 class AuthServiceProvider extends ServiceProvider {
     /**
@@ -22,6 +24,7 @@ class AuthServiceProvider extends ServiceProvider {
     public function boot() {
         $this->registerPolicies();
 
-        //
+        $userRoleManager = App::make(UserRoleManager::class);
+        $userRoleManager->registerUserPolicies();
     }
 }

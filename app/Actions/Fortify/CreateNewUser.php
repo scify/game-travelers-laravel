@@ -2,20 +2,29 @@
 
 namespace App\Actions\Fortify;
 
+use App\BusinessLogicLayer\User\UserManager;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 
 class CreateNewUser implements CreatesNewUsers {
     use PasswordValidationRules;
 
+
+    protected UserManager $userManager;
+
+    public function __construct(UserManager $userManager) {
+        $this->userManager = $userManager;
+    }
+
     /**
      * Validate and create a newly registered user.
      *
-     * @param  array  $input
-     * @return \App\Models\User
+     * @param array $input
+     * @return User
+     * @throws ValidationException
      */
     public function create(array $input) {
         Validator::make($input, [
@@ -29,9 +38,9 @@ class CreateNewUser implements CreatesNewUsers {
             'password' => $this->passwordRules(),
         ])->validate();
 
-        return User::create([
-            'email' => $input['email'],
-            'password' => Hash::make($input['password']),
+        return $this->userManager->create([
+            'email' => trim($input['email']),
+            'password' => trim($input['password'])
         ]);
     }
 }
