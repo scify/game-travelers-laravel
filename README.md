@@ -1,64 +1,161 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Taxidiotes Game Web Application
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![JavaScript Style Guide: Good Parts](https://img.shields.io/badge/code%20style-goodparts-brightgreen.svg?style=flat)](https://github.com/dwyl/goodparts "JavaScript The Good Parts")
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
+[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://GitHub.com/scify)
 
-## About Laravel
+Laravel 9 Web Application for the Taksidiotes Game Web app
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+[Project URL](https://taxidiotes.scify.org/)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# Installation Instructions:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Pre-initialization steps
 
-## Learning Laravel
+After cloning the project, create an .env file (should be a copy of .env.example),
+containing the information about your database name and credentials:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+cp .env.example .env
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Take a look at the `.env` file that was created. You may need to update the `DB_*` variables, in order to set up the DB
+connection.
+Also, make sure that the `APP_URL` is set to the correct domain and port that you will be using.
 
-## Laravel Sponsors
+<hr>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## First time install (setup database and install dependencies)
 
-### Premium Partners
+0. Make sure php 8.0 (or newer) is installed.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
 
-## Contributing
+1. After cloning the project, create an .env file (should be a copy of .env.example),
+   containing the information about your database name and credentials.
+   Then run ```php artisan migrate``` to create the DB schema and
+   ```php artisan db:seed``` in order to insert the starter data to the DB
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2. Install laravel/back-end dependencies
 
-## Code of Conduct
+```bash
+composer install
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+composer dump-autoload
+```
 
-## Security Vulnerabilities
+3. Then, run the command to set the application unique key:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php artisan key:generate
+```
 
-## License
+If executed successfully, it will be set in the `APP_KEY` variable in the `.env` file.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. Install and compile front-end dependencies
+
+If you are using `nvm`, run this command in order to sync to the correct NodeJS version for the project:
+
+```bash
+nvm use
+```
+
+Install and compile the front-end dependencies:
+
+```bash
+npm install
+
+npm run dev
+```
+
+5. Create symbolic link for uploaded files.
+
+```bash
+php artisan storage:link
+```
+
+to link the `/public/storage` folder with the `/storage/app/public` directory
+
+## SEO - Generate Sitemap
+
+This application uses [Spatie - Laravel Sitemap](https://github.com/spatie/laravel-sitemap) plugin, in order to create
+the `public/sitemap.xml` file (which is excluded from git), that will be crawled by the search engines.
+In order to run the generator for the current application installation, run the embedded Laravel command:
+
+```bash
+php artisan sitemap:generate
+```
+
+## PHP code style - Laravel Pint
+
+This application uses [Laravel Pint](https://laravel.com/docs/9.x/pint) in order to perform code-style.
+
+In order to run the styler, run :
+
+```bash
+
+./vendor/bin/pint --test -v # the --test will not do any changes, it will just output the changes needed
+
+./vendor/bin/pint -v # this command will actually perform the code style changes 
+
+```
+
+## Apache configuration example:
+
+```
+% sudo touch /etc/apache2/sites-available/taxidiotes.conf
+% sudo nano /etc/apache2/sites-available/taxidiotes.conf
+<VirtualHost *:80>
+       
+        ServerName dev.taxidiotes
+        ServerAlias dev.taxidiotes
+        DocumentRoot "/home/path/to/project/public"
+        <Directory "/home/path/to/project/public">
+            Require all granted
+            AllowOverride all
+        </Directory>
+       
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
+```
+
+Make the symbolic link:
+
+```bash
+% cd /etc/apache2/sites-enabled && sudo ln -s ../sites-available/taxidiotes.conf
+```
+
+Enable mod_rewrite, mod_ssl and restart apache:
+
+```bash
+% sudo a2enmod rewrite && sudo a2enmod ssl && sudo service apache2 restart
+```
+
+Fix permissions for storage directory:
+
+```bash
+sudo chown -R user:www-data storage
+chmod 775 storage
+cd storage/
+find . -type f -exec chmod 664 {} \;
+find . -type d -exec chmod 775 {} \;
+```
+
+Or run the `set-file-permissions.sh` script.
+
+Change hosts file so dev.taxidiotes points to localhost:
+
+```$xslt
+sudo nano /etc/hosts
+127.0.0.1       dev.taxidiotes
+```
+
+## How to debug
+
+- Install and configure Xdebug on your machine
+- At Chrome
+  install [Xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc?utm_source=chrome-app-launcher-info-dialog)
+- At PhpStorm/IntelliJ click the "Start listening for PHP debug connections"

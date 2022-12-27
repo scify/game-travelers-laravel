@@ -6,8 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\UpdatesUserPasswords;
 
-class UpdateUserPassword implements UpdatesUserPasswords
-{
+class UpdateUserPassword implements UpdatesUserPasswords {
     use PasswordValidationRules;
 
     /**
@@ -17,8 +16,7 @@ class UpdateUserPassword implements UpdatesUserPasswords
      * @param  array  $input
      * @return void
      */
-    public function update($user, array $input)
-    {
+    public function update($user, array $input) {
         Validator::make($input, [
             'current_password' => ['required', 'string', 'current_password:web'],
             'password' => $this->passwordRules(),

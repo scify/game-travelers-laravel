@@ -6,7 +6,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Player; // I guess a Player Model (aka Profile) is needed.
+
+// I guess a Player Model (aka Profile) is needed.
 
 /**
  * Avatar model represents an avatar data record.
@@ -25,8 +26,7 @@ use App\Models\Player; // I guess a Player Model (aka Profile) is needed.
  * @property int $width The width of the 1x asset in pixels (default:100).
  * @property int $height The height of the 1x asset in pixels (default:100).
  */
-class Avatar extends Model
-{
+class Avatar extends Model {
     use Player;
 
     /**
@@ -49,12 +49,12 @@ class Avatar extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        "id",
-        "asset",
-        "description",
-        "public_path",
-        "width",
-        "height",
+        'id',
+        'asset',
+        'description',
+        'public_path',
+        'width',
+        'height',
     ];
 
     /**
@@ -65,9 +65,9 @@ class Avatar extends Model
      * @var array<string, mixed>
      */
     protected $attributes = [
-        "width" => 100,
-        "height" => 100,
-        "public_path" => "images/avatars",
+        'width' => 100,
+        'height' => 100,
+        'public_path' => 'images/avatars',
     ];
 
     /**
@@ -79,12 +79,12 @@ class Avatar extends Model
      * @var array<string, string>
      */
     public static $rules = [
-        "id" => "required|integer|unique:avatars", // why (not)
-        "asset" => "required",
-        "description" => "required",
-        "public_path" => "required",
-        "width" => "integer|min:50|max:200|same:height", // 1:1!
-        "height" => "integer|min:50|max:200|same:width", // 1:1!
+        'id' => 'required|integer|unique:avatars', // why (not)
+        'asset' => 'required',
+        'description' => 'required',
+        'public_path' => 'required',
+        'width' => 'integer|min:50|max:200|same:height', // 1:1!
+        'height' => 'integer|min:50|max:200|same:width', // 1:1!
     ];
 
     /**
@@ -95,20 +95,18 @@ class Avatar extends Model
      * function I don't really know, but my thought experiment has no actual
      * limits.
      */
-    public function players()
-    {
+    public function players() {
         return $this->hasMany(Player::class);
     }
 
     /**
      * Retrieve an avatar data record by its ID.
      *
-     * @param int $id The ID of the avatar data record to retrieve.
+     * @param  int  $id The ID of the avatar data record to retrieve.
      * @return \App\Models\Avatar|null The avatar data record.
      */
-    public static function findById($id)
-    {
-        return static::where("id", $id)->first();
+    public static function findById($id) {
+        return static::where('id', $id)->first();
     }
 
     /**
@@ -124,18 +122,17 @@ class Avatar extends Model
      *
      * @return array<int, array<string, mixed>>
      */
-    public static function getAllAvatars()
-    {
+    public static function getAllAvatars() {
         $avatars = self::all();
         $list = [];
         foreach ($avatars as $avatar) {
             $list[$avatar->id] = [
-                "id" => $avatar->id,
-                "asset" => $avatar->asset,
-                "description" => $avatar->description,
-                "public_path" => $avatar->public_path,
-                "width" => $avatar->width,
-                "height" => $avatar->height,
+                'id' => $avatar->id,
+                'asset' => $avatar->asset,
+                'description' => $avatar->description,
+                'public_path' => $avatar->public_path,
+                'width' => $avatar->width,
+                'height' => $avatar->height,
             ];
         }
     }

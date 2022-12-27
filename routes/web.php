@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // Temporary splash screen implementation to hide the /log diary out of sight.
 Route::get('/', function () {
@@ -37,8 +37,10 @@ Route::get('/log', function () {
 // which also resides in the same folder.
 // @see ../docs/examples/exampleData.php Avatar Data Model
 // @example ../docs/examples/exampleDataAvatarModel.php Avatar Data Model
-require __DIR__.'/../docs/examples/exampleData.php';
+require __DIR__ . '/../docs/examples/exampleData.php';
+/** @var array $avatars */
 View::share('avatars', $avatars);
+/** @var array $players_with_avatars */
 View::share('players_with_avatars', $players_with_avatars);
 
 /*

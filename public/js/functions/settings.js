@@ -9,23 +9,21 @@ function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 /**
-  * Avatar Selection Functions.
-  * Requirements:
-  * - Avatar <buttons> with the data-avatar=true and other data-attributes.
-  * - A hidden input element with id=#selectedAvatarId.
-  * - A submit button with the id=#submitButton.
-  */
+ * Avatar Selection Functions.
+ * Requirements:
+ * - Avatar <buttons> with the data-avatar=true and other data-attributes.
+ * - A hidden input element with id=#selectedAvatarId.
+ * - A submit button with the id=#submitButton.
+ */
 window.addEventListener("load", function () {
+  var btnId;
   // Should only run on pages with avatarsContainer & for related buttons.
   var avatarsContainer = document.getElementById("avatarsContainer");
   // Let the fun begin!
 
   if (avatarsContainer) {
-    var buttons = avatarsContainer.querySelectorAll("button[data-avatar=\"true\"]");
+    var buttons = avatarsContainer.querySelectorAll('button[data-avatar="true"]');
     if (buttons) {
-      var btnRole;
-      var btnId;
-      var btnId;
       (function () {
         /**
          * Form validation function.
@@ -35,6 +33,7 @@ window.addEventListener("load", function () {
          * If an #playerNameInput input is on the same page, then it's value is
          * also take under consideration for validation.
          */
+        // eslint-disable-next-line no-inner-declarations
         var updateSubmitButtonState = function updateSubmitButtonState() {
           var submitButton = document.getElementById("submitButton");
           var secondaryButton = document.getElementById("secondaryButton");
@@ -46,11 +45,7 @@ window.addEventListener("load", function () {
           // If nameInput, then we are on the create new profile page.
           if (nameInput) {
             var nameValue = nameInput.value;
-            if (nameValue.length >= 2 && !isNaN(idValue) && idValue > 0) {
-              submitButton.disabled = false;
-            } else {
-              submitButton.disabled = true;
-            }
+            submitButton.disabled = !(nameValue.length >= 2 && !isNaN(idValue) && idValue > 0);
             // If !nameInput, then we are just updating an existing profile.
           } else {
             if (!isNaN(idValue) && idValue > 0) {
@@ -69,13 +64,15 @@ window.addEventListener("load", function () {
         /**
          * Avatar handler function.
          */
+        // eslint-disable-next-line no-inner-declarations
         var handleAvatarState = function handleAvatarState(btn) {
+          var id;
           // Get the button's role:
           var role = btn.getAttribute("data-role");
           if (role && role === "player") {
-            var id = btn.getAttribute("data-player-id");
+            id = btn.getAttribute("data-player-id");
           } else {
-            var id = btn.getAttribute("data-avatar-id");
+            id = btn.getAttribute("data-avatar-id");
           }
           // Get the selected avatar id and update the linked input field:
           idInput.value = id;
@@ -99,39 +96,38 @@ window.addEventListener("load", function () {
           btn.classList.add("selected");
           btn.setAttribute("aria-checked", "true");
           updateSubmitButtonState();
-        };
-        var animateAvatarButtons = function animateAvatarButtons(buttons) {
-          var reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-          if (reducedMotionQuery.media !== 'not all' && !reducedMotionQuery.matches) {
-            var _loop = function _loop(i) {
-              var anBtn = buttons[i];
-              var anDelay = 300 + i * 50;
-              setTimeout(function () {
-                anBtn.style.transform = "scale(1)";
-                anBtn.style.transition = "0.2s linear";
-                requestAnimationFrame(function () {
-                  anBtn.style.transform = "scale(1.2)";
-                });
-                setTimeout(function () {
-                  anBtn.style.transform = 'scale(1)';
-                }, anDelay);
-              }, anDelay);
-            };
-            for (var i = 0; i < buttons.length; i++) {
-              _loop(i);
-            }
-          }
-        };
+        }; // TODO: Remove if not used.
+        // function animateAvatarButtons(buttons) {
+        // 	const reducedMotionQuery = window.matchMedia(
+        // 		"(prefers-reduced-motion: reduce)"
+        // 	);
+        // 	if (
+        // 		reducedMotionQuery.media !== "not all" &&
+        // 		!reducedMotionQuery.matches
+        // 	) {
+        // 		for (let i = 0; i < buttons.length; i++) {
+        // 			let anBtn = buttons[i];
+        // 			const anDelay = 300 + i * 50;
+        // 			setTimeout(() => {
+        // 				anBtn.style.transform = "scale(1)";
+        // 				anBtn.style.transition = "0.2s linear";
+        // 				requestAnimationFrame(() => {
+        // 					anBtn.style.transform = "scale(1.2)";
+        // 				});
+        // 				setTimeout(() => {
+        // 					anBtn.style.transform = "scale(1)";
+        // 				}, anDelay);
+        // 			}, anDelay);
+        // 		}
+        // 	}
+        // }
+        // Form initialization:
+        // Reset playerAvatarInput to either the filled or default state (0) &
+        // set the proper classes to the initialized avatar buttons.
         // Variables for reading/validating/processing various form elements.
         var idInput = document.getElementById("avatarsContainerInput");
         var nameInput = document.getElementById("playerNameInput");
         var initialFormIdValue = idInput ? parseInt(idInput.value) : 0;
-        ;
-        ;
-
-        // Form initialization:
-        // Reset playerAvatarInput to either the filled or default state (0) &
-        // set the proper classes to the initialized avatar buttons.
         if (initialFormIdValue === 0) {
           updateSubmitButtonState();
           // Animate on (initial) load!
@@ -142,7 +138,7 @@ window.addEventListener("load", function () {
           try {
             for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
               var btn = _step2.value;
-              btnRole = btn.getAttribute("data-role");
+              var btnRole = btn.getAttribute("data-role");
               if (btnRole === "player") {
                 btnId = btn.getAttribute("data-player-id");
               } else {
@@ -175,14 +171,14 @@ window.addEventListener("load", function () {
         var _iterator3 = _createForOfIteratorHelper(buttons),
           _step3;
         try {
-          var _loop2 = function _loop2() {
+          var _loop = function _loop() {
             var btn = _step3.value;
             btn.addEventListener("click", function () {
               return handleAvatarState(btn);
             });
           };
           for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-            _loop2();
+            _loop();
           }
         } catch (err) {
           _iterator3.e(err);
@@ -214,7 +210,7 @@ window.addEventListener("load", function () {
     try {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
         var img = _step.value;
-        img.addEventListener('click', function (event) {
+        img.addEventListener("click", function (event) {
           var checkboxId = event.target.getAttribute("data-for");
           if (checkboxId) {
             var checkbox = document.getElementById(checkboxId);
@@ -244,15 +240,17 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 /*
  * Group Setters Functions.
  */
-window.addEventListener('load', function () {
+window.addEventListener("load", function () {
   // First, select all of the input fields with the data-role="groupSetter" attribute
   var groupSetters = document.querySelectorAll("input[data-role='groupSetter']");
   if (groupSetters.length) {
     (function () {
       // Function
+      // eslint-disable-next-line no-inner-declarations
       var setGroupSetterStates = function setGroupSetterStates(groupSetter) {
         var enables = groupSetter.getAttribute("data-enables");
         var disables = groupSetter.getAttribute("data-disables");
+        var dataKeySelected;
         if (groupSetter.checked) {
           var enableEl = document.getElementById(enables);
           enableEl.classList.remove("opacity-50");
@@ -306,7 +304,7 @@ window.addEventListener('load', function () {
           var groupSetter = _step3.value;
           setGroupSetterStates(groupSetter);
           // Add listener
-          groupSetter.addEventListener('change', function () {
+          groupSetter.addEventListener("change", function () {
             setGroupSetterStates(groupSetter);
           });
         };
@@ -331,9 +329,10 @@ window.addEventListener('load', function () {
 /*
  * Help & Tooltips Functions.
  */
-window.addEventListener('load', function () {
+window.addEventListener("load", function () {
   var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  tooltipTriggerList.map(function (tooltipTriggerEl) {
+    // eslint-disable-next-line no-undef
     return new bootstrap.Tooltip(tooltipTriggerEl);
   });
 });
@@ -400,6 +399,7 @@ window.addEventListener("load", function () {
               window.removeEventListener("click", assignerClickHandler);
             }
           }
+
           /** KeyUp event listener for Key Assigner. */
           function assignerKeyUpHandler(event) {
             // Override the default behavior of keys.
@@ -459,10 +459,10 @@ window.addEventListener("load", function () {
             }
             keyAssigner.textContent = returnKey;
             keyAssigner.setAttribute("data-key-selected", returnKey);
-            setInputId = keyAssigner.getAttribute("data-sets-input");
-            setInput = document.getElementById(setInputId);
+            var setInputId = keyAssigner.getAttribute("data-sets-input");
+            var setInput = document.getElementById(setInputId);
             setInput.value = returnKey;
-            keyAssigner.classList.remove('active');
+            keyAssigner.classList.remove("active");
             // Removes self (like once() used to do).
             window.removeEventListener("keyup", assignerKeyUpHandler);
           }
@@ -495,7 +495,7 @@ window.addEventListener("load", function () {
  * Range Labels Functions.
  */
 window.addEventListener("load", function () {
-  var rangeElements = document.querySelectorAll("input[type=\"range\"]");
+  var rangeElements = document.querySelectorAll('input[type="range"]');
   if (rangeElements.length) {
     var _loop = function _loop(i) {
       var element = rangeElements[i];
@@ -506,7 +506,7 @@ window.addEventListener("load", function () {
       } else {
         label.textContent = "\u03BA\u03AC\u03B8\u03B5 ".concat(element.value, " \u03B4\u03B5\u03C5\u03C4\u03B5\u03C1\u03CC\u03BB\u03B5\u03C0\u03C4\u03B1");
       }
-      element.addEventListener("change", function (event) {
+      element.addEventListener("change", function () {
         if (parseInt(element.value) === 1) {
           label.textContent = "\u03BA\u03AC\u03B8\u03B5 ".concat(element.value, " \u03B4\u03B5\u03C5\u03C4\u03B5\u03C1\u03CC\u03BB\u03B5\u03C0\u03C4\u03BF");
         } else {

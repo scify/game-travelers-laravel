@@ -16,3 +16,13 @@ yarn-error.log
 _ide_helper.php
 _ide_helper_models.php
 .phpstorm.meta.php
+public/css
+public/js
+public/web.config
+.idea/
+*.~lock.*
+public/fonts
+public/images
+resources/sass/*.css
+resources/sass/*.css.map
+public/sitemap.xml

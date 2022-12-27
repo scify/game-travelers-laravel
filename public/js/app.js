@@ -2090,7 +2090,9 @@ try {
   // in this script). window.bootstrap = was required to access bootstrap
   // object via JavaScript and create custom interactive elements.
   window.bootstrap = __webpack_require__(/*! bootstrap/dist/js/bootstrap.bundle */ "./node_modules/bootstrap/dist/js/bootstrap.bundle.js");
-} catch (e) {}
+} catch (e) {
+  console.error(e);
+}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -2099,7 +2101,7 @@ try {
  */
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

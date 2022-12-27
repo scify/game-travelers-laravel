@@ -11,5 +11,5 @@
  * component (@see /views/components/layout.blade.php ).
  */
 
-require('./bootstrap');
+require("./bootstrap");
 
