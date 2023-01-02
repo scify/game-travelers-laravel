@@ -25,7 +25,7 @@ class UsersTableSeeder extends Seeder {
             [
                 'id' => 2,
                 'email' => 'user-taxidiotes@scify.org',
-                'password' => bcrypt(env('DEFAULT_TEST_USER_PASSWORD_FOR_SEED')),
+                'password' => bcrypt(env('DEFAULT_ADMIN_USER_PASSWORD_FOR_SEED')),
             ],
         ];
 

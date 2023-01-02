@@ -4,6 +4,7 @@ namespace App\Actions\Fortify;
 
 use App\BusinessLogicLayer\User\UserManager;
 use App\Models\User;
+use App\Notifications\UserRegistered;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
@@ -38,9 +39,11 @@ class CreateNewUser implements CreatesNewUsers {
             'password' => $this->passwordRules(),
         ])->validate();
 
-        return $this->userManager->create([
+        $user = $this->userManager->create([
             'email' => trim($input['email']),
             'password' => trim($input['password'])
         ]);
+        $user->notify(new UserRegistered($user));
+        return $user;
     }
 }

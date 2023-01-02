@@ -5,7 +5,10 @@
  * Contains App's web routes.
  */
 
+use App\Models\User;
+use App\Notifications\UserRegistered;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +25,19 @@ require __DIR__ . '/auth.php';
 // Temporary splash screen implementation to hide the /log diary out of sight.
 Route::get('/', function () {
     return view('splash');
+})->name('home');
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('administration')->middleware('can:manage-platform')->name('administration.')->group(function () {
+        Route::get('test-email/{email}', function (Request $request) {
+            $user = User::where(['email' => $request->email])->first();
+            if (!$user)
+                $user = User::findOrFail(1);
+            $user->notify(new UserRegistered($user));
+            return "Email sent to: " . $user->email;
+        });
+    });
 });
 
 // From the "obsolete" pages, this still acts as the index, so please don't
