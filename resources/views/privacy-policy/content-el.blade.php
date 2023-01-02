@@ -500,15 +500,15 @@
                                     cookies χρησιμοποιούνται για στατιστικούς σκοπούς και για να βελτιωθεί η
                                     επίδοση μιας πλατφόρμας.
                                 </td>
-                                <td>dianoia_marketplace_cookies_consent_selection,
-                                    dianoia_marketplace_cookies_consent_targeting (Αποθηκεύει την κατάσταση
+                                <td>taxidiotes_cookies_consent_selection,
+                                    taxidiotes_cookies_consent_targeting (Αποθηκεύει την κατάσταση
                                     συναίνεσης cookie του χρήστη για το συγκεκριμένο τομέα)
                                     <br><br>
                                     XSRF-TOKEN (Εξασφαλίζει την ασφάλεια περιήγησης του επισκέπτη αποτρέποντας
                                     την πλαστογραφία αιτήματος μεταξύ ιστοτόπων. Αυτό το cookie είναι
                                     καθοριστικό για την ασφάλεια του ιστοτόπου και του επισκέπτη)
                                     <br><br>
-                                    remember_web_*, dianoia_marketplace_session (Όταν η εφαρμογή πρέπει να
+                                    remember_web_*, taxidiotes_session (Όταν η εφαρμογή πρέπει να
                                     ‘θυμάται’ τους συνδεδεμένους χρήστες όσο αυτοί περιηγούνται στην Πλατφόρμα)
                                     <br><br>
                                     lang (Αποηκεύει τη γλωσσική προτίμηση του χρήστη)
