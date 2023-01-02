@@ -40,6 +40,8 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+Route::view('/privacy-policy', 'privacy-policy.page')->name('privacy-policy');
+
 // From the "obsolete" pages, this still acts as the index, so please don't
 // delete this blade until we have a brand new front-page to replace it. Also
 // has important comments, as some of us decided to use this as a notebook.
