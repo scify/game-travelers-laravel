@@ -12,7 +12,7 @@
     <!-- new player step 2/3 content -->
     <form
         method="get" {{-- should be post, get is for testing --}}
-        action="{{ url('/settings/difficulty/new') }}"
+        action="{{ route('new.player') }}"
         id="settingsControlsNew" {{-- unused id --}}
     >
         @csrf
@@ -64,7 +64,7 @@
                     <x-buttonBack
                         :label="'Επιστροφή στην επιλογή παίκτη'"
                         :align="'left'"
-                        :url="url('/select/player')"
+                        :url="route('new.player')"
                     />
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">

@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Notifications\UserRegistered;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,10 +67,6 @@ View::share('players_with_avatars', $players_with_avatars);
  * Last update: December 18, 2022.
  * @link https://xd.adobe.com/view/d308b3ee-c123-48d3-87ff-5304ebdaa85a-865b/
  */
-Route::get('/select/player', function () {
-    // Requires View::share('players_with_avatars', $players_with_avatars);
-    return view('gameSelectPlayer');
-});
 Route::get('/select/board', function () {
     // Requires Implementation of "User Menu".
     // Select Board page with links for passing data via GET.
@@ -189,4 +186,34 @@ Route::get('/testVue', function () {
 // Font-tester
 Route::get('/extras/font-tester', function () {
     return view('extras/testFont');
+});
+
+
+//Integrated pages
+Route::middleware('auth')->group(function () {
+    Route::get('/select/player', [UserController::class, 'show'])
+        ->name('select.player');
+
+    Route::post('/select/player', [UserController::class, 'select'])
+        ->name('select.player');
+
+    Route::get('/create/player', [UserController::class, 'newPlayer'])
+        ->name('new.player');
+
+    Route::post('/create/player', [UserController::class, 'savePlayer'])
+        ->name('new.player');
+
+    Route::get('/controls/player', [UserController::class, 'controlsConfigure'])
+        ->name('controls.player');
+
+    Route::post('/controls/player', [UserController::class, 'controlsSave'])
+        ->name('controls.player');
+
+    Route::get('home', function () {
+        return redirect('/select/player');
+    });
+
+    Route::get('logout', function () {
+        return view('logoutDummy');
+    });
 });

@@ -15,8 +15,8 @@
 
     <!-- new player step 1/3 content -->
     <form
-        method="get" {{-- should be post, get is for testing --}}
-        action="{{ url('/settings/controls/new') }}"
+        method="post"
+        action="{{ route('new.player') }}"
         id="settingsProfileNew" {{-- unused id --}}
     >
         @csrf
@@ -54,7 +54,7 @@
                     <x-buttonBack
                         :label="'Ακύρωση και επιστροφή στην επιλογή παίκτη'"
                         :align="'left'"
-                        :url="url('/select/player')"
+                        :url="route('select.player')"
                     />
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">
@@ -84,7 +84,7 @@
                         class="field-input extended underlined big"
                         type="text"
                         name="name"
-                        value="" {{-- Read by JS --}}
+                        value="{{ $name }}"
                         minlength="2" {{-- JS form validation --}}
                         maxlength="50"
                         required="true"
@@ -119,7 +119,7 @@
                 <div class="col-md-9">
                     <x-selectAvatar
                         :avatars=$avatars {{-- @see ../../docs/exampleData.php --}}
-                        :selectedAvatarId=0
+                        :selectedAvatarId=$selectedAvatarId
                         :tabindex=2
                     />
                 </div>
