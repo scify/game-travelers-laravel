@@ -155,20 +155,23 @@ $players = [
  *   The same-old-good-avatar-array, we've already used in other occassions.
  * @return array
  */
-function addAvatarToPlayer($player, $avatars) {
-    // @var App\Models\Avatar[] $avatars An array of Avatar Model objects.
-    // $avatars = Avatar::getAllAvatars();
-    $avatar_id = $player['avatar_id'];
-    $avatar = $avatars[$avatar_id];
-
-    return array_merge($player, ['avatar' => $avatar]);
-}
+//function addAvatarToPlayer($player, $avatars) {
+//    // @var App\Models\Avatar[] $avatars An array of Avatar Model objects.
+//    // $avatars = Avatar::getAllAvatars();
+//    $avatar_id = $player['avatar_id'];
+//    $avatar = $avatars[$avatar_id];
+//
+//    return array_merge($player, ['avatar' => $avatar]);
+//}
 
 // This won't work in here as we can't use `global $avatars` in the cb function:
 //   $players_with_avatars = array_map("addAvatarToPlayer", $players);
 // So until we have our Avatar and Profile model, let's use this monstrosity:
 $players_with_avatars = array_map(function ($players) use ($avatars) {
-    return addAvatarToPlayer($players, $avatars);
+    $avatar_id = $players['avatar_id'];
+    $avatar = $avatars[$avatar_id];
+
+    return array_merge($players, ['avatar' => $avatar]);
 }, $players);
 // I am pretty sure that there has to be a better way.
 // We shouldn't really add comments after the code though.
