@@ -17,7 +17,6 @@ class UserRepository extends Repository {
 
     public function create(array $data) {
         $storeArr = [
-            'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ];
