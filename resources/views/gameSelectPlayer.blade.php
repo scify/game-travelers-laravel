@@ -17,8 +17,8 @@
         handle on the back-end. Keep on reading the inline comments though.
         --}}
     <form
-        method="get" {{-- Get seems preferrable - see debate on the following select pages. --}}
-        action="{{ url('/select/board') }}"
+        method="post" {{-- Get seems preferrable - see debate on the following select pages. --}}
+        action="{{ route('select.player') }}"
         class="
         form
         @error('player') is-invalid @enderror {{-- one field, one error --}}
@@ -95,7 +95,8 @@
                                     and if the other requested IDs (e.g. board)
                                     are indeed available for selection. --}}
                                 <x-selectPlayer
-                                    :avatars=$players_with_avatars {{-- @see ../../docs/exampleData.php --}}
+                                    :avatars=$avatars
+                                    :players=$players
                                     :selected-player-id=0 {{-- 0: none selected --}}
                                     :tabindex=1 {{-- Accessibility (int). --}}
                                     :show-add-player=true {{-- Optional. TRUE or NULL (default). --}}

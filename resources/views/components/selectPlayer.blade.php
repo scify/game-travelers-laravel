@@ -33,7 +33,7 @@
 <!-- avatar container -->
 <div class="avatars container-lg text-center" id="avatarsContainer"> {{-- ID used by JS --}}
     <div class="avatars-row row">
-        @foreach ($avatars as $player)
+        @foreach ($players as $player)
             @php
                 // Make sure we have a starting tab to index...
                 $tabindex = $tabindex ?? $loop->index; $tabindex++;
@@ -45,8 +45,9 @@
                 // should provide the rendered width and height. In other news
                 // these two overrides should happen at the Route for now and
                 // they shall be removed from this template.
-                $player['avatar']['width'] = 88;
-                $player['avatar']['height'] = 88;
+                $avatar = $avatars[$player["avatar_id"]];
+                $avatar['width'] = 88;
+                $avatar['height'] = 88;
                 // Determine if this avatar is the selected one.
                 // @TODO: Implement avatarChecked = true in Controller/Route.
                 // This check should/could also be done on the Route. People
@@ -60,7 +61,7 @@
             @endphp
             <div class="avatar-col col-4 col-sm-3 col-xl-2 align-self-start">
                 <x-displayAvatar
-                    :avatar='$player["avatar"]'
+                    :avatar='$avatars[$player["avatar_id"]]'
                     :id='$player["id"]'
                     :name='$player["name"]'
                     :avatar-checked=$avatarChecked
@@ -81,7 +82,7 @@
                     data-role="button-add-player"
                     aria-label="Προσθήκη νέου παίκτη"
                     tabindex="{{ $tabindex ?? '-1' }}"
-                    href="{{ url('/settings/profile/new') }}"
+                    href="{{ route('new.player') }}"
                 >
                     <img
                         src="{{ asset('images/icons/plus90.svg') }}"
