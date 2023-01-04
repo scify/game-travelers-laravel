@@ -31,7 +31,7 @@
                         title="Προφίλ παίκτη"
                         aria-label="Προφίλ παίκτη"
                         aria-describedby="currentPageDescription"
-                        aria-current="page"
+                        aria-current="submit"
                         aria-readonly="true"
                         tabindex="-1"
                         name="page"

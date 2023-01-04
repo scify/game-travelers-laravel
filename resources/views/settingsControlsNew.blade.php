@@ -11,8 +11,8 @@
 
     <!-- new player step 2/3 content -->
     <form
-        method="get" {{-- should be post, get is for testing --}}
-        action="{{ route('new.player') }}"
+        method="post" {{-- should be post, get is for testing --}}
+        action="{{ route('controls.player') }}"
         id="settingsControlsNew" {{-- unused id --}}
     >
         @csrf
@@ -28,7 +28,7 @@
                         class="btn btn-round past"
                         title="Προφίλ παίκτη"
                         aria-label="Αποθήκευση και επιστροφή στο προφίλ παίκτη"
-                        name="page"
+                        name="submit"
                         value="profile"
                         type="submit"
                     >
@@ -41,7 +41,7 @@
                     title="Ρυθμίσεις πλοήγησης"
                     aria-label="Ρυθμίσεις πλοήγησης"
                     aria-describedby="currentPageDescription"
-                    aria-current="page"
+                    aria-current="submit"
                     aria-readonly="true"
                     tabindex="-1"
                     name="page"
@@ -64,7 +64,6 @@
                     <x-buttonBack
                         :label="'Επιστροφή στην επιλογή παίκτη'"
                         :align="'left'"
-                        :url="route('new.player')"
                     />
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">
@@ -79,7 +78,6 @@
                     <x-buttonForward
                         :label="'Μετάβαση στις ρυθμίσεις δυσκολίας'"
                         :align="'right'"
-                        :url="url('/settings/difficulty/new')"
                     />
                 </div>
            </div>
@@ -120,7 +118,7 @@
                                     data-disables="controlType2Group" {{-- Read by JS = #id of options group --}}
                                     tabindex="10"
                                     id="controlType1"
-                                    checked
+                                    @if($control_mode == 1) checked @endif
                                 />
                                 <label class="form-check-label field-label medium" for="controlType1">Αυτόματος</label>
                                 <div class="field-subgroup container-fluid gx-0 gy-5 pt-3" id="controlType1Group">
@@ -148,7 +146,7 @@
                                                 data-role="keyAssignerInput"
                                                 type="hidden"
                                                 name="controlAutomaticSelectionButton"
-                                                value="Space"
+                                                value="{{ $control_auto_select }}"
                                             />
                                         </div>
                                     </div>
@@ -165,6 +163,7 @@
                                     data-disables="controlType1Group" {{-- Read by JS = #id of options group--}}
                                     tabindex="20"
                                     id="controlType2"
+                                    @if($control_mode == 2) checked @endif
                                 />
                                 <label class="form-check-label field-label medium" for="controlType2">Χειροκίνητος</label>
                                 <div class="field-subgroup container-fluid gx-0 gy-5 pt-3" id="controlType2Group">
@@ -188,7 +187,7 @@
                                             >
                                                 όρισε πλήκτρο
                                             </button>
-                                            <input id="controlManualSelectionButton" data-role="keyAssignerInput" type="hidden" name="controlManualSelectionButton" value="Space" />
+                                            <input id="controlManualSelectionButton" data-role="keyAssignerInput" type="hidden" name="controlManualSelectionButton" value="{{ $control_manual_select }}" />
                                         </div>
                                     </div>
                                     <div class="row mt-2">
@@ -211,7 +210,7 @@
                                             >
                                                 όρισε πλήκτρο
                                             </button>
-                                            <input id="controlManualNavigationButton" data-role="keyAssignerInput" type="hidden" name="controlManualNavigationButton" value="Enter" />
+                                            <input id="controlManualNavigationButton" data-role="keyAssignerInput" type="hidden" name="controlManualNavigationButton" value="{{ $control_manual_nav }}" />
                                         </div>
                                     </div>
                                 </div>
@@ -240,15 +239,15 @@
                         </div>
                         <div class="row ms-1 mt-2">
                             <div class="col-12 form-check">
-                                <input class="form-check-input" type="radio" name="helpAfterTries" value="1" tabindex="30" id="helpAfterTries1" />
+                                <input class="form-check-input" type="radio" name="helpAfterTries" value="1" tabindex="30" id="helpAfterTries1" @if($help_after_tries == 1) checked @endif/>
                                 <label class="form-check-label" for="helpAfterTries1">Μετά από 1 λάθος</label>
                             </div>
                             <div class="col-12 form-check mt-1">
-                                <input class="form-check-input" type="radio" name="helpAfterTries" value="2" tabindex="40" id="helpAfterTries2" />
+                                <input class="form-check-input" type="radio" name="helpAfterTries" value="2" tabindex="40" id="helpAfterTries2" @if($help_after_tries == 2) checked @endif/>
                                 <label class="form-check-label" for="helpAfterTries2">Μετά από 2 λάθη</label>
                             </div>
                             <div class="col-12 form-check mt-1">
-                                <input class="form-check-input" type="radio" name="helpAfterTries" value="3" tabindex="50" id="helpAfterTries3" checked />
+                                <input class="form-check-input" type="radio" name="helpAfterTries" value="3" tabindex="50" id="helpAfterTries3" @if($help_after_tries == 3) checked @endif/>
                                 <label class="form-check-label" for="helpAfterTries3">Μετά από 3 λάθη</label>
                             </div>
                         </div>
@@ -278,7 +277,7 @@
                                     class="form-range"
                                     type="range"
                                     name="scanningSpeed"
-                                    value="2"
+                                    value="{{ $scanning_speed }}"
                                     min="1"
                                     max="8"
                                     step="1"
@@ -311,7 +310,7 @@
                     name="submit"
                     value="save"
                 >
-                    αποθήκευση ρυθμίσεων
+                    συνέχεια
                 </button>
             </div>
 

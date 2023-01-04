@@ -209,6 +209,18 @@ Route::middleware('auth')->group(function () {
     Route::post('/controls/player', [UserController::class, 'controlsSave'])
         ->name('controls.player');
 
+    Route::get('/difficulty/player', [UserController::class, 'difficultyConfigure'])
+        ->name('difficulty.player');
+
+    Route::post('/difficulty/player', [UserController::class, 'difficultySave'])
+        ->name('difficulty.player');
+
+    Route::get('/settings', [UserController::class, 'settingsShow'])
+        ->name('settings');
+
+    Route::post('/settings', [UserController::class, 'settingsSelect'])
+        ->name('settings');
+
     Route::get('home', function () {
         return redirect('/select/player');
     });

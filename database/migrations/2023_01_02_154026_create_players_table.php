@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('name');
             $table->smallInteger('avatar_id');
             $table->boolean('auto')->default(true);
-            $table->string('select_key')->default('');
-            $table->string('navigate_key')->default('');
+            $table->string('select_key')->default('Space');
+            $table->string('navigate_key')->default('Enter');
             $table->smallInteger('help_after_x_mistakes')->default(3);
             $table->smallInteger('scanning_speed')->default(2);
             $table->smallInteger('dice_type')->default(1);

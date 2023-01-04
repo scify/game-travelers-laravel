@@ -13,11 +13,11 @@
         >
             <img
                 class="img-avatar"
-                src="{{ asset('images/avatars/boy-1.svg') }}" {{-- add selected {playerid}'s avatar --}}
+                src="{{ asset('images/avatars/'. $avatarName . '.svg') }}"
                 width="70" height="70"
                 alt="Φατσούλα που έχει επιλέξει ο παίκτης"
             />
-            <span class="user-label">Μανώλης</span>
+            <span class="user-label">{{ $playerName }}</span>
         </button>
         {{-- @TODO: Fix offset. WARNING! Due to manual offset via data-bs-offset
             in combination with the z-index values, these menu options can't be
@@ -26,21 +26,24 @@
         <ul class="user-menu dropdown-menu dropdown-menu-start" aria-labelledby="userMenuButton">
             <li>
                 {{-- there's no need to pass anything to /select/player --}}
-                <a class="user-menu-item dropdown-item" href="{{ url('/select/player') }}">
+                <a class="user-menu-item dropdown-item" href="{{ route('select.player') }}">
                     Αλλαγή παίκτη
                 </a>
             </li>
+            @if(isset($showSettings))
             <li>
                 {{-- href could be url('/player/{playerid}/settings/ --}}
-                <a class="user-menu-item dropdown-item" href="{{ url('/player/settings') }}" aria-description="Ρυθμίσεις για τον παίκτη">
+                <a class="user-menu-item dropdown-item" href="{{ route('settings') }}" aria-description="Ρυθμίσεις για τον παίκτη">
                     Ρυθμίσεις
                 </a>
             </li>
+            @endif
             <li>
                 {{-- href should be the log-out page --}}
-                <a class="user-menu-item dropdown-item" href="#" title="Αποσύνδεση και έξοδος από το παιχνίδι" aria-description="Αποσύνδεση και έξοδος από το παιχνίδι">
-                    Έξοδος
-                </a>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button class="btn user-menu-item dropdown-item" type="submit" title="Αποσύνδεση και έξοδος από το παιχνίδι" aria-description="Αποσύνδεση και έξοδος από το παιχνίδι">Έξοδος</button>
+                </form>
             </li>
         </ul>
     </div>
