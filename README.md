@@ -38,30 +38,19 @@ Also, make sure that the `APP_URL` is set to the correct domain and port that yo
    ```php artisan db:seed``` in order to insert the starter data to the DB
 
 2. Install laravel/back-end dependencies
-
 ```bash
 composer install
-
-composer dump-autoload
 ```
 
-3. Then, run the command to set the application unique key:
+3. Front-end dependencies
+
+If you are using [`nvm`](https://github.com/nvm-sh/nvm), run this command in order to sync to the correct NodeJS version for the project:
 
 ```bash
-php artisan key:generate
+nvm use
 ```
 
-If executed successfully, it will be set in the `APP_KEY` variable in the `.env` file.
-
-4. Install and compile front-end dependencies
-
-If you are using `nvm`, run this command in order to sync to the correct NodeJS version for the project:
-
-```bash
-nvm install
-```
-
-Install and compile the front-end dependencies:
+Then, install and compile the front-end dependencies:
 
 ```bash
 npm install
@@ -69,13 +58,13 @@ npm install
 npm run dev
 ```
 
-5. Create symbolic link for uploaded files.
+4. Create the symbolic link for user-uploaded files.
 
 ```bash
 php artisan storage:link
 ```
 
-to link the `/public/storage` folder with the `/storage/app/public` directory
+in order to link the `/public/storage` folder with the `/storage/app/public` directory.
 
 ## SEO - Generate Sitemap
 
