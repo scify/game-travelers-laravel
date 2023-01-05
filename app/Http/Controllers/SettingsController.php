@@ -18,6 +18,8 @@ class SettingsController extends Controller
     public function settingsShow(Request $request)
     {
         $player_id = $request->cookie('player_id');
+        if ($player_id == null)
+            return \Redirect::route('select.player');
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id']);
         $name = $players[0]->name;
         $avatar_id = $players[0]->avatar_id;
@@ -48,6 +50,8 @@ class SettingsController extends Controller
     public function profileShow(Request $request)
     {
         $player_id = $request->cookie('player_id');
+        if ($player_id == null)
+            return \Redirect::route('select.player');
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id']);
         $name = $players[0]->name;
         $avatar_id = $players[0]->avatar_id;
@@ -62,6 +66,8 @@ class SettingsController extends Controller
     {
         $user_id = auth()->user()->id;
         $player_id = $request->cookie('player_id');
+        if ($player_id == null)
+            return \Redirect::route('select.player');
         $input = $request->only('name', 'avatarId');
         $name = trim($input['name']);
         $avatar_id = (int)$input['avatarId'];
@@ -83,6 +89,8 @@ class SettingsController extends Controller
     public function controlsShow(Request $request)
     {
         $player_id = $request->cookie('player_id');
+        if ($player_id == null)
+            return \Redirect::route('select.player');
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id', 'auto', 'select_key', 'navigate_key', 'help_after_x_mistakes', 'scanning_speed']);
         $name = $players[0]->name;
         $avatar_id = $players[0]->avatar_id;
@@ -112,6 +120,8 @@ class SettingsController extends Controller
     public function controlsSave(Request $request)
     {
         $player_id = $request->cookie('player_id');
+        if ($player_id == null)
+            return \Redirect::route('select.player');
         $input = $request->only('controlType', 'controlAutomaticSelectionButton', 'controlManualSelectionButton', 'controlManualNavigationButton', 'helpAfterTries', 'scanningSpeed');
         $control_mode = (int)$input['controlType'];
         $control_auto_select = $input['controlAutomaticSelectionButton'];
@@ -130,6 +140,8 @@ class SettingsController extends Controller
     public function difficultyShow(Request $request)
     {
         $player_id = $request->cookie('player_id');
+        if ($player_id == null)
+            return \Redirect::route('select.player');
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id', 'dice_type', 'board_size', 'difficulty', 'movement_mode']);
         $name = $players[0]->name;
         $avatar_id = $players[0]->avatar_id;
@@ -149,6 +161,8 @@ class SettingsController extends Controller
     public function difficultySave(Request $request)
     {
         $player_id = $request->cookie('player_id');
+        if ($player_id == null)
+            return \Redirect::route('select.player');
         $input = $request->only('dice', 'gameDuration', 'level', 'movement');
         $dice_type = (int)$input['dice'];
         $board_size = (int)$input['gameDuration'];

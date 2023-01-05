@@ -61,7 +61,7 @@ class UserController extends Controller
                 $avatar_id = $players[0]->avatar_id;
             }
         }
-        return view('settingsProfileNew', ["name" => $name, "selectedAvatarId" => $avatar_id]);
+        return view('settingsProfileNew', ["name" => $name, "selectedAvatarId" => $avatar_id, 'avatars' => $this->playerRepository->getAvatars()]);
 
     }
 
@@ -96,6 +96,8 @@ class UserController extends Controller
     public function controlsConfigure(Request $request)
     {
         $player_id = $request->cookie('player_id');
+        if ($player_id == null)
+            return \Redirect::route('select.player');
         $control_mode = 1;
         $control_auto_select = "Space";
         $control_manual_select = "Space";
@@ -148,6 +150,8 @@ class UserController extends Controller
     public function difficultyConfigure(Request $request)
     {
         $player_id = $request->cookie('player_id');
+        if ($player_id == null)
+            return \Redirect::route('select.player');
         $dice_type = 1;
         $board_size = 2;
         $difficulty = 1;

@@ -51,18 +51,6 @@ Route::get('/log', function () {
     return view('extras/logViews');
 });
 
-// Sample Data used on settingsProfile, settingsProfileNew and 2 demos.
-// The exampleData.php file contains the $avatar array will all the available
-// avatars. It's the (emulated) output of the proposed (untested) Avatar model,
-// which also resides in the same folder.
-// @see ../docs/examples/exampleData.php Avatar Data Model
-// @example ../docs/examples/exampleDataAvatarModel.php Avatar Data Model
-require __DIR__ . '/../docs/examples/exampleData.php';
-/** @var array $avatars */
-View::share('avatars', $avatars);
-/** @var array $players_with_avatars */
-View::share('players_with_avatars', $players_with_avatars);
-
 /*
  * Travellers | Step 1. New game
  * Last update: December 18, 2022.
@@ -129,40 +117,7 @@ Route::get('demo/settings/profile/new/success', function () {
     return view('extras/demoPlayerProfileNewSuccess');
 });
 
-/*
- * Travellers | Existing Player Settings.
- * Last update: December 20, 2022.
- * @link https://xd.adobe.com/view/d308b3ee-c123-48d3-87ff-5304ebdaa85a-865b/
- */
-Route::get('/settings', function () {
-    // Should be /player/{playerid}/settings allowing easier access via userMenu
-    // without having to have a 2nd form on each individual page.
-    return view('settings');
-});
-Route::get('/settings/profile', function () {
-    // Should be /player/{playerid}/settings/profile allowing easier access
-    // via userMenu without having to have a 2nd form on each individual page.
-    // Same form, fields, purpose as New Player Control Settings.
-    // @see settingsProfileNew.blade.php
-    // Final version (might or might not) have a different layout.
-    return view('settingsProfile');
-});
-Route::get('/settings/controls', function () {
-    // Should be /player/{playerid}/settings/controls allowing easier access
-    // via userMenu without having to have a 2nd form on each individual page.
-    // Same form, fields, purpose as New Player Control Settings.
-    // @see settingsControlsNew.blade.php
-    // Final version (might or might not) have a different layout.
-    return view('settingsControls');
-});
-Route::get('/settings/difficulty', function () {
-    // Should be /player/{playerid}/settings/difficulty allowing easier access
-    // via userMenu without having to have a 2nd form on each individual page.
-    // Same form, fields, purpose as New Player Control Settings.
-    // @see settingsDifficultyNew.blade.php
-    // Final version (might or might not) have a different layout.
-    return view('settingsDifficulty');
-});
+
 
 // Random x-layout component demos for No-Vue (default), Vue (optional):
 Route::get('/demo/noVue', function () {
