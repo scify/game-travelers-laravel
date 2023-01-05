@@ -22,7 +22,8 @@ mix.webpackConfig({
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix.copyDirectory('resources/images', 'public/images')
+    .js('resources/js/app.js', 'public/js')
     .js('resources/js/vue.js', 'public/js') // vue dependencies
     .js('resources/js/settings/*.js', 'public/js/functions/settings.js') // single use scripts
     .vue()

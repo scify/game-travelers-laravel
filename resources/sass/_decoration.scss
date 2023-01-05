@@ -8,7 +8,7 @@
 
 .background-mountains {
     min-height: 632px;
-    background-image: url("../images/bg-wide-trees.png");
+    background-image: url("../images/backgrounds/bg-wide-trees.png");
     background-repeat: no-repeat;
     background-position-x: right;
     background-position-y: bottom;
@@ -19,7 +19,7 @@
 }
 
 .background-dash-up { // header
-    background-image: url("../images/bg-head-dash-2.png");
+    background-image: url("../images/backgrounds/bg-head-dash-2.png");
     background-repeat: no-repeat;
     background-position-y: bottom;
     background-position-x: center;
@@ -36,7 +36,7 @@
 .background-group-1,
 .trvl-bg--group-1 {
     min-height: 632px;
-    background-image: url("../images/bg-g1-side-group-1.png");
+    background-image: url("../images/backgrounds/bg-g1-side-group-1.png");
     background-repeat: no-repeat;
     background-position-x: right;
     background-position-y: top;
@@ -46,29 +46,29 @@
         only screen and (min--moz-device-pixel-ratio: 2),
         only screen and (min-device-pixel-ratio: 2),
         only screen and (min-resolution: 2dppx) {
-            background-image: url("../images/bg-g1-side-group-1@2x.png");
+            background-image: url("../images/backgrounds/bg-g1-side-group-1@2x.png");
     }
     &.responsive-hide {
         @media (max-width: 575.98px) {
-            background-image: url("../images/bg-g1-side-back-2.png");
+            background-image: url("../images/backgrounds/bg-g1-side-back-2.png");
             @media
                 only screen and (-webkit-min-device-pixel-ratio: 2),
                 only screen and (min--moz-device-pixel-ratio: 2),
                 only screen and (min-device-pixel-ratio: 2),
                 only screen and (min-resolution: 2dppx) {
-                    background-image: url("../images/bg-g1-side-back-2@2x.png");
+                    background-image: url("../images/backgrounds/bg-g1-side-back-2@2x.png");
             }
         }
     }
     &.responsive-hide-sm {
         @media (max-width: 767.98px) {
-            background-image: url("../images/bg-g1-side-back-2.png");
+            background-image: url("../images/backgrounds/bg-g1-side-back-2.png");
             @media
                 only screen and (-webkit-min-device-pixel-ratio: 2),
                 only screen and (min--moz-device-pixel-ratio: 2),
                 only screen and (min-device-pixel-ratio: 2),
                 only screen and (min-resolution: 2dppx) {
-                    background-image: url("../images/bg-g1-side-back-2@2x.png");
+                    background-image: url("../images/backgrounds/bg-g1-side-back-2@2x.png");
             }
         }
     }
@@ -88,7 +88,7 @@
     }
 }
 .background-group-2--tree-1 { // the left one
-    background-image: url("../images/bg-g2-side-tree-2.png");
+    background-image: url("../images/backgrounds/bg-g2-side-tree-2.png");
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: bottom;
@@ -99,7 +99,7 @@
     // min-width:136px;
 }
 .background-group-2--tree-2 { // the right one
-    background-image: url("../images/bg-g2-side-tree-1.png");
+    background-image: url("../images/backgrounds/bg-g2-side-tree-1.png");
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: top;
@@ -115,7 +115,7 @@
  *
  */
 .background-group-3--dash {
-    background-image: url("../images/bg-g2-dash-down.png");
+    background-image: url("../images/backgrounds/bg-g2-dash-down.png");
     background-repeat: no-repeat;
     background-position: 0% 75%;
     background-size: 1368px 139px;
@@ -124,11 +124,11 @@
         only screen and (min--moz-device-pixel-ratio: 2),
         only screen and (min-device-pixel-ratio: 2),
         only screen and (min-resolution: 2dppx) {
-            background-image: url("../images/bg-g2-dash-down@2x.png");
+            background-image: url("../images/backgrounds/bg-g2-dash-down@2x.png");
     }
 }
 .background-group-3--abstract {
-    background-image: url("../images/bg-g3-abstract.png");
+    background-image: url("../images/backgrounds/bg-g3-abstract.png");
     background-repeat: no-repeat;
     background-position: 0% 20%;
     background-size: 83px 159px;
@@ -137,11 +137,11 @@
         only screen and (min--moz-device-pixel-ratio: 2),
         only screen and (min-device-pixel-ratio: 2),
         only screen and (min-resolution: 2dppx) {
-            background-image: url("../images/bg-g3-abstract@2x.png");
+            background-image: url("../images/backgrounds/bg-g3-abstract@2x.png");
     }
 }
 .background-group-3--flowers {
-    background-image: url("../images/bg-g3-side-flowers.png");
+    background-image: url("../images/backgrounds/bg-g3-side-flowers.png");
     background-repeat: no-repeat;
     background-position: 100% 20%;
     background-size: 323px 541px;
@@ -150,7 +150,7 @@
         only screen and (min--moz-device-pixel-ratio: 2),
         only screen and (min-device-pixel-ratio: 2),
         only screen and (min-resolution: 2dppx) {
-            background-image: url("../images/bg-g3-side-flowers@2x.png");
+            background-image: url("../images/backgrounds/bg-g3-side-flowers@2x.png");
     }
     @media (max-width: 575.98px) {
         background-image: none;

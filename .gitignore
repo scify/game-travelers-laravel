@@ -1,6 +1,15 @@
 /node_modules
 /public/hot
 /public/storage
+public/css
+public/fonts
+public/js
+public/images
+public/mix-manifest.json
+public/sitemap.xml
+public/web.config
+resources/sass/*.css
+resources/sass/*.css.map
 /storage/*.key
 /vendor
 .env
@@ -16,14 +25,11 @@ yarn-error.log
 _ide_helper.php
 _ide_helper_models.php
 .phpstorm.meta.php
-public/css
-public/js
-public/web.config
 .idea/
 *.~lock.*
-public/fonts
-public/images
-resources/sass/*.css
-resources/sass/*.css.map
-public/sitemap.xml
-public/mix-manifest.json
+# General mmacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+# Linux temp files
+.fuse_hidden*
