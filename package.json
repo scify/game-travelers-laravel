@@ -1,4 +1,6 @@
 {
+    "name": "game-travelers-laravel",
+    "version": "0.1.0",
     "private": true,
     "scripts": {
         "dev": "npm run development",
