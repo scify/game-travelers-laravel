@@ -20,6 +20,7 @@ class SettingsController extends Controller
         $player_id = $request->cookie('player_id');
         if ($player_id == null)
             return \Redirect::route('select.player');
+
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id']);
         $name = $players[0]->name;
         $avatar_id = $players[0]->avatar_id;
@@ -32,8 +33,18 @@ class SettingsController extends Controller
     public function settingsSelect(Request $request)
     {
         $action = $request->only('submit')['submit'];
-        if ($action == "back")
-            return \Redirect::route('select.player');
+        if ($action == "back") {
+            $settingFrom = $request->cookie('settingFrom');
+            if ($settingFrom == null)
+                return \Redirect::route('select.player');
+            else if ($settingFrom == "userController")
+                return \Redirect::route('select.player');
+            else if ($settingFrom == "selectBoardController")
+                return \Redirect::route('select.board');
+            else
+                return \Redirect::route('select.player');
+
+        }
         else if ($action == "profile")
             return \Redirect::route('settings.profile');
         else if ($action == "controls")
@@ -59,7 +70,7 @@ class SettingsController extends Controller
         \View::share('avatarName', $avatarName);
         \View::share('playerName', $name);
         \View::share('showSettings', true);
-        return view('settingsProfile', ["name" => $name, "selectedAvatarId" => $avatar_id]);
+        return view('settingsProfile', ["name" => $name, "selectedAvatarId" => $avatar_id, 'avatars' => $this->playerRepository->getAvatars()]);
     }
 
     public function profileSave(Request $request)

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\SelectBoardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -194,6 +195,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/settings/difficulty', [SettingsController::class, 'difficultySave'])
         ->name('settings.difficulty');
+
+    Route::get('/select/board', [SelectBoardController::class, 'show'])
+        ->name('select.board');
 
     Route::get('home', function () {
         return redirect('/select/player');

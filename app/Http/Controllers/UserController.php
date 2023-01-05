@@ -22,6 +22,8 @@ class UserController extends Controller
         Cookie::queue(
             Cookie::forget('player_id')
         );
+        Cookie::queue('settingFrom', 'userController', $minute = 120);
+
         $players = $this->playerRepository->allWhere(['user_id' => $user_id]);
         $players_info = [];
         foreach ($players as $player) {
@@ -43,7 +45,7 @@ class UserController extends Controller
         $action = $request->only('submit')['submit'];
         Cookie::queue('player_id', $player_id, $minute = 120);
         if ($action == "start") {
-
+            return \Redirect::route('select.board');
         } else if ($action == "settings")
             return \Redirect::route('settings');
 
