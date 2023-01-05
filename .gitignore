@@ -4,7 +4,6 @@
 public/css
 public/fonts
 public/js
-public/images
 public/mix-manifest.json
 public/sitemap.xml
 public/web.config
@@ -27,7 +26,7 @@ _ide_helper_models.php
 .phpstorm.meta.php
 .idea/
 *.~lock.*
-# General mmacOS
+# General macOS
 .DS_Store
 .AppleDouble
 .LSOverride
