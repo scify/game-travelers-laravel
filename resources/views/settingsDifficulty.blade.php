@@ -34,7 +34,7 @@
                     <h1 id="currentPageLabel">Ρυθμίσεις δυσκολίας</h1>
                     <p>
                         <strong id="currentPageDescription">
-                            Επίλεξε πόσο εύκολο ή δύσκολο θέλεις να είναι το παιχνίδι. {{-- Player Name goes here? Somewhere? Where? --}}
+                            Επίλεξε βαθμό δυσκολίας για τον παίκτη <em>PLACEHOLDER</em>. {{-- Player Name goes here? Somewhere? Where? --}}
                         </strong>
                     </p>
                 </div>

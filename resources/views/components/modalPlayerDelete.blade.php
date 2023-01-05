@@ -19,8 +19,8 @@
             </div>
             <div class="modal-footer">
                 <div class="d-grid gap-3 col-12">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ακύρωση</button>
                     <button type="submit" class="btn btn-danger" name="submit" value="deletePlayer">Διαγραφή παίκτη</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ακύρωση</button>
                 </div>
             </div>
         </div>

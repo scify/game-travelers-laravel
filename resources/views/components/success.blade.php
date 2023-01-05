@@ -19,7 +19,7 @@
             <h1>{{ $message ?? 'Συγχαρητήρια!' }}</h1>
             <div class="d-flex justify-content-center">
                 <a href="{{ $url ?? '/' }}" class="confirmation-link confirmation-animation" alt="{{ $alt ?? 'συνέχεια' }}" tabindex="1">
-                    <img src="{{ asset('images/icon-checkmark.svg') }}" width="129" height="96" alt="check-mark" />
+                    <img src="{{ asset('images/icons/checkmark.svg') }}" width="129" height="96" alt="check-mark" />
                 </a>
             </div>
         </div>

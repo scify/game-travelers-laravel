@@ -42,11 +42,15 @@
             @endif
             <li>
                 {{-- href should be the log-out page --}}
-                <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button class="btn user-menu-item dropdown-item" type="submit" title="Αποσύνδεση και έξοδος από το παιχνίδι" aria-description="Αποσύνδεση και έξοδος από το παιχνίδι">Έξοδος</button>
-                </form>
+                <a class="user-menu-item dropdown-item" href="#"
+                    title="Αποσύνδεση και έξοδος από το παιχνίδι" aria-description="Αποσύνδεση και έξοδος από το παιχνίδι"
+                    data-bs-toggle="modal" data-bs-target="#modalLogout"
+                >
+                    Έξοδος
+                </a>
             </li>
         </ul>
     </div>
 </div>
+
+<x-modalLogout />
