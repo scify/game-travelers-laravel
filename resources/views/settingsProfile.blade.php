@@ -67,6 +67,7 @@
                         autocapitalize="on"
                         spellcheck="false"
                         tabindex="1"
+                        autofocus
                         id="playerNameInput" {{-- ID Used by JS --}}
                     />
                     @error('name')

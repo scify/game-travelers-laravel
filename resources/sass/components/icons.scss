@@ -1,4 +1,4 @@
-a.kicon {
+.kicon {
     position: relative;
     transition: all .3s ease-in-out;
     display: inline-block;
@@ -18,26 +18,30 @@ a.kicon {
         }
     }
 }
-a.kicon:hover {
+.kicon:hover {
     color: var(--black);
     background: hsla(40, 3%, 21%, 0.1);
     box-shadow: 0 0 0 0.5rem hsla(40, 3%, 21%, 0.1);
 }
 
-a.kicon:focus:not(:hover),
-a.kicon:focus-visible:not(:hover) {
+.kicon:focus:not(:hover),
+.kicon:focus-visible:not(:hover) {
     --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
     box-shadow: 0 0 0 0.3rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5);
 }
 
-a.kicon-chevron-left svg {
+.kicon-chevron-left svg {
     margin-left: 0.15rem;
 }
 
-a.kicon svg {
+.kicon-chevron-right svg {
+    margin-left: -0.30rem;
+}
+
+.kicon svg {
     width: 1.7rem; // 25px
     height: 1.7rem;
 }
-a.kicon svg {
+.kicon svg {
     box-shadow: none !important;
 }
