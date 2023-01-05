@@ -55,7 +55,8 @@ class SettingsController extends Controller
             $player_id = $request->cookie('player_id');
             $this->playerRepository->delete($player_id);
             return \Redirect::route('select.player');
-        }
+        }else
+            return abort(403, 'Unauthorized action.');
     }
 
     public function profileShow(Request $request)

@@ -44,10 +44,12 @@ class UserController extends Controller
         $player_id = $request->only('player')['player'];
         $action = $request->only('submit')['submit'];
         Cookie::queue('player_id', $player_id, $minute = 120);
-        if ($action == "start") {
+        if ($action == "start")
             return \Redirect::route('select.board');
-        } else if ($action == "settings")
+        else if ($action == "settings")
             return \Redirect::route('settings');
+        else
+            return abort(403, 'Unauthorized action.');
 
     }
 
@@ -146,6 +148,8 @@ class UserController extends Controller
             return \Redirect::route('new.player');
         else if ($action == "next" || $action == "save")
             return \Redirect::route('difficulty.player');
+        else
+            return abort(403, 'Unauthorized action.');
 
     }
 
@@ -188,6 +192,8 @@ class UserController extends Controller
             return \Redirect::route('controls.player');
         else if ($action == "save")
             return \Redirect::route('select.player');
+        else
+            return abort(403, 'Unauthorized action.');
     }
 
 }

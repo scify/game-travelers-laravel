@@ -4,7 +4,7 @@
  * @file
  * Contains App's web routes.
  */
-
+use App\Http\Middleware\EnsurePlayerIdIsValid;
 use App\Models\User;
 use App\Notifications\UserRegistered;
 use Illuminate\Support\Facades\Route;
@@ -155,46 +155,46 @@ Route::middleware('auth')->group(function () {
         ->name('select.player');
 
     Route::get('/create/player', [UserController::class, 'newPlayer'])
-        ->name('new.player');
+        ->name('new.player')->middleware(EnsurePlayerIdIsValid::class);
 
     Route::post('/create/player', [UserController::class, 'savePlayer'])
-        ->name('new.player');
+        ->name('new.player')->middleware(EnsurePlayerIdIsValid::class);
 
     Route::get('/controls/player', [UserController::class, 'controlsConfigure'])
-        ->name('controls.player');
+        ->name('controls.player')->middleware(EnsurePlayerIdIsValid::class);
 
     Route::post('/controls/player', [UserController::class, 'controlsSave'])
-        ->name('controls.player');
+        ->name('controls.player')->middleware(EnsurePlayerIdIsValid::class);
 
     Route::get('/difficulty/player', [UserController::class, 'difficultyConfigure'])
-        ->name('difficulty.player');
+        ->name('difficulty.player')->middleware(EnsurePlayerIdIsValid::class);
 
     Route::post('/difficulty/player', [UserController::class, 'difficultySave'])
-        ->name('difficulty.player');
+        ->name('difficulty.player')->middleware(EnsurePlayerIdIsValid::class);
 
     Route::get('/settings', [SettingsController::class, 'settingsShow'])
-        ->name('settings');
+        ->name('settings')->middleware(EnsurePlayerIdIsValid::class);
 
     Route::post('/settings', [SettingsController::class, 'settingsSelect'])
-        ->name('settings');
+        ->name('settings')->middleware(EnsurePlayerIdIsValid::class);
 
     Route::get('/settings/profile', [SettingsController::class, 'profileShow'])
-        ->name('settings.profile');
+        ->name('settings.profile')->middleware(EnsurePlayerIdIsValid::class);
 
     Route::post('/settings/profile', [SettingsController::class, 'profileSave'])
-        ->name('settings.profile');
+        ->name('settings.profile')->middleware(EnsurePlayerIdIsValid::class);
 
     Route::get('/settings/controls', [SettingsController::class, 'controlsShow'])
-        ->name('settings.controls');
+        ->name('settings.controls')->middleware(EnsurePlayerIdIsValid::class);
 
     Route::post('/settings/controls', [SettingsController::class, 'controlsSave'])
-        ->name('settings.controls');
+        ->name('settings.controls')->middleware(EnsurePlayerIdIsValid::class);
 
     Route::get('/settings/difficulty', [SettingsController::class, 'difficultyShow'])
-        ->name('settings.difficulty');
+        ->name('settings.difficulty')->middleware(EnsurePlayerIdIsValid::class);
 
     Route::post('/settings/difficulty', [SettingsController::class, 'difficultySave'])
-        ->name('settings.difficulty');
+        ->name('settings.difficulty')->middleware(EnsurePlayerIdIsValid::class);
 
     Route::get('/select/board', [SetupGameController::class, 'show'])
         ->name('select.board');
