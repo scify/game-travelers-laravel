@@ -4,13 +4,6 @@
          component as many times as needed (e.g. 1, 2, 3 or even more times).
          If one of the pawns is not available for any reason, it can be
          disabled by setting :comingsoon=true (instead of the default null).
-        -GET Example using <a> links:
-         This page demonstrates the layout for a GET page where data are passed
-         via simple links. The selectPawnLink component is used, while each
-         pawn is an actual <a> link. All that has to be done is to make sure
-         the this link contains the required info. If for example we are
-         re-directing a user to the game.blade.php page, then something like
-         this could be used: @example game?player=1&board=1&mode=1&pawn=1
          I guess, the selected player ID should be checked in order to confirm
          that it belongs to the authenticated user, while additional checks
          should be made to ensure that the requested board, mode and pawn IDs
@@ -19,97 +12,123 @@
     @section('scripts')
     @endsection
 
-    <!-- section header -->
-    <div class="gameselect-header container-lg px-4 mb-2 mb-lg-1">
-        <div class="row">
-            <div class="col-1">
-                {{-- Reserved for header navigation buttons.  --}}
-            </div>
-            <div class="col-10 text-center" id="currentPageHeader">
-                <h1 id="currentPageLabel">Διάλεξε πιόνι</h1>
-                <p>
-                    <strong class="fs-5" id="currentPageDescription">
-                        &nbsp;
-                    </strong>
-                </p>
-            </div>
-            <div class="col-1">
-                {{--  Reserved for header navigation buttons. --}}
-            </div>
-        </div>
-    </div>
-    <!-- / section header -->
+    <form method="post" action="{{ url('/select/options') }}"> {{-- form starts here --}}
+        @csrf
 
-    <div class="section gameselect container-xxl pt-3 px-4 px-lg-6">
-        <div class="row text-center justify-content-center gy-4 gy-xxl-2">
-            <x-selectPawnLink
-                :asset="'pawn-iasonas'"
-                :title="'Ιάσωνας'"
-                :alt="'Προεπισκόπηση πιονιού Ιάσωνα'" {{-- alt image desc --}}
-                {{-- add :pawn-id=$pawnId }} for if using PawnButton buttons --}}
-                :tabindex=1 {{-- first pawn should be 1 (default: -1) --}}
-                :url="url('/select/options')" {{-- e.g. game?player=1&board=1&mode=1&pawn=1 --}}
-            />
-            <x-selectPawnLink
-                :asset="'pawn-myrto'"
-                :title="'Μυρτώ'"
-                :alt="'Προεπισκόπηση πιονιού Μυρτούς'" {{-- alt image desc --}}
-                :tabindex=2 {{-- first pawn should be 1 (default: -1) --}}
-                :url="url('/select/options')" {{-- e.g. game?player=1&board=1&mode=1&pawn=1 --}}
-            />
-            <x-selectPawnLink
-                :asset="'pawn-katerina'"
-                :title="'Κατερίνα'"
-                :alt="'Προεπισκόπηση πιονιού Κατερίνας'" {{-- alt image desc --}}
-                :tabindex=3 {{-- first pawn should be 1 (default: -1) --}}
-                :url="url('/select/options')" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
-            />
-            <x-selectPawnLink
-                :asset="'pawn-dimitris'"
-                :title="'Δημήτρης'"
-                :alt="'Προεπισκόπηση πιονιού Δημήτρη'" {{-- alt image desc --}}
-                :tabindex=4 {{-- first pawn should be 1 (default: -1) --}}
-                :url="url('/select/options')" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
-            />
-            <x-selectPawnLink
-                :asset="'pawn-vasilis'"
-                :title="'Βασίλης'"
-                :alt="'Προεπισκόπηση πιονιού Βασίλη'" {{-- alt image desc --}}
-                :tabindex=5 {{-- first pawn should be 1 (default: -1) --}}
-                :url="url('/select/options')" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
-            />
-            <x-selectPawnLink
-                :asset="'pawn-zoumpoulia'"
-                :title="'Ζουμπουλία'"
-                :alt="'Προεπισκόπηση πιονιού Ζουμπουλίας'" {{-- alt image desc --}}
-                :tabindex=6 {{-- first pawn should be 1 (default: -1) --}}
-                :url="url('/select/options')" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
-            />
-            <x-selectPawnLink
-                :asset="'pawn-vrasidas'"
-                :title="'Βρασίδας'"
-                :alt="'Προεπισκόπηση πιονιού Βρασίδα'" {{-- alt image desc --}}
-                :tabindex=7 {{-- first pawn should be 1 (default: -1) --}}
-                :url="url('/select/options')" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
-            />
+        {{-- Not sure if those are needed, but it's an alternative way to pass
+        along these arguments, in case the user has already made a selection and
+        moved back. Requires some testing with both browser's and site's back
+        buttons for the final implementation. Note that the there are always
+        4 hidden values including the player id. One is not hidden as it is
+        the one that can actually be selected via this page's buttons. " --}}
+        <input type="hidden" name="player" value="1" /> {{-- player ID --}}
+        <input type="hidden" name="board" value="0" /> {{-- 0- for not yet selected --}}
+        <input type="hidden" name="mode" value="0" /> {{-- 0- for not yet selected --}}
+        <input type="hidden" name="option" value="0" /> {{-- 0- for not yet selected --}}
 
-        </div>
-        <div class="row gx-0 pt-6 pt-sm-0 fix-pawn-margin">
-            <div class="col-12">
-                <div class="d-flex flex-auto mt-4 mt-sm-0">
-                    <a
-                        class="btn btn-primary btn-circle ms-auto responsive-expand"
-                        href="{{ url('/select/mode' )}}"
-                        id="backButton"
-                        data-tabindex="1000"
-                        tabindex="1000"
-                    >
-                        <span>πίσω</span>
-                    </a>
-
+        <!-- section header -->
+        <div class="gameselect-header container-lg px-4 mb-2 mb-lg-1">
+            <div class="row">
+                <div class="col-1">
+                    {{-- Reserved for header navigation buttons.  --}}
+                </div>
+                <div class="col-10 text-center" id="currentPageHeader">
+                    <h1 id="currentPageLabel">Διάλεξε πιόνι</h1>
+                    <p>
+                        <strong class="fs-5" id="currentPageDescription">
+                            &nbsp;
+                        </strong>
+                    </p>
+                </div>
+                <div class="col-1">
+                    {{--  Reserved for header navigation buttons. --}}
                 </div>
             </div>
         </div>
-    </div>
+        <!-- / section header -->
+
+        <div class="section gameselect container-xxl pt-3 px-4 px-lg-6">
+            <div class="row text-center justify-content-center gy-4 gy-xxl-2">
+                <x-selectPawnButton
+                    :asset="'pawn-iasonas'"
+                    :title="'Ιάσωνας'"
+                    :pawn=1
+                    :alt="'Προεπισκόπηση πιονιού Ιάσωνα'" {{-- alt image desc --}}
+                    {{-- add :pawn-id=$pawnId }} for if using PawnButton buttons --}}
+                    :tabindex=1 {{-- first pawn should be 1 (default: -1) --}}
+                    :url="url('/select/options')" {{-- e.g. game?player=1&board=1&mode=1&pawn=1 --}}
+                />
+                <x-selectPawnButton
+                    :asset="'pawn-myrto'"
+                    :title="'Μυρτώ'"
+                    :pawn=2
+                    :alt="'Προεπισκόπηση πιονιού Μυρτούς'" {{-- alt image desc --}}
+                    :tabindex=2 {{-- first pawn should be 1 (default: -1) --}}
+                    :url="url('/select/options')" {{-- e.g. game?player=1&board=1&mode=1&pawn=1 --}}
+                />
+                <x-selectPawnButton
+                    :asset="'pawn-katerina'"
+                    :title="'Κατερίνα'"
+                    :pawn=3
+                    :alt="'Προεπισκόπηση πιονιού Κατερίνας'" {{-- alt image desc --}}
+                    :tabindex=3 {{-- first pawn should be 1 (default: -1) --}}
+                    :url="url('/select/options')" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
+                />
+                <x-selectPawnButton
+                    :asset="'pawn-dimitris'"
+                    :title="'Δημήτρης'"
+                    :pawn=4
+                    :alt="'Προεπισκόπηση πιονιού Δημήτρη'" {{-- alt image desc --}}
+                    :tabindex=4 {{-- first pawn should be 1 (default: -1) --}}
+                    :url="url('/select/options')" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
+                />
+                <x-selectPawnButton
+                    :asset="'pawn-vasilis'"
+                    :title="'Βασίλης'"
+                    :pawn=5
+                    :alt="'Προεπισκόπηση πιονιού Βασίλη'" {{-- alt image desc --}}
+                    :tabindex=5 {{-- first pawn should be 1 (default: -1) --}}
+                    :url="url('/select/options')" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
+                />
+                <x-selectPawnButton
+                    :asset="'pawn-zoumpoulia'"
+                    :title="'Ζουμπουλία'"
+                    :pawn=6
+                    :alt="'Προεπισκόπηση πιονιού Ζουμπουλίας'" {{-- alt image desc --}}
+                    :tabindex=6 {{-- first pawn should be 1 (default: -1) --}}
+                    :url="url('/select/options')" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
+                />
+                <x-selectPawnButton
+                    :asset="'pawn-vrasidas'"
+                    :title="'Βρασίδας'"
+                    :pawn=7
+                    :alt="'Προεπισκόπηση πιονιού Βρασίδα'" {{-- alt image desc --}}
+                    :tabindex=7 {{-- first pawn should be 1 (default: -1) --}}
+                    :url="url('/select/options')" {{-- e.g. options?player=1&board=1&mode=1&pawn=1 --}}
+                />
+
+            </div>
+            <div class="row gx-0 pt-6 pt-sm-0 fix-pawn-margin">
+                <div class="col-12">
+                    <div class="d-flex flex-auto mt-4 mt-sm-0">
+                       {{-- Maybe this has to be part of the form as well.
+                            If it does, change element to button and add a
+                            type="submit" and proper name and value attrs. --}}
+                        <a
+                            class="btn btn-primary btn-circle ms-auto responsive-expand"
+                            href="{{ url('/select/mode' )}}"
+                            id="backButton"
+                            data-tabindex="1000"
+                            tabindex="1000"
+                        >
+                            <span>πίσω</span>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
 
 </x-layout>

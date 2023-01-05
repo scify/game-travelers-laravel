@@ -5,7 +5,7 @@
         tabindex="{{ $tabindex ?? '-1' }}"
         data-tabindex="{{ $tabindex ?? '-1' }}"
         name="board"
-        value="{{ $boardId ?? '0' }}"
+        value="{{ $board ?? '0' }}"
         type="submit"
         label="{{ $title ?? 'Πίστα' }}"
         @isset($comingsoon)

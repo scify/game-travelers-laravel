@@ -5,7 +5,7 @@
         tabindex="{{ $tabindex ?? '-1' }}"
         data-tabindex="{{ $tabindex ?? '-1' }}"
         name="mode"
-        value="{{ $modeId ?? '0' }}"
+        value="{{ $mode ?? '0' }}"
         type="submit"
         label="{{ $title ?? 'Τύπος παιχνιδιού' }}"
         @isset($comingsoon)

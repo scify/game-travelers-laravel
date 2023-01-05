@@ -5,7 +5,7 @@
         tabindex="{{ $tabindex ?? '-1' }}"
         data-tabindex="{{ $tabindex ?? '-1' }}"
         name="option"
-        value="{{ $optionId ?? '0' }}"
+        value="{{ $option ?? '0' }}"
         type="submit"
         label="{{ $title ?? 'Επιλογή' }}"
         @isset($comingsoon)

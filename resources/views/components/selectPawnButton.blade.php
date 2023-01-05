@@ -5,7 +5,7 @@
         tabindex="{{ $tabindex ?? '-1' }}"
         data-tabindex="{{ $tabindex ?? '-1' }}"
         name="pawn"
-        value="{{ $pawnId ?? '0' }}"
+        value="{{ $pawn ?? '0' }}"
         type="submit"
         label="{{ $title ?? 'Πιόνι' }}"
         @isset($comingsoon)

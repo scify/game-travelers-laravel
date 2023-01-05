@@ -20,7 +20,7 @@
     @section('scripts')
     @endsection
 
-    <form method="POST" action="/nextpage"> {{-- form starts here --}}
+    <form method="post" action="/nextpage"> {{-- form starts here --}}
         @csrf
 
         <input type="hidden" name="player" value="1" /> {{-- player ID, but let's make it look a little bit better in case of GET--}}
