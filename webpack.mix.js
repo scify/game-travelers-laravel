@@ -27,6 +27,9 @@ mix.copyDirectory('resources/images', 'public/images')
     .js('resources/js/vue.js', 'public/js') // vue dependencies
     .js('resources/js/settings/*.js', 'public/js/functions/settings.js') // single use scripts
     .vue()
-    .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/app.scss', 'public/css', {
+        // Folder structure is already optimal thanks to copyDirectory so there's no need to rewriteUrls:
+        processUrls: false,
+    })
     // .sass('resources/sass/fixedwh.scss', 'public/css')
     .version(); // cache busting @see https://laravel-mix.com/docs/6.0/versioning
