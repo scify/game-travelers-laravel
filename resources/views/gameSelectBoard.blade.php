@@ -76,7 +76,7 @@
                 <div class="d-flex flex-auto">
                     <a
                         class="btn btn-primary btn-circle ms-auto responsive-expand"
-                        href="{{ url('/select/player' )}}"
+                        href="{{ route('select.player')}}"
                         id="backButton"
                         data-tabindex="1000"
                         tabindex="1000"

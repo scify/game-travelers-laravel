@@ -6,7 +6,7 @@ use App\Repository\Player\PlayerRepository;
 use Illuminate\Http\Request;
 use Cookie;
 
-class SelectBoardController extends Controller
+class SetupGameController extends Controller
 {
     protected PlayerRepository $playerRepository;
 
@@ -20,7 +20,7 @@ class SelectBoardController extends Controller
         $player_id = $request->cookie('player_id');
         if ($player_id == null)
             return \Redirect::route('select.player');
-        Cookie::queue('settingFrom', 'selectBoardController', $minute = 120);
+        Cookie::queue('settingFrom', 'selectBoard', $minute = 120);
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id']);
         $name = $players[0]->name;
         $avatar_id = $players[0]->avatar_id;

@@ -13,11 +13,12 @@
         >
             <img
                 class="img-avatar"
-                src="{{ asset('images/avatars/'. $avatarName . '.svg') }}"
+                @if(isset($avatarName)) src="{{ asset('images/avatars/'.$avatarName. '.svg') }}"
+                @else src="{{ asset('images/avatars/boy-1.svg') }}" @endif
                 width="70" height="70"
                 alt="Φατσούλα που έχει επιλέξει ο παίκτης"
             />
-            <span class="user-label">{{ $playerName }}</span>
+            <span class="user-label">{{ $playerName ?? 'dummy' }}</span>
         </button>
         {{-- @TODO: Fix offset. WARNING! Due to manual offset via data-bs-offset
             in combination with the z-index values, these menu options can't be
@@ -31,12 +32,13 @@
                 </a>
             </li>
             @if(isset($showSettings))
-            <li>
-                {{-- href could be url('/player/{playerid}/settings/ --}}
-                <a class="user-menu-item dropdown-item" href="{{ route('settings') }}" aria-description="Ρυθμίσεις για τον παίκτη">
-                    Ρυθμίσεις
-                </a>
-            </li>
+                <li>
+                    {{-- href could be url('/player/{playerid}/settings/ --}}
+                    <a class="user-menu-item dropdown-item" href="{{ route('settings') }}"
+                       aria-description="Ρυθμίσεις για τον παίκτη">
+                        Ρυθμίσεις
+                    </a>
+                </li>
             @endif
             <li>
                 {{-- href should be the log-out page --}}

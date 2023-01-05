@@ -39,7 +39,7 @@ class SettingsController extends Controller
                 return \Redirect::route('select.player');
             else if ($settingFrom == "userController")
                 return \Redirect::route('select.player');
-            else if ($settingFrom == "selectBoardController")
+            else if ($settingFrom == "selectBoard")
                 return \Redirect::route('select.board');
             else
                 return \Redirect::route('select.player');
