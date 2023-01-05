@@ -5,11 +5,8 @@
     - After deletion, user can be forwarded to the list at
         /select/player from which the management of players is
         possible. Deleted player won't be there anymore! --}}
-<form method="post" action="{{ url('/select/player') }}">
+<form method="post" action="{{ route('settings') }}">
     @csrf
-    {{-- as usual a player belongs to user validation would be nice --}}
-    <input type="hidden" name="player" value="{{ $playerId ?? 0 }}" />
-
     <div class="modal fade" id="modalPlayerDelete" tabindex="-1" aria-labelledby="modalPlayerDeleteLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -23,7 +20,7 @@
             <div class="modal-footer">
                 <div class="d-grid gap-3 col-12">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ακύρωση</button>
-                    <button type="button" class="btn btn-danger" name="submit" value="deletePlayer">Διαγραφή παίκτη</button>
+                    <button type="submit" class="btn btn-danger" name="submit" value="deletePlayer">Διαγραφή παίκτη</button>
                 </div>
             </div>
         </div>

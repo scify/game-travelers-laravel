@@ -239,15 +239,15 @@
                         </div>
                         <div class="row ms-1 mt-2">
                             <div class="col-12 form-check">
-                                <input class="form-check-input" type="radio" name="helpAfterTries" value="1" tabindex="30" id="helpAfterTries1" @if($help_after_tries == 1) checked @endif/>
+                                <input class="form-check-input" type="radio" name="helpAfterTries" value="1" tabindex="30" id="helpAfterTries1" @if($help_after_tries == 1) checked @endif />
                                 <label class="form-check-label" for="helpAfterTries1">Μετά από 1 λάθος</label>
                             </div>
                             <div class="col-12 form-check mt-1">
-                                <input class="form-check-input" type="radio" name="helpAfterTries" value="2" tabindex="40" id="helpAfterTries2" @if($help_after_tries == 2) checked @endif/>
+                                <input class="form-check-input" type="radio" name="helpAfterTries" value="2" tabindex="40" id="helpAfterTries2" @if($help_after_tries == 2) checked @endif />
                                 <label class="form-check-label" for="helpAfterTries2">Μετά από 2 λάθη</label>
                             </div>
                             <div class="col-12 form-check mt-1">
-                                <input class="form-check-input" type="radio" name="helpAfterTries" value="3" tabindex="50" id="helpAfterTries3" @if($help_after_tries == 3) checked @endif/>
+                                <input class="form-check-input" type="radio" name="helpAfterTries" value="3" tabindex="50" id="helpAfterTries3" @if($help_after_tries == 3) checked @endif />
                                 <label class="form-check-label" for="helpAfterTries3">Μετά από 3 λάθη</label>
                             </div>
                         </div>

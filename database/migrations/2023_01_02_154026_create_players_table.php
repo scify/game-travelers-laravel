@@ -14,10 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('players', function (Blueprint $table) {
-            $table->unsignedInteger('id');
+            $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->primary(['id','user_id']);
             $table->string('name');
             $table->smallInteger('avatar_id');
             $table->boolean('auto')->default(true);

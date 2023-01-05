@@ -12,9 +12,6 @@ class Player extends Model {
      * @var string
      */
     protected $table = 'players';
-
-    protected $primaryKey = ['id', 'user_id'];
-    public $incrementing = false;
     /**
      * The attributes that are mass assignable.
      *
@@ -26,44 +23,5 @@ class Player extends Model {
 
     public function user(): BelongsTo {
         return $this->belongsTo(User::class, 'user_id', 'id');
-    }
-
-    /**
-     * Set the keys for a save update query.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    protected function setKeysForSaveQuery($query)
-    {
-        $keys = $this->getKeyName();
-        if(!is_array($keys)){
-            return parent::setKeysForSaveQuery($query);
-        }
-
-        foreach($keys as $keyName){
-            $query->where($keyName, '=', $this->getKeyForSaveQuery($keyName));
-        }
-
-        return $query;
-    }
-
-    /**
-     * Get the primary key value for a save query.
-     *
-     * @param mixed $keyName
-     * @return mixed
-     */
-    protected function getKeyForSaveQuery($keyName = null)
-    {
-        if(is_null($keyName)){
-            $keyName = $this->getKeyName();
-        }
-
-        if (isset($this->original[$keyName])) {
-            return $this->original[$keyName];
-        }
-
-        return $this->getAttribute($keyName);
     }
 }

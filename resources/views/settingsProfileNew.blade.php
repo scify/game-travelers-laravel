@@ -51,7 +51,7 @@
         <div class="settings-header container-lg px-4 px-sm-4 mb-2 mb-lg-5">
             <div class="row">
                 <div class="col-1">
-                    <x-buttonBack
+                    <x-linkButtonBack
                         :label="'Ακύρωση και επιστροφή στην επιλογή παίκτη'"
                         :align="'left'"
                         :url="route('select.player')"

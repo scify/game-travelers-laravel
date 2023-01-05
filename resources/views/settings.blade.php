@@ -42,20 +42,22 @@
                 <div class="section gamesettings background-group-3--flowers container-xxl px-4">
 
                     <div class="buttonstack vstack gap-4 pt-4 mx-auto settings-options text-center">
-                        <a class="btn btn-lg btn-primary" href="{{ url('/settings/profile') }}" tabindex="1">
+                        <button class="btn btn-lg btn-primary" type="submit" name="submit" value="profile" tabindex="1">
                             <span class="balloon"></span> Προφίλ παίκτη
-                        </a>
+                        </button>
                         <a class="btn btn-lg btn-primary disabled" tabindex="-1">
                             <span class="balloon"></span> Μουσική & ήχος
                         </a>
-                        <a class="btn btn-lg btn-primary" href="{{ url('/settings/controls') }}" tabindex="3">
+                        <button class="btn btn-lg btn-primary" type="submit" name="submit" value="controls"
+                                tabindex="3">
                             <span class="balloon"></span> Πλοήγηση
-                        </a>
-                        <a class="btn btn-lg btn-primary" href="{{ url('/settings/difficulty') }}" tabindex="4">
+                        </button>
+                        <button class="btn btn-lg btn-primary" type="submit" name="submit" value="difficulty"
+                                tabindex="4">
                             <span class="balloon"></span> Επίπεδο δυσκολίας
-                        </a>
+                        </button>
                         <!-- delete player button -->
-                        <button class="btn btn-lg btn-danger" data-bs-toggle="modal" data-bs-target="#modalPlayerDelete"
+                        <button class="btn btn-lg btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalPlayerDelete"
                                 tabindex="5">
                             <span class="balloon"></span> Διαγραφή παίκτη
                         </button> {{-- Modal located outside this messy nest. --}}
@@ -66,14 +68,12 @@
                 </div>
             </div>
         </div>
-
-        {{-- Modals should be at a top-level position.
-            @see https://getbootstrap.com/docs/5.1/components/modal/
-            --}}
-        <x-modalPlayerDelete
-            :playerName=$name
-            :playerId=$player_id
-        />
     </form>
+    {{-- Modals should be at a top-level position.
+        @see https://getbootstrap.com/docs/5.1/components/modal/
+        --}}
+    <x-modalPlayerDelete
+        :playerName=$name
+    />
 
 </x-layout>

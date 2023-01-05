@@ -10,6 +10,7 @@ use App\Notifications\UserRegistered;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -215,11 +216,29 @@ Route::middleware('auth')->group(function () {
     Route::post('/difficulty/player', [UserController::class, 'difficultySave'])
         ->name('difficulty.player');
 
-    Route::get('/settings', [UserController::class, 'settingsShow'])
+    Route::get('/settings', [SettingsController::class, 'settingsShow'])
         ->name('settings');
 
-    Route::post('/settings', [UserController::class, 'settingsSelect'])
+    Route::post('/settings', [SettingsController::class, 'settingsSelect'])
         ->name('settings');
+
+    Route::get('/settings/profile', [SettingsController::class, 'profileShow'])
+        ->name('settings.profile');
+
+    Route::post('/settings/profile', [SettingsController::class, 'profileSave'])
+        ->name('settings.profile');
+
+    Route::get('/settings/controls', [SettingsController::class, 'controlsShow'])
+        ->name('settings.controls');
+
+    Route::post('/settings/controls', [SettingsController::class, 'controlsSave'])
+        ->name('settings.controls');
+
+    Route::get('/settings/difficulty', [SettingsController::class, 'difficultyShow'])
+        ->name('settings.difficulty');
+
+    Route::post('/settings/difficulty', [SettingsController::class, 'difficultySave'])
+        ->name('settings.difficulty');
 
     Route::get('home', function () {
         return redirect('/select/player');
