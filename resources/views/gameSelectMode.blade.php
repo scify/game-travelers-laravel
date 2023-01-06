@@ -57,7 +57,7 @@
         <!-- / section header -->
 
         <div class="section gameselect container-xxl pt-5 px-4 px-lg-6">
-            <div class="row text-center gy-5">
+            <div class="row text-center gx-2 gy-5">
                 <x-selectModeButton {{-- if using a form replace with x-selectModeButton --}}
                     :asset="'mode-single'"
                     :title="'Μονό'"

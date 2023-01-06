@@ -280,6 +280,14 @@ button.key-assigner.active {
     font-weight: bold;
 }
 // Coming soon (on top of a disabled board)
+.btn-board .coming-soon-wrapper {
+    display: block;
+    position: relative;
+    float: right;
+    overflow: hidden;
+    bottom: calc(244px + 1.5rem);
+    border-start-end-radius: 42px;
+}
 .btn-board .coming-soon {
     content: "";
     display: block;
@@ -288,8 +296,8 @@ button.key-assigner.active {
     border-width: 0 105px 105px 0;
     border-color: transparent #287971 transparent transparent;
     text-align: center;
-    bottom: calc(244px + 1.5rem);
-    border-start-end-radius: 42px;
+    // bottom: calc(244px + 1.5rem);
+    // border-start-end-radius: 42px;
     opacity: 0.9;
     float: right;
     z-index: 200;
