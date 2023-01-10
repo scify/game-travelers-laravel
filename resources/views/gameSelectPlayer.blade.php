@@ -97,6 +97,9 @@
                                 <x-selectPlayer
                                     :avatars=$avatars
                                     :players=$players
+                                    :playerId=$player_id
+                                    :from=$from
+                                    :gameId=$game_id
                                     :selected-player-id=0 {{-- 0: none selected --}}
                                     :tabindex=1 {{-- Accessibility (int). --}}
                                     :show-add-player=true {{-- Optional. TRUE or NULL (default). --}}

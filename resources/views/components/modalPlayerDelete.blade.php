@@ -5,7 +5,7 @@
     - After deletion, user can be forwarded to the list at
         /select/player from which the management of players is
         possible. Deleted player won't be there anymore! --}}
-<form method="post" action="{{ route('settings') }}">
+<form method="post" action="{{ route('settings', ['player_id' => $playerId, 'from' => $from, 'game_id' =>$gameId]) }}">
     @csrf
     <div class="modal fade" id="modalPlayerDelete" tabindex="-1" aria-labelledby="modalPlayerDeleteLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

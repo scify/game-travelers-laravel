@@ -18,7 +18,7 @@ class SetupGameController extends Controller
         $this->gameRepository = $gameRepository;
     }
 
-    public function boardShow(Request $request)
+    public function boardShow(Request $request, int $player_id, string $from)
     {
         $player_id = $request->cookie('player_id');
         if ($player_id == null)
@@ -34,7 +34,7 @@ class SetupGameController extends Controller
         return view('gameSelectBoard', ['name' => $name, 'player_id' => $player_id]);
     }
 
-    public function boardSave(Request $request)
+    public function boardSave(Request $request, int $player_id, string $from)
     {
 
             $user_id = auth()->user()->id;
@@ -56,7 +56,7 @@ class SetupGameController extends Controller
 
     }
 
-    public function modeShow(Request $request)
+    public function modeShow(Request $request, int $player_id, string $from, int $game_id = 0)
     {
         $player_id = $request->cookie('player_id');
         $game_id = $request->cookie('game_id');
@@ -73,7 +73,7 @@ class SetupGameController extends Controller
         return view('gameSelectMode', ['name' => $name, 'player_id' => $player_id]);
     }
 
-    public function modeSave(Request $request)
+    public function modeSave(Request $request, int $player_id, string $from, int $game_id = 0)
     {
         $game_id = $request->cookie('game_id');
         $selected_mode_id = (int)$request->only('mode')['mode'];
@@ -84,7 +84,7 @@ class SetupGameController extends Controller
         return \Redirect::route('select.pawn');
     }
 
-    public function pawnShow(Request $request)
+    public function pawnShow(Request $request, int $player_id, string $from, int $game_id = 0)
     {
         $player_id = $request->cookie('player_id');
         $game_id = $request->cookie('game_id');
@@ -101,7 +101,7 @@ class SetupGameController extends Controller
         return view('gameSelectPawn', ['name' => $name, 'player_id' => $player_id]);
     }
 
-    public function pawnSave(Request $request)
+    public function pawnSave(Request $request, int $player_id, string $from, int $game_id = 0)
     {
         $game_id = $request->cookie('game_id');
         $selected_pawn_id = (int)$request->only('pawn')['pawn'];
@@ -112,7 +112,7 @@ class SetupGameController extends Controller
         return \Redirect::route('select.options');
     }
 
-    public function optionsShow(Request $request)
+    public function optionsShow(Request $request, int $player_id, string $from, int $game_id = 0)
     {
         $player_id = $request->cookie('player_id');
         $game_id = $request->cookie('game_id');
@@ -129,7 +129,7 @@ class SetupGameController extends Controller
         return view('gameSelectOptions', ['name' => $name, 'player_id' => $player_id]);
     }
 
-    public function optionsSave(Request $request)
+    public function optionsSave(Request $request, int $player_id, string $from, int $game_id = 0)
     {
         $game_id = $request->cookie('game_id');
         $selected_option = (int)$request->only('option')['option'];

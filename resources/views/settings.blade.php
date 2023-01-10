@@ -9,7 +9,7 @@
 
     <form
         method="post" {{-- should be post, get is for testing --}}
-    action="{{ route('settings') }}"
+    action="{{ route('settings', ['player_id' => $player_id, 'from' => $from, 'game_id' =>$game_id]) }}"
         id="settingsControls" {{-- unused id --}}
     >
         @csrf
@@ -74,6 +74,9 @@
         --}}
     <x-modalPlayerDelete
         :playerName=$name
+        :playerId=$player_id
+        :from=$from
+        :gameId=$game_id
     />
 
 </x-layout>

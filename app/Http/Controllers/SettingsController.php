@@ -15,7 +15,7 @@ class SettingsController extends Controller
         $this->playerRepository = $playerRepository;
     }
 
-    public function settingsShow(Request $request)
+    public function settingsShow(Request $request, int $player_id, string $from, int $game_id = 0)
     {
         $player_id = $request->cookie('player_id');
         if ($player_id == null)
@@ -27,25 +27,22 @@ class SettingsController extends Controller
         $avatarName = $this->playerRepository->getAvatars()[$avatar_id]['asset'];
         \View::share('avatarName', $avatarName);
         \View::share('playerName', $name);
-        return view('settings', ['name' => $name, 'player_id' => $player_id]);
+        return view('settings', ['name' => $name, 'player_id' => $player_id, 'from' => $from, 'game_id' => $game_id]);
     }
 
-    public function settingsSelect(Request $request)
+    public function settingsSelect(Request $request, int $player_id, string $from, int $game_id)
     {
         $action = $request->only('submit')['submit'];
         if ($action == "back") {
-            $settingFrom = $request->cookie('settingFrom');
-            if ($settingFrom == null)
+            if ($from == "user")
                 return \Redirect::route('select.player');
-            else if ($settingFrom == "userController")
-                return \Redirect::route('select.player');
-            else if ($settingFrom == "selectBoard")
+            else if ($from == "board")
                 return \Redirect::route('select.board');
-            else if ($settingFrom == "selectMode")
+            else if ($from == "mode")
                 return \Redirect::route('select.mode');
-            else if ($settingFrom == "selectPawn")
+            else if ($from == "pawn")
                 return \Redirect::route('select.pawn');
-            else if ($settingFrom == "selectOption")
+            else if ($from == "option")
                 return \Redirect::route('select.options');
             else
                 return \Redirect::route('select.player');

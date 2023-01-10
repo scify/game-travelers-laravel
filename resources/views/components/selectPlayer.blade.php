@@ -82,7 +82,7 @@
                     data-role="button-add-player"
                     aria-label="Προσθήκη νέου παίκτη"
                     tabindex="{{ $tabindex ?? '-1' }}"
-                    href="{{ route('new.player') }}"
+                    href="{{ route('new.player', ['player_id' => $playerId, 'from' => $from, 'game_id' =>$gameId]) }}"
                 >
                     <img
                         src="{{ asset('images/icons/plus90.svg') }}"

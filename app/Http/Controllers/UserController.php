@@ -16,13 +16,6 @@ class UserController extends Controller
         $this->playerRepository = $playerRepository;
     }
 
-    public function clearCookiesAndRedirect() {
-        Cookie::queue(Cookie::forget('player_id'));
-        Cookie::queue(Cookie::forget('game_id'));
-        Cookie::queue('settingFrom', 'userController', $minute = 120);
-        return \Redirect::route('select.player');
-    }
-
     public function show()
     {
         $user_id = auth()->user()->id;
@@ -37,43 +30,40 @@ class UserController extends Controller
             ];
             $players_info[] = $player_info;
         }
-        return view('gameSelectPlayer', ['players' => $players_info, 'avatars' => $this->playerRepository->getAvatars()]);
+        return view('gameSelectPlayer', ['players' => $players_info, 'avatars' => $this->playerRepository->getAvatars(), 'player_id' => 0, 'from' => 'user', 'game_id' => 0]);
     }
 
     public function select(Request $request)
     {
         $player_id = $request->only('player')['player'];
         $action = $request->only('submit')['submit'];
-        Cookie::queue('player_id', $player_id, $minute = 120);
         if ($action == "start")
-            return \Redirect::route('select.board');
+            return \Redirect::route('select.board', ['player_id' => $player_id, 'from' => "user", 'game_id' => 0]);
         else if ($action == "settings")
-            return \Redirect::route('settings');
+            return \Redirect::route('settings', ['player_id' => $player_id, 'from' => "user", 'game_id' => 0]);
         else
             return abort(403, 'Unauthorized action.');
 
     }
 
-    public function newPlayer(Request $request)
+    public function newPlayer(Request $request, int $player_id, string $from, int $game_id)
     {
         $name = "";
         $avatar_id = 0;
-        $player_id = $request->cookie('player_id');
-        if ($player_id != null) {
+        if ($player_id != 0) {
             $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id']);
             if (sizeof($players) > 0) {
                 $name = $players[0]->name;
                 $avatar_id = $players[0]->avatar_id;
             }
         }
-        return view('settingsProfileNew', ["name" => $name, "selectedAvatarId" => $avatar_id, 'avatars' => $this->playerRepository->getAvatars()]);
+        return view('settingsProfileNew', ["name" => $name, "selectedAvatarId" => $avatar_id, 'avatars' => $this->playerRepository->getAvatars(), 'player_id' => $player_id, 'from' => $from, 'game_id' => 0]);
 
     }
 
-    public function savePlayer(Request $request)
+    public function savePlayer(Request $request, int $player_id, string $from, int $game_id)
     {
         $user_id = auth()->user()->id;
-        $player_id = $request->cookie('player_id');
         $input = $request->only('name', 'avatarId');
         $name = trim($input['name']);
         $avatar_id = (int)$input['avatarId'];
@@ -86,22 +76,21 @@ class UserController extends Controller
         if ($name_found) {
             return \Redirect::back()->withErrors(['name' => ['exists']]);
         } else {
-            if ($player_id == null) {
+            if ($player_id == 0) {
                 $entry = ['user_id' => $user_id, 'name' => $name, 'avatar_id' => $avatar_id];
                 $player = $this->playerRepository->create($entry);
-                Cookie::queue('player_id', $player->id, $minute = 120);
+                $player_id = $player->id;
             } else {
                 $entry = ['name' => $name, 'avatar_id' => $avatar_id];
-                $player = $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
+                $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
             }
-            return \Redirect::route('controls.player');
+            return \Redirect::route('controls.player', ['player_id' => $player_id, 'from' => $from, 'game_id' => 0]);
         }
     }
 
-    public function controlsConfigure(Request $request)
+    public function controlsConfigure(Request $request, int $player_id, string $from, int $game_id)
     {
-        $player_id = $request->cookie('player_id');
-        if ($player_id == null)
+        if ($player_id == 0)
             return \Redirect::route('select.player');
         $control_mode = 1;
         $control_auto_select = "Space";
@@ -109,26 +98,24 @@ class UserController extends Controller
         $control_manual_nav = "Enter";
         $help_after_tries = 3;
         $scanning_speed = 2;
-        if ($player_id != null) {
-            $players = $this->playerRepository->allWhere(['id' => $player_id], ['auto', 'select_key', 'navigate_key', 'help_after_x_mistakes', 'scanning_speed']);
-            if (sizeof($players) > 0) {
-                $control_mode = $players[0]->auto;
-                $control_select = $players[0]->select_key;
-                $control_nav = $players[0]->navigate_key;
-                if ($control_mode == 1)
-                    $control_auto_select = $control_select;
-                else if ($control_mode == 2) {
-                    $control_manual_select = $control_select;
-                    $control_manual_nav = $control_nav;
-                }
-                $help_after_tries = $players[0]->help_after_x_mistakes;
-                $scanning_speed = $players[0]->scanning_speed;
+        $players = $this->playerRepository->allWhere(['id' => $player_id], ['auto', 'select_key', 'navigate_key', 'help_after_x_mistakes', 'scanning_speed']);
+        if (sizeof($players) > 0) {
+            $control_mode = $players[0]->auto;
+            $control_select = $players[0]->select_key;
+            $control_nav = $players[0]->navigate_key;
+            if ($control_mode == 1)
+                $control_auto_select = $control_select;
+            else if ($control_mode == 2) {
+                $control_manual_select = $control_select;
+                $control_manual_nav = $control_nav;
             }
+            $help_after_tries = $players[0]->help_after_x_mistakes;
+            $scanning_speed = $players[0]->scanning_speed;
         }
-        return view('settingsControlsNew', ["control_mode" => $control_mode, "control_auto_select" => $control_auto_select, "control_manual_select" => $control_manual_select, "control_manual_nav" => $control_manual_nav, "help_after_tries" => $help_after_tries, "scanning_speed" => $scanning_speed]);
+        return view('settingsControlsNew', ["control_mode" => $control_mode, "control_auto_select" => $control_auto_select, "control_manual_select" => $control_manual_select, "control_manual_nav" => $control_manual_nav, "help_after_tries" => $help_after_tries, "scanning_speed" => $scanning_speed, 'player_id' => $player_id, 'from' => 'user', 'game_id' => 0]);
     }
 
-    public function controlsSave(Request $request)
+    public function controlsSave(Request $request, int $player_id, string $from, int $game_id = 0)
     {
         $player_id = $request->cookie('player_id');
         $input = $request->only('controlType', 'controlAutomaticSelectionButton', 'controlManualSelectionButton', 'controlManualNavigationButton', 'helpAfterTries', 'scanningSpeed');
@@ -154,7 +141,7 @@ class UserController extends Controller
 
     }
 
-    public function difficultyConfigure(Request $request)
+    public function difficultyConfigure(Request $request, int $player_id, string $from, int $game_id = 0)
     {
         $player_id = $request->cookie('player_id');
         if ($player_id == null)
@@ -175,9 +162,8 @@ class UserController extends Controller
         return view('settingsDifficultyNew', ['dice_type' => $dice_type, 'board_size' => $board_size, 'difficulty' => $difficulty, 'movement_mode' => $movement_mode]);
     }
 
-    public function difficultySave(Request $request)
+    public function difficultySave(Request $request, int $player_id, string $from, int $game_id = 0)
     {
-        $player_id = $request->cookie('player_id');
         $input = $request->only('dice', 'gameDuration', 'level', 'movement');
         $dice_type = (int)$input['dice'];
         $board_size = (int)$input['gameDuration'];
