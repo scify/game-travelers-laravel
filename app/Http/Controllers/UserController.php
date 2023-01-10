@@ -16,14 +16,16 @@ class UserController extends Controller
         $this->playerRepository = $playerRepository;
     }
 
+    public function clearCookiesAndRedirect() {
+        Cookie::queue(Cookie::forget('player_id'));
+        Cookie::queue(Cookie::forget('game_id'));
+        Cookie::queue('settingFrom', 'userController', $minute = 120);
+        return \Redirect::route('select.player');
+    }
+
     public function show()
     {
         $user_id = auth()->user()->id;
-        Cookie::queue(
-            Cookie::forget('player_id')
-        );
-        Cookie::queue('settingFrom', 'userController', $minute = 120);
-
         $players = $this->playerRepository->allWhere(['user_id' => $user_id]);
         $players_info = [];
         foreach ($players as $player) {
@@ -40,7 +42,6 @@ class UserController extends Controller
 
     public function select(Request $request)
     {
-        $user_id = auth()->user()->id;
         $player_id = $request->only('player')['player'];
         $action = $request->only('submit')['submit'];
         Cookie::queue('player_id', $player_id, $minute = 120);

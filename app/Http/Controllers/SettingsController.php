@@ -41,6 +41,12 @@ class SettingsController extends Controller
                 return \Redirect::route('select.player');
             else if ($settingFrom == "selectBoard")
                 return \Redirect::route('select.board');
+            else if ($settingFrom == "selectMode")
+                return \Redirect::route('select.mode');
+            else if ($settingFrom == "selectPawn")
+                return \Redirect::route('select.pawn');
+            else if ($settingFrom == "selectOption")
+                return \Redirect::route('select.options');
             else
                 return \Redirect::route('select.player');
 

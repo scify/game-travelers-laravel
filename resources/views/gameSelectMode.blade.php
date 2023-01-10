@@ -17,7 +17,7 @@
     @section('scripts')
     @endsection
 
-    <form method="post" action="{{ url('/select/pawn') }}"> {{-- form starts here --}}
+    <form method="post" action="{{ route('select.mode') }}"> {{-- form starts here --}}
         @csrf
 
         {{-- Not sure if those are needed, but it's an alternative way to pass
@@ -74,7 +74,7 @@
                     :alt="'Διπλό παιχνίδι'" {{-- alt image desc --}}
                     :tabindex=2
                     {{-- :url="url('/select/pawn')" --}}
-                    :comingsoon=null {{-- If set to true disables link, adds ΠΡΟΣΕΧΩΣ teaser. --}}
+                    :comingsoon=true {{-- If set to true disables link, adds ΠΡΟΣΕΧΩΣ teaser. --}}
                 />
                 <x-selectModeButton
                     :asset="'mode-pc'"
@@ -83,7 +83,7 @@
                     :alt="'Παιχνίδι με υπολογιστή'" {{-- alt image desc --}}
                     :tabindex=3
                     {{-- :url="url('/select/pawn')" --}}
-                    :comingsoon=null {{-- If set to true disables link, adds ΠΡΟΣΕΧΩΣ teaser. --}}
+                    :comingsoon=true {{-- If set to true disables link, adds ΠΡΟΣΕΧΩΣ teaser. --}}
                 />
             </div>
             <div class="row gx-0 pt-6 pt-sm-0 pt-md-0 pt-lg-0 pt-xl-6 pt-xxl-6">
@@ -92,7 +92,7 @@
                         {{-- Maybe this has to be part of the form as well. Oh well. I suppose making it a button works but haven't tested it yet. --}}
                         <a
                             class="btn btn-primary btn-circle ms-auto responsive-expand"
-                            href="{{ url('/select/board' )}}"
+                            href="{{ route('select.board') }}"
                             id="backButton"
                             data-tabindex="1000"
                             tabindex="1000"

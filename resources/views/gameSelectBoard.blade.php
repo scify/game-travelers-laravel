@@ -12,7 +12,7 @@
     @section('scripts')
     @endsection
 
-    <form method="post" action="{{ url('/select/mode') }}"> {{-- form starts here --}}
+    <form method="post" action="{{ route('select.board') }}"> {{-- form starts here --}}
         @csrf
 
         {{-- Not sure if those are needed, but it's an alternative way to pass

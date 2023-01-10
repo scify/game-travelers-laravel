@@ -27,7 +27,7 @@
         <ul class="user-menu dropdown-menu dropdown-menu-start" aria-labelledby="userMenuButton">
             <li>
                 {{-- there's no need to pass anything to /select/player --}}
-                <a class="user-menu-item dropdown-item" href="{{ route('select.player') }}">
+                <a class="user-menu-item dropdown-item" href="{{ route('select.player.clear') }}">
                     Αλλαγή παίκτη
                 </a>
             </li>

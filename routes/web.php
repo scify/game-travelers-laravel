@@ -52,74 +52,6 @@ Route::get('/log', function () {
     return view('extras/logViews');
 });
 
-/*
- * Travellers | Step 1. New game
- * Last update: December 18, 2022.
- * @link https://xd.adobe.com/view/d308b3ee-c123-48d3-87ff-5304ebdaa85a-865b/
- */
-Route::get('/select/board', function () {
-    // Requires Implementation of "User Menu".
-    // Select Board page with links for passing data via GET.
-    // This is indeed fully implemented and has :comingsoon=true support.
-    return view('gameSelectBoard');
-});
-Route::get('/select/mode', function () {
-    // Requires Implementation of "User Menu".
-    // Select Mode (single player et.) page with links for passing data via GET.
-    // Individual modes can be disabled with the :comingsoon=true attribute.
-    return view('gameSelectMode');
-});
-Route::get('/select/pawn', function () {
-    // Requires Implementation of "User Menu".
-    // Select Pawn (tutorial, etc.) page with links for passing data via GET.
-    return view('gameSelectPawn');
-});
-Route::get('/select/options', function () {
-    // Requires Implementation of "User Menu".
-    // Select Options (tutorial, etc.) page with links for passing data via GET.
-    return view('gameSelectOptions');
-});
-// Demos
-Route::get('/demo/select/board/form', function () {
-    // Select Board page with buttons in a form for passing data via POST/GET.
-    return view('extras/demoGameSelectBoardForm');
-});
-
-/*
- * Stepper 2 | New player settings.
- * Last update: December 20, 2022.
- * @link https://xd.adobe.com/view/881b8987-9d56-443d-9e00-c2edcb5a6671-dd48/
- */
-Route::get('/settings/profile/new', function () {
-    // New Player Step 1: Player's Profile
-    // Requires View::share('avatars', $avatars);
-    // Same form, fields, purpose as Existing Player Profile Settings.
-    return view('settingsProfileNew');
-});
-Route::get('/settings/controls/new', function () {
-    // New Player Step 2: Player's Control Settings
-    // Same form, fields, purpose as Existing Player Control Settings.
-    return view('settingsControlsNew');
-});
-Route::get('/settings/difficulty/new', function () {
-    // New Player Step 3: Player's Difficulty Settings
-    // Same form, fields, purpose as Existing Player Difficulty Settings.
-    return view('settingsDifficultyNew');
-});
-// Demos
-Route::get('demo/settings/profile/new/error', function () {
-    // DEMO - Error - New Player Step 1: Player's Profile
-    // Requires View::share('avatars', $avatars);
-    return view('extras/demoPlayerProfileNewError');
-});
-Route::get('demo/settings/profile/new/success', function () {
-    // DEMO - Success - New Player Step 1: Player's Profile
-    // Requires View::share('avatars', $avatars);
-    return view('extras/demoPlayerProfileNewSuccess');
-});
-
-
-
 // Random x-layout component demos for No-Vue (default), Vue (optional):
 Route::get('/demo/noVue', function () {
     return view('extras/demoNoVue');
@@ -148,6 +80,9 @@ Route::get('/extras/font-tester', function () {
 
 //Integrated pages
 Route::middleware('auth')->group(function () {
+    Route::get('/select/player.clear', [UserController::class, 'clearCookiesAndRedirect'])
+        ->name('select.player.clear');
+
     Route::get('/select/player', [UserController::class, 'show'])
         ->name('select.player');
 
@@ -196,8 +131,29 @@ Route::middleware('auth')->group(function () {
     Route::post('/settings/difficulty', [SettingsController::class, 'difficultySave'])
         ->name('settings.difficulty')->middleware(EnsurePlayerIdIsValid::class);
 
-    Route::get('/select/board', [SetupGameController::class, 'show'])
+    Route::get('/select/board', [SetupGameController::class, 'boardShow'])
         ->name('select.board');
+
+    Route::post('/select/board', [SetupGameController::class, 'boardSave'])
+        ->name('select.board');
+
+    Route::get('/select/mode', [SetupGameController::class, 'modeShow'])
+        ->name('select.mode');
+
+    Route::post('/select/mode', [SetupGameController::class, 'modeSave'])
+        ->name('select.mode');
+
+    Route::get('/select/pawn', [SetupGameController::class, 'pawnShow'])
+        ->name('select.pawn');
+
+    Route::post('/select/pawn', [SetupGameController::class, 'pawnSave'])
+        ->name('select.pawn');
+
+    Route::get('/select/options', [SetupGameController::class, 'optionsShow'])
+        ->name('select.options');
+
+    Route::post('/select/options', [SetupGameController::class, 'optionsSave'])
+        ->name('select.options');
 
     Route::get('home', function () {
         return redirect('/select/player');
@@ -205,5 +161,5 @@ Route::middleware('auth')->group(function () {
 
     Route::get('logout', function () {
         return view('logoutDummy');
-    });
+    })->name('dummy.logout');
 });

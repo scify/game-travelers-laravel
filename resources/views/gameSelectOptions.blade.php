@@ -17,7 +17,7 @@
     @section('scripts')
     @endsection
 
-    <form method="post" action="{{ url('/select/options') }}"> {{-- form starts here --}}
+    <form method="post" action="{{ route('select.options') }}"> {{-- form starts here --}}
         @csrf
 
         {{-- Not sure if those are needed, but it's an alternative way to pass
@@ -84,7 +84,7 @@
                             type="submit" and proper name and value attrs. --}}
                         <a
                             class="btn btn-primary btn-circle ms-auto responsive-expand"
-                            href="{{ url('/select/pawn') }}"
+                            href="{{ route('select.pawn') }}"
                             id="backButton"
                             data-tabindex="1000"
                             tabindex="1000"
