@@ -74,7 +74,6 @@
                         >
                             <span>πίσω</span>
                         </a>
-
                     </div>
                 </div>
             </div>

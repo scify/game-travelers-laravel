@@ -1,4 +1,12 @@
 <!-- /resources/views/components/selectPawnButton.blade.php -->
+@php
+    if (!isset($board)) {
+        $board = 1;
+    }
+    if (!isset($asset)) {
+        $asset = "pawn-iasonas";
+    }
+@endphp
 <div class="col-6 col-md-4 col-xxl-3 pawn">
     <button
         class="btn btn-pawn pawn-button @isset($comingsoon)disabled @endisset"
@@ -15,8 +23,8 @@
     >
         <img
             class="pawn-img"
-            srcset="{{ asset('images/pawns/' . $asset . '@@2x.png') }} 2x"
-            src="{{ asset('images/pawns/' . $asset . '.png') }}"
+            srcset="{{ asset('images/pawns/' . $board . $asset . '@@2x.png') }} 2x"
+            src="{{ asset('images/pawns/' . $board . '/' . $asset . '.png') }}"
             width="136" height="212"
             alt="{{ $alt ?? 'Προεπισκόπηση πίστας' }}"
         />
