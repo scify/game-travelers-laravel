@@ -14,18 +14,18 @@ class UsersTableSeeder extends Seeder {
 
     public function run() {
         echo "\nRunning User Seeder...\n";
-        echo env('DEFAULT_ADMIN_USER_PASSWORD_FOR_SEED') . "\n";
+        echo env('DEFAULT_USER_PASSWORD_FOR_SEED') . "\n";
 
         $data = [
             [
                 'id' => 1,
                 'email' => 'admin-taxidiotes@scify.org',
-                'password' => bcrypt(env('DEFAULT_ADMIN_USER_PASSWORD_FOR_SEED')),
+                'password' => bcrypt(env('DEFAULT_USER_PASSWORD_FOR_SEED')),
             ],
             [
                 'id' => 2,
                 'email' => 'user-taxidiotes@scify.org',
-                'password' => bcrypt(env('DEFAULT_ADMIN_USER_PASSWORD_FOR_SEED')),
+                'password' => bcrypt(env('DEFAULT_USER_PASSWORD_FOR_SEED')),
             ],
         ];
 
