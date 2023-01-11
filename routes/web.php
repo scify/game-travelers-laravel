@@ -80,10 +80,10 @@ Route::get('/extras/font-tester', function () {
 
 //Integrated pages
 Route::middleware('auth')->group(function () {
-    Route::get('/select/player', [UserController::class, 'show'])
+    Route::get('/select/player/{player_id}/{from}/{game_id}', [UserController::class, 'show'])
         ->name('select.player');
 
-    Route::post('/select/player', [UserController::class, 'select'])
+    Route::post('/select/player/{player_id}/{from}/{game_id}', [UserController::class, 'select'])
         ->name('select.player');
 
     Route::get('/create/player/{player_id}/{from}/{game_id}', [UserController::class, 'newPlayer'])
@@ -129,31 +129,31 @@ Route::middleware('auth')->group(function () {
         ->name('settings.difficulty')->middleware(EnsureIdsAreValid::class);
 
     Route::get('/select/board/{player_id}/{from}/{game_id}', [SetupGameController::class, 'boardShow'])
-        ->name('select.board');
+        ->name('select.board')->middleware(EnsureIdsAreValid::class);
 
     Route::post('/select/board/{player_id}/{from}/{game_id}', [SetupGameController::class, 'boardSave'])
-        ->name('select.board');
+        ->name('select.board')->middleware(EnsureIdsAreValid::class);
 
     Route::get('/select/mode/{player_id}/{from}/{game_id}', [SetupGameController::class, 'modeShow'])
-        ->name('select.mode');
+        ->name('select.mode')->middleware(EnsureIdsAreValid::class);
 
     Route::post('/select/mode/{player_id}/{from}/{game_id}', [SetupGameController::class, 'modeSave'])
-        ->name('select.mode');
+        ->name('select.mode')->middleware(EnsureIdsAreValid::class);
 
     Route::get('/select/pawn/{player_id}/{from}/{game_id}', [SetupGameController::class, 'pawnShow'])
-        ->name('select.pawn');
+        ->name('select.pawn')->middleware(EnsureIdsAreValid::class);
 
     Route::post('/select/pawn/{player_id}/{from}/{game_id}', [SetupGameController::class, 'pawnSave'])
-        ->name('select.pawn');
+        ->name('select.pawn')->middleware(EnsureIdsAreValid::class);
 
     Route::get('/select/options/{player_id}/{from}/{game_id}', [SetupGameController::class, 'optionsShow'])
-        ->name('select.options');
+        ->name('select.options')->middleware(EnsureIdsAreValid::class);
 
     Route::post('/select/options/{player_id}/{from}/{game_id}', [SetupGameController::class, 'optionsSave'])
-        ->name('select.options');
+        ->name('select.options')->middleware(EnsureIdsAreValid::class);
 
     Route::get('home', function () {
-        return redirect('/select/player');
+        return redirect()->route('select.player', [0, "user", 0]);
     });
 
     Route::get('logout', function () {

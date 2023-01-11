@@ -18,12 +18,10 @@ class SetupGameController extends Controller
         $this->gameRepository = $gameRepository;
     }
 
-    public function boardShow(Request $request, int $player_id, string $from)
+    public function boardShow(Request $request, int $player_id, string $from, int $game_id)
     {
-        $player_id = $request->cookie('player_id');
-        if ($player_id == null)
-            return \Redirect::route('select.player');
-        Cookie::queue('settingFrom', 'selectBoard', $minute = 120);
+        if ($player_id == 0)
+            return abort(403, 'Unauthorized action.');
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id']);
         $name = $players[0]->name;
         $avatar_id = $players[0]->avatar_id;
@@ -31,38 +29,41 @@ class SetupGameController extends Controller
         \View::share('avatarName', $avatarName);
         \View::share('playerName', $name);
         \View::share('showSettings', true);
-        return view('gameSelectBoard', ['name' => $name, 'player_id' => $player_id]);
+        return view('gameSelectBoard');
     }
 
-    public function boardSave(Request $request, int $player_id, string $from)
+    public function boardSave(Request $request, int $player_id, string $from, int $game_id)
     {
 
-            $user_id = auth()->user()->id;
-            $player_id = (int)$request->cookie('player_id');
-            $selected_board_id = (int)$request->only('board')['board'];
-            $entry = ['user_id' => $user_id, 'player_id' => $player_id, 'board_id' => $selected_board_id];
-            $game_id = $request->cookie('game_id');
-            dd($game_id);
-            if ($game_id == null) {
+        if ($player_id == 0)
+            return abort(403, 'Unauthorized action.');
+
+        $user_id = auth()->user()->id;
+        $selected_board_id = (int)$request->only('board')['board'];
+        $entry = ['user_id' => $user_id, 'player_id' => $player_id, 'board_id' => $selected_board_id];
+        if ($game_id == 0) {
+            //check if an active game already exists
+            $active_games = $this->gameRepository->allWhere(['user_id'=> $user_id, 'active' => true],['id']);
+            if (sizeof($active_games) == 0) {
                 $game = $this->gameRepository->create($entry);
                 $game_id = $game->id;
-                Cookie::queue('game_id', $game_id, $minute = 120);
             } else {
-                $game_id = (int)$game_id;
+                $game_id = $active_games[0]->id;
                 $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
             }
+        } else {
+            $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
+        }
 
-        return \Redirect::route('select.mode');
+        return \Redirect::route('select.mode', [$player_id, 'mode', $game_id]);
 
     }
 
-    public function modeShow(Request $request, int $player_id, string $from, int $game_id = 0)
+    public function modeShow(Request $request, int $player_id, string $from, int $game_id)
     {
-        $player_id = $request->cookie('player_id');
-        $game_id = $request->cookie('game_id');
-        if ($player_id == null || $game_id == null)
-            return \Redirect::route('select.player');
-        Cookie::queue('settingFrom', 'selectMode', $minute = 120);
+        if ($player_id == 0 || $game_id == 0)
+            return abort(403, 'Unauthorized action.');
+
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id']);
         $name = $players[0]->name;
         $avatar_id = $players[0]->avatar_id;
@@ -70,27 +71,25 @@ class SetupGameController extends Controller
         \View::share('avatarName', $avatarName);
         \View::share('playerName', $name);
         \View::share('showSettings', true);
-        return view('gameSelectMode', ['name' => $name, 'player_id' => $player_id]);
+        return view('gameSelectMode');
     }
 
-    public function modeSave(Request $request, int $player_id, string $from, int $game_id = 0)
+    public function modeSave(Request $request, int $player_id, string $from, int $game_id)
     {
-        $game_id = $request->cookie('game_id');
+        if ($player_id == 0 || $game_id == 0)
+            return abort(403, 'Unauthorized action.');
+
         $selected_mode_id = (int)$request->only('mode')['mode'];
         $entry = ['mode_id' => $selected_mode_id];
-        if ($game_id == null)
-            return abort(403, 'Unauthorized action.');
         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
-        return \Redirect::route('select.pawn');
+        return \Redirect::route('select.pawn', [$player_id, 'pawn', $game_id]);
     }
 
-    public function pawnShow(Request $request, int $player_id, string $from, int $game_id = 0)
+    public function pawnShow(Request $request, int $player_id, string $from, int $game_id)
     {
-        $player_id = $request->cookie('player_id');
-        $game_id = $request->cookie('game_id');
-        if ($player_id == null || $game_id == null)
-            return \Redirect::route('select.player');
-        Cookie::queue('settingFrom', 'selectPawn', $minute = 120);
+        if ($player_id == 0 || $game_id == 0)
+            return abort(403, 'Unauthorized action.');
+
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id']);
         $name = $players[0]->name;
         $avatar_id = $players[0]->avatar_id;
@@ -98,27 +97,25 @@ class SetupGameController extends Controller
         \View::share('avatarName', $avatarName);
         \View::share('playerName', $name);
         \View::share('showSettings', true);
-        return view('gameSelectPawn', ['name' => $name, 'player_id' => $player_id]);
+        return view('gameSelectPawn');
     }
 
-    public function pawnSave(Request $request, int $player_id, string $from, int $game_id = 0)
+    public function pawnSave(Request $request, int $player_id, string $from, int $game_id)
     {
-        $game_id = $request->cookie('game_id');
+        if ($player_id == 0 || $game_id == 0)
+            return abort(403, 'Unauthorized action.');
+
         $selected_pawn_id = (int)$request->only('pawn')['pawn'];
         $entry = ['pawn_id_1' => $selected_pawn_id];
-        if ($game_id == null)
-            return abort(403, 'Unauthorized action.');
         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
-        return \Redirect::route('select.options');
+        return \Redirect::route('select.options', [$player_id, 'options', $game_id]);
     }
 
-    public function optionsShow(Request $request, int $player_id, string $from, int $game_id = 0)
+    public function optionsShow(Request $request, int $player_id, string $from, int $game_id)
     {
-        $player_id = $request->cookie('player_id');
-        $game_id = $request->cookie('game_id');
-        if ($player_id == null || $game_id == null)
-            return \Redirect::route('select.player');
-        Cookie::queue('settingFrom', 'selectOption', $minute = 120);
+        if ($player_id == 0 || $game_id == 0)
+            return abort(403, 'Unauthorized action.');
+
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id']);
         $name = $players[0]->name;
         $avatar_id = $players[0]->avatar_id;
@@ -126,12 +123,14 @@ class SetupGameController extends Controller
         \View::share('avatarName', $avatarName);
         \View::share('playerName', $name);
         \View::share('showSettings', true);
-        return view('gameSelectOptions', ['name' => $name, 'player_id' => $player_id]);
+        return view('gameSelectOptions');
     }
 
-    public function optionsSave(Request $request, int $player_id, string $from, int $game_id = 0)
+    public function optionsSave(Request $request, int $player_id, string $from, int $game_id)
     {
-        $game_id = $request->cookie('game_id');
+        if ($player_id == 0 || $game_id == 0)
+            return abort(403, 'Unauthorized action.');
+
         $selected_option = (int)$request->only('option')['option'];
         $tutorial = true;
         if ($selected_option == 2)

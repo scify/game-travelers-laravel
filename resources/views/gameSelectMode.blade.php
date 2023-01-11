@@ -17,7 +17,7 @@
     @section('scripts')
     @endsection
 
-    <form method="post" action="{{ route('select.mode') }}"> {{-- form starts here --}}
+    <form method="post" action="{{ route('select.mode', [ request()->player_id, request()->from, request()->game_id ]) }}"> {{-- form starts here --}}
         @csrf
 
         {{-- Not sure if those are needed, but it's an alternative way to pass
@@ -92,7 +92,7 @@
                         {{-- Maybe this has to be part of the form as well. Oh well. I suppose making it a button works but haven't tested it yet. --}}
                         <a
                             class="btn btn-primary btn-circle ms-auto responsive-expand"
-                            href="{{ route('select.board') }}"
+                            href="{{ route('select.board', [ request()->player_id, 'board', request()->game_id ]) }}"
                             id="backButton"
                             data-tabindex="1000"
                             tabindex="1000"

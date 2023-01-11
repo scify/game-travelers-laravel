@@ -12,7 +12,7 @@
     <!-- new player step 2/3 content -->
     <form
         method="post" {{-- should be post, get is for testing --}}
-        action="{{ route('controls.player') }}"
+        action="{{ route('controls.player', [ request()->player_id, request()->from, request()->game_id ]) }}"
         id="settingsControlsNew" {{-- unused id --}}
     >
         @csrf

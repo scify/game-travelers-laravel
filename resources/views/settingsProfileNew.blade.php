@@ -16,7 +16,7 @@
     <!-- new player step 1/3 content -->
     <form
         method="post"
-        action="{{ route('new.player', ['player_id' => $player_id, 'from' => $from, 'game_id' =>$game_id]) }}"
+        action="{{ route('new.player', [ request()->player_id, request()->from, request()->game_id ]) }}"
         id="settingsProfileNew" {{-- unused id --}}
     >
         @csrf
@@ -54,7 +54,7 @@
                     <x-linkButtonBack
                         :label="'Ακύρωση και επιστροφή στην επιλογή παίκτη'"
                         :align="'left'"
-                        :url="route('select.player')"
+                        :url="route('select.player',[0, 'user' ,0])"
                     />
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">

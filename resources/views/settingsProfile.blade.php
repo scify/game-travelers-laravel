@@ -15,7 +15,7 @@
 
     <form
         method="post"
-        action="{{ route('settings.profile') }}"
+        action="{{ route('settings.profile', [ request()->player_id, request()->from, request()->game_id ] ) }}"
         id="settingsProfile"
     >
     @csrf
@@ -26,8 +26,8 @@
                 <div class="col-1">
                     <x-linkButtonBack
                     :label="'Επιστροφή στις ρυθμίσεις'"
+                    :url="route('settings', [ request()->player_id, request()->from, request()->game_id ] )"
                     :align="'left'"
-                    :url="route('settings')"
                 />
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">

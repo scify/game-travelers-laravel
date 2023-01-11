@@ -16,7 +16,7 @@ class UserController extends Controller
         $this->playerRepository = $playerRepository;
     }
 
-    public function show()
+    public function show(Request $request, int $player_id, string $from, int $game_id)
     {
         $user_id = auth()->user()->id;
         $players = $this->playerRepository->allWhere(['user_id' => $user_id]);
@@ -30,15 +30,15 @@ class UserController extends Controller
             ];
             $players_info[] = $player_info;
         }
-        return view('gameSelectPlayer', ['players' => $players_info, 'avatars' => $this->playerRepository->getAvatars(), 'player_id' => 0, 'from' => 'user', 'game_id' => 0]);
+        return view('gameSelectPlayer', ['players' => $players_info, 'avatars' => $this->playerRepository->getAvatars()]);
     }
 
-    public function select(Request $request)
+    public function select(Request $request, int $player_id, string $from, int $game_id)
     {
         $player_id = $request->only('player')['player'];
         $action = $request->only('submit')['submit'];
         if ($action == "start")
-            return \Redirect::route('select.board', ['player_id' => $player_id, 'from' => "user", 'game_id' => 0]);
+            return \Redirect::route('select.board', ['player_id' => $player_id, 'from' => "board", 'game_id' => 0]);
         else if ($action == "settings")
             return \Redirect::route('settings', ['player_id' => $player_id, 'from' => "user", 'game_id' => 0]);
         else
@@ -57,7 +57,7 @@ class UserController extends Controller
                 $avatar_id = $players[0]->avatar_id;
             }
         }
-        return view('settingsProfileNew', ["name" => $name, "selectedAvatarId" => $avatar_id, 'avatars' => $this->playerRepository->getAvatars(), 'player_id' => $player_id, 'from' => $from, 'game_id' => 0]);
+        return view('settingsProfileNew', ["name" => $name, "selectedAvatarId" => $avatar_id, 'avatars' => $this->playerRepository->getAvatars()]);
 
     }
 
@@ -70,7 +70,7 @@ class UserController extends Controller
         $players = $this->playerRepository->allWhere(['user_id' => $user_id], ['id', 'name']);
         $name_found = false;
         foreach ($players as $player) {
-            if ($player->id != $player_id && $player->name == $name)
+            if ($player->id != $player_id && strtolower($player->name) == strtolower($name))
                 $name_found = true;
         }
         if ($name_found) {
@@ -84,14 +84,14 @@ class UserController extends Controller
                 $entry = ['name' => $name, 'avatar_id' => $avatar_id];
                 $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
             }
-            return \Redirect::route('controls.player', ['player_id' => $player_id, 'from' => $from, 'game_id' => 0]);
+            return \Redirect::route('controls.player', [$player_id, $from , 0]);
         }
     }
 
     public function controlsConfigure(Request $request, int $player_id, string $from, int $game_id)
     {
         if ($player_id == 0)
-            return \Redirect::route('select.player');
+            return abort(403, 'Unauthorized action.');
         $control_mode = 1;
         $control_auto_select = "Space";
         $control_manual_select = "Space";
@@ -112,12 +112,11 @@ class UserController extends Controller
             $help_after_tries = $players[0]->help_after_x_mistakes;
             $scanning_speed = $players[0]->scanning_speed;
         }
-        return view('settingsControlsNew', ["control_mode" => $control_mode, "control_auto_select" => $control_auto_select, "control_manual_select" => $control_manual_select, "control_manual_nav" => $control_manual_nav, "help_after_tries" => $help_after_tries, "scanning_speed" => $scanning_speed, 'player_id' => $player_id, 'from' => 'user', 'game_id' => 0]);
+        return view('settingsControlsNew', ["control_mode" => $control_mode, "control_auto_select" => $control_auto_select, "control_manual_select" => $control_manual_select, "control_manual_nav" => $control_manual_nav, "help_after_tries" => $help_after_tries, "scanning_speed" => $scanning_speed]);
     }
 
     public function controlsSave(Request $request, int $player_id, string $from, int $game_id = 0)
     {
-        $player_id = $request->cookie('player_id');
         $input = $request->only('controlType', 'controlAutomaticSelectionButton', 'controlManualSelectionButton', 'controlManualNavigationButton', 'helpAfterTries', 'scanningSpeed');
         $control_mode = (int)$input['controlType'];
         $control_auto_select = $input['controlAutomaticSelectionButton'];
@@ -133,9 +132,9 @@ class UserController extends Controller
         $action = $request->only('submit')['submit'];
 
         if ($action == "back" || $action == "profile")
-            return \Redirect::route('new.player');
+            return \Redirect::route('new.player', [$player_id, $from, 0]);
         else if ($action == "next" || $action == "save")
-            return \Redirect::route('difficulty.player');
+            return \Redirect::route('difficulty.player', [$player_id, $from, 0]);
         else
             return abort(403, 'Unauthorized action.');
 
@@ -143,21 +142,18 @@ class UserController extends Controller
 
     public function difficultyConfigure(Request $request, int $player_id, string $from, int $game_id = 0)
     {
-        $player_id = $request->cookie('player_id');
-        if ($player_id == null)
-            return \Redirect::route('select.player');
+        if ($player_id == 0)
+            return abort(403, 'Unauthorized action.');
         $dice_type = 1;
         $board_size = 2;
         $difficulty = 1;
         $movement_mode = 2;
-        if ($player_id != null) {
-            $players = $this->playerRepository->allWhere(['id' => $player_id], ['dice_type', 'board_size', 'difficulty', 'movement_mode']);
-            if (sizeof($players) > 0) {
-                $dice_type = $players[0]->dice_type;
-                $board_size = $players[0]->board_size;
-                $difficulty = $players[0]->difficulty;
-                $movement_mode = $players[0]->movement_mode;
-            }
+        $players = $this->playerRepository->allWhere(['id' => $player_id], ['dice_type', 'board_size', 'difficulty', 'movement_mode']);
+        if (sizeof($players) > 0) {
+            $dice_type = $players[0]->dice_type;
+            $board_size = $players[0]->board_size;
+            $difficulty = $players[0]->difficulty;
+            $movement_mode = $players[0]->movement_mode;
         }
         return view('settingsDifficultyNew', ['dice_type' => $dice_type, 'board_size' => $board_size, 'difficulty' => $difficulty, 'movement_mode' => $movement_mode]);
     }
@@ -174,11 +170,11 @@ class UserController extends Controller
         $player = $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
         $action = $request->only('submit')['submit'];
         if ($action == "profile")
-            return \Redirect::route('new.player');
+            return \Redirect::route('new.player', [$player_id, $from, 0]);
         else if ($action == "back" || $action == "controls")
-            return \Redirect::route('controls.player');
+            return \Redirect::route('controls.player', [$player_id, $from, 0]);
         else if ($action == "save")
-            return \Redirect::route('select.player');
+            return \Redirect::route('select.player', [0, $from, 0]);
         else
             return abort(403, 'Unauthorized action.');
     }

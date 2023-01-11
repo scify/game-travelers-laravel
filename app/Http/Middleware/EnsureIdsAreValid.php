@@ -44,7 +44,7 @@ class EnsureIdsAreValid
                 $problem_found = true;
 
             if ($game_id != 0) {
-                $entry = $this->gameRepository->allWhere(['id' => $game_id], ['user_id'])->all();
+                $entry = $this->gameRepository->allWhere(['id' => $game_id, 'active' => true], ['user_id'])->all();
                 if (sizeof($entry) == 0)
                     $problem_found = true;
                 else if ($entry[0]->user_id != $user_id)

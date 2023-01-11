@@ -14,7 +14,7 @@
     <!-- new player step 3/3 content -->
     <form
         method="post" {{-- should be post, get is for testing --}}
-        action="{{ route('difficulty.player') }}"
+        action="{{ route('difficulty.player', [ request()->player_id, request()->from, request()->game_id ]) }}"
         id="settingsDifficultyNew" {{-- unused id --}}
     >
         @csrf

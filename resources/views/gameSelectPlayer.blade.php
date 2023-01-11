@@ -18,7 +18,7 @@
         --}}
     <form
         method="post" {{-- Get seems preferrable - see debate on the following select pages. --}}
-        action="{{ route('select.player') }}"
+        action="{{ route('select.player', ['player_id' => 0, 'from' => 'login', 'game_id' => 0]) }}"
         class="
         form
         @error('player') is-invalid @enderror {{-- one field, one error --}}
@@ -97,9 +97,6 @@
                                 <x-selectPlayer
                                     :avatars=$avatars
                                     :players=$players
-                                    :playerId=$player_id
-                                    :from=$from
-                                    :gameId=$game_id
                                     :selected-player-id=0 {{-- 0: none selected --}}
                                     :tabindex=1 {{-- Accessibility (int). --}}
                                     :show-add-player=true {{-- Optional. TRUE or NULL (default). --}}
