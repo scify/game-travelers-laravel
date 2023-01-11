@@ -1,7 +1,7 @@
 // Backgrounds: Flowers & Mountains & Trees
 .background,
 .trvl-bg {
-    input:not([type='checkbox']) {
+    input:not([type="checkbox"]) {
         background-color: hsla(var(--trvl-c-background-hsl), 0.2);
     }
 }
@@ -18,11 +18,13 @@
     }
 }
 
-.background-dash-up { // header
+.background-dash-up {
+    // header
     background-image: url("/images/backgrounds/bg-head-dash-2.png");
     background-repeat: no-repeat;
-    background-position-y: bottom;
-    background-position-x: center;
+    background-position: 30% 60%;
+    // background-position-y: bottom;
+    // background-position-x: center;
     background-size: 1370px 142px;
     min-height: 195px;
 }
@@ -41,34 +43,31 @@
     background-position-x: right;
     background-position-y: top;
     background-size: 351px 632px;
-    @media
-        only screen and (-webkit-min-device-pixel-ratio: 2),
+    @media only screen and (-webkit-min-device-pixel-ratio: 2),
         only screen and (min--moz-device-pixel-ratio: 2),
         only screen and (min-device-pixel-ratio: 2),
         only screen and (min-resolution: 2dppx) {
-            background-image: url("/images/backgrounds/bg-g1-side-group-1@2x.png");
+        background-image: url("/images/backgrounds/bg-g1-side-group-1@2x.png");
     }
     &.responsive-hide {
         @media (max-width: 575.98px) {
             background-image: url("/images/backgrounds/bg-g1-side-back-2.png");
-            @media
-                only screen and (-webkit-min-device-pixel-ratio: 2),
+            @media only screen and (-webkit-min-device-pixel-ratio: 2),
                 only screen and (min--moz-device-pixel-ratio: 2),
                 only screen and (min-device-pixel-ratio: 2),
                 only screen and (min-resolution: 2dppx) {
-                    background-image: url("/images/backgrounds/bg-g1-side-back-2@2x.png");
+                background-image: url("/images/backgrounds/bg-g1-side-back-2@2x.png");
             }
         }
     }
     &.responsive-hide-sm {
         @media (max-width: 767.98px) {
             background-image: url("/images/backgrounds/bg-g1-side-back-2.png");
-            @media
-                only screen and (-webkit-min-device-pixel-ratio: 2),
+            @media only screen and (-webkit-min-device-pixel-ratio: 2),
                 only screen and (min--moz-device-pixel-ratio: 2),
                 only screen and (min-device-pixel-ratio: 2),
                 only screen and (min-resolution: 2dppx) {
-                    background-image: url("/images/backgrounds/bg-g1-side-back-2@2x.png");
+                background-image: url("/images/backgrounds/bg-g1-side-back-2@2x.png");
             }
         }
     }
@@ -80,14 +79,15 @@
  * (queries) Media queries to hide trees in less than XXL sizes.
  */
 @media (min-width: 1400px) {
-    .col-xxl-8.background-group-2--col  {
+    .col-xxl-8.background-group-2--col {
         width: 78% !important;
     }
     .col-xxl-2.background-group-2--col {
         width: 11% !important;
     }
 }
-.background-group-2--tree-1 { // the left one
+.background-group-2--tree-1 {
+    // the left one
     background-image: url("/images/backgrounds/bg-g2-side-tree-2.png");
     background-repeat: no-repeat;
     background-position-x: center;
@@ -98,7 +98,8 @@
     left: -2rem;
     // min-width:136px;
 }
-.background-group-2--tree-2 { // the right one
+.background-group-2--tree-2 {
+    // the right one
     background-image: url("/images/backgrounds/bg-g2-side-tree-1.png");
     background-repeat: no-repeat;
     background-position-x: center;
@@ -119,12 +120,11 @@
     background-repeat: no-repeat;
     background-position: 0% 75%;
     background-size: 1368px 139px;
-    @media
-        only screen and (-webkit-min-device-pixel-ratio: 2),
+    @media only screen and (-webkit-min-device-pixel-ratio: 2),
         only screen and (min--moz-device-pixel-ratio: 2),
         only screen and (min-device-pixel-ratio: 2),
         only screen and (min-resolution: 2dppx) {
-            background-image: url("/images/backgrounds/bg-g2-dash-down@2x.png");
+        background-image: url("/images/backgrounds/bg-g2-dash-down@2x.png");
     }
 }
 .background-group-3--abstract {
@@ -132,12 +132,11 @@
     background-repeat: no-repeat;
     background-position: 0% 20%;
     background-size: 83px 159px;
-    @media
-        only screen and (-webkit-min-device-pixel-ratio: 2),
+    @media only screen and (-webkit-min-device-pixel-ratio: 2),
         only screen and (min--moz-device-pixel-ratio: 2),
         only screen and (min-device-pixel-ratio: 2),
         only screen and (min-resolution: 2dppx) {
-            background-image: url("/images/backgrounds/bg-g3-abstract@2x.png");
+        background-image: url("/images/backgrounds/bg-g3-abstract@2x.png");
     }
 }
 .background-group-3--flowers {
@@ -145,12 +144,11 @@
     background-repeat: no-repeat;
     background-position: 100% 20%;
     background-size: 323px 541px;
-    @media
-        only screen and (-webkit-min-device-pixel-ratio: 2),
+    @media only screen and (-webkit-min-device-pixel-ratio: 2),
         only screen and (min--moz-device-pixel-ratio: 2),
         only screen and (min-device-pixel-ratio: 2),
         only screen and (min-resolution: 2dppx) {
-            background-image: url("/images/backgrounds/bg-g3-side-flowers@2x.png");
+        background-image: url("/images/backgrounds/bg-g3-side-flowers@2x.png");
     }
     @media (max-width: 575.98px) {
         background-image: none;
@@ -160,7 +158,7 @@
 /* Responsiveness */
 // Portrait phones
 @media (max-width: 575.98px) {
-    .background input:not([type='checkbox']) {
+    .background input:not([type="checkbox"]) {
         background-color: hsla(var(--trvl-c-background-hsl), 0.4);
     }
 }

@@ -35,8 +35,9 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('administration')->middleware('can:manage-platform')->name('administration.')->group(function () {
         Route::get('test-email/{email}', function (Request $request) {
             $user = User::where(['email' => $request->email])->first();
-            if (!$user)
+            if (!$user) {
                 $user = User::findOrFail(1);
+            }
             $user->notify(new UserRegistered($user));
             return "Email sent to: " . $user->email;
         });
@@ -82,6 +83,10 @@ Route::get('/extras/font-tester', function () {
     return view('extras/testFont');
 });
 
+// Aris @todo: Existing game integration screen
+Route::get('/select/existing', function () {
+    return view('gameSelectExisting');
+});
 
 //Integrated pages
 Route::middleware('auth')->group(function () {
