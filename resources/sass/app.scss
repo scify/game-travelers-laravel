@@ -393,7 +393,6 @@ section.content {
 /* Responsiveness */
 
 // Portrait phones
-
 // Game board buttons responsiveness.
 @media (max-width: 400px) {
     .gameselect {
@@ -460,5 +459,12 @@ section.content {
     }
     .text-center-end {
         text-align: center;
+    }
+}
+
+// Remove top padding from header if there's sufficient blank space on top.
+@media (min-height: 768px) and (min-width: 1400px) {
+    .trvl-header {
+        padding-top: 0 !important;
     }
 }
