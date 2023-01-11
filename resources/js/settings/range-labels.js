@@ -2,7 +2,7 @@
  * Range Labels Functions.
  */
 window.addEventListener("load", function () {
-	const rangeElements = document.querySelectorAll("input[type=\"range\"]");
+	const rangeElements = document.querySelectorAll("input[type='range']");
 	if (rangeElements.length) {
 		for (let i = 0; i < rangeElements.length; i++) {
 			const element = rangeElements[i];

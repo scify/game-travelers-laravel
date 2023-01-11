@@ -10,9 +10,21 @@
 <body>
     <div class="container">
         <div class="alert alert-success" role="alert">
-            Success! Updated December 22, 2022, 00:22. Please select one of the following routes.
+            Success! Updated January 11, 2023, 03:22. Please select one of the following routes.
         </div>
         <h1>Demo Routes</h2>
+        January 11, 2023 Notes:
+        <ul>
+            <li>We did it! All pages can be controlled by any key in either
+                automatic or manual mode!
+            </li>
+            <li>Next goal: Virtual reality!</li>
+            <li><a href="{{ url('/demo/select/pawn') }}">Select Pawn with Controller Switch enabled in automatic mode.</a>
+            Please see the documentation on both the demo blade.php and the switcher.js for more information. Script also
+        works in manual mode. Script allows setting of scanning speed. Script allows setting of both Selection and Navigation
+    Buttons. Script can be escaped with the Escape button - providing helpful hints and option to succesfully break it! </li>
+        </ul>
+
         December 22, 2022 Notes:
         <ul>
             <li>We did it! All pages are fully responsive!</li>
@@ -83,6 +95,20 @@
                 <li>Start webserver: <code>php artisan serve</code></li>
                 <li>Run and build, continiously: <code>npm run watch</code></li>
             </ul>
+        </p>
+        <p>
+            Updating npm/composer and database:
+        </p>
+        <p>
+            <code>
+                git pull
+                npm install
+                composer i
+                php artisan migrate:rollback
+                php artisan migrate
+                php artisan db:seed
+                npm run dev
+            </code>
         </p>
 
         <hr />
