@@ -52,6 +52,11 @@ Route::get('/log', function () {
     return view('extras/logViews');
 });
 
+// Demos
+// 1. Scanning Controller JavaScript demo:
+Route::get('/demo/select/pawn', function () {
+    return view('extras/demoGameSelectPawnScanning');
+});
 // Random x-layout component demos for No-Vue (default), Vue (optional):
 Route::get('/demo/noVue', function () {
     return view('extras/demoNoVue');

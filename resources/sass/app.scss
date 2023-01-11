@@ -3,7 +3,7 @@
 /* Imports */
 //
 // Fonts
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap");
 //@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;900&display=swap');
 //@import url('https://fonts.googleapis.com/css2?family=Nunito');
 //@import url('https://fonts.googleapis.com/css2?family=Mansalva:wght@400&display=swap');
@@ -14,19 +14,19 @@
 // @import "fonts";
 //
 // Bootstrap's variables
-@import 'variables';
+@import "variables";
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 //
 // Base theme & CSS Variables
-@import 'base';
+@import "base";
 //
 // Components
-@import 'components/avatars';
-@import 'components/buttons';
-@import 'components/forms';
-@import 'components/icons';
-@import 'components/stepper';
+@import "components/avatars";
+@import "components/buttons";
+@import "components/forms";
+@import "components/icons";
+@import "components/stepper";
 //
 // Misc
 @import "decoration";
@@ -41,23 +41,36 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-weight: 800;
 }
 
-a, a:hover, a:active, a:visited {
-  color: var(--trvl-c-link);
-  outline: none;
+a,
+a:hover,
+a:active,
+a:visited {
+    color: var(--trvl-c-link);
+    outline: none;
 }
 a:focus-visible {
-  outline-color: hsla(0, 0%, 0%, 0.7); // hsla(var(--trvl-shadow-focus-hsl), 0.75)
-  outline-width: 0.3rem;
-  outline-style: solid;
+    outline-color: hsla(
+        0,
+        0%,
+        0%,
+        0.7
+    ); // hsla(var(--trvl-shadow-focus-hsl), 0.75)
+    outline-width: 0.3rem;
+    outline-style: solid;
 }
 
 header img,
 footer img {
-    display:block;
+    display: block;
 }
 
 // Alerts
@@ -82,7 +95,7 @@ img.splash {
 @keyframes splashFadeIn {
     0% {
         opacity: 0;
-        color: #000
+        color: #000;
     }
     100% {
         opacity: 1;
@@ -106,10 +119,10 @@ section.content {
 /* Sections */
 // Main Content
 .section {
-  h1 {
-    font-size: 2em;
-    color: var(--trvl-c-black);
-  }
+    h1 {
+        font-size: 2em;
+        color: var(--trvl-c-black);
+    }
 }
 
 // Settings & Profiles
@@ -140,7 +153,7 @@ section.content {
         .dice-field {
             &--img {
                 img {
-                    display:block;
+                    display: block;
                     position: relative;
                     left: -1rem;
                     cursor: pointer;
@@ -160,7 +173,7 @@ section.content {
     min-height: 566px;
 }
 .gameselect {
-    min-height: 495px
+    min-height: 495px;
 }
 
 /* User */
@@ -176,27 +189,28 @@ section.content {
     &:hover {
         box-shadow: none;
     }
-    &::after { // dropdown triangle
+    &::after {
+        // dropdown triangle
         z-index: 1001; // @see https://getbootstrap.com/docs/5.0/layout/z-index/
         position: absolute;
         margin-left: 0;
         left: 70px;
         bottom: 22px;
-        transition: all .1s ease-in-out;
+        transition: all 0.1s ease-in-out;
         // vertical-align: 0.75em;
     }
-    &[aria-expanded=true] img {
+    &[aria-expanded="true"] img {
         scale: 1.1;
     }
-    &[aria-expanded=true]::after {
+    &[aria-expanded="true"]::after {
         border-bottom: 0.3em solid;
         border-top: 0;
     }
-    &:hover:not([aria-expanded=true]) img {
+    &:hover:not([aria-expanded="true"]) img {
         scale: 1.05;
     }
     img {
-        transition: all .2s ease-out;
+        transition: all 0.2s ease-out;
         margin: 0 auto;
         padding: 0;
         background: #fff;
@@ -212,7 +226,7 @@ section.content {
 .user-label {
     display: block; // block/inline-block for ellipsis.
     font-weight: 600;
-    z-index: 2001;
+    z-index: 1002;
     position: relative; // for z-index
     font-size: 1rem;
     width: 90px;
@@ -230,7 +244,7 @@ section.content {
     --bs-dropdown-border-width: 0;
     --bs-dropdown-link-hover-bg: #faefe4;
     font-weight: 600;
-    box-shadow: 0 0.2em rgba(0,0,0,0.1);
+    box-shadow: 0 0.2em rgba(0, 0, 0, 0.1);
 }
 .user-menu li a {
     transition: all 0.1s ease-in;
@@ -286,9 +300,9 @@ section.content {
     }
     // Confirmation link
     a.confirmation-link {
-        display:flex;
-        transition: all .2s ease-in-out;
-        box-shadow: 0 0.3rem rgba(0,0,0,0.05);
+        display: flex;
+        transition: all 0.2s ease-in-out;
+        box-shadow: 0 0.3rem rgba(0, 0, 0, 0.05);
         align-items: center;
         flex-direction: column;
         justify-content: center;
@@ -309,7 +323,7 @@ section.content {
     }
     a.confirmation-link:hover {
         background-color: var(--trvl-btn-bg);
-        box-shadow: 0 0.3rem rgba(0,0,0,0.1);
+        box-shadow: 0 0.3rem rgba(0, 0, 0, 0.1);
         border-color: var(--trvl-btn-border-color);
     }
     @keyframes animation-confirm-button {
@@ -384,17 +398,17 @@ section.content {
 @media (max-width: 400px) {
     .gameselect {
         padding: 0 !important;
-        margin-left: 0!important;
-        margin-right: 0!important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
     .gameselect .col {
-       width: 100%;
+        width: 100%;
     }
 
     .btn-board {
         border-radius: 0 !important;
-        border-left: none!important;
-        border-right: none!important;
+        border-left: none !important;
+        border-right: none !important;
         border-top: 0.3rem solid transparent;
         border-bottom: 0.3rem solid transparent;
     }
@@ -421,7 +435,7 @@ section.content {
     .text-center-end {
         text-align: center;
     }
-    .trvl-footer  {
+    .trvl-footer {
         .scify {
             left: calc(100vw - 1.25rem - var(--trvl-footer-width));
             top: calc(var(--trvl-footer-height-negative) - 1rem);
@@ -430,7 +444,7 @@ section.content {
 }
 
 // Landscape phones
-@media (min-width: 576px) and (max-width: 767.98px){
+@media (min-width: 576px) and (max-width: 767.98px) {
     .text-start-end-start-end {
         text-align: right;
     }
@@ -444,7 +458,7 @@ section.content {
     .text-start-end-start-end {
         text-align: left;
     }
-      .text-center-end {
+    .text-center-end {
         text-align: center;
     }
 }

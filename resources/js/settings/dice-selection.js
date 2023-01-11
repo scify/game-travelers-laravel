@@ -1,6 +1,6 @@
 /**
-  * Dice Selection Functions.
-  */
+ * Dice Selection Functions.
+ */
 window.addEventListener("load", () => {
 	const diceImages = document.querySelectorAll("img[data-role='dice']");
 	if (diceImages.length) {

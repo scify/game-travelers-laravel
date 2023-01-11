@@ -1,10 +1,11 @@
 /* Buttons */
 // Base
 .btn {
-    --bs-btn-focus-box-shadow: 0 0 0 0.3rem rgba(var(--bs-btn-focus-shadow-rgb), 0.6);
+    --bs-btn-focus-box-shadow: 0 0 0 0.3rem
+        rgba(var(--bs-btn-focus-shadow-rgb), 0.6);
 }
 .btn:hover {
-    box-shadow: 0 0.3rem rgba(var(--trvl-btn-hover-shadow-rgb), .1);
+    box-shadow: 0 0.3rem rgba(var(--trvl-btn-hover-shadow-rgb), 0.1);
 }
 
 /* Primary & Secondary buttons */
@@ -87,7 +88,7 @@
         opacity: 0;
         transition: all 0.2s ease-in-out;
         color: #aaaaaa;
-        content: '';
+        content: "";
         width: 44px;
         height: 44px;
         position: absolute;
@@ -113,7 +114,9 @@
 .btn-help {
     display: inline-block;
     position: absolute; // Relative introduces extra height on Firefox.
-    bottom: calc(0.9rem + 0.1vw); // The "i" is moving closer to base as the screen gets smaller, to avoid being on-top of possible wrapped elements.
+    bottom: calc(
+        0.9rem + 0.1vw
+    ); // The "i" is moving closer to base as the screen gets smaller, to avoid being on-top of possible wrapped elements.
     padding: 0;
     margin: 0;
     margin-left: 3px;
@@ -131,10 +134,10 @@
 // The small ones for key-capturing.
 .btn-light {
     &.key-assigner {
-        transition: all .5s ease-in-out;
-        min-width:134px;
+        transition: all 0.5s ease-in-out;
+        min-width: 134px;
         font-weight: 300;
-        font-size:0.9rem;
+        font-size: 0.9rem;
         --bs-btn-color: var(--trvl-c-dark) !important;
         --bs-btn-bg: #afbbb5; // AAA Pass @todo: Move to base.scss.
         --bs-btn-border-color: rgba(var(--dark-gray-rgb), 0.5);
@@ -145,10 +148,14 @@
         --bs-btn-active-color: var(--black);
         --bs-btn-active-bg: var(--white);
         --bs-btn-active-border-color: var(--white);
-        --bs-btn-active-shadow: inset 0 3px 5px rgba(var(--trvl-c-dark-rgb), 0.125);
+        --bs-btn-active-shadow: inset 0 3px 5px
+            rgba(var(--trvl-c-dark-rgb), 0.125);
         --bs-btn-disabled-color: var(--trvl-btn-disabled-color);
         --bs-btn-disabled-bg: #afbbb5; // AAA Pass @todo: Move to base.scss.
-        --bs-btn-disabled-border-color: rgba(var(--unnamed-color-faf9f8-rgb), 0.1);
+        --bs-btn-disabled-border-color: rgba(
+            var(--unnamed-color-faf9f8-rgb),
+            0.1
+        );
     }
 }
 button.key-assigner.active {
@@ -183,10 +190,13 @@ button.key-assigner.active {
         border: 0.3rem solid var(--trvl-c-dark);
         box-shadow: 0 1em 1em rgba(var(--trvl-c-dark-rgb), 0.1);
     }
+    &.switcher-active,
+    &.switcher-focus,
     &:focus,
     &:focus-visible {
         border: 0.3rem solid var(--trvl-c-dark);
     }
+    &.switcher-active,
     &:active {
         border: 0.3rem solid var(--trvl-c-dark);
         box-shadow: 0 1em 1em rgba(var(--trvl-c-dark-rgb), 0.2);
@@ -222,7 +232,7 @@ button.key-assigner.active {
         0 0.3em 0.6em rgba(var(--trvl-c-dark-rgb), 0.161),
         0 0.1em 0.1em rgba(var(--trvl-c-dark-rgb), 0.222);
     &.blank {
-        display:block;
+        display: block;
         width: 352px;
         height: 244px;
     }
@@ -232,7 +242,7 @@ button.key-assigner.active {
 .pawn-label {
     display: block;
     position: relative;
-    font-weight:bold;
+    font-weight: bold;
 }
 .pawn-label {
     bottom: 2.5rem;
@@ -247,7 +257,9 @@ button.key-assigner.active {
     }
 }
 
-.btn-pawn:hover .pawn-img {
+.btn-pawn:hover .pawn-img,
+.btn-pawn.switcher-active .pawn-img,
+.btn-pawn.switcher-focus .pawn-img {
     background-color: rgba(250, 249, 248, 0.3);
 }
 
@@ -276,7 +288,7 @@ button.key-assigner.active {
 .btn-board.disabled:focus .board-label,
 .btn-board.disabled:focus-visible .board-label {
     /* font-size: 1.8rem; */
-    scale: 1.0;
+    scale: 1;
     font-weight: bold;
 }
 // Coming soon (on top of a disabled board)
@@ -346,11 +358,14 @@ button.key-assigner.active {
     }
     &:hover {
         border: 0.3rem solid var(--trvl-c-dark);
-        box-shadow:
-        0 2px 2px rgba(var(--trvl-c-dark-rgb), 0.1);
+        box-shadow: 0 2px 2px rgba(var(--trvl-c-dark-rgb), 0.1);
     }
 }
-
+// Invert button for switcher-focus:
+.btn-circle.switcher-focus {
+    background-color: var(--trvl-c-dark);
+    color: var(--trvl-c-bright);
+}
 
 /* Button sizes */
 // Large button
@@ -367,23 +382,22 @@ button.key-assigner.active {
 /* Responsiveness */
 // Portrait phones
 @media (max-width: 575.98px) {
-  div.form-actions.responsive-expand button,
-  button.responsive-expand,
-  a.responsive-expand {
-    width: 100%;
-  }
-  a.btn-circle.responsive-expand {
-    border-radius: 1rem;
-    height: auto;
-    line-height: 1;
-    padding: 0.75rem;
-    margin-top: -2rem;
-    margin-bottom: 2rem;
-    span {
-        display: inline;
-        position: initial;
-        bottom: 0;
+    div.form-actions.responsive-expand button,
+    button.responsive-expand,
+    a.responsive-expand {
+        width: 100%;
     }
-  }
+    a.btn-circle.responsive-expand {
+        border-radius: 1rem;
+        height: auto;
+        line-height: 1;
+        padding: 0.75rem;
+        margin-top: -2rem;
+        margin-bottom: 2rem;
+        span {
+            display: inline;
+            position: initial;
+            bottom: 0;
+        }
+    }
 }
-

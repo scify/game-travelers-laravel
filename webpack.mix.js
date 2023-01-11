@@ -1,14 +1,16 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
-const ESLintPlugin = require('eslint-webpack-plugin');
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 mix.disableSuccessNotifications();
 
 mix.webpackConfig({
-    plugins: [new ESLintPlugin({
-        fix: true,
-        extensions: ['js', 'vue'],
-    })],
+	plugins: [
+		new ESLintPlugin({
+			fix: true,
+			extensions: ["js", "vue"],
+		}),
+	],
 });
 
 /*
@@ -22,14 +24,15 @@ mix.webpackConfig({
  |
  */
 
-mix.copyDirectory('resources/images', 'public/images')
-    .js('resources/js/app.js', 'public/js')
-    .js('resources/js/vue.js', 'public/js') // vue dependencies
-    .js('resources/js/settings/*.js', 'public/js/functions/settings.js') // single use scripts
-    .vue()
-    .sass('resources/sass/app.scss', 'public/css', {
-        // Folder structure is already optimal thanks to copyDirectory so there's no need to rewriteUrls:
-        processUrls: false,
-    })
-    // .sass('resources/sass/fixedwh.scss', 'public/css')
-    .version(); // cache busting @see https://laravel-mix.com/docs/6.0/versioning
+mix.copyDirectory("resources/images", "public/images")
+	.js("resources/js/app.js", "public/js")
+	.js("resources/js/vue.js", "public/js") // vue dependencies
+	.js("resources/js/settings/*.js", "public/js/functions/settings.js") // settings functions
+	.js("resources/js/switcher/*.js", "public/js/functions/switcher.js") // switcher functions
+	.vue()
+	.sass("resources/sass/app.scss", "public/css", {
+		// Folder structure is already optimal thanks to copyDirectory so there's no need to rewriteUrls:
+		processUrls: false,
+	})
+	// .sass('resources/sass/fixedwh.scss', 'public/css')
+	.version(); // cache busting @see https://laravel-mix.com/docs/6.0/versioning

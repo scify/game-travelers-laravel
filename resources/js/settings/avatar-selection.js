@@ -13,7 +13,7 @@ window.addEventListener("load", function () {
 
 	if (avatarsContainer) {
 		const buttons = avatarsContainer.querySelectorAll(
-			"button[data-avatar=\"true\"]"
+			"button[data-avatar='true']"
 		);
 
 		if (buttons) {
