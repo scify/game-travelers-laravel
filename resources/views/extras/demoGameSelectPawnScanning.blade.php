@@ -33,7 +33,7 @@ be adjusted accordingly. --}}
          are either valid or null/0.
     --}}
     @section('scripts')
-        {{-- REMOVE THESE LINES WHEN THE VALUES ARE PASSED VIA THE CONTROLLER:
+        {{-- REMOVE THESE LINES IF THESE VALUES ARE PASSED VIA THE CONTROLLER:
         As we don't yet have these values from a Controller, we are
         injecting them directly in-here via @@php. This should be removed from
         the final version of the code: --}}

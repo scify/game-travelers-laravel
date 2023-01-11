@@ -1,4 +1,9 @@
 <!-- /resources/views/components/selectBoardButton.blade.php -->
+@php
+    if (!isset($asset)) {
+        $asset = "board-island";
+    }
+@endphp
 <div class="col board">
     <button
         class="btn btn-board board-button @isset($comingsoon)disabled @endisset"

@@ -22,7 +22,11 @@
         />
         <span class="board-label">{{ $title ?? 'Τύπος παιχνιδιού' }}</span>
         @isset($comingsoon)
-        <span class="coming-soon"><strong>ΠΡΟΣΕΧΩΣ!</strong></span>
+        <span class="coming-soon-wrapper">
+            <span class="coming-soon">
+                <strong>ΠΡΟΣΕΧΩΣ!</strong>
+            </span>
+        </span>
         @endisset
     </button>
 </div>

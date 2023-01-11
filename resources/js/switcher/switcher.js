@@ -67,7 +67,7 @@ window.addEventListener("load", function () {
 		return;
 	}
 
-	// iterate through elements and check tabindex values
+	// Iterate through elements and check data-tabindex values.
 	for (let i = 0; i < switcherElements.length; i++) {
 		const element = switcherElements[i];
 		const tabindex = element.getAttribute("data-tabindex");
@@ -75,15 +75,13 @@ window.addEventListener("load", function () {
 			validSwitcherElements.push(element);
 		}
 	}
-
-	// sort elements by tabindex value
+	// Sort valid elements by data-tabindex value.
 	validSwitcherElements.sort((a, b) => {
 		return (
 			a.getAttribute("data-tabindex") - b.getAttribute("data-tabindex")
 		);
 	});
-
-	// remove switcher classes from all elements (just in case):
+	// Remove any left-over switcher classes from all elements:
 	for (let i = 0; i < validSwitcherElements.length; i++) {
 		validSwitcherElements[i].classList.remove(classFocus);
 		validSwitcherElements[i].classList.remove(classActive);
@@ -92,11 +90,12 @@ window.addEventListener("load", function () {
 	let intervalId;
 	if (validSwitcherElements.length > 0) {
 		if (controlMode === 1) {
-			let currentFocusIndex = -1;
 			// Automatic mode (default).
+			this.document.body.classList.add("switcher");
+			let currentFocusIndex = -1;
 			// Selection Button (default: Enter) clicks a highlighted option.
 			intervalId = setInterval(() => {
-				// remove events and classes from the previous element
+				// Remove events and classes from the previous element.
 				if (currentFocusIndex >= 0) {
 					validSwitcherElements[
 						currentFocusIndex
@@ -106,12 +105,10 @@ window.addEventListener("load", function () {
 						classFocus
 					);
 				}
-
-				// move to next element
+				// Move to the next element.
 				currentFocusIndex =
 					(currentFocusIndex + 1) % validSwitcherElements.length;
-
-				// focus on next element and add the class
+				// Focus on next element and add switcher class.
 				validSwitcherElements[currentFocusIndex].addEventListener(
 					"keydown",
 					handleSwitchKey
