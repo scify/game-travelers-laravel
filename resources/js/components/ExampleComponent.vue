@@ -16,6 +16,8 @@
 export default {
 	mounted() {
 		console.log("Component mounted.");
+		// window.AudioPlayer.playBackgroundMusic();
+		// window.AudioPlayer.playStartMusic();
 	},
 };
 </script>

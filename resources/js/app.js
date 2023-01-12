@@ -12,3 +12,7 @@
  */
 
 require("./bootstrap");
+
+// import {AudioPlayer} from 'audio-player.js'
+// window.AudioPlayer = AudioPlayer;
+// window.AudioPlayer.init()
