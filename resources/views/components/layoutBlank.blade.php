@@ -12,11 +12,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ $description ?? 'Ταξιδιώτες, ένα παιχνίδι από την SciFY' }}">
     <meta name="keywords" content="{{-- @todo: keywords --}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? 'Ταξιδιώτες' }}</title>
-    <link rel="icon" href="{{ asset('images/favicons/favicon-32.png') }}" sizes="32x32">
-    <link rel="icon" href="{{ asset('images/favicons/favicon-128.png') }}" sizes="128x128">
-    <link rel="icon" href="{{ asset('images/favicons/favicon-192.png') }}" sizes="192x192">
-    <link rel="apple-touch-icon" href="{{ asset('images/favicons/favicon-180.png') }}" sizes="180x180">
+    @include('layout.favicons')
     <link rel="canonical" href="{{ url()->current() }}">
     <script src="{{ mix('js/app.js') }}" defer></script>
     @isset($hasVue)<script src="{{ mix('js/vue.js') }}" defer></script>@endisset

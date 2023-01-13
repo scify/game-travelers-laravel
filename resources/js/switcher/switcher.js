@@ -4,106 +4,117 @@
  * @see ../lang.js
  */
 
-console.log(window.SwitcherKeys);
+// Blurs any items that have focus.
+window.onpageshow = function (e) {
+	if (e.persisted) {
+		const allElements = document.querySelectorAll("*");
+		for (let i = 0; i < allElements.length; i++) {
+			allElements[i].blur();
+		}
+		switcher();
+	}
+};
 
-// Settings Initialisation.
-let controlMode,
-	scanningSpeed,
-	automaticSelectionButton,
-	manualSelectionButton,
-	manualNavigationButton;
+window.addEventListener("load", switcher);
 
-if (window.Switcher instanceof Object) {
-	controlMode =
-		!isNaN(parseInt(window.Switcher.controlMode)) &&
-		(parseInt(window.Switcher.controlMode) === 1 ||
-			parseInt(window.Switcher.controlMode) === 2)
-			? parseInt(window.Switcher.controlMode)
-			: 1;
-	scanningSpeed =
-		!isNaN(parseInt(window.Switcher.scanningSpeed)) &&
-		parseInt(window.Switcher.scanningSpeed) >= 1 &&
-		parseInt(window.Switcher.scanningSpeed) <= 10
-			? parseInt(window.Switcher.scanningSpeed)
-			: 2;
-	automaticSelectionButton =
-		window.Switcher.automaticSelectionButton !== undefined &&
-		window.SwitcherKeys.allowedList.includes(
-			window.Switcher.automaticSelectionButton
-		)
-			? window.Switcher.automaticSelectionButton
-			: "Space";
-	manualSelectionButton =
-		window.Switcher.manualSelectionButton !== undefined &&
-		window.SwitcherKeys.allowedList.includes(
-			window.Switcher.manualSelectionButton
-		)
-			? window.Switcher.manualSelectionButton
-			: "Space";
-	manualNavigationButton =
-		window.Switcher.manualNavigationButton !== undefined &&
-		window.SwitcherKeys.allowedList.includes(
-			window.Switcher.manualNavigationButton
-		)
-			? window.Switcher.manualNavigationButton
-			: "Enter";
-} else {
-	// Set defaults if window.Switcher has nothing interesting.
-	controlMode = 1;
-	scanningSpeed = 2;
-	automaticSelectionButton = "Space";
-	manualSelectionButton = "Space";
-	manualNavigationButton = "Enter";
-}
+function switcher() {
+	// Settings Initialisation.
+	let controlMode,
+		scanningSpeed,
+		automaticSelectionButton,
+		manualSelectionButton,
+		manualNavigationButton;
 
-// Assigned keys.
-// Reminder: event.keyCode and event.which are deprecated, therefore we are
-// relying on the much (less) accurate event.key and event.code, which both
-// have benefits and drawbacks (@see /resources/js/settings/key-assigner.js).
-//
-// Επιλογή or selectionButton selects something aka executes something aka it
-// is the "GOTO" button. It defaults to [Enter].
-// For codes @see https://www.toptal.com/developers/keycode/for/enter
-let selectionButton =
-	controlMode === 1 ? automaticSelectionButton : manualSelectionButton;
-// Πλοήγηση or navigationButton moves something, does not select and does not
-// execute. It is something like a CURSOR key. It defaults to [Space].
-// For codes @see https://www.toptal.com/developers/keycode/for/Space
-let navigationButton = manualNavigationButton;
-
-// Override default values with the ones from the Blade template, if available:
-if (typeof window.Switcher !== "undefined") {
-	controlMode = parseInt(window.Switcher.controlMode);
-	if (isNaN(controlMode) || (controlMode !== 1 && controlMode !== 2)) {
+	if (window.Switcher instanceof Object) {
+		controlMode =
+			!isNaN(parseInt(window.Switcher.controlMode)) &&
+			(parseInt(window.Switcher.controlMode) === 1 ||
+				parseInt(window.Switcher.controlMode) === 2)
+				? parseInt(window.Switcher.controlMode)
+				: 1;
+		scanningSpeed =
+			!isNaN(parseInt(window.Switcher.scanningSpeed)) &&
+			parseInt(window.Switcher.scanningSpeed) >= 1 &&
+			parseInt(window.Switcher.scanningSpeed) <= 10
+				? parseInt(window.Switcher.scanningSpeed)
+				: 2;
+		automaticSelectionButton =
+			window.Switcher.automaticSelectionButton !== undefined &&
+			window.SwitcherKeys.allowedList.includes(
+				window.Switcher.automaticSelectionButton
+			)
+				? window.Switcher.automaticSelectionButton
+				: "Space";
+		manualSelectionButton =
+			window.Switcher.manualSelectionButton !== undefined &&
+			window.SwitcherKeys.allowedList.includes(
+				window.Switcher.manualSelectionButton
+			)
+				? window.Switcher.manualSelectionButton
+				: "Space";
+		manualNavigationButton =
+			window.Switcher.manualNavigationButton !== undefined &&
+			window.SwitcherKeys.allowedList.includes(
+				window.Switcher.manualNavigationButton
+			)
+				? window.Switcher.manualNavigationButton
+				: "Enter";
+	} else {
+		// Set defaults if window.Switcher has nothing interesting.
 		controlMode = 1;
-	}
-	scanningSpeed = parseInt(window.Switcher.scanningSpeed);
-	if (isNaN(scanningSpeed) || scanningSpeed < 1 || scanningSpeed > 8) {
 		scanningSpeed = 2;
+		automaticSelectionButton = "Space";
+		manualSelectionButton = "Space";
+		manualNavigationButton = "Enter";
 	}
-}
-if (typeof window.controlMode !== "undefined") {
-	controlMode = parseInt(window.controlMode);
-	if (isNaN(controlMode)) {
-		controlMode = 1;
-	}
-}
-if (typeof window.scanningSpeed !== "undefined") {
-	scanningSpeed = parseInt(window.scanningSpeed);
-	if (isNaN(scanningSpeed)) {
-		scanningSpeed = 2;
-	}
-}
-// @todo: handle the keys - so far it works with the default ones.
 
-// Configuration
-// Add delay for CSS transitions on top of the defined scanningSpeed. This value
-// for now is hardcoded, as all the CSS transitions are set to 300ms.
-const transitionSpeed = 300; // in milisecconds
-const classFocus = "switcher-focus"; // Focus switcher CSS class
-const classActive = "switcher-active"; // Active switcher CSS class
+	// Assigned keys.
+	// Reminder: event.keyCode and event.which are deprecated, therefore we are
+	// relying on the much (less) accurate event.key and event.code, which both
+	// have benefits and drawbacks (@see /resources/js/settings/key-assigner.js).
+	//
+	// Επιλογή or selectionButton selects something aka executes something aka it
+	// is the "GOTO" button. It defaults to [Enter].
+	// For codes @see https://www.toptal.com/developers/keycode/for/enter
+	let selectionButton =
+		controlMode === 1 ? automaticSelectionButton : manualSelectionButton;
+	// Πλοήγηση or navigationButton moves something, does not select and does not
+	// execute. It is something like a CURSOR key. It defaults to [Space].
+	// For codes @see https://www.toptal.com/developers/keycode/for/Space
+	let navigationButton = manualNavigationButton;
 
-window.addEventListener("load", function () {
+	// Override default values with the ones from the Blade template, if available:
+	if (typeof window.Switcher !== "undefined") {
+		controlMode = parseInt(window.Switcher.controlMode);
+		if (isNaN(controlMode) || (controlMode !== 1 && controlMode !== 2)) {
+			controlMode = 1;
+		}
+		scanningSpeed = parseInt(window.Switcher.scanningSpeed);
+		if (isNaN(scanningSpeed) || scanningSpeed < 1 || scanningSpeed > 8) {
+			scanningSpeed = 2;
+		}
+	}
+	if (typeof window.controlMode !== "undefined") {
+		controlMode = parseInt(window.controlMode);
+		if (isNaN(controlMode)) {
+			controlMode = 1;
+		}
+	}
+	if (typeof window.scanningSpeed !== "undefined") {
+		scanningSpeed = parseInt(window.scanningSpeed);
+		if (isNaN(scanningSpeed)) {
+			scanningSpeed = 2;
+		}
+	}
+	// @todo: handle the keys - so far it works with the default ones.
+
+	// Configuration
+	// Add delay for CSS transitions on top of the defined scanningSpeed. This value
+	// for now is hardcoded, as all the CSS transitions are set to 300ms.
+	const transitionSpeed = 300; // in milisecconds
+	const classFocus = "switcher-focus"; // Focus switcher CSS class
+	const classActive = "switcher-active"; // Active switcher CSS class
+
 	const switcherElements = document.querySelectorAll("[data-tabindex]");
 	const validSwitcherElements = [];
 
@@ -297,9 +308,6 @@ ${window.trans("messages.switcher.help_manual_button_select")}
 					} else {
 						nextFocusIndex = currentFocusIndex + 1;
 					}
-					console.log(
-						`Current: ${currentFocusIndex}, Next: ${nextFocusIndex} out of ${validSwitcherElements.length}`
-					);
 					break;
 				}
 			}
@@ -327,4 +335,4 @@ ${window.trans("messages.switcher.help_manual_button_select")}
 			}
 		}
 	}
-});
+}

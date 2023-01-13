@@ -7,7 +7,7 @@
         $asset = "pawn-iasonas";
     }
 @endphp
-<div class="col-6 col-md-4 col-xxl-3 pawn">
+<div class="col-6 col-sm-4 col-xl-3 pawn">
     <button
         class="btn btn-pawn pawn-button @isset($comingsoon)disabled @endisset"
         tabindex="{{ $tabindex ?? '-1' }}"
