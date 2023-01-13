@@ -1,12 +1,16 @@
-<x-layout :title="'Διάλεξε πιόνι | Νέο παιχνίδι | Ταξιδιώτες'" :hasUserMenu=true :background="'background-dash-up'">
+<x-layout
+    :title="__('messages.select_pawn') . ' | ' . __('messages.new_game') . ' | ' . __('messages.app_name')"
+    :hasUserMenu=true
+    :background="'background-dash-up'"
+>
     {{-- This page was designed responsively in order to support any amount of
          pawns, therefore you can simply use the x-selectPawnButton component as
          many times as needed. You can't disable panws with comingsoon=true.
 
          Pawns are linked to boards: The characters are the same, but they
          have different apperances (e.g. swiming suit on island, versus a
-         footer on mountain. Therefore, x-selectPawnButton excpects a board
-         variable and defaults to 1 for the island board.--}}
+         footer on mountain. Therefore, @todo x-selectPawnButton excpects a
+         board id and defaults to 1 for the island board.--}}
     @section('scripts')
         @php
             // @todo: Can we have all the configuration options for the user as
@@ -15,9 +19,9 @@
             $switcher = [
                 'controlMode' => 2, // default: [1] - automatic mode
                 'scanningSpeed' => 3, // default: [2] - in seconds
-                'automaticSelectionButton' => 'Space',
-                'manualSelectionButton' => 'Space',
-                'manualNavigationButton' => 'Enter',
+                'automaticSelectionButton' => 'Space', // default: [Space]
+                'manualSelectionButton' => 'Space', // default: [Space]
+                'manualNavigationButton' => 'Enter', // default: [Enter]
             ];
         @endphp
         <script>
@@ -38,7 +42,7 @@
                     {{-- Reserved for header navigation buttons.  --}}
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">
-                    <h1 id="currentPageLabel">Διάλεξε πιόνι</h1>
+                    <h1 id="currentPageLabel">{{ __("messages.select_pawn") }}</h1>
                     <p>
                         <strong class="fs-5" id="currentPageDescription">
                             {{--Use `&nbsp;` if no description.--}}

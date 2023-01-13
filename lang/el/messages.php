@@ -50,6 +50,10 @@ return [
     'registration_prompt' => 'Νέος χρήστης;', // New user?
     'stay_online' => 'Μείνετε συνδεδεμένοι',
 
+    /* New game */
+    'new_game' => 'Νέο παιχνίδι',
+    'select_pawn' => 'Διάλεξε πιόνι', // Choose Player 1 Pawn
+
     /* Switcher */
     'switcher' => [
         'break' => 'Διακοπή',

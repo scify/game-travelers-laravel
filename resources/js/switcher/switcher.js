@@ -18,7 +18,7 @@ window.onpageshow = function (e) {
 window.addEventListener("load", switcher);
 
 function switcher() {
-	// Settings Initialisation.
+	// Settings Initialisation
 	let controlMode,
 		scanningSpeed,
 		automaticSelectionButton,
@@ -60,27 +60,15 @@ function switcher() {
 				? window.Switcher.manualNavigationButton
 				: "Enter";
 	} else {
-		// Set defaults if window.Switcher has nothing interesting.
+		// Default parameters if window.Switcher has nothing.
 		controlMode = 1;
 		scanningSpeed = 2;
 		automaticSelectionButton = "Space";
 		manualSelectionButton = "Space";
 		manualNavigationButton = "Enter";
 	}
-
-	// Assigned keys.
-	// Reminder: event.keyCode and event.which are deprecated, therefore we are
-	// relying on the much (less) accurate event.key and event.code, which both
-	// have benefits and drawbacks (@see /resources/js/settings/key-assigner.js).
-	//
-	// Επιλογή or selectionButton selects something aka executes something aka it
-	// is the "GOTO" button. It defaults to [Enter].
-	// For codes @see https://www.toptal.com/developers/keycode/for/enter
 	let selectionButton =
 		controlMode === 1 ? automaticSelectionButton : manualSelectionButton;
-	// Πλοήγηση or navigationButton moves something, does not select and does not
-	// execute. It is something like a CURSOR key. It defaults to [Space].
-	// For codes @see https://www.toptal.com/developers/keycode/for/Space
 	let navigationButton = manualNavigationButton;
 
 	// Configuration
@@ -169,27 +157,17 @@ function switcher() {
 		}
 	}
 
-	function handleSwitchKey(event) {
-		let whichkey;
+	function switcherModal() {
 		let helpText, helpButtons;
-		// Note that even if extremely useful, event.keyCode is deprecated.
-		// Instead we parse the event.key (@see key-assigner.js).
-		if (event.key.length) {
-			const charCode = event.key.charCodeAt(0);
-			if (event.key.length > 1 && charCode < 128) {
-				// Named attribute (e.g. Enter)
-				if (window.SwitcherKeys.escapeList.indexOf(event.code) !== -1) {
-					event.preventDefault();
-					var newDiv = document.createElement("div");
-					newDiv.setAttribute("id", "escapeModal");
-					newDiv.setAttribute("tabindex", "-1");
-					newDiv.setAttribute("class", "modal fade");
-					newDiv.setAttribute("data-bs-backdrop", "static");
-					newDiv.setAttribute("data-bs-keyboard", "false");
-					newDiv.setAttribute("data-bs-focus", "false");
-					if (controlMode === 1) {
-						// Automatic help
-						helpText = `
+		var escapeModal = document.getElementById("escapeModal");
+		if (!escapeModal) {
+			var newDiv = document.createElement("div");
+			newDiv.setAttribute("id", "escapeModal");
+			newDiv.setAttribute("tabindex", "-1");
+			newDiv.setAttribute("class", "modal fade");
+			if (controlMode === 1) {
+				// Automatic help
+				helpText = `
 <p>
 ${window.trans("messages.switcher.help_automatic")}
 </p>
@@ -197,15 +175,15 @@ ${window.trans("messages.switcher.help_automatic")}
 ${window.trans("messages.switcher.help_automatic_button_select")}
 <strong>${selectionButton}</strong>.
 </p>`;
-						helpButtons = `
+				helpButtons = `
 <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="clearInterval(${intervalId});return false">
-	${window.trans("messages.switcher.break")}
+${window.trans("messages.switcher.break")}
 </button>
 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-	${window.trans("messages.switcher.continue")}
+${window.trans("messages.switcher.continue")}
 </button>`;
-					} else {
-						helpText = `
+			} else {
+				helpText = `
 <p>
 ${window.trans("messages.switcher.help_manual_button_navigate")}
 <strong>${navigationButton}</strong>.
@@ -214,36 +192,49 @@ ${window.trans("messages.switcher.help_manual_button_navigate")}
 ${window.trans("messages.switcher.help_manual_button_select")}
 <strong>${selectionButton}</strong>.
 </p>`;
-						helpButtons = `
+				helpButtons = `
 <button type='button' class='btn btn-primary' data-bs-dismiss='modal'>
-	${window.trans("messages.switcher.continue")}
+${window.trans("messages.switcher.continue")}
 </button>`;
-					}
+			}
 
-					newDiv.innerHTML = `
+			newDiv.innerHTML = `
 <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
-		<div class="modal-body">
-		${helpText}
-		</div>
-		<div class="modal-footer">
-		${helpButtons}
-		</div>
+<div class="modal-body">
+${helpText}
+</div>
+<div class="modal-footer">
+${helpButtons}
+</div>
 </div></div>`;
-					document.body.appendChild(newDiv);
+			document.body.appendChild(newDiv);
+		}
 
-					var escapeModal = document.getElementById("escapeModal");
-					var bsEscapeModal =
-						// eslint-disable-next-line no-undef
-						bootstrap.Modal.getOrCreateInstance(escapeModal);
-					bsEscapeModal.show();
-					escapeModal.addEventListener(
-						"hidden.bs.modal",
-						function () {
-							removeSwitcherClasses();
-							bsEscapeModal.dispose();
-						}
-					);
-					return false;
+		var bsEscapeModal =
+			// eslint-disable-next-line no-undef
+			bootstrap.Modal.getOrCreateInstance(escapeModal, {
+				keyboard: false,
+				focus: false,
+				backdrop: "static",
+			});
+		bsEscapeModal.show();
+		escapeModal.addEventListener("hidden.bs.modal", function () {
+			removeSwitcherClasses();
+		});
+		return false;
+	}
+
+	function handleSwitchKey(event) {
+		let whichkey;
+		// Note that even if extremely useful, event.keyCode is deprecated.
+		// Instead we parse the event.key (@see key-assigner.js).
+		if (event.key.length) {
+			const charCode = event.key.charCodeAt(0);
+			if (event.key.length > 1 && charCode < 128) {
+				// Named attribute (e.g. Enter)
+				if (window.SwitcherKeys.escapeList.indexOf(event.code) !== -1) {
+					event.preventDefault();
+					switcherModal();
 				}
 				if (
 					window.SwitcherKeys.forbiddenList.indexOf(event.code) !== -1
@@ -264,9 +255,10 @@ ${window.trans("messages.switcher.help_manual_button_select")}
 			if (whichkey === selectionButton) {
 				event.preventDefault();
 				clearInterval(intervalId); // stop the interval
-				this.click();
 				this.classList.remove(classFocus);
 				this.classList.add(classActive);
+				this.click();
+				return;
 			}
 		} else {
 			// Manual mode.
@@ -281,7 +273,6 @@ ${window.trans("messages.switcher.help_manual_button_select")}
 					} else {
 						nextFocusIndex = currentFocusIndex + 1;
 					}
-					break;
 				}
 			}
 			// Part 1. Navigate to the next element.
@@ -303,8 +294,9 @@ ${window.trans("messages.switcher.help_manual_button_select")}
 				validSwitcherElements[currentFocusIndex].classList.add(
 					classActive
 				);
-				validSwitcherElements[currentFocusIndex].click();
 				window.removeEventListener("keydown", handleSwitchKey);
+				validSwitcherElements[currentFocusIndex].click();
+				return;
 			}
 		}
 	}

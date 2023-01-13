@@ -50,6 +50,10 @@ return [
     'registration_prompt' => 'New user?', // New user?
     'stay_online' => 'Keep me logged-in',
 
+    /* New game */
+    'new_game' => 'New Game',
+    'select_pawn' => 'Choose pawn', // Choose Player 1 Pawn
+
     // Most of the following strings have already been moved to validation as
     // custom rules and have been commented out from this file.
     // @todo Fix password_token_error to somehow inject this:
