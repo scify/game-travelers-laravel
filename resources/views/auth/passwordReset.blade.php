@@ -1,4 +1,4 @@
-<x-layout :title="'Ανάκτηση συνθηματικού | Ταξιδιώτες'">
+<x-layout :title="__('messages.password_reset') . ' | ' . __('messages.app_name')">
     {{-- Note: A generic error alert (#form-alert) is thrown just below the
         form's header in case of any error. --}}
     @section('scripts')
@@ -17,21 +17,16 @@
                     @csrf
                     <div class="form px-0 px-md-6">
                         <div class="form-header p-4 mb-4">
-                            <h1>Ανάκτηση συνθηματικού</h1>
+                            <h1>{{ __('messages.password_reset') }}</h1>
                             <p class="my-4">
-                                Αν δεν θυμάστε το συνθηματικό σας δεν έχετε παρά
-                                να συμπληρώσετε το email σας και εμείς θα σας
-                                στείλουμε οδηγίες για το πώς θα μπορέσετε να το
-                                αλλάξετε.
+                                {{ __('messages.password_reset_description') }}
                             </p>
 
                             {{-- @see https://laravel.com/docs/9.x/validation#quick-displaying-the-validation-errors --}}
                             @if($errors->any())
                             <!-- errors -->
-                            <div class="alert alert-danger" id="form-alert">
-                                Δυστυχώς το email που εισάγατε δεν αντιστοιχεί σε
-                                εγγεγραμμένο χρήστη. Βεβαιωθείτε ότι έχετε εισάγει
-                                σωστά το email και προσπαθήστε ξανά.
+                            <div class="form-alert alert alert-danger" id="form-alert">
+                                {{ __('messages.password_reset_error') }}
                             </div>
                             <!-- errors -->
                             @endif
@@ -56,7 +51,11 @@
                         <!-- / email -->
 
                         <div class="form-actions p-4 text-center">
-                            <button class="btn btn-lg btn-primary text-nowrap responsive-expand" tabindex="2" type="submit">Ανάκτηση συνθηματικού</button>
+                            <button
+                                class="btn btn-lg btn-primary text-nowrap responsive-expand"
+                                tabindex="2"
+                                type="submit"
+                            >{{ __('messages.password_reset') }}</button>
                         </div>
                     </div>
                 </form>

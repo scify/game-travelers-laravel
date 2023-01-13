@@ -1,10 +1,10 @@
-<x-layout :title="'Επιτυχής εκτέλεση ενέργειας | Ταξιδιώτες'">
+<x-layout :title="__('messages.password_reset') . ' | ' . __('messages.app_name')">
     @section('scripts')
     {{-- Optional: Custom JS scripts --}}
     @endsection
 
     <x-success
-        :message="'Το αίτημα σας για αλλαγή συνθηματικού ήταν επιτυχές, δείτε το email που σας στείλαμε!'"
+        :message="__('messages.password_reset_request_success')"
         :url="url('/login')"
     />
 

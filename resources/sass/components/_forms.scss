@@ -1,4 +1,9 @@
-/* Buttons */
+/* Forms */
+.form-alert {
+    ul {
+        padding-top: 1rem;
+    }
+}
 
 // Fields
 .form.is-invalid,
@@ -19,7 +24,7 @@
         &:focus,
         &:focus-visible,
         &:focus-within {
-          box-shadow: inset 0 -0.25rem hsla(var(--trvl-danger-hsl), 0.2);
+            box-shadow: inset 0 -0.25rem hsla(var(--trvl-danger-hsl), 0.2);
         }
     }
     .field-description.big {
@@ -75,7 +80,7 @@ fieldset input[type="radio"]:not(:checked) + label {
     margin-left: 0.35rem;
     margin-right: 0.35rem;
     margin-bottom: 0.1rem; // needed for perfect alignment with other pages.
-    &>.ruler {
+    & > .ruler {
         transition: all 0.15s ease-in-out;
         font-size: 0.9em;
         &.selected {
@@ -119,8 +124,8 @@ input[type="radio"]:checked::before {
     transform: scale(0.7);
 }
 input[type="radio"]:focus {
-   // Importants fights with Bootstrap;
-     box-shadow: none !important;
+    // Importants fights with Bootstrap;
+    box-shadow: none !important;
 }
 input[type="radio"]:focus-visible {
     // Importants fights with Bootstrap;
@@ -128,48 +133,48 @@ input[type="radio"]:focus-visible {
 }
 
 // Inputs: Checkboxes
-input[type=checkbox] {
+input[type="checkbox"] {
     background-color: var(--trvl-btn-bg);
     border-color: var(--trvl-c-text);
     &:checked {
-      border-color: var(--trvl-c-text);
-      background-color: var(--trvl-c-text);
+        border-color: var(--trvl-c-text);
+        background-color: var(--trvl-c-text);
     }
     &:focus {
-      border-color: var(--trvl-c-text);
-      // box-shadow: 0 0 0 0.25rem rgba(var(--trvl-btn-focus-shadow-rgb), 0.55);
-      box-shadow: 0 0 0 0.25em hsla(var(--trvl-shadow-focus-hsl), 0.5);
+        border-color: var(--trvl-c-text);
+        // box-shadow: 0 0 0 0.25rem rgba(var(--trvl-btn-focus-shadow-rgb), 0.55);
+        box-shadow: 0 0 0 0.25em hsla(var(--trvl-shadow-focus-hsl), 0.5);
     }
 }
 
 // Inputs: Text & numeric
 input {
     outline: none; // @TODO: Outlines for focus
-    &:focus:not([type=range]),
-    &:focus-visible:not([type=range]),
-    &:focus-within:not([type=range]) {
+    &:focus:not([type="range"]),
+    &:focus-visible:not([type="range"]),
+    &:focus-within:not([type="range"]) {
         box-shadow: inset 0 -0.25em hsla(var(--trvl-shadow-focus-hsl), 0.4);
     }
     &.underlined {
-      border-bottom: 2px solid var(--trvl-c-text);
-      border-left: none;
-      border-right: none;
-      border-top: none;
-      font-weight: 300; // a little bit less bolder than the normal (400)
-      line-height: 2.5;
-      background-color: var(--trvl-c-background);
+        border-bottom: 2px solid var(--trvl-c-text);
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        font-weight: 300; // a little bit less bolder than the normal (400)
+        line-height: 2.5;
+        background-color: var(--trvl-c-background);
     }
     &.extended {
-      width: 100%;
+        width: 100%;
     }
     &.big {
-      font-size: 2em;
-      line-height: inherit;
-      &:focus,
-      &:focus-visible,
-      &:focus-within {
-        box-shadow: inset 0 -0.15em hsla(var(--trvl-shadow-focus-hsl), 0.4);
-      }
+        font-size: 2em;
+        line-height: inherit;
+        &:focus,
+        &:focus-visible,
+        &:focus-within {
+            box-shadow: inset 0 -0.15em hsla(var(--trvl-shadow-focus-hsl), 0.4);
+        }
     }
 }
 
@@ -178,7 +183,7 @@ legend,
 label {
     font-weight: 600; // make sure we have a regular/normal weight
     &.extended {
-          display: block;
+        display: block;
         padding-bottom: 0.5em;
     }
     &.medium {

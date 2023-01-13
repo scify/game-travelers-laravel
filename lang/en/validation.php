@@ -129,6 +129,18 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
+    // Passwords.
+    // Note that this list is the exact same as the one on Laravel, but it is
+    // included in here for easier translation to other languages.
+    // @see /vendor/laravel/framework/src/Illuminate/Validation/Rules/Password.php
+    'password' =>
+    [
+        'mixed' => 'The :attribute must contain at least one uppercase and one lowercase letter.',
+        'letters' => 'The :attribute must contain at least one letter.',
+        'symbols' => 'The :attribute must contain at least one symbol.',
+        'numbers' => 'The :attribute must contain at least one number.',
+        'uncompromised' => 'The given :attribute has appeared in a data leak. Please choose a different :attribute.',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -145,6 +157,14 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'captcha' => [
+            'numeric' => 'In CAPTCHA, the sum of two numbers must also be a number.',
+            'required' => 'CAPTCHA verification is required.',
+            'size' => 'Wrong CAPTCHA. Please try again.',
+        ],
+        'email' => [
+            'unique' => 'This email is already in use.',
+        ],
     ],
 
     /*
@@ -158,6 +178,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'password' => 'password',
+    ],
 
 ];

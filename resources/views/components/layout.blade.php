@@ -53,6 +53,7 @@
             @include('layout.footer')
         </div>
     </div>
+    @include('layout.footer-scripts')
     @yield('scripts', '') {{-- Optional: JS scripts loaded after DOM is rendered --}}
 </body>
 </html>

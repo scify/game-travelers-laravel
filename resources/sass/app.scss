@@ -296,7 +296,7 @@ section.content {
         color: var(--trvl-c-text);
     }
     @media (max-width: 1199.98px) {
-        min-height: calc(100vh - var(--trvl-header-height));
+        min-height: calc(100vh - var(--trvl-header-height) - 1.5rem);
     }
     // Confirmation link
     a.confirmation-link {
@@ -356,13 +356,10 @@ section.content {
 .offcanvas.is-invalid {
     // enough for at least 2 lines of text as we can't really be responsive.
     --bs-offcanvas-height: 8rem;
-    --bs-offcanvas-bg: #f9c5bf;
+    --bs-offcanvas-padding-x: 2rem;
+    --bs-offcanvas-color: var(--trvl-c-dark);
+    --bs-offcanvas-bg: var(--trvl-danger-light-bg);
     font-weight: 800;
-    .btn-close {
-        width: 1.2em;
-        height: 1.2em;
-        background-size: 1.2em;
-    }
 }
 
 // Custom new utilities

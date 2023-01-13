@@ -30,9 +30,9 @@ return [
         'string'  => 'Το :attribute πρέπει να είναι ανάμεσα σε :min και :max χαρακτήρες.',
         'array'   => 'Το :attribute πρέπει να είναι ανάμεσα σε :min και :max στοιχεία.',
     ],
-    'current_password' => 'The password is incorrect.',
+    'current_password' => 'Το συνθηματικό δεν είναι σωστό.',
     'boolean'              => 'Το πεδίο :attribute πρέπει να είναι σωστό ή λάθος.',
-    'confirmed'            => 'Η επιβεβαίωση  :attribute δεν είναι ίδια.',
+    'confirmed'            => 'Το :attribute δεν είναι ίδιο με το :attribute επαλήθευσης.',
     'date'                 => 'Το :attribute δεν είναι έγκυρη ημερομηνία.',
     'date_format'          => 'Το :attribute δεν ταιριάζει στη μορφή :format.',
     'date_equals' => 'The :attribute must be a date equal to :date.',
@@ -43,7 +43,7 @@ return [
     'digits_between'       => 'Το :attribute πρέπει να είναι ανάμεσα σε :min και :max ψηφία.',
     'dimensions'           => 'Το :attribute έχει μη έγκυρες διαστάσεις εικόνας.',
     'distinct'             => 'Το πεδίο :attribute έχει διπλή τιμή.',
-    'email'                => 'Το :attribute πρέπει να είναι έγκυρη διεύθυνση email.',
+    'email'                => 'Το :attribute πρέπει να είναι μια έγκυρη διεύθυνση ηλεκτρονικής αλληλογραφίας.',
     'ends_with' => 'The :attribute must end with one of the following: :values.',
     'enum' => 'The selected :attribute is invalid.',
     'exists'               => 'Το επιλεγμένο :attribute δεν είναι έγκυρο.',
@@ -72,35 +72,35 @@ return [
     'lt' => [
         'numeric' => 'The :attribute must be less than :value.',
         'file' => 'The :attribute must be less than :value kilobytes.',
-        'string' => 'The :attribute must be less than :value characters.',
+        'string' => 'Το :attribute πρέπει να είναι μικρότερο από :value χαρακτήρες.',
         'array' => 'The :attribute must have less than :value items.',
     ],
     'lte' => [
         'numeric' => 'The :attribute must be less than or equal to :value.',
         'file' => 'The :attribute must be less than or equal to :value kilobytes.',
-        'string' => 'The :attribute must be less than or equal to :value characters.',
+        'string' => 'Το :attribute πρέπει να είναι ίσο ή μικρότερο από :value χαρακτήρες.',
         'array' => 'The :attribute must not have more than :value items.',
     ],
     'mac_address' => 'The :attribute must be a valid MAC address.',
     'max' => [
         'numeric' => 'The :attribute must not be greater than :max.',
         'file' => 'The :attribute must not be greater than :max kilobytes.',
-        'string' => 'The :attribute must not be greater than :max characters.',
+        'string' => 'Το :attribute δεν πρέπει να είναι μεγαλύτερο από :max χαρακτήρες.',
         'array' => 'The :attribute must not have more than :max items.',
     ],
     'mimes' => 'The :attribute must be a file of type: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
-        'numeric' => 'The :attribute must be at least :min.',
+        'numeric' => 'Το :attribute πρέπει να είναι τουλάχιστον :min.',
         'file' => 'The :attribute must be at least :min kilobytes.',
-        'string' => 'The :attribute must be at least :min characters.',
+        'string' => 'Το :attribute πρέπει να έχει τουλάχιστον :min χαρακτήρες.',
         'array' => 'The :attribute must have at least :min items.',
     ],
     'multiple_of' => 'The :attribute must be a multiple of :value.',
     'not_in' => 'The selected :attribute is invalid.',
     'not_regex' => 'The :attribute format is invalid.',
-    'numeric' => 'The :attribute must be a number.',
-    'password' => 'The password is incorrect.',
+    'numeric' => 'To :attribute πρέπει να είναι αριθμός.',
+    'password' => 'Το συνθηματικό είναι λάνθασμένο.',
     'present' => 'The :attribute field must be present.',
     'prohibited' => 'The :attribute field is prohibited.',
     'prohibited_if' => 'The :attribute field is prohibited when :other is :value.',
@@ -129,6 +129,18 @@ return [
     'uploaded'             => 'Η φόρτωση του :attribute απέτυχε.',
     'url'                  => 'Η μορφή του :attribute δεν είναι έγκυρη.',
     'uuid' => 'The :attribute must be a valid UUID.',
+    // Passwords.
+    // Note that this list is the exact same as the one on Laravel, but it is
+    // included in here for easier translation to other languages.
+    // @see /vendor/laravel/framework/src/Illuminate/Validation/Rules/Password.php
+    'password' =>
+    [
+        'mixed' => 'Το :attribute πρέπει να περιέχει τουλάχιστον ένα κεφαλαίο και ένα μικρό γράμμα.',
+        'letters' => 'Το :attribute πρέπει να περιέχει τουλάχιστον ένα γράμμα.',
+        'symbols' => 'Το :attribute πρέπει να περιέχει τουλάχιστον ένα σύμβολο.',
+        'numbers' => 'Το :attribute πρέπει να περιέχει τουλάχιστον έναν αριθμό.',
+        'uncompromised' => 'Το :attribute που χρησιμοποιήσατε έχει συμπεριληφθεί σε δεδομένα που έχουν διαρρεύσει δημόσια (data leak). Για λόγους ασφαλείας χρησιμοποιήστε ένα διαφορετικό :attribute.',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -145,6 +157,14 @@ return [
         'attribute-name' => [
             'rule-name' => 'προσαρμοσμένο-μήνυμα',
         ],
+        'captcha' => [
+            'numeric' => 'Το άρθροισμα των αριθμών στην επιβεβαίωση ασφαλείας πρέπει να είναι ένας αριθμός.',
+            'required' => 'Η επιβεβαίωση ασφαλείας είναι υποχρεωτική.',
+            'size' => 'Δεν έχετε υπολογίσει σωστά το άρθροισμα των αριθμών για την επιβεβαίωση ασφαλείας.',
+        ],
+        'email' => [
+            'unique' => 'Υπάρχει ήδη λογαριασμός με αυτό το email.',
+        ],
     ],
 
     /*
@@ -158,6 +178,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'password' => 'συνθηματικό',
+    ],
 
 ];

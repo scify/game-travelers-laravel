@@ -1,24 +1,25 @@
-{{--
-    This container extends to the full width/height of the page, even though it
-    is is served as a component in order to be reusable. And yes, the circular
-    button is meant to be interpreted as a sun/moon in context.
+{{--This container extends to the full width/height of the page, even though it
+    is is served as a component in order to be reusable. From a design point-of-
+    view, the large circular button is meant to be interpreted in context as the
+    sun or the moon :).
 
-    Instructions for use:
-    @see <passwordResetComplete> for an actual example:
-    <x-success
-        :message="'Το νέο συνθηματικό αποθηκεύτηκε επιτυχώς!'"
-        :url="url('/login')"
-    />
+    Parameters:
+    $url (Required)
+    $message (Optional, defaults to "Congratulations!")
+    $alt (Optional, defaults to "Continue")
 
-    Note: The image $alt could also be customised (defaults to "συνέχεια").
-    Note: The animation does not run on "prefers-reduced-motion" setups.
---}}
+    Note: The animation is disabled on "prefers-reduced-motion" setups. --}}
 <div class="confirmation-page background background-mountains container-xxl px-4">
     <div class="d-flex justify-content-center text-center">
         <div class="px-3 pt-5">
-            <h1>{{ $message ?? 'Συγχαρητήρια!' }}</h1>
-            <div class="d-flex justify-content-center">
-                <a href="{{ $url ?? '/' }}" class="confirmation-link confirmation-animation" alt="{{ $alt ?? 'συνέχεια' }}" tabindex="1">
+            <h1>{{ $message ?? __("messages.congratulations") . '!' }}</h1>
+            <div class="d-flex justify-content-center pb-6 pb-sm-0">
+                <a
+                    href="{{ $url ?? '/' }}"
+                    class="confirmation-link confirmation-animation"
+                    alt="{{ $alt ?? __('messages.continue') }}"
+                    tabindex="1"
+                >
                     <img src="{{ asset('images/icons/checkmark.svg') }}" width="129" height="96" alt="check-mark" />
                 </a>
             </div>

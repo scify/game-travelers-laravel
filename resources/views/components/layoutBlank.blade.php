@@ -21,7 +21,7 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
     @isset($hasVue)<script src="{{ mix('js/vue.js') }}" defer></script>@endisset
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    @yield('css') {{-- Optional: Additional CSS stylesheets, if needed. --}}
+    @yield('css', '') {{-- Optional: Additional CSS stylesheets, if needed. --}}
 </head>
 <body>
     <div class="travelers">
@@ -31,6 +31,7 @@
             </section>
         </div>
     </div>
+    @include('layout.footer-scripts')
     @yield('scripts', '') {{-- Optional: JS scripts loaded after DOM is rendered --}}
 </body>
 </html>

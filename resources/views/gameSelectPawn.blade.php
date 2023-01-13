@@ -8,6 +8,22 @@
          footer on mountain. Therefore, x-selectPawnButton excpects a board
          variable and defaults to 1 for the island board.--}}
     @section('scripts')
+        @php
+            // @todo: Can we have all the configuration options for the user as
+            // an array on all the pages that require the Switcher.js (tm) in
+            // order to do something like that: ?
+            $switcher = [
+                'controlMode' => 2, // default: [1] - automatic mode
+                'scanningSpeed' => 3, // default: [2] - in seconds
+                'automaticSelectionButton' => 'Space',
+                'manualSelectionButton' => 'Space',
+                'manualNavigationButton' => 'Enter',
+            ];
+        @endphp
+        <script>
+            window.Switcher = {{ Js::from($switcher)}};
+        </script>
+        <script src="{{ mix('js/functions/switcher.js') }}" defer></script>
     @endsection
 
     <form method="post"

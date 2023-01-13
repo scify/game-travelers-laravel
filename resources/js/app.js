@@ -12,6 +12,8 @@
  */
 
 require("./bootstrap");
+require("./lang.js");
+require("./keys.js");
 
 // import {AudioPlayer} from 'audio-player.js'
 // window.AudioPlayer = AudioPlayer;

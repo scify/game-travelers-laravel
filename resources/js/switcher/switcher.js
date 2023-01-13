@@ -1,34 +1,87 @@
 /**
  * Switcher Controller aka Διακόπτης 0.1.0
- *
+ * @see ../../views/layout/footer-scripts.blade.php
+ * @see ../lang.js
  */
 
+console.log(window.SwitcherKeys);
+
 // Settings Initialisation.
+let controlMode,
+	scanningSpeed,
+	automaticSelectionButton,
+	manualSelectionButton,
+	manualNavigationButton;
 
-// Control mode.
-let controlMode = 2; // Automatic (default: [1]) or Manual [2].
-
-// Automatic scanning speed.
-// Sensible defaults are used if values haven't been set via the Blade template:
-let scanningSpeed = 2; // Default automatic scanning switch in seconds [2].
+if (window.Switcher instanceof Object) {
+	controlMode =
+		!isNaN(parseInt(window.Switcher.controlMode)) &&
+		(parseInt(window.Switcher.controlMode) === 1 ||
+			parseInt(window.Switcher.controlMode) === 2)
+			? parseInt(window.Switcher.controlMode)
+			: 1;
+	scanningSpeed =
+		!isNaN(parseInt(window.Switcher.scanningSpeed)) &&
+		parseInt(window.Switcher.scanningSpeed) >= 1 &&
+		parseInt(window.Switcher.scanningSpeed) <= 10
+			? parseInt(window.Switcher.scanningSpeed)
+			: 2;
+	automaticSelectionButton =
+		window.Switcher.automaticSelectionButton !== undefined &&
+		window.SwitcherKeys.allowedList.includes(
+			window.Switcher.automaticSelectionButton
+		)
+			? window.Switcher.automaticSelectionButton
+			: "Space";
+	manualSelectionButton =
+		window.Switcher.manualSelectionButton !== undefined &&
+		window.SwitcherKeys.allowedList.includes(
+			window.Switcher.manualSelectionButton
+		)
+			? window.Switcher.manualSelectionButton
+			: "Space";
+	manualNavigationButton =
+		window.Switcher.manualNavigationButton !== undefined &&
+		window.SwitcherKeys.allowedList.includes(
+			window.Switcher.manualNavigationButton
+		)
+			? window.Switcher.manualNavigationButton
+			: "Enter";
+} else {
+	// Set defaults if window.Switcher has nothing interesting.
+	controlMode = 1;
+	scanningSpeed = 2;
+	automaticSelectionButton = "Space";
+	manualSelectionButton = "Space";
+	manualNavigationButton = "Enter";
+}
 
 // Assigned keys.
 // Reminder: event.keyCode and event.which are deprecated, therefore we are
 // relying on the much (less) accurate event.key and event.code, which both
 // have benefits and drawbacks (@see /resources/js/settings/key-assigner.js).
 //
-// Note: These definitions (Επιλογή / Πλοήγηση) make me dizzy:
 // Επιλογή or selectionButton selects something aka executes something aka it
-// is the "GOTO" button and makes much more sense to me if it defaults to Enter.
+// is the "GOTO" button. It defaults to [Enter].
 // For codes @see https://www.toptal.com/developers/keycode/for/enter
-let selectionButton = "Enter"; // Default key for "Selection" (Επιλογή) [Enter].
+let selectionButton =
+	controlMode === 1 ? automaticSelectionButton : manualSelectionButton;
 // Πλοήγηση or navigationButton moves something, does not select and does not
-// execute. It is something like a CURSOR key. It makes much more sense to
-// make it use Space. You can test those buttons in action if you want to.
+// execute. It is something like a CURSOR key. It defaults to [Space].
 // For codes @see https://www.toptal.com/developers/keycode/for/Space
-let navigationButton = "Space"; // Default key for "Navigation" (Πλοήγηση) [Space].
+let navigationButton = manualNavigationButton;
 
-// Override default values with the ones from the Blade template:
+// Override default values with the ones from the Blade template, if available:
+if (typeof window.Switcher !== "undefined") {
+	controlMode = parseInt(window.Switcher.controlMode);
+	if (isNaN(controlMode) || (controlMode !== 1 && controlMode !== 2)) {
+		controlMode = 1;
+	}
+	scanningSpeed = parseInt(window.Switcher.scanningSpeed);
+	if (isNaN(scanningSpeed) || scanningSpeed < 1 || scanningSpeed > 8) {
+		scanningSpeed = 2;
+	}
+}
 if (typeof window.controlMode !== "undefined") {
 	controlMode = parseInt(window.controlMode);
 	if (isNaN(controlMode)) {
@@ -134,10 +187,6 @@ window.addEventListener("load", function () {
 
 	function handleSwitchKey(event) {
 		let whichkey;
-		// @todo: Tab should be handled a little bit different, but for now...
-		const escapeList = ["Escape", "Tab"];
-		// @todo: Add more buttons to the Forbidden list?
-		const forbiddenList = ["Escape", "Tab", "ShiftLeft"];
 		let helpText, helpButtons;
 		// Note that even if extremely useful, event.keyCode is deprecated.
 		// Instead we parse the event.key (@see key-assigner.js).
@@ -145,7 +194,7 @@ window.addEventListener("load", function () {
 			const charCode = event.key.charCodeAt(0);
 			if (event.key.length > 1 && charCode < 128) {
 				// Named attribute (e.g. Enter)
-				if (escapeList.indexOf(event.code) !== -1) {
+				if (window.SwitcherKeys.escapeList.indexOf(event.code) !== -1) {
 					event.preventDefault();
 					var newDiv = document.createElement("div");
 					newDiv.setAttribute("id", "escapeModal");
@@ -155,12 +204,36 @@ window.addEventListener("load", function () {
 					newDiv.setAttribute("data-bs-keyboard", "false");
 					newDiv.setAttribute("data-bs-focus", "false");
 					if (controlMode === 1) {
-						helpText = `<p>Για προσωρινή διακοπή της αυτόματης σάρωσης επιλέξτε «Διακοπή». Αν επιλέξετε «Συνέχεια» η αυτόματη σάρωση θα συνεχιστεί.</p><p>Υπενθυμίζεται ότι η επιλογή της υποδεδειγμένης ενέργειας πραγματοποιείται με το πάτημα του πλήκτρου <strong>${selectionButton}</strong>.</p>`;
-						helpButtons = `<button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="clearInterval(${intervalId});return false">Διακοπή</button><button type="button" class="btn btn-primary" data-bs-dismiss="modal">Συνέχεια</button>`;
+						// Automatic help
+						helpText = `
+<p>
+${window.trans("messages.switcher.help_automatic")}
+</p>
+<p>
+${window.trans("messages.switcher.help_automatic_button_select")}
+<strong>${selectionButton}</strong>.
+</p>`;
+						helpButtons = `
+<button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="clearInterval(${intervalId});return false">
+	${window.trans("messages.switcher.break")}
+</button>
+<button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+	${window.trans("messages.switcher.continue")}
+</button>`;
 					} else {
-						helpText = `<p>Η μετάβαση στην επόμενη διαθέσιμη επιλογή γίνεται με το πλήκτρο <strong>${navigationButton}</strong>.</p> <p>Η επικύρωση της υποδεδειγμένης επιλογής γίνεται με το πλήκτρο <strong>${selectionButton}</strong>.</p>`;
-						helpButtons =
-							"<button type='button' class='btn btn-primary' data-bs-dismiss='modal'>Συνέχεια</button>";
+						helpText = `
+<p>
+${window.trans("messages.switcher.help_manual_button_navigate")}
+<strong>${navigationButton}</strong>.
+</p>
+<p>
+${window.trans("messages.switcher.help_manual_button_select")}
+<strong>${selectionButton}</strong>.
+</p>`;
+						helpButtons = `
+<button type='button' class='btn btn-primary' data-bs-dismiss='modal'>
+	${window.trans("messages.switcher.continue")}
+</button>`;
 					}
 
 					newDiv.innerHTML = `
@@ -188,7 +261,9 @@ window.addEventListener("load", function () {
 					);
 					return false;
 				}
-				if (forbiddenList.indexOf(event.code) !== -1) {
+				if (
+					window.SwitcherKeys.forbiddenList.indexOf(event.code) !== -1
+				) {
 					return false;
 				}
 				whichkey = event.code;

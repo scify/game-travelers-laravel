@@ -1,4 +1,4 @@
-<x-layout :title="'Αλλαγή συνθηματικού | Ταξιδιώτες'">
+<x-layout :title="__('messages.password_change'). ' | ' . __('messages.app_name')">
     {{-- Note: A generic error alert (#form-alert) is thrown just below the
         form's header in case of any error and the password fields are also
         highlighted just in case... --}}
@@ -16,43 +16,22 @@
                 <!-- form -->
                 <form method="post" action="{{ route('password.update') }}">
                     @csrf
+
                     <div class="form px-0 px-md-6">
                         <div class="form-header p-4 mb-4">
-                            <h1>Αλλαγή συνθηματικού</h1>
+                            <h1>{{ __("messages.password_change") }}</h1>
                             <p class="my-4">
-                                Εισάγετε ένα νέο συνθηματικό το οποίο θα
-                                μπορείτε να χρησιμοποιείτε από εδώ και στο εξής
-                                για τη σύνδεσή σας στους Ταξιδιώτες.
+                                {{ __("messages.password_new_description") }}
                             </p>
-
                             {{-- @see https://laravel.com/docs/9.x/validation#quick-displaying-the-validation-errors --}}
                             @if($errors->any())
                             <!-- errors -->
-                            <div class="alert alert-danger" id="form-alert">
-                                Για να ολοκληρωθεί επιτυχώς η διαδικασία θα πρέπει
-                                να συμπληρώσετε τα πεδία σύμφωνα με τις σχετικές
-                                υποδείξεις:
+                            <div class="form-alert alert alert-danger" id="form-alert">
+                                {{ __("messages.error_form") }}
                                 <ul>
+                                    {{-- Note: @see messages.password_token_error --}}
                                     @foreach ($errors->all() as $error)
-                                        @if ($error == "The email has already been taken.")
-                                            <li>Υπάρχει ήδη λογαριασμός με αυτό το email.</li>
-                                        @elseif($error == "The password must be at least 8 characters.")
-                                            <li>Ο κωδικός πρέπει να είναι τουλάχιστον 8 χαρακτήρες.</li>
-                                        @elseif($error == "The password must contain at least one letter.")
-                                            <li>Ο κωδικός πρέπει να περιέχει τουλάχιστον ένα γράμμα.</li>
-                                        @elseif($error == "The password must contain at least one symbol.")
-                                            <li>Ο κωδικός πρέπει να περιέχει τουλάχιστον ένα σύμβολο.</li>
-                                        @elseif($error == "The password must contain at least one number.")
-                                            <li>Ο κωδικός πρέπει να περιέχει τουλάχιστον έναν αριθμό.</li>
-                                        @elseif($error == "The password confirmation does not match.")
-                                            <li>Οι δυο κωδικοί δεν είναι ίδιοι.</li>
-                                        @elseif($error == "This password reset token is invalid.")
-                                            <li>Tο token έχει λήξει. <a href="{{ route('password.request') }}">Ζητήστε πάλι αλλαγή κωδικού.</a></li>
-                                        @elseif(Str::startsWith($error, "The captcha"))
-                                            <li>To άθροισμα είναι λάθος!</li>
-                                        @else
-                                            <li>{{ $error }}</li>
-                                        @endif
+                                        <li>{{ $error }}</li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -69,7 +48,7 @@
                         ">
                             <div class="row">
                                 <div class="field col-lg-6">
-                                    <label class="field-label extended" for="password">Νέο συνθηματικό</label>
+                                    <label class="field-label extended" for="password">{{ __("messages.password_new") }}</label>
                                     <input
                                         class="field-input underlined extended"
                                         type="password"
@@ -83,16 +62,18 @@
                                         autocapitalize="off"
                                         spellcheck="false"
                                         aria-required="true"
-                                        aria-label="Επιθυμητός κωδικός πρόσβασης"
+                                        aria-label="{{ __('messages.password_new_label') }}"
                                         aria-describedby="password-description"
                                         tabindex="1"
                                         id="password"
                                     />
                                 </div>
+
                                 <input type="hidden" name="token" value="{{ request()->route('token') }}">
-                                <input type="hidden" name="email" value="{{ request()->request->all()['email'] }}">
+                                <input type="hidden" name="email" value="{{ request()->all()['email'] }}">
+
                                 <div class="field col-lg-6 pt-4 pt-lg-0 ">
-                                    <label class="field-label extended text-nowrap text-truncate" for="password_confirmation">Επαλήθευση νέου συνθηματικού</label>
+                                    <label class="field-label extended text-nowrap text-truncate" for="password_confirmation">{{ __("messages.password_new_validation") }}</label>
                                     <input
                                         class="field-input underlined extended"
                                         type="password"
@@ -106,7 +87,7 @@
                                         autocapitalize="off"
                                         spellcheck="false"
                                         aria-required="true"
-                                        aria-label="Επαλήθευση επιθυμητού κωδικού πρόσβασης"
+                                        aria-label="{{ __('messages.password_new_validation_label') }}"
                                         aria-describedby="password-description"
                                         tabindex="2"
                                         id="password_confirmation"
@@ -115,14 +96,18 @@
                             </div>
                             <div class="row">
                                 <div class="field-description" id="password-description">
-                                    Χρησιμοποιείστε 8 ή περισσότερους χαρακτήρες με έναν συνδυασμό από τουλάχιστον ένα γράμμα και αριθμό.
+                                    {{ __("messages.password_rules") }}
                                 </div>
                             </div>
                         </div>
                         <!-- passwords -->
 
                         <div class="form-actions p-4 text-center">
-                            <button class="btn btn-lg btn-primary text-nowrap responsive-expand" tabindex="3" type="submit">Αλλαγή συνθηματικού</button>
+                            <button
+                                class="btn btn-lg btn-primary text-nowrap responsive-expand"
+                                tabindex="3"
+                                type="submit"
+                            >{{ __("messages.password_change") }}</button>
                         </div>
                     </div>
                 </form>

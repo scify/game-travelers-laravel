@@ -56,13 +56,21 @@
 }
 
 // Close button adjustments
-
 .btn-close {
     opacity: 0.8;
     background-size: 18px 18px;
 }
 .btn-close:hover {
     opacity: 1;
+}
+// Off-canvas button close adjustments
+.offcanvas-header .btn-close {
+    width: 1.4em;
+    height: 1.4em;
+    // background-size: 1.4em;
+    background: transparent
+        url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z' style='stroke-width: 1.5;' /%3e%3c/svg%3e")
+        center/1.4em auto no-repeat;
 }
 
 // Round button

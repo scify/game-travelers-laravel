@@ -23,10 +23,12 @@
     background-image: url("/images/backgrounds/bg-head-dash-2.png");
     background-repeat: no-repeat;
     background-position: 30% 60%;
-    // background-position-y: bottom;
-    // background-position-x: center;
     background-size: 1370px 142px;
     min-height: 195px;
+    @media (max-width: 1399.98px) {
+        background-position-y: bottom;
+        background-position-x: center;
+    }
 }
 
 /*
