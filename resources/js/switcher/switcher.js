@@ -208,8 +208,9 @@ ${helpButtons}
 </div>
 </div></div>`;
 			document.body.appendChild(newDiv);
+			escapeModal = newDiv;
 		}
-
+		console.log("before");
 		var bsEscapeModal =
 			// eslint-disable-next-line no-undef
 			bootstrap.Modal.getOrCreateInstance(escapeModal, {
