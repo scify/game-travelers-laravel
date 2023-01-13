@@ -4,7 +4,7 @@
  * @see ../lang.js
  */
 
-// Blurs any items that have focus.
+// Blurs any items with focus.
 window.onpageshow = function (e) {
 	if (e.persisted) {
 		const allElements = document.querySelectorAll("*");
@@ -83,34 +83,9 @@ function switcher() {
 	// For codes @see https://www.toptal.com/developers/keycode/for/Space
 	let navigationButton = manualNavigationButton;
 
-	// Override default values with the ones from the Blade template, if available:
-	if (typeof window.Switcher !== "undefined") {
-		controlMode = parseInt(window.Switcher.controlMode);
-		if (isNaN(controlMode) || (controlMode !== 1 && controlMode !== 2)) {
-			controlMode = 1;
-		}
-		scanningSpeed = parseInt(window.Switcher.scanningSpeed);
-		if (isNaN(scanningSpeed) || scanningSpeed < 1 || scanningSpeed > 8) {
-			scanningSpeed = 2;
-		}
-	}
-	if (typeof window.controlMode !== "undefined") {
-		controlMode = parseInt(window.controlMode);
-		if (isNaN(controlMode)) {
-			controlMode = 1;
-		}
-	}
-	if (typeof window.scanningSpeed !== "undefined") {
-		scanningSpeed = parseInt(window.scanningSpeed);
-		if (isNaN(scanningSpeed)) {
-			scanningSpeed = 2;
-		}
-	}
-	// @todo: handle the keys - so far it works with the default ones.
-
 	// Configuration
-	// Add delay for CSS transitions on top of the defined scanningSpeed. This value
-	// for now is hardcoded, as all the CSS transitions are set to 300ms.
+	// Add delay for CSS transitions on top of the defined scanningSpeed. This
+	// value for now is hardcoded, as all the CSS transitions are set to 300ms.
 	const transitionSpeed = 300; // in milisecconds
 	const classFocus = "switcher-focus"; // Focus switcher CSS class
 	const classActive = "switcher-active"; // Active switcher CSS class
@@ -188,8 +163,6 @@ function switcher() {
 			let currentFocusIndex = 0;
 			validSwitcherElements[currentFocusIndex].focus();
 			validSwitcherElements[currentFocusIndex].classList.add(classFocus);
-			// Navigation Button (default: Space) moves to next option.
-			// Selection Button (default: Enter) clicks a highlighted option.
 			// Note: Keydown for immediate reponse, instead of the keyup used
 			// on key-assigner.js.
 			window.addEventListener("keydown", handleSwitchKey);
