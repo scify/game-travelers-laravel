@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Repository\Game\GameRepository;
 use App\Repository\Player\PlayerRepository;
 use Illuminate\Http\Request;
-use Cookie;
 
 class SetupGameController extends Controller
 {
@@ -139,6 +138,6 @@ class SetupGameController extends Controller
         if ($game_id == null)
             return abort(403, 'Unauthorized action.');
         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
-        return \Redirect::route('dummy.logout');
+        return \Redirect::route('board', [$player_id, $game_id]);
     }
 }

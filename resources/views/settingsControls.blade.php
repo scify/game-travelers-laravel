@@ -34,7 +34,7 @@
                     <h1 id="currentPageLabel">Ρυθμίσεις πλοήγησης</h1>
                     <p>
                         <strong id="currentPageDescription">
-                            Επίλεξε τον τρόπο με τον οποίο ο παίκτης <em>PLACEHOLDER</em> θα πλοηγείται στο παιχνίδι. {{-- Player Name goes here. --}}
+                            Επίλεξε τον τρόπο με τον οποίο ο παίκτης <em>{{ $name }}</em> θα πλοηγείται στο παιχνίδι.
                         </strong>
                     </p>
                 </div>

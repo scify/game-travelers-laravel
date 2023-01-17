@@ -34,7 +34,7 @@
                     <h1 id="currentPageLabel">Ρυθμίσεις δυσκολίας</h1>
                     <p>
                         <strong id="currentPageDescription">
-                            Επίλεξε βαθμό δυσκολίας για τον παίκτη <em>PLACEHOLDER</em>. {{-- Player Name goes here? Somewhere? Where? --}}
+                            Επίλεξε βαθμό δυσκολίας για τον παίκτη <em> {{ $name }}</em>.
                         </strong>
                     </p>
                 </div>

@@ -4,6 +4,7 @@
  * @file
  * Contains App's web routes.
  */
+
 use App\Http\Middleware\EnsureIdsAreValid;
 use App\Models\User;
 use App\Notifications\UserRegistered;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SetupGameController;
+use App\Http\Controllers\BoardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -169,4 +171,6 @@ Route::middleware('auth')->group(function () {
     Route::get('logout', function () {
         return view('logoutDummy');
     })->name('dummy.logout');
+
+    Route::get('board/{player_id}/{game_id}', [BoardController::class, 'play'])->name('board')->middleware(EnsureIdsAreValid::class);
 });

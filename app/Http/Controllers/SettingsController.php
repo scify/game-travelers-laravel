@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Repository\Player\PlayerRepository;
 use Illuminate\Http\Request;
-use Cookie;
 
 class SettingsController extends Controller
 {
@@ -126,7 +125,7 @@ class SettingsController extends Controller
         \View::share('avatarName', $avatarName);
         \View::share('playerName', $name);
         \View::share('showSettings', true);
-        return view('settingsControls', ["control_mode" => $control_mode, "control_auto_select" => $control_auto_select, "control_manual_select" => $control_manual_select, "control_manual_nav" => $control_manual_nav, "help_after_tries" => $help_after_tries, "scanning_speed" => $scanning_speed]);
+        return view('settingsControls', ['name' => $name, "control_mode" => $control_mode, "control_auto_select" => $control_auto_select, "control_manual_select" => $control_manual_select, "control_manual_nav" => $control_manual_nav, "help_after_tries" => $help_after_tries, "scanning_speed" => $scanning_speed]);
     }
 
     public function controlsSave(Request $request, int $player_id, string $back_route, int $game_id)
@@ -166,7 +165,7 @@ class SettingsController extends Controller
         \View::share('avatarName', $avatarName);
         \View::share('playerName', $name);
         \View::share('showSettings', true);
-        return view('settingsDifficulty', ['dice_type' => $dice_type, 'board_size' => $board_size, 'difficulty' => $difficulty, 'movement_mode' => $movement_mode]);
+        return view('settingsDifficulty', ['name' => $name, 'dice_type' => $dice_type, 'board_size' => $board_size, 'difficulty' => $difficulty, 'movement_mode' => $movement_mode]);
     }
 
     public function difficultySave(Request $request, int $player_id, string $back_route, int $game_id)
