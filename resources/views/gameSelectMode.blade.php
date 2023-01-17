@@ -45,19 +45,19 @@
                     :comingsoon=null {{--Προσεχώς: true / null (default)--}}
                 />
                 <x-selectModeButton
-                    :asset="'mode-double'"
-                    :title="'Διπλό'"
-                    :mode=2
-                    :alt="'Διπλό παιχνίδι'"
-                    :tabindex=2
-                    :comingsoon=true {{--Προσεχώς: true / null (default)--}}
-                />
-                <x-selectModeButton
                     :asset="'mode-pc'"
                     :title="'Με υπολογιστή'"
                     :mode=3
                     :alt="'Παιχνίδι με υπολογιστή'"
                     :tabindex=3
+                    :comingsoon=null {{--Προσεχώς: true / null (default)--}}
+                />
+                <x-selectModeButton
+                    :asset="'mode-double'"
+                    :title="'Διπλό'"
+                    :mode=2
+                    :alt="'Διπλό παιχνίδι'"
+                    :tabindex=2
                     :comingsoon=true {{--Προσεχώς: true / null (default)--}}
                 />
             </div>

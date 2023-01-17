@@ -18,7 +18,7 @@
         <script src="{{ mix('js/functions/switcher.js') }}" defer></script>
     @endsection
     <form method="post"
-        action="{{ route('select.pawn', [ request()->player_id, request()->from, request()->game_id ]) }}"
+        action="{{ route('select.pawn2', [ request()->player_id, request()->from, request()->game_id ]) }}"
     >
         @csrf
 
@@ -29,7 +29,7 @@
                     {{-- Reserved for header navigation buttons.  --}}
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">
-                    <h1 id="currentPageLabel">{{ __("messages.select_pawn") }}</h1>
+                    <h1 id="currentPageLabel">{{ __("messages.select_pawn_2") }}</h1>
                     <p>
                         <strong class="fs-5" id="currentPageDescription">
                             {{--Use `&nbsp;` if no description.--}}
@@ -50,57 +50,64 @@
                     :asset="'pawn-iasonas'"
                     :title="'Ιάσωνας'"
                     :pawn=1
-                    :board={{ $board }}
+                    :board=$board
                     :alt="'Προεπισκόπηση πιονιού Ιάσωνα'"
                     :tabindex=1
+                    :pawn-id-1=$pawn_id_1
                 />
                 <x-selectPawnButton
                     :asset="'pawn-myrto'"
                     :title="'Μυρτώ'"
                     :pawn=2
-                    :board={{ $board }} {{-- PLACEHOLDER for board [default: 1] --}}
+                    :board=$board
                     :alt="'Προεπισκόπηση πιονιού Μυρτούς'"
                     :tabindex=2
+                    :pawn-id-1=$pawn_id_1
                 />
                 <x-selectPawnButton
                     :asset="'pawn-katerina'"
                     :title="'Κατερίνα'"
                     :pawn=3
-                    :board={{ $board }} {{-- PLACEHOLDER for board [default: 1] --}}
+                    :board=$board
                     :alt="'Προεπισκόπηση πιονιού Κατερίνας'"
                     :tabindex=3
+                    :pawn-id-1=$pawn_id_1
                 />
                 <x-selectPawnButton
                     :asset="'pawn-dimitris'"
                     :title="'Δημήτρης'"
                     :pawn=4
-                    :board={{ $board }} {{-- PLACEHOLDER for board [default: 1] --}}
+                    :board=$board
                     :alt="'Προεπισκόπηση πιονιού Δημήτρη'"
                     :tabindex=4
+                    :pawn-id-1=$pawn_id_1
                 />
                 <x-selectPawnButton
                     :asset="'pawn-vasilis'"
                     :title="'Βασίλης'"
                     :pawn=5
-                    :board={{ $board }} {{-- PLACEHOLDER for board [default: 1] --}}
+                    :board=$board
                     :alt="'Προεπισκόπηση πιονιού Βασίλη'"
                     :tabindex=5
+                    :pawn-id-1=$pawn_id_1
                 />
                 <x-selectPawnButton
                     :asset="'pawn-zoumpoulia'"
                     :title="'Ζουμπουλία'"
                     :pawn=6
-                    :board={{ $board }} {{-- PLACEHOLDER for board [default: 1] --}}
+                    :board=$board
                     :alt="'Προεπισκόπηση πιονιού Ζουμπουλίας'"
                     :tabindex=6
+                    :pawn-id-1=$pawn_id_1
                 />
                 <x-selectPawnButton
                     :asset="'pawn-vrasidas'"
                     :title="'Βρασίδας'"
                     :pawn=7
-                    :board={{ $board }}
+                    :board=$board
                     :alt="'Προεπισκόπηση πιονιού Βρασίδα'"
                     :tabindex=7
+                    :pawn-id-1=$pawn_id_1
                 />
 
             </div>

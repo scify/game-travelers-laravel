@@ -53,7 +53,7 @@ return [
     /* New game */
     'new_game' => 'Νέο παιχνίδι',
     'select_pawn' => 'Διάλεξε πιόνι', // Choose Player 1 Pawn
-
+    'select_pawn_2' => 'Διάλεξε το πιόνι του συμπαίκτη', // Choose Player 1 Pawn
     /* Switcher */
     'switcher' => [
         'break' => 'Διακοπή',

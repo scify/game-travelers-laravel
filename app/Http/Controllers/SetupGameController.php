@@ -21,14 +21,21 @@ class SetupGameController extends Controller
     {
         if ($player_id == 0)
             return abort(403, 'Unauthorized action.');
-        $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id']);
+        $players = $this->playerRepository->allWhere(['id' => $player_id]);
         $name = $players[0]->name;
         $avatar_id = $players[0]->avatar_id;
         $avatarName = $this->playerRepository->getAvatars()[$avatar_id]['asset'];
         \View::share('avatarName', $avatarName);
         \View::share('playerName', $name);
         \View::share('showSettings', true);
-        return view('gameSelectBoard');
+        $switcher = [
+            'controlMode' =>  $players[0]->auto ? 1 : 2,
+            'scanningSpeed' => $players[0]->scanning_speed,
+            'automaticSelectionButton' => $players[0]->select_key,
+            'manualSelectionButton' => $players[0]->select_key,
+            'manualNavigationButton' => $players[0]->navigate_key,
+        ];
+        return view('gameSelectBoard', ['switcher' => $switcher]);
     }
 
     public function boardSave(Request $request, int $player_id, string $from, int $game_id)
@@ -63,14 +70,21 @@ class SetupGameController extends Controller
         if ($player_id == 0 || $game_id == 0)
             return abort(403, 'Unauthorized action.');
 
-        $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id']);
+        $players = $this->playerRepository->allWhere(['id' => $player_id]);
         $name = $players[0]->name;
         $avatar_id = $players[0]->avatar_id;
         $avatarName = $this->playerRepository->getAvatars()[$avatar_id]['asset'];
         \View::share('avatarName', $avatarName);
         \View::share('playerName', $name);
         \View::share('showSettings', true);
-        return view('gameSelectMode');
+        $switcher = [
+            'controlMode' =>  $players[0]->auto ? 1 : 2,
+            'scanningSpeed' => $players[0]->scanning_speed,
+            'automaticSelectionButton' => $players[0]->select_key,
+            'manualSelectionButton' => $players[0]->select_key,
+            'manualNavigationButton' => $players[0]->navigate_key,
+        ];
+        return view('gameSelectMode', ['switcher' => $switcher]);
     }
 
     public function modeSave(Request $request, int $player_id, string $from, int $game_id)
@@ -89,14 +103,26 @@ class SetupGameController extends Controller
         if ($player_id == 0 || $game_id == 0)
             return abort(403, 'Unauthorized action.');
 
-        $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id']);
+        $players = $this->playerRepository->allWhere(['id' => $player_id]);
         $name = $players[0]->name;
         $avatar_id = $players[0]->avatar_id;
         $avatarName = $this->playerRepository->getAvatars()[$avatar_id]['asset'];
         \View::share('avatarName', $avatarName);
         \View::share('playerName', $name);
         \View::share('showSettings', true);
-        return view('gameSelectPawn');
+
+        $game = $this->gameRepository->allWhere(['id' => $game_id],['board_id']);
+        $board = $game[0]->board_id;
+
+        $switcher = [
+            'controlMode' =>  $players[0]->auto ? 1 : 2,
+            'scanningSpeed' => $players[0]->scanning_speed,
+            'automaticSelectionButton' => $players[0]->select_key,
+            'manualSelectionButton' => $players[0]->select_key,
+            'manualNavigationButton' => $players[0]->navigate_key,
+        ];
+
+        return view('gameSelectPawn', ['board' => $board, 'switcher' => $switcher]);
     }
 
     public function pawnSave(Request $request, int $player_id, string $from, int $game_id)
@@ -107,6 +133,51 @@ class SetupGameController extends Controller
         $selected_pawn_id = (int)$request->only('pawn')['pawn'];
         $entry = ['pawn_id_1' => $selected_pawn_id];
         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
+
+        $game = $this->gameRepository->allWhere(['id' => $game_id], ['mode_id']);
+        $mode = $game[0]->mode_id;
+
+        if ($mode == 1)
+            return \Redirect::route('select.options', [$player_id, 'options', $game_id]);
+        else
+            return \Redirect::route('select.pawn2', [$player_id, 'pawn2', $game_id]);
+    }
+
+    public function pawn2Show(Request $request, int $player_id, string $from, int $game_id)
+    {
+        if ($player_id == 0 || $game_id == 0)
+            return abort(403, 'Unauthorized action.');
+
+        $players = $this->playerRepository->allWhere(['id' => $player_id]);
+        $name = $players[0]->name;
+        $avatar_id = $players[0]->avatar_id;
+        $avatarName = $this->playerRepository->getAvatars()[$avatar_id]['asset'];
+        \View::share('avatarName', $avatarName);
+        \View::share('playerName', $name);
+        \View::share('showSettings', true);
+
+        $game = $this->gameRepository->allWhere(['id' => $game_id], ['board_id']);
+        $board = $game[0]->board_id;
+
+        $switcher = [
+            'controlMode' =>  $game[0]->auto ? 1 : 2,
+            'scanningSpeed' => $game[0]->scanning_speed,
+            'automaticSelectionButton' => $game[0]->select_key,
+            'manualSelectionButton' => $game[0]->select_key,
+            'manualNavigationButton' => $game[0]->navigate_key,
+        ];
+
+        return view('gameSelectPawnSecond', ['board' => $board, 'switcher' => $switcher, 'pawn_id_1' => $game[0]->pawn_id_1]);
+    }
+
+    public function pawn2Save(Request $request, int $player_id, string $from, int $game_id)
+    {
+        if ($player_id == 0 || $game_id == 0)
+            return abort(403, 'Unauthorized action.');
+
+        $selected_pawn_id = (int)$request->only('pawn')['pawn'];
+        $entry = ['pawn_id_2' => $selected_pawn_id];
+        $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
         return \Redirect::route('select.options', [$player_id, 'options', $game_id]);
     }
 
@@ -115,14 +186,23 @@ class SetupGameController extends Controller
         if ($player_id == 0 || $game_id == 0)
             return abort(403, 'Unauthorized action.');
 
-        $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id']);
+        $players = $this->playerRepository->allWhere(['id' => $player_id]);
         $name = $players[0]->name;
         $avatar_id = $players[0]->avatar_id;
         $avatarName = $this->playerRepository->getAvatars()[$avatar_id]['asset'];
         \View::share('avatarName', $avatarName);
         \View::share('playerName', $name);
         \View::share('showSettings', true);
-        return view('gameSelectOptions');
+
+        $switcher = [
+            'controlMode' =>  $players[0]->auto ? 1 : 2,
+            'scanningSpeed' => $players[0]->scanning_speed,
+            'automaticSelectionButton' => $players[0]->select_key,
+            'manualSelectionButton' => $players[0]->select_key,
+            'manualNavigationButton' => $players[0]->navigate_key,
+        ];
+
+        return view('gameSelectOptions', ['switcher' => $switcher]);
     }
 
     public function optionsSave(Request $request, int $player_id, string $from, int $game_id)
