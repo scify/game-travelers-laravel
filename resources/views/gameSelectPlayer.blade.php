@@ -1,4 +1,8 @@
-<x-layout :title="'Διάλεξε παίκτη | Νέο παιχνίδι | Ταξιδιώτες'">
+<x-layout
+    :title="'Διάλεξε παίκτη | Νέο παιχνίδι | Ταξιδιώτες'"
+    :hasUserMenu=true
+    :background="'background-dash-up'"
+>
     {{-- To be fair this would have been a nice Vue app. For now it's a form
          with custom JS. Note that as in the playerProfileNew form, the avatars
          container acts as a radiogroup and each button is a radio (with the
@@ -40,11 +44,7 @@
                     </p>
                 </div>
                 <div class="col-1">
-                    {{-- @TODO: UX fix to allow logging-out without selecting a
-                        player. Note that this side of the header conflicts with
-                        decoration trees, so a nav button should not be added
-                        here.
-                        --}}
+                    &nbsp;
                 </div>
             </div>
         </div>
@@ -67,33 +67,6 @@
                         >
 
                             <div class="col-md-12">
-                                {{-- Assuming the usage of a simple form to
-                                    pass the selected player id to the next
-                                    page, all we need from THIS page is the
-                                    selected player's ID. The hidden field for
-                                    the player's ID is the one used for handling
-                                    the Avatars via JS and is located on:
-                                    views/components/selectPlayer.blade.php
-                                    with id="avatarsContainerInput",
-                                    name="player" and a value equal to the
-                                    :selected-player-id provided below (defaults
-                                    to 0 if none set).
-                                    The next page (e.g. select board) can get
-                                    the player id via GET or POST, while the
-                                    pages after that (and even the game itself)
-                                    can get the values via GET:
-                                    @example ?player=1&board=1&mode=1&pawn=3
-                                    or for 2 player games:
-                                    @example ?player=1&player2=12&board=1&mode=2&pawn=5
-                                    To be fair, these URLs could get ugly, but
-                                    on the other hand they are much more easy to
-                                    debug and/or test, plus they provide a fall-
-                                    back for users using the back and forward
-                                    buttons of their browsers. Each of these
-                                    pages should CHECK if the requested
-                                    player(s) "belong" to the auth user or not
-                                    and if the other requested IDs (e.g. board)
-                                    are indeed available for selection. --}}
                                 <x-selectPlayer
                                     :avatars=$avatars
                                     :players=$players
@@ -117,19 +90,7 @@
                         {{-- These buttons are enabled via JS and they both
                             act as submit buttons which pass the selected player
                             ID (via the hidden field with name="player") to a
-                            page. So, how can we pass a value to two different
-                            pages? I suppose we could submit this form to self.
-                            If a valid player is found that belongs to the auth
-                            user and the value of submit=start, then user is
-                            redirected to either the gameSelectBoard or
-                            gameSelectMode page (so start acts as an alias to
-                            the next available page on the start new game flow).
-                            If the value of submit=settings then user is
-                            redirected to the Settings landing page. If a valid
-                            player is not found, user could see THIS form again
-                            (but that shouldn't happen unless user is trying to
-                            hack the form -and yet, we do have an is-invalid
-                            error on this page because it helps with debugging).
+                            page.
                             --}}
                         <button
                             data-role="submit-form-button"
