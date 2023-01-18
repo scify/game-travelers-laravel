@@ -140,6 +140,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/settings/difficulty/{player_id}/{from}/{game_id}', [SettingsController::class, 'difficultySave'])
         ->name('settings.difficulty')->middleware(EnsureIdsAreValid::class);
 
+    Route::get('/select/continue/{player_id}/{from}/{game_id}', [SetupGameController::class, 'continueShow'])
+        ->name('select.continue')->middleware(EnsureIdsAreValid::class);
+
+    Route::post('/select/continue/{player_id}/{from}/{game_id}', [SetupGameController::class, 'continueSave'])
+        ->name('select.continue')->middleware(EnsureIdsAreValid::class);
+
     Route::get('/select/board/{player_id}/{from}/{game_id}', [SetupGameController::class, 'boardShow'])
         ->name('select.board')->middleware(EnsureIdsAreValid::class);
 

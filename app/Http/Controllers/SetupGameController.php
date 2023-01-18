@@ -17,11 +17,50 @@ class SetupGameController extends Controller
         $this->gameRepository = $gameRepository;
     }
 
+    public function continueShow(Request $request, int $player_id, string $from, int $game_id)
+    {
+        if ($player_id == 0) {
+            return abort(403, 'Unauthorized action.');
+        }
+        $players = $this->playerRepository->allWhere(['id' => $player_id]);
+        $name = $players[0]->name;
+        $avatar_id = $players[0]->avatar_id;
+        $avatarName = $this->playerRepository->getAvatars()[$avatar_id]['asset'];
+        \View::share('avatarName', $avatarName);
+        \View::share('playerName', $name);
+        \View::share('showSettings', true);
+        $switcher = $this->getSwitcher($players);
+        return view('gameSelectExisting', ['switcher' => $switcher]);
+    }
+
+    public function continueSave(Request $request, int $player_id, string $from, int $game_id)
+    {
+
+        if ($player_id == 0) {
+            return abort(403, 'Unauthorized action.');
+        }
+
+        $user_id = auth()->user()->id;
+        $selected = (int) $request->only('option')['option'];
+
+        if ($selected == 1) {
+            $entry = ['active' => false];
+            $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
+            return \Redirect::route('select.board', [$player_id, 'board', 0]);
+        } else {
+            return \Redirect::route('board', [$player_id, $game_id]);
+        }
+    }
+
     public function boardShow(Request $request, int $player_id, string $from, int $game_id)
     {
         if ($player_id == 0) {
             return abort(403, 'Unauthorized action.');
         }
+
+        if ($this->checkIfActiveGameHasStarted($game_id))
+            return \Redirect::route('board', [$player_id, $game_id]);
+
         $players = $this->playerRepository->allWhere(['id' => $player_id]);
         $name = $players[0]->name;
         $avatar_id = $players[0]->avatar_id;
@@ -45,7 +84,7 @@ class SetupGameController extends Controller
         $entry = ['user_id' => $user_id, 'player_id' => $player_id, 'board_id' => $selected_board_id];
         if ($game_id == 0) {
             //check if an active game already exists
-            $active_games = $this->gameRepository->allWhere(['user_id' => $user_id, 'active' => true], ['id']);
+            $active_games = $this->gameRepository->allWhere(['player_id' => $player_id, 'active' => true], ['id']);
             if (sizeof($active_games) == 0) {
                 $game = $this->gameRepository->create($entry);
                 $game_id = $game->id;
@@ -65,6 +104,9 @@ class SetupGameController extends Controller
         if ($player_id == 0 || $game_id == 0) {
             return abort(403, 'Unauthorized action.');
         }
+
+        if ($this->checkIfActiveGameHasStarted($game_id))
+            return \Redirect::route('board', [$player_id, $game_id]);
 
         $players = $this->playerRepository->allWhere(['id' => $player_id]);
         $name = $players[0]->name;
@@ -94,6 +136,9 @@ class SetupGameController extends Controller
         if ($player_id == 0 || $game_id == 0) {
             return abort(403, 'Unauthorized action.');
         }
+
+        if ($this->checkIfActiveGameHasStarted($game_id))
+            return \Redirect::route('board', [$player_id, $game_id]);
 
         $players = $this->playerRepository->allWhere(['id' => $player_id]);
         $name = $players[0]->name;
@@ -125,7 +170,7 @@ class SetupGameController extends Controller
         $mode = $game[0]->mode_id;
 
         if ($mode == 1) {
-            return \Redirect::route('select.options', [$player_id, 'options', $game_id]);
+            return \Redirect::route('select.options', [$player_id, 'option', $game_id]);
         } else {
             return redirect()->route('select.pawnTwo', [$player_id, 'pawn-two', $game_id]);
         }
@@ -136,6 +181,9 @@ class SetupGameController extends Controller
         if ($player_id == 0 || $game_id == 0) {
             return abort(403, 'Unauthorized action.');
         }
+
+        if ($this->checkIfActiveGameHasStarted($game_id))
+            return \Redirect::route('board', [$player_id, $game_id]);
 
         $players = $this->playerRepository->allWhere(['id' => $player_id]);
         $name = $players[0]->name;
@@ -165,7 +213,7 @@ class SetupGameController extends Controller
         $selected_pawn_id_2 = (int) $request->only('pawn')['pawn'];
         $entry = ['pawn_id_2' => $selected_pawn_id_2];
         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
-        return \Redirect::route('select.options', [$player_id, 'options', $game_id]);
+        return \Redirect::route('select.options', [$player_id, 'option', $game_id]);
     }
 
     public function optionsShow(Request $request, int $player_id, string $from, int $game_id)
@@ -173,6 +221,8 @@ class SetupGameController extends Controller
         if ($player_id == 0 || $game_id == 0) {
             return abort(403, 'Unauthorized action.');
         }
+        if ($this->checkIfActiveGameHasStarted($game_id))
+            return \Redirect::route('board', [$player_id, $game_id]);
 
         $players = $this->playerRepository->allWhere(['id' => $player_id]);
         $name = $players[0]->name;
@@ -198,7 +248,7 @@ class SetupGameController extends Controller
         if ($selected_option == 2) {
             $tutorial = false;
         }
-        $entry = ['use_tutorial' => $tutorial];
+        $entry = ['use_tutorial' => $tutorial, 'started' => true];
         if ($game_id == null) {
             return abort(403, 'Unauthorized action.');
         }
@@ -226,5 +276,14 @@ class SetupGameController extends Controller
             'manualNavigationButton' => $players[0]->navigate_key,
         ];
         return $switcher;
+    }
+
+    private function checkIfActiveGameHasStarted($game_id)
+    {
+        if ($game_id == 0)
+            return false;
+
+        $games = $this->gameRepository->allWhere(['id' => $game_id], ['started']);
+        return $games[0]->started;
     }
 }

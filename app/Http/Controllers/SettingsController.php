@@ -37,6 +37,8 @@ class SettingsController extends Controller
                 switch ($back_route) {
                     case "user":
                         return \Redirect::route('select.player', [0, 'user', 0]);
+                    case "continue":
+                        return \Redirect::route('select.continue', [$player_id, 'continue', $game_id]);
                     case "board":
                         return \Redirect::route('select.board', [$player_id, 'board', $game_id]);
                     case "mode":

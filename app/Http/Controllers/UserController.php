@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Repository\Player\PlayerRepository;
+use App\Repository\Game\GameRepository;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
 
     protected PlayerRepository $playerRepository;
+    protected GameRepository $gameRepository;
 
-    public function __construct(PlayerRepository $playerRepository)
+    public function __construct(PlayerRepository $playerRepository, GameRepository $gameRepository)
     {
         $this->playerRepository = $playerRepository;
+        $this->gameRepository = $gameRepository;
     }
 
     public function show(Request $request, int $player_id, string $from, int $game_id)
@@ -36,9 +39,20 @@ class UserController extends Controller
     {
         $player_id = $request->only('player')['player'];
         $action = $request->only('submit')['submit'];
-        if ($action == "start")
-            return \Redirect::route('select.board', ['player_id' => $player_id, 'from' => "board", 'game_id' => 0]);
-        else if ($action == "settings")
+        if ($action == "start") {
+            $active_games = $this->gameRepository->allWhere(['player_id' => $player_id, 'active' => true], ['id', 'started']);
+            if (sizeof($active_games) == 0)
+                return \Redirect::route('select.board', ['player_id' => $player_id, 'from' => "board", 'game_id' => 0]);
+            else {
+                $game_id = $active_games[0]->id;
+                if ($active_games[0]->started)
+                    return \Redirect::route('select.continue', ['player_id' => $player_id, 'from' => "continue", 'game_id' => $game_id]);
+                else {
+                    $this->gameRepository->delete($game_id);
+                    return \Redirect::route('select.board', ['player_id' => $player_id, 'from' => "board", 'game_id' => 0]);
+                }
+            }
+        } else if ($action == "settings")
             return \Redirect::route('settings', ['player_id' => $player_id, 'from' => "user", 'game_id' => 0]);
         else
             return abort(403, 'Unauthorized action.');
