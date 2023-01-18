@@ -73,6 +73,11 @@ footer img {
     display: block;
 }
 
+kbd {
+    font-weight: 600;
+    font-family: "Manrope";
+}
+
 // Alerts
 .alert-danger {
     font-weight: 500;
@@ -169,8 +174,12 @@ section.content {
     }
 }
 // Manual height calculations based on the background heights.
+.gamestart {
+    min-height: 520px;
+}
 .gamesettings {
-    min-height: 520px; // 566px;
+    // gamesettings
+    min-height: 590px;
 }
 .gameselect {
     min-height: 495px;

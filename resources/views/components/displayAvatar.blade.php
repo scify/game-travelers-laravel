@@ -31,6 +31,10 @@
         class="img-avatar img-avatar--{{ $avatar['id'] ?? 0}}"
         width="{{ $avatar['width'] ?? '100'}}"
         height="{{ $avatar['height'] ?? '100'}}"
+        @isset($role) @if ($role == 'player')
+        data-player-id="{{ $id ?? 0 }}" {{-- Read by JS --}}
+        data-player-name="{{ $name ?? 'Άγνωστο' }}"
+        @endif @endisset
         alt="{{ $avatar['description'] ?? 'Φατσούλα' }}"
     />
 </button>

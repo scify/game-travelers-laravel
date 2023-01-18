@@ -187,7 +187,7 @@ ${window.trans("messages.switcher.help_automatic")}
 </p>
 <p>
 ${window.trans("messages.switcher.help_automatic_button_select")}
-<strong>${selectionButton}</strong>.
+<kbd>${selectionButton}</kbd>.
 </p>`;
 				helpButtons = `
 <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="clearInterval(${intervalId});return false">
@@ -200,11 +200,11 @@ ${window.trans("messages.switcher.continue")}
 				helpText = `
 <p>
 ${window.trans("messages.switcher.help_manual_button_navigate")}
-<strong>${navigationButton}</strong>.
+<kbd>${navigationButton}</kbd>.
 </p>
 <p>
 ${window.trans("messages.switcher.help_manual_button_select")}
-<strong>${selectionButton}</strong>.
+<kbd>${selectionButton}</kbd>.
 </p>`;
 				helpButtons = `
 <button type='button' class='btn btn-primary' data-bs-dismiss='modal'>

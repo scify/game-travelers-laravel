@@ -22,6 +22,33 @@ window.addEventListener("load", function () {
 			const nameInput = document.getElementById("playerNameInput");
 			const initialFormIdValue = idInput ? parseInt(idInput.value) : 0;
 
+			// eslint-disable-next-line no-inner-declarations
+			function updateUserMenuButton(idValue) {
+				const userMenuButtonImage = document.getElementById(
+					"userMenuButtonImage"
+				);
+				const userMenuButtonLabel = document.getElementById(
+					"userMenuButtonLabel"
+				);
+				console.log("Updating User Menu Button");
+				// Update User Menu if needed:
+				if (userMenuButtonImage && !isNaN(idValue)) {
+					if (idValue > 0) {
+						console.log(idValue);
+						let selectedButton = avatarsContainer.querySelector(
+							`img[data-player-id='${idValue}'`
+						);
+						userMenuButtonImage.setAttribute("alt", "Ενημερωμένο");
+						userMenuButtonImage.setAttribute(
+							"src",
+							selectedButton.getAttribute("src")
+						);
+						userMenuButtonLabel.textContent =
+							selectedButton.getAttribute("data-player-name");
+					}
+				}
+			}
+
 			/**
 			 * Form validation function.
 			 *
@@ -36,6 +63,7 @@ window.addEventListener("load", function () {
 				const secondaryButton =
 					document.getElementById("secondaryButton");
 				const idValue = idInput ? parseInt(idInput.value) : 0;
+
 				// Nothing to update if (primary) Submit Button does not exist.
 				if (!submitButton) {
 					return false;
@@ -48,9 +76,10 @@ window.addEventListener("load", function () {
 						!isNaN(idValue) &&
 						idValue > 0
 					);
-					// If !nameInput, then we are just updating an existing profile.
+					// If !nameInput, then we are updating/selectin player.
 				} else {
 					if (!isNaN(idValue) && idValue > 0) {
+						updateUserMenuButton(idValue);
 						submitButton.disabled = false;
 						if (secondaryButton) {
 							secondaryButton.disabled = false;
@@ -91,32 +120,6 @@ window.addEventListener("load", function () {
 				btn.setAttribute("aria-checked", "true");
 				updateSubmitButtonState();
 			}
-
-			// TODO: Remove if not used.
-			// function animateAvatarButtons(buttons) {
-			// 	const reducedMotionQuery = window.matchMedia(
-			// 		"(prefers-reduced-motion: reduce)"
-			// 	);
-			// 	if (
-			// 		reducedMotionQuery.media !== "not all" &&
-			// 		!reducedMotionQuery.matches
-			// 	) {
-			// 		for (let i = 0; i < buttons.length; i++) {
-			// 			let anBtn = buttons[i];
-			// 			const anDelay = 300 + i * 50;
-			// 			setTimeout(() => {
-			// 				anBtn.style.transform = "scale(1)";
-			// 				anBtn.style.transition = "0.2s linear";
-			// 				requestAnimationFrame(() => {
-			// 					anBtn.style.transform = "scale(1.2)";
-			// 				});
-			// 				setTimeout(() => {
-			// 					anBtn.style.transform = "scale(1)";
-			// 				}, anDelay);
-			// 			}, anDelay);
-			// 		}
-			// 	}
-			// }
 
 			// Form initialization:
 			// Reset playerAvatarInput to either the filled or default state (0) &
