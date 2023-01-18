@@ -145,13 +145,11 @@ class SetupGameController extends Controller
         \View::share('playerName', $name);
         \View::share('showSettings', true);
 
-        $game = $this->gameRepository->allWhere(['id' => $game_id], ['board_id']);
+        $game = $this->gameRepository->allWhere(['id' => $game_id], ['board_id', 'pawn_id_1']);
         $board = $game[0]->board_id;
         $pawns = $this->gameRepository->getPawns();
         $switcher = $this->getSwitcher($players);
-        // @todo: Fix this as it always returns Null for some reason :(.
         $player_one_pawn_id = $game[0]->pawn_id_1;
-
         return view(
             'gameSelectPawnTwo',
             ['board' => $board, 'player_one_pawn_id' => $player_one_pawn_id, 'pawns' => $pawns, 'switcher' => $switcher]
@@ -221,7 +219,7 @@ class SetupGameController extends Controller
     private function getSwitcher($players)
     {
         $switcher = [
-            'controlMode' => $players[0]->auto ? 1 : 2,
+            'controlMode' => $players[0]->auto,
             'scanningSpeed' => $players[0]->scanning_speed,
             'automaticSelectionButton' => $players[0]->select_key,
             'manualSelectionButton' => $players[0]->select_key,
