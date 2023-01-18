@@ -77,8 +77,13 @@ function switcher() {
 	const transitionSpeed = 300; // in milisecconds
 	const classFocus = "switcher-focus"; // Focus switcher CSS class
 	const classActive = "switcher-active"; // Active switcher CSS class
+	console.log(
+		`Switcher enabled (mode: ${controlMode}, s: ${selectionButton}, n: ${navigationButton})`
+	);
 
-	const switcherElements = document.querySelectorAll("[data-tabindex]");
+	const switcherElements = document.querySelectorAll(
+		"[data-tabindex]:not([disabled])"
+	);
 	const validSwitcherElements = [];
 
 	function removeSwitcherClasses() {

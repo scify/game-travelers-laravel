@@ -1,5 +1,5 @@
 <x-layout
-    :title="__('messages.select_pawn') . ' | ' . __('messages.new_game') . ' | ' . __('messages.app_name')"
+    :title="__('messages.select_pawn_coplayer') . ' | ' . __('messages.new_game') . ' | ' . __('messages.app_name')"
     :hasUserMenu=true
     :background="'background-dash-up'"
 >
@@ -18,7 +18,7 @@
         <script src="{{ mix('js/functions/switcher.js') }}" defer></script>
     @endsection
     <form method="post"
-        action="{{ route('select.pawn', [ request()->player_id, request()->from, request()->game_id ]) }}"
+        action="{{ route('select.pawnTwo', [ request()->player_id, request()->from, request()->game_id ]) }}"
     >
         @csrf
 
@@ -29,7 +29,7 @@
                     {{-- Reserved for header navigation buttons.  --}}
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">
-                    <h1 id="currentPageLabel">{{ __("messages.select_pawn") }}</h1>
+                    <h1 id="currentPageLabel">{{ __("messages.select_pawn_coplayer") }}</h1>
                     <p>
                         <strong class="fs-5" id="currentPageDescription">
                             {{--Use `&nbsp;` if no description.--}}
@@ -57,6 +57,7 @@
                         :alt='$pawn["alt"]'
                         :tabindex=$tabindex
                         :board=$board
+                        :player_one_pawn_id=$player_one_pawn_id
                     />
                 @endforeach
             </div>
@@ -65,7 +66,7 @@
                     <div class="d-flex flex-auto mt-4 mt-sm-0">
                         <a
                             class="btn btn-primary btn-circle ms-auto responsive-expand"
-                            href="{{ route('select.mode', [ request()->player_id, 'mode', request()->game_id ])}}"
+                            href="{{ route('select.pawn', [ request()->player_id, 'mode', request()->game_id ])}}"
                             id="backButton"
                             data-tabindex="1000"
                             tabindex="1000"

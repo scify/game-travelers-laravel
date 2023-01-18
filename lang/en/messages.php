@@ -52,7 +52,8 @@ return [
 
     /* New game */
     'new_game' => 'New Game',
-    'select_pawn' => 'Choose pawn', // Choose Player 1 Pawn
+    'select_pawn' => 'Choose your pawn', // Choose Player 1 Pawn
+    'select_pawn_coplayer' => 'Choose your co-player\'s pawn', // Choose Player 2 Pawn
 
     // Most of the following strings have already been moved to validation as
     // custom rules and have been commented out from this file.

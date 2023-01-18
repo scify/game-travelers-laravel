@@ -5,12 +5,15 @@ namespace App\Repository\Player;
 use App\Models\Player;
 use App\Repository\Repository;
 
-class PlayerRepository extends Repository {
-    public function getModelClassName() {
+class PlayerRepository extends Repository
+{
+    public function getModelClassName()
+    {
         return Player::class;
     }
 
-    public function getAvatars() {
+    public function getAvatars()
+    {
         $width = 100;
         $height = 100;
         $avatars = [
