@@ -3,6 +3,10 @@
         with Switcher.js. It is based on gameSelectOptions.php and uses the
         same x-selectOptionsButton components.--}}
     @section('scripts')
+        <script>
+            window.Switcher = {{ Js::from($switcher)}};
+        </script>
+        <script src="{{ mix('js/functions/switcher.js') }}" defer></script>
     @endsection
 
     <form method="post"

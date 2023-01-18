@@ -5,6 +5,10 @@
         reason, it can be disabled by setting :comingsoon=true (instead of the
         default null).--}}
     @section('scripts')
+        <script>
+            window.Switcher = {{ Js::from($switcher)}};
+        </script>
+        <script src="{{ mix('js/functions/switcher.js') }}" defer></script>
     @endsection
 
     <form method="post"
@@ -47,17 +51,17 @@
                 <x-selectModeButton
                     :asset="'mode-pc'"
                     :title="'Με υπολογιστή'"
-                    :mode=3
+                    :mode=2
                     :alt="'Παιχνίδι με υπολογιστή'"
-                    :tabindex=3
+                    :tabindex=2
                     :comingsoon=null {{--Προσεχώς: true / null (default)--}}
                 />
                 <x-selectModeButton
                     :asset="'mode-double'"
                     :title="'Διπλό'"
-                    :mode=2
+                    :mode=3
                     :alt="'Διπλό παιχνίδι'"
-                    :tabindex=2
+                    :tabindex=3
                     :comingsoon=true {{--Προσεχώς: true / null (default)--}}
                 />
             </div>

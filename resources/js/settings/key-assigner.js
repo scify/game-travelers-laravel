@@ -10,29 +10,53 @@ window.addEventListener("load", function () {
 		"input[data-role='keyAssignerInput']"
 	);
 	let returnKey = "Error";
-	if (keyAssigners.length) {
-		for (const keyAssigner of keyAssigners) {
-			// Initialize button values on forms, if not properly set based on
-			// the actual Inputs. Hopefully it works as intended.
+	let timeoutId;
+
+	function addInvalidClass(keyAssigner) {
+		if (!keyAssigner.classList.contains("invalid")) {
+			keyAssigner.classList.add("invalid");
+			timeoutId = setTimeout(
+				() => keyAssigner.classList.remove("invalid"),
+				1500
+			);
+		} else {
+			clearTimeout(timeoutId);
+			timeoutId = setTimeout(
+				() => keyAssigner.classList.remove("invalid"),
+				1500
+			);
+		}
+	}
+
+	function resetKeyAssigners() {
+		if (keyAssigners.length) {
 			if (keyAssignersInputs) {
-				for (const keyAssignerInput of keyAssignersInputs) {
-					if (keyAssignerInput.value) {
+				for (const resetKeyAssignerInput of keyAssignersInputs) {
+					if (resetKeyAssignerInput.value) {
 						let keyAssignerInputId =
-							keyAssignerInput.getAttribute("id");
+							resetKeyAssignerInput.getAttribute("id");
 						let keyAssignerButton = document.querySelector(
 							`[data-sets-input=${keyAssignerInputId}]`
 						);
 						if (keyAssignerButton) {
 							keyAssignerButton.textContent =
-								keyAssignerInput.value;
+								resetKeyAssignerInput.value;
 							keyAssignerButton.setAttribute(
 								"data-key-selected",
-								keyAssignerInput.value
+								resetKeyAssignerInput.value
 							);
 						}
 					}
 				}
 			}
+		}
+	}
+
+	if (keyAssigners.length) {
+		for (const keyAssigner of keyAssigners) {
+			// Initialize button values on forms, if not properly set based on
+			// the actual Inputs. Hopefully it works as intended.
+			resetKeyAssigners();
 			// Add click events to all buttons in order to set-up keyup events.
 			keyAssigner.addEventListener("click", () => {
 				/** Removes active assignerKeyUpHandler events. */
@@ -41,11 +65,12 @@ window.addEventListener("load", function () {
 					if (event.target !== keyAssigner) {
 						console.log("event logged");
 						event.stopPropagation();
-						console.log("aborted", event);
+						console.log("aborted");
 						keyAssigner.classList.remove("active");
 						// Revert to default though :(
 						keyAssigner.textContent =
 							keyAssigner.getAttribute("data-key-default");
+						resetKeyAssigners();
 						window.removeEventListener(
 							"keyup",
 							assignerKeyUpHandler
@@ -61,8 +86,6 @@ window.addEventListener("load", function () {
 				function assignerKeyUpHandler(event) {
 					// Override the default behavior of keys.
 					event.preventDefault();
-					// Click event listeners are not needed anymore.
-					window.removeEventListener("click", assignerClickHandler);
 					// When a key is pressed, get its key value.
 					// Note: Even if extremely useful, `event.which` and
 					// `event.keyCode` are deprecated. Instead we rely on
@@ -70,58 +93,22 @@ window.addEventListener("load", function () {
 					// @see https://www.toptal.com/developers/keycode/for/Space
 					if (event.key.length) {
 						const charCode = event.key.charCodeAt(0);
-						// Further reading:
-						// @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt
-						// @see https://stackoverflow.com/questions/67655744/get-key-value-of-key-pressed-with-javascriiipt/67656033#67656033
+						const allowedList = window.SwitcherKeys.allowedList;
 						if (event.key.length > 1 && charCode < 128) {
-							// Named attribute (e.g. Enter)
-							// Note that some named keys should be excluded as
-							// they are used for controlling the browser (e.g.
-							// the Win key on Windows, the Cmd & Option keys on
-							// Mac, etc. etc. We might settle with a safe list.
-							// In case of error, we simply revert to the default
-							// key for each keyAssigner, passed via the
-							// data-key-default attribute.
-							// Forbidden list so far, contains buttons reserved
-							// for accessibility (Escape, Tab, ShiftLeft). Note
-							// that Space and Enter are also problematic...
-							const forbiddenList = [
-								"Escape",
-								"Tab",
-								"ShiftLeft",
-								"ShiftRight",
-								"ControlLeft",
-								"ControlRight",
-								"AltLeft",
-								"AltRight",
-								"F1",
-								"F2",
-								"F3",
-								"F4",
-								"F5",
-								"F6",
-								"F7",
-								"F8",
-								"F9",
-								"F10",
-								"F11",
-								"F12",
-								"Backspace",
-							];
-							if (forbiddenList.indexOf(event.code) !== -1) {
-								// Selected key is in the forbidden list!
-								// If we simply don't do anything in here,
-								// the key press will simply be ignored.
-								// If we return false, the key press will simply
-								// be ignored and we will keep on waiting for
-								// the next key press...
-								return false;
-							} else {
+							// Named Key
+							if (allowedList.indexOf(event.code) !== -1) {
 								returnKey = event.code;
+								console.log("Key Code accepted.");
+							} else {
+								keyAssigner.classList.add("invalid");
+								console.log("Not accepted key code.");
+								addInvalidClass(keyAssigner);
+								return false;
 							}
 						} else {
 							// Unicode character
 							if (charCode === 32) {
+								console.log("Space accepted");
 								// Believe it or not, " " is indeed NOT a name
 								// attribute. And it's not a Spacebar, but
 								// simply "Space". Regardless, we convert this
@@ -129,19 +116,55 @@ window.addEventListener("load", function () {
 								// easier.
 								returnKey = "Space";
 							} else {
-								returnKey = event.key;
+								if (allowedList.indexOf(event.key) !== -1) {
+									console.log("Key accepted");
+									returnKey = event.key;
+								} else {
+									keyAssigner.classList.add("invalid");
+									console.log(
+										`Not accepted key ${event.key}.`
+									);
+									addInvalidClass(keyAssigner);
+									return false;
+								}
 							}
 						}
 					}
 					if (returnKey === "Error") {
+						console.log("Error!");
 						returnKey =
-							keyAssigner.getAttribute("data-key-default");
+							keyAssigner.getAttribute("data-key-selected");
 					}
-					keyAssigner.textContent = returnKey;
-					keyAssigner.setAttribute("data-key-selected", returnKey);
 					let setInputId =
 						keyAssigner.getAttribute("data-sets-input");
 					let setInput = document.getElementById(setInputId);
+					// If this assigner's data-sets-input value is either
+					// controlManualSelectionButton or controlManualNavigationButton
+					// we have to compare returnKey with  data-key-selected...
+					let otherAssigner = document.querySelector(
+						"button[data-sets-input='controlManualNavigationButton']"
+					);
+					if (setInputId === "controlManualNavigationButton") {
+						otherAssigner = document.querySelector(
+							"button[data-sets-input='controlManualSelectionButton']"
+						);
+					}
+					if (otherAssigner) {
+						if (
+							returnKey ===
+							otherAssigner.getAttribute("data-key-selected")
+						) {
+							addInvalidClass(keyAssigner);
+							addInvalidClass(otherAssigner);
+							return false;
+						}
+					}
+
+					// Click event listeners are not needed anymore.
+					window.removeEventListener("click", assignerClickHandler);
+
+					keyAssigner.textContent = returnKey;
+					keyAssigner.setAttribute("data-key-selected", returnKey);
 					setInput.value = returnKey;
 					keyAssigner.classList.remove("active");
 					// Removes self (like once() used to do).

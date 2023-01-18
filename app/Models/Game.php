@@ -10,14 +10,16 @@ class Game extends Model
     protected $table = 'games';
 
     protected $fillable = [
-        'id', 'user_id', 'player_id', 'board_id', 'mode_id', 'pawn_id_1', 'pawn_id_2', 'use_tutorial', 'location_1', 'location_2', 'active' , 'first_player_turn'
+        'id', 'user_id', 'player_id', 'board_id', 'mode_id', 'pawn_id_1', 'pawn_id_2', 'use_tutorial', 'location_1', 'location_2', 'active', 'first_player_turn',
     ];
 
-    public function user(): BelongsTo {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function player(): BelongsTo {
+    public function player(): BelongsTo
+    {
         return $this->belongsTo(Player::class, 'player_id', 'id');
     }
 }

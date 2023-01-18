@@ -158,11 +158,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/select/pawn/{player_id}/{from}/{game_id}', [SetupGameController::class, 'pawnSave'])
         ->name('select.pawn')->middleware(EnsureIdsAreValid::class);
 
-    Route::get('/select/pawn2/{player_id}/{from}/{game_id}', [SetupGameController::class, 'pawn2Show'])
-        ->name('select.pawn2')->middleware(EnsureIdsAreValid::class);
+    Route::get('/select/pawn-two/{player_id}/{from}/{game_id}', [SetupGameController::class, 'pawnTwoShow'])
+        ->name('select.pawnTwo')->middleware(EnsureIdsAreValid::class);
 
-    Route::post('/select/pawn2/{player_id}/{from}/{game_id}', [SetupGameController::class, 'pawn2Save'])
-        ->name('select.pawn2')->middleware(EnsureIdsAreValid::class);
+    Route::post('/select/pawn-two/{player_id}/{from}/{game_id}', [SetupGameController::class, 'pawnTwoSave'])
+        ->name('select.pawnTwo')->middleware(EnsureIdsAreValid::class);
 
     Route::get('/select/options/{player_id}/{from}/{game_id}', [SetupGameController::class, 'optionsShow'])
         ->name('select.options')->middleware(EnsureIdsAreValid::class);

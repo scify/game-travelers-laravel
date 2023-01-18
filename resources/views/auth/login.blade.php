@@ -21,7 +21,7 @@
 
                     <div class="form px-0 px-md-6">
                         <div class="form-header p-4">
-                            <h1>{{ __("messages.welcome")}}</h1>
+                            <h1>{{ __("messages.login_title")}}</h1>
                         </div>
                         <div class="field p-4">
                             <label class="field-label extended" for="email">{{ __("messages.email") }}</label>

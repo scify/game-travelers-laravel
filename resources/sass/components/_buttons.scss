@@ -168,6 +168,12 @@
 }
 button.key-assigner.active {
     box-shadow: 0 0 0 0.3rem rgba(244, 156, 41, 0.56);
+    &.invalid {
+        animation: btn-shake 0.8s cubic-bezier(0.34, 0.06, 0.18, 0.94) both;
+    }
+}
+button.key-assigner.invalid {
+    box-shadow: 0 0 0 0.3rem rgba(244, 12, 4, 0.56);
 }
 
 // Game select fully-accessible buttons
@@ -208,6 +214,29 @@ button.key-assigner.active {
     &:active {
         border: 0.3rem solid var(--trvl-c-dark);
         box-shadow: 0 1em 1em rgba(var(--trvl-c-dark-rgb), 0.2);
+    }
+    &.selected-by-other-player {
+        background-color: rgba(11, 33, 34, 0.5);
+        box-shadow: 0 1em 1em rgba(var(--trvl-c-dark-rgb), 0.2);
+        position: relative;
+        &:before {
+            content: "Εσύ!";
+            display: inline-block;
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            padding: 0.2em;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+        &.pawn-button-6:before {
+            top: 8%;
+        }
+        .pawn-label {
+            opacity: 0.9;
+            color: var(--trvl-c-bright);
+        }
     }
 }
 .btn-pawn {
@@ -407,5 +436,28 @@ button.key-assigner.active {
             position: initial;
             bottom: 0;
         }
+    }
+}
+
+@keyframes btn-shake {
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
     }
 }
