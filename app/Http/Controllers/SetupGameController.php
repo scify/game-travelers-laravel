@@ -150,7 +150,6 @@ class SetupGameController extends Controller
         $pawns = $this->gameRepository->getPawns();
         $switcher = $this->getSwitcher($players);
         $player_one_pawn_id = $game[0]->pawn_id_1;
-        dd($player_one_pawn_id);
         return view(
             'gameSelectPawnTwo',
             ['board' => $board, 'player_one_pawn_id' => $player_one_pawn_id, 'pawns' => $pawns, 'switcher' => $switcher]
