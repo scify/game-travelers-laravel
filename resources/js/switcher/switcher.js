@@ -77,14 +77,15 @@ function switcher() {
 	const transitionSpeed = 300; // in milisecconds
 	const classFocus = "switcher-focus"; // Focus switcher CSS class
 	const classActive = "switcher-active"; // Active switcher CSS class
-	console.log(
-		`Switcher enabled (mode: ${controlMode}, s: ${selectionButton}, n: ${navigationButton})`
-	);
-
 	const switcherElements = document.querySelectorAll(
 		"[data-tabindex]:not([disabled])"
 	);
 	const validSwitcherElements = [];
+
+	// Switcher enabled.
+	console.log(
+		`Switcher enabled (mode: ${controlMode}, s: ${selectionButton}, n: ${navigationButton})`
+	);
 
 	function removeSwitcherClasses() {
 		var elements = document.getElementsByClassName(classFocus);
@@ -121,11 +122,19 @@ function switcher() {
 
 	let intervalId;
 	if (validSwitcherElements.length > 0) {
+		this.document.body.classList.add("switcher");
 		if (controlMode === 1) {
 			// Automatic mode (default).
-			this.document.body.classList.add("switcher");
-			let currentFocusIndex = -1;
 			// Selection Button (default: Enter) clicks a highlighted option.
+			// On start select the first element and add the listener:
+			let currentFocusIndex = 0;
+			validSwitcherElements[currentFocusIndex].focus();
+			validSwitcherElements[currentFocusIndex].classList.add(classFocus);
+			validSwitcherElements[currentFocusIndex].addEventListener(
+				"keydown",
+				handleSwitchKey
+			);
+			// On interval, move to next element remove/add listeners:
 			intervalId = setInterval(() => {
 				// Remove events and classes from the previous element.
 				if (currentFocusIndex >= 0) {
@@ -231,34 +240,45 @@ ${helpButtons}
 	}
 
 	function handleSwitchKey(event) {
-		let whichkey;
+		const allowedList = window.SwitcherKeys.allowedList;
+		const escapeList = window.SwitcherKeys.escapeList;
+		let returnKey;
 		// Note that even if extremely useful, event.keyCode is deprecated.
 		// Instead we parse the event.key (@see key-assigner.js).
 		if (event.key.length) {
 			const charCode = event.key.charCodeAt(0);
 			if (event.key.length > 1 && charCode < 128) {
-				// Named attribute (e.g. Enter)
-				if (window.SwitcherKeys.escapeList.indexOf(event.code) !== -1) {
+				// Key is "named" (e.g. LeftAlt):
+				if (escapeList.indexOf(event.code) !== -1) {
 					event.preventDefault();
 					switcherModal();
-				}
-				if (
-					window.SwitcherKeys.forbiddenList.indexOf(event.code) !== -1
-				) {
 					return false;
 				}
-				whichkey = event.code;
-			} else {
-				if (charCode === 32) {
-					whichkey = "Space";
+				if (allowedList.indexOf(event.code) !== -1) {
+					console.log("Key Code accepted.");
+					returnKey = event.code;
 				} else {
-					whichkey = event.key;
+					console.log("Not accepted key code.");
+					return false;
+				}
+			} else {
+				if (allowedList.indexOf(event.key) !== -1) {
+					if (charCode === 32) {
+						console.log("Space accepted");
+						returnKey = "Space";
+					} else {
+						console.log("Key accepted.");
+						returnKey = event.key;
+					}
+				} else {
+					console.log(`Not accepted key ${event.key}.`);
+					return false;
 				}
 			}
 		}
 		if (controlMode === 1) {
 			// Automatic mode.
-			if (whichkey === selectionButton) {
+			if (returnKey === selectionButton) {
 				event.preventDefault();
 				clearInterval(intervalId); // stop the interval
 				this.classList.remove(classFocus);
@@ -282,7 +302,7 @@ ${helpButtons}
 				}
 			}
 			// Part 1. Navigate to the next element.
-			if (whichkey === navigationButton) {
+			if (returnKey === navigationButton) {
 				validSwitcherElements[currentFocusIndex].classList.remove(
 					classFocus
 				);
@@ -291,7 +311,7 @@ ${helpButtons}
 				validSwitcherElements[nextFocusIndex].classList.add(classFocus);
 			}
 			// Part 2. Select the current element.
-			if (whichkey === selectionButton) {
+			if (returnKey === selectionButton) {
 				event.preventDefault();
 				// Find the currently highlighted button and click it.
 				validSwitcherElements[currentFocusIndex].classList.remove(

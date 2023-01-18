@@ -13,23 +13,32 @@
         >
             <img
                 class="img-avatar"
-                @if(isset($avatarName)) src="{{ asset('images/avatars/'.$avatarName. '.svg') }}"
-                @else src="{{ asset('images/avatars/boy-1.svg') }}" @endif
+                id="userMenuButtonImage"
                 width="70" height="70"
+                @if(isset($avatarName))
+                src="{{ asset('images/avatars/'.$avatarName. '.svg') }}"
                 alt="Φατσούλα που έχει επιλέξει ο παίκτης"
+                @else
+                src="{{ asset('images/avatars/no-avatar.svg') }}"
+                alt="Δεν έχει επιλεχθεί παίκτης"
+                @endif
             />
-            <span class="user-label">{{ $playerName ?? "dummy" }}</span>
+            <span class="user-label" id="userMenuButtonLabel">
+                {{ $playerName ?? "Επιλογές" }}
+            </span>
         </button>
         {{--@TODO: Fix offset.WARNING!Due to manual offset via data - bs - offset
         in combination with the z - index values, these menu options can't be
             longer than Αλλαγή παίκτη(~12 chars) or the box will run wild.
             --}}
         <ul class="user-menu dropdown-menu dropdown-menu-start" aria-labelledby="userMenuButton">
+            @if(isset($playerName))
             <li>
                 <a class="user-menu-item dropdown-item" href="{{ route('select.player', [0,'user', 0]) }}">
                 Αλλαγή παίκτη
                 </a>
             </li>
+            @endif
             @if(isset($showSettings))
             <li>
                 <a class="user-menu-item dropdown-item" href="{{ route('settings', [ request()->player_id, request()->from, request()->game_id ]) }}"
