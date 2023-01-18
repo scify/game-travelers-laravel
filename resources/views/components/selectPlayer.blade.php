@@ -31,8 +31,17 @@
       which should be an integer. JS automates this process.
     --}}
 <!-- avatar container -->
+@php
+    $justify_content = "";
+    if (is_array($players)) {
+        $number_of_items = count($players) + 1;
+        if ($number_of_items < 6) {
+            $justify_content = "justify-content-around";
+        }
+    }
+@endphp
 <div class="avatars container-lg text-center" id="avatarsContainer"> {{-- ID used by JS --}}
-    <div class="avatars-row row">
+    <div class="avatars-row row {{ $justify_content }}">
         @foreach ($players as $player)
             @php
                 // Make sure we have a starting tab to index...
@@ -59,6 +68,7 @@
                     }
                 }
             @endphp
+
             <div class="avatar-col col-4 col-sm-3 col-xl-2 align-self-start">
                 <x-displayAvatar
                     :avatar='$avatars[$player["avatar_id"]]'

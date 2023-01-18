@@ -170,7 +170,7 @@ section.content {
 }
 // Manual height calculations based on the background heights.
 .gamesettings {
-    min-height: 566px;
+    min-height: 520px; // 566px;
 }
 .gameselect {
     min-height: 495px;
@@ -222,6 +222,11 @@ section.content {
         border-radius: 50%;
         z-index: 1001;
         position: relative;
+        &.sun {
+            filter: blur(4px) opacity(0.9);
+            box-shadow: 0 0 10px orange, 0 0 60px orange, 0 0 200px yellow,
+                inset 0 0 80px yellow;
+        }
     }
     @media (prefers-reduced-motion) {
         scale: 1 !important;

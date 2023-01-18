@@ -12,13 +12,14 @@
             {{-- @TODO: Fix ARIA issues introduced by using an image. --}}
         >
             <img
-                class="img-avatar"
                 id="userMenuButtonImage"
                 width="70" height="70"
                 @if(isset($avatarName))
+                class="img-avatar"
                 src="{{ asset('images/avatars/'.$avatarName. '.svg') }}"
                 alt="Φατσούλα που έχει επιλέξει ο παίκτης"
                 @else
+                class="img-avatar"
                 src="{{ asset('images/avatars/no-avatar.svg') }}"
                 alt="Δεν έχει επιλεχθεί παίκτης"
                 @endif

@@ -87,6 +87,7 @@
 
 					/** KeyUp event listener for Key Assigner. */
 					function assignerKeyUpHandler(event) {
+						const allowedList = window.SwitcherKeys.allowedList;
 						// Override the default behavior of keys.
 						event.preventDefault();
 						// When a key is pressed, get its key value.
@@ -96,7 +97,6 @@
 						// @see https://www.toptal.com/developers/keycode/for/Space
 						if (event.key.length) {
 							const charCode = event.key.charCodeAt(0);
-							const allowedList = window.SwitcherKeys.allowedList;
 							if (event.key.length > 1 && charCode < 128) {
 								// Key is "named" (e.g. LeftAlt):
 								if (allowedList.indexOf(event.code) !== -1) {
