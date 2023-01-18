@@ -3,7 +3,7 @@
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Game board</title>
-    <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
+    <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet" />
 </head>
 <body>
 <div id="app" class="d-flex align-items-center justify-content-center vh-100 w-100">
@@ -20,4 +20,10 @@
 </body>
 <script src="{{ mix('js/vue.js') }}" type="text/javascript"></script>
 <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
+<script>
+    history.pushState(null, null, location.href);
+    window.onpopstate = function() {
+        history.go(1);
+    };
+</script>
 </html>

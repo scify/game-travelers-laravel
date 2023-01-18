@@ -10,7 +10,7 @@
     @endsection
 
     <form method="post"
-        action="%PLACEHOLDER%" {{-- dont forget the back button! --}}
+        action="{{ route('select.continue', [ request()->player_id, request()->from, request()->game_id ]) }}" {{-- dont forget the back button! --}}
     >
         @csrf
 
@@ -55,7 +55,7 @@
                     <div class="d-flex flex-auto">
                         <a
                             class="btn btn-primary btn-circle ms-auto responsive-expand"
-                            href="%PLACEHOLDER%"
+                            href="{{ route("select.player", [0,"user", 0]) }}"
                             id="backButton"
                             data-tabindex="1000"
                             tabindex="1000"
