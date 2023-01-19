@@ -5,37 +5,58 @@
 			backgroundImage: 'url(\'' + this.getSizePath() + 'board.png\')',
 		}"
 	>
-		<Transition name="fade">
+		<div v-if="this.gameEnd == 0">
+			<Transition name="fade">
+				<img
+					v-if="this.showPawn1"
+					v-bind:src="this.computePawn1Src"
+					style="z-index: 2; position: absolute; display: block"
+				/>
+			</Transition>
+			<div v-if="this.mode > 1">
+				<Transition name="fade">
+					<img
+						v-if="this.showPawn2"
+						v-bind:src="this.computePawn2Src"
+						style="z-index: 2; position: absolute; display: block"
+					/>
+				</Transition>
+			</div>
 			<img
-				v-if="this.showPawn1"
-				v-bind:src="this.computePawn1Src"
+				v-bind:src="this.computeLeftSrc"
 				style="z-index: 2; position: absolute; display: block"
 			/>
-		</Transition>
-		<Transition name="fade">
+			<div v-if="this.mode > 1">
+				<img
+					v-bind:src="this.computeRightSrc"
+					style="z-index: 2; position: absolute; display: block"
+				/>
+			</div>
 			<img
-				v-if="this.showPawn2"
-				v-bind:src="this.computePawn2Src"
+				:class="{
+					shake: this.rollingAnimation,
+					moveUpDown: this.rollAnimation,
+				}"
+				v-bind:src="this.center_src"
 				style="z-index: 2; position: absolute; display: block"
 			/>
-		</Transition>
-		<img
-			v-bind:src="this.computeLeftSrc"
-			style="z-index: 2; position: absolute; display: block"
-		/>
-		<img
-			v-bind:src="this.computeRightSrc"
-			style="z-index: 2; position: absolute; display: block"
-		/>
-
-		<img
-			:class="{
-				shake: this.rollingAnimation,
-				moveUpDown: this.rollAnimation,
-			}"
-			v-bind:src="this.center_src"
-			style="z-index: 2; position: absolute; display: block"
-		/>
+		</div>
+		<div v-if="this.gameEnd == 1">
+			<Transition name="fade">
+				<img
+					v-bind:src="this.getWinSrc()"
+					style="z-index: 10; position: absolute; display: block"
+				/>
+			</Transition>
+		</div>
+		<div v-if="this.gameEnd == -1">
+			<Transition name="fade">
+				<img
+					v-bind:src="this.getLoseSrc()"
+					style="z-index: 10; position: absolute; display: block"
+				/>
+			</Transition>
+		</div>
 	</div>
 </template>
 
@@ -94,6 +115,7 @@ export default {
 			rollingAnimation: false,
 			showPawn1: false,
 			showPawn2: false,
+			gameEnd: 0,
 		};
 	},
 	methods: {
@@ -102,6 +124,12 @@ export default {
 		},
 		getSizePath() {
 			return this.getBoardPath() + "size_" + this.boardSize + "/";
+		},
+		getWinSrc() {
+			return this.getBoardPath() + "win.png";
+		},
+		getLoseSrc() {
+			return this.getBoardPath() + "lose.png";
 		},
 		make_location_blue(pos) {
 			alert(pos);
@@ -169,7 +197,10 @@ export default {
 				location_1: this.pos1,
 				location_2: this.pos2,
 				game_phase: this.gamePhase,
+				dice_type: this.diceType,
+				difficulty: this.difficulty,
 			};
+			let board = this;
 			axios
 				.post(this.backendUrl, data, {
 					headers: {
@@ -180,7 +211,9 @@ export default {
 					if (response.status > 300) {
 						console.log(response);
 					} else {
-						alert(JSON.stringify(response.data, null, 2));
+						//alert(JSON.stringify(response.data, null, 2));
+						board.gameEnd = response.data.gameEnded;
+						board.gameEnd = -1;
 					}
 				})
 				.catch(function (error) {
@@ -272,7 +305,7 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-	transition: opacity 0.9s;
+	transition: opacity 1s;
 }
 
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
