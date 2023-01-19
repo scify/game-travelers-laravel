@@ -6,6 +6,13 @@
 		}"
 	>
 		<div v-if="this.gameEnd === 0">
+			<Transition name="fade_blue">
+				<img
+					v-if="this.blue_position_show"
+					v-bind:src="this.blue_position_src"
+					style="z-index: 2; position: absolute; display: block"
+				/>
+			</Transition>
 			<Transition name="fade">
 				<img
 					v-if="this.showPawn1"
@@ -110,6 +117,9 @@ export default {
 			firstPlayerTurn: this.gameData["firstPlayerTurn"],
 			gamePhase: this.gameData["game_phase"], // 1 roll, 2 move, 3 draw
 			center_src: "",
+			blue_position_src: "",
+			blue_position_show: false,
+			blue_blinking_allowed: false,
 			rollAnimation: false,
 			rollingAnimation: false,
 			showPawn1: false,
@@ -130,8 +140,38 @@ export default {
 		getLoseSrc() {
 			return this.getBoardPath() + "lose.png";
 		},
-		make_location_blue(pos) {
-			alert(pos);
+		activate_blue_rotation(start, end, current, second) {
+			if (this.blue_blinking_allowed) {
+				this.blue_position_src =
+					this.getSizePath() + "blue_positions/" + current + ".png";
+				this.blue_position_show = true;
+				window.setTimeout(() => {
+					this.blue_position_show = false;
+				}, 500);
+				window.setTimeout(() => {
+					let nextSecond = second + 1;
+					if (nextSecond === this.scanningSpeed) {
+						nextSecond = 0;
+						let next_current = current + 1;
+						if (next_current > end) next_current = start;
+						this.activate_blue_rotation(
+							start,
+							end,
+							next_current,
+							nextSecond
+						);
+					} else
+						this.activate_blue_rotation(
+							start,
+							end,
+							current,
+							nextSecond
+						);
+				}, 1000);
+			} else {
+				this.blue_position_show = false;
+				this.blue_position_src = "";
+			}
 		},
 		key_press(e) {
 			let key = e.key;
@@ -142,11 +182,6 @@ export default {
 			//console.log("my object: %o", this.playerData);
 			//alert(e.keyCode);
 			this.sendToBackend();
-			this.rollingAnimation = true;
-			this.rollAnimation = false;
-			window.setTimeout(() => {
-				this.rollingAnimation = false;
-			}, 1000);
 		},
 		setCenter(isDice, value) {
 			let src = this.getBoardPath() + "center/";
@@ -175,18 +210,69 @@ export default {
 				else src += "m";
 				src += Math.abs(value);
 			}
-			return src + ".png";
+			this.center_src = src + ".png";
+		},
+		activateHelp(newPosition) {
+			let pos = this.pos1;
+			if (!this.firstPlayerTurn) pos = this.pos2;
+			if (this.movementMode === 1) {
+				this.blue_blinking_allowed = true;
+				this.activate_blue_rotation(
+					newPosition,
+					newPosition,
+					newPosition,
+					0
+				);
+			} else if (this.movementMode === 2) {
+				this.blue_blinking_allowed = true;
+				this.activate_blue_rotation(
+					newPosition,
+					newPosition,
+					newPosition,
+					0
+				);
+				window.setTimeout(() => {
+					this.blue_blinking_allowed = false;
+				}, 3000);
+				window.setTimeout(() => {
+					this.blue_blinking_allowed = true;
+					this.activate_blue_rotation(
+						pos + 1,
+						newPosition,
+						pos + 1,
+						0
+					);
+				}, 4000);
+			} else if (this.movementMode === 3) {
+				this.blue_blinking_allowed = true;
+				let max = pos + 6;
+				let max_value = 15;
+				if (this.boardSize === 2) max_value = 30;
+				else if (this.boardSize === 3) max_value = 45;
+				if (max > max_value) max = max_value;
+				this.activate_blue_rotation(pos + 1, max, pos + 1, 0);
+			}
+		},
+		applyDiceRoll(newPosition, diceResult) {
+			this.setCenter(true, diceResult);
+			this.activateHelp(diceResult);
+		},
+		applyDiceMovement() {
+			//
+		},
+		applyCardMovement() {
+			//
 		},
 		init() {
-			if (this.gamePhase == 1) {
-				// need to roll
-				this.center_src = this.setCenter(this.diceType, 0);
-				window.setTimeout(() => {
-					this.showPawn1 = true;
-					this.showPawn2 = true;
+			// need to roll
+			this.setCenter(this.diceType, 0);
+			window.setTimeout(() => {
+				this.showPawn1 = true;
+				this.showPawn2 = true;
+				if (this.gamePhase == 1) {
 					this.rollAnimation = true;
-				}, 500);
-			}
+				}
+			}, 500);
 		},
 		sendToBackend() {
 			let data = {
@@ -199,7 +285,11 @@ export default {
 				dice_type: this.diceType,
 				difficulty: this.difficulty,
 			};
-			let board = this;
+			let self = this;
+			if (self.gamePhase === 1) {
+				this.rollingAnimation = true;
+				this.rollAnimation = false;
+			}
 			axios
 				.post(this.backendUrl, data, {
 					headers: {
@@ -210,13 +300,18 @@ export default {
 					if (response.status > 300) {
 						console.log(response);
 					} else {
-						alert(JSON.stringify(response.data, null, 2));
-						board.gameEnd = response.data.gameEnded;
-						if (board.gameEnd !== 0) {
+						self.gameEnd = response.data.gameEnded;
+						if (self.gameEnd !== 0) {
 							alert(JSON.stringify(response.data, null, 2));
 						} else {
-							if (board.gamePhase == 1) {
-								alert(JSON.stringify(response.data, null, 2));
+							if (self.gamePhase === 1) {
+								window.setTimeout(() => {
+									self.applyDiceRoll(
+										response.data.newPosition,
+										response.data.diceResult
+									);
+									self.rollingAnimation = false;
+								}, 1000);
 							}
 						}
 					}
@@ -314,6 +409,15 @@ export default {
 }
 
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+	opacity: 0;
+}
+
+.fade_blue-enter-active,
+.fade_blue-leave-active {
+	transition: opacity 0.5s;
+}
+
+.fade_blue-enter, .fade_blue-leave-to /* .fade_blue-leave-active below version 2.1.8 */ {
 	opacity: 0;
 }
 </style>
