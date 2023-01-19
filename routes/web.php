@@ -184,5 +184,10 @@ Route::middleware('auth')->group(function () {
         return view('logoutDummy');
     })->name('dummy.logout');
 
-    Route::get('board/{player_id}/{game_id}', [BoardController::class, 'play'])->name('board')->middleware(EnsureIdsAreValid::class);
+    Route::get('board/{player_id}/{game_id}', [BoardController::class, 'play'])
+        ->name('board')->middleware(EnsureIdsAreValid::class);
+
+    Route::post('board/fromVue', [BoardController::class, 'fromVue'])
+        ->name('to.backend');
+
 });

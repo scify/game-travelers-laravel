@@ -243,12 +243,15 @@ class SetupGameController extends Controller
             return abort(403, 'Unauthorized action.');
         }
 
+        $players = $this->playerRepository->allWhere(['id' => $player_id], ['board_size']);
+        $board_size = $players[0]->board_size;
+
         $selected_option = (int) $request->only('option')['option'];
         $tutorial = true;
         if ($selected_option == 2) {
             $tutorial = false;
         }
-        $entry = ['use_tutorial' => $tutorial, 'started' => true];
+        $entry = ['use_tutorial' => $tutorial, 'started' => true, 'selected_board_size' => $board_size];
         if ($game_id == null) {
             return abort(403, 'Unauthorized action.');
         }

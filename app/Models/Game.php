@@ -10,7 +10,7 @@ class Game extends Model
     protected $table = 'games';
 
     protected $fillable = [
-        'id', 'user_id', 'player_id', 'board_id', 'mode_id', 'pawn_id_1', 'pawn_id_2', 'use_tutorial', 'location_1', 'location_2', 'active', 'first_player_turn', 'started',
+        'id', 'user_id', 'player_id', 'board_id', 'mode_id', 'pawn_id_1', 'pawn_id_2', 'use_tutorial', 'location_1', 'location_2', 'active', 'first_player_turn', 'started', 'selected_board_size', 'game_phase',
     ];
 
     public function user(): BelongsTo

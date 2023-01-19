@@ -5,14 +5,20 @@
 			backgroundImage: 'url(\'' + this.getSizePath() + 'board.png\')',
 		}"
 	>
-		<img
-			v-bind:src="this.computePawn1Src"
-			style="z-index: 2; position: absolute; display: block"
-		/>
-		<img
-			v-bind:src="this.computePawn2Src"
-			style="z-index: 2; position: absolute; display: block"
-		/>
+		<Transition name="fade">
+			<img
+				v-if="this.showPawn1"
+				v-bind:src="this.computePawn1Src"
+				style="z-index: 2; position: absolute; display: block"
+			/>
+		</Transition>
+		<Transition name="fade">
+			<img
+				v-if="this.showPawn2"
+				v-bind:src="this.computePawn2Src"
+				style="z-index: 2; position: absolute; display: block"
+			/>
+		</Transition>
 		<img
 			v-bind:src="this.computeLeftSrc"
 			style="z-index: 2; position: absolute; display: block"
@@ -23,7 +29,10 @@
 		/>
 
 		<img
-			:class="{ shake: this.dice_animation }"
+			:class="{
+				shake: this.rollingAnimation,
+				moveUpDown: this.rollAnimation,
+			}"
 			v-bind:src="this.center_src"
 			style="z-index: 2; position: absolute; display: block"
 		/>
@@ -42,6 +51,7 @@ export default {
 		this.init();
 	},
 	props: {
+		backendUrl: String,
 		playerId: Number,
 		gameId: Number,
 		playerData: {
@@ -67,7 +77,7 @@ export default {
 			maxMistakes: this.playerData["help_after_x_mistakes"],
 			scanningSpeed: this.playerData["scanning_speed"],
 			diceType: this.playerData["dice_type"],
-			boardSize: this.playerData["board_size"],
+			boardSize: this.gameData["board_size"],
 			difficulty: this.playerData["difficulty"],
 			movementMode: this.playerData["movement_mode"],
 			board: this.gameData["board"],
@@ -78,8 +88,12 @@ export default {
 			pos1: this.gameData["pos1"],
 			pos2: this.gameData["pos2"],
 			firstPlayerTurn: this.gameData["firstPlayerTurn"],
+			gamePhase: this.gameData["game_phase"], // 1 roll, 2 move, 3 draw
 			center_src: "",
-			dice_animation: false,
+			rollAnimation: false,
+			rollingAnimation: false,
+			showPawn1: false,
+			showPawn2: false,
 		};
 	},
 	methods: {
@@ -100,9 +114,11 @@ export default {
 			//console.log(String.fromCharCode(e.keyCode));
 			//console.log("my object: %o", this.playerData);
 			//alert(e.keyCode);
-			this.dice_animation = true;
+			this.sendToBackend();
+			this.rollingAnimation = true;
+			this.rollAnimation = false;
 			window.setTimeout(() => {
-				this.dice_animation = false;
+				this.rollingAnimation = false;
 			}, 1000);
 		},
 		setCenter(isDice, value) {
@@ -135,7 +151,41 @@ export default {
 			return src + ".png";
 		},
 		init() {
-			this.center_src = this.setCenter(this.diceType, 0);
+			if (this.gamePhase == 1) {
+				// need to roll
+				this.center_src = this.setCenter(this.diceType, 0);
+				window.setTimeout(() => {
+					this.showPawn1 = true;
+					this.showPawn2 = true;
+					this.rollAnimation = true;
+				}, 500);
+			}
+		},
+		sendToBackend() {
+			let data = {
+				player_id: this.playerId,
+				game_id: this.gameId,
+				first_player_turn: this.firstPlayerTurn,
+				location_1: this.pos1,
+				location_2: this.pos2,
+				game_phase: this.gamePhase,
+			};
+			axios
+				.post(this.backendUrl, data, {
+					headers: {
+						Accept: "application/json",
+					},
+				})
+				.then(function (response) {
+					if (response.status > 300) {
+						console.log(response);
+					} else {
+						alert(JSON.stringify(response.data, null, 2));
+					}
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
 		},
 	},
 	computed: {
@@ -204,5 +254,28 @@ export default {
 	60% {
 		transform: translate3d(6px, 2px, 0);
 	}
+}
+
+.moveUpDown {
+	animation: moveUpDown 1s linear infinite;
+}
+
+@keyframes moveUpDown {
+	0%,
+	100% {
+		transform: translateY(5px);
+	}
+	50% {
+		transform: translateY(-5px);
+	}
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.9s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+	opacity: 0;
 }
 </style>

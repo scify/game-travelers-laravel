@@ -10,6 +10,7 @@
     <div style="height: 768px; width: 1366px" class="border border-dark no-gutters">
         <board-component
             :player-id='{{ $player_id }}'
+            :backend-url="'{{ route('to.backend') }}'"
             :game-id='{{ $game_id }}'
             :player-data='@json($player_data)'
             :game-data='@json($game_data)'>
