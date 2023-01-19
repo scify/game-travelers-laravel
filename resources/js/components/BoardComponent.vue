@@ -5,7 +5,7 @@
 			backgroundImage: 'url(\'' + this.getSizePath() + 'board.png\')',
 		}"
 	>
-		<div v-if="this.gameEnd == 0">
+		<div v-if="this.gameEnd === 0">
 			<Transition name="fade">
 				<img
 					v-if="this.showPawn1"
@@ -41,22 +41,21 @@
 				style="z-index: 2; position: absolute; display: block"
 			/>
 		</div>
-		<div v-if="this.gameEnd == 1">
-			<Transition name="fade">
-				<img
-					v-bind:src="this.getWinSrc()"
-					style="z-index: 10; position: absolute; display: block"
-				/>
-			</Transition>
-		</div>
-		<div v-if="this.gameEnd == -1">
-			<Transition name="fade">
-				<img
-					v-bind:src="this.getLoseSrc()"
-					style="z-index: 10; position: absolute; display: block"
-				/>
-			</Transition>
-		</div>
+
+		<Transition name="fade">
+			<img
+				v-if="this.gameEnd === 1"
+				v-bind:src="this.getWinSrc()"
+				style="z-index: 10; position: absolute; display: block"
+			/>
+		</Transition>
+		<Transition name="fade">
+			<img
+				v-if="this.gameEnd === -1"
+				v-bind:src="this.getLoseSrc()"
+				style="z-index: 10; position: absolute; display: block"
+			/>
+		</Transition>
 	</div>
 </template>
 
@@ -120,7 +119,7 @@ export default {
 	},
 	methods: {
 		getBoardPath() {
-			return "/images/board/board_" + this.board + "/";
+			return "/images/boards/board_" + this.board + "/";
 		},
 		getSizePath() {
 			return this.getBoardPath() + "size_" + this.boardSize + "/";
@@ -211,9 +210,15 @@ export default {
 					if (response.status > 300) {
 						console.log(response);
 					} else {
-						//alert(JSON.stringify(response.data, null, 2));
+						alert(JSON.stringify(response.data, null, 2));
 						board.gameEnd = response.data.gameEnded;
-						board.gameEnd = -1;
+						if (board.gameEnd !== 0) {
+							alert(JSON.stringify(response.data, null, 2));
+						} else {
+							if (board.gamePhase == 1) {
+								alert(JSON.stringify(response.data, null, 2));
+							}
+						}
 					}
 				})
 				.catch(function (error) {

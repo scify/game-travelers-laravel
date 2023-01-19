@@ -101,7 +101,7 @@ class BoardController extends Controller
                 $dice_result = $new_position - $active_player_pos;
                 if ($dice_type == 3)
                     $dice_result = $this->getColourIdOfPos($new_position);
-                return response(['gameEnded' => 0, 'newPosition' => $new_position, 'dice_result' => $dice_result]);
+                return response(['gameEnded' => 0, 'newPosition' => $new_position, 'diceResult' => $dice_result]);
             } else if ($game_phase == 2) { // move performed by die roll in the front-end
                 //check if you must draw card
                 $colour_id = $this->getColourIdOfPos($active_player_pos);
