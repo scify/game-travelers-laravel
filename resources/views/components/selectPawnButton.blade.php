@@ -1,9 +1,9 @@
 <!-- /resources/views/components/selectPawnButton.blade.php -->
 @php
-    if ($pawnId == 12) { // @todo: make it a 6 and test.
-        $selected_by_other_player = true;
-    }
     if (!isset($board)) {
+        $board = 1;
+    }
+    if ($pawnId >= 6) {
         $board = 1;
     }
     if (!isset($playerOnePawnId)) {
@@ -28,8 +28,8 @@
     >
         <img
             class="pawn-img"
-            srcset="{{ asset('images/pawns/' . $board . '/' . $asset . '@@2x.png') }} 2x"
-            src="{{ asset('images/pawns/' . $board . '/' . $asset . '.png') }}"
+            srcset="{{ asset('images/pawns/board_' . $board . '/' . $asset . '@@2x.png') }} 2x"
+            src="{{ asset('images/pawns/board_' . $board . '/' . $asset . '.png') }}"
             width="136" height="212"
             alt="{{ $alt ?? 'Προεπισκόπηση πιονιού' }}"
         />

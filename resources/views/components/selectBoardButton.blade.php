@@ -1,18 +1,13 @@
 <!-- /resources/views/components/selectBoardButton.blade.php -->
-@php
-    if (!isset($asset)) {
-        $asset = "board-island";
-    }
-@endphp
 <div class="col board">
     <button
         class="btn btn-board board-button @isset($comingsoon)disabled @endisset"
         tabindex="{{ $tabindex ?? '-1' }}"
         data-tabindex="{{ $tabindex ?? '-1' }}"
         name="board"
-        value="{{ $board ?? '0' }}"
+        value="{{ $boardId ?? '0' }}"
         type="submit"
-        label="{{ $title ?? 'Πίστα' }}"
+        label="{{ $name ?? __("messages.board") }}"
         @isset($comingsoon)
         {{-- For not yet available boards add atribute 'disabled': --}}
         disabled
@@ -23,13 +18,13 @@
             srcset="{{ asset('images/boards/' . $asset . '@@2x.png') }} 2x"
             src="{{ asset('images/boards/' . $asset . '.png') }}"
             width="352" height="244"
-            alt="{{ $alt ?? 'Προεπισκόπηση πίστας' }}"
+            alt="{{ $alt ?? __("messages.board_preview") }}"
         />
-        <span class="board-label">{{ $title ?? 'Πίστα' }}</span>
+        <span class="board-label">{{ $name ?? 'Πίστα' }}</span>
         @isset($comingsoon)
         <span class="coming-soon-wrapper">
             <span class="coming-soon">
-                <strong>ΠΡΟΣΕΧΩΣ!</strong>
+                <strong>{{ __("messages.coming_soon_teaser")}}!</strong>
             </span>
         </span>
         @endisset
