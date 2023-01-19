@@ -19,8 +19,14 @@
 
 		/** Resets the Key Assigners on the webpage.
 		 * Iterates through the actual form inputs and sets the values of the
-		 * corresponding Key Assigners. */
-		function resetKeyAssigners() {
+		 * corresponding Key Assigners.
+		 *
+		 * @param {boolean} [resetActive=true]
+		 * Defaults to true in order to also reset active Key Assigners. If set
+		 * to false, Active Key Assigners are partially resetted (their text
+		 * value remains unalatered).
+		 */
+		function resetKeyAssigners(resetActive = true) {
 			if (!keyAssignersInputs) return;
 			for (const resetInput of keyAssignersInputs) {
 				if (resetInput.value) {
@@ -29,11 +35,21 @@
 						`[data-sets-input=${resetInputId}]`
 					);
 					if (keyAssignerButton) {
+						keyAssignerButton.classList.remove("invalid");
 						keyAssignerButton.setAttribute(
 							"data-key-selected",
 							resetInput.value
 						);
-						keyAssignerButton.textContent = resetInput.value;
+						if (resetActive) {
+							keyAssignerButton.textContent = resetInput.value;
+						} else {
+							if (
+								!keyAssignerButton.classList.contains("active")
+							) {
+								keyAssignerButton.textContent =
+									resetInput.value;
+							}
+						}
 					}
 				}
 			}
@@ -42,18 +58,23 @@
 		/** Adds a visual alert (warning) to a Key Assigner if the key selected
 		 * by the user is invalid. */
 		function invalidateKeyAssigner(keyAssigner) {
+			let keyAssignerText;
+			keyAssignerText = keyAssigner.textContent;
+			keyAssigner.textContent = window.trans(
+				"messages.switcher.set_button_invalid"
+			);
 			if (!keyAssigner.classList.contains("invalid")) {
 				keyAssigner.classList.add("invalid");
-				timeoutId = setTimeout(
-					() => keyAssigner.classList.remove("invalid"),
-					1200
-				);
+				timeoutId = setTimeout(() => {
+					keyAssigner.classList.remove("invalid");
+					keyAssigner.textContent = keyAssignerText;
+				}, 1200);
 			} else {
 				clearTimeout(timeoutId);
-				timeoutId = setTimeout(
-					() => keyAssigner.classList.remove("invalid"),
-					1200
-				);
+				timeoutId = setTimeout(() => {
+					keyAssigner.classList.remove("invalid");
+					keyAssigner.textContent = keyAssignerText;
+				}, 1200);
 			}
 		}
 
@@ -66,14 +87,14 @@
 					function assignerClickHandler(event) {
 						// Should not abort if the click is on the actual trigger.
 						if (event.target !== keyAssigner) {
-							console.log("event logged");
+							// console.log("event logged");
 							event.stopPropagation();
-							console.log("aborted");
+							// console.log("aborted");
 							keyAssigner.classList.remove("active");
-							// Revert to default though :(
 							keyAssigner.textContent =
 								keyAssigner.getAttribute("data-key-default");
-							resetKeyAssigners();
+							// Revert to default though :(
+							resetKeyAssigners(false);
 							window.removeEventListener(
 								"keyup",
 								assignerKeyUpHandler
@@ -131,6 +152,14 @@
 								}
 							}
 						}
+						if (returnKey.indexOf("Enter") !== -1) {
+							if (
+								keyAssigner.classList.contains("first-trigger")
+							) {
+								keyAssigner.classList.remove("first-trigger");
+								return false;
+							}
+						}
 						if (returnKey === "Error") {
 							console.log("Error!");
 							returnKey =
@@ -180,10 +209,13 @@
 							assignerKeyUpHandler
 						);
 					}
-
-					keyAssigner.textContent = "όρισε πλήκτρο";
+					// Set keyAssigner to active
 					keyAssigner.classList.add("active");
-					// Cancel the whole thing by a single click of a button:
+					keyAssigner.classList.add("first-trigger");
+					keyAssigner.textContent = window.trans(
+						"messages.switcher.set_button"
+					);
+					// Cancel the whole thing by a single click of the mouse:
 					window.addEventListener("click", assignerClickHandler);
 					// When a button is clicked, ask user to press a key:
 					window.addEventListener("keyup", assignerKeyUpHandler);

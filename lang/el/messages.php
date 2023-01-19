@@ -69,6 +69,8 @@ return [
         'help_automatic_button_select' => 'Η επιλογή της υποδεδειγμένης ενέργειας πραγματοποιείται με το πλήκτρο:',
         'help_manual_button_navigate' => 'Η μετάβαση στην επόμενη διαθέσιμη επιλογή γίνεται με το πλήκτρο:',
         'help_manual_button_select' => 'Η επικύρωση της υποδεδειγμένης επιλογής γίνεται με το πλήκτρο:',
+        'set_button' => 'όρισε πλήκτρο', // press key
+        'set_button_invalid' => 'μη αποδεκτό', // invalid button (please keep it short)
     ],
 
     // Most of the following strings have already been moved to validation as

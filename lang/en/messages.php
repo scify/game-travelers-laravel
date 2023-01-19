@@ -50,10 +50,28 @@ return [
     'registration_prompt' => 'New user?', // New user?
     'stay_online' => 'Keep me logged-in',
 
-    /* New game */
+    /* Game related language files */
+    'coming_soon_teaser' => 'COMING SOON', // Coming soon in all-caps
     'new_game' => 'New Game',
+    /* Boards */
+    'board' => 'Board', // Board
+    'board_preview' => 'Board preview', // Preview board
+    'select_board' => 'Select Board', // Choose board
+    /* Pawns */
     'select_pawn' => 'Choose your pawn', // Choose Player 1 Pawn
     'select_pawn_coplayer' => 'Choose your co-player\'s pawn', // Choose Player 2 Pawn
+
+    /* Switcher */
+    'switcher' => [
+        'break' => 'Break',
+        'continue' => 'Continue',
+        'help_automatic' => 'If you like to temporarily stop auto-scanning please select «Break».',
+        'help_automatic_button_select' => 'To make a selection press:',
+        'help_manual_button_navigate' => 'To move/navigate press:',
+        'help_manual_button_select' => 'To make a selection press:',
+        'set_button' => 'press a key', // press key
+        'set_button_invalid' => 'invalid key', // invalid button (please keep it short)
+    ],
 
     // Most of the following strings have already been moved to validation as
     // custom rules and have been commented out from this file.

@@ -24,7 +24,7 @@ class GameRepository extends Repository
     */
     public function getBoards()
     {
-        $preview_path = 'images/boards';
+        $public_path = 'images/boards';
         $preview_width = 352;
         $preview_height = 244;
 
@@ -35,9 +35,8 @@ class GameRepository extends Repository
                 'description' => 'Πίστα νησιού',
                 'comingsoon' => null,
                 'preview' => [
-                    'asset' => 'board-island', // extensions: .png, @2x.png
+                    'asset' => $public_path . '/board_1/preview', // extensions: .png, @2x.png
                     'alt' => 'Προεπισκόπηση πίστας νησιού',
-                    'public_path' => $preview_path,
                     'width' => $preview_width,
                     'height' => $preview_height,
                 ],
@@ -48,9 +47,8 @@ class GameRepository extends Repository
                 'description' => 'Πίστα βουνού',
                 'comingsoon' => null,
                 'preview' => [
-                    'asset' => 'board-mountain', // extensions: .png, @2x.png
-                    'alt' => 'Προεπισκόπηση πίστας νησιού',
-                    'public_path' => $preview_path,
+                    'asset' => $public_path . '/board_2/preview', // extensions: .png, @2x.png
+                    'alt' => 'Προεπισκόπηση πίστας βουνού',
                     'width' => $preview_width,
                     'height' => $preview_height,
                 ],
@@ -61,9 +59,9 @@ class GameRepository extends Repository
                 'description' => 'Πίστα πόλης',
                 'comingsoon' => true,
                 'preview' => [
-                    'asset' => 'board-island', // extensions: .png, @2x.png
+                    // @todo: Fix (replace) the missing asset.
+                    'asset' => $public_path . '/board_2/preview', // extensions: .png, @2x.png
                     'alt' => 'Προεπισκόπηση πίστας πόλης',
-                    'public_path' => $preview_path,
                     'width' => $preview_width,
                     'height' => $preview_height,
                 ],

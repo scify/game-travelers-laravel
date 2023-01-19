@@ -15,8 +15,8 @@
     >
         <img
             class="board-img"
-            srcset="{{ asset('images/boards/' . $asset . '@@2x.png') }} 2x"
-            src="{{ asset('images/boards/' . $asset . '.png') }}"
+            srcset="{{ asset($asset . '@@2x.png') }} 2x"
+            src="{{ asset($asset . '.png') }}"
             width="352" height="244"
             alt="{{ $alt ?? __("messages.board_preview") }}"
         />
