@@ -33,7 +33,6 @@ class BoardController extends Controller
             'help_after_x_mistakes' => $player[0]->help_after_x_mistakes,
             'scanning_speed' => $player[0]->scanning_speed,
             'dice_type' => $player[0]->dice_type,
-            'board_size' => $player[0]->board_size,
             'difficulty' => $player[0]->difficulty,
             'movement_mode' => $player[0]->movement_mode
         ];
@@ -47,7 +46,34 @@ class BoardController extends Controller
             'pos1' => $game[0]->location_1,
             'pos2' => $game[0]->location_2,
             'firstPlayerTurn' => $game[0]->first_player_turn,
+            'board_size' => $game[0]->selected_board_size,
+            'game_phase' => $game[0]->game_phase,
         ];
         return view('board', ['player_id' => $player_id, 'game_id' => $game_id, 'player_data' => $player_data, 'game_data' => $game_data]);
     }
+
+    public function fromVue(Request $request)
+    {
+        $user_id = auth()->user()->id;
+        $player_id = $request->player_id;
+        $game_id = $request->game_id;
+        $first_player_turn = $request->first_player_turn;
+        $location_1 = $request->location_1;
+		$location_2 = $request->location_2;
+		$game_phase = $request->game_phase;
+
+        $games = $this->gameRepository->allWhere(['id' => $game_id]);
+        if (sizeof($games) != 1)
+            return response(['message' => 'Game not found'], 302);
+        else {
+            $game = $games[0];
+        }
+
+        return response([ 'game_phase' => 1]);
+    }
+
+    protected function rollDieForPlayer() {
+
+    }
+
 }
