@@ -50,10 +50,17 @@ return [
     'registration_prompt' => 'Νέος χρήστης;', // New user?
     'stay_online' => 'Μείνετε συνδεδεμένοι',
 
-    /* New game */
+    /* Game related language files */
+    'coming_soon_teaser' => 'ΠΡΟΣΕΧΩΣ', // Coming soon in all-caps
     'new_game' => 'Νέο παιχνίδι',
+    /* Boards */
+    'board' => 'Πίστα', // Board
+    'board_preview' => 'Προεπισκόπηση πίστας', // Preview board
+    'select_board' => 'Διάλεξε πίστα', // Choose board
+    /* Pawns */
     'select_pawn' => 'Διάλεξε πιόνι', // Choose Player 1 Pawn
     'select_pawn_coplayer' => 'Διάλεξε το πιόνι του συμπαίκτη σου', // Choose Player 2 Pawn
+
     /* Switcher */
     'switcher' => [
         'break' => 'Διακοπή',

@@ -4,8 +4,9 @@ Even though the characters are always the same, their images (appearance) differ
 
 Pawn images have been organized in sub-folders according to the board on which they belong to:
 
--   Folder [1](./1/) contains the images of the pawns for the 1st board of the game (the island).
--   Folder [2](./2/) will contain the images of the pawns for the 2nd board of the game (the mountain).
+-   Folder [1](./board_1/) contains the images of the pawns for the 1st board of the game (the island).
+-   Folder [2](./board_2/) will contain the images of the pawns for the 2nd board of the game (the mountain).
+-   Folder [3](./board_3/) will contain the images of the pawns for the 3rd board of the game (the city).
 
 ### 7 pawns, 14 images
 
@@ -23,10 +24,12 @@ The filenames should always be the same, regardless of the folder.
 6. pawn-zoumpoulia
 7. pawn-vrasidas
 
+    Note that pawn-zoumpoulia and pawn-vrasidas have no variations.
+
 ### Pawn order
 
 Note that these are not in random order: Their ordered list number corresponts to the ID used on the back-end to determine the user's selection.
 
 ### Pawn usage
 
-Currently, these images are not processed automatically and they have to manually be inserted on [gameSelectPawn.blade.php](../../views/gameSelectPawn.blade.php) as Buttons with the help of the [x-selectPawnButton](../../views/components/selectPawnButton.blade.php) component.
+All images are configured via [GameRepository.php](../../../app//Repository//Game/GameRepository.php).

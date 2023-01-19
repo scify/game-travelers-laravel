@@ -1,4 +1,8 @@
-<x-layout :title="'Διάλεξε πίστα | Νέο παιχνίδι | Ταξιδιώτες'" :hasUserMenu=true :background="'background-dash-up'">
+<x-layout
+    :title="__('messages.select_board') . ' | ' . __('messages.new_game') . ' | ' . __('messages.app_name')"
+    :hasUserMenu=true
+    :background="'background-dash-up'"
+>
     {{--This page was designed responsively in order to support any amount of
         boards, therefore you can simply use the x-selectBoardButton component
         as many times as needed. If one of the boards is not available for any
@@ -23,7 +27,7 @@
                     {{--Reserved for header navigation buttons.--}}
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">
-                    <h1 id="currentPageLabel">Διάλεξε πίστα</h1>
+                    <h1 id="currentPageLabel">{{ __('messages.select_board') }}</h1>
                     <p>
                         <strong class="fs-5" id="currentPageDescription">
                             {{--Use `&nbsp;` if no description.--}}
@@ -40,30 +44,19 @@
 
         <div class="section gameselect container-xxl pt-5 px-4 px-lg-6">
             <div class="row text-center gx-2 gy-5">
-                <x-selectBoardButton
-                    :asset="'board-island'"
-                    :title="'Νησί'"
-                    :board=1
-                    :alt="'Προεπισκόπηση πίστας νησιού'"
-                    :tabindex=1
-                    :comingsoon=null {{--Προσεχώς: true / null (default)--}}
-                />
-                <x-selectBoardButton
-                    {{--:asset="'board-island'"--}}
-                    :title="'Βουνό'"
-                    :board=2
-                    :alt="'Προεπισκόπηση πίστας βουνού'"
-                    :tabindex=2
-                    :comingsoon=true {{--Προσεχώς: true / null (default)--}}
-                />
-                <x-selectBoardButton
-                    {{--:asset="'board-island'"--}}
-                    :title="'Πόλη'"
-                    :board=3
-                    :alt="'Προεπισκόπηση πίστας πόλης'"
-                    :tabindex=3
-                    :comingsoon=true {{--Προσεχώς: true / null (default)--}}
-                />
+                @foreach ($boards as $board)
+                    @php
+                    $tabindex = $tabindex ?? $loop->index; $tabindex++;
+                    @endphp
+                    <x-selectBoardButton
+                        :board_id='$board["id"]'
+                        :name='$board["name"]'
+                        :comingsoon='$board["comingsoon"]'
+                        :asset='$board["preview"]["asset"]'
+                        :alt='$board["preview"]["alt"]'
+                        :tabindex=$tabindex
+                    />
+                @endforeach
             </div>
             <div class="row gx-0 pt-6 pt-sm-0 pt-md-0 pt-lg-0 pt-xl-6 pt-xxl-6">
                 <div class="col-12">

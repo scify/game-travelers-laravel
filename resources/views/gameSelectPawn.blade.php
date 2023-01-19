@@ -51,9 +51,9 @@
                     $tabindex = $tabindex ?? $loop->index; $tabindex++;
                     @endphp
                     <x-selectPawnButton
-                        :asset='$pawn["asset"]'
-                        :name='$pawn["name"]'
                         :pawn_id='$pawn["id"]'
+                        :name='$pawn["name"]'
+                        :asset='$pawn["asset"]'
                         :alt='$pawn["alt"]'
                         :tabindex=$tabindex
                         :board=$board

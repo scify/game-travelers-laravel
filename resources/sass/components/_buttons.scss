@@ -262,6 +262,9 @@ button.key-assigner.invalid {
     border-radius: 18px;
 }
 .board-img {
+    width: 352px;
+    height: 244px;
+    display: inline-block;
     background-color: var(--trvl-btn-bg);
     border-radius: 42px;
     box-shadow:
@@ -270,8 +273,6 @@ button.key-assigner.invalid {
         0 0.1em 0.1em rgba(var(--trvl-c-dark-rgb), 0.222);
     &.blank {
         display: block;
-        width: 352px;
-        height: 244px;
     }
 }
 // Board & Pawn labels
