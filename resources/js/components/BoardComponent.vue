@@ -322,6 +322,8 @@ export default {
 		},
 		applyCorrectMovement() {
 			this.ignoreInput = true;
+			this.blueIndex = this.newPosition;
+			this.blue_position_show = true;
 			if (this.firstPlayerTurn) {
 				this.showPawn1 = false;
 				this.pos1 = this.newPosition;
