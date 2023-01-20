@@ -24,8 +24,10 @@ mix.webpackConfig({
  |
  */
 
-mix.copyDirectory("resources/images", "public/images")
-	.js("resources/js/app.js", "public/js")
+mix.copyDirectory("resources/images", "public/images");
+mix.copyDirectory("resources/audio", "public/audio");
+
+mix.js("resources/js/app.js", "public/js")
 	.js("resources/js/vue.js", "public/js") // vue dependencies
 	.js("resources/js/settings/*.js", "public/js/functions/settings.js") // settings functions
 	.js("resources/js/switcher/*.js", "public/js/functions/switcher.js") // switcher functions
