@@ -9,14 +9,12 @@
 
          Pawns are linked to boards: The characters are the same, but they
          have different apperances (e.g. swiming suit on island, versus a
-         footer on mountain. Therefore, @todo x-selectPawnButton excpects a
-         board id and defaults to 1 for the island board.--}}
+         footer on mountain. Therefore, x-selectPawnButton excpects a board id
+         --}}
     @section('scripts')
-        <script>
-            window.Switcher = {{ Js::from($switcher)}};
-        </script>
-        <script src="{{ mix('js/functions/switcher.js') }}" defer></script>
+        <x-switcher :switcher=$switcher />
     @endsection
+
     <form method="post"
         action="{{ route('select.pawn', [ request()->player_id, request()->from, request()->game_id ]) }}"
     >

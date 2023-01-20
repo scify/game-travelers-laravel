@@ -5,10 +5,7 @@
         reason, it can be disabled by setting :comingsoon=true (instead of the
         default null).--}}
     @section('scripts')
-        <script>
-            window.Switcher = {{ Js::from($switcher)}};
-        </script>
-        <script src="{{ mix('js/functions/switcher.js') }}" defer></script>
+        <x-switcher :switcher=$switcher />
     @endsection
 
     <form method="post"

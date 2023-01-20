@@ -27,15 +27,15 @@
 
 <x-modalSettings
     :help="'DifficultyLevel'"  {{-- id --}}
-    :title="'Επίπεδο'"
+    :title="'Επίπεδο δυσκολίας'"
     :subtitle="'Το επίπεδο δυσκολίας για τον παίκτη.'"
 >
     <p>
-        <strong>Εύκολο</strong><br />
+        <strong>Κανονικό</strong><br />
         Τα ζάρια βοηθάνε τον παίκτη.
     </p>
     <p>
-        <strong>Κανονικό</strong><br />
+        <strong>Δύσκολο</strong><br />
         Τα ζάρια λειτουργούν κανονικά.
     </p>
 </x-modalSettings>

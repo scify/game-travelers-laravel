@@ -1,6 +1,7 @@
 <x-layoutBlank
     :title="__('messages.coming_soon') . ' | ' . __('messages.app_name')"
-    :description="'Ταξιδιώτες: Προσεχώς από τη SciFY'">
+    :description="'Ταξιδιώτες: Προσεχώς από τη SciFY'"
+>
 
     <div class="container-fluid">
         <div class="d-flex flex-auto">
@@ -8,4 +9,4 @@
         </div>
     </div>
 
-</x-layout>
+</x-layoutBlank>

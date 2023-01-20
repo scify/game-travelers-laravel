@@ -12,11 +12,9 @@
          footer on mountain. Therefore, @todo x-selectPawnButton excpects a
          board id and defaults to 1 for the island board.--}}
     @section('scripts')
-        <script>
-            window.Switcher = {{ Js::from($switcher)}};
-        </script>
-        <script src="{{ mix('js/functions/switcher.js') }}" defer></script>
+        <x-switcher :switcher=$switcher />
     @endsection
+
     <form method="post"
         action="{{ route('select.pawnTwo', [ request()->player_id, request()->from, request()->game_id ]) }}"
     >
