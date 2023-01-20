@@ -6,10 +6,7 @@
          :comingsoon=true (this will not add a coming soon teaser as usual, but
          it will simply disable the option instead).--}}
     @section('scripts')
-        <script>
-            window.Switcher = {{ Js::from($switcher)}};
-        </script>
-        <script src="{{ mix('js/functions/switcher.js') }}" defer></script>
+        <x-switcher :switcher=$switcher />
     @endsection
 
     <form method="post"

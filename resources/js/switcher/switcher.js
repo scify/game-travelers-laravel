@@ -84,7 +84,7 @@ function switcher() {
 
 	// Switcher enabled.
 	console.log(
-		`Switcher enabled (mode: ${controlMode}, s: ${selectionButton}, n: ${navigationButton})`
+		`Switcher active (mode: ${controlMode} ${scanningSpeed}s, s: ${selectionButton}, n: ${navigationButton})`
 	);
 
 	function removeSwitcherClasses() {
@@ -172,68 +172,16 @@ function switcher() {
 	}
 
 	function switcherModal() {
-		let helpText, helpButtons;
-		var escapeModal = document.getElementById("escapeModal");
-		if (!escapeModal) {
-			var newDiv = document.createElement("div");
-			newDiv.setAttribute("id", "escapeModal");
-			newDiv.setAttribute("tabindex", "-1");
-			newDiv.setAttribute("class", "modal fade");
-			if (controlMode === 1) {
-				// Automatic help
-				helpText = `
-<p>
-${window.trans("messages.switcher.help_automatic")}
-</p>
-<p>
-${window.trans("messages.switcher.help_automatic_button_select")}
-<kbd>${selectionButton}</kbd>.
-</p>`;
-				helpButtons = `
-<button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="clearInterval(${intervalId});return false">
-${window.trans("messages.switcher.break")}
-</button>
-<button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-${window.trans("messages.switcher.continue")}
-</button>`;
-			} else {
-				helpText = `
-<p>
-${window.trans("messages.switcher.help_manual_button_navigate")}
-<kbd>${navigationButton}</kbd>.
-</p>
-<p>
-${window.trans("messages.switcher.help_manual_button_select")}
-<kbd>${selectionButton}</kbd>.
-</p>`;
-				helpButtons = `
-<button type='button' class='btn btn-primary' data-bs-dismiss='modal'>
-${window.trans("messages.switcher.continue")}
-</button>`;
-			}
-
-			newDiv.innerHTML = `
-<div class="modal-dialog modal-dialog-centered"><div class="modal-content">
-<div class="modal-body">
-${helpText}
-</div>
-<div class="modal-footer">
-${helpButtons}
-</div>
-</div></div>`;
-			document.body.appendChild(newDiv);
-			escapeModal = newDiv;
-		}
-		console.log("before");
-		var bsEscapeModal =
+		var switcherModalEl = document.getElementById("switcherModal");
+		var bsSwitcherModal =
 			// eslint-disable-next-line no-undef
-			bootstrap.Modal.getOrCreateInstance(escapeModal, {
+			bootstrap.Modal.getOrCreateInstance(switcherModalEl, {
 				keyboard: false,
 				focus: false,
 				backdrop: "static",
 			});
-		bsEscapeModal.show();
-		escapeModal.addEventListener("hidden.bs.modal", function () {
+		bsSwitcherModal.show();
+		switcherModalEl.addEventListener("hidden.bs.modal", function () {
 			removeSwitcherClasses();
 		});
 		return false;
