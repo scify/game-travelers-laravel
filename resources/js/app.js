@@ -14,6 +14,8 @@
 require("./bootstrap");
 require("./lang.js");
 require("./keys.js");
+// Temporary custom-made audio player.
+require("./audio.js");
 
 // import {AudioPlayer} from 'audio-player.js'
 // window.AudioPlayer = AudioPlayer;

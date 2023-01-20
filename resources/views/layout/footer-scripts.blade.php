@@ -16,11 +16,40 @@
             ];
         })->toJson();
     });
+
+    // Extremely confusing audioFiles map
+    $audioPath = base_path("resources/audio/");
+    $audioFiles = Cache::rememberForever('audioFiles_', function () use ($audioPath) {
+        return collect(File::directories($audioPath))
+            ->mapWithKeys(function ($directory) {
+                $folderName = basename($directory);
+                $subDirectories = collect(File::directories($directory));
+                return [
+                    $folderName => $subDirectories->count() ? $subDirectories->mapWithKeys(function ($subDirectory) {
+                        return [
+                            basename($subDirectory) => collect(File::glob($subDirectory . '/*.mp3'))
+                                ->mapWithKeys(function ($file) {
+                                    return [
+                                        (new SplFileInfo($file))->getBasename('.mp3') => basename($file)
+                                    ];
+                                })
+                        ];
+                    }) : collect(File::glob($directory . '/*.mp3'))->mapWithKeys(function ($file) {
+                        return [
+                            (new SplFileInfo($file))->getBasename('.mp3') => basename($file)
+                        ];
+                    })
+                ];
+            })->toJson();
+    });
+
 @endphp
 <script>
     window.Laravel = {{ Js::from([
         'baseUrl' => url("/"),
         'locale' => app()->getLocale(),
+        'audioFiles' => json_decode($audioFiles),
         'translations' => json_decode($translations)
     ])}}
 </script>
+

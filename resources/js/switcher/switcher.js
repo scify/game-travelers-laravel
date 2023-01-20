@@ -158,6 +158,7 @@ function switcher() {
 				validSwitcherElements[currentFocusIndex].classList.add(
 					classFocus
 				);
+				window.sound("fx.ui_click_rollover_misc_09");
 			}, scanningSpeed * 1000 + transitionSpeed);
 		} else {
 			// Manual mode.
@@ -180,6 +181,7 @@ function switcher() {
 				focus: false,
 				backdrop: "static",
 			});
+		window.sound("fx.popup_01");
 		bsSwitcherModal.show();
 		switcherModalEl.addEventListener("hidden.bs.modal", function () {
 			removeSwitcherClasses();
@@ -210,29 +212,47 @@ function switcher() {
 					return false;
 				}
 			} else {
-				if (allowedList.indexOf(event.key) !== -1) {
-					if (charCode === 32) {
-						console.log("Space accepted");
-						returnKey = "Space";
-					} else {
+				if (charCode === 32) {
+					// Space is one of the unicode characters
+					// which is read as " ". To make our life
+					// easier, we simply convert it to "Space".
+					console.log("Space accepted");
+					returnKey = "Space";
+				} else {
+					if (allowedList.indexOf(event.key) !== -1) {
 						console.log("Key accepted.");
 						returnKey = event.key;
+					} else {
+						console.log(`Not accepted key ${event.key}.`);
+						return false;
 					}
-				} else {
-					console.log(`Not accepted key ${event.key}.`);
-					return false;
 				}
 			}
 		}
 		if (controlMode === 1) {
 			// Automatic mode.
+			event.preventDefault();
+			let currentFocusIndex = 0;
+			for (let i = 0; i < validSwitcherElements.length; i++) {
+				if (validSwitcherElements[i].classList.contains(classFocus)) {
+					currentFocusIndex = i;
+				}
+			}
 			if (returnKey === selectionButton) {
-				event.preventDefault();
 				clearInterval(intervalId); // stop the interval
-				this.classList.remove(classFocus);
-				this.classList.add(classActive);
-				this.click();
-				return;
+				validSwitcherElements[currentFocusIndex].classList.remove(
+					classFocus
+				);
+				validSwitcherElements[currentFocusIndex].classList.add(
+					classActive
+				);
+				window.removeEventListener("keydown", handleSwitchKey);
+				// validSwitcherElements[currentFocusIndex].click();
+				// return;
+				window.sound("fx.match3_1b", function () {
+					validSwitcherElements[currentFocusIndex].click();
+					// return;
+				});
 			}
 		} else {
 			// Manual mode.
@@ -257,10 +277,10 @@ function switcher() {
 				validSwitcherElements[currentFocusIndex].blur();
 				validSwitcherElements[nextFocusIndex].focus();
 				validSwitcherElements[nextFocusIndex].classList.add(classFocus);
+				window.sound("fx.ui_click_rollover_misc_09");
 			}
 			// Part 2. Select the current element.
 			if (returnKey === selectionButton) {
-				event.preventDefault();
 				// Find the currently highlighted button and click it.
 				validSwitcherElements[currentFocusIndex].classList.remove(
 					classFocus
@@ -269,8 +289,12 @@ function switcher() {
 					classActive
 				);
 				window.removeEventListener("keydown", handleSwitchKey);
-				validSwitcherElements[currentFocusIndex].click();
-				return;
+				// validSwitcherElements[currentFocusIndex].click();
+				// return;
+				window.sound("fx.match3_1b", function () {
+					validSwitcherElements[currentFocusIndex].click();
+					// return;
+				});
 			}
 		}
 	}
