@@ -36,8 +36,8 @@
     <title>{{ $title ?? 'Ταξιδιώτες' }}</title>
     @include('layout.favicons')
     <link rel="canonical" href="{{ url()->current() }}">
-    <script src="{{ mix('js/app.js') }}" defer></script>
     @isset($hasVue)<script src="{{ mix('js/vue.js') }}" defer></script>@endisset
+    <script src="{{ mix('js/app.js') }}" defer></script>
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     @yield('css', '') {{-- Optional: Additional CSS stylesheets, if needed. --}}
 </head>
