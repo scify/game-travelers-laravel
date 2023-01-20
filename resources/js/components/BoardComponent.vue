@@ -9,7 +9,7 @@
 			<Transition name="fade_blue">
 				<img
 					v-if="this.blue_position_show"
-					v-bind:src="this.blue_position_src"
+					v-bind:src="this.computeBlueSrc"
 					style="z-index: 2; position: absolute; display: block"
 				/>
 			</Transition>
@@ -20,7 +20,7 @@
 					style="z-index: 2; position: absolute; display: block"
 				/>
 			</Transition>
-			<div v-if="this.mode > 1">
+			<div v-if="this.gameMode > 1">
 				<Transition name="fade">
 					<img
 						v-if="this.showPawn2"
@@ -33,7 +33,7 @@
 				v-bind:src="this.computeLeftSrc"
 				style="z-index: 2; position: absolute; display: block"
 			/>
-			<div v-if="this.mode > 1">
+			<div v-if="this.gameMode > 1">
 				<img
 					v-bind:src="this.computeRightSrc"
 					style="z-index: 2; position: absolute; display: block"
@@ -79,6 +79,7 @@ export default {
 	},
 	props: {
 		backendUrl: String,
+		exitUrl: String,
 		playerId: Number,
 		gameId: Number,
 		playerData: {
@@ -96,6 +97,7 @@ export default {
 	},
 	data: function () {
 		return {
+			ignoreInput: false,
 			playerName: this.playerData["name"],
 			avatarId: this.playerData["avatar_id"],
 			autoMove: this.playerData["auto"],
@@ -108,16 +110,17 @@ export default {
 			difficulty: this.playerData["difficulty"],
 			movementMode: this.playerData["movement_mode"],
 			board: this.gameData["board"],
-			mode: this.gameData["mode"],
+			gameMode: this.gameData["mode"],
 			pawn1: this.gameData["pawn1"],
 			pawn2: this.gameData["pawn2"],
 			tutorial: this.gameData["tutorial"],
 			pos1: this.gameData["pos1"],
 			pos2: this.gameData["pos2"],
+			newPosition: -1,
 			firstPlayerTurn: this.gameData["firstPlayerTurn"],
 			gamePhase: this.gameData["game_phase"], // 1 roll, 2 move, 3 draw
 			center_src: "",
-			blue_position_src: "",
+			blueIndex: 0,
 			blue_position_show: false,
 			blue_blinking_allowed: false,
 			rollAnimation: false,
@@ -125,6 +128,7 @@ export default {
 			showPawn1: false,
 			showPawn2: false,
 			gameEnd: 0,
+			mistakes: 0,
 		};
 	},
 	methods: {
@@ -142,8 +146,7 @@ export default {
 		},
 		activate_blue_rotation(start, end, current, second) {
 			if (this.blue_blinking_allowed) {
-				this.blue_position_src =
-					this.getSizePath() + "blue_positions/" + current + ".png";
+				this.blueIndex = current;
 				this.blue_position_show = true;
 				window.setTimeout(() => {
 					this.blue_position_show = false;
@@ -170,38 +173,77 @@ export default {
 				}, 1000);
 			} else {
 				this.blue_position_show = false;
-				this.blue_position_src = "";
+				this.blueIndex = 0;
 			}
 		},
 		key_press(e) {
-			let key = e.key;
-			if (key === " ") key = "Space";
-			//console.log(e);
-			//alert(key);
-			//console.log(String.fromCharCode(e.keyCode));
-			//console.log("my object: %o", this.playerData);
-			//alert(e.keyCode);
-			this.sendToBackend();
+			if (!this.ignoreInput) {
+				let key = e.key;
+				if (key === " ") key = "Space";
+				let isSelect = false;
+				let isNavigate = false;
+				if (this.selectKey === key) isSelect = true;
+				else if (this.autoMove === 2 && this.navigateKey === key)
+					isNavigate = true;
+				if (isSelect || isNavigate) {
+					if (this.gameEnd !== 0) window.location.href = this.exitUrl;
+					else if (this.gamePhase === 1) {
+						this.ignoreInput = true;
+						this.sendToBackend();
+					} else if (this.gamePhase === 2) {
+						if (isNavigate) {
+							this.blue_position_show = false;
+							let nextBlue = this.blueIndex + 1;
+							if (nextBlue > this.newPosition) {
+								nextBlue = this.pos1 + 1;
+								if (!this.firstPlayerTurn)
+									nextBlue = this.pos2 + 1;
+							}
+							this.blueIndex = nextBlue;
+							this.blue_position_show = true;
+						} else if (isSelect) {
+							if (this.newPosition === this.blueIndex) {
+								this.applyCorrectMovement();
+							} else {
+								this.mistakes += 1;
+								if (this.mistakes === this.maxMistakes) {
+									// treat the choice as correct
+									this.mistakes = 0;
+									this.applyCorrectMovement();
+								}
+							}
+						}
+					}
+				}
+
+				//check if key is select
+
+				//console.log(e);
+				//alert(key);
+				//console.log(String.fromCharCode(e.keyCode));
+				//console.log("my object: %o", this.playerData);
+				//alert(e.keyCode);
+			}
 		},
 		setCenter(isDice, value) {
 			let src = this.getBoardPath() + "center/";
 			if (isDice) {
 				// show dice
-				if (value == 0) {
+				if (value === 0) {
 					if (this.diceType === 1) src += "dice_numbers";
 					else if (this.diceType === 2) src += "dice_dots";
 					else if (this.diceType === 3) src += "dice_colours";
 				} else {
-					if (this.diceType == 3) {
-						if (value == 1) src += "o";
-						else if (value == 2) src += "g";
-						else if (value == 3) src += "b";
-						else if (value == 4) src += "p";
-						else if (value == 5) src += "r";
-						else if (value == 6) src += "y";
+					if (this.diceType === 3) {
+						if (value === 1) src += "o";
+						else if (value === 2) src += "g";
+						else if (value === 3) src += "b";
+						else if (value === 4) src += "p";
+						else if (value === 5) src += "r";
+						else if (value === 6) src += "y";
 					} else {
 						src += value;
-						if (this.diceType == 2) src += "d";
+						if (this.diceType === 2) src += "d";
 					}
 				}
 			} else {
@@ -212,10 +254,11 @@ export default {
 			}
 			this.center_src = src + ".png";
 		},
-		activateHelp(newPosition) {
+		activateSelector(newPosition) {
 			let pos = this.pos1;
 			if (!this.firstPlayerTurn) pos = this.pos2;
 			if (this.movementMode === 1) {
+				this.ignoreInput = false;
 				this.blue_blinking_allowed = true;
 				this.activate_blue_rotation(
 					newPosition,
@@ -233,32 +276,67 @@ export default {
 				);
 				window.setTimeout(() => {
 					this.blue_blinking_allowed = false;
+					this.ignoreInput = false;
 				}, 3000);
+
+				//if only selection key is used
 				window.setTimeout(() => {
-					this.blue_blinking_allowed = true;
-					this.activate_blue_rotation(
-						pos + 1,
-						newPosition,
-						pos + 1,
-						0
-					);
-				}, 4000);
+					if (this.autoMove === 1) {
+						this.blue_blinking_allowed = true;
+						this.activate_blue_rotation(
+							pos + 1,
+							newPosition,
+							pos + 1,
+							0
+						);
+					} else {
+						//if navigation key is used
+						this.blueIndex = pos + 1;
+						this.blue_position_show = true;
+					}
+				}, 3200);
 			} else if (this.movementMode === 3) {
-				this.blue_blinking_allowed = true;
-				let max = pos + 6;
-				let max_value = 15;
-				if (this.boardSize === 2) max_value = 30;
-				else if (this.boardSize === 3) max_value = 45;
-				if (max > max_value) max = max_value;
-				this.activate_blue_rotation(pos + 1, max, pos + 1, 0);
+				if (this.autoMove === 1) {
+					this.blue_blinking_allowed = true;
+					let max = pos + 6;
+					let max_value = 15;
+					if (this.boardSize === 2) max_value = 30;
+					else if (this.boardSize === 3) max_value = 45;
+					if (max > max_value) max = max_value;
+					this.activate_blue_rotation(pos + 1, max, pos + 1, 0);
+				} else {
+					this.blueIndex = pos + 1;
+					this.blue_position_show = true;
+				}
 			}
 		},
 		applyDiceRoll(newPosition, diceResult) {
+			this.gamePhase = 2;
+			this.mistakes = 0;
+			this.newPosition = newPosition;
 			this.setCenter(true, diceResult);
-			this.activateHelp(diceResult);
+			if (this.gameMode === 2 && !this.firstPlayerTurn)
+				this.applyCorrectMovement();
+			//check this in pvp
+			else this.activateSelector(newPosition);
 		},
-		applyDiceMovement() {
-			//
+		applyCorrectMovement() {
+			this.ignoreInput = true;
+			if (this.firstPlayerTurn) {
+				this.showPawn1 = false;
+				this.pos1 = this.newPosition;
+				window.setTimeout(() => {
+					this.showPawn1 = true;
+				}, 1000);
+			} else {
+				this.showPawn2 = false;
+				this.pos2 = this.newPosition;
+				window.setTimeout(() => {
+					this.showPawn2 = true;
+				}, 1000);
+			}
+			this.newPosition = -1;
+			this.sendToBackend();
 		},
 		applyCardMovement() {
 			//
@@ -269,9 +347,9 @@ export default {
 			window.setTimeout(() => {
 				this.showPawn1 = true;
 				this.showPawn2 = true;
-				if (this.gamePhase == 1) {
+				if (this.gamePhase === 1) {
 					this.rollAnimation = true;
-				}
+				} else this.sendToBackend();
 			}, 500);
 		},
 		sendToBackend() {
@@ -284,6 +362,7 @@ export default {
 				game_phase: this.gamePhase,
 				dice_type: this.diceType,
 				difficulty: this.difficulty,
+				game_mode: this.gameMode,
 			};
 			let self = this;
 			if (self.gamePhase === 1) {
@@ -302,7 +381,9 @@ export default {
 					} else {
 						self.gameEnd = response.data.gameEnded;
 						if (self.gameEnd !== 0) {
-							alert(JSON.stringify(response.data, null, 2));
+							window.setTimeout(() => {
+								self.ignoreInput = false;
+							}, 1000);
 						} else {
 							if (self.gamePhase === 1) {
 								window.setTimeout(() => {
@@ -312,6 +393,26 @@ export default {
 									);
 									self.rollingAnimation = false;
 								}, 1000);
+							} else if (self.gamePhase === 2) {
+								self.firstPlayerTurn =
+									response.data.firstPlayerTurn;
+								if (response.data.drawCard === 0) {
+									self.setCenter(true, 0);
+									self.rollAnimation = true;
+									self.gamePhase = 1;
+									if (self.firstPlayerTurn)
+										self.ignoreInput = false;
+									else if (self.gameMode === 2) {
+										window.setTimeout(() => {
+											self.sendToBackend();
+										}, 1000);
+									}
+								} else {
+									//draw a card
+									alert(
+										JSON.stringify(response.data, null, 2)
+									);
+								}
 							}
 						}
 					}
@@ -355,6 +456,16 @@ export default {
 			} else {
 				return this.getBoardPath() + "right/" + this.pawn2 + "a.png";
 			}
+		},
+		computeBlueSrc() {
+			if (this.blueIndex === 0) return "";
+			else
+				return (
+					this.getSizePath() +
+					"blue_positions/" +
+					this.blueIndex +
+					".png"
+				);
 		},
 	},
 };

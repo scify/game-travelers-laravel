@@ -63,6 +63,7 @@ class BoardController extends Controller
         $dice_type = $request->dice_type;
         $game_phase = $request->game_phase;
         $difficulty = $request->difficulty;
+        $game_mode = $request->game_mode;
         $games = $this->gameRepository->allWhere(['id' => $game_id]);
         if (sizeof($games) != 1)
             return response(['message' => 'Game not found'], 302);
@@ -75,6 +76,10 @@ class BoardController extends Controller
             $board_size = $game->selected_board_size;
             $tutorial_mode = $game->use_tutorial;
             $db_game_phase = $game->game_phase;
+            $db_first_player_turn = $game->first_player_turn;
+            $db_active_player_pos = $game->location_1;
+            if (!$first_player_turn)
+                $db_active_player_pos = $game->location_2;
             $latest_random_result = $game->latest_random_result;
             $active_player_pos = $location_2;
             if ($first_player_turn)
@@ -103,6 +108,10 @@ class BoardController extends Controller
                     $dice_result = $this->getColourIdOfPos($new_position);
                 return response(['gameEnded' => 0, 'newPosition' => $new_position, 'diceResult' => $dice_result]);
             } else if ($game_phase == 2) { // move performed by die roll in the front-end
+                //check if call is made again before
+                if ($game_phase == $db_game_phase) {
+                    $active_player_pos = $db_active_player_pos;
+                }
                 //check if you must draw card
                 $colour_id = $this->getColourIdOfPos($active_player_pos);
                 if ($colour_id == 3 || $colour_id == 5) {
@@ -113,24 +122,42 @@ class BoardController extends Controller
                             $latest_random_result = -1 * $latest_random_result;
                     }
                     $random_card = $latest_random_result;
-                    $entry = ['latest_random_result' => $latest_random_result, 'game_phase' => 2, 'location_1' => $active_player_pos];
-                    if (!$first_player_turn)
-                        $entry = ['latest_random_result' => $latest_random_result, 'game_phase' => 2, 'location_2' => $active_player_pos];
-                    $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
-                    return response(['gameEnded' => 0, 'drawCard' => $random_card]);
+                    if ($game_phase != $db_game_phase) {
+                        $entry = ['latest_random_result' => $latest_random_result, 'game_phase' => 2, 'location_1' => $active_player_pos];
+                        if (!$first_player_turn)
+                            $entry = ['latest_random_result' => $latest_random_result, 'game_phase' => 2, 'location_2' => $active_player_pos];
+                        $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
+                    }
+                    return response(['gameEnded' => 0, 'drawCard' => $random_card, 'firstPlayerTurn' => $db_first_player_turn]);
                 } else {
-                    $entry = ['latest_random_result' => 0, 'game_phase' => 2, 'location_1' => $active_player_pos];
-                    if (!$first_player_turn)
-                        $entry = ['latest_random_result' => 0, 'game_phase' => 2, 'location_2' => $active_player_pos];
-                    $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
-                    return response(['gameEnded' => 0, 'drawCard' => 0]);
+                    if ($game_phase != $db_game_phase) {
+                        $first_player_turn_new_value = true;
+                        if ($game_mode > 1) { // switch player only if the game is not solo
+                            if ($first_player_turn)
+                                $first_player_turn_new_value = false;
+                        }
+                        $entry = ['latest_random_result' => 0, 'game_phase' => 2, 'location_1' => $active_player_pos, 'first_player_turn' => $first_player_turn_new_value];
+                        if (!$first_player_turn)
+                            $entry = ['latest_random_result' => 0, 'game_phase' => 2, 'location_2' => $active_player_pos, 'first_player_turn' => $first_player_turn_new_value];
+                        $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
+                        return response(['gameEnded' => 0, 'drawCard' => 0, 'firstPlayerTurn' => $first_player_turn_new_value]);
+                    } else
+                        return response(['gameEnded' => 0, 'drawCard' => 0, 'firstPlayerTurn' => $db_first_player_turn]);
                 }
             } else if ($game_phase == 3) { //move performed by card
-                $entry = ['latest_random_result' => 0, 'game_phase' => 3, 'location_1' => $active_player_pos];
-                if (!$first_player_turn)
-                    $entry = ['latest_random_result' => 0, 'game_phase' => 3, 'location_2' => $active_player_pos];
-                $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
-                return response(['gameEnded' => 0]);
+                if ($game_phase != $db_game_phase) {
+                    $first_player_turn_new_value = true;
+                    if ($game_mode > 1) { // switch player only if the game is not solo
+                        if ($first_player_turn)
+                            $first_player_turn_new_value = false;
+                    }
+                    $entry = ['latest_random_result' => 0, 'game_phase' => 3, 'location_1' => $active_player_pos, 'first_player_turn' => $first_player_turn_new_value];
+                    if (!$first_player_turn)
+                        $entry = ['latest_random_result' => 0, 'game_phase' => 3, 'location_2' => $active_player_pos, 'first_player_turn' => $first_player_turn_new_value];
+                    $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
+                    return response(['gameEnded' => 0, 'firstPlayerTurn' => $first_player_turn_new_value]);
+                } else
+                    return response(['gameEnded' => 0, 'firstPlayerTurn' => $db_first_player_turn]);
             }
         }
     }
