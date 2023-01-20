@@ -29,7 +29,8 @@ require __DIR__ . '/auth.php';
 
 // Temporary splash screen implementation to hide the /log diary out of sight.
 Route::get('/', function () {
-    return view('splash');
+    //return view('splash');
+    return redirect()->route('login');
 })->name('home');
 
 

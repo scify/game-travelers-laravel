@@ -49,7 +49,8 @@ class BoardController extends Controller
             'board_size' => $game[0]->selected_board_size,
             'game_phase' => $game[0]->game_phase,
         ];
-        return view('board', ['player_id' => $player_id, 'game_id' => $game_id, 'player_data' => $player_data, 'game_data' => $game_data]);
+
+        return view('board', ['player_id' => $player_id, 'game_id' => $game_id, 'player_data' => $player_data, 'game_data' => $game_data, 'cards' => $this->getCards($game[0]->board_id)]);
     }
 
     public function fromVue(Request $request)
@@ -64,6 +65,7 @@ class BoardController extends Controller
         $game_phase = $request->game_phase;
         $difficulty = $request->difficulty;
         $game_mode = $request->game_mode;
+        $board_id = $request->board_id;
         $games = $this->gameRepository->allWhere(['id' => $game_id]);
         if (sizeof($games) != 1)
             return response(['message' => 'Game not found'], 302);
@@ -109,6 +111,7 @@ class BoardController extends Controller
                 return response(['gameEnded' => 0, 'newPosition' => $new_position, 'diceResult' => $dice_result]);
             } else if ($game_phase == 2) { // move performed by die roll in the front-end
                 //check if call is made again before
+
                 if ($game_phase == $db_game_phase) {
                     $active_player_pos = $db_active_player_pos;
                 }
@@ -116,10 +119,7 @@ class BoardController extends Controller
                 $colour_id = $this->getColourIdOfPos($active_player_pos);
                 if ($colour_id == 3 || $colour_id == 5) {
                     if ($db_game_phase != $game_phase) {
-                        $latest_random_result = rand(1, 10);
-                        $randomPolarity = rand(1, 2);
-                        if ($randomPolarity == 2)
-                            $latest_random_result = -1 * $latest_random_result;
+                        $latest_random_result = $this->getAValidCard($board_size, $active_player_pos, $board_id);
                     }
                     $random_card = $latest_random_result;
                     if ($game_phase != $db_game_phase) {
@@ -178,11 +178,11 @@ class BoardController extends Controller
 
         if ($tutorial_mode && $first_player_turn) {
             if ($pos == 0)
-                return 2;
-            else if ($pos == 2)
                 return 4;
             else if ($pos == 4)
-                return 5;
+                return 6;
+            else if ($pos == 6)
+                return 9;
         } elseif ($tutorial_mode && !$first_player_turn) {
             if ($pos == 0)
                 return 1;
@@ -205,10 +205,197 @@ class BoardController extends Controller
     protected function getColourIdOfPos(int $pos): int
     {
         $modulo = $pos % 6;
-        if ($modulo == 0)
+        if ($modulo === 0)
             return 6;
         else
             return $modulo;
+    }
+
+    protected function getAValidCard($board_size, $pos, $board_id):int {
+        $max = $this->getFinalPos($board_size);
+        $random = rand(1, 10);
+        $randomPolarity = rand(1, 2);
+        if ($randomPolarity == 2)
+            $random *= -1;
+        $value = $this->getCards($board_id)[$random]['value'];
+        $new_pos = $value + $pos;
+        if ($new_pos <= 0 || $new_pos > $max)
+            return $this->getAValidCard($board_size, $pos, $board_id);
+        else
+            return $random;
+    }
+
+    protected function getCards($board_id)
+    {
+        if ($board_id == 1) {
+            return [
+                1 => [
+                    'name' => 'Van',
+                    'value' => 3,
+                ],
+                2 => [
+                    'name' => 'Boat',
+                    'value' => 3,
+                ],
+                3 => [
+                    'name' => 'Mermaid',
+                    'value' => 3,
+                ],
+                4 => [
+                    'name' => 'Dolphin',
+                    'value' => 1,
+                ],
+                5 => [
+                    'name' => 'Car',
+                    'value' => 5,
+                ],
+                6 => [
+                    'name' => 'Note',
+                    'value' => 1,
+                ],
+                7 => [
+                    'name' => 'Map',
+                    'value' => 1,
+                ],
+                8 => [
+                    'name' => 'Octopus',
+                    'value' => 5,
+                ],
+                9 => [
+                    'name' => 'Fish',
+                    'value' => 1,
+                ],
+                10 => [
+                    'name' => 'Path',
+                    'value' => 5,
+                ],
+                -1 => [
+                    'name' => 'Wind',
+                    'value' => -3,
+                ],
+                -2 => [
+                    'name' => 'Tire',
+                    'value' => -1,
+                ],
+                -3 => [
+                    'name' => 'Crab',
+                    'value' => -3,
+                ],
+                -4 => [
+                    'name' => 'WrongPath',
+                    'value' => -5,
+                ],
+                -5 => [
+                    'name' => 'Bird',
+                    'value' => -5,
+                ],
+                -6 => [
+                    'name' => 'Pelican',
+                    'value' => -1,
+                ],
+                -7 => [
+                    'name' => 'Cow',
+                    'value' => -3,
+                ],
+                -8 => [
+                    'name' => 'Hat',
+                    'value' => -5,
+                ],
+                -9 => [
+                    'name' => 'Water',
+                    'value' => -3,
+                ],
+                -10 => [
+                    'name' => 'IceCream',
+                    'value' => -1,
+                ],
+
+            ];
+        } else if ($board_id == 2) {
+            return [
+                1 => [
+                    'name' => 'Snowman',
+                    'value' => 3,
+                ],
+                2 => [
+                    'name' => 'Car',
+                    'value' => 3,
+                ],
+                3 => [
+                    'name' => 'Deer',
+                    'value' => 1,
+                ],
+                4 => [
+                    'name' => 'Map',
+                    'value' => 1,
+                ],
+                5 => [
+                    'name' => 'Note',
+                    'value' => 3,
+                ],
+                6 => [
+                    'name' => 'OldMan',
+                    'value' => 5,
+                ],
+                7 => [
+                    'name' => 'CableCar',
+                    'value' => 5,
+                ],
+                8 => [
+                    'name' => 'Shovel',
+                    'value' => 3,
+                ],
+                9 => [
+                    'name' => 'Skier',
+                    'value' => 1,
+                ],
+                10 => [
+                    'name' => 'Sleigh',
+                    'value' => 5,
+                ],
+                -1 => [
+                    'name' => 'WrongPath',
+                    'value' => -3,
+                ],
+                -2 => [
+                    'name' => 'WrongNote',
+                    'value' => -3,
+                ],
+                -3 => [
+                    'name' => 'Wind',
+                    'value' => -3,
+                ],
+                -4 => [
+                    'name' => 'Squirrel',
+                    'value' => -3,
+                ],
+                -5 => [
+                    'name' => 'Snow',
+                    'value' => -5,
+                ],
+                -6 => [
+                    'name' => 'Hail',
+                    'value' => -5,
+                ],
+                -7 => [
+                    'name' => 'Scarf',
+                    'value' => -1,
+                ],
+                -8 => [
+                    'name' => 'Cap',
+                    'value' => -1,
+                ],
+                -9 => [
+                    'name' => 'Bear',
+                    'value' => -5,
+                ],
+                -10 => [
+                    'name' => 'Chocolate',
+                    'value' => -1,
+                ],
+
+            ];
+        } else return [];
     }
 
 }

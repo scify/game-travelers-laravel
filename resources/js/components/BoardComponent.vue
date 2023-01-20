@@ -5,6 +5,19 @@
 			backgroundImage: 'url(\'' + this.getSizePath() + 'board.png\')',
 		}"
 	>
+		<Transition name="fade">
+			<img
+				v-if="this.computeCardSrc.length > 0"
+				v-bind:src="this.computeCardSrc"
+				style="
+					z-index: 10;
+					position: absolute;
+					display: block;
+					left: calc(50% - 344px / 2);
+					top: calc(50% - 482px / 2);
+				"
+			/>
+		</Transition>
 		<div v-if="this.gameEnd === 0">
 			<Transition name="fade_blue">
 				<img
@@ -39,14 +52,17 @@
 					style="z-index: 2; position: absolute; display: block"
 				/>
 			</div>
-			<img
-				:class="{
-					shake: this.rollingAnimation,
-					moveUpDown: this.rollAnimation,
-				}"
-				v-bind:src="this.center_src"
-				style="z-index: 2; position: absolute; display: block"
-			/>
+			<Transition name="fade">
+				<img
+					:class="{
+						shake: this.rollingAnimation,
+						moveUpDown: this.rollAnimation,
+					}"
+					v-if="this.center_src.length > 0"
+					v-bind:src="this.center_src"
+					style="z-index: 2; position: absolute; display: block"
+				/>
+			</Transition>
 		</div>
 
 		<Transition name="fade">
@@ -94,6 +110,12 @@ export default {
 				return {};
 			},
 		},
+		cards: {
+			type: Object,
+			default: function () {
+				return {};
+			},
+		},
 	},
 	data: function () {
 		return {
@@ -129,6 +151,7 @@ export default {
 			showPawn2: false,
 			gameEnd: 0,
 			mistakes: 0,
+			cardName: "",
 		};
 	},
 	methods: {
@@ -213,16 +236,11 @@ export default {
 								}
 							}
 						}
+					} else if (this.gamePhase === 3) {
+						this.cardName = "";
+						this.applyCorrectMovement();
 					}
 				}
-
-				//check if key is select
-
-				//console.log(e);
-				//alert(key);
-				//console.log(String.fromCharCode(e.keyCode));
-				//console.log("my object: %o", this.playerData);
-				//alert(e.keyCode);
 			}
 		},
 		setCenter(isDice, value) {
@@ -321,35 +339,43 @@ export default {
 			else this.activateSelector(newPosition);
 		},
 		applyCorrectMovement() {
-			this.ignoreInput = true;
-			this.blueIndex = this.newPosition;
-			this.blue_position_show = true;
-			if (this.firstPlayerTurn) {
-				this.showPawn1 = false;
-				this.pos1 = this.newPosition;
-				window.setTimeout(() => {
-					this.showPawn1 = true;
-				}, 1000);
-			} else {
-				this.showPawn2 = false;
-				this.pos2 = this.newPosition;
-				window.setTimeout(() => {
-					this.showPawn2 = true;
-				}, 1000);
-			}
-			this.newPosition = -1;
-			this.sendToBackend();
+			this.blue_blinking_allowed = false;
+			window.setTimeout(() => {
+				this.ignoreInput = true;
+				this.blueIndex = this.newPosition;
+				this.blue_position_show = true;
+				if (this.firstPlayerTurn) {
+					this.showPawn1 = false;
+					this.pos1 = this.newPosition;
+					window.setTimeout(() => {
+						this.showPawn1 = true;
+					}, 1000);
+				} else {
+					this.showPawn2 = false;
+					this.pos2 = this.newPosition;
+					window.setTimeout(() => {
+						this.showPawn2 = true;
+					}, 1000);
+				}
+				this.newPosition = -1;
+				this.sendToBackend();
+			}, 1000);
 		},
-		applyCardMovement() {
-			//
+		applyCardMovement(cardValue) {
+			let pos = this.pos1;
+			if (!this.firstPlayerTurn) pos = this.pos2;
+			pos += cardValue;
+			this.gamePhase = 3;
+			this.newPosition = pos;
+			this.setCenter(false, cardValue);
 		},
 		init() {
 			// need to roll
-			this.setCenter(this.diceType, 0);
 			window.setTimeout(() => {
 				this.showPawn1 = true;
 				this.showPawn2 = true;
 				if (this.gamePhase === 1) {
+					this.setCenter(this.diceType, 0);
 					this.rollAnimation = true;
 				} else this.sendToBackend();
 			}, 500);
@@ -365,7 +391,9 @@ export default {
 				dice_type: this.diceType,
 				difficulty: this.difficulty,
 				game_mode: this.gameMode,
+				board_id: this.board,
 			};
+			//alert(JSON.stringify(data, null, "    "));
 			let self = this;
 			if (self.gamePhase === 1) {
 				this.rollingAnimation = true;
@@ -411,16 +439,32 @@ export default {
 									}
 								} else {
 									//draw a card
-									alert(
-										JSON.stringify(response.data, null, 2)
-									);
+									let card =
+										self.cards[response.data.drawCard];
+									self.cardName = card["name"];
+									self.applyCardMovement(card["value"]);
+									self.ignoreInput = false;
+								}
+							} else if (self.gamePhase === 3) {
+								self.firstPlayerTurn =
+									response.data.firstPlayerTurn;
+								self.setCenter(true, 0);
+								self.rollAnimation = true;
+								self.gamePhase = 1;
+								if (self.firstPlayerTurn)
+									self.ignoreInput = false;
+								else if (self.gameMode === 2) {
+									window.setTimeout(() => {
+										self.sendToBackend();
+									}, 1000);
 								}
 							}
 						}
 					}
 				})
 				.catch(function (error) {
-					console.log(error);
+					//console.log(error);
+					alert(error);
 				});
 		},
 	},
@@ -468,6 +512,10 @@ export default {
 					this.blueIndex +
 					".png"
 				);
+		},
+		computeCardSrc() {
+			if (this.cardName === "") return "";
+			else return this.getBoardPath() + "cards/" + this.cardName + ".png";
 		},
 	},
 };
