@@ -433,19 +433,11 @@ export default {
 		},
 		getPawnSex() {
 			if (this.firstPlayerTurn) {
-				if (
-					this.pawn1 === 2 ||
-					this.pawn1 === 3 ||
-					this.pawn1 === 6
-				)
+				if (this.pawn1 === 2 || this.pawn1 === 3 || this.pawn1 === 6)
 					return "_g";
 				else return "_b";
 			} else {
-				if (
-					this.pawn2 === 2 ||
-					this.pawn2 === 3 ||
-					this.pawn2 === 6
-				)
+				if (this.pawn2 === 2 || this.pawn2 === 3 || this.pawn2 === 6)
 					return "_g";
 				else return "_b";
 			}
