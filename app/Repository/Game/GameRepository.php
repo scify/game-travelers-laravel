@@ -89,10 +89,10 @@ class GameRepository extends Repository
         $pawns = [
             1 => [
                 'id' => 1,
-                'name' => 'Ιάσωνας',
+                'name' => 'Ιάσονας',
                 'asset' => 'pawn-iasonas',
-                'description' => 'Πιόνι Ιάσωνα',
-                'alt' => 'Προεπισκόπηση πιονιού Ιάσωνα',
+                'description' => 'Πιόνι Ιάσονα',
+                'alt' => 'Προεπισκόπηση πιονιού Ιάσονα',
                 'public_path' => $path,
                 'width' => $width,
                 'height' => $height,
