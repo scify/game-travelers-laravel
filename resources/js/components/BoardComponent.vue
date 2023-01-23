@@ -434,12 +434,12 @@ export default {
 							}, 1000);
 						} else {
 							if (self.gamePhase === 1) {
-								alert(
+								/*alert(
 									"NewPosition: " +
 										response.data.newPosition +
 										"\nDiceResult: " +
 										response.data.diceResult
-								);
+								);*/
 								window.setTimeout(() => {
 									self.applyDiceRoll(
 										response.data.newPosition,
