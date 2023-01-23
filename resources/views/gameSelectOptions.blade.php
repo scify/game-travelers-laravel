@@ -54,6 +54,7 @@
                     :tabindex=2
                     :url="'#'"
                     :comingsoon=null
+                    :audio-select="'sounds.game_start.option_2_select'"
                 />
             </div>
             <div class="row gx-0 pt-6 pt-sm-0 pt-md-6 pt-lg-6 pt-xl-6 pt-xxl-6">

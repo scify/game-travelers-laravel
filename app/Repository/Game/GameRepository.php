@@ -34,6 +34,10 @@ class GameRepository extends Repository
                 'name' => 'Νησί',
                 'description' => 'Πίστα νησιού',
                 'comingsoon' => null,
+                'audio' => [
+                    'focus' => 'sounds.game_start.board_1_focus',
+                    'select' => 'sounds.game_start.board_1_select',
+                ],
                 'preview' => [
                     'asset' => $public_path . '/board_1/preview', // extensions: .png, @2x.png
                     'alt' => 'Προεπισκόπηση πίστας νησιού',
@@ -46,6 +50,10 @@ class GameRepository extends Repository
                 'name' => 'Βουνό',
                 'description' => 'Πίστα βουνού',
                 'comingsoon' => null,
+                'audio' => [
+                    'focus' => 'sounds.game_start.board_2_focus',
+                    'select' => 'sounds.game_start.board_2_select',
+                ],
                 'preview' => [
                     'asset' => $public_path . '/board_2/preview', // extensions: .png, @2x.png
                     'alt' => 'Προεπισκόπηση πίστας βουνού',
@@ -58,6 +66,10 @@ class GameRepository extends Repository
                 'name' => 'Πόλη',
                 'description' => 'Πίστα πόλης',
                 'comingsoon' => true,
+                'audio' => [
+                    'focus' => 'sounds.game_start.board_3_focus',
+                    'select' => 'sounds.game_start.board_3_select',
+                ],
                 'preview' => [
                     // @todo: Fix (replace) the missing asset.
                     'asset' => $public_path . '/board_2/preview', // extensions: .png, @2x.png

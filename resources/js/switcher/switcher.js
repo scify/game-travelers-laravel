@@ -86,6 +86,12 @@ function switcher() {
 	console.log(
 		`Switcher active (mode: ${controlMode} ${scanningSpeed}s, s: ${selectionButton}, n: ${navigationButton})`
 	);
+	// Audio on page-load?
+	typeof window.Switcher === "object" &&
+	"audio" in window.Switcher &&
+	typeof window.Switcher.audio === "string"
+		? window.sound(window.Switcher.audio)
+		: null;
 
 	function removeSwitcherClasses() {
 		var elements = document.getElementsByClassName(classFocus);
@@ -158,7 +164,7 @@ function switcher() {
 				validSwitcherElements[currentFocusIndex].classList.add(
 					classFocus
 				);
-				window.sound("fx.ui_click_rollover_misc_09");
+				window.sound("fx.select");
 			}, scanningSpeed * 1000 + transitionSpeed);
 		} else {
 			// Manual mode.
@@ -181,7 +187,7 @@ function switcher() {
 				focus: false,
 				backdrop: "static",
 			});
-		window.sound("fx.popup_01");
+		window.sound("fx.modal");
 		bsSwitcherModal.show();
 		switcherModalEl.addEventListener("hidden.bs.modal", function () {
 			removeSwitcherClasses();
@@ -247,10 +253,22 @@ function switcher() {
 					classActive
 				);
 				window.removeEventListener("keydown", handleSwitchKey);
-				// validSwitcherElements[currentFocusIndex].click();
-				// return;
-				window.sound("fx.match3_1b", function () {
-					validSwitcherElements[currentFocusIndex].click();
+				window.sound("fx.navigate", function () {
+					if (
+						validSwitcherElements[currentFocusIndex].hasAttribute(
+							"data-audio-select"
+						)
+					) {
+						let audioSelectValue =
+							validSwitcherElements[
+								currentFocusIndex
+							].getAttribute("data-audio-select");
+						window.sound(audioSelectValue, function () {
+							validSwitcherElements[currentFocusIndex].click();
+						});
+					} else {
+						validSwitcherElements[currentFocusIndex].click();
+					}
 					// return;
 				});
 			}
@@ -277,7 +295,7 @@ function switcher() {
 				validSwitcherElements[currentFocusIndex].blur();
 				validSwitcherElements[nextFocusIndex].focus();
 				validSwitcherElements[nextFocusIndex].classList.add(classFocus);
-				window.sound("fx.ui_click_rollover_misc_09");
+				window.sound("fx.select");
 			}
 			// Part 2. Select the current element.
 			if (returnKey === selectionButton) {
@@ -291,8 +309,22 @@ function switcher() {
 				window.removeEventListener("keydown", handleSwitchKey);
 				// validSwitcherElements[currentFocusIndex].click();
 				// return;
-				window.sound("fx.match3_1b", function () {
-					validSwitcherElements[currentFocusIndex].click();
+				window.sound("fx.navigate", function () {
+					if (
+						validSwitcherElements[currentFocusIndex].hasAttribute(
+							"data-audio-select"
+						)
+					) {
+						let audioSelectValue =
+							validSwitcherElements[
+								currentFocusIndex
+							].getAttribute("data-audio-select");
+						window.sound(audioSelectValue, function () {
+							validSwitcherElements[currentFocusIndex].click();
+						});
+					} else {
+						validSwitcherElements[currentFocusIndex].click();
+					}
 					// return;
 				});
 			}
