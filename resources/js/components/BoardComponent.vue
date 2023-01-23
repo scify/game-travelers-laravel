@@ -152,9 +152,27 @@ export default {
 			gameEnd: 0,
 			mistakes: 0,
 			cardName: "",
+			latestCardValue: 0,
+			stepSoundSwitch: true,
 		};
 	},
 	methods: {
+		playStepSound() {
+			if (this.stepSoundSwitch) {
+				window.sound("sounds.game.footstep1");
+				this.stepSoundSwitch = false;
+			} else {
+				window.sound("sounds.game.footstep2");
+				this.stepSoundSwitch = true;
+			}
+		},
+		startMusic() {
+			/*let timer = setInterval(function () {
+				if (window.sound) {
+					clearInterval(timer);
+				}
+			}, 500);*/
+		},
 		getBoardPath() {
 			return "/images/boards/board_" + this.board + "/";
 		},
@@ -203,6 +221,7 @@ export default {
 			if (!this.ignoreInput) {
 				let key = e.key;
 				console.log("Key pressed and NOT ignored:\t " + e.key);
+				if (key === "Delete") window.location.href = this.exitUrl;
 				if (key === " ") key = "Space";
 				let isSelect = false;
 				let isNavigate = false;
@@ -226,6 +245,7 @@ export default {
 						this.sendToBackend();
 					} else if (this.gamePhase === 2) {
 						if (isNavigate) {
+							window.sound("fx.ui_click_rollover_misc_09");
 							this.blue_position_show = false;
 							let nextBlue = this.blueIndex + 1;
 							if (nextBlue > this.newPosition) {
@@ -237,8 +257,10 @@ export default {
 							this.blue_position_show = true;
 						} else if (isSelect) {
 							if (this.newPosition === this.blueIndex) {
+								window.sound("fx.match3_1b");
 								this.applyCorrectMovement();
 							} else {
+								window.sound("fx.ui_click_rollover_misc_11");
 								this.mistakes += 1;
 								if (this.mistakes === this.maxMistakes) {
 									// treat the choice as correct
@@ -248,6 +270,15 @@ export default {
 							}
 						}
 					} else if (this.gamePhase === 3) {
+						if (this.latestCardValue > 0)
+							window.sound(
+								"sounds.cards.F" + this.latestCardValue
+							);
+						else
+							window.sound(
+								"sounds.cards.B" +
+									Math.abs(this.latestCardValue)
+							);
 						this.cardName = "";
 						this.applyCorrectMovement();
 					}
@@ -370,6 +401,7 @@ export default {
 				else this.pos1 = current - 1;
 				window.setTimeout(() => {
 					this.showPawn1 = true;
+					this.playStepSound();
 				}, 500);
 				window.setTimeout(() => {
 					if (this.pos1 !== end)
@@ -382,6 +414,7 @@ export default {
 				else this.pos2 = current - 1;
 				window.setTimeout(() => {
 					this.showPawn2 = true;
+					this.playStepSound();
 				}, 500);
 				window.setTimeout(() => {
 					if (this.pos2 !== end)
@@ -390,13 +423,31 @@ export default {
 				}, 1000);
 			}
 		},
-		applyCardMovement(cardValue) {
+		applyCardMovement() {
 			let pos = this.pos1;
 			if (!this.firstPlayerTurn) pos = this.pos2;
-			pos += cardValue;
+			pos += this.latestCardValue;
 			this.gamePhase = 3;
 			this.newPosition = pos;
-			this.setCenter(false, cardValue);
+			this.setCenter(false, this.latestCardValue);
+		},
+		getAvatarSex() {
+			if (
+				this.avatarId === 2 ||
+				this.avatarId === 3 ||
+				this.avatarId === 6
+			)
+				return "_g";
+			else return "_b";
+		},
+		playCardSound() {
+			window.sound(
+				"sounds.cards." +
+					this.cardName +
+					"_" +
+					this.board +
+					this.getAvatarSex()
+			);
 		},
 		init() {
 			// need to roll
@@ -408,6 +459,7 @@ export default {
 					this.rollAnimation = true;
 				} else this.sendToBackend();
 			}, 500);
+			this.startMusic();
 		},
 		sendToBackend() {
 			let data = {
@@ -426,6 +478,7 @@ export default {
 			let self = this;
 			if (self.gamePhase === 1) {
 				this.rollingAnimation = true;
+				window.sound("sounds.game.dice");
 				this.rollAnimation = false;
 			}
 			axios
@@ -445,12 +498,6 @@ export default {
 							}, 1000);
 						} else {
 							if (self.gamePhase === 1) {
-								/*alert(
-									"NewPosition: " +
-										response.data.newPosition +
-										"\nDiceResult: " +
-										response.data.diceResult
-								);*/
 								window.setTimeout(() => {
 									self.applyDiceRoll(
 										response.data.newPosition,
@@ -477,7 +524,9 @@ export default {
 									let card =
 										self.cards[response.data.drawCard];
 									self.cardName = card["name"];
-									self.applyCardMovement(card["value"]);
+									self.latestCardValue = card["value"];
+									self.applyCardMovement();
+									self.playCardSound();
 									self.ignoreInput = false;
 								}
 							} else if (self.gamePhase === 3) {
