@@ -25,7 +25,7 @@ return [
     'coming_soon_description' => 'Ταξιδιώτες: Προσεχώς από τη SciFY',
     /* views/auth/*.blade.php */
     'captcha' => 'Επιβεβαίωση ασφαλείας',
-    'captcha_description' => 'Για λόγους ασφαλείας εισάγετε το άθροισμα αυτής της απλής μαθηματικής πράξης.',
+    'captcha_description' => 'Για λόγους ασφαλείας γράψτε το άθροισμα αυτής της απλής μαθηματικής πράξης.',
     'captcha_placeholder' => 'άθροισμα',
     'login_prompt' => 'Είστε ήδη χρήστης;',
     'login_title' => 'Καλώς ήρθατε!', // Welcome!

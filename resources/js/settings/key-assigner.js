@@ -60,6 +60,13 @@
 		function invalidateKeyAssigner(keyAssigner) {
 			let keyAssignerText;
 			keyAssignerText = keyAssigner.textContent;
+			if (
+				keyAssignerText ===
+					window.trans("messages.switcher.set_button_invalid") ||
+				keyAssignerText === window.trans("messages.switcher.set_button")
+			) {
+				keyAssignerText = keyAssigner.getAttribute("data-key-selected");
+			}
 			keyAssigner.textContent = window.trans(
 				"messages.switcher.set_button_invalid"
 			);
@@ -94,7 +101,7 @@
 							keyAssigner.textContent =
 								keyAssigner.getAttribute("data-key-default");
 							// Revert to default though :(
-							resetKeyAssigners(false);
+							resetKeyAssigners(true);
 							window.removeEventListener(
 								"keyup",
 								assignerKeyUpHandler
@@ -171,13 +178,18 @@
 						// If this assigner's data-sets-input value is either
 						// controlManualSelectionButton or controlManualNavigationButton
 						// we make sure that they are not set to the same Key.
-						let otherAssigner = document.querySelector(
-							"button[data-sets-input='controlManualNavigationButton']"
-						);
-						if (setInputId === "controlManualNavigationButton") {
-							otherAssigner = document.querySelector(
-								"button[data-sets-input='controlManualSelectionButton']"
-							);
+						let otherAssigner = false;
+						switch (setInputId) {
+							case "controlManualSelectionButton":
+								otherAssigner = document.querySelector(
+									"button[data-sets-input='controlManualNavigationButton']"
+								);
+								break;
+							case "controlManualNavigationButton":
+								otherAssigner = document.querySelector(
+									"button[data-sets-input='controlManualSelectionButton']"
+								);
+								break;
 						}
 						if (otherAssigner) {
 							if (
@@ -210,11 +222,11 @@
 						);
 					}
 					// Set keyAssigner to active
-					keyAssigner.classList.add("active");
-					keyAssigner.classList.add("first-trigger");
 					keyAssigner.textContent = window.trans(
 						"messages.switcher.set_button"
 					);
+					keyAssigner.classList.add("active");
+					keyAssigner.classList.add("first-trigger");
 					// Cancel the whole thing by a single click of the mouse:
 					window.addEventListener("click", assignerClickHandler);
 					// When a button is clicked, ask user to press a key:
