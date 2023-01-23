@@ -202,6 +202,7 @@ export default {
 		key_press(e) {
 			if (!this.ignoreInput) {
 				let key = e.key;
+				console.log("Key pressed and NOT ignored:\t " + e.key);
 				if (key === " ") key = "Space";
 				let isSelect = false;
 				let isNavigate = false;
@@ -210,6 +211,14 @@ export default {
 					if (this.movementMode === 1) isSelect = true;
 					else isNavigate = true;
 				}
+				console.log(
+					"isSelect:\t" +
+						isSelect +
+						"\tisNavigate:\t" +
+						isNavigate +
+						"\tgamePhase:\t" +
+						this.gamePhase
+				);
 				if (isSelect || isNavigate) {
 					if (this.gameEnd !== 0) window.location.href = this.exitUrl;
 					else if (this.gamePhase === 1) {
@@ -243,6 +252,8 @@ export default {
 						this.applyCorrectMovement();
 					}
 				}
+			} else {
+				console.log("Key pressed and ignored" + e.key);
 			}
 		},
 		setCenter(isDice, value) {
