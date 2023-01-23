@@ -9,7 +9,7 @@
         reason, it can be disabled by setting :comingsoon = true (instead of the
         default null). --}}
     @section('scripts')
-        <x-switcher :switcher=$switcher />
+        <x-switcher :switcher=$switcher :audio="'sounds.game_start.welcome_[1-3]'" />
     @endsection
 
     <form method="post"
@@ -47,10 +47,12 @@
                     @endphp
                     <x-selectBoardButton
                         :board_id='$board["id"]'
-                        :name='$board["name"]'
-                        :comingsoon='$board["comingsoon"]'
                         :asset='$board["preview"]["asset"]'
                         :alt='$board["preview"]["alt"]'
+                        :audio-focus='$board["audio"]["focus"]'
+                        :audio-select='$board["audio"]["select"]'
+                        :comingsoon='$board["comingsoon"]'
+                        :name='$board["name"]'
                         :tabindex=$tabindex
                     />
                 @endforeach

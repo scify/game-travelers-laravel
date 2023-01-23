@@ -4,6 +4,9 @@
         class="btn btn-board board-button @isset($comingsoon)disabled @endisset"
         tabindex="{{ $tabindex ?? '-1' }}"
         data-tabindex="{{ $tabindex ?? '-1' }}"
+        @isset($audioSelect)
+        data-audio-select="{{ $audioSelect }}"
+        @endisset
         name="option"
         value="{{ $option ?? '0' }}"
         type="submit"

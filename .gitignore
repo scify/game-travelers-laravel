@@ -28,6 +28,7 @@ _ide_helper_models.php
 .phpstorm.meta.php
 .idea/
 *.~lock.*
+*.md.backup
 # General macOS
 .DS_Store
 .AppleDouble

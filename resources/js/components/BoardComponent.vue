@@ -245,7 +245,7 @@ export default {
 						this.sendToBackend();
 					} else if (this.gamePhase === 2) {
 						if (isNavigate) {
-							window.sound("fx.ui_click_rollover_misc_09");
+							window.sound("fx.select");
 							this.blue_position_show = false;
 							let nextBlue = this.blueIndex + 1;
 							if (nextBlue > this.newPosition) {
@@ -257,10 +257,10 @@ export default {
 							this.blue_position_show = true;
 						} else if (isSelect) {
 							if (this.newPosition === this.blueIndex) {
-								window.sound("fx.match3_1b");
+								window.sound("fx.navigate");
 								this.applyCorrectMovement();
 							} else {
-								window.sound("fx.ui_click_rollover_misc_11");
+								window.sound("fx.select_negative");
 								this.mistakes += 1;
 								if (this.mistakes === this.maxMistakes) {
 									// treat the choice as correct

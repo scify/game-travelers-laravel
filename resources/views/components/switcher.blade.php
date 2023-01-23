@@ -13,7 +13,8 @@
  *
  * @see ../../../app/Http/Controllers/SetupGameController.php
  */
-if (!isset($switcher)) {
+// Define a default switcher if none set.
+ if (!isset($switcher)) {
     $switcher = [
         'controlMode' => 1, // 1: Automatic, 2: Manual
         'scanningSpeed' => 2, // in seconds
@@ -21,6 +22,12 @@ if (!isset($switcher)) {
         'manualSelectionButton' => 'Space',
         'manualNavigationButton' => 'Enter',
     ];
+}
+// Support audio on page load if audio is defined.
+if (isset($switcher) && is_array($switcher)) {
+    if (isset($audio) && is_string($audio)) {
+        $switcher['audio'] = trim($audio);
+    }
 }
 @endphp
 <!-- Switcher Help Modal -->
@@ -65,14 +72,10 @@ if (!isset($switcher)) {
                     >
                         {{ __("messages.switcher.break") }}
                     </button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-                        {{ __("messages.switcher.continue") }}
-                    </button>
-                @else
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-                        {{ __("messages.switcher.continue") }}
-                    </button>
                 @endif
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                    {{ __("messages.switcher.continue") }}
+                </button>
             </div>
         </div>
     </div>

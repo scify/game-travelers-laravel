@@ -42,6 +42,7 @@
                     :title="'Μονό'"
                     :mode=1
                     :alt="'Μονό παιχνίδι'"
+                    :audio-select="'sounds.game_start.mode_1_select'"
                     :tabindex=1
                     :comingsoon=null {{--Προσεχώς: true / null (default)--}}
                 />
@@ -50,6 +51,7 @@
                     :title="'Με υπολογιστή'"
                     :mode=2
                     :alt="'Παιχνίδι με υπολογιστή'"
+                    :audio-select="'sounds.game_start.mode_2_select'"
                     :tabindex=2
                     :comingsoon=null {{--Προσεχώς: true / null (default)--}}
                 />
@@ -58,6 +60,7 @@
                     :title="'Διπλό'"
                     :mode=3
                     :alt="'Διπλό παιχνίδι'"
+                    :audio-select="'sounds.game_start.mode_3_select'"
                     :tabindex=3
                     :comingsoon=true {{--Προσεχώς: true / null (default)--}}
                 />

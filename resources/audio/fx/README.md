@@ -7,9 +7,9 @@
 
 ## Credits
 
-From **CasualGameSFXPack**:
+All sounds are from the **CasualGameSFXPack**:
 
-- ui_click_rollover_misc_11 -> SELECT NEGATIVE
-- ui_click_rollover_misc_09 -> SELECT NEUTRAL
-- match3_1b -> NAVIGATE
-- popup_01 -> MODAL
+- fx.select_negative --> File `ui_click_rollover_misc_11.mp3`
+- fx.select --> File `ui_click_rollover_misc_09.mp3`
+- fx.navigate --> File `match3_1b.mp3`
+- fx.modal --> File `popup_01.mp3`
