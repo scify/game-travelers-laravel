@@ -206,8 +206,10 @@ export default {
 				let isSelect = false;
 				let isNavigate = false;
 				if (this.selectKey === key) isSelect = true;
-				else if (this.autoMove === 2 && this.navigateKey === key)
-					isNavigate = true;
+				else if (this.autoMove === 2 && this.navigateKey === key) {
+					if (this.movementMode === 1) isSelect = true;
+					else isNavigate = true;
+				}
 				if (isSelect || isNavigate) {
 					if (this.gameEnd !== 0) window.location.href = this.exitUrl;
 					else if (this.gamePhase === 1) {
@@ -326,6 +328,7 @@ export default {
 					this.blueIndex = pos + 1;
 					this.blue_position_show = true;
 				}
+				this.ignoreInput = false;
 			}
 		},
 		applyDiceRoll(newPosition, diceResult) {
@@ -340,26 +343,41 @@ export default {
 		},
 		applyCorrectMovement() {
 			this.blue_blinking_allowed = false;
-			window.setTimeout(() => {
-				this.ignoreInput = true;
-				this.blueIndex = this.newPosition;
-				this.blue_position_show = true;
-				if (this.firstPlayerTurn) {
-					this.showPawn1 = false;
-					this.pos1 = this.newPosition;
-					window.setTimeout(() => {
-						this.showPawn1 = true;
-					}, 1000);
-				} else {
-					this.showPawn2 = false;
-					this.pos2 = this.newPosition;
-					window.setTimeout(() => {
-						this.showPawn2 = true;
-					}, 1000);
-				}
-				this.newPosition = -1;
-				this.sendToBackend();
-			}, 1000);
+			let newPosition = this.newPosition;
+			this.newPosition = -1;
+			this.ignoreInput = true;
+			this.blueIndex = newPosition;
+			this.blue_position_show = true;
+			let current = this.pos2;
+			if (this.firstPlayerTurn) current = this.pos1;
+			this.activate_movement_rotation(newPosition, current);
+		},
+		activate_movement_rotation(end, current) {
+			if (this.firstPlayerTurn) {
+				this.showPawn1 = false;
+				if (end > current) this.pos1 = current + 1;
+				else this.pos1 = current - 1;
+				window.setTimeout(() => {
+					this.showPawn1 = true;
+				}, 500);
+				window.setTimeout(() => {
+					if (this.pos1 !== end)
+						this.activate_movement_rotation(end, this.pos1);
+					else this.sendToBackend();
+				}, 1000);
+			} else {
+				this.showPawn2 = false;
+				if (end > current) this.pos2 = current + 1;
+				else this.pos2 = current - 1;
+				window.setTimeout(() => {
+					this.showPawn2 = true;
+				}, 500);
+				window.setTimeout(() => {
+					if (this.pos2 !== end)
+						this.activate_movement_rotation(end, this.pos2);
+					else this.sendToBackend();
+				}, 1000);
+			}
 		},
 		applyCardMovement(cardValue) {
 			let pos = this.pos1;
@@ -416,6 +434,12 @@ export default {
 							}, 1000);
 						} else {
 							if (self.gamePhase === 1) {
+								alert(
+									"NewPosition: " +
+										response.data.newPosition +
+										"\nDiceResult: " +
+										response.data.diceResult
+								);
 								window.setTimeout(() => {
 									self.applyDiceRoll(
 										response.data.newPosition,
@@ -566,7 +590,7 @@ export default {
 
 .fade-enter-active,
 .fade-leave-active {
-	transition: opacity 1s;
+	transition: opacity 0.5s;
 }
 
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
