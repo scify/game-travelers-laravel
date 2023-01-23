@@ -196,9 +196,34 @@
 								returnKey ===
 								otherAssigner.getAttribute("data-key-selected")
 							) {
-								invalidateKeyAssigner(keyAssigner);
-								invalidateKeyAssigner(otherAssigner);
-								return false;
+								if (
+									returnKey !== "Space" &&
+									returnKey !== "Enter"
+								) {
+									invalidateKeyAssigner(keyAssigner);
+									invalidateKeyAssigner(otherAssigner);
+									return false;
+								}
+								// The same key has been assigned to both Key
+								// Assigners. We don't allow this unless the key
+								// in question is either Space or Enter in which
+								// case the other assigner reverts to the
+								// unassigned key.
+								console.log("Switching Other Key Assigner.");
+								otherAssigner.setAttribute(
+									"data-key-selected",
+									returnKey === "Space" ? "Enter" : "Space"
+								);
+								otherAssigner.textContent =
+									returnKey === "Space" ? "Enter" : "Space";
+								let setOtherInputId =
+									otherAssigner.getAttribute(
+										"data-sets-input"
+									);
+								let setOtherInput =
+									document.getElementById(setOtherInputId);
+								setOtherInput.value =
+									returnKey === "Space" ? "Enter" : "Space";
 							}
 						}
 
