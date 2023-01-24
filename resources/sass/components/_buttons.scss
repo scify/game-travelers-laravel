@@ -187,6 +187,15 @@ button.key-assigner.invalid {
     // Allows the absolute placement of other elements on top of these buttons.
     max-height: 212px;
 }
+
+// General overrides when switcher is enabled.
+body.switcher {
+    .btn-board:not(.switcher-focus):hover,
+    .btn-pawn:not(.switcher-focus):hover {
+        border: 0.3rem solid rgba(var(--trvl-c-dark-rgb), 0.4);
+    }
+}
+
 .btn-board,
 .btn-pawn {
     --bs-btn-disabled-opacity: 1;
@@ -200,20 +209,27 @@ button.key-assigner.invalid {
     border: 0.3rem solid transparent;
     transition: all 0.3s ease-in-out;
     outline: none !important;
+    // Hover, Focus & Active states for mouse navigation
     &:hover {
         border: 0.3rem solid var(--trvl-c-dark);
         box-shadow: 0 1em 1em rgba(var(--trvl-c-dark-rgb), 0.1);
     }
-    &.switcher-active,
-    &.switcher-focus,
     &:focus,
     &:focus-visible {
         border: 0.3rem solid var(--trvl-c-dark);
     }
-    &.switcher-active,
     &:active {
         border: 0.3rem solid var(--trvl-c-dark);
-        box-shadow: 0 1em 1em rgba(var(--trvl-c-dark-rgb), 0.2);
+        box-shadow: 0 1em 1em rgba(var(--trvl-c-dark-rgb), 0.3);
+    }
+    // Switcher focus-active states overriding mouse:hover
+    &.switcher-focus,
+    &.switcher-active {
+        border: 0.3rem solid var(--trvl-c-dark);
+    }
+    &.switcher-active {
+        border: 0.3rem solid var(--trvl-c-dark);
+        box-shadow: 0 1em 1em rgba(var(--trvl-c-dark-rgb), 0.3);
     }
     &.selected-by-other-player {
         background-color: rgba(11, 33, 34, 0.5);
@@ -239,6 +255,7 @@ button.key-assigner.invalid {
         }
     }
 }
+
 .btn-pawn {
     width: 136px;
     height: 212px;
@@ -298,10 +315,14 @@ button.key-assigner.invalid {
     }
 }
 
-.btn-pawn:hover .pawn-img,
-.btn-pawn.switcher-active .pawn-img,
-.btn-pawn.switcher-focus .pawn-img {
-    background-color: rgba(250, 249, 248, 0.3);
+// Default Pawn Hover for mouse navigation
+.btn-pawn:hover .pawn-img {
+    background-color: rgba(250, 249, 248, 0.25);
+}
+// Switcher Focus & Active states (overrides mouse:hover)
+.btn-pawn.switcher-focus .pawn-img,
+.btn-pawn.switcher-active .pawn-img {
+    background-color: rgba(250, 249, 248, 0.5);
 }
 
 .btn-board:hover .board-label,
