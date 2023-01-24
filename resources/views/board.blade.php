@@ -16,7 +16,8 @@
         <board-component
             :player-id='{{ $player_id }}'
             :backend-url="'{{ route('to.backend') }}'"
-            :exit-url="'{{ route('select.player', [0,'user',0]) }}'"
+            :continue-url="'{{ route('select.continue', [$player_id, 'continue', $game_id]) }}'"
+            :board-url="'{{ route('select.board', [$player_id, 'board', 0]) }}'"
             :game-id='{{ $game_id }}'
             :player-data='@json($player_data)'
             :game-data='@json($game_data)'

@@ -93,7 +93,8 @@ export default {
 	},
 	props: {
 		backendUrl: String,
-		exitUrl: String,
+		boardUrl: String,
+		continueUrl: String,
 		playerId: Number,
 		gameId: Number,
 		playerData: {
@@ -155,6 +156,234 @@ export default {
 		};
 	},
 	methods: {
+		init() {
+			// need to roll
+			window.setTimeout(() => {
+				this.showPawn1 = true;
+				this.showPawn2 = true;
+				if (this.gamePhase === 1) {
+					this.setCenter(this.diceType, 0);
+					this.rollAnimation = true;
+
+					if (this.firstPlayerTurn) {
+						if (this.pos1 === 0) window.sound("sounds.game.start");
+						else window.sound("sounds.game.our_turn_[1-6]");
+					} else window.sound("sounds.game.other_turn_[1-8]");
+				} else {
+					this.ignoreInput = true;
+					this.sendToBackend();
+				}
+			}, 500);
+			this.startMusic();
+		},
+		sendToBackend() {
+			let data = {
+				player_id: this.playerId,
+				game_id: this.gameId,
+				first_player_turn: this.firstPlayerTurn,
+				location_1: this.pos1,
+				location_2: this.pos2,
+				game_phase: this.gamePhase,
+				dice_type: this.diceType,
+				difficulty: this.difficulty,
+				game_mode: this.gameMode,
+				board_id: this.board,
+			};
+			let self = this;
+			if (self.gamePhase === 1) {
+				this.rollingAnimation = true;
+				window.sound("sounds.game.dice", null, true);
+				this.rollAnimation = false;
+			}
+			axios
+				.post(this.backendUrl, data, {
+					headers: {
+						Accept: "application/json",
+					},
+				})
+				.then(function (response) {
+					if (response.status > 300) {
+						console.log(response);
+					} else {
+						self.gameEnd = response.data.gameEnded;
+						if (self.gameEnd !== 0) {
+							if (self.gameEnd === 1)
+								window.sound("sounds.game.win_[1-8]");
+							else window.sound("sounds.game.defeat_[1-3]");
+							window.setTimeout(() => {
+								self.ignoreInput = false;
+							}, 1000);
+						} else {
+							if (self.gamePhase === 1) {
+								window.setTimeout(() => {
+									self.applyDiceRoll(
+										response.data.newPosition,
+										response.data.diceResult
+									);
+									self.rollingAnimation = false;
+								}, 1000);
+							} else if (self.gamePhase === 2) {
+								self.firstPlayerTurn =
+									response.data.firstPlayerTurn;
+								if (response.data.drawCard === 0) {
+									self.setCenter(true, 0);
+									self.rollAnimation = true;
+									self.gamePhase = 1;
+
+									if (self.firstPlayerTurn) {
+										if (self.tutorial && self.pos1 === 4)
+											self.ignoreInput = false;
+										else
+											window.sound(
+												"sounds.game.our_turn_[1-6]",
+												function () {
+													self.ignoreInput = false;
+												}
+											);
+									} else
+										window.sound(
+											"sounds.game.other_turn_[1-8]",
+											function () {
+												if (self.gameMode === 2)
+													window.setTimeout(() => {
+														self.sendToBackend();
+													}, 1000);
+											}
+										);
+								} else {
+									//draw a card
+									let card =
+										self.cards[response.data.drawCard];
+									self.cardName = card["name"];
+									self.latestCardValue = card["value"];
+									self.playCardSound();
+								}
+							} else if (self.gamePhase === 3) {
+								self.firstPlayerTurn =
+									response.data.firstPlayerTurn;
+								self.setCenter(true, 0);
+								self.rollAnimation = true;
+								self.gamePhase = 1;
+								if (self.firstPlayerTurn)
+									window.sound(
+										"sounds.game.our_turn_[1-6]",
+										function () {
+											self.ignoreInput = false;
+										}
+									);
+								else if (self.gameMode === 2) {
+									window.sound(
+										"sounds.game.other_turn_[1-8]",
+										function () {
+											self.sendToBackend();
+										}
+									);
+								}
+							}
+						}
+					}
+				})
+				.catch(function (error) {
+					//console.log(error);
+					alert(error);
+				});
+		},
+		key_press(e) {
+			let self = this;
+			if (!this.ignoreInput) {
+				let key = e.key;
+				console.log("Key pressed and NOT ignored:\t " + e.key);
+				if (key === "Delete") window.location.href = this.continueUrl;
+				if (key === " ") key = "Space";
+				let isSelect = false;
+				let isNavigate = false;
+				if (this.selectKey === key) isSelect = true;
+				else if (this.autoMove === 2 && this.navigateKey === key) {
+					if (this.movementMode === 1) isSelect = true;
+					else isNavigate = true;
+				}
+				console.log(
+					"isSelect:\t" +
+						isSelect +
+						"\tisNavigate:\t" +
+						isNavigate +
+						"\tgamePhase:\t" +
+						this.gamePhase
+				);
+				if (isSelect || isNavigate) {
+					if (this.gameEnd !== 0)
+						window.location.href = this.boardUrl;
+					else if (this.gamePhase === 1) {
+						this.ignoreInput = true;
+						this.sendToBackend();
+					} else if (this.gamePhase === 2) {
+						if (isNavigate) {
+							window.sound("fx.select");
+							this.blue_position_show = false;
+							let nextBlue = this.blueIndex + 1;
+							if (nextBlue > this.newPosition) {
+								nextBlue = this.pos1 + 1;
+								if (!this.firstPlayerTurn)
+									nextBlue = this.pos2 + 1;
+							}
+							this.blueIndex = nextBlue;
+							this.blue_position_show = true;
+						} else if (isSelect) {
+							if (this.newPosition === this.blueIndex) {
+								this.ignoreInput = true;
+								window.sound(
+									"sounds.game.reward_[1-12]",
+									function () {
+										self.applyCorrectMovement();
+									}
+								);
+							} else {
+								this.ignoreInput = true;
+								this.mistakes += 1;
+								if (this.mistakes === this.maxMistakes) {
+									// treat the choice as correct
+									window.sound(
+										"sounds.game.help_[1-4]",
+										function () {
+											self.mistakes = 0;
+											self.applyCorrectMovement();
+										}
+									);
+								} else {
+									window.sound(
+										"sounds.game.try_again_[1-7]",
+										function () {
+											self.ignoreInput = false;
+										}
+									);
+								}
+							}
+						}
+					} else if (this.gamePhase === 3) {
+						this.ignoreInput = true;
+						if (this.latestCardValue > 0)
+							window.sound(
+								"sounds.cards.F" + this.latestCardValue,
+								function () {
+									self.cardName = "";
+									self.applyCorrectMovement();
+								}
+							);
+						else
+							window.sound(
+								"sounds.cards.B" +
+									Math.abs(this.latestCardValue),
+								function () {
+									self.cardName = "";
+									self.applyCorrectMovement();
+								}
+							);
+					}
+				}
+			} else {
+				console.log("Key pressed and IGNORED:\t" + e.key);
+			}
+		},
 		playStepSound() {
 			if (this.stepSoundSwitch) {
 				window.sound("sounds.game.footstep1");
@@ -213,94 +442,6 @@ export default {
 			} else {
 				this.blue_position_show = false;
 				this.blueIndex = 0;
-			}
-		},
-		key_press(e) {
-			if (!this.ignoreInput) {
-				let key = e.key;
-				console.log("Key pressed and NOT ignored:\t " + e.key);
-				if (key === "Delete") window.location.href = this.exitUrl;
-				if (key === " ") key = "Space";
-				let isSelect = false;
-				let isNavigate = false;
-				if (this.selectKey === key) isSelect = true;
-				else if (this.autoMove === 2 && this.navigateKey === key) {
-					if (this.movementMode === 1) isSelect = true;
-					else isNavigate = true;
-				}
-				console.log(
-					"isSelect:\t" +
-						isSelect +
-						"\tisNavigate:\t" +
-						isNavigate +
-						"\tgamePhase:\t" +
-						this.gamePhase
-				);
-				if (isSelect || isNavigate) {
-					if (this.gameEnd !== 0) window.location.href = this.exitUrl;
-					else if (this.gamePhase === 1) {
-						this.ignoreInput = true;
-						this.sendToBackend();
-					} else if (this.gamePhase === 2) {
-						if (isNavigate) {
-							window.sound("fx.select");
-							this.blue_position_show = false;
-							let nextBlue = this.blueIndex + 1;
-							if (nextBlue > this.newPosition) {
-								nextBlue = this.pos1 + 1;
-								if (!this.firstPlayerTurn)
-									nextBlue = this.pos2 + 1;
-							}
-							this.blueIndex = nextBlue;
-							this.blue_position_show = true;
-						} else if (isSelect) {
-							let self = this;
-							if (this.newPosition === this.blueIndex) {
-								this.ignoreInput = true;
-								window.sound(
-									"sounds.game.reward_[1-12]",
-									function () {
-										self.applyCorrectMovement();
-									}
-								);
-							} else {
-								this.ignoreInput = true;
-								this.mistakes += 1;
-								if (this.mistakes === this.maxMistakes) {
-									// treat the choice as correct
-									window.sound(
-										"sounds.game.help_[1-6]",
-										function () {
-											self.mistakes = 0;
-											self.applyCorrectMovement();
-										}
-									);
-								} else {
-									window.sound(
-										"sounds.game.try_again_[1-7]",
-										function () {
-											self.ignoreInput = false;
-										}
-									);
-								}
-							}
-						}
-					} else if (this.gamePhase === 3) {
-						if (this.latestCardValue > 0)
-							window.sound(
-								"sounds.cards.F" + this.latestCardValue
-							);
-						else
-							window.sound(
-								"sounds.cards.B" +
-									Math.abs(this.latestCardValue)
-							);
-						this.cardName = "";
-						this.applyCorrectMovement();
-					}
-				}
-			} else {
-				console.log("Key pressed and IGNORED:\t" + e.key);
 			}
 		},
 		setCenter(isDice, value) {
@@ -391,6 +532,7 @@ export default {
 			}
 		},
 		applyDiceRoll(newPosition, diceResult) {
+			let self = this;
 			this.gamePhase = 2;
 			this.mistakes = 0;
 			this.newPosition = newPosition;
@@ -398,7 +540,26 @@ export default {
 			if (this.gameMode === 2 && !this.firstPlayerTurn)
 				this.applyCorrectMovement();
 			//check this in pvp
-			else this.activateSelector(newPosition);
+			else {
+				if (this.tutorial && this.firstPlayerTurn) {
+					if (this.pos1 === 0) {
+						window.sound(
+							"sounds.tutorial.Pink_Move_Forward",
+							function () {
+								window.sound("sounds.tutorial.Here_we_go_Pink");
+								self.activateSelector(newPosition);
+							}
+						);
+					} else if (this.pos1 === 4) {
+						window.sound(
+							"sounds.tutorial.We_Should_Go_Here",
+							function () {
+								self.activateSelector(newPosition);
+							}
+						);
+					} else this.activateSelector(newPosition);
+				} else this.activateSelector(newPosition);
+			}
 		},
 		applyCorrectMovement() {
 			this.blue_blinking_allowed = false;
@@ -414,6 +575,7 @@ export default {
 
 		activate_movement_rotation(end, current) {
 			this.ignoreInput = true;
+			let self = this;
 			if (this.firstPlayerTurn) {
 				this.showPawn1 = false;
 				if (end > current) this.pos1 = current + 1;
@@ -425,7 +587,32 @@ export default {
 				window.setTimeout(() => {
 					if (this.pos1 !== end)
 						this.activate_movement_rotation(end, this.pos1);
-					else this.sendToBackend();
+					else {
+						if (this.tutorial && this.firstPlayerTurn) {
+							if (this.pos1 === 4)
+								window.sound(
+									"sounds.tutorial.bravo_roll_again",
+									function () {
+										self.sendToBackend();
+									}
+								);
+							else if (this.pos1 === 9)
+								window.sound(
+									"sounds.tutorial.Aha_Lets_see",
+									function () {
+										self.sendToBackend();
+									}
+								);
+							else if (this.pos1 === 14)
+								window.sound(
+									"sounds.tutorial.Now_you_know_how_to_play ",
+									function () {
+										self.sendToBackend();
+									}
+								);
+							else this.sendToBackend();
+						} else this.sendToBackend();
+					}
 				}, 1000);
 			} else {
 				this.showPawn2 = false;
@@ -449,6 +636,7 @@ export default {
 			this.gamePhase = 3;
 			this.newPosition = pos;
 			this.setCenter(false, this.latestCardValue);
+			this.ignoreInput = false;
 		},
 		getPawnSex() {
 			if (this.firstPlayerTurn) {
@@ -470,125 +658,9 @@ export default {
 					this.board +
 					this.getPawnSex(),
 				function () {
-					self.ignoreInput = false;
+					self.applyCardMovement();
 				}
 			);
-		},
-		init() {
-			// need to roll
-			window.setTimeout(() => {
-				this.showPawn1 = true;
-				this.showPawn2 = true;
-				if (this.gamePhase === 1) {
-					this.setCenter(this.diceType, 0);
-					this.rollAnimation = true;
-
-					if (this.firstPlayerTurn)
-						if (this.pos1 === 0) window.sound("sounds.game.start");
-						else window.sound("sounds.game.our_turn_[1-6]");
-					else window.sound("sounds.game.other_turn_[1-8]");
-				} else this.sendToBackend();
-			}, 500);
-			this.startMusic();
-		},
-		sendToBackend() {
-			let data = {
-				player_id: this.playerId,
-				game_id: this.gameId,
-				first_player_turn: this.firstPlayerTurn,
-				location_1: this.pos1,
-				location_2: this.pos2,
-				game_phase: this.gamePhase,
-				dice_type: this.diceType,
-				difficulty: this.difficulty,
-				game_mode: this.gameMode,
-				board_id: this.board,
-			};
-			let self = this;
-			if (self.gamePhase === 1) {
-				this.rollingAnimation = true;
-				window.sound("sounds.game.dice");
-				this.rollAnimation = false;
-			}
-			axios
-				.post(this.backendUrl, data, {
-					headers: {
-						Accept: "application/json",
-					},
-				})
-				.then(function (response) {
-					if (response.status > 300) {
-						console.log(response);
-					} else {
-						self.gameEnd = response.data.gameEnded;
-						if (self.gameEnd !== 0) {
-							window.setTimeout(() => {
-								self.ignoreInput = false;
-							}, 1000);
-						} else {
-							if (self.gamePhase === 1) {
-								window.setTimeout(() => {
-									self.applyDiceRoll(
-										response.data.newPosition,
-										response.data.diceResult
-									);
-									self.rollingAnimation = false;
-								}, 1000);
-							} else if (self.gamePhase === 2) {
-								self.firstPlayerTurn =
-									response.data.firstPlayerTurn;
-								if (response.data.drawCard === 0) {
-									self.setCenter(true, 0);
-									self.rollAnimation = true;
-									self.gamePhase = 1;
-
-									if (self.firstPlayerTurn) {
-										window.sound(
-											"sounds.game.our_turn_[1-6]",
-											function () {
-												self.ignoreInput = false;
-											}
-										);
-									} else
-										window.sound(
-											"sounds.game.other_turn_[1-8]",
-											function () {
-												if (self.gameMode === 2)
-													window.setTimeout(() => {
-														self.sendToBackend();
-													}, 1000);
-											}
-										);
-								} else {
-									//draw a card
-									let card =
-										self.cards[response.data.drawCard];
-									self.cardName = card["name"];
-									self.latestCardValue = card["value"];
-									self.applyCardMovement();
-									self.playCardSound();
-								}
-							} else if (self.gamePhase === 3) {
-								self.firstPlayerTurn =
-									response.data.firstPlayerTurn;
-								self.setCenter(true, 0);
-								self.rollAnimation = true;
-								self.gamePhase = 1;
-								if (self.firstPlayerTurn)
-									self.ignoreInput = false;
-								else if (self.gameMode === 2) {
-									window.setTimeout(() => {
-										self.sendToBackend();
-									}, 1000);
-								}
-							}
-						}
-					}
-				})
-				.catch(function (error) {
-					//console.log(error);
-					alert(error);
-				});
 		},
 	},
 	computed: {
