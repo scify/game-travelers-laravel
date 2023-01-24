@@ -128,13 +128,13 @@ Fix permissions for storage directory:
 ```bash
 sudo chown -R ${USER}:www-data storage
 
-chmod 775 storage
+sudo chmod 775 storage
 
 cd storage/
 
-find . -type f -exec chmod 664 {} \;
+sudo find . -type f -exec chmod 664 {} \;
 
-find . -type d -exec chmod 775 {} \;
+sudo find . -type d -exec chmod 775 {} \;
 ```
 
 Or run the `set-file-permissions.sh` script (needs sudo):
