@@ -140,7 +140,7 @@ find . -type d -exec chmod 775 {} \;
 Or run the `set-file-permissions.sh` script (needs sudo):
 
 ```bash
-sudo ./set-file-permissions.sh www-data {{app_user}} .
+sudo ./set-file-permissions.sh www-data ${USER} .
 ```
 
 Change hosts file so dev.taxidiotes points to localhost:
