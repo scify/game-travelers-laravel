@@ -113,9 +113,9 @@
 
 		audio.onended = function () {
 			window.travelersSounds = window.travelersSounds.filter(function (
-				elem
+				sound
 			) {
-				return elem.file !== filename;
+				return sound.file !== filename;
 			});
 			if (callback && typeof callback === "function") {
 				callback();

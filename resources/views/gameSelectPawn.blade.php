@@ -12,7 +12,7 @@
          footer on mountain. Therefore, x-selectPawnButton excpects a board id
          --}}
     @section('scripts')
-        <x-switcher :switcher=$switcher />
+        <x-switcher :switcher=$switcher :audio="'sounds.game_start.pawn_onload'" />
     @endsection
 
     <form method="post"
