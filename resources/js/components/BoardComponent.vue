@@ -153,6 +153,7 @@ export default {
 			cardName: "",
 			latestCardValue: 0,
 			stepSoundSwitch: true,
+			tutorialYouKnowHowToPlayFlag: 0,
 		};
 	},
 	methods: {
@@ -546,8 +547,12 @@ export default {
 						window.sound(
 							"sounds.tutorial.Pink_Move_Forward",
 							function () {
-								window.sound("sounds.tutorial.Here_we_go_Pink");
-								self.activateSelector(newPosition);
+								window.sound(
+									"sounds.tutorial.Here_we_go_Pink",
+									function () {
+										self.activateSelector(newPosition);
+									}
+								);
 							}
 						);
 					} else if (this.pos1 === 4) {
@@ -596,21 +601,26 @@ export default {
 										self.sendToBackend();
 									}
 								);
-							else if (this.pos1 === 9)
+							else if (
+								this.pos1 === 9 &&
+								this.tutorialYouKnowHowToPlayFlag === 0
+							)
 								window.sound(
 									"sounds.tutorial.Aha_Lets_see",
 									function () {
+										self.tutorialYouKnowHowToPlayFlag += 1;
 										self.sendToBackend();
 									}
 								);
-							else if (this.pos1 === 14)
+							else if (this.tutorialYouKnowHowToPlayFlag === 1) {
 								window.sound(
-									"sounds.tutorial.Now_you_know_how_to_play ",
+									"sounds.tutorial.Now_you_know_how_to_play",
 									function () {
+										self.tutorialYouKnowHowToPlayFlag += 1;
 										self.sendToBackend();
 									}
 								);
-							else this.sendToBackend();
+							} else this.sendToBackend();
 						} else this.sendToBackend();
 					}
 				}, 1000);
