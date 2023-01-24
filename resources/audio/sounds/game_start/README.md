@@ -25,6 +25,10 @@ Missing:
 - mode_2_select --> `GameStart/Vs_computer.mp3`
 - mode_3_select --> `GameStart/Vs_player.mp3`
 
+### Game pawn:
+
+- pawn_onload --> `GameStart/Choose_your_pawn.mp3`
+
 ### Game options:
 
 - option_2_select --> `GameStart/Know_how_to_play_Start_game.mp3`
