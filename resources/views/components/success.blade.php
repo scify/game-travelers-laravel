@@ -14,14 +14,17 @@
         <div class="px-3 pt-5">
             <h1>{{ $message ?? __("messages.congratulations") . '!' }}</h1>
             <div class="d-flex justify-content-center pb-6 pb-sm-0">
-                <a
-                    href="{{ $url ?? '/' }}"
-                    class="confirmation-link confirmation-animation"
-                    alt="{{ $alt ?? __('messages.continue') }}"
-                    tabindex="1"
-                >
-                    <img src="{{ asset('images/icons/checkmark.svg') }}" width="129" height="96" alt="check-mark" />
-                </a>
+                @if(isset($url))
+                    <a
+                        href="{{ $url ?? '/' }}"
+                        class="confirmation-link confirmation-animation"
+                        tabindex="1">
+                        {{ __('messages.continue') }}
+                    </a>
+                @else
+                    <img src="{{ asset('images/icons/checkmark.svg') }}" alt="{{ $alt ?? __('messages.continue') }}"
+                         width="129" height="96"/>
+                @endisset
             </div>
         </div>
     </div>
