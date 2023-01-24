@@ -9,6 +9,7 @@ public/js
 public/mix-manifest.json
 public/sitemap.xml
 public/web.config
+public/*.ico
 resources/sass/*.css
 resources/sass/*.css.map
 /storage/*.key

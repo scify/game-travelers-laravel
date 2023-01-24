@@ -29,6 +29,10 @@ Missing:
 
 - pawn_onload --> `GameStart/Choose_your_pawn.mp3`
 
+## Game pawn two:
+
+- pawntwo_onload --> `???/Choose_opponents_pawn.mp3`
+
 ### Game options:
 
 - option_2_select --> `GameStart/Know_how_to_play_Start_game.mp3`
