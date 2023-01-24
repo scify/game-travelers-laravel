@@ -49,48 +49,6 @@ Route::middleware(['auth'])->group(function () {
 
 Route::view('/privacy-policy', 'privacy-policy.page')->name('privacy-policy');
 
-// From the "obsolete" pages, this still acts as the index, so please don't
-// delete this blade until we have a brand new front-page to replace it. Also
-// has important comments, as some of us decided to use this as a notebook.
-Route::get('/log', function () {
-    return view('extras/logViews');
-});
-
-// Demos
-// 1. Scanning Controller JavaScript demo:
-Route::get('/demo/select/pawn', function () {
-    return view('extras/demoGameSelectPawnScanning');
-});
-// Random x-layout component demos for No-Vue (default), Vue (optional):
-Route::get('/demo/noVue', function () {
-    return view('extras/demoNoVue');
-});
-Route::get('/demo/hasVue', function () {
-    return view('extras/demoHasVue');
-});
-Route::get('/demo/hasVueBlank', function () {
-    return view('extras/demoHasVueBlank');
-});
-
-
-// Obsolete pages:
-// No longer needed, yet they might be useful during development.
-Route::get('/testRoute', function () {
-    return view('extras/obsolete/secondPageTest');
-});
-Route::get('/testVue', function () {
-    return view('extras/obsolete/testVueJSPage');
-});
-// Font-tester
-Route::get('/extras/font-tester', function () {
-    return view('extras/testFont');
-});
-
-// Aris @todo: Existing game integration screen
-Route::get('/select/existing', function () {
-    return view('gameSelectExisting');
-});
-
 //Integrated pages
 Route::middleware('auth')->group(function () {
     Route::get('/select/player/{player_id}/{from}/{game_id}', [UserController::class, 'show'])
