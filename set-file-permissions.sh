@@ -18,7 +18,7 @@ find "$folder"/storage -type f -exec chmod 664 {} \;
 
 # Update permissions for all storage folders
 find "$folder"/storage -type d -exec chmod 775 {} \;
-if [ -d "$folder"/storage/app/public ]; then
+if [ -d "$folder"/storage/app/public/application ]; then
     chmod 777 "$folder"/storage/app/public/application
     chmod 777 "$folder"/storage/app/public/application/*
 fi
