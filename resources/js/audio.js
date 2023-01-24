@@ -1,15 +1,19 @@
 (function () {
 	"use strict";
 	// Experimental Audio Functions
+	// Providing 2 channel-audio for Travelers via window.music (music),
+	// window.sound (sound narration & effects).
 	// @todo: Make these functions work via:
 	// @link https://github.com/goldfire/howler.js
-	// as audio.play is not a reliable method to play sound or music in all
-	// browsers, especially when permissions is requested.
 	// @todo: old world, solasta @IMPORTANT
+
+	window.travelersSounds = [];
+
 	/**
 	 * Music
 	 * Allows the playback of music via the HTMLAudioElement.
 	 * Volume is set to 40%.
+	 * @param audiofile One of the audio files available via Laravel.audioFiles in folder.subfolder.file (with no extension) format.
 	 *
 	 * @example
 	 * window.music("music.movin_on")
@@ -36,14 +40,18 @@
 		audio.play();
 	};
 	window.music = music;
+
 	/**
 	 * Sound
-	 * Allows the playback of sounds via the HTMLAudioElement.
-	 * Uses 100% volume. Note that sounds should be equalized as there's no way
-	 * to ensure consistency of different recordings volumes via JavaScript.
+	 * Allows the playback of sounds (e.g. narrations) via the HTMLAudioElement.
+	 * Uses 100% volume. Allows playback of random files (see examples). Allows
+	 * callbacks to be executed when the playback is finished. Optionally, you
+	 * can interrupt any sounds that are already playing by passing interrupt as
+	 * a third parameter.
 	 *
-	 * @param audiofile One of the audio files available via Laravel.audioFiles in folder.subfolder.file (with no extension) format.
-	 * @param callback Optional callback function to be executed on audio.onended.
+	 * @param audiofile One of the audio files available via window.Laravel.audioFiles in folder.subfolder.file format (with no extension).
+	 * @param callback Optional callback function to be executed on audio.onended event.
+	 * @param interrupt Optionally interrupt previous playback if true (defaults to false).
 	 *
 	 * @example
 	 * window.sound("sounds.before_opponents_turn.dice")
@@ -54,13 +62,23 @@
 	 * //  - /audio/sounds/game_start/welcome_1.mp3
 	 * //  - /audio/sounds/game_start/welcome_2.mp3
 	 * //  - /audio/sounds/game_start/welcome_3.mp3
+	 * @example
+	 * window.sound("sounds.game_start.welcome_1", null, true)
+	 * // Stops any other sound(s) and immediately start playing welcome_1.mp3
 	 */
-	const sound = function (audiofile, callback) {
+	const sound = function (audiofile, callback = null, interrupt = false) {
 		if (!window.Laravel.audioFiles) {
 			console.log("Audio files not found");
 			return;
 		}
-
+		// Prevent simultaneous playblack.
+		if (interrupt && window.travelersSounds.length > 0) {
+			window.travelersSounds.forEach((sound) => {
+				sound.audio.pause();
+				sound.audio.currentTime = 0;
+			});
+			window.travelersSounds = [];
+		}
 		// Almost Random Sound (tm) playback.
 		var match = audiofile.match(/\[([0-9]+)-([0-9]+)\]/);
 		if (match) {
@@ -91,7 +109,14 @@
 		var filename = folders.pop() + ".mp3";
 		var folderPath = "/audio/" + folders.join("/");
 		var audio = new Audio(folderPath + "/" + filename);
+		window.travelersSounds.push({ audio: audio, file: filename });
+
 		audio.onended = function () {
+			window.travelersSounds = window.travelersSounds.filter(function (
+				elem
+			) {
+				return elem.file !== filename;
+			});
 			if (callback && typeof callback === "function") {
 				callback();
 			}

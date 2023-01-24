@@ -253,24 +253,30 @@ function switcher() {
 					classActive
 				);
 				window.removeEventListener("keydown", handleSwitchKey);
-				window.sound("fx.navigate", function () {
-					if (
-						validSwitcherElements[currentFocusIndex].hasAttribute(
-							"data-audio-select"
-						)
-					) {
-						let audioSelectValue =
+				window.sound(
+					"fx.navigate",
+					function () {
+						if (
 							validSwitcherElements[
 								currentFocusIndex
-							].getAttribute("data-audio-select");
-						window.sound(audioSelectValue, function () {
+							].hasAttribute("data-audio-select")
+						) {
+							let audioSelectValue =
+								validSwitcherElements[
+									currentFocusIndex
+								].getAttribute("data-audio-select");
+							window.sound(audioSelectValue, function () {
+								validSwitcherElements[
+									currentFocusIndex
+								].click();
+							});
+						} else {
 							validSwitcherElements[currentFocusIndex].click();
-						});
-					} else {
-						validSwitcherElements[currentFocusIndex].click();
-					}
-					// return;
-				});
+						}
+						// return;
+					},
+					true
+				);
 			}
 		} else {
 			// Manual mode.
@@ -309,24 +315,30 @@ function switcher() {
 				window.removeEventListener("keydown", handleSwitchKey);
 				// validSwitcherElements[currentFocusIndex].click();
 				// return;
-				window.sound("fx.navigate", function () {
-					if (
-						validSwitcherElements[currentFocusIndex].hasAttribute(
-							"data-audio-select"
-						)
-					) {
-						let audioSelectValue =
+				window.sound(
+					"fx.navigate",
+					function () {
+						if (
 							validSwitcherElements[
 								currentFocusIndex
-							].getAttribute("data-audio-select");
-						window.sound(audioSelectValue, function () {
+							].hasAttribute("data-audio-select")
+						) {
+							let audioSelectValue =
+								validSwitcherElements[
+									currentFocusIndex
+								].getAttribute("data-audio-select");
+							window.sound(audioSelectValue, function () {
+								validSwitcherElements[
+									currentFocusIndex
+								].click();
+							});
+						} else {
 							validSwitcherElements[currentFocusIndex].click();
-						});
-					} else {
-						validSwitcherElements[currentFocusIndex].click();
-					}
-					// return;
-				});
+						}
+						// return;
+					},
+					true
+				);
 			}
 		}
 	}
