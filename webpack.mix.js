@@ -24,9 +24,13 @@ mix.webpackConfig({
  |
  */
 
+// Deploy images
 mix.copyDirectory("resources/images", "public/images");
+// Handle favicon.ico
+mix.copy("resources/images/favicons/favicon.ico", "public");
+// Deploy audio
 mix.copyDirectory("resources/audio", "public/audio");
-
+// Start mixing JS & SCSS
 mix.js("resources/js/app.js", "public/js")
 	.js("resources/js/vue.js", "public/js") // vue dependencies
 	.js("resources/js/settings/*.js", "public/js/functions/settings.js") // settings functions
@@ -36,5 +40,4 @@ mix.js("resources/js/app.js", "public/js")
 		// Folder structure is already optimal thanks to copyDirectory so there's no need to rewriteUrls:
 		processUrls: false,
 	})
-	// .sass('resources/sass/fixedwh.scss', 'public/css')
 	.version(); // cache busting @see https://laravel-mix.com/docs/6.0/versioning
