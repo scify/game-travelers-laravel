@@ -126,14 +126,22 @@ Enable mod_rewrite, mod_ssl and restart apache:
 Fix permissions for storage directory:
 
 ```bash
-sudo chown -R user:www-data storage
+sudo chown -R ${USER}:www-data storage
+
 chmod 775 storage
+
 cd storage/
+
 find . -type f -exec chmod 664 {} \;
+
 find . -type d -exec chmod 775 {} \;
 ```
 
-Or run the `set-file-permissions.sh` script.
+Or run the `set-file-permissions.sh` script (needs sudo):
+
+```bash
+sudo ./set-file-permissions.sh www-data {{app_user}} .
+```
 
 Change hosts file so dev.taxidiotes points to localhost:
 
