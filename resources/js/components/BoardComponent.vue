@@ -89,8 +89,6 @@ export default {
 		window.addEventListener("keypress", (e) => {
 			this.key_press(e);
 		});
-		// window.AudioPlayer.playBackgroundMusic();
-		// window.AudioPlayer.playStartMusic();
 		this.init();
 	},
 	props: {
@@ -256,16 +254,34 @@ export default {
 							this.blueIndex = nextBlue;
 							this.blue_position_show = true;
 						} else if (isSelect) {
+							let self = this;
 							if (this.newPosition === this.blueIndex) {
-								window.sound("fx.navigate");
-								this.applyCorrectMovement();
+								this.ignoreInput = true;
+								window.sound(
+									"sounds.game.reward_[1-12]",
+									function () {
+										self.applyCorrectMovement();
+									}
+								);
 							} else {
-								window.sound("fx.select_negative");
+								this.ignoreInput = true;
 								this.mistakes += 1;
 								if (this.mistakes === this.maxMistakes) {
 									// treat the choice as correct
-									this.mistakes = 0;
-									this.applyCorrectMovement();
+									window.sound(
+										"sounds.game.help_[1-6]",
+										function () {
+											self.mistakes = 0;
+											self.applyCorrectMovement();
+										}
+									);
+								} else {
+									window.sound(
+										"sounds.game.try_again_[1-7]",
+										function () {
+											self.ignoreInput = false;
+										}
+									);
 								}
 							}
 						}
@@ -284,7 +300,7 @@ export default {
 					}
 				}
 			} else {
-				console.log("Key pressed and ignored" + e.key);
+				console.log("Key pressed and IGNORED:\t" + e.key);
 			}
 		},
 		setCenter(isDice, value) {
@@ -317,6 +333,7 @@ export default {
 			this.center_src = src + ".png";
 		},
 		activateSelector(newPosition) {
+			this.ignoreInput = false;
 			let pos = this.pos1;
 			if (!this.firstPlayerTurn) pos = this.pos2;
 			if (this.movementMode === 1) {
@@ -394,7 +411,9 @@ export default {
 			if (this.firstPlayerTurn) current = this.pos1;
 			this.activate_movement_rotation(newPosition, current);
 		},
+
 		activate_movement_rotation(end, current) {
+			this.ignoreInput = true;
 			if (this.firstPlayerTurn) {
 				this.showPawn1 = false;
 				if (end > current) this.pos1 = current + 1;
@@ -443,12 +462,16 @@ export default {
 			}
 		},
 		playCardSound() {
+			let self = this;
 			window.sound(
 				"sounds.cards." +
 					this.cardName +
 					"_" +
 					this.board +
-					this.getPawnSex()
+					this.getPawnSex(),
+				function () {
+					self.ignoreInput = false;
+				}
 			);
 		},
 		init() {
@@ -459,6 +482,11 @@ export default {
 				if (this.gamePhase === 1) {
 					this.setCenter(this.diceType, 0);
 					this.rollAnimation = true;
+
+					if (this.firstPlayerTurn)
+						if (this.pos1 === 0) window.sound("sounds.game.start");
+						else window.sound("sounds.game.our_turn_[1-6]");
+					else window.sound("sounds.game.other_turn_[1-8]");
 				} else this.sendToBackend();
 			}, 500);
 			this.startMusic();
@@ -476,7 +504,6 @@ export default {
 				game_mode: this.gameMode,
 				board_id: this.board,
 			};
-			//alert(JSON.stringify(data, null, "    "));
 			let self = this;
 			if (self.gamePhase === 1) {
 				this.rollingAnimation = true;
@@ -514,13 +541,24 @@ export default {
 									self.setCenter(true, 0);
 									self.rollAnimation = true;
 									self.gamePhase = 1;
-									if (self.firstPlayerTurn)
-										self.ignoreInput = false;
-									else if (self.gameMode === 2) {
-										window.setTimeout(() => {
-											self.sendToBackend();
-										}, 1000);
-									}
+
+									if (self.firstPlayerTurn) {
+										window.sound(
+											"sounds.game.our_turn_[1-6]",
+											function () {
+												self.ignoreInput = false;
+											}
+										);
+									} else
+										window.sound(
+											"sounds.game.other_turn_[1-8]",
+											function () {
+												if (self.gameMode === 2)
+													window.setTimeout(() => {
+														self.sendToBackend();
+													}, 1000);
+											}
+										);
 								} else {
 									//draw a card
 									let card =
@@ -529,7 +567,6 @@ export default {
 									self.latestCardValue = card["value"];
 									self.applyCardMovement();
 									self.playCardSound();
-									self.ignoreInput = false;
 								}
 							} else if (self.gamePhase === 3) {
 								self.firstPlayerTurn =
