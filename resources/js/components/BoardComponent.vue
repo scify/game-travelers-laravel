@@ -375,7 +375,9 @@ export default {
 						this.blue_blinking_allowed = false;
 						if (this.latestCardValue > 0)
 							window.sound(
-								"sounds.cards.F" + this.latestCardValue,
+								"sounds.cards.F" +
+									this.latestCardValue +
+									this.getPawnSex(),
 								function () {
 									self.cardName = "";
 									self.applyCorrectMovement();
@@ -384,7 +386,8 @@ export default {
 						else
 							window.sound(
 								"sounds.cards.B" +
-									Math.abs(this.latestCardValue),
+									Math.abs(this.latestCardValue) +
+									this.getPawnSex(),
 								function () {
 									self.cardName = "";
 									self.applyCorrectMovement();
@@ -509,13 +512,14 @@ export default {
 				);
 				window.setTimeout(() => {
 					this.blue_blinking_allowed = false;
-					this.ignoreInput = false;
 				}, 3000);
 
 				//if only selection key is used
 				window.setTimeout(() => {
 					if (this.autoMove === 1) {
 						this.blue_blinking_allowed = true;
+						this.blueIndex = pos + 1;
+						this.ignoreInput = false;
 						this.activate_blue_rotation(
 							pos + 1,
 							newPosition,
@@ -526,6 +530,7 @@ export default {
 						//if navigation key is used
 						this.blueIndex = pos + 1;
 						this.blue_position_show = true;
+						this.ignoreInput = false;
 					}
 				}, 3200);
 			} else if (this.movementMode === 3) {
