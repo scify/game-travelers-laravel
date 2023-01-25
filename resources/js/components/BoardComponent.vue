@@ -233,7 +233,12 @@ export default {
 
 									if (self.firstPlayerTurn) {
 										if (self.tutorial && self.pos1 === 4)
-											self.ignoreInput = false;
+											window.sound(
+												"sounds.tutorial.bravo_roll_again",
+												function () {
+													self.ignoreInput = false;
+												}
+											);
 										else
 											window.sound(
 												"sounds.game.our_turn_[1-6]",
@@ -291,10 +296,10 @@ export default {
 		},
 		key_press(e) {
 			let self = this;
+			let key = e.key;
+			if (key === "Delete") window.location.href = this.continueUrl;
 			if (!this.ignoreInput) {
-				let key = e.key;
 				console.log("Key pressed and NOT ignored:\t " + e.key);
-				if (key === "Delete") window.location.href = this.continueUrl;
 				if (key === " ") key = "Space";
 				let isSelect = false;
 				let isNavigate = false;
@@ -336,7 +341,8 @@ export default {
 									"sounds.game.reward_[1-12]",
 									function () {
 										self.applyCorrectMovement();
-									}
+									},
+									true
 								);
 							} else {
 								this.ignoreInput = true;
@@ -355,7 +361,8 @@ export default {
 										"sounds.game.try_again_[1-7]",
 										function () {
 											self.ignoreInput = false;
-										}
+										},
+										true
 									);
 								}
 							}
@@ -547,21 +554,13 @@ export default {
 						window.sound(
 							"sounds.tutorial.Pink_Move_Forward",
 							function () {
-								window.sound(
-									"sounds.tutorial.Here_we_go_Pink",
-									function () {
-										self.activateSelector(newPosition);
-									}
-								);
+								self.activateSelector(newPosition);
+								window.sound("sounds.tutorial.Here_we_go_Pink");
 							}
 						);
 					} else if (this.pos1 === 4) {
-						window.sound(
-							"sounds.tutorial.We_Should_Go_Here",
-							function () {
-								self.activateSelector(newPosition);
-							}
-						);
+						window.sound("sounds.tutorial.We_Should_Go_Here");
+						self.activateSelector(newPosition);
 					} else this.activateSelector(newPosition);
 				} else this.activateSelector(newPosition);
 			}
@@ -594,14 +593,7 @@ export default {
 						this.activate_movement_rotation(end, this.pos1);
 					else {
 						if (this.tutorial && this.firstPlayerTurn) {
-							if (this.pos1 === 4)
-								window.sound(
-									"sounds.tutorial.bravo_roll_again",
-									function () {
-										self.sendToBackend();
-									}
-								);
-							else if (
+							if (
 								this.pos1 === 9 &&
 								this.tutorialYouKnowHowToPlayFlag === 0
 							)
