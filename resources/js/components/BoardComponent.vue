@@ -336,6 +336,7 @@ export default {
 							this.blue_position_show = true;
 						} else if (isSelect) {
 							if (this.newPosition === this.blueIndex) {
+								this.blue_blinking_allowed = false;
 								this.ignoreInput = true;
 								window.sound(
 									"sounds.game.reward_[1-12]",
@@ -348,6 +349,7 @@ export default {
 								this.ignoreInput = true;
 								this.mistakes += 1;
 								if (this.mistakes === this.maxMistakes) {
+									this.blue_blinking_allowed = false;
 									// treat the choice as correct
 									window.sound(
 										"sounds.game.help_[1-4]",
@@ -359,16 +361,18 @@ export default {
 								} else {
 									window.sound(
 										"sounds.game.try_again_[1-7]",
-										function () {
-											self.ignoreInput = false;
-										},
+										null,
 										true
 									);
+									window.setTimeout(function () {
+										self.ignoreInput = false;
+									}, 600);
 								}
 							}
 						}
 					} else if (this.gamePhase === 3) {
 						this.ignoreInput = true;
+						this.blue_blinking_allowed = false;
 						if (this.latestCardValue > 0)
 							window.sound(
 								"sounds.cards.F" + this.latestCardValue,
@@ -495,6 +499,7 @@ export default {
 					0
 				);
 			} else if (this.movementMode === 2) {
+				this.ignoreInput = true;
 				this.blue_blinking_allowed = true;
 				this.activate_blue_rotation(
 					newPosition,
@@ -612,7 +617,6 @@ export default {
 			}
 		},
 		applyCorrectMovement() {
-			this.blue_blinking_allowed = false;
 			let newPosition = this.newPosition;
 			this.newPosition = -1;
 			this.ignoreInput = true;
