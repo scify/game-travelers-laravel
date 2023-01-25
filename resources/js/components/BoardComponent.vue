@@ -549,18 +549,64 @@ export default {
 				this.applyCorrectMovement();
 			//check this in pvp
 			else {
-				if (this.tutorial && this.firstPlayerTurn) {
+				if (
+					this.tutorial &&
+					this.firstPlayerTurn &&
+					this.tutorialYouKnowHowToPlayFlag === 0
+				) {
 					if (this.pos1 === 0) {
-						window.sound(
-							"sounds.tutorial.Pink_Move_Forward",
-							function () {
-								self.activateSelector(newPosition);
-								window.sound("sounds.tutorial.Here_we_go_Pink");
-							}
-						);
+						let sound_forward = "sounds.tutorial.Pink_Move_Forward";
+						if (self.diceType !== 3)
+							sound_forward = "sounds.tutorial.Pawn_4_forward";
+						window.sound(sound_forward, function () {
+							if (self.movementMode === 3) {
+								self.blueIndex = 4;
+								self.blue_position_show = true;
+							} else self.activateSelector(newPosition);
+							let we_should_go_here_sound =
+								"sounds.tutorial.Here_we_go_Pink";
+							if (self.diceType !== 3)
+								we_should_go_here_sound =
+									"sounds.tutorial.We_Should_Go_Here";
+							window.sound(we_should_go_here_sound, function () {
+								if (self.movementMode > 1)
+									window.sound(
+										"sounds.tutorial.Choose_this_Pawn_goes_there",
+										function () {
+											if (self.movementMode === 3) {
+												self.blue_position_show = false;
+												self.blueIndex = 0;
+												self.activateSelector(
+													newPosition
+												);
+											}
+										}
+									);
+							});
+						});
 					} else if (this.pos1 === 4) {
-						window.sound("sounds.tutorial.We_Should_Go_Here");
-						self.activateSelector(newPosition);
+						if (self.movementMode === 3) {
+							let sound_to_play =
+								"sounds.tutorial.Yellow_Choose_Position";
+							if (self.diceType !== 3)
+								sound_to_play =
+									"sounds.tutorial.Roll_2_You_Choose_Now";
+							window.sound(sound_to_play, function () {
+								self.activateSelector(newPosition);
+							});
+						} else {
+							window.sound(
+								"sounds.tutorial.We_Should_Go_Here",
+								function () {
+									if (self.movementMode > 1) {
+										window.sound(
+											"sounds.tutorial.Choose_this_Pawn_goes_there"
+										);
+									}
+								}
+							);
+							self.activateSelector(newPosition);
+						}
 					} else this.activateSelector(newPosition);
 				} else this.activateSelector(newPosition);
 			}

@@ -119,7 +119,7 @@ class BoardController extends Controller
                 $colour_id = $this->getColourIdOfPos($active_player_pos);
                 if ($colour_id == 3 || $colour_id == 5) {
                     if ($db_game_phase != $game_phase) {
-                        $latest_random_result = $this->getAValidCard($board_size, $active_player_pos, $board_id);
+                        $latest_random_result = $this->getAValidCard($board_size, $active_player_pos, $board_id, $tutorial_mode);
                     }
                     $random_card = $latest_random_result;
                     if ($game_phase != $db_game_phase) {
@@ -211,16 +211,19 @@ class BoardController extends Controller
             return $modulo;
     }
 
-    protected function getAValidCard($board_size, $pos, $board_id):int {
+    protected function getAValidCard($board_size, $pos, $board_id, $is_tutorial): int
+    {
         $max = $this->getFinalPos($board_size);
         $random = rand(1, 10);
-        $randomPolarity = rand(1, 2);
-        if ($randomPolarity == 2)
-            $random *= -1;
+        if (!$is_tutorial) {
+            $randomPolarity = rand(1, 2);
+            if ($randomPolarity == 2)
+                $random *= -1;
+        }
         $value = $this->getCards($board_id)[$random]['value'];
         $new_pos = $value + $pos;
         if ($new_pos <= 0 || $new_pos > $max)
-            return $this->getAValidCard($board_size, $pos, $board_id);
+            return $this->getAValidCard($board_size, $pos, $board_id, $is_tutorial);
         else
             return $random;
     }
