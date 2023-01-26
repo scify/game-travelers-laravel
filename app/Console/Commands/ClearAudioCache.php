@@ -35,6 +35,8 @@ class ClearAudioCache extends Command {
      * @return int
      */
     public function handle(): int {
-        return Cache::flush();
+        $res = Cache::flush();
+        echo "Clear: " . $res . "\n\n";
+        return $res;
     }
 }
