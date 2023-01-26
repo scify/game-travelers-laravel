@@ -299,7 +299,7 @@ export default {
 			let key = e.key;
 			if (key === "Delete") window.location.href = this.continueUrl;
 			if (!this.ignoreInput) {
-				console.log("Key pressed and NOT ignored:\t " + e.key);
+				console.log("Key pressed and NOT ignored:\t(" + e.key + ")");
 				if (key === " ") key = "Space";
 				let isSelect = false;
 				let isNavigate = false;
@@ -314,7 +314,27 @@ export default {
 						"\tisNavigate:\t" +
 						isNavigate +
 						"\tgamePhase:\t" +
-						this.gamePhase
+						this.gamePhase +
+						"\tfirstPlayerTurn\t" +
+						this.firstPlayerTurn +
+						"\tpos1\t" +
+						this.pos1 +
+						"\tpos2\t" +
+						this.pos2 +
+						"\tboardId\t" +
+						this.board +
+						"\tboardSize\t" +
+						this.boardSize +
+						"\tlatestCardValue\t" +
+						this.latestCardValue +
+						"\tnewPosition\t" +
+						this.newPosition +
+						"\tautoMove\t" +
+						this.autoMove +
+						"\tmovementMode\t" +
+						this.movementMode +
+						"\tgameMode\t" +
+						this.gameMode
 				);
 				if (isSelect || isNavigate) {
 					if (this.gameEnd !== 0)
@@ -373,13 +393,14 @@ export default {
 					} else if (this.gamePhase === 3) {
 						this.ignoreInput = true;
 						this.blue_blinking_allowed = false;
+						this.cardName = "";
 						if (this.latestCardValue > 0)
 							window.sound(
 								"sounds.cards.F" +
 									this.latestCardValue +
 									this.getPawnSex(),
 								function () {
-									self.cardName = "";
+									self.latestCardValue = 0;
 									self.applyCorrectMovement();
 								}
 							);
@@ -389,14 +410,14 @@ export default {
 									Math.abs(this.latestCardValue) +
 									this.getPawnSex(),
 								function () {
-									self.cardName = "";
+									self.latestCardValue = 0;
 									self.applyCorrectMovement();
 								}
 							);
 					}
 				}
 			} else {
-				console.log("Key pressed and IGNORED:\t" + e.key);
+				console.log("Key pressed and IGNORED:\t(" + e.key + ")");
 			}
 		},
 		playStepSound() {
