@@ -29,11 +29,23 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ $description ?? 'Ταξιδιώτες, ένα παιχνίδι από την SciFY.' }}">
-    <meta name="keywords" content="{{-- @todo: keywords --}}">
+    <meta name="application-name" content="{{ config('app.name') }}">
+    <meta name="author" content="SciFY">
+    <meta name="description" content="{{ $description ?? __('messages.meta_description') }}">
+    <meta name="keywords" content="{{ __('messages.meta_keywords') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'Ταξιδιώτες' }}</title>
+    <title>{{ $title ?? config('app.name') }}</title>
+    <meta name="og:title" property="og:title" content="{{ config('app.name') }}">
+    <meta name="og:type" property="og:type" content="website">
+    <meta name="og:url" property="og:url" content="{{ url()->current() }}">
+    <meta name="og:image" property="og:image" content="{{ asset('images/taxidiotes_logo.webp') }}">
+    <meta name="og:description" property="og:description" content="{{ __('messages.meta_tags_description') }}">
+    <meta name="og:site_name" property="og:site_name" content="{{ config('app.name') }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ config('app.name') }}"/>
+    <meta name="twitter:description" content="{{ __('messages.meta_tags_description') }}"/>
+    <meta name="twitter:image" content="{{ asset('images/taxidiotes_logo.webp') }}"/>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=5" name="viewport">
     @include('layout.favicons')
     <link rel="canonical" href="{{ url()->current() }}">
     <script src="{{ mix('js/app.js') }}" defer></script>

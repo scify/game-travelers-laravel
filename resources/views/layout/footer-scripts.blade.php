@@ -19,7 +19,7 @@
 
     // Extremely confusing audioFiles map
     $audioPath = base_path("resources/audio/");
-    $audioFiles = Cache::rememberForever('audioFiles_', function () use ($audioPath) {
+    $audioFiles = Cache::rememberForever('audioFiles', function () use ($audioPath) {
         return collect(File::directories($audioPath))
             ->mapWithKeys(function ($directory) {
                 $folderName = basename($directory);
