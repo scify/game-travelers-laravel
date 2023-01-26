@@ -29,7 +29,9 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="{{ $description ?? __('messages.meta_title') }}">
+    <meta name="application-name" content="{{ __('messages.meta_title') }}">
+    <meta name="author" content="SciFY">
+    <meta name="description" content="{{ $description ?? __('messages.meta_description') }}">
     <meta name="keywords" content="{{ __('messages.meta_keywords') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? config('app.name') }}</title>
