@@ -29,7 +29,7 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
-    <meta name="application-name" content="{{ __('messages.meta_title') }}">
+    <meta name="application-name" content="{{ config('app.name') }}">
     <meta name="author" content="SciFY">
     <meta name="description" content="{{ $description ?? __('messages.meta_description') }}">
     <meta name="keywords" content="{{ __('messages.meta_keywords') }}">
