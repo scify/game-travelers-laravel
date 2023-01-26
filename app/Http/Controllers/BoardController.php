@@ -222,10 +222,18 @@ class BoardController extends Controller
         }
         $value = $this->getCards($board_id)[$random]['value'];
         $new_pos = $value + $pos;
-        if ($new_pos <= 0 || $new_pos > $max)
-            return $this->getAValidCard($board_size, $pos, $board_id, $is_tutorial);
-        else
-            return $random;
+        if ($new_pos <= 0) { //the card was negative we need a smaller card
+            $random = -1 * rand(1, 7);
+            $value = $this->getCards($board_id)[$random]['value'];
+            if (($value + $pos) <= 0)
+                $random = -1 * rand(1, 3);
+        } else if ($new_pos > $max) { //the card was positive we need a smaller positive card
+            $random = rand(1, 7);
+            $value = $this->getCards($board_id)[$random]['value'];
+            if (($value + $pos) > $max)
+                $random = rand(1, 3);
+        }
+        return $random;
     }
 
     protected function getCards($board_id)
@@ -233,170 +241,169 @@ class BoardController extends Controller
         if ($board_id == 1) {
             return [
                 1 => [
-                    'name' => 'Van',
-                    'value' => 3,
+                    'name' => 'Fish',
+                    'value' => 1,
                 ],
                 2 => [
-                    'name' => 'Boat',
-                    'value' => 3,
-                ],
-                3 => [
-                    'name' => 'Mermaid',
-                    'value' => 3,
-                ],
-                4 => [
                     'name' => 'Dolphin',
                     'value' => 1,
                 ],
-                5 => [
-                    'name' => 'Car',
-                    'value' => 5,
-                ],
-                6 => [
+                3 => [
                     'name' => 'Note',
                     'value' => 1,
                 ],
-                7 => [
+                4 => [
                     'name' => 'Map',
                     'value' => 1,
                 ],
+                5 => [
+                    'name' => 'Van',
+                    'value' => 3,
+                ],
+                6 => [
+                    'name' => 'Boat',
+                    'value' => 3,
+                ],
+                7 => [
+                    'name' => 'Mermaid',
+                    'value' => 3,
+                ],
+
                 8 => [
-                    'name' => 'Octopus',
+                    'name' => 'Car',
                     'value' => 5,
                 ],
                 9 => [
-                    'name' => 'Fish',
-                    'value' => 1,
+                    'name' => 'Octopus',
+                    'value' => 5,
                 ],
                 10 => [
                     'name' => 'Path',
                     'value' => 5,
                 ],
                 -1 => [
-                    'name' => 'Wind',
-                    'value' => -3,
-                ],
-                -2 => [
                     'name' => 'Tire',
                     'value' => -1,
                 ],
-                -3 => [
-                    'name' => 'Crab',
-                    'value' => -3,
-                ],
-                -4 => [
-                    'name' => 'WrongPath',
-                    'value' => -5,
-                ],
-                -5 => [
-                    'name' => 'Bird',
-                    'value' => -5,
-                ],
-                -6 => [
-                    'name' => 'Pelican',
-                    'value' => -1,
-                ],
-                -7 => [
-                    'name' => 'Cow',
-                    'value' => -3,
-                ],
-                -8 => [
-                    'name' => 'Hat',
-                    'value' => -5,
-                ],
-                -9 => [
-                    'name' => 'Water',
-                    'value' => -3,
-                ],
-                -10 => [
+                -2 => [
                     'name' => 'IceCream',
                     'value' => -1,
                 ],
-
+                -3 => [
+                    'name' => 'Pelican',
+                    'value' => -1,
+                ],
+                -4 => [
+                    'name' => 'Cow',
+                    'value' => -3,
+                ],
+                -5 => [
+                    'name' => 'Water',
+                    'value' => -3,
+                ],
+                -6 => [
+                    'name' => 'Wind',
+                    'value' => -3,
+                ],
+                -7 => [
+                    'name' => 'Crab',
+                    'value' => -3,
+                ],
+                -8 => [
+                    'name' => 'WrongPath',
+                    'value' => -5,
+                ],
+                -9 => [
+                    'name' => 'Bird',
+                    'value' => -5,
+                ],
+                -10 => [
+                    'name' => 'Hat',
+                    'value' => -5,
+                ],
             ];
         } else if ($board_id == 2) {
             return [
                 1 => [
-                    'name' => 'Snowman',
-                    'value' => 3,
-                ],
-                2 => [
-                    'name' => 'Car',
-                    'value' => 3,
-                ],
-                3 => [
-                    'name' => 'Deer',
-                    'value' => 1,
-                ],
-                4 => [
                     'name' => 'Map',
                     'value' => 1,
                 ],
+                2 => [
+                    'name' => 'Deer',
+                    'value' => 1,
+                ],
+                3 => [
+                    'name' => 'Skier',
+                    'value' => 1,
+                ],
+                4 => [
+                    'name' => 'Snowman',
+                    'value' => 3,
+                ],
                 5 => [
-                    'name' => 'Note',
+                    'name' => 'Car',
                     'value' => 3,
                 ],
                 6 => [
-                    'name' => 'OldMan',
-                    'value' => 5,
+                    'name' => 'Note',
+                    'value' => 3,
                 ],
                 7 => [
-                    'name' => 'CableCar',
-                    'value' => 5,
-                ],
-                8 => [
                     'name' => 'Shovel',
                     'value' => 3,
                 ],
+                8 => [
+                    'name' => 'OldMan',
+                    'value' => 5,
+                ],
                 9 => [
-                    'name' => 'Skier',
-                    'value' => 1,
+                    'name' => 'CableCar',
+                    'value' => 5,
                 ],
                 10 => [
                     'name' => 'Sleigh',
                     'value' => 5,
                 ],
                 -1 => [
-                    'name' => 'WrongPath',
-                    'value' => -3,
-                ],
-                -2 => [
-                    'name' => 'WrongNote',
-                    'value' => -3,
-                ],
-                -3 => [
-                    'name' => 'Wind',
-                    'value' => -3,
-                ],
-                -4 => [
-                    'name' => 'Squirrel',
-                    'value' => -3,
-                ],
-                -5 => [
-                    'name' => 'Snow',
-                    'value' => -5,
-                ],
-                -6 => [
-                    'name' => 'Hail',
-                    'value' => -5,
-                ],
-                -7 => [
-                    'name' => 'Scarf',
-                    'value' => -1,
-                ],
-                -8 => [
-                    'name' => 'Cap',
-                    'value' => -1,
-                ],
-                -9 => [
-                    'name' => 'Bear',
-                    'value' => -5,
-                ],
-                -10 => [
                     'name' => 'Chocolate',
                     'value' => -1,
                 ],
-
+                -2 => [
+                    'name' => 'Scarf',
+                    'value' => -1,
+                ],
+                -3 => [
+                    'name' => 'Cap',
+                    'value' => -1,
+                ],
+                -4 => [
+                    'name' => 'WrongPath',
+                    'value' => -3,
+                ],
+                -5 => [
+                    'name' => 'WrongNote',
+                    'value' => -3,
+                ],
+                -6 => [
+                    'name' => 'Wind',
+                    'value' => -3,
+                ],
+                -7 => [
+                    'name' => 'Squirrel',
+                    'value' => -3,
+                ],
+                -8 => [
+                    'name' => 'Snow',
+                    'value' => -5,
+                ],
+                -9 => [
+                    'name' => 'Hail',
+                    'value' => -5,
+                ],
+                -10 => [
+                    'name' => 'Bear',
+                    'value' => -5,
+                ],
             ];
         } else return [];
     }
