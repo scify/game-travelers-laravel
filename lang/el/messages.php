@@ -60,7 +60,7 @@ return [
     'select_board' => 'Διάλεξε πίστα', // Choose board
     /* Pawns */
     'select_pawn' => 'Διάλεξε πιόνι', // Choose Player 1 Pawn
-    'select_pawn_coplayer' => 'Διάλεξε το πιόνι του συμπαίκτη σου', // Choose Player 2 Pawn
+    'select_pawn_coplayer' => 'Διάλεξε το πιόνι του αντιπάλου σου', // Choose Player 2 Pawn
 
     /* Switcher */
     'switcher' => [
