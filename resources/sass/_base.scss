@@ -1,42 +1,42 @@
 /* Imported colors from Travelers mock-ups */
 :root {
-  // Let's not stick with unnamed colors, please?
-  --unnamed-color-383735: #383735;
-  --unnamed-color-383735-rgb: 56, 55, 53;
-  --unnamed-color-faf9f8: #FAF9F8;
-  --unnamed-color-faf9f8-rgb: 250, 249, 248;
-  --unnamed-color-f8e2ce: #F8E2CE;
-  --unnamed-color-dfdae7: #DFDAE7;
-  --unnamed-color-c3d0c9: #C3D0C9;
-  --unnamed-color-c3d0c9-hsl: 148deg, 12%, 79%;
-  --unnamed-color-d8c46f: #D8C46F;
-  --unnamed-color-c0ceeb: #C0CEEB;
-  --salmon-red: #E88080; // unnamed-color-e88080
-  --salmon-red-hsl: 0deg, 69%, 71%;
-  --salmon-dark-red: #804343;
-  --salmon-light-red: #faa8a8;
-  --salmon-light-red-text: #5F1111;
-  --crimson-red: #6c1414; // actually a variation of salmon
-  --crimson-red-hsl: 0, 69%, 25%; // actually a variation of salmon
-  // Default colors
-  --white: #ffffff;
-  --black: #000000;
-  --black-rgb: 0, 0, 0;
-  --gray-rgb: 160, 160, 160;
-  --dark-gray-rgb: 90, 90, 90;
-  --light-green: #edf9dd;
-  --light-green-dark: #22241f;
-  --pale-green: #78b594;
-  --pale-green-rgb: 120, 181, 148;
-  --pale-green-hsl: 148deg, 29%, 59%;
+    // Let's not stick with unnamed colors, please?
+    --unnamed-color-383735: #383735;
+    --unnamed-color-383735-rgb: 56, 55, 53;
+    --unnamed-color-faf9f8: #faf9f8;
+    --unnamed-color-faf9f8-rgb: 250, 249, 248;
+    --unnamed-color-f8e2ce: #f8e2ce;
+    --unnamed-color-dfdae7: #dfdae7;
+    --unnamed-color-c3d0c9: #c3d0c9;
+    --unnamed-color-c3d0c9-hsl: 148deg, 12%, 79%;
+    --unnamed-color-d8c46f: #d8c46f;
+    --unnamed-color-c0ceeb: #c0ceeb;
+    --salmon-red: #e88080; // unnamed-color-e88080
+    --salmon-red-hsl: 0deg, 69%, 71%;
+    --salmon-dark-red: #804343;
+    --salmon-light-red: #faa8a8;
+    --salmon-light-red-text: #5f1111;
+    --crimson-red: #6c1414; // actually a variation of salmon
+    --crimson-red-hsl: 0, 69%, 25%; // actually a variation of salmon
+    // Default colors
+    --white: #ffffff;
+    --black: #000000;
+    --black-rgb: 0, 0, 0;
+    --gray-rgb: 160, 160, 160;
+    --dark-gray-rgb: 90, 90, 90;
+    --light-green: #edf9dd;
+    --light-green-dark: #22241f;
+    --pale-green: #78b594;
+    --pale-green-rgb: 120, 181, 148;
+    --pale-green-hsl: 148deg, 29%, 59%;
 }
 
 /* Traveler's default variables */
 :root {
-  --trvl-header-height: calc(145px - 1rem);
-  --trvl-footer-width: 105px;
-  --trvl-footer-height: 53px;
-  --trvl-footer-height-negative: calc(-1 * var(--trvl-footer-height));
+    --trvl-header-height: calc(145px - 1rem);
+    --trvl-footer-width: 105px;
+    --trvl-footer-height: 53px;
+    --trvl-footer-height-negative: calc(-1 * var(--trvl-footer-height));
 }
 
 /* Traveler's default colour scheme */
@@ -47,6 +47,8 @@
     --trvl-c-text: var(--unnamed-color-383735);
     --trvl-c-text-rgb: var(--unnamed-color-383735-rgb);
     --trvl-c-link: var(--unnamed-color-383735);
+    --trvl-bg-light: var(--unnamed-color-faf9f8);
+    --trvl-bg-light-rgb: var(--unnamed-color-faf9f8-rgb);
     // Buttons
     --trvl-btn-bg: var(--unnamed-color-faf9f8);
     --trvl-btn-color: var(--unnamed-color-000000);
@@ -74,17 +76,19 @@
     --trvl-danger: var(--crimson-red);
     --trvl-danger-hsl: var(--crimson-red-hsl);
     --trvl-danger-color: var(--trvl-c-dark);
-    --trvl-danger-bg: hsla(var(--salmon-red-hsl), 0.8); // was hsl(0, 75%, 89%, 0.9);
+    --trvl-danger-bg: hsla(
+        var(--salmon-red-hsl),
+        0.8
+    ); // was hsl(0, 75%, 89%, 0.9);
     --trvl-danger-light-text: var(--salmon-light-red-text);
     --trvl-danger-light-bg: var(--salmon-light-red);
     --trvl-danger-border-color: var(--salmon-dark-red);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    // ok, just joking...
-    --trvl-c-background: var(--unnamed-color-c3d0c9);
-    // or not?
-  }
+    :root {
+        // ok, just joking...
+        --trvl-c-background: var(--unnamed-color-c3d0c9);
+        // or not?
+    }
 }
-

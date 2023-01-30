@@ -130,6 +130,14 @@ section.content {
     }
 }
 
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: rgba(
+        var(--trvl-bg-light-rgb),
+        var(--bs-bg-opacity)
+    ) !important;
+}
+
 // Settings & Profiles
 .settings-header,
 .gamesettings-header,
@@ -481,7 +489,7 @@ section.content {
 
 // Remove top padding from header if there's sufficient blank space on top.
 @media (min-height: 768px) and (min-width: 1400px) {
-    .trvl-header {
+    .trvl-header.centered {
         padding-top: 0 !important;
     }
 }

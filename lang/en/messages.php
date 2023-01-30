@@ -10,6 +10,10 @@ return [
     */
     'app_name' => 'Travellers',
     'privacy_policy' => 'Privacy Policy',
+    'meta_title' => 'Travellers, a game from SciFY.',
+    'meta_description' => '"Travellers" is a web game specially designed for children with disabilities.',
+    'meta_keywords' =>
+'disability games,game,game disability,travellers,travellers game',
     /* Generic */
     'close' => 'Close', // i.e. "Close" window
     'congratulations' => 'Congratulations',
@@ -94,7 +98,4 @@ return [
     'password_token_error' => 'Unfortunately, your password reset request has expired.',
     'password_token_error_link' => 'Start over the process of reseting your password.',
     // 'error_password_captcha' => 'Incorrect CAPTCHA value.',
-    'meta_title' => 'Travellers, a game from SciFY.',
-    'meta_description' => '"Travellers" is a web game specially designed for children with disabilities.',
-    'meta_keywords' => 'disability games,game,game disability,travellers,travellers game'
 ];
