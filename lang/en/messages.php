@@ -63,6 +63,9 @@ return [
     'board_preview' => 'Board preview', // Preview board
     'select_board' => 'Select Board', // Choose board
     /* Pawns */
+    'pawn' => 'Pawn',
+    'pawn_preview' => 'Pawn preview',
+    'pawn_your_choice' => 'Your choice!',
     'select_pawn' => 'Choose your pawn', // Choose Player 1 Pawn
     'select_pawn_coplayer' => 'Choose your co-player\'s pawn', // Choose Player 2 Pawn
 

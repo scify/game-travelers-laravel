@@ -91,15 +91,16 @@
 .btn-balloon {
     white-space: nowrap;
     position: relative;
-    > .balloon {
-        cursor: default;
+    & > .balloon {
+        position: absolute;
         opacity: 0;
-        transition: all 0.2s ease-in-out;
+        transition: all 0.2s cubic-bezier(0.62, -0.01, 0.36, 0.99);
+        //animation: btn-fly-out 0.5s linear forwards;
+        cursor: default;
         color: #aaaaaa;
         content: "";
         width: 44px;
         height: 44px;
-        position: absolute;
         line-height: 1;
         right: 22rem;
         bottom: 0;
@@ -111,10 +112,12 @@
             background-size: 32px 32px;
         }
     }
-    &:hover > .balloon {
+    &:hover > .balloon,
+    &:focus > .balloon {
         opacity: 1;
+        // animation: btn-fly-in 0.5s linear forwards;
         @media (max-width: 575.98px) {
-            opacity: 0.9;
+            opacity: 1;
         }
     }
 }
@@ -148,22 +151,19 @@
         font-size: 0.9rem;
         --bs-btn-color: var(--trvl-c-dark) !important;
         --bs-btn-bg: #afbbb5; // AAA Pass @todo: Move to base.scss.
-        --bs-btn-border-color: rgba(var(--dark-gray-rgb), 0.5);
+        --bs-btn-border-color: rgba(var(--color-gray-dark-rgb), 0.5);
         --bs-btn-hover-color: var(--trvl-btn-hover-color);
         --bs-btn-hover-bg: #afbbb5; // AAA Pass @todo: Move to base.scss.
         --bs-btn-hover-border-color: var(--trvl-c-dark);
         --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
-        --bs-btn-active-color: var(--black);
-        --bs-btn-active-bg: var(--white);
-        --bs-btn-active-border-color: var(--white);
+        --bs-btn-active-color: var(--color-black);
+        --bs-btn-active-bg: var(--color-white);
+        --bs-btn-active-border-color: var(--color-white);
         --bs-btn-active-shadow: inset 0 3px 5px
             rgba(var(--trvl-c-dark-rgb), 0.125);
         --bs-btn-disabled-color: var(--trvl-btn-disabled-color);
         --bs-btn-disabled-bg: #afbbb5; // AAA Pass @todo: Move to base.scss.
-        --bs-btn-disabled-border-color: rgba(
-            var(--unnamed-color-faf9f8-rgb),
-            0.1
-        );
+        --bs-btn-disabled-border-color: rgba(var(--trvl-c-white-rgb), 0.1);
     }
 }
 button.key-assigner.active {
@@ -233,20 +233,9 @@ body.switcher {
     }
     &.selected-by-other-player {
         background-color: rgba(11, 33, 34, 0.5);
-        box-shadow: 0 1em 1em rgba(var(--trvl-c-dark-rgb), 0.2);
+        box-shadow: 0 0.5em 1em rgba(var(--trvl-c-dark-rgb), 0.2);
         position: relative;
-        &:before {
-            content: "Εσύ!";
-            display: inline-block;
-            width: 100%;
-            position: absolute;
-            top: 50%;
-            padding: 0.2em;
-            font-weight: bold;
-            background: rgba(0, 0, 0, 0.5);
-            color: #fff;
-        }
-        &.pawn-button-6:before {
+        &.pawn-button-6 .pawn-your-choice {
             top: 8%;
         }
         .pawn-label {
@@ -305,7 +294,18 @@ body.switcher {
 .pawn-label {
     bottom: 2.5rem;
     font-size: 1.2rem;
-    color: var(--trvl-c-text);
+    color: var(--trvl-color);
+}
+.pawn-your-choice {
+    display: inline-block;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    padding: 0.2em;
+    font-weight: bold;
+    background: rgba(var(--trvl-c-dark-rgb), 0.5);
+    color: var(--trvl-c-bright);
 }
 .board-label {
     top: 1rem;
@@ -317,12 +317,12 @@ body.switcher {
 
 // Default Pawn Hover for mouse navigation
 .btn-pawn:hover .pawn-img {
-    background-color: rgba(250, 249, 248, 0.25);
+    background-color: rgba(var(--trvl-c-white-rgb), 0.25);
 }
 // Switcher Focus & Active states (overrides mouse:hover)
 .btn-pawn.switcher-focus .pawn-img,
 .btn-pawn.switcher-active .pawn-img {
-    background-color: rgba(250, 249, 248, 0.5);
+    background-color: rgba(var(--trvl-c-white-rgb), 0.5);
 }
 
 .btn-board:hover .board-label,
@@ -368,7 +368,7 @@ body.switcher {
     position: relative;
     border-style: solid;
     border-width: 0 105px 105px 0;
-    border-color: transparent #287971 transparent transparent;
+    border-color: transparent var(--trvl-c-cyan-dark) transparent transparent;
     text-align: center;
     // bottom: calc(244px + 1.5rem);
     // border-start-end-radius: 42px;
@@ -386,7 +386,7 @@ body.switcher {
     border: none;
     font-weight: 800;
     z-index: 201;
-    color: #fff;
+    color: var(--trvl-c-bright);
     top: 1.9rem;
     left: 1.1rem;
 }
@@ -461,6 +461,20 @@ body.switcher {
             position: initial;
             bottom: 0;
         }
+    }
+}
+
+@keyframes btn-fly-in {
+    10% {
+        transform: translate3d(-25%, 50%, 0);
+        opacity: 0;
+    }
+    90% {
+        transform: translate3d(1%, 1%, 0);
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
     }
 }
 

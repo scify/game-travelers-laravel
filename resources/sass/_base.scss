@@ -1,34 +1,43 @@
-/* Imported colors from Travelers mock-ups */
+/* Travelers Colour Palette */
 :root {
-    // Let's not stick with unnamed colors, please?
-    --unnamed-color-383735: #383735;
-    --unnamed-color-383735-rgb: 56, 55, 53;
-    --unnamed-color-faf9f8: #faf9f8;
-    --unnamed-color-faf9f8-rgb: 250, 249, 248;
-    --unnamed-color-f8e2ce: #f8e2ce;
-    --unnamed-color-dfdae7: #dfdae7;
-    --unnamed-color-c3d0c9: #c3d0c9;
-    --unnamed-color-c3d0c9-hsl: 148deg, 12%, 79%;
-    --unnamed-color-d8c46f: #d8c46f;
-    --unnamed-color-c0ceeb: #c0ceeb;
-    --salmon-red: #e88080; // unnamed-color-e88080
-    --salmon-red-hsl: 0deg, 69%, 71%;
-    --salmon-dark-red: #804343;
-    --salmon-light-red: #faa8a8;
-    --salmon-light-red-text: #5f1111;
-    --crimson-red: #6c1414; // actually a variation of salmon
-    --crimson-red-hsl: 0, 69%, 25%; // actually a variation of salmon
-    // Default colors
-    --white: #ffffff;
-    --black: #000000;
-    --black-rgb: 0, 0, 0;
-    --gray-rgb: 160, 160, 160;
-    --dark-gray-rgb: 90, 90, 90;
-    --light-green: #edf9dd;
-    --light-green-dark: #22241f;
-    --pale-green: #78b594;
-    --pale-green-rgb: 120, 181, 148;
-    --pale-green-hsl: 148deg, 29%, 59%;
+    /* Colours imported from the design mock-ups */
+    --trvl-c-black: #383735;
+    --trvl-c-black-rgb: 56, 55, 53;
+    --trvl-c-white: #faf9f8;
+    --trvl-c-white-rgb: 250, 249, 248;
+    --trvl-c-brown: #f8e2ce;
+    --trvl-c-brown-rgb: 248, 226, 206;
+    --trvl-c-green: #c3d0c9;
+    --trvl-c-green-rgb: 195, 208, 201;
+    --trvl-c-green-hsl: 148deg, 12%, 79%;
+    --trvl-c-salmon: #e88080;
+    --trvl-c-salmon-hsl: 0deg, 69%, 71%;
+    --trvl-c-dfdae7: #dfdae7; // Not in use: White-purple-ish
+    --trvl-c-d8c46f: #d8c46f; // Not in use: Yellow-ish
+    --trvl-c-c0ceeb: #c0ceeb; // Not in use: Blue-ish
+    /* Extended colour palette */
+    // Reds
+    --trvl-c-salmon-dark: #804343;
+    --trvl-c-salmon-light: #faa8a8;
+    --trvl-c-salmon-light-text: #5f1111;
+    --trvl-c-crimson: #6c1414; // actually a variation of salmon
+    --trvl-c-crimson-hsl: 0, 69%, 25%;
+    // Greens
+    --trvl-c-green-light: #edf9dd;
+    --trvl-c-green-dark: #22241f;
+    --trvl-c-green-pale: #78b594;
+    --trvl-c-green-pale-rgb: 120, 181, 148;
+    --trvl-c-green-pale-hsl: 148deg, 29%, 59%;
+    // Cyans
+    --trvl-c-cyan-dark: #287971; // e.g. Coming soon
+    /* Various default colours */
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-black-rgb: 0, 0, 0;
+    --color-gray: #a0a0a0;
+    --color-gray-rgb: 160, 160, 160;
+    --color-gray-dark: #5a5a5a;
+    --color-gray-dark-rgb: 90, 90, 90;
 }
 
 /* Traveler's default variables */
@@ -42,53 +51,53 @@
 /* Traveler's default colour scheme */
 :root {
     // Main colors
-    --trvl-c-background: var(--unnamed-color-c3d0c9);
-    --trvl-c-background-hsl: var(--unnamed-color-c3d0c9-hsl);
-    --trvl-c-text: var(--unnamed-color-383735);
-    --trvl-c-text-rgb: var(--unnamed-color-383735-rgb);
-    --trvl-c-link: var(--unnamed-color-383735);
-    --trvl-bg-light: var(--unnamed-color-faf9f8);
-    --trvl-bg-light-rgb: var(--unnamed-color-faf9f8-rgb);
+    --trvl-bg: var(--trvl-c-green);
+    --trvl-bg-hsl: var(--trvl-c-green-hsl);
+    --trvl-bg-light: var(--trvl-c-white);
+    --trvl-bg-light-rgb: var(--trvl-c-white-rgb);
+    --trvl-color: var(--trvl-c-black);
+    --trvl-color-rgb: var(--trvl-c-black-rgb);
+    --trvl-link: var(--trvl-c-black);
     // Buttons
-    --trvl-btn-bg: var(--unnamed-color-faf9f8);
-    --trvl-btn-color: var(--unnamed-color-000000);
-    --trvl-btn-border-color: var(--unnamed-color-383735);
-    --trvl-btn-hover-bg: var(--unnamed-color-faf9f8);
-    --trvl-btn-hover-color: var(--unnamed-color-000000);
-    --trvl-btn-hover-border-color: var(--unnamed-color-383735);
-    --trvl-btn-active-bg: var(--light-green);
-    --trvl-btn-active-color: var(--light-green-dark);
-    --trvl-btn-active-border-color: var(--light-green-dark);
+    --trvl-btn-bg: var(--trvl-c-white);
+    --trvl-btn-color: var(--color-black);
+    --trvl-btn-border-color: var(--trvl-c-black);
+    --trvl-btn-hover-bg: var(--trvl-c-white);
+    --trvl-btn-hover-color: var(--color-black);
+    --trvl-btn-hover-border-color: var(--trvl-c-black);
+    --trvl-btn-active-bg: var(--trvl-c-green-light);
+    --trvl-btn-active-color: var(--trvl-c-green-dark);
+    --trvl-btn-active-border-color: var(--trvl-c-green-dark);
     --trvl-btn-disabled-bg: #f4f2f0;
     --trvl-btn-disabled-color: #6c6a65;
     --trvl-btn-disabled-border-color: #6c6a65;
-    --trvl-btn-hover-shadow-rgb: var(--dark-gray-rgb);
-    --trvl-btn-focus-shadow-rgb: var(--pale-green-rgb);
-    --trvl-shadow-focus-hsl: var(--pale-green-hsl);
+    --trvl-btn-hover-shadow-rgb: var(--color-gray-dark-rgb);
+    --trvl-btn-focus-shadow-rgb: var(--trvl-c-green-pale-rgb);
+    --trvl-shadow-focus-hsl: var(--trvl-c-green-pale-hsl);
     // Dropdowns
-    --trvl-dropdown-bg: var(--unnamed-color-f8e2ce);
-    --trvl-modal-bg: var(--unnamed-color-f8e2ce);
+    --trvl-dropdown-bg: var(--trvl-c-brown);
+    --trvl-modal-bg: var(--trvl-c-brown);
     // Extensions
-    --trvl-c-bright: var(--white);
-    --trvl-c-dark: var(--black);
-    --trvl-c-dark-rgb: var(--black-rgb);
-    --trvl-c-black: var(--black);
-    --trvl-danger: var(--crimson-red);
-    --trvl-danger-hsl: var(--crimson-red-hsl);
+    --trvl-c-bright: var(--color-white);
+    --trvl-c-dark: var(--color-black);
+    --trvl-c-dark-rgb: var(--color-black-rgb);
+    --trvl-c-black: var(--color-black);
+    --trvl-danger: var(--trvl-c-crimson);
+    --trvl-danger-hsl: var(--trvl-c-crimson-hsl);
     --trvl-danger-color: var(--trvl-c-dark);
     --trvl-danger-bg: hsla(
-        var(--salmon-red-hsl),
+        var(--trvl-c-salmon-hsl),
         0.8
     ); // was hsl(0, 75%, 89%, 0.9);
-    --trvl-danger-light-text: var(--salmon-light-red-text);
-    --trvl-danger-light-bg: var(--salmon-light-red);
-    --trvl-danger-border-color: var(--salmon-dark-red);
+    --trvl-danger-light-text: var(--trvl-c-salmon-light-text);
+    --trvl-danger-light-bg: var(--trvl-c-salmon-light);
+    --trvl-danger-border-color: var(--trvl-c-salmon-dark);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         // ok, just joking...
-        --trvl-c-background: var(--unnamed-color-c3d0c9);
+        --trvl-bg: var(--trvl-c-green);
         // or not?
     }
 }

@@ -9,7 +9,7 @@
         --bs-btn-active-color: var(--trvl-btn-active-color);
         --bs-btn-active-bg: var(--trvl-btn-active-bg);
         --bs-btn-active-border-color: var(--trvl-btn-active-border-color);
-        --bs-btn-disabled-color: var(--trvl-c-background);
+        --bs-btn-disabled-color: var(--trvl-bg);
         --bs-btn-disabled-bg: #2f3130;
         --bs-btn-disabled-border-color: #2f3130;
         --bs-btn-disabled-opacity: 1;
@@ -22,7 +22,7 @@
         font-size: 32px;
         font-weight: 800;
         &.past {
-            --bs-btn-color: #444947; // #2f3130; // var(--trvl-c-background);
+            --bs-btn-color: #444947; // #2f3130; // var(--trvl-bg);
             --bs-btn-bg: var(--trvl-btn-bg);
             --bs-btn-border-color: #3d413f;
             --bs-btn-border-width: 3px;
@@ -33,7 +33,7 @@
         &.current,
         :disabled {
             --bs-btn-bg: #2f3130;
-            --bs-btn-color: var(--trvl-c-background);
+            --bs-btn-color: var(--trvl-bg);
             --bs-btn-hover-bg: #2f3130;
             --bs-btn-hover-color: var(--trvl-btn-bg);
         }
