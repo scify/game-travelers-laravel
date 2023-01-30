@@ -6,8 +6,7 @@
          :comingsoon=true (this will not add a coming soon teaser as usual, but
          it will simply disable the option instead).--}}
     @section('scripts')
-        <x-switcher :switcher=$switcher />
-        <script>window.setTimeout(function() {window.music("music.feelin_good");}, 500);</script>
+        <x-switcher :switcher=$switcher :music="'music.feelin_good'" />
     @endsection
 
     <form method="post"

@@ -12,8 +12,7 @@
          footer on mountain. Therefore, @todo x-selectPawnButton excpects a
          board id and defaults to 1 for the island board.--}}
     @section('scripts')
-        <x-switcher :switcher=$switcher :audio="'sounds.game_start.pawntwo_onload'" />
-        <script>window.setTimeout(function() {window.music("music.feelin_good");}, 500);</script>
+        <x-switcher :switcher=$switcher :audio="'sounds.game_start.pawntwo_onload'" :music="'music.feelin_good'" />
     @endsection
 
     <form method="post"

@@ -86,12 +86,19 @@ function switcher() {
 	console.log(
 		`Switcher active (mode: ${controlMode} ${scanningSpeed}s, s: ${selectionButton}, n: ${navigationButton})`
 	);
-	// Audio on page-load?
+	// Audio (voice narration) on page-load?
 	typeof window.Switcher === "object" &&
 	"audio" in window.Switcher &&
 	typeof window.Switcher.audio === "string"
 		? window.sound(window.Switcher.audio)
 		: null;
+	// Music on page-load?
+	const music =
+		typeof window.Switcher === "object" &&
+		"music" in window.Switcher &&
+		typeof window.Switcher.music === "string"
+			? window.music(window.Switcher.music, "0.2", true)
+			: null;
 
 	function removeSwitcherClasses() {
 		var elements = document.getElementsByClassName(classFocus);
@@ -203,6 +210,7 @@ function switcher() {
 		// Instead we parse the event.key (@see key-assigner.js).
 		if (event.key.length) {
 			const charCode = event.key.charCodeAt(0);
+			// event.code checks
 			if (event.key.length > 1 && charCode < 128) {
 				// Key is "named" (e.g. LeftAlt):
 				if (escapeList.indexOf(event.code) !== -1) {
@@ -211,13 +219,14 @@ function switcher() {
 					return false;
 				}
 				if (allowedList.indexOf(event.code) !== -1) {
-					console.log("Key Code accepted.");
+					console.log("Key-code accepted.");
 					returnKey = event.code;
 				} else {
-					console.log("Not accepted key code.");
+					console.log(`Not accepted key-code ${event.code}`);
 					return false;
 				}
 			} else {
+				// event.key checks
 				if (charCode === 32) {
 					// Space is one of the unicode characters
 					// which is read as " ". To make our life
@@ -229,7 +238,24 @@ function switcher() {
 						console.log("Key accepted.");
 						returnKey = event.key;
 					} else {
-						console.log(`Not accepted key ${event.key}.`);
+						if (escapeList.indexOf(event.key) !== -1) {
+							event.preventDefault();
+							switcherModal();
+							return false;
+						}
+						if (event.key === "-" || event.key === "_") {
+							if (music !== null) {
+								music.volume = Math.max(0, music.volume - 0.1);
+								return false;
+							}
+						}
+						if (event.key === "=" || event.key === "+") {
+							if (music !== null) {
+								music.volume = Math.min(1, music.volume + 0.1);
+								return false;
+							}
+						}
+						console.log(`Not accepted key ${event.key}`);
 						return false;
 					}
 				}

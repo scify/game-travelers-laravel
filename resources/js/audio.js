@@ -12,19 +12,21 @@
 	/**
 	 * Music
 	 * Allows the playback of music via the HTMLAudioElement.
-	 * Volume is set to 40%.
-	 * @param audiofile One of the audio files available via Laravel.audioFiles in folder.subfolder.file (with no extension) format.
+	 * Volume is set to 10% but can be adjusted with the optional audioVolume parameter.
+	 * @param audioFile One of the audio files available via Laravel.audioFiles in folder.subfolder.file (with no extension) format.
+	 * @param audioVolume Optional: Set the volume (defaults to 0.1), max: 1.0
+	 * @param audioLoop Optional: Defaults to true. Set to false to disable loop.
 	 *
 	 * @example
 	 * window.music("music.movin_on")
 	 * //  Plays the music on /audio/music/movin_on.mp3
 	 */
-	const music = function (audiofile) {
+	const music = function (audioFile, audioVolume = 0.1, audioLoop = true) {
 		if (!window.Laravel.audioFiles) {
 			console.log("Music files not found");
 			return;
 		}
-		var folders = audiofile.split(".");
+		var folders = audioFile.split(".");
 		var found = folders.reduce(
 			(obj, key) => obj && obj[key],
 			window.Laravel.audioFiles
@@ -36,8 +38,8 @@
 		var filename = folders.pop() + ".mp3";
 		var folderPath = "/audio/" + folders.join("/");
 		var audio = new Audio(folderPath + "/" + filename);
-		audio.volume = 0.1;
-		audio.loop = true;
+		audio.volume = audioVolume;
+		audio.loop = audioLoop;
 		audio.play();
 		return audio;
 	};
