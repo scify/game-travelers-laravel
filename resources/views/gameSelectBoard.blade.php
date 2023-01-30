@@ -10,10 +10,11 @@
         default null). --}}
     @section('scripts')
         <x-switcher :switcher=$switcher :audio="'sounds.game_start.welcome_[1-3]'" />
+        <script>window.setTimeout(function() {window.music("music.feelin_good");}, 500);</script>
     @endsection
 
     <form method="post"
-        action="{{ route('select.board', [ request()->player_id, request()->from, request()->game_id ]) }}"
+          action="{{ route('select.board', [ request()->player_id, request()->from, request()->game_id ]) }}"
     >
         @csrf
 
@@ -43,7 +44,7 @@
             <div class="row text-center gx-2 gy-5">
                 @foreach ($boards as $board)
                     @php
-                    $tabindex = $tabindex ?? $loop->index; $tabindex++;
+                        $tabindex = $tabindex ?? $loop->index; $tabindex++;
                     @endphp
                     <x-selectBoardButton
                         :board_id='$board["id"]'

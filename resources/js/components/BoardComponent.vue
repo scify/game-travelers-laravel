@@ -154,12 +154,20 @@ export default {
 			latestCardValue: 0,
 			stepSoundSwitch: true,
 			tutorialYouKnowHowToPlayFlag: 0,
+			music: null,
 		};
 	},
 	methods: {
 		init() {
 			// need to roll
 			window.setTimeout(() => {
+				if (this.board === 1)
+					this.music = window.music("music.great_ideas");
+				else if (this.board === 2)
+					this.music = window.music(
+						"music.in_the_land_of_make_believe"
+					);
+
 				this.showPawn1 = true;
 				this.showPawn2 = true;
 				if (this.gamePhase === 1) {
@@ -297,7 +305,10 @@ export default {
 		key_press(e) {
 			let self = this;
 			let key = e.key;
-			if (key === "Delete") window.location.href = this.continueUrl;
+			if (key === "e" || key === "E" || key === "ε" || key === "Ε")
+				window.location.href = this.continueUrl;
+			else if (key === "-" || key === "_") this.decreaseMusic();
+			else if (key === "=" || key === "+") this.increaseMusic();
 			if (!this.ignoreInput) {
 				console.log("Key pressed and NOT ignored:\t(" + e.key + ")");
 				if (key === " ") key = "Space";
@@ -359,7 +370,7 @@ export default {
 								this.blue_blinking_allowed = false;
 								this.ignoreInput = true;
 								window.sound(
-									"sounds.game.reward_[1-12]",
+									"sounds.game.reward_[1-11]",
 									function () {
 										self.applyCorrectMovement();
 									},
@@ -380,7 +391,7 @@ export default {
 									);
 								} else {
 									window.sound(
-										"sounds.game.try_again_[1-7]",
+										"sounds.game.try_again_[1-6]",
 										null,
 										true
 									);
@@ -739,6 +750,18 @@ export default {
 					self.applyCardMovement();
 				}
 			);
+		},
+		increaseMusic() {
+			let volume = this.music.volume;
+			volume += 0.1;
+			if (volume > 1) volume = 1.0;
+			this.music.volume = volume;
+		},
+		decreaseMusic() {
+			let volume = this.music.volume;
+			volume -= 0.1;
+			if (volume <= 0) volume = 0;
+			this.music.volume = volume;
 		},
 	},
 	computed: {
