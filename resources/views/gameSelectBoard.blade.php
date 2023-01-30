@@ -9,8 +9,7 @@
         reason, it can be disabled by setting :comingsoon = true (instead of the
         default null). --}}
     @section('scripts')
-        <x-switcher :switcher=$switcher :audio="'sounds.game_start.welcome_[1-3]'" />
-        <script>window.setTimeout(function() {window.music("music.feelin_good");}, 500);</script>
+        <x-switcher :switcher=$switcher :audio="'sounds.game_start.welcome_[1-3]'" :music="'music.feelin_good'" />
     @endsection
 
     <form method="post"

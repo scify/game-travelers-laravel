@@ -23,10 +23,13 @@
         'manualNavigationButton' => 'Enter',
     ];
 }
-// Support audio on page load if audio is defined.
+// Support music & audio on page load if audio is defined.
 if (isset($switcher) && is_array($switcher)) {
     if (isset($audio) && is_string($audio)) {
         $switcher['audio'] = trim($audio);
+    }
+    if (isset($music) && is_string($music)) {
+        $switcher['music'] = trim($music);
     }
 }
 @endphp

@@ -3,8 +3,7 @@
         with Switcher.js. It is based on gameSelectOptions.php and uses the
         same x-selectOptionsButton components.--}}
     @section('scripts')
-        <x-switcher :switcher=$switcher />
-        <script>window.setTimeout(function() {window.music("music.feelin_good");}, 500);</script>
+        <x-switcher :switcher=$switcher :music="'music.feelin_good'" />
     @endsection
 
     <form method="post"
