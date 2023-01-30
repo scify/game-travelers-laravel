@@ -4,6 +4,7 @@
         same x-selectOptionsButton components.--}}
     @section('scripts')
         <x-switcher :switcher=$switcher />
+        <script>window.setTimeout(function() {window.music("music.feelin_good");}, 500);</script>
     @endsection
 
     <form method="post"

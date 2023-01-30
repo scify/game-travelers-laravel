@@ -36,8 +36,10 @@
 		var filename = folders.pop() + ".mp3";
 		var folderPath = "/audio/" + folders.join("/");
 		var audio = new Audio(folderPath + "/" + filename);
-		audio.volume = 0.3;
+		audio.volume = 0.1;
+		audio.loop = true;
 		audio.play();
+		return audio;
 	};
 	window.music = music;
 
@@ -122,6 +124,7 @@
 			}
 		};
 		audio.play();
+		return audio;
 	};
 	window.sound = sound;
 })();

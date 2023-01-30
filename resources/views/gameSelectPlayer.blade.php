@@ -11,6 +11,7 @@
     --}}
     @section('scripts')
         <script src="{{ mix('js/functions/settings.js') }}" defer></script>
+        <script>window.setTimeout(function() {window.music("music.feelin_good");}, 500);</script>
     @endsection
 
     {{-- In essence, this form's purpose is to simply pass a "player" to the
