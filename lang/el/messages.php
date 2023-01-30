@@ -63,6 +63,9 @@ return [
     'board_preview' => 'Προεπισκόπηση πίστας', // Preview board
     'select_board' => 'Διάλεξε πίστα', // Choose board
     /* Pawns */
+    'pawn' => 'Πιόνι',
+    'pawn_preview' => 'Προεπισκόπηση πιονιού',
+    'pawn_your_choice' => 'Εσύ!',
     'select_pawn' => 'Διάλεξε πιόνι', // Choose Player 1 Pawn
     'select_pawn_coplayer' => 'Διάλεξε το πιόνι του αντιπάλου σου', // Choose Player 2 Pawn
 

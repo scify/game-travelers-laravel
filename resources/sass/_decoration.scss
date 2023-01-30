@@ -2,7 +2,7 @@
 .background,
 .trvl-bg {
     input:not([type="checkbox"]) {
-        background-color: hsla(var(--trvl-c-background-hsl), 0.2);
+        background-color: hsla(var(--trvl-bg-hsl), 0.2);
     }
 }
 
@@ -161,6 +161,6 @@
 // Portrait phones
 @media (max-width: 575.98px) {
     .background input:not([type="checkbox"]) {
-        background-color: hsla(var(--trvl-c-background-hsl), 0.4);
+        background-color: hsla(var(--trvl-bg-hsl), 0.4);
     }
 }

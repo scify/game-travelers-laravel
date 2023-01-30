@@ -28,7 +28,7 @@
         }
     }
     .field-description.big {
-        background-color: hsla(var(--salmon-red-hsl), 0.01);
+        background-color: hsla(var(--trvl-c-salmon-hsl), 0.01);
     }
 }
 .field-description {
@@ -68,10 +68,10 @@ fieldset input[type="radio"]:not(:checked) + label {
 
 // Inputs: Ranges
 .form-range::-moz-range-thumb {
-    background-color: var(--trvl-c-text);
+    background-color: var(--trvl-color);
 }
 .form-range::-webkit-slider-thumb {
-    background-color: var(--trvl-c-text);
+    background-color: var(--trvl-color);
 }
 .form-range-ruler {
     opacity: 0.9;
@@ -94,7 +94,7 @@ input[type="radio"] {
     // Importants fights with Bootstrap
     -webkit-appearance: none !important;
     appearance: none !important;
-    background-color: var(--trvl-c-background) !important;
+    background-color: var(--trvl-bg) !important;
     border-color: currentColor !important;
     background-image: none !important;
     filter: none !important;
@@ -118,7 +118,7 @@ input[type="radio"]::before {
     border-radius: 50%;
     transform: scale(0);
     transition: 240ms transform ease-in-out;
-    box-shadow: inset 1em 1em var(--trvl-c-text);
+    box-shadow: inset 1em 1em var(--trvl-color);
 }
 input[type="radio"]:checked::before {
     transform: scale(0.7);
@@ -135,13 +135,13 @@ input[type="radio"]:focus-visible {
 // Inputs: Checkboxes
 input[type="checkbox"] {
     background-color: var(--trvl-btn-bg);
-    border-color: var(--trvl-c-text);
+    border-color: var(--trvl-color);
     &:checked {
-        border-color: var(--trvl-c-text);
-        background-color: var(--trvl-c-text);
+        border-color: var(--trvl-color);
+        background-color: var(--trvl-color);
     }
     &:focus {
-        border-color: var(--trvl-c-text);
+        border-color: var(--trvl-color);
         // box-shadow: 0 0 0 0.25rem rgba(var(--trvl-btn-focus-shadow-rgb), 0.55);
         box-shadow: 0 0 0 0.25em hsla(var(--trvl-shadow-focus-hsl), 0.5);
     }
@@ -156,13 +156,13 @@ input {
         box-shadow: inset 0 -0.25em hsla(var(--trvl-shadow-focus-hsl), 0.4);
     }
     &.underlined {
-        border-bottom: 2px solid var(--trvl-c-text);
+        border-bottom: 2px solid var(--trvl-color);
         border-left: none;
         border-right: none;
         border-top: none;
         font-weight: 300; // a little bit less bolder than the normal (400)
         line-height: 2.5;
-        background-color: var(--trvl-c-background);
+        background-color: var(--trvl-bg);
     }
     &.extended {
         width: 100%;

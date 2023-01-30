@@ -42,22 +42,22 @@
                 <div class="section gamesettings background-group-3--flowers container-xxl px-4">
 
                     <div class="buttonstack vstack gap-4 pt-4 mx-auto settings-options text-center">
-                        <button class="btn btn-lg btn-primary" type="submit" name="submit" value="profile" tabindex="1">
+                        <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="profile" tabindex="1">
                             <span class="balloon"></span> Προφίλ παίκτη
                         </button>
                         <a class="btn btn-lg btn-primary disabled" tabindex="-1">
                             <span class="balloon"></span> Μουσική & ήχος
                         </a>
-                        <button class="btn btn-lg btn-primary" type="submit" name="submit" value="controls"
+                        <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="controls"
                                 tabindex="3">
                             <span class="balloon"></span> Πλοήγηση
                         </button>
-                        <button class="btn btn-lg btn-primary" type="submit" name="submit" value="difficulty"
+                        <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="difficulty"
                                 tabindex="4">
                             <span class="balloon"></span> Επίπεδο δυσκολίας
                         </button>
                         <!-- delete player button -->
-                        <button class="btn btn-lg btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalPlayerDelete"
+                        <button class="btn btn-lg btn-danger btn-balloon" type="button" data-bs-toggle="modal" data-bs-target="#modalPlayerDelete"
                                 tabindex="5">
                             <span class="balloon"></span> Διαγραφή παίκτη
                         </button> {{-- Modal located outside this messy nest. --}}

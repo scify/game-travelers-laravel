@@ -131,7 +131,7 @@
     z-index: 98;
     font-size: 1rem;
     font-weight: 500;
-    color: rgba(var(--trvl-c-text-rgb), 0.92);
+    color: rgba(var(--trvl-color-rgb), 0.92);
     text-align: center;
     white-space: nowrap;
 }
@@ -152,11 +152,11 @@ button[role="radio"].selected + label {
 .btn-avatar:hover > .label-avatar,
 .btn-avatar-options:hover > .label-avatar-options {
     // scale: 0.9;
-    color: rgba(var(--trvl-c-text-rgb), 1);
+    color: rgba(var(--trvl-color-rgb), 1);
 }
 .btn-avatar.selected > .label-avatar {
     scale: 0.9;
-    color: rgba(var(--trvl-c-text-rgb), 1);
+    color: rgba(var(--trvl-color-rgb), 1);
 }
 .btn-avatar > .label-avatar.hidden {
     left: -3000px;

@@ -1,6 +1,6 @@
 .kicon {
     position: relative;
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     display: inline-block;
     width: 1.7rem;
     height: 1.7rem;
@@ -11,15 +11,15 @@
     border: none;
     border-radius: 50%;
     background: transparent;
-    color: var(--trvl-c-text);
+    color: var(--trvl-color);
     @media (max-width: 575.98px) {
         &-right {
-            left:-0.5rem;
+            left: -0.5rem;
         }
     }
 }
 .kicon:hover {
-    color: var(--black);
+    color: var(--color-black);
     background: hsla(40, 3%, 21%, 0.1);
     box-shadow: 0 0 0 0.5rem hsla(40, 3%, 21%, 0.1);
 }
@@ -35,7 +35,7 @@
 }
 
 .kicon-chevron-right svg {
-    margin-left: -0.30rem;
+    margin-left: -0.3rem;
 }
 
 .kicon svg {
