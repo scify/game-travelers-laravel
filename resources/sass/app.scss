@@ -3,7 +3,15 @@
 /* Imports */
 //
 // Fonts
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap");
+// Manrope by Mikhail Saranda.
+// Weights:
+// - Light: 300
+// - Regular/Normal: 400
+// - Medium: 500
+// - SemiBold: 600
+// - Bold: 700
+// - ExtraBold: 800
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap");
 //@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;900&display=swap');
 //@import url('https://fonts.googleapis.com/css2?family=Nunito');
 //@import url('https://fonts.googleapis.com/css2?family=Mansalva:wght@400&display=swap');
@@ -78,12 +86,110 @@ kbd {
     font-family: "Manrope";
 }
 
+/* Bootstrap friendly global tags */
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--trvl-bg-light-rgb), var(--bs-bg-opacity));
+    color: var(--trvl-color);
+}
+.bg-green {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--trvl-bg-rgb), var(--bs-bg-opacity));
+    color: var(--trvl-color);
+}
+.bg-brown {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--trvl-bg-brown-rgb), var(--bs-bg-opacity));
+    color: var(--trvl-color);
+}
+.bg-salmon {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--trvl-bg-salmon-rgb), var(--bs-bg-opacity));
+    color: var(--trvl-c-white);
+}
+
 // Alerts
 .alert-danger {
     font-weight: 500;
     --bs-alert-color: var(--trvl-danger-color);
     --bs-alert-bg: var(--trvl-danger-bg);
     --bs-alert-border-color: var(--trvl-danger-border-color);
+}
+
+/* Main Landing Content (non-game related pages) */
+// Landing footer
+.trvl-landing-footer-curve {
+    height: 203px;
+    background-image: url("/images/landing/curves/curve_footer_color.svg");
+    background-repeat: no-repeat;
+    background-position-x: left;
+    background-position-y: center;
+    background-size: 100% 203px;
+    &--dash {
+        height: 203px;
+        background-image: url("/images/landing/curves/curve_footer_dash.svg");
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: 1440px 203px;
+    }
+}
+.trvl-landing-footer {
+    font-weight: 500;
+    &--links {
+        ul {
+            padding-left: 0;
+            li {
+                list-style: none;
+                padding-bottom: 0.75rem;
+                a {
+                    text-decoration: none;
+                }
+                a:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    &--social {
+        u {
+            display: inline-block;
+            white-space: nowrap;
+        }
+        ul {
+            padding-top: 1rem;
+            display: flex;
+            gap: 2rem;
+            padding-left: 0;
+            li {
+                display: flex;
+                align-items: center;
+                list-style: none;
+                width: 36px;
+                height: 36px;
+                a {
+                    display: inline-block;
+                    text-decoration: none;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+    }
+}
+// Landing footer social media
+
+/* Main Game Content (absolute center & middle via flexbox). */
+.travelers {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+}
+.travelers-container {
+    width: 100%;
+}
+
+section.content {
+    min-height: 480px;
 }
 
 // Splash
@@ -108,36 +214,13 @@ img.splash {
     }
 }
 
-/* Main Content (absolute center & middle via flexbox). */
-.travelers {
-    display: flex;
-    align-items: center;
-    min-height: 100vh;
-}
-.travelers-container {
-    width: 100%;
-}
-section.content {
-    min-height: 480px;
-}
-
 /* Sections */
 // Main Content
 .section {
     h1 {
         font-size: 2em;
-        color: var(--trvl-c-black);
+        color: var(--trvl-c-dark);
     }
-}
-
-.bg-light {
-    --bs-bg-opacity: 1;
-    background-color: rgba(var(--trvl-bg-light-rgb), var(--bs-bg-opacity));
-}
-
-.bg-green {
-    --bs-bg-opacity: 1;
-    background-color: rgba(var(--trvl-bg), var(--bs-bg-opacity));
 }
 
 // Settings & Profiles

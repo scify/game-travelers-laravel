@@ -11,6 +11,7 @@
     --trvl-c-green-rgb: 195, 208, 201;
     --trvl-c-green-hsl: 148deg, 12%, 79%;
     --trvl-c-salmon: #e88080;
+    --trvl-c-salmon-rgb: 232, 128, 128;
     --trvl-c-salmon-hsl: 0deg, 69%, 71%;
     --trvl-c-dfdae7: #dfdae7; // Not in use: White-purple-ish
     --trvl-c-d8c46f: #d8c46f; // Not in use: Yellow-ish
@@ -52,9 +53,14 @@
 :root {
     // Main colors
     --trvl-bg: var(--trvl-c-green);
+    --trvl-bg-rgb: var(--trvl-c-green-rgb);
     --trvl-bg-hsl: var(--trvl-c-green-hsl);
     --trvl-bg-light: var(--trvl-c-white);
     --trvl-bg-light-rgb: var(--trvl-c-white-rgb);
+    --trvl-bg-brown: var(--trvl-c-brown);
+    --trvl-bg-brown-rgb: var(--trvl-c-brown-rgb);
+    --trvl-bg-salmon: var(--trvl-c-salmon);
+    --trvl-bg-salmon-rgb: var(--trvl-c-salmon-rgb);
     --trvl-color: var(--trvl-c-black);
     --trvl-color-rgb: var(--trvl-c-black-rgb);
     --trvl-link: var(--trvl-c-black);
@@ -81,7 +87,6 @@
     --trvl-c-bright: var(--color-white);
     --trvl-c-dark: var(--color-black);
     --trvl-c-dark-rgb: var(--color-black-rgb);
-    --trvl-c-black: var(--color-black);
     --trvl-danger: var(--trvl-c-crimson);
     --trvl-danger-hsl: var(--trvl-c-crimson-hsl);
     --trvl-danger-color: var(--trvl-c-dark);
