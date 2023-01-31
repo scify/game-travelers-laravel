@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="203" preserveAspectRatio="none" viewBox="0 0 1440 203">
+  <defs>
+    <clipPath id="a">
+      <path fill="none" d="M-856-4829H584v203H-856z" data-name="Rectangle 307"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#a)" transform="translate(856 4829)">
+    <path fill="#c3d0c9" d="M-262.228-4668.69c212.144 23.076 846.229 0 846.229 0v338.433h-1440v-499.145s381.628 137.635 593.771 160.712Z" data-name="Path 12706"/>
+  </g>
+</svg>
