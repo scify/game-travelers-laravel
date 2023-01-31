@@ -36,7 +36,8 @@ class EnsureIdsAreValid {
 
         $problem_found = !$this->playerRepository->playerExists($player_id, $user_id);
 
-        if ($game_id != 0)
+
+        if (!$problem_found && $game_id != 0)
             $problem_found = !$this->gameRepository->gameExists($game_id, $user_id);
 
         if ($problem_found)
