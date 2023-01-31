@@ -55,7 +55,7 @@ class UserController extends Controller
         } else if ($action == "settings")
             return \Redirect::route('settings', ['player_id' => $player_id, 'from' => "user", 'game_id' => 0]);
         else
-            return abort(403, 'Unauthorized action.');
+            abort(403, __('messages.unauthorized_action'));
 
     }
 
@@ -104,7 +104,7 @@ class UserController extends Controller
     public function controlsConfigure(Request $request, int $player_id, string $from, int $game_id)
     {
         if ($player_id == 0)
-            return abort(403, 'Unauthorized action.');
+            abort(403, __('messages.unauthorized_action'));
         $control_mode = 1;
         $control_auto_select = "Space";
         $control_manual_select = "Space";
@@ -149,14 +149,14 @@ class UserController extends Controller
         else if ($action == "next" || $action == "save")
             return \Redirect::route('difficulty.player', [$player_id, $from, 0]);
         else
-            return abort(403, 'Unauthorized action.');
+            abort(403, __('messages.unauthorized_action'));
 
     }
 
     public function difficultyConfigure(Request $request, int $player_id, string $from, int $game_id = 0)
     {
         if ($player_id == 0)
-            return abort(403, 'Unauthorized action.');
+            abort(403, __('messages.unauthorized_action'));
         $dice_type = 1;
         $board_size = 2;
         $difficulty = 1;
@@ -189,7 +189,7 @@ class UserController extends Controller
         else if ($action == "save")
             return \Redirect::route('select.player', [0, $from, 0]);
         else
-            return abort(403, 'Unauthorized action.');
+            abort(403, __('messages.unauthorized_action'));
     }
 
 }
