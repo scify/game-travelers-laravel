@@ -47,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+// Privacy Policy
 Route::view('/privacy-policy', 'privacy-policy.page')->name('privacy-policy');
 
 //Integrated pages
@@ -148,5 +149,4 @@ Route::middleware('auth')->group(function () {
 
     Route::post('board/fromVue', [BoardController::class, 'fromVue'])
         ->name('to.backend');
-
 });

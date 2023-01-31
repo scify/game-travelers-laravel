@@ -23,7 +23,7 @@
                 src="{{ asset('images/avatars/no-avatar.svg') }}"
                 alt="Δεν έχει επιλεχθεί παίκτης"
                 @endif
-            />
+            >
             <span class="user-label" id="userMenuButtonLabel">
                 {{ $playerName ?? "Επιλογές" }}
             </span>

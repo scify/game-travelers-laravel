@@ -15,7 +15,7 @@
 
         <header>
           <a href="{{ url('/') }}">
-            <img src="{{ asset('images/logo.svg') }}" width="145" height="79" alt="Ταξιδιώτες" />
+            <img src="{{ asset('images/logo.svg') }}" width="145" height="79" alt="Ταξιδιώτες">
           </a>
           <small>fixed width & height edition</small>
         </header>
@@ -43,7 +43,7 @@
             </div>
             <footer class="pt-5">
               <a href="#">
-                <img src="{{ asset('images/scify.png') }}" width="105" height="53" alt="Created by SciFY" />
+                <img src="{{ asset('images/scify.png') }}" width="105" height="53" alt="Created by SciFY">
               </a>
             </footer>
           </div>

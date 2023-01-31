@@ -35,7 +35,7 @@
             src="{{ asset('images/pawns/board_' . $board . '/' . $asset . '.png') }}"
             width="136" height="212"
             alt="{{ $alt ?? __('messages.pawn_preview') }}"
-        />
+        >
         @isset($selected_by_other_player)
             <span class="pawn-your-choice">{{ __('messages.pawn_your_choice') }}</span>
         @endisset

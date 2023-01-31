@@ -36,7 +36,7 @@
         data-player-name="{{ $name ?? 'Άγνωστο' }}"
         @endif @endisset
         alt="{{ $avatar['description'] ?? 'Φατσούλα' }}"
-    />
+    >
 </button>
     <label
         class="btn-text label-avatar @isset($hideLabel) hidden @endisset @isset($role) @if ($role == 'player') label-player label-player--{{ $id ?? 0 }} @endif @endisset"

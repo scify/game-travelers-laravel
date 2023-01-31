@@ -12,7 +12,7 @@
 <meta name="og:description" property="og:description" content="{{ __('messages.meta_description') }}">
 <meta name="og:site_name" property="og:site_name" content="{{ config('app.name') }}">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="{{ config('app.name') }}"/>
-<meta name="twitter:description" content="{{ __('messages.meta_description') }}"/>
-<meta name="twitter:image" content="{{ asset('images/taxidiotes_logo.webp') }}"/>
+<meta name="twitter:title" content="{{ config('app.name') }}">
+<meta name="twitter:description" content="{{ __('messages.meta_description') }}">
+<meta name="twitter:image" content="{{ asset('images/taxidiotes_logo.webp') }}">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">

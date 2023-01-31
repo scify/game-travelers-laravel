@@ -1,4 +1,4 @@
-<x-layout :title="'Ρυθμίσεις δυσκολίας | Ταξιδιώτες'" :hasUserMenu=true :background="'background-dash-up'">
+<x-layout :title="'Ρυθμίσεις δυσκολίας | Ταξιδιώτες'" :hasUserMenu=true :headerBackground="'background-dash-up'">
     {{-- Note: This is the exact same page as the one for New Players BUT with
         a modified header. According to the design these pages should be
         different, yet they have the exact same form, fields and purpose. Their
@@ -80,7 +80,7 @@
                                                     data-role="dice" {{-- Read by JS --}}
                                                     data-for="dice1" {{-- Read by JS (input id of the dice) --}}
                                                     alt="Ζάρι με αριθμούς"
-                                                />
+                                                >
                                             </div>
                                             <div class="dice-field--check pt-2">
                                                 <input
@@ -105,7 +105,7 @@
                                                     data-role="dice" {{-- Read by JS --}}
                                                     data-for="dice2" {{-- Read by JS (input id of the dice) --}}
                                                     alt="Ζάρι με κουκίδες"
-                                                />
+                                                >
                                             </div>
                                             <div class="dice-field--check pt-2">
                                                 <input
@@ -129,7 +129,7 @@
                                                     data-role="dice" {{-- Read by JS --}}
                                                     data-for="dice3" {{-- Read by JS (input id of the dice) --}}
                                                     alt="Ζάρι με χρώματα"
-                                                />
+                                                >
                                             </div>
                                             <div class="dice-field--check pt-2">
                                                 <input

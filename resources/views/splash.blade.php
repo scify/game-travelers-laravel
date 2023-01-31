@@ -5,7 +5,7 @@
 
     <div class="container-fluid">
         <div class="d-flex flex-auto">
-            <img class="splash" src="{{ asset('images/logo.svg') }}" width="100%" alt="{{ __("messages.app_name") }}" style="display: none;" />
+            <img class="splash" src="{{ asset('images/logo.svg') }}" width="100%" alt="{{ __("messages.app_name") }}" style="display: none;">
         </div>
     </div>
 

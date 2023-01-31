@@ -3,7 +3,7 @@
     <div class="col-md-6"></div>
     <div class="col-md-6 text-center-end">
         <button class="next-handdrawn-button" style="outline: none; border: none; background: transparent;">
-            <img src="{{ asset('images/buttons/profile-next@2x.png') }}" width="110" height="91" />
+            <img src="{{ asset('images/buttons/profile-next@2x.png') }}" width="110" height="91">
         </button>
     </div>
 </div>
