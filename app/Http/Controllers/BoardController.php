@@ -22,7 +22,7 @@ class BoardController extends Controller
     public function play(Request $request, int $player_id, int $game_id)
     {
         if ($player_id == 0 || $game_id == 0)
-            return abort(403, 'Unauthorized action.');
+            abort(403, __('messages.unauthorized_action'));
         $player = $this->playerRepository->allWhere(['id' => $player_id]);
         $player_data = [
             'name' => $player[0]->name,
@@ -73,7 +73,7 @@ class BoardController extends Controller
             $game = $games[0];
 
             if ($user_id != $game->user_id || $player_id != $game->player_id)
-                return response(['message' => 'Unauthorized action.'], 403);
+                return response(['message' => __('messages.unauthorized_action')], 403);
 
             $board_size = $game->selected_board_size;
             $tutorial_mode = $game->use_tutorial;

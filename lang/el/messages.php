@@ -101,4 +101,5 @@ return [
     'password_token_error' => 'Το διακριτικό δεν είναι πλέον έγκυρο. Θα πρέπει να ξεκινήσετε εκ νέου τη διαδικασία:',
     'password_token_error_link' => 'Ανάκτηση κωδικού.',
     //'error_password_captcha' => 'Το άρθροισμα δεν είναι σωστό.',
+    'unauthorized_action' => 'Μη εξουσιοδοτημένη ενέργεια'
 ];

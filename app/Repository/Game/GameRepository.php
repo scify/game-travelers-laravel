@@ -172,4 +172,8 @@ class GameRepository extends Repository
         ];
         return $pawns;
     }
+
+    public function gameExists(int $game_id, int $user_id): bool {
+        return Game::where(['id' => $game_id, 'user_id' => $user_id, 'active' => true])->exists();
+    }
 }

@@ -101,4 +101,5 @@ return [
     'password_token_error' => 'Unfortunately, your password reset request has expired.',
     'password_token_error_link' => 'Start over the process of reseting your password.',
     // 'error_password_captcha' => 'Incorrect CAPTCHA value.',
+    'unauthorized_action' => 'Unauthorized action'
 ];

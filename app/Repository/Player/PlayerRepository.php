@@ -69,4 +69,8 @@ class PlayerRepository extends Repository
         ];
         return $avatars;
     }
+
+    public function playerExists(int $player_id, int $user_id): bool {
+        return Player::where(['id' => $player_id, 'user_id' => $user_id])->exists();
+    }
 }

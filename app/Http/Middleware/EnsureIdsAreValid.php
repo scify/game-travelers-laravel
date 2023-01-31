@@ -14,7 +14,6 @@ class EnsureIdsAreValid {
     protected PlayerRepository $playerRepository;
     protected GameRepository $gameRepository;
 
-
     public function __construct(PlayerRepository $playerRepository, GameRepository $gameRepository) {
         $this->playerRepository = $playerRepository;
         $this->gameRepository = $gameRepository;
@@ -31,29 +30,18 @@ class EnsureIdsAreValid {
         $parameters = $request->route()->parameters;
         $player_id = (int)$parameters['player_id'];
         $game_id = (int)$parameters['game_id'];
+        $user_id = auth()->id();
         if ($player_id == 0)
             return $next($request);
 
-        $problem_found = false;
-        $user_id = auth()->id();
-        $entry = $this->playerRepository->allWhere(['id' => $player_id], ['user_id']);
-        if ($entry->count() == 0)
-            $problem_found = true;
-        else if ($entry[0]->user_id != $user_id)
-            $problem_found = true;
+        $problem_found = !$this->playerRepository->playerExists($player_id, $user_id);
 
-        if ($game_id != 0) {
-            $entry = $this->gameRepository->allWhere(['id' => $game_id, 'active' => true], ['user_id']);
-            if ($entry->count() == 0)
-                $problem_found = true;
-            else if ($entry[0]->user_id != $user_id)
-                $problem_found = true;
-        }
+        if ($game_id != 0)
+            $problem_found = !$this->gameRepository->gameExists($game_id, $user_id);
 
         if ($problem_found)
-            abort(403, 'Unauthorized action.');
+            abort(403, __('messages.unauthorized_action'));
         else
             return $next($request);
-
     }
 }
