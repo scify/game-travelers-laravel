@@ -117,24 +117,52 @@ kbd {
 }
 
 /* Main Landing Content (non-game related pages) */
-// Landing footer
-.trvl-landing-footer-curve {
-    height: 203px;
-    background-image: url("/images/landing/curves/curve_footer_color.svg");
+// Curves
+.trvl-curve {
     background-repeat: no-repeat;
-    background-position-x: left;
-    background-position-y: center;
-    background-size: 100% 203px;
-    &--dash {
+    &--footer {
         height: 203px;
-        background-image: url("/images/landing/curves/curve_footer_dash.svg");
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
-        background-size: 1440px 203px;
+        &--color {
+            background-position: 0% 50%;
+            background-size: 100% 203px;
+            &--green {
+                background-image: url("/images/landing/curves/curve_footer_green.svg");
+            }
+        }
+        &--dash {
+            background-image: url("/images/landing/curves/curve_footer_dash.svg");
+            background-position: 50% 50%;
+            background-size: 1440px 203px;
+        }
+    }
+    &--header {
+        height: 208px;
+        &--color {
+            background-position: 0% 50%;
+            background-size: 100% 208px;
+            &--white {
+                background-image: url("/images/landing/curves/curve_header_white.svg");
+            }
+        }
+        &--dash {
+            background-image: url("/images/landing/curves/curve_header_dash.svg");
+            background-position: 50% 50%;
+            background-size: 1440px 208px;
+        }
     }
 }
+// Landing header
+.trvl-landing-header {
+    margin-bottom: -8rem;
+}
+// Landing footer
 .trvl-landing-footer {
     font-weight: 500;
+    &--row--2 {
+        @media (max-width: 575.98px) {
+            margin-top: -4rem;
+        }
+    }
     &--links {
         ul {
             padding-left: 0;
