@@ -1,4 +1,4 @@
-<x-layout :title="'Επίλεξε πίστα | Νέο παιχνίδι | Ταξιδιώτες'" :hasUserMenu=true :background="'background-dash-up'">
+<x-layout :title="'Επίλεξε πίστα | Νέο παιχνίδι | Ταξιδιώτες'" :hasUserMenu=true :headerBackground="'background-dash-up'">
     {{-- This page was designed responsively in order to support any amount of
          boards, therefore, you can simply use the x-selectLevel[Link/Button]
          component as many times as needed (e.g. 1, 2, 3 or even more times).

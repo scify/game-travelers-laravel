@@ -98,7 +98,7 @@
                         src="{{ asset('images/icons/plus90.svg') }}"
                         width="90" height="90"
                         alt="Σύμβολο πρόσθεσης"
-                    />
+                    >
                 </a>
                 <span class="label-avatar-options">Νέο προφίλ</span>
             </div>

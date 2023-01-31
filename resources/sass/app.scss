@@ -132,10 +132,12 @@ section.content {
 
 .bg-light {
     --bs-bg-opacity: 1;
-    background-color: rgba(
-        var(--trvl-bg-light-rgb),
-        var(--bs-bg-opacity)
-    ) !important;
+    background-color: rgba(var(--trvl-bg-light-rgb), var(--bs-bg-opacity));
+}
+
+.bg-green {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--trvl-bg), var(--bs-bg-opacity));
 }
 
 // Settings & Profiles
@@ -340,6 +342,10 @@ section.content {
         border-radius: 50%;
         background-color: rgba(238, 235, 235, 0.8);
         border-color: var(--trvl-btn-border-color);
+        font-weight: 800;
+        font-size: 2rem;
+        text-decoration: none;
+        color: rgba(var(--trvl-c-dark-rgb), 0.8);
     }
     a.confirmation-animation {
         animation: animation-confirm-button 1.2s;
@@ -353,6 +359,7 @@ section.content {
         background-color: var(--trvl-btn-bg);
         box-shadow: 0 0.3rem rgba(0, 0, 0, 0.1);
         border-color: var(--trvl-btn-border-color);
+        color: rgba(var(--trvl-c-dark-rgb), 1);
     }
     @keyframes animation-confirm-button {
         0% {
@@ -369,7 +376,6 @@ section.content {
 
 // Footer
 .trvl-footer {
-    // position:relative;
     // bottom: 50px;
     position: relative;
     .scify {

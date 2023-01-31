@@ -12,7 +12,7 @@
             src="{{ asset('images/boards/' . $asset . '.png') }}"
             width="352" height="244"
             alt="{{ $alt ?? 'Προεπισκόπηση πίστας' }}"
-        />
+        >
         <span class="board-label">{{ $title ?? 'Πίστα' }}</span>
         @isset($comingsoon)
         <span class="coming-soon"><strong>ΠΡΟΣΕΧΩΣ!</strong></span>

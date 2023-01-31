@@ -130,7 +130,7 @@
                                                     data-role="dice" {{-- Read by JS --}}
                                                     data-for="dice1" {{-- Read by JS (input id of the dice) --}}
                                                     alt="Ζάρι με αριθμούς"
-                                                />
+                                                >
                                             </div>
                                             <div class="dice-field--check pt-2">
                                                 <input
@@ -142,7 +142,7 @@
                                                     id="dice1" {{-- Read by JS --}}
                                                     required
                                                     @if($dice_type == 1) checked autofocus @endif
-                                                />
+                                                >
                                             <label class="form-check-label" for="dice1">Νούμερα</label>
                                             </div>
                                         </div>
@@ -155,7 +155,7 @@
                                                     data-role="dice" {{-- Read by JS --}}
                                                     data-for="dice2" {{-- Read by JS (input id of the dice) --}}
                                                     alt="Ζάρι με κουκίδες"
-                                                />
+                                                >
                                             </div>
                                             <div class="dice-field--check pt-2">
                                                 <input
@@ -179,7 +179,7 @@
                                                     data-role="dice" {{-- Read by JS --}}
                                                     data-for="dice3" {{-- Read by JS (input id of the dice) --}}
                                                     alt="Ζάρι με χρώματα"
-                                                />
+                                                >
                                             </div>
                                             <div class="dice-field--check pt-2">
                                                 <input

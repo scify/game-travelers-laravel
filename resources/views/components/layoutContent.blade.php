@@ -1,12 +1,14 @@
 {{--*
-    * Blank layout (no header/footer) for Taxidiotes (Splash screens).
+    * Landing aka Content layout for Taxidiotes (the site, i.e. *NOT* the game).
     *
-    * Same as the default game layout.blade.php but with no footer or header.
-    * Used on the splash screen and might be used on the board as well. See the
-    * default layout.blade.php for supported optional parameters.
+    * Same as the default game layout.blade.php but overflow-y (aka vertical
+    * scrolling) is expected and therefore, there are no attempts via CSS to
+    * force the content to be rendered in the absolute middle of the viewport.
+    * Used on all content pages: e.g. Landing (aka Index), Privacy Policy,
+    * Cookies etc. See the default layout.blade.php for optional parameters.
     --}}
 <!doctype html>
-<html lang="{{ config('app.locale') }}">
+<html lang="{{ app()->getLocale() }}">
 <head>
     @include('layout.meta')
     @include('layout.favicons')
@@ -18,9 +20,11 @@
 <body>
     <div class="travelers">
         <div class="travelers-container">
+            @include('layout.header')
             <section class="content">
                 {{ $slot }}
             </section>
+            @include('layout.landing.footer')
         </div>
     </div>
     @include('layout.footer-scripts')

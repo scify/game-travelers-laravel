@@ -20,7 +20,7 @@
             src="{{ asset('images/modes/' . $asset . '.png') }}"
             width="352" height="244"
             alt="{{ $alt ?? 'Προεπισκόπηση τύπου παιχνιδιού' }}"
-        />
+        >
         <span class="board-label">{{ $title ?? 'Τύπος παιχνιδιού' }}</span>
         @isset($comingsoon)
         <span class="coming-soon-wrapper">

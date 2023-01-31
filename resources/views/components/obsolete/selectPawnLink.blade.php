@@ -12,7 +12,7 @@
             src="{{ asset('images/pawns/' . $asset . '.png') }}"
             width="136" height="212"
             alt="{{ $alt ?? 'Προεπισκόπηση πίστας' }}"
-        />
+        >
         <span class="pawn-label">{{ $title ?? 'Πίστα' }}</span>
     </a>
 </div>

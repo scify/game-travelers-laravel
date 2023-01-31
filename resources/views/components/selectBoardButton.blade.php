@@ -21,7 +21,7 @@
             src="{{ asset($asset . '.png') }}"
             width="352" height="244"
             alt="{{ $alt ?? __("messages.board_preview") }}"
-        />
+        >
         <span class="board-label">{{ $name ?? 'Πίστα' }}</span>
         @isset($comingsoon)
         <span class="coming-soon-wrapper">

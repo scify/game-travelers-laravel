@@ -1,7 +1,7 @@
 <x-layout
     :title="__('messages.select_pawn') . ' | ' . __('messages.new_game') . ' | ' . __('messages.app_name')"
     :hasUserMenu=true
-    :background="'background-dash-up'"
+    :headerBackground="'background-dash-up'"
 >
     {{-- This page was designed responsively in order to support any amount of
          pawns, therefore you can simply use the x-selectPawnButton component as

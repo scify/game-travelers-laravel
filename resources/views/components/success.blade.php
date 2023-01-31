@@ -1,12 +1,12 @@
 {{--This container extends to the full width/height of the page, even though it
     is is served as a component in order to be reusable. From a design point-of-
     view, the large circular button is meant to be interpreted in context as the
-    sun or the moon :).
+    sun or the moon.
 
     Parameters:
-    $url (Required)
+    $url (Optional...)
     $message (Optional, defaults to "Congratulations!")
-    $alt (Optional, defaults to "Continue")
+    $alt (Optional, defaults to "Continue" - should be one small word or else).
 
     Note: The animation is disabled on "prefers-reduced-motion" setups. --}}
 <div class="confirmation-page background background-mountains container-xxl px-4">
@@ -23,7 +23,7 @@
                     </a>
                 @else
                     <img src="{{ asset('images/icons/checkmark.svg') }}" alt="{{ $alt ?? __('messages.continue') }}"
-                         width="129" height="96"/>
+                         width="129" height="96">
                 @endisset
             </div>
         </div>
