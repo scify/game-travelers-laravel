@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1440" height="208" viewBox="0 0 1440 208">
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="208" viewBox="0 0 1440 208">
   <defs>
-    <clipPath id="clip-path">
-      <rect id="Rectangle_313" data-name="Rectangle 313" width="1440" height="208" transform="translate(-635 -14112)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    <clipPath id="a">
+      <path fill="#fff" stroke="#707070" d="M-635-14112H805v208H-635z" data-name="Rectangle 313"/>
     </clipPath>
   </defs>
-  <g id="abstract_header_dash" data-name="abstract header_dash" transform="translate(635 14112)" clip-path="url(#clip-path)">
-    <path id="Path_12711" data-name="Path 12711" d="M.949,85.223s303.389,106.613,586.588,96.229S1026,104.615,1181.946,108.383s227.665,55.66,259.917,98.693S1440,1232,1440,1232H0Z" transform="translate(-635 -14112)" fill="#c3d0c9" opacity="0"/>
-    <path id="Dash_line_1" data-name="Dash line 1" d="M-5027,11418.9s-5.208,137.027,145.785,114.189,187.526-43.6,272.69-47.752,118.787-37.371,209.762,0,211.023,65.78,369.181,70.59,191.8-49.277,263.452-51.354,176.93,50.988,179.107,38.531" transform="translate(4392.021 -25476.059)" fill="none" stroke="#707070" stroke-linecap="round" stroke-width="1" stroke-dasharray="10"/>
+  <g clip-path="url(#a)" data-name="abstract header_dash" transform="translate(635 14112)">
+    <path fill="none" stroke="#707070" stroke-dasharray="10" stroke-linecap="round" d="M-634.979-14057.159s-5.208 137.027 145.785 114.189 187.526-43.6 272.69-47.752 118.787-37.371 209.762 0 211.023 65.78 369.181 70.59 191.8-49.277 263.452-51.354 176.93 50.988 179.107 38.531" data-name="Dash line 1"/>
   </g>
 </svg>
+

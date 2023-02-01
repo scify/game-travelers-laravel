@@ -108,7 +108,6 @@ kbd {
         color: var(--trvl-color);
     }
 }
-
 .bg-brown {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--trvl-bg-brown-rgb), var(--bs-bg-opacity));
@@ -128,7 +127,7 @@ kbd {
     --bs-alert-border-color: var(--trvl-danger-border-color);
 }
 
-/* Main Landing Content (non-game related pages) */
+/* Main Landing Pages ontent (non-game related pages) */
 section.landing {
     // Utilities
     &.mb-lg-n300 {
@@ -167,7 +166,6 @@ section.landing {
             @media (max-width: 991.98px) {
                 font-size: calc(1.4rem + 1.5vw);
             }
-            // font-size: calc(1.375rem + 1.5vw);
         }
     }
     .landing-block {
@@ -180,6 +178,12 @@ section.landing {
             background-image: url("/images/landing/blocks/background-abstract.png");
             background-size: 264px 398px;
             background-repeat: no-repeat;
+            @media only screen and (-webkit-min-device-pixel-ratio: 2),
+                only screen and (min--moz-device-pixel-ratio: 2),
+                only screen and (min-device-pixel-ratio: 2),
+                only screen and (min-resolution: 2dppx) {
+                background-image: url("/images/landing/blocks/background-abstract@2x.png");
+            }
         }
         &--label {
             display: inline-block;
@@ -204,6 +208,12 @@ section.landing {
             background-image: url("/images/landing/numbers/dashline.png");
             background-size: 731px 962px;
             background-repeat: no-repeat;
+            @media only screen and (-webkit-min-device-pixel-ratio: 2),
+                only screen and (min--moz-device-pixel-ratio: 2),
+                only screen and (min-device-pixel-ratio: 2),
+                only screen and (min-resolution: 2dppx) {
+                background-image: url("/images/landing/numbers/dashline@2x.png");
+            }
         }
         @media (max-width: 991.98px) {
             font-size: calc(1.25rem + 1.5vw);
@@ -232,43 +242,6 @@ section.landing {
                 padding-top: 8rem;
                 margin-left: 8%;
             }
-        }
-    }
-}
-// Curves
-.trvl-curve {
-    background-repeat: no-repeat;
-    &--footer {
-        height: 203px;
-        &--color {
-            background-position: 0% 50%;
-            background-size: 100% 203px;
-            &--green {
-                background-image: url("/images/landing/curves/curve_footer_green.svg");
-            }
-        }
-        &--dash {
-            background-image: url("/images/landing/curves/curve_footer_dash.svg");
-            background-position: 50% 50%;
-            background-size: 1440px 203px;
-        }
-    }
-    &--header {
-        height: 208px;
-        &--color {
-            background-position: 0% 50%;
-            background-size: 100% 208px;
-            &--green {
-                background-image: url("/images/landing/curves/curve_header_green.svg");
-            }
-            &--white {
-                background-image: url("/images/landing/curves/curve_header_white.svg");
-            }
-        }
-        &--dash {
-            background-image: url("/images/landing/curves/curve_header_dash.svg");
-            background-position: 50% 50%;
-            background-size: 1440px 208px;
         }
     }
 }

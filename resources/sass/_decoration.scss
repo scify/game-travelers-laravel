@@ -157,6 +157,44 @@
     }
 }
 
+/* Landing page(s) curves */
+.trvl-curve {
+    background-repeat: no-repeat;
+    &--footer {
+        height: 203px;
+        &--color {
+            background-position: 0% 50%;
+            background-size: 100% 203px;
+            &--green {
+                background-image: url("/images/landing/curves/curve_footer_green.svg");
+            }
+        }
+        &--dash {
+            background-image: url("/images/landing/curves/curve_footer_dash.svg");
+            background-position: 50% 50%;
+            background-size: 1440px 203px;
+        }
+    }
+    &--header {
+        height: 208px;
+        &--color {
+            background-position: 0% 50%;
+            background-size: 100% 208px;
+            &--green {
+                background-image: url("/images/landing/curves/curve_header_green.svg");
+            }
+            &--white {
+                background-image: url("/images/landing/curves/curve_header_white.svg");
+            }
+        }
+        &--dash {
+            background-image: url("/images/landing/curves/curve_header_dash.svg");
+            background-position: 50% 50%;
+            background-size: 1440px 208px;
+        }
+    }
+}
+
 /* Responsiveness */
 // Portrait phones
 @media (max-width: 575.98px) {

@@ -4,11 +4,11 @@
     sun or the moon.
 
     Parameters:
-    $url (Optional...)
+    $url (Optional)
     $message (Optional, defaults to "Congratulations!")
     $alt (Optional, defaults to "Continue" - should be one small word or else).
 
-    Note: The animation is disabled on "prefers-reduced-motion" setups. --}}
+    Note: The <a> animation is disabled on "prefers-reduced-motion" setups. --}}
 <div class="confirmation-page background background-mountains container-xxl px-4">
     <div class="d-flex justify-content-center text-center">
         <div class="px-3 pt-5">
@@ -22,8 +22,8 @@
                         {{ __('messages.continue') }}
                     </a>
                 @else
-                    <img src="{{ asset('images/icons/checkmark.svg') }}" alt="{{ $alt ?? __('messages.continue') }}"
-                         width="129" height="96">
+                    <img src="{{ asset('images/icons/checkmark24.svg') }}" alt="{{ $alt ?? __('messages.continue') }}"
+                         width="128" height="128">
                 @endisset
             </div>
         </div>
