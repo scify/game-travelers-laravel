@@ -47,6 +47,9 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+// Landing page
+Route::view('/landing-page', 'index')->name('landing-page');
+
 // Privacy Policy
 Route::view('/privacy-policy', 'privacy-policy.page')->name('privacy-policy');
 

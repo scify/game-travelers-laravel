@@ -1,5 +1,28 @@
 <!-- /resources/views/layout/landing/header.blade.php -->
-<header class="trvl-landing-header bg-green">
+@php
+/* Colorful green/white header with curves for Taxidiotes.
+ *
+ * @param string|null $headerBackgroundColor
+ *    Optional header background color. Allowed values: green, white. Defaults
+ *    to white, assuming that the element following the header has green
+ *    background (which is the default for all pages). Green should only be
+ *    set if the content that follows the header is in white backround.
+ */
+$supportedColors = ["green", "white"];
+$headerBackgroundColor = isset($headerBackgroundColor) ? $headerBackgroundColor : "green";
+if (!in_array($headerBackgroundColor, $supportedColors)) {
+    $headerBackgroundColor = "green";
+}
+foreach ($supportedColors as $color) {
+    $varName = "headerIs" . ucfirst($color);
+    $$varName = ($headerBackgroundColor === $color);
+}
+@endphp
+<header @class([
+    'trvl-landing-header',
+    'bg-green' => $headerIsGreen,
+    'bg-light' => $headerIsWhite,
+])>
     <div class="container-xxl p-4 px-sm-5 px-lg-4">
         <div class="logo d-flex justify-content-center">
             <a href="{{ url('/') }}">
@@ -8,7 +31,15 @@
         </div>
     </div>
 </header>
-<div class="trvl-curve trvl-curve--header trvl-curve--header--color trvl-curve--header--color--white bg-green" aria-role="presentation">
+<div aria-role="presentation" @class([
+    'trvl-curve',
+    'trvl-curve--header',
+    'trvl-curve--header--color',
+    'trvl-curve--header--color--green' => $headerIsWhite,
+    'trvl-curve--header--color--white' => $headerIsGreen,
+    'bg-green' => $headerIsGreen,
+    'bg-light' => $headerIsWhite,
+])>
     <div class="trvl-curve trvl-curve--header trvl-curve--header--dash">
         &nbsp;
     </div>

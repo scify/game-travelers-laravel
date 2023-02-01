@@ -87,7 +87,8 @@ kbd {
 }
 
 /* Bootstrap friendly global tags */
-.bg-light {
+.bg-light,
+.bg-white {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--trvl-bg-light-rgb), var(--bs-bg-opacity));
     color: var(--trvl-color);
@@ -97,6 +98,17 @@ kbd {
     background-color: rgba(var(--trvl-bg-rgb), var(--bs-bg-opacity));
     color: var(--trvl-color);
 }
+.bg-lg-green {
+    @media (min-width: 992px) {
+        --bs-bg-opacity: 1;
+        background-color: rgba(
+            var(--trvl-bg-rgb),
+            var(--bs-bg-opacity)
+        ) !important;
+        color: var(--trvl-color);
+    }
+}
+
 .bg-brown {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--trvl-bg-brown-rgb), var(--bs-bg-opacity));
@@ -117,6 +129,112 @@ kbd {
 }
 
 /* Main Landing Content (non-game related pages) */
+section.landing {
+    // Utilities
+    &.mb-lg-n300 {
+        @media (min-width: 992px) {
+            margin-bottom: -300px;
+        }
+    }
+    .landing-trees {
+        img.img-xl {
+            @media (max-width: 991.98px) {
+                width: 100%;
+                height: auto;
+            }
+            @media (min-width: 575.98px) {
+                display: inline-block !important;
+            }
+            @media (max-width: 575.98px) {
+                display: none !important;
+            }
+        }
+        img.img-sm {
+            @media (min-width: 575.98px) {
+                display: none !important;
+            }
+        }
+    }
+    .landing-title {
+        text-align: center;
+        h1 {
+            span {
+                white-space: nowrap;
+            }
+            line-height: 1.4;
+            font-size: 3rem;
+            font-weight: 700;
+            @media (max-width: 991.98px) {
+                font-size: calc(1.4rem + 1.5vw);
+            }
+            // font-size: calc(1.375rem + 1.5vw);
+        }
+    }
+    .landing-block {
+        position: relative;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        &--abstract {
+            width: 264px;
+            height: 398px;
+            background-image: url("/images/landing/blocks/background-abstract.png");
+            background-size: 264px 398px;
+            background-repeat: no-repeat;
+        }
+        &--label {
+            display: inline-block;
+            position: relative;
+            top: -140px;
+            left: 10%;
+            width: 220px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-align: center;
+            span {
+                white-space: nowrap;
+            }
+        }
+    }
+    .landing-numbers {
+        font-weight: 500;
+        font-size: 2.5rem;
+        text-align: center;
+        @media (min-width: 768px) {
+            min-height: 962px;
+            background-image: url("/images/landing/numbers/dashline.png");
+            background-size: 731px 962px;
+            background-repeat: no-repeat;
+        }
+        @media (max-width: 991.98px) {
+            font-size: calc(1.25rem + 1.5vw);
+        }
+        &--one {
+            padding-top: 6rem;
+            @media (min-width: 992px) {
+                padding-top: 11rem;
+                margin-left: 4%;
+            }
+        }
+        &--two {
+            padding-top: 6rem;
+            @media (min-width: 992px) {
+                padding-top: 5rem;
+                margin-left: 21%;
+            }
+            @media (min-width: 1400px) {
+                padding-top: 5rem;
+                margin-left: 41%;
+            }
+        }
+        &--three {
+            padding-top: 6rem;
+            @media (min-width: 992px) {
+                padding-top: 8rem;
+                margin-left: 8%;
+            }
+        }
+    }
+}
 // Curves
 .trvl-curve {
     background-repeat: no-repeat;
@@ -140,6 +258,9 @@ kbd {
         &--color {
             background-position: 0% 50%;
             background-size: 100% 208px;
+            &--green {
+                background-image: url("/images/landing/curves/curve_header_green.svg");
+            }
             &--white {
                 background-image: url("/images/landing/curves/curve_header_white.svg");
             }
@@ -204,7 +325,6 @@ kbd {
         }
     }
 }
-// Landing footer social media
 
 /* Main Game Content (absolute center & middle via flexbox). */
 .travelers {
