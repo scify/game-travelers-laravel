@@ -19,6 +19,21 @@
 			/>
 		</Transition>
 		<div v-if="this.gameEnd === 0">
+			<img
+				v-if="this.blueIndex !== 0"
+				v-bind:src="this.getStartSrc()"
+				style="z-index: 4; position: absolute; display: block"
+			/>
+			<img
+				v-bind:src="this.getGoalSrc()"
+				style="z-index: 4; position: absolute; display: block"
+			/>
+			<img
+				v-if="getExtrasSrc().length > 0"
+				v-bind:src="this.getExtrasSrc()"
+				style="z-index: 4; position: absolute; display: block"
+			/>
+
 			<Transition name="fade_blue">
 				<img
 					v-if="this.blue_position_show"
@@ -30,7 +45,7 @@
 				<img
 					v-if="this.showPawn1"
 					v-bind:src="this.computePawn1Src"
-					style="z-index: 2; position: absolute; display: block"
+					style="z-index: 5; position: absolute; display: block"
 				/>
 			</Transition>
 			<div v-if="this.gameMode > 1">
@@ -38,18 +53,18 @@
 					<img
 						v-if="this.showPawn2"
 						v-bind:src="this.computePawn2Src"
-						style="z-index: 2; position: absolute; display: block"
+						style="z-index: 5; position: absolute; display: block"
 					/>
 				</Transition>
 			</div>
 			<img
 				v-bind:src="this.computeLeftSrc"
-				style="z-index: 2; position: absolute; display: block"
+				style="z-index: 5; position: absolute; display: block"
 			/>
 			<div v-if="this.gameMode > 1">
 				<img
 					v-bind:src="this.computeRightSrc"
-					style="z-index: 2; position: absolute; display: block"
+					style="z-index: 5; position: absolute; display: block"
 				/>
 			</div>
 			<Transition name="fade">
@@ -60,7 +75,7 @@
 					}"
 					v-if="this.center_src.length > 0"
 					v-bind:src="this.center_src"
-					style="z-index: 2; position: absolute; display: block"
+					style="z-index: 5; position: absolute; display: block"
 				/>
 			</Transition>
 		</div>
@@ -141,7 +156,7 @@ export default {
 			firstPlayerTurn: this.gameData["firstPlayerTurn"],
 			gamePhase: this.gameData["game_phase"], // 1 roll, 2 move, 3 draw
 			center_src: "",
-			blueIndex: 0,
+			blueIndex: -1,
 			blue_position_show: false,
 			blue_blinking_allowed: false,
 			rollAnimation: false,
@@ -176,8 +191,8 @@ export default {
 
 					if (this.firstPlayerTurn) {
 						if (this.pos1 === 0) window.sound("sounds.game.start");
-						else window.sound("sounds.game.our_turn_[1-6]");
-					} else window.sound("sounds.game.other_turn_[1-8]");
+						else window.sound(this.getOurTurnSound());
+					} else window.sound(this.getOtherTurnSound());
 				} else {
 					this.ignoreInput = true;
 					this.sendToBackend();
@@ -249,14 +264,14 @@ export default {
 											);
 										else
 											window.sound(
-												"sounds.game.our_turn_[1-6]",
+												self.getOurTurnSound(),
 												function () {
 													self.ignoreInput = false;
 												}
 											);
 									} else
 										window.sound(
-											"sounds.game.other_turn_[1-8]",
+											self.getOtherTurnSound(),
 											function () {
 												if (self.gameMode === 2)
 													window.setTimeout(() => {
@@ -280,14 +295,14 @@ export default {
 								self.gamePhase = 1;
 								if (self.firstPlayerTurn)
 									window.sound(
-										"sounds.game.our_turn_[1-6]",
+										self.getOurTurnSound(),
 										function () {
 											self.ignoreInput = false;
 										}
 									);
 								else if (self.gameMode === 2) {
 									window.sound(
-										"sounds.game.other_turn_[1-8]",
+										self.getOtherTurnSound(),
 										function () {
 											self.sendToBackend();
 										}
@@ -356,13 +371,20 @@ export default {
 					} else if (this.gamePhase === 2) {
 						if (isNavigate) {
 							window.sound("fx.select");
+							let initialPos = this.pos1;
+							if (!this.firstPlayerTurn) initialPos = this.pos2;
 							this.blue_position_show = false;
 							let nextBlue = this.blueIndex + 1;
-							if (nextBlue > this.newPosition) {
-								nextBlue = this.pos1 + 1;
-								if (!this.firstPlayerTurn)
-									nextBlue = this.pos2 + 1;
-							}
+
+							if (
+								(this.movementMode === 3 &&
+									(nextBlue > this.getMaxBoardPosition() ||
+										nextBlue > initialPos + 6)) ||
+								(this.movementMode === 2 &&
+									nextBlue > this.newPosition)
+							)
+								nextBlue = initialPos;
+
 							this.blueIndex = nextBlue;
 							this.blue_position_show = true;
 						} else if (isSelect) {
@@ -370,7 +392,7 @@ export default {
 								this.blue_blinking_allowed = false;
 								this.ignoreInput = true;
 								window.sound(
-									"sounds.game.reward_[1-11]",
+									this.getRewardSound(),
 									function () {
 										self.applyCorrectMovement();
 									},
@@ -440,13 +462,6 @@ export default {
 				this.stepSoundSwitch = true;
 			}
 		},
-		startMusic() {
-			/*let timer = setInterval(function () {
-				if (window.sound) {
-					clearInterval(timer);
-				}
-			}, 500);*/
-		},
 		getBoardPath() {
 			return "/images/boards/board_" + this.board + "/";
 		},
@@ -488,7 +503,7 @@ export default {
 				}, 1000);
 			} else {
 				this.blue_position_show = false;
-				this.blueIndex = 0;
+				this.blueIndex = -1;
 			}
 		},
 		setCenter(isDice, value) {
@@ -552,15 +567,10 @@ export default {
 						this.blue_blinking_allowed = true;
 						this.blueIndex = pos + 1;
 						this.ignoreInput = false;
-						this.activate_blue_rotation(
-							pos + 1,
-							newPosition,
-							pos + 1,
-							0
-						);
+						this.activate_blue_rotation(pos, newPosition, pos, 0);
 					} else {
 						//if navigation key is used
-						this.blueIndex = pos + 1;
+						this.blueIndex = pos;
 						this.blue_position_show = true;
 						this.ignoreInput = false;
 					}
@@ -569,13 +579,11 @@ export default {
 				if (this.autoMove === 1) {
 					this.blue_blinking_allowed = true;
 					let max = pos + 6;
-					let max_value = 15;
-					if (this.boardSize === 2) max_value = 30;
-					else if (this.boardSize === 3) max_value = 45;
+					let max_value = this.getMaxBoardPosition();
 					if (max > max_value) max = max_value;
-					this.activate_blue_rotation(pos + 1, max, pos + 1, 0);
+					this.activate_blue_rotation(pos, max, pos, 0);
 				} else {
-					this.blueIndex = pos + 1;
+					this.blueIndex = pos;
 					this.blue_position_show = true;
 				}
 				this.ignoreInput = false;
@@ -617,7 +625,7 @@ export default {
 										function () {
 											if (self.movementMode === 3) {
 												self.blue_position_show = false;
-												self.blueIndex = 0;
+												self.blueIndex = -1;
 												self.activateSelector(
 													newPosition
 												);
@@ -763,6 +771,32 @@ export default {
 			if (volume <= 0) volume = 0;
 			this.music.volume = volume;
 		},
+		getStartSrc() {
+			return this.getBoardPath() + "start.png";
+		},
+		getGoalSrc() {
+			return this.getBoardPath() + "goal.png";
+		},
+		getExtrasSrc() {
+			if (this.board === 2) return this.getBoardPath() + "extras.png";
+			else return "";
+		},
+		getMaxBoardPosition() {
+			let max_value = 15;
+			if (this.boardSize === 2) max_value = 30;
+			else if (this.boardSize === 3) max_value = 45;
+			return max_value;
+		},
+		getRewardSound() {
+			return "sounds.game.reward_[1-11]";
+		},
+		getOurTurnSound() {
+			if (this.gameMode === 1) return "sounds.game.our_turn_solo_[1-3]";
+			else return "sounds.game.our_turn_[1-6]";
+		},
+		getOtherTurnSound() {
+			return "sounds.game.other_turn_[1-8]";
+		},
 	},
 	computed: {
 		computePawn1Src() {
@@ -800,7 +834,7 @@ export default {
 			}
 		},
 		computeBlueSrc() {
-			if (this.blueIndex === 0) return "";
+			if (this.blueIndex === -1) return "";
 			else
 				return (
 					this.getSizePath() +
