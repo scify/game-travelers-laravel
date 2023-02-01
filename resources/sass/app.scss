@@ -127,29 +127,33 @@ kbd {
     --bs-alert-border-color: var(--trvl-danger-border-color);
 }
 
-/* Main Landing Pages ontent (non-game related pages) */
+/* Main Landing Pages Content (non-game related pages) */
 section.landing {
     // Utilities
-    &.mb-lg-n300 {
+    &.mb-lg-n350 {
         @media (min-width: 992px) {
-            margin-bottom: -300px;
+            margin-bottom: -350px;
         }
     }
     .landing-trees {
         img.img-xl {
-            @media (max-width: 991.98px) {
-                width: 100%;
-                height: auto;
-            }
-            @media (min-width: 575.98px) {
+            @media (min-width: 992px) {
                 display: inline-block !important;
             }
-            @media (max-width: 575.98px) {
+            @media (max-width: 991.98px) {
+                display: none !important;
+            }
+        }
+        img.img-lg {
+            @media (min-width: 768px) and (max-width: 991.98px) {
+                display: inline-block !important;
+            }
+            @media (max-width: 767.98px) {
                 display: none !important;
             }
         }
         img.img-sm {
-            @media (min-width: 575.98px) {
+            @media (min-width: 768px) {
                 display: none !important;
             }
         }

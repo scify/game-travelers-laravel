@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="302" viewBox="0 0 1440 302">
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" stroke="#707070" d="M9908-13241h1440v302H9908z" data-name="Rectangle 324"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#a)" transform="translate(-9908 13241)">
+    <path fill="none" stroke="#707070" stroke-dasharray="10" stroke-linecap="round" d="M9908.021-13210.67s-5.208 137.027 145.785 114.189 187.526-43.6 272.69-47.752 118.787-37.371 209.762 0 211.023 65.78 369.181 70.59 191.8-49.277 263.452-51.354 176.93 50.988 179.107 38.531" data-name="Dash line 2"/>
+  </g>
+</svg>
+
