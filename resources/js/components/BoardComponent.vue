@@ -427,9 +427,12 @@ export default {
 						this.ignoreInput = true;
 						this.blue_blinking_allowed = false;
 						this.cardName = "";
+						let sound = "sounds.cards.";
+						if (!this.firstPlayerTurn) sound += "opponent_";
 						if (this.latestCardValue > 0)
 							window.sound(
-								"sounds.cards.F" +
+								sound +
+									"F" +
 									this.latestCardValue +
 									this.getPawnSex(),
 								function () {
@@ -439,7 +442,8 @@ export default {
 							);
 						else
 							window.sound(
-								"sounds.cards.B" +
+								sound +
+									"B" +
 									Math.abs(this.latestCardValue) +
 									this.getPawnSex(),
 								function () {
