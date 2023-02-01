@@ -5,7 +5,7 @@
     <section class="landing bg-green px-4">
         <div class="container-lg pt-2 px-4 pb-5">
             <div class="landing-trees d-flex justify-content-center">
-                <img class="img-xl" src=""
+                <img class="img-xl"
                     loading="lazy"
                     srcset="{{ asset('images/landing/trees/trees-xl@2x.png') }} 2x"
                     src="{{ asset('images/landing/trees/trees-xl.png') }}"
@@ -14,7 +14,16 @@
                     alt=""
                     style="display: none;"
                 >
-                <img class="img-sm" src=""
+                <img class="img-lg"
+                    loading="lazy"
+                    srcset="{{ asset('images/landing/trees/trees-lg@2x.png') }} 2x"
+                    src="{{ asset('images/landing/trees/trees-lg.png') }}"
+                    width="628" height="236"
+                    aria-role="presentation"
+                    alt=""
+                    style="display: none;"
+                >
+                <img class="img-sm"
                     loading="lazy"
                     srcset="{{ asset('images/landing/trees/tree@2x.png') }} 2x"
                     src="{{ asset('images/landing/trees/tree.png') }}"
@@ -47,7 +56,7 @@
     </div>
     --}}
 
-    <section class="landing bg-light bg-lg-green px-4 pt-6 mb-lg-n300">
+    <section class="landing bg-light bg-lg-green px-4 pt-6 mb-lg-n350">
         <div class="container-lg pt-2 px-4">
             <div class="landing-blocks landing-blocks--three">
                 <div class="d-flex flex-column flex-lg-row justify-content-around align-items-center">
@@ -100,8 +109,8 @@
     {{--  @todo replace with proper curve when exported | hidden < lg
             MISSING PROPER CURVE FOR >=LG SCREENS (this stands as a replacement)
     --}}
-    <div aria-role="presentation" class="d-none d-lg-block trvl-curve trvl-curve--header trvl-curve--header--color trvl-curve--header--color--white bg-green">
-        <div class="trvl-curve trvl-curve--header trvl-curve--header--dash">
+    <div aria-role="presentation" class="d-none d-lg-block trvl-curve trvl-curve--landing-one trvl-curve--landing-one--color trvl-curve--landing-one--color--green bg-light">
+        <div class="trvl-curve trvl-curve--landing-one trvl-curve--landing-one--dash">
             &nbsp;
         </div>
     </div>
