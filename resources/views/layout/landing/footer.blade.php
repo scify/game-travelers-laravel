@@ -1,5 +1,5 @@
 <!-- /resources/views/layout/landing/footer.blade.php -->
-<div class="trvl-curve trvl-curve--footer trvl-curve--footer--color trvl-curve--footer--color--green bg-light" aria-role="presentation">
+<div aria-role="presentation" class="trvl-curve trvl-curve--footer trvl-curve--footer--color trvl-curve--footer--color--green bg-light">
     <div class="trvl-curve trvl-curve--footer trvl-curve--footer--dash">
         &nbsp;
     </div>
@@ -11,8 +11,8 @@
 
             <div class="trvl-landing-footer--links flex-grow-1">
                 <ul>
-                    <li><a href="{{-- @todo --}}">Επικοινώνησε μαζί μας</a></li>
-                    <li><a href="{{-- @todo --}}">Cookies Policy</a></li>
+                    <li><a href="#{{-- @todo --}}">Επικοινώνησε μαζί μας</a></li>
+                    <li><a href="#{{-- @todo --}}">Cookies Policy</a></li>
                     <li>
                         <a href="{{ route('privacy-policy') }}">
                             {{ __("messages.privacy_policy")}}
