@@ -63,9 +63,9 @@ function switcher() {
 		// Default parameters if window.Switcher has nothing.
 		controlMode = 1;
 		scanningSpeed = 2;
-		automaticSelectionButton = "Space";
-		manualSelectionButton = "Space";
-		manualNavigationButton = "Enter";
+		automaticSelectionButton = "Enter";
+		manualSelectionButton = "Enter";
+		manualNavigationButton = "Space";
 	}
 	let selectionButton =
 		controlMode === 1 ? automaticSelectionButton : manualSelectionButton;

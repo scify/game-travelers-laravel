@@ -16,11 +16,11 @@
 // Define a default switcher if none set.
  if (!isset($switcher)) {
     $switcher = [
-        'controlMode' => 1, // 1: Automatic, 2: Manual
-        'scanningSpeed' => 2, // in seconds
-        'automaticSelectionButton' => 'Space',
-        'manualSelectionButton' => 'Space',
-        'manualNavigationButton' => 'Enter',
+        "controlMode" => 1, // 1: Automatic, 2: Manual
+        "scanningSpeed" => 2, // in seconds
+        "automaticSelectionButton" => "Enter",
+        "manualSelectionButton" => "Enter",
+        "manualNavigationButton" => "Space",
     ];
 }
 // Support music & audio on page load if audio is defined.
