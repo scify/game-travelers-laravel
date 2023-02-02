@@ -175,8 +175,6 @@ section.landing {
     .landing-blocks {
         .landing-block {
             position: relative;
-            overflow: hidden;
-            text-overflow: ellipsis;
             &--abstract {
                 width: 264px;
                 height: 398px;
@@ -193,6 +191,8 @@ section.landing {
                     top: -140px;
                     left: 10%;
                     width: 220px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
             }
             &--abstract-round {
@@ -208,6 +208,7 @@ section.landing {
                     background-image: url("/images/landing/four-blocks/background-abstract@2x.png");
                 }
                 .landing-block--label {
+                    top: -30%;
                 }
             }
             &--label {

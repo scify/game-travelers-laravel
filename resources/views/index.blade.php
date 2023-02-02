@@ -241,7 +241,8 @@
                         >
                         <div class="landing-block--label">
                             <h2>
-                                <span>Προσαρμόσιμη δυσκολία</span>
+                                <span>Ενσωματωμένη βοήθεια</span>
+                                <span>και ενθάρρυνση</span>
                             </h2>
                         </div>
                     </div>
@@ -258,7 +259,7 @@
                         >
                         <div class="landing-block--label">
                             <h2>
-                                <span>Προσαρμόσιμη δυσκολία</span>
+                                <span>Πολλοί τρόποι χειρισμού</span>
                             </h2>
                         </div>
                     </div>
@@ -275,7 +276,7 @@
                         >
                         <div class="landing-block--label">
                             <h2>
-                                <span>Προσαρμόσιμη δυσκολία</span>
+                                <span>Χωρίς ανάγκη επίβλεψης</span>
                             </h2>
                         </div>
                     </div>
