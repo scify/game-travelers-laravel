@@ -57,8 +57,8 @@
                         <div class="landing-block landing-block--abstract">
                             <img class=""
                                 loading="lazy"
-                                srcset="{{ asset('images/landing/blocks/balloon@2x.png') }} 2x"
-                                src="{{ asset('images/landing/blocks/balloon.png') }}"
+                                srcset="{{ asset('images/landing/three-blocks/balloon@2x.png') }} 2x"
+                                src="{{ asset('images/landing/three-blocks/balloon.png') }}"
                                 width="264" height="398"
                                 aria-role="presentation"
                                 alt=""
@@ -73,8 +73,8 @@
                         <div class="landing-block landing-block--abstract mt-6 mt-lg-0">
                             <img class=""
                                 loading="lazy"
-                                srcset="{{ asset('images/landing/blocks/unicorn@2x.png') }} 2x"
-                                src="{{ asset('images/landing/blocks/unicorn.png') }}"
+                                srcset="{{ asset('images/landing/three-blocks/unicorn@2x.png') }} 2x"
+                                src="{{ asset('images/landing/three-blocks/unicorn.png') }}"
                                 width="264" height="398"
                                 aria-role="presentation"
                                 alt=""
@@ -89,8 +89,8 @@
                         <div class="landing-block landing-block--abstract mt-6 mt-lg-0">
                             <img class=""
                                 loading="lazy"
-                                srcset="{{ asset('images/landing/blocks/vase@2x.png') }} 2x"
-                                src="{{ asset('images/landing/blocks/vase.png') }}"
+                                srcset="{{ asset('images/landing/three-blocks/vase@2x.png') }} 2x"
+                                src="{{ asset('images/landing/three-blocks/vase.png') }}"
                                 width="264" height="398"
                                 aria-role="presentation"
                                 alt=""
@@ -191,11 +191,11 @@
                 </div>
                 <div class="screenshot pt-6 px-0 px-sm-5 px-xl-0">
                     <div class="pt-2 offset-xl-4 text-center">
-                        <h2>
+                        <h2 class="pb-2">
                             <span>Διαφορετικό προφίλ</span>
                             <span>για κάθε παίκτη</span>
                         </h2>
-                        <img class="img-fluid screenshot rounded pt-2"
+                        <img class="img-fluid screenshot rounded"
                             loading="lazy"
                             srcset="{{ asset('images/landing/screenshots/screenshot-02@2x.png') }} 2x"
                             src="{{ asset('images/landing/screenshots/screenshot-02.png') }}"
@@ -207,5 +207,82 @@
             </div>
         </div>
     </section>
+
+    <!--section--four--blocks -->
+    <section class="landing bg-light px-4 pt-6 ">
+        <div class="landing-blocks landing-blocks--four container-xxl pt-2 px-4">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-around gy-5">
+                <div class="col">
+                    <div class="landing-block landing-block--abstract-round m-auto">
+                        <img class=""
+                            loading="lazy"
+                            srcset="{{ asset('images/landing/four-blocks/puzzle@2x.png') }} 2x"
+                            src="{{ asset('images/landing/four-blocks/puzzle.png') }}"
+                            width="226" height="243"
+                            aria-role="presentation"
+                            alt=""
+                        >
+                        <div class="landing-block--label">
+                            <h2>
+                                <span>Προσαρμόσιμη δυσκολία</span>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="landing-block landing-block--abstract-round m-auto">
+                        <img class=""
+                            loading="lazy"
+                            srcset="{{ asset('images/landing/four-blocks/hearts@2x.png') }} 2x"
+                            src="{{ asset('images/landing/four-blocks/hearts.png') }}"
+                            width="226" height="243"
+                            aria-role="presentation"
+                            alt=""
+                        >
+                        <div class="landing-block--label">
+                            <h2>
+                                <span>Προσαρμόσιμη δυσκολία</span>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="landing-block landing-block--abstract-round m-auto">
+                        <img class=""
+                            loading="lazy"
+                            srcset="{{ asset('images/landing/four-blocks/pencil@2x.png') }} 2x"
+                            src="{{ asset('images/landing/four-blocks/pencil.png') }}"
+                            width="226" height="243"
+                            aria-role="presentation"
+                            alt=""
+                        >
+                        <div class="landing-block--label">
+                            <h2>
+                                <span>Προσαρμόσιμη δυσκολία</span>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="landing-block landing-block--abstract-round m-auto">
+                        <img class=""
+                            loading="lazy"
+                            srcset="{{ asset('images/landing/four-blocks/rainbow@2x.png') }} 2x"
+                            src="{{ asset('images/landing/four-blocks/rainbow.png') }}"
+                            width="226" height="243"
+                            aria-role="presentation"
+                            alt=""
+                        >
+                        <div class="landing-block--label">
+                            <h2>
+                                <span>Προσαρμόσιμη δυσκολία</span>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
 </x-layout>
