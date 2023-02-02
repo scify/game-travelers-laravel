@@ -132,8 +132,8 @@
                                                 type="button"
                                                 class="btn btn-sm btn-light rounded-pill key-assigner"
                                                 data-role="keyAssigner" {{-- Used by JS --}}
-                                                data-key-default="Space" {{-- Read by JS --}}
-                                                data-key-selected="Space" {{-- Updates via JS --}}
+                                                data-key-default="Enter" {{-- Read by JS --}}
+                                                data-key-selected="Enter" {{-- Updates via JS --}}
                                                 data-sets-input="controlAutomaticSelectionButton"
                                                 aria-label = "Ορισμός πλήκτρου επιλογής"
                                                 aria-description = "Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυυμείτε να γίνεται η επιλογή στο παιχνίδι"
@@ -177,8 +177,8 @@
                                                 type="button"
                                                 class="btn btn-sm btn-light rounded-pill key-assigner"
                                                 data-role="keyAssigner" {{-- Used by JS --}}
-                                                data-key-default="Space" {{-- Read by JS --}}
-                                                data-key-selected="Space" {{-- Updates via JS --}}
+                                                data-key-default="Enter" {{-- Read by JS --}}
+                                                data-key-selected="Enter" {{-- Updates via JS --}}
                                                 data-sets-input="controlManualSelectionButton"
                                                 aria-label = "Ορισμός πλήκτρου επιλογής"
                                                 aria-description = "Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυυμείτε να γίνεται η επιλογή στο παιχνίδι"
@@ -200,8 +200,8 @@
                                                 type="button"
                                                 class="btn btn-sm btn-light rounded-pill key-assigner"
                                                 data-role="keyAssigner" {{-- Used by JS --}}
-                                                data-key-default="Enter" {{-- Read by JS --}}
-                                                data-key-selected="Enter" {{-- Updates via JS --}}
+                                                data-key-default="Space" {{-- Read by JS --}}
+                                                data-key-selected="Space" {{-- Updates via JS --}}
                                                 data-sets-input="controlManualNavigationButton"
                                                 aria-label = "Ορισμός πλήκτρου πλοήγησης"
                                                 aria-description = "Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυυμείτε να γίνεται η πλοήγηση στο παιχνίδι"
