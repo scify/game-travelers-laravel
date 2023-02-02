@@ -207,7 +207,7 @@
     </section>
 
     <!--section--four--blocks -->
-    <section class="landing bg-light px-4 py-6 py-xl-7 ">
+    <section class="landing bg-light px-4 pt-6 pb-4 pt-xl-7 pb-xl-5">
         <div class="landing-blocks landing-blocks--four container-xxl pt-2 px-4">
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-around gy-6">
                 <div class="col">
@@ -294,14 +294,28 @@
             <source type="image/webp" srcset="{{ asset('images/landing/laptop/laptop.webp') }}">
             <source type="image/png" srcset="{{ asset('images/landing/laptop/laptop.png') }}">
             <img
-                class="img-fluid mx-auto d-block"
+                class="img-fluid mx-auto d-block px-sm-5 px-xxl-0"
                 loading="lazy"
                 src="{{ asset('images/landing/laptop/laptop.png') }}"
                 width="1042" height="765"
-                alt="Εικαστική σύνθεση στην οποία απεικονίζονται μερικοί από τους ήρωες του παιχνιδιού μπροστά από την οθόνη ενός φορητού υπολογιστή. Στην οθόνη του εμφανίζεται μια από τις πίστες του παιχνιδιού «Ταξιδιώτες»."
+                alt="Εικαστική σύνθεση στην οποία απεικονίζονται μερικοί από τους χαρακτήρες του παιχνιδιού μπροστά από την οθόνη ενός φορητού υπολογιστή. Στην οθόνη του εμφανίζεται μια από τις πίστες του παιχνιδιού «Ταξιδιώτες»."
             >
           </picture>
     </section>
 
+    <!-- section--portraits -->
+    <section class="landing bg-brown px-4 pt-4 pb-5 pt-lg-6 pb-lg-7">
+        <picture>
+            <source type="image/webp" srcset="{{ asset('images/landing/portraits/portraits.webp') }}">
+            <source type="image/png" srcset="{{ asset('images/landing/portraits/portraits.png') }}">
+            <img
+                class="img-fluid mx-auto d-block px-3 px-sm-6 px-xxl-3"
+                loading="lazy"
+                src="{{ asset('images/landing/portraits/portraits.png') }}"
+                width="1168" height="863"
+                alt="Εικαστική σύνθεση στην οποία απεικονίζονται πορτρέτα με κάποιους από τους χαρακτήρες του παιχνιδιού «Ταξιδιώτες»."
+            >
+          </picture>
+    </section>
 
 </x-layout>
