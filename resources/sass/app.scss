@@ -172,35 +172,54 @@ section.landing {
             }
         }
     }
-    .landing-block {
-        position: relative;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        &--abstract {
-            width: 264px;
-            height: 398px;
-            background-image: url("/images/landing/blocks/background-abstract.png");
-            background-size: 264px 398px;
-            background-repeat: no-repeat;
-            @media only screen and (-webkit-min-device-pixel-ratio: 2),
-                only screen and (min--moz-device-pixel-ratio: 2),
-                only screen and (min-device-pixel-ratio: 2),
-                only screen and (min-resolution: 2dppx) {
-                background-image: url("/images/landing/blocks/background-abstract@2x.png");
-            }
-        }
-        &--label {
-            display: inline-block;
+    .landing-blocks {
+        .landing-block {
             position: relative;
-            top: -140px;
-            left: 10%;
-            width: 220px;
-            h2 {
-                font-weight: 600;
-                font-size: 1.2rem;
-                text-align: center;
-                span {
-                    white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            &--abstract {
+                width: 264px;
+                height: 398px;
+                background-image: url("/images/landing/three-blocks/background-abstract.png");
+                background-size: 264px 398px;
+                background-repeat: no-repeat;
+                @media only screen and (-webkit-min-device-pixel-ratio: 2),
+                    only screen and (min--moz-device-pixel-ratio: 2),
+                    only screen and (min-device-pixel-ratio: 2),
+                    only screen and (min-resolution: 2dppx) {
+                    background-image: url("/images/landing/three-blocks/background-abstract@2x.png");
+                }
+                .landing-block--label {
+                    top: -140px;
+                    left: 10%;
+                    width: 220px;
+                }
+            }
+            &--abstract-round {
+                width: 226px;
+                height: 243px;
+                background-image: url("/images/landing/four-blocks/background-abstract.png");
+                background-size: 226px 243px;
+                background-repeat: no-repeat;
+                @media only screen and (-webkit-min-device-pixel-ratio: 2),
+                    only screen and (min--moz-device-pixel-ratio: 2),
+                    only screen and (min-device-pixel-ratio: 2),
+                    only screen and (min-resolution: 2dppx) {
+                    background-image: url("/images/landing/four-blocks/background-abstract@2x.png");
+                }
+                .landing-block--label {
+                }
+            }
+            &--label {
+                display: inline-block;
+                position: relative;
+                h2 {
+                    font-weight: 600;
+                    font-size: 1.2rem;
+                    text-align: center;
+                    span {
+                        white-space: nowrap;
+                    }
                 }
             }
         }
