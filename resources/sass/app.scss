@@ -195,32 +195,40 @@ section.landing {
             top: -140px;
             left: 10%;
             width: 220px;
-            font-weight: 600;
-            font-size: 1.2rem;
-            text-align: center;
-            span {
-                white-space: nowrap;
+            h2 {
+                font-weight: 600;
+                font-size: 1.2rem;
+                text-align: center;
+                span {
+                    white-space: nowrap;
+                }
             }
         }
     }
     .landing-numbers {
-        font-weight: 500;
-        font-size: 2.5rem;
         text-align: center;
-        @media (min-width: 768px) {
-            min-height: 962px;
-            background-image: url("/images/landing/numbers/dashline.png");
-            background-size: 731px 962px;
-            background-repeat: no-repeat;
-            @media only screen and (-webkit-min-device-pixel-ratio: 2),
-                only screen and (min--moz-device-pixel-ratio: 2),
-                only screen and (min-device-pixel-ratio: 2),
-                only screen and (min-resolution: 2dppx) {
-                background-image: url("/images/landing/numbers/dashline@2x.png");
+        background-image: url("/images/landing/numbers/dashline.png");
+        background-size: 731px 962px;
+        background-repeat: no-repeat;
+        background-position: 0% 0%;
+        h2 {
+            font-weight: 500;
+            font-size: 2.5rem;
+            @media (max-width: 991.98px) {
+                font-size: calc(1.25rem + 1.5vw);
             }
         }
-        @media (max-width: 991.98px) {
-            font-size: calc(1.25rem + 1.5vw);
+        @media only screen and (-webkit-min-device-pixel-ratio: 2),
+            only screen and (min--moz-device-pixel-ratio: 2),
+            only screen and (min-device-pixel-ratio: 2),
+            only screen and (min-resolution: 2dppx) {
+            background-image: url("/images/landing/numbers/dashline@2x.png");
+        }
+        @media (max-width: 767.98px) {
+            background-position: 100% -700%;
+        }
+        @media (min-width: 768px) {
+            min-height: 962px;
         }
         &--one {
             padding-top: 6rem;
@@ -246,6 +254,51 @@ section.landing {
                 padding-top: 8rem;
                 margin-left: 8%;
             }
+        }
+    }
+    .landing-screenshots {
+        background-image: url("/images/landing/screenshots/dashline.png");
+        background-size: 1016px 1533px;
+        background-repeat: no-repeat;
+        background-position: 100% 10%;
+        @media only screen and (-webkit-min-device-pixel-ratio: 2),
+            only screen and (min--moz-device-pixel-ratio: 2),
+            only screen and (min-device-pixel-ratio: 2),
+            only screen and (min-resolution: 2dppx) {
+            background-image: url("/images/landing/screenshots/dashline@2x.png");
+        }
+        @media (min-width: 992px) and (max-width: 1199.98px) {
+            background-position: -10% 10%;
+        }
+        @media (max-width: 991.98px) {
+            background-position: -10% 0%;
+        }
+        h2 {
+            font-weight: 500;
+            font-size: 2.5rem;
+            line-height: 1.4;
+            span {
+                white-space: nowrap;
+            }
+            @media (max-width: 991.98px) {
+                font-size: calc(1.25rem + 1.5vw);
+            }
+        }
+        .screenshot {
+            > .offset-xl-0 {
+                @media (max-width: 1199.98px) {
+                    text-align: center;
+                }
+            }
+            > .offset-xl-1 {
+                @media (max-width: 1199.98px) {
+                    text-align: center;
+                }
+            }
+        }
+        img.screenshot {
+            --bs-border-radius: 3rem;
+            box-shadow: 0 0.33em 0.66em rgba(var(--trvl-c-dark-rgb), 0.12);
         }
     }
 }
