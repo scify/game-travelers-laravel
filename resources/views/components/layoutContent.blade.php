@@ -21,9 +21,9 @@
 </head>
 <body>
     @include('layout.landing.header')
-    <section class="content-non-interactive mb-n2">
+    <div class="content-non-interactive mb-n2">
         {{ $slot }}
-    </section>
+    </div>
     @include('layout.landing.footer')
     @yield('scripts', '') {{-- Optional: JS scripts loaded after DOM is rendered --}}
 </body>

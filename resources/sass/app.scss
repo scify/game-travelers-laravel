@@ -321,7 +321,9 @@ section.landing {
         }
         img.screenshot {
             --bs-border-radius: 3rem;
-            box-shadow: 0 0.33em 0.66em rgba(var(--trvl-c-dark-rgb), 0.12);
+            box-shadow: 0 0.25em 0.1em 0.4em rgba(var(--trvl-c-dark-rgb), 0.03),
+                0.5em 1em 0.8em rgba(var(--trvl-c-dark-rgb), 0.03);
+            // 0 0.33em 0.66em rgba(var(--trvl-c-dark-rgb), 0.12);
         }
     }
 }

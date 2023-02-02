@@ -49,7 +49,7 @@
     </section>
 
     <!-- section--three-blocks -->
-    <section class="landing trvl-curve trvl-curve--landing-one-lg--color--green bg-light bg-lg-green px-0 pt-6-xl mb-lg-n350">
+    <section class="landing trvl-curve trvl-curve--landing-one-lg--color--green bg-light bg-lg-green px-0 mb-lg-n350">
         <div class="trvl-curve trvl-curve--landing-three-blocks--sm-lg-dash px-4">
             <div class="container-lg pt-2 px-4">
                 <div class="landing-blocks landing-blocks--three">
@@ -163,9 +163,7 @@
 
     <!-- curve--landing-two -->
     <div aria-role="presentation" class="trvl-curve trvl-curve--landing-two trvl-curve--landing-two--color trvl-curve--landing-two--color--brown bg-light">
-        <div class="">
-            &nbsp;
-        </div>
+        &nbsp;
     </div>
 
     <!-- section--screenshots -->
@@ -209,9 +207,9 @@
     </section>
 
     <!--section--four--blocks -->
-    <section class="landing bg-light px-4 pt-6 ">
+    <section class="landing bg-light px-4 py-6 py-xl-7 ">
         <div class="landing-blocks landing-blocks--four container-xxl pt-2 px-4">
-            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-around gy-5">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-around gy-6">
                 <div class="col">
                     <div class="landing-block landing-block--abstract-round m-auto">
                         <img class=""
@@ -283,6 +281,26 @@
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- curve--landing-two -->
+    <div aria-role="presentation" class="trvl-curve trvl-curve--landing-two trvl-curve--landing-two--color trvl-curve--landing-two--color--brown bg-light">
+        &nbsp;
+    </div>
+
+    <!-- section--laptop -->
+    <section class="landing bg-brown px-4 pt-4 pb-5 pt-lg-6 pb-lg-7">
+        <picture>
+            <source type="image/webp" srcset="{{ asset('images/landing/laptop/laptop.webp') }}">
+            <source type="image/png" srcset="{{ asset('images/landing/laptop/laptop.png') }}">
+            <img
+                class="img-fluid mx-auto d-block"
+                loading="lazy"
+                src="{{ asset('images/landing/laptop/laptop.png') }}"
+                width="1042" height="765"
+                alt="Εικαστική σύνθεση στην οποία απεικονίζονται μερικοί από τους ήρωες του παιχνιδιού μπροστά από την οθόνη ενός φορητού υπολογιστή. Στην οθόνη του εμφανίζεται μια από τις πίστες του παιχνιδιού «Ταξιδιώτες»."
+            >
+          </picture>
     </section>
 
 
