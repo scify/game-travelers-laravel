@@ -318,4 +318,73 @@
           </picture>
     </section>
 
+    <!-- floating-dash -->
+    <div class="floating-dash-container position-relative bg-light mb-2">
+        <div class="floating-dash position-relative" aria-role="presentation">
+            &nbsp;
+        </div>
+
+        <!-- section--partners -->
+        <section class="landing bg-light px-4 pt-4 pb-4 pt-lg-6">
+            <div class="landing-partners container-lg px-0 px-xl-5 px-xxl-6">
+                <div class="px-2 px-lg-6 px-xl-6 pb-5 text-center">
+                    Το παιχνίδι αναπτύχθηκε σε στενή συνεργασία με ειδικούς παιδαγωγούς
+                    από φορείς εγνωσμένου κύρους: η ΕΛΕΠΑΠ, το <span class="text-nowrap">ΚΑΣΠ Χατζηπατέρειο</span>, το <span class="text-nowrap">Ειδικό Σχολείο</span> <span class="text-nowrap">Αγριάς Μαγνησίας</span>
+                    και το Κέντρο Κοινωνικής Πρόνοιας <span class="text-nowrap">Περιφέρειας Αττικής</span>.
+                </div>
+                <div class="landing-partners--logos container py-5">
+                    <div class="row row-cols-1 row-cols-sm-3 gy-6 justify-content-around text-center">
+                        <div>
+                            <a href="https://elepap.gr" target="_blank">
+                                <img class="img-fluid"
+                                    loading="lazy"
+                                    src="{{ asset('images/landing/partners/elepap.png') }}"
+                                    width="203" height="90"
+                                    alt="ΕΛΕΠΑΠ"
+                                >
+                            </a>
+                        </div>
+                        <div>
+                            <a href="https://kasp.gr" target="_blank">
+                                <img class="img-fluid"
+                                    loading="lazy"
+                                    src="{{ asset('images/landing/partners/kasp.png') }}"
+                                    width="78" height="90"
+                                    alt="«Χατζηπατέρειο» Κέντρο Αποκατάστασης & Στήριξης Παιδιού (Κ.Α.Σ.Π.)"
+                                >
+                            </a>
+                        </div>
+                        <div >
+                            <a href="https://www.kkppa.gr" target="_blank">
+                                <img class="img-fluid"
+                                    loading="lazy"
+                                    src="{{ asset('images/landing/partners/kkppa.png') }}"
+                                    width="298" height="90"
+                                    alt="Κέντρο Κοινωνικής Πρόνοιας Περιφέρειας Αττικής (Κ.Κ.Π.Π.Α.)"
+                                >
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="partner px-2 px-lg-6 px-xl-6 pt-5 pb-5 text-center">
+                    <strong>
+                    Με την χρηματοδότηση
+                    <span class="text-nowrap">του Ομίλου Ηρακλή</span>
+                    </strong>
+                    <div class="pt-2 px-4 px-sm-0">
+                        <a href="https://www.lafarge.gr" target="_blank">
+                            <img class="img-fluid"
+                                loading="lazy"
+                                src="{{ asset('images/landing/partners/iraklis.png') }}"
+                                width="488" height="142"
+                                alt="Όμιλος Ηρακλής"
+                            >
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
 </x-layout>

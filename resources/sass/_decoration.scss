@@ -13,11 +13,12 @@
     background-position-x: right;
     background-position-y: bottom;
     background-size: 1366px 768px;
-    @media (max-width: 1199.98px) {
+    @include media-breakpoint-down(xl) {
         min-height: 100vh;
     }
 }
 
+// Game Header dash-line & Floating Dash
 .background-dash-up {
     // header
     background-image: url("/images/backgrounds/bg-head-dash-2.png");
@@ -25,9 +26,26 @@
     background-position: 30% 60%;
     background-size: 1370px 142px;
     min-height: 195px;
-    @media (max-width: 1399.98px) {
+    @include media-breakpoint-down(xxl) {
         background-position-y: bottom;
         background-position-x: center;
+    }
+}
+
+// Floating-dash
+.floating-dash {
+    position: relative;
+    display: block;
+    top: -10rem;
+    margin-bottom: -10rem;
+    height: 203px;
+    background-image: url("/images/landing/curves/curve-footer-dash.svg");
+    background-position: 50% 50%;
+    background-size: 1440px 203px;
+    background-repeat: no-repeat;
+    @include media-breakpoint-down(lg) {
+        top: -8rem;
+        margin-bottom: -8rem;
     }
 }
 
@@ -52,7 +70,7 @@
         background-image: url("/images/backgrounds/bg-g1-side-group-1@2x.png");
     }
     &.responsive-hide {
-        @media (max-width: 575.98px) {
+        @include media-breakpoint-down(sm) {
             background-image: url("/images/backgrounds/bg-g1-side-back-2.png");
             @media only screen and (-webkit-min-device-pixel-ratio: 2),
                 only screen and (min--moz-device-pixel-ratio: 2),

@@ -326,6 +326,25 @@ section.landing {
             // 0 0.33em 0.66em rgba(var(--trvl-c-dark-rgb), 0.12);
         }
     }
+    .landing-partners {
+        font-size: 1.275rem;
+        font-weight: 600;
+        hr {
+            opacity: 0.9;
+        }
+        strong {
+            font-weight: 700;
+            font-size: 1.55rem;
+        }
+        @include media-breakpoint-down(sm) {
+            font-size: calc(0.7rem + 1.5vw);
+        }
+        &--logos {
+            border-top: 1px solid;
+            border-color: rgba(var(--trvl-color-rgb), 0.9);
+            border-bottom: 1px solid;
+        }
+    }
 }
 // Landing header
 .trvl-landing-header {
