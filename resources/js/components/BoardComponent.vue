@@ -1,98 +1,148 @@
 <template>
-	<div
-		class="w-100 h-100 p-0 m-0"
-		v-bind:style="{
-			backgroundImage: 'url(\'' + this.getSizePath() + 'board.png\')',
-		}"
-	>
-		<Transition name="fade">
-			<img
-				v-if="this.computeCardSrc.length > 0"
-				v-bind:src="this.computeCardSrc"
-				style="
-					z-index: 10;
-					position: absolute;
-					display: block;
-					left: calc(50% - 344px / 2);
-					top: calc(50% - 482px / 2);
-				"
-			/>
-		</Transition>
-		<div v-if="this.gameEnd === 0">
-			<img
-				v-if="this.blueIndex !== 0"
-				v-bind:src="this.getStartSrc()"
-				style="z-index: 4; position: absolute; display: block"
-			/>
-			<img
-				v-bind:src="this.getGoalSrc()"
-				style="z-index: 4; position: absolute; display: block"
-			/>
-			<img
-				v-if="getExtrasSrc().length > 0"
-				v-bind:src="this.getExtrasSrc()"
-				style="z-index: 4; position: absolute; display: block"
-			/>
-
-			<Transition name="fade_blue">
-				<img
-					v-if="this.blue_position_show"
-					v-bind:src="this.computeBlueSrc"
-					style="z-index: 2; position: absolute; display: block"
-				/>
-			</Transition>
-			<Transition name="fade">
-				<img
-					v-if="this.showPawn1"
-					v-bind:src="this.computePawn1Src"
-					style="z-index: 5; position: absolute; display: block"
-				/>
-			</Transition>
-			<div v-if="this.gameMode > 1">
+	<div class="w-100 h-100 p-0 m-0">
+		<Transition name="fade_init">
+			<div
+				v-if="this.gameEnd === 0"
+				class="w-100 h-100 p-0 m-0"
+				v-bind:style="{
+					backgroundImage: this.computeBackgroundSrc,
+				}"
+			>
 				<Transition name="fade">
 					<img
-						v-if="this.showPawn2"
-						v-bind:src="this.computePawn2Src"
+						v-if="this.computeCardSrc.length > 0"
+						v-bind:src="this.computeCardSrc"
+						style="
+							z-index: 10;
+							position: absolute;
+							display: block;
+							left: calc(50% - 344px / 2);
+							top: calc(50% - 482px / 2);
+						"
+					/>
+				</Transition>
+				<div v-if="this.gameEnd === 0">
+					<img
+						v-if="this.blueIndex !== 0"
+						v-bind:src="this.getStartSrc()"
+						style="z-index: 4; position: absolute; display: block"
+					/>
+					<img
+						v-bind:src="this.getGoalSrc()"
+						style="z-index: 4; position: absolute; display: block"
+					/>
+					<img
+						v-if="getExtrasSrc().length > 0"
+						v-bind:src="this.getExtrasSrc()"
+						style="z-index: 4; position: absolute; display: block"
+					/>
+
+					<Transition name="fade_blue">
+						<img
+							v-if="this.blue_position_show"
+							v-bind:src="this.computeBlueSrc"
+							style="
+								z-index: 2;
+								position: absolute;
+								display: block;
+							"
+						/>
+					</Transition>
+					<Transition name="fade">
+						<img
+							v-if="this.showPawn1"
+							v-bind:src="this.computePawn1Src"
+							style="
+								z-index: 5;
+								position: absolute;
+								display: block;
+							"
+						/>
+					</Transition>
+					<div v-if="this.gameMode > 1">
+						<Transition name="fade">
+							<img
+								v-if="this.showPawn2"
+								v-bind:src="this.computePawn2Src"
+								style="
+									z-index: 5;
+									position: absolute;
+									display: block;
+								"
+							/>
+						</Transition>
+					</div>
+					<img
+						v-bind:src="this.computeLeftSrc"
 						style="z-index: 5; position: absolute; display: block"
+					/>
+					<div v-if="this.gameMode > 1">
+						<img
+							v-bind:src="this.computeRightSrc"
+							style="
+								z-index: 5;
+								position: absolute;
+								display: block;
+							"
+						/>
+					</div>
+					<Transition name="fade">
+						<img
+							:class="{
+								shake: this.rollingAnimation,
+								moveUpDown: this.rollAnimation,
+							}"
+							v-if="this.center_src.length > 0"
+							v-bind:src="this.center_src"
+							style="
+								z-index: 5;
+								position: absolute;
+								display: block;
+							"
+						/>
+					</Transition>
+				</div>
+			</div>
+		</Transition>
+		<Transition name="fade_init">
+			<div
+				v-if="this.showWin"
+				class="w-100 h-100 p-0 m-0"
+				v-bind:style="{
+					backgroundImage: this.computeBackgroundSrc,
+				}"
+			>
+				<Transition name="fade_init">
+					<img
+						v-if="this.winFrame > 0"
+						v-bind:src="this.winFrame1"
+						style="z-index: 2; position: absolute; display: block"
+					/>
+				</Transition>
+				<Transition name="slide-fade">
+					<img
+						v-if="this.winFrame > 1"
+						v-bind:src="this.winFrame2"
+						style="z-index: 2; position: absolute; display: block"
+					/>
+				</Transition>
+				<Transition name="bounce">
+					<img
+						v-if="this.winFrame > 2"
+						v-bind:src="this.winFrame3"
+						style="z-index: 2; position: absolute; display: block"
 					/>
 				</Transition>
 			</div>
-			<img
-				v-bind:src="this.computeLeftSrc"
-				style="z-index: 5; position: absolute; display: block"
-			/>
-			<div v-if="this.gameMode > 1">
-				<img
-					v-bind:src="this.computeRightSrc"
-					style="z-index: 5; position: absolute; display: block"
-				/>
-			</div>
-			<Transition name="fade">
-				<img
-					:class="{
-						shake: this.rollingAnimation,
-						moveUpDown: this.rollAnimation,
-					}"
-					v-if="this.center_src.length > 0"
-					v-bind:src="this.center_src"
-					style="z-index: 5; position: absolute; display: block"
-				/>
-			</Transition>
-		</div>
-
-		<Transition name="fade">
-			<img
-				v-if="this.gameEnd === 1"
-				v-bind:src="this.getWinSrc()"
-				style="z-index: 10; position: absolute; display: block"
-			/>
 		</Transition>
-		<Transition name="fade">
-			<img
-				v-if="this.gameEnd === -1"
-				v-bind:src="this.getLoseSrc()"
-				style="z-index: 10; position: absolute; display: block"
-			/>
+		<Transition name="fade_loose">
+			<div
+				v-if="this.showLoose"
+				class="w-100 h-100 p-0 m-0"
+				v-bind:style="{
+					backgroundImage: this.computeBackgroundSrc,
+				}"
+			></div>
 		</Transition>
 	</div>
 </template>
@@ -163,19 +213,29 @@ export default {
 			rollingAnimation: false,
 			showPawn1: false,
 			showPawn2: false,
-			gameEnd: 0,
+			gameEnd: -100,
 			mistakes: 0,
 			cardName: "",
 			latestCardValue: 0,
 			stepSoundSwitch: true,
 			tutorialYouKnowHowToPlayFlag: 0,
 			music: null,
+			showWin: false,
+			showLoose: false,
+			winFrame: 0,
+			winFrame1: "",
+			winFrame2: "",
+			winFrame3: "",
 		};
 	},
 	methods: {
 		init() {
 			// need to roll
+			this.winFrame1 = this.getBoardPath() + "/win/1.png";
+			this.winFrame2 = this.getBoardPath() + "/win/2.png";
+			this.winFrame3 = this.getBoardPath() + "/win/3.png";
 			window.setTimeout(() => {
+				this.gameEnd = 0;
 				if (this.board === 1)
 					this.music = window.music("music.great_ideas");
 				else if (this.board === 2)
@@ -198,7 +258,6 @@ export default {
 					this.sendToBackend();
 				}
 			}, 500);
-			this.startMusic();
 		},
 		sendToBackend() {
 			let data = {
@@ -231,10 +290,26 @@ export default {
 					} else {
 						self.gameEnd = response.data.gameEnded;
 						if (self.gameEnd !== 0) {
-							if (self.gameEnd === 1)
+							self.music.pause();
+							if (self.gameEnd === 1) {
+								window.sound("sounds.game.win");
 								window.sound("sounds.game.win_[1-8]");
-							else window.sound("sounds.game.defeat_[1-3]");
+								window.setTimeout(() => {
+									self.winFrame = 1;
+								}, 1500);
+								window.setTimeout(() => {
+									self.winFrame = 2;
+								}, 2000);
+								window.setTimeout(() => {
+									self.winFrame = 3;
+								}, 2500);
+							} else {
+								window.sound("sounds.game.defeat");
+								window.sound("sounds.game.defeat_[1-3]");
+							}
 							window.setTimeout(() => {
+								if (self.gameEnd === 1) self.showWin = true;
+								else self.showLoose = true;
 								self.ignoreInput = false;
 							}, 1000);
 						} else {
@@ -321,7 +396,8 @@ export default {
 			let self = this;
 			let key = e.key;
 			if (key === "e" || key === "E" || key === "ε" || key === "Ε")
-				window.location.href = this.continueUrl;
+				if (this.gameEnd === 0) window.location.href = this.continueUrl;
+				else window.location.href = this.boardUrl;
 			else if (key === "-" || key === "_") this.decreaseMusic();
 			else if (key === "=" || key === "+") this.increaseMusic();
 			if (!this.ignoreInput) {
@@ -473,7 +549,7 @@ export default {
 			return this.getBoardPath() + "size_" + this.boardSize + "/";
 		},
 		getWinSrc() {
-			return this.getBoardPath() + "win.png";
+			return this.getBoardPath() + "win/background.png";
 		},
 		getLoseSrc() {
 			return this.getBoardPath() + "lose.png";
@@ -851,6 +927,16 @@ export default {
 			if (this.cardName === "") return "";
 			else return this.getBoardPath() + "cards/" + this.cardName + ".png";
 		},
+		computeBackgroundSrc() {
+			switch (this.gameEnd) {
+				case 1:
+					return "url('" + this.getWinSrc() + "')";
+				case -1:
+					return "url('" + this.getLoseSrc() + "')";
+				default:
+					return "url('" + this.getSizePath() + "board.png')";
+			}
+		},
 	},
 };
 </script>
@@ -903,7 +989,8 @@ export default {
 	transition: opacity 0.5s;
 }
 
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-enter,
+.fade-leave-to {
 	opacity: 0;
 }
 
@@ -912,7 +999,58 @@ export default {
 	transition: opacity 0.5s;
 }
 
-.fade_blue-enter, .fade_blue-leave-to /* .fade_blue-leave-active below version 2.1.8 */ {
+.fade_blue-enter,
+.fade_blue-leave-to {
+	opacity: 0;
+}
+
+.fade_loose-enter-active,
+.fade_loose-leave-active {
+	transition: opacity 3s;
+}
+
+.fade_loose-enter,
+.fade_loose-leave-to {
+	opacity: 0;
+}
+
+.fade_init-enter-active,
+.fade_init-leave-active {
+	transition: opacity 1s;
+}
+
+.fade_init-enter,
+.fade_init-leave-to {
+	opacity: 0;
+}
+
+.bounce-enter-active {
+	animation: bounce-in 1s;
+}
+.bounce-leave-active {
+	animation: bounce-in 1s reverse;
+}
+@keyframes bounce-in {
+	0% {
+		transform: scale(0);
+	}
+	50% {
+		transform: scale(1.5);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+.slide-fade-enter-active {
+	transition: all 1s ease;
+}
+.slide-fade-leave-active {
+	transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+	transform: translateY(200px);
 	opacity: 0;
 }
 </style>
