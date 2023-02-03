@@ -34,15 +34,16 @@ class EnsureIdsAreValid {
         if ($player_id == 0)
             return $next($request);
 
-        $problem_found = !$this->playerRepository->playerExists($player_id, $user_id);
-
-
-        if (!$problem_found && $game_id != 0)
-            $problem_found = !$this->gameRepository->gameExists($game_id, $user_id);
-
-        if ($problem_found)
+        if (!$this->playerRepository->playerExists($player_id, $user_id))
             abort(403, __('messages.unauthorized_action'));
-        else
-            return $next($request);
+        else if ($game_id != 0) {
+            if (!$this->gameRepository->gameExists($game_id, $user_id)) {
+                if ($this->gameRepository->gameExistsAsInactive($game_id, $user_id))
+                    return \Redirect::route('select.board', [$player_id, 'board', 0]);
+                else
+                    abort(403, __('messages.unauthorized_action'));
+            }
+        }
+        return $next($request);
     }
 }
