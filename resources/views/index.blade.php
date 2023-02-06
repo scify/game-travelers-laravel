@@ -34,8 +34,8 @@
                     alt=""
                 >
             </div>
-            <div class="landing-title pt-4">
-                <h1>
+            <div class="landing-call pt-4 text-center">
+                <h1 class="action">
                     <span>Ταξίδι στο παιχνίδι,</span>
                     <span>για όλα τα παιδιά!</span>
                 </h1>
@@ -207,8 +207,8 @@
     </section>
 
     <!--section--four--blocks -->
-    <section class="landing bg-light px-4 pt-6 pb-4 pt-xl-7 pb-xl-5">
-        <div class="landing-blocks landing-blocks--four container-xxl pt-2 px-4">
+    <section class="landing bg-light px-4 pt-6 pb-4 pt-xl-7 pb-xl-6">
+        <div class="landing-blocks landing-blocks--four container-xxl py-2 px-4">
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-around gy-6">
                 <div class="col">
                     <div class="landing-block landing-block--abstract-round m-auto">
@@ -384,6 +384,57 @@
                 </div>
             </div>
         </section>
+
+        <!-- section--simple-call -->
+        <section class="landing bg-light px-4 py-6">
+            <div class="landing-call container-lg text-center">
+                <div class="text-center">
+                    <h1 class="action text-center">
+                        Ενδιαφέρεσαι για το παιχνίδι;
+                    </h1>
+                </div>
+                <div class="landing-call pt-4 text-center">
+                    <a href="{{ route('login') }}" class="btn btn-primary btn-lg text-nowrap responsive-expand">
+                        παίξε
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- section--links -->
+        <section class="landing bg-light px-4 py-6">
+            <div class="landing-links container-lg text-center">
+                <div class="text-center">
+                    <h1>
+                        Άλλες βοηθητικές τεχνολογίες για ΑμεΑ
+                    </h1>
+                </div>
+                <div class="row pt-5 gy-5 landing-links">
+                    <div class="col-lg-4 link">
+                        <a href="https://talkandplay.scify.org/" target="_blank">Talk and Play</a>
+                        <div class="pt-2">
+                            Σύστημα επικοινωνίας και ψυχαγωγίας
+                            για παιδιά με εγκεφαλική παράλυση
+                        </div>
+                    </div>
+                    <div class="col-lg-4 link">
+                        <a href="https://memoristudio.scify.org/" target="_blank">Memor-i Studio</a>
+                        <div class="pt-2">
+                            Ηλεκτρονικά παιχνίδια για τυφλά παιδιά.
+                            Πλατφόρμα ανάπτυξης νέων παιχνιδιών
+                        </div>
+                    </div>
+                    <div class="col-lg-4 link">
+                        <a href="#{{-- @todo --}}" target="_blank">Games for the Blind</a>
+                        <div class="pt-2">
+                            Και άλλα ηλεκτρονικά παιχνίδια
+                            για τυφλά παιδιά
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 
     </div>
 

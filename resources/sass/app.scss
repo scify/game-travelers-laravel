@@ -135,6 +135,20 @@ section.landing {
             margin-bottom: -350px;
         }
     }
+    // Generic
+    h1.action {
+        text-align: center;
+        line-height: 1.4;
+        font-size: 3rem; // ~50px
+        font-weight: 700;
+        span {
+            white-space: nowrap;
+        }
+        @media (max-width: 991.98px) {
+            font-size: calc(1.4rem + 1.5vw);
+        }
+    }
+    // Sub-sections
     .landing-trees {
         img.img-xl {
             @media (min-width: 992px) {
@@ -155,20 +169,6 @@ section.landing {
         img.img-sm {
             @media (min-width: 768px) {
                 display: none !important;
-            }
-        }
-    }
-    .landing-title {
-        text-align: center;
-        h1 {
-            span {
-                white-space: nowrap;
-            }
-            line-height: 1.4;
-            font-size: 3rem;
-            font-weight: 700;
-            @media (max-width: 991.98px) {
-                font-size: calc(1.4rem + 1.5vw);
             }
         }
     }
@@ -343,6 +343,39 @@ section.landing {
             border-top: 1px solid;
             border-color: rgba(var(--trvl-color-rgb), 0.9);
             border-bottom: 1px solid;
+        }
+    }
+    .landing-links {
+        h1 {
+            font-size: 2rem; // ~30px
+            font-weight: 700;
+            @include media-breakpoint-down(sm) {
+                font-size: calc(1.2rem + 1.5vw);
+            }
+        }
+        .link {
+            position: relative;
+            a {
+                display: inline-block;
+                font-size: 1.725rem;
+                font-weight: 600;
+            }
+            a::after {
+                content: "";
+                display: inline-block;
+                position: absolute;
+                width: calc(1.725rem / 2);
+                height: calc(1.725rem / 2);
+                left: 92%;
+                border-top: 0.2rem solid;
+                border-right: 0.2rem solid;
+                border-color: inherit;
+            }
+            div {
+                font-size: 1.125rem;
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
         }
     }
 }
