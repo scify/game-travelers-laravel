@@ -113,6 +113,7 @@
 		var filename = folders.pop() + ".mp3";
 		var folderPath = "/audio/" + folders.join("/");
 		var audio = new Audio(folderPath + "/" + filename);
+		// console.log(folders.pop()); // e.g. game_start
 		window.travelersSounds.push({ audio: audio, file: filename });
 
 		audio.onended = function () {
