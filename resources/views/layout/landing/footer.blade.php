@@ -12,7 +12,7 @@
             <div class="trvl-landing-footer--links flex-grow-1">
                 <ul>
                     <li><a href="#{{-- @todo --}}">Επικοινώνησε μαζί μας</a></li>
-                    <li><a href="#{{-- @todo --}}">Cookies Policy</a></li>
+                    <li class="d-none"><a href="#{{-- @todo --}}">Cookies Policy</a></li>
                     <li>
                         <a href="{{ route('privacy-policy') }}">
                             {{ __("messages.privacy_policy")}}
