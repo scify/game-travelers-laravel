@@ -106,9 +106,9 @@ class UserController extends Controller
         if ($player_id == 0)
             abort(403, __('messages.unauthorized_action'));
         $control_mode = 1;
-        $control_auto_select = "Space";
-        $control_manual_select = "Space";
-        $control_manual_nav = "Enter";
+        $control_auto_select = "Enter";
+        $control_manual_select = "Enter";
+        $control_manual_nav = "Space";
         $help_after_tries = 3;
         $scanning_speed = 2;
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['auto', 'select_key', 'navigate_key', 'help_after_x_mistakes', 'scanning_speed']);

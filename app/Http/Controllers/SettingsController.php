@@ -119,9 +119,9 @@ class SettingsController extends Controller
         $avatar_id = $players[0]->avatar_id;
         $avatarName = $this->playerRepository->getAvatars()[$avatar_id]['asset'];
         $control_mode = $players[0]->auto;
-        $control_auto_select = "Space";
-        $control_manual_select = "Space";
-        $control_manual_nav = "Enter";
+        $control_auto_select = "Enter";
+        $control_manual_select = "Enter";
+        $control_manual_nav = "Space";
         $control_select = $players[0]->select_key;
         $control_nav = $players[0]->navigate_key;
         if ($control_mode == 1) {
