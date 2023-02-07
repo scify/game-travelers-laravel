@@ -411,21 +411,21 @@
                 </div>
                 <div class="row pt-5 gy-5 landing-links">
                     <div class="col-lg-4 link">
-                        <a href="https://talkandplay.scify.org/" target="_blank">Talk and Play</a>
+                        <a href="https://talkandplay.scify.org" target="_blank">Talk and Play</a>
                         <div class="pt-2">
                             Σύστημα επικοινωνίας και ψυχαγωγίας
                             για παιδιά με εγκεφαλική παράλυση
                         </div>
                     </div>
                     <div class="col-lg-4 link">
-                        <a href="https://memoristudio.scify.org/" target="_blank">Memor-i Studio</a>
+                        <a href="https://memoristudio.scify.org" target="_blank">Memor-i Studio</a>
                         <div class="pt-2">
                             Ηλεκτρονικά παιχνίδια για τυφλά παιδιά.
                             Πλατφόρμα ανάπτυξης νέων παιχνιδιών
                         </div>
                     </div>
                     <div class="col-lg-4 link">
-                        <a href="#{{-- @todo --}}" target="_blank">Games for the Blind</a>
+                        <a href="http://gamesfortheblind.org" target="_blank">Games for the Blind</a>
                         <div class="pt-2">
                             Και άλλα ηλεκτρονικά παιχνίδια
                             για τυφλά παιδιά
