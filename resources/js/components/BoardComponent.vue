@@ -252,7 +252,12 @@ export default {
 					if (this.firstPlayerTurn) {
 						if (this.pos1 === 0) window.sound("sounds.game.start");
 						else window.sound(this.getOurTurnSound());
-					} else window.sound(this.getOtherTurnSound());
+					} else {
+						let self = this;
+						window.sound(this.getOtherTurnSound(), function () {
+							self.sendToBackend();
+						});
+					}
 				} else {
 					this.ignoreInput = true;
 					this.sendToBackend();
@@ -500,33 +505,7 @@ export default {
 							}
 						}
 					} else if (this.gamePhase === 3) {
-						this.ignoreInput = true;
-						this.blue_blinking_allowed = false;
-						this.cardName = "";
-						let sound = "sounds.cards.";
-						if (!this.firstPlayerTurn) sound += "opponent_";
-						if (this.latestCardValue > 0)
-							window.sound(
-								sound +
-									"F" +
-									this.latestCardValue +
-									this.getPawnSex(),
-								function () {
-									self.latestCardValue = 0;
-									self.applyCorrectMovement();
-								}
-							);
-						else
-							window.sound(
-								sound +
-									"B" +
-									Math.abs(this.latestCardValue) +
-									this.getPawnSex(),
-								function () {
-									self.latestCardValue = 0;
-									self.applyCorrectMovement();
-								}
-							);
+						this.resolvePhase3();
 					}
 				}
 			} else {
@@ -806,6 +785,33 @@ export default {
 				}, 1000);
 			}
 		},
+		resolvePhase3() {
+			let self = this;
+			this.ignoreInput = true;
+			this.blue_blinking_allowed = false;
+			this.cardName = "";
+			let sound = "sounds.cards.";
+			if (!this.firstPlayerTurn) sound += "opponent_";
+			if (this.latestCardValue > 0)
+				window.sound(
+					sound + "F" + this.latestCardValue + this.getPawnSex(),
+					function () {
+						self.latestCardValue = 0;
+						self.applyCorrectMovement();
+					}
+				);
+			else
+				window.sound(
+					sound +
+						"B" +
+						Math.abs(this.latestCardValue) +
+						this.getPawnSex(),
+					function () {
+						self.latestCardValue = 0;
+						self.applyCorrectMovement();
+					}
+				);
+		},
 		applyCardMovement() {
 			let pos = this.pos1;
 			if (!this.firstPlayerTurn) pos = this.pos2;
@@ -813,7 +819,11 @@ export default {
 			this.gamePhase = 3;
 			this.newPosition = pos;
 			this.setCenter(false, this.latestCardValue);
-			this.ignoreInput = false;
+			if (this.firstPlayerTurn) {
+				this.ignoreInput = false;
+			} else {
+				this.resolvePhase3();
+			}
 		},
 		getPawnSex() {
 			if (this.firstPlayerTurn) {
