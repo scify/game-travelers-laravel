@@ -297,7 +297,8 @@ export default {
 						if (self.gameEnd !== 0) {
 							self.music.pause();
 							if (self.gameEnd === 1) {
-								window.sound("sounds.game.win");
+								let sound = window.sound("sounds.game.win");
+								sound.volume = 0.2;
 								window.sound("sounds.game.win_[1-8]");
 								window.setTimeout(() => {
 									self.winFrame = 1;
@@ -309,7 +310,8 @@ export default {
 									self.winFrame = 3;
 								}, 2500);
 							} else {
-								window.sound("sounds.game.defeat");
+								let sound = window.sound("sounds.game.defeat");
+								sound.volume = 0.2;
 								window.sound("sounds.game.defeat_[1-3]");
 							}
 							window.setTimeout(() => {
@@ -473,8 +475,9 @@ export default {
 								this.blue_blinking_allowed = false;
 								this.ignoreInput = true;
 								window.sound(
-									this.getRewardSound(),
+									"sounds.game.clapping",
 									function () {
+										window.sound(self.getRewardSound());
 										self.applyCorrectMovement();
 									},
 									true
