@@ -10,7 +10,10 @@
          For more details please read the inline comments.
     --}}
     @section('scripts')
-        <x-settings :music="'music.feelin_good'" />
+        <x-settings />
+            {{-- Music has been removed as it won't be possible to respect
+            individual player settings otherwise. It's not good UX to have music
+            volume louder than player's choice or to alter it without reason. --}}
     @endsection
 
     {{-- In essence, this form's purpose is to simply pass a "player" to the
@@ -21,7 +24,7 @@
         handle on the back-end. Keep on reading the inline comments though.
         --}}
     <form
-        method="post" {{-- Get seems preferrable - see debate on the following select pages. --}}
+        method="post"
         action="{{ route('select.player', ['player_id' => 0, 'from' => 'login', 'game_id' => 0]) }}"
         class="
         form
