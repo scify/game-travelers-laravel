@@ -35,7 +35,6 @@
 			"k",
 			"l",
 			"m",
-			"n",
 			"o",
 			"p",
 			"q",
@@ -60,7 +59,6 @@
 			"K",
 			"L",
 			"M",
-			"N",
 			"O",
 			"P",
 			"Q",
@@ -84,7 +82,6 @@
 			"Κ",
 			"Λ",
 			"Μ",
-			"Ν",
 			"Ξ",
 			"Ο",
 			"Π",
@@ -107,7 +104,6 @@
 			"κ",
 			"λ",
 			"μ",
-			"ν",
 			"ξ",
 			"ο",
 			"π",
@@ -121,7 +117,7 @@
 			"ω",
 		],
 		// Keys which are not allowed but trigger help functions.
-		escapeList: ["Escape", "Tab", "e", "E", "ε", "Ε"],
+		escapeList: ["Escape", "Tab", "e", "E", "ε", "Ε", "n", "N", "ν", "Ν"],
 		// Keys not allowed (legacy code).
 		forbiddenList: [
 			"Escape",
