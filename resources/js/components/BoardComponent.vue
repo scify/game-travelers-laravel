@@ -36,7 +36,33 @@
 						v-bind:src="this.getExtrasSrc()"
 						style="z-index: 4; position: absolute; display: block"
 					/>
-
+					<Transition name="fade">
+						<img
+							@mouseover="infoState = 1"
+							@mouseleave="infoState = 0"
+							v-on:click="showPopUp = true"
+							v-bind:src="this.computeInfoSrc"
+							style="
+								z-index: 50;
+								position: absolute;
+								display: block;
+								left: calc(50% - 500px);
+								top: calc(50% - 340px);
+							"
+						/>
+					</Transition>
+					<Transition name="fade">
+						<img
+							v-if="this.showPopUp"
+							v-on:click="showPopUp = false"
+							src="/images/boards/info/pop_up.png"
+							style="
+								z-index: 100;
+								position: absolute;
+								display: block;
+							"
+						/>
+					</Transition>
 					<Transition name="fade_blue">
 						<img
 							v-if="this.blue_position_show"
@@ -226,10 +252,14 @@ export default {
 			winFrame1: "",
 			winFrame2: "",
 			winFrame3: "",
+			infoState: 0,
+			showPopUp: false,
+			showNumbers: true,
 		};
 	},
 	methods: {
 		init() {
+			if (this.diceType === 3) this.showNumbers = false;
 			// need to roll
 			this.winFrame1 = this.getBoardPath() + "/win/1.png";
 			this.winFrame2 = this.getBoardPath() + "/win/2.png";
@@ -407,7 +437,11 @@ export default {
 				else window.location.href = this.boardUrl;
 			else if (key === "-" || key === "_") this.decreaseMusic();
 			else if (key === "=" || key === "+") this.increaseMusic();
-			if (!this.ignoreInput) {
+			else if (key === "n" || key === "N" || key === "ν" || key === "Ν")
+				if (self.showNumbers) self.showNumbers = false;
+				else self.showNumbers = true;
+			else if (self.showPopUp == true) self.showPopUp = false;
+			else if (!this.ignoreInput) {
 				console.log("Key pressed and NOT ignored:\t(" + e.key + ")");
 				if (key === " ") key = "Space";
 				let isSelect = false;
@@ -884,7 +918,7 @@ export default {
 			return "sounds.game.reward_[1-11]";
 		},
 		getOurTurnSound() {
-			if (this.gameMode === 1) return "sounds.game.our_turn_solo_[1-3]";
+			if (this.gameMode === 1) return "sounds.game.our_turn_solo_[1-5]";
 			else return "sounds.game.our_turn_[1-6]";
 		},
 		getOtherTurnSound() {
@@ -928,12 +962,21 @@ export default {
 		},
 		computeBlueSrc() {
 			if (this.blueIndex === -1) return "";
-			else
+			else if (this.blueIndex === 0)
+				return this.getSizePath() + "blue_positions/0.png";
+			else if (this.showNumbers)
 				return (
 					this.getSizePath() +
 					"blue_positions/" +
 					this.blueIndex +
 					".png"
+				);
+			else
+				return (
+					this.getSizePath() +
+					"blue_positions/" +
+					this.blueIndex +
+					"_colour.png"
 				);
 		},
 		computeCardSrc() {
@@ -947,7 +990,23 @@ export default {
 				case -1:
 					return "url('" + this.getLoseSrc() + "')";
 				default:
-					return "url('" + this.getSizePath() + "board.png')";
+					if (this.showNumbers)
+						return "url('" + this.getSizePath() + "board.png')";
+					else
+						return (
+							"url('" + this.getSizePath() + "board_colour.png')"
+						);
+			}
+		},
+		computeInfoSrc() {
+			let path = "/images/boards/info/";
+			switch (this.infoState) {
+				case 0:
+					return path + "default_state.png";
+				case 1:
+					return path + "hover_state.png";
+				default:
+					return path + "default_state.png";
 			}
 		},
 	},
@@ -1040,9 +1099,11 @@ export default {
 .bounce-enter-active {
 	animation: bounce-in 1s;
 }
+
 .bounce-leave-active {
 	animation: bounce-in 1s reverse;
 }
+
 @keyframes bounce-in {
 	0% {
 		transform: scale(0);
@@ -1058,9 +1119,11 @@ export default {
 .slide-fade-enter-active {
 	transition: all 1s ease;
 }
+
 .slide-fade-leave-active {
 	transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
 }
+
 .slide-fade-enter,
 .slide-fade-leave-to {
 	transform: translateY(200px);
