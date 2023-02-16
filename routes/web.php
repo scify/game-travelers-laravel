@@ -47,8 +47,9 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-// Landing page
+// Landing page: @todo Approve & promote landing page to index
 Route::view('/landing-page', 'index')->name('landing-page');
+
 
 // Privacy Policy
 Route::view('/privacy-policy', 'privacy-policy.page')->name('privacy-policy');
@@ -90,6 +91,13 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/settings/profile/{player_id}/{from}/{game_id}', [SettingsController::class, 'profileSave'])
         ->name('settings.profile')->middleware(EnsureIdsAreValid::class);
+
+    // Audio settings: @todo Integrate with back-end
+    // Route::view('/settings/audio', 'settingsAudio')->name('settings.audio');
+    Route::get('/settings/audio/{player_id}/{from}/{game_id}', [SettingsController::class, 'audioShow'])
+    ->name('settings.audio')->middleware(EnsureIdsAreValid::class);
+    Route::post('/settings/audio/{player_id}/{from}/{game_id}', [SettingsController::class, 'audioSave'])
+    ->name('settings.audio')->middleware(EnsureIdsAreValid::class);
 
     Route::get('/settings/controls/{player_id}/{from}/{game_id}', [SettingsController::class, 'controlsShow'])
         ->name('settings.controls')->middleware(EnsureIdsAreValid::class);

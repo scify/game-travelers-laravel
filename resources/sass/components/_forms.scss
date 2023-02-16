@@ -66,7 +66,43 @@ fieldset input[type="radio"]:not(:checked) + label {
     font-weight: 300;
 }
 
-// Inputs: Ranges
+/* Upload inputs */
+// @todo
+
+/* Inputs: Ranges */
+// Visual Volume Decorative Slider
+.volume-slider {
+    --sliderHeight: 3em;
+    .form-label {
+        font-weight: 700;
+        font-size: 1.15em;
+    }
+}
+.volume-slider--progress {
+    --sliderProgress: 0%;
+    --sliderOpacity: 0;
+    --sliderColor: rgba(var(--trvl-color-rgb), var(--sliderOpacity));
+    position: relative;
+    top: -1.45em;
+    height: 0.5em;
+    z-index: -100;
+    border-radius: 0.5em;
+    transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    background: var(--sliderColor);
+    width: var(--sliderProgress);
+}
+.volume-slider--progress:before {
+    content: "";
+    display: block;
+    position: relative;
+    width: 100%;
+    z-index: -110;
+    bottom: calc(var(--sliderHeight) - 0.1em);
+    height: var(--sliderHeight);
+    clip-path: polygon(100% 0, 0 100%, 100% 100%);
+    background: rgba(var(--trvl-color-rgb), 0.1);
+}
+// Thumb & Sliders (Generic)
 .form-range::-moz-range-thumb {
     background-color: var(--trvl-color);
 }

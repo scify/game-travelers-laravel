@@ -19,9 +19,12 @@ return [
     'congratulations' => 'Congratulations',
     'continue' => 'Continue', // i.e. "Continue" to the next step
     'email' => 'Email',
+    'every' => 'every', // every
     'login' => 'Login',
     'password' => 'Password',
     'register' => 'Register',
+    'second' => 'second', // singular second (time)
+    'seconds' => 'seconds', // plural seconds (time)
     /* Forms Generic */
     'error_form' => 'Please, fill the fields of this form based on the instructions bellow:',
     /* splash.blade.php */

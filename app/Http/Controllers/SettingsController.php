@@ -54,6 +54,8 @@ class SettingsController extends Controller
                 }
             case "profile":
                 return \Redirect::route('settings.profile', [$player_id, $back_route, $game_id]);
+            case "audio":
+                return \Redirect::route('settings.audio', [$player_id, $back_route, $game_id]);
             case "controls":
                 return \Redirect::route('settings.controls', [$player_id, $back_route, $game_id]);
             case "difficulty":
@@ -106,6 +108,50 @@ class SettingsController extends Controller
             $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
             return \Redirect::route('settings', [$player_id, $back_route, $game_id]);
         }
+    }
+
+    /**
+     * Show player's audio settings "dummy" function.
+     *
+     * I am pretty sure that this function returns some values which might be
+     * helpful when the back-end is trully implemented.
+     */
+    public function audioShow(Request $request, int $player_id, string $back_route, int $game_id)
+    {
+        if ($player_id == 0) {
+            abort(403, __('messages.unauthorized_action'));
+        }
+        $player = $this->playerRepository->find($player_id, ['name', 'avatar_id']);
+        $name = $player->name;
+        $avatar_id = $player->avatar_id;
+        $avatarName = $this->playerRepository->getAvatars()[$avatar_id]['asset'];
+
+        $musicVolume = 0.2; // accepted range on UI: 0 to 1.0, step 0.1
+        $soundVolume = 1.0; // accepted range on UI: **0.1** to 1.0, step 0.1
+        // Note: Front-end via JS prevents the soundVolume to be set to 0 and it
+        // nudges it back to the next accessible "step" which is 0.1. IMHO these
+        // ranges should also be checked on save to avoid having out of range
+        // numbers in the DB which may or may not cause problems on HTML.audio
+        // and we don't have any way to throw a helpful exception on promise(s).
+
+        \View::share('avatarName', $avatarName);
+        \View::share('playerName', $name);
+        \View::share('showSettings', true);
+
+        return view('settingsAudio', ['name' => $name, 'musicVolume' => $musicVolume, 'soundVolume' => $soundVolume]);
+    }
+
+    /**
+     * Save player's audio settings "dummy" function.
+     *
+     * I am pretty sure that this function does not save anything.
+     */
+    public function audioSave(Request $request, int $player_id, string $back_route, int $game_id)
+    {
+        if ($player_id == 0) {
+            abort(403, __('messages.unauthorized_action'));
+        }
+        return view('settingsAudio');
     }
 
     public function controlsShow(Request $request, int $player_id, string $back_route, int $game_id)

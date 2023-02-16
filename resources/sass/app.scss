@@ -502,6 +502,14 @@ img.splash {
         margin-bottom: 5em;
     }
     */
+    h2 {
+        font-size: 1.5em;
+    }
+    .border-bottom {
+        --bs-border-style: dashed;
+        --bs-border-color: rgba(var(--trvl-color-rgb), 0.8);
+    }
+
     .dices {
         .dice-field {
             &--img {
