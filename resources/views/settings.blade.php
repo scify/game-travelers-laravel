@@ -45,24 +45,20 @@
                         <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="profile" tabindex="1">
                             <span class="balloon"></span> Προφίλ παίκτη
                         </button>
-                        <a class="btn btn-lg btn-primary disabled" tabindex="-1">
+                        <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="audio" tabindex="2">
                             <span class="balloon"></span> Μουσική & ήχος
-                        </a>
-                        <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="controls"
-                                tabindex="3">
+                        </button>
+                        <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="controls" tabindex="3">
                             <span class="balloon"></span> Πλοήγηση
                         </button>
-                        <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="difficulty"
-                                tabindex="4">
+                        <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="difficulty" tabindex="4">
                             <span class="balloon"></span> Επίπεδο δυσκολίας
                         </button>
                         <!-- delete player button -->
-                        <button class="btn btn-lg btn-danger btn-balloon" type="button" data-bs-toggle="modal" data-bs-target="#modalPlayerDelete"
-                                tabindex="5">
+                        <button class="btn btn-lg btn-danger btn-balloon" type="button" data-bs-toggle="modal" data-bs-target="#modalPlayerDelete" tabindex="5">
                             <span class="balloon"></span> Διαγραφή παίκτη
                         </button> {{-- Modal located outside this messy nest. --}}
                         <!-- / delete player button -->
-
                     </div>
 
                 </div>

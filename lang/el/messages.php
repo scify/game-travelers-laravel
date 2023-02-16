@@ -19,9 +19,12 @@ return [
     'congratulations' => 'Συγχαρητήρια',
     'continue' => 'Συνέχεια', // i.e. "Continue" to the next step
     'email' => 'Email',
+    'every' => 'κάθε', // every
     'login' => 'Σύνδεση',
     'password' => 'Συνθηματικό',
     'register' => 'Εγγραφή',
+    'second' => 'δευτερόλεπτο', // singular second (time)
+    'seconds' => 'δευτερόλεπτα', // plural seconds (time)
     /* Forms Generic */
     'error_form' => 'Για να ολοκληρωθεί επιτυχώς η διαδικασία θα πρέπει να συμπληρώσετε τα πεδία σύμφωνα με τις σχετικές υποδείξεις:',
     /* splash.blade.php */

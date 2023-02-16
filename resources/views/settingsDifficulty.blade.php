@@ -16,7 +16,7 @@
     <form
         method="post" {{-- should be post, get is for testing --}}
         action="{{ route('settings.difficulty', [ request()->player_id, request()->from, request()->game_id ]) }}"
-        id="settingsDifficultyNew"
+        id="settingsDifficulty"
     >
         @csrf
 
