@@ -10,7 +10,7 @@
          For more details please read the inline comments.
     --}}
     @section('scripts')
-        <x-settings />
+        <x-settingsScripts />
             {{-- Music has been removed as it won't be possible to respect
             individual player settings otherwise. It's not good UX to have music
             volume louder than player's choice or to alter it without reason. --}}

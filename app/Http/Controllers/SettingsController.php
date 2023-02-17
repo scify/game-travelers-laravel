@@ -126,7 +126,7 @@ class SettingsController extends Controller
         $avatar_id = $player->avatar_id;
         $avatarName = $this->playerRepository->getAvatars()[$avatar_id]['asset'];
 
-        $musicVolume = 0.2; // accepted range on UI: 0 to 1.0, step 0.1
+        $musicVolume = 0.4; // accepted range on UI: 0 to 1.0, step 0.1
         $soundVolume = 1.0; // accepted range on UI: **0.1** to 1.0, step 0.1
         // Note: Front-end via JS prevents the soundVolume to be set to 0 and it
         // nudges it back to the next accessible "step" which is 0.1. IMHO these
@@ -134,11 +134,47 @@ class SettingsController extends Controller
         // numbers in the DB which may or may not cause problems on HTML.audio
         // and we don't have any way to throw a helpful exception on promise(s).
 
+        // playerAudioFiles expedrimentation.
+        $playerAudioFiles = [];
+        $playerAudioFiles["sounds_win"] = [
+            "sounds.game.win_1" => false,
+            "sounds.game.win_2" => false,
+            "sounds.game.win_3" => false,
+        ];
+        $playerAudioFiles["sounds_defeat"] = [
+            "sounds.game.defeat_1" => false,
+            "sounds.game.defeat_2" => false,
+            "sounds.game.defeat_3" => false,
+        ];
+        $playerAudioFiles["sounds_reward"] = [
+            "sounds.game.reward_1" => false,
+            "sounds.game.reward_2" => false,
+            "sounds.game.reward_3" => false,
+        ];
+        $playerAudioFiles["sounds_reward"] = [
+            "sounds.game.reward_1" => false,
+            "sounds.game.reward_2" => false,
+            "sounds.game.reward_3" => false,
+        ];
+        $playerAudioFiles["sounds_try_again"] = [
+            "sounds.game.try_again_1" => true,
+            "sounds.game.try_again_2" => false,
+            "sounds.game.try_again_3" => false,
+        ];
+
         \View::share('avatarName', $avatarName);
         \View::share('playerName', $name);
         \View::share('showSettings', true);
 
-        return view('settingsAudio', ['name' => $name, 'musicVolume' => $musicVolume, 'soundVolume' => $soundVolume]);
+        return view(
+            'settingsAudio',
+            [
+                'name' => $name,
+                'musicVolume' => $musicVolume,
+                'soundVolume' => $soundVolume,
+                'playerAudioFiles' => $playerAudioFiles,
+            ]
+        );
     }
 
     /**

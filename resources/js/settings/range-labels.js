@@ -4,7 +4,7 @@
 window.addEventListener("load", function () {
 	const rangeElements = document.querySelectorAll("input[type='range']");
 
-	function handleVolumeSlider(rangeElement) {
+	function handleVolumeSlider(rangeElement, audioConfirmation = true) {
 		// Get input[type='range'] parameters directly from the element.
 		const rangeMin = parseFloat(rangeElement.min);
 		const rangeMax = parseFloat(rangeElement.max);
@@ -17,6 +17,13 @@ window.addEventListener("load", function () {
 			rangeValue = rangeMin + rangeStep;
 			rangeElement.value = rangeValue;
 		}
+		// Play a sound via window.sound to the set volume:
+		if (audioConfirmation) {
+			if (typeof window.sound === "function" && window.sound !== null) {
+				window.sound("fx.select", null, true, rangeValue);
+			}
+		}
+		// Calculate the visual representation of the set volume.
 		const rangePercent =
 			((rangeValue - rangeMin) / (rangeMax - rangeMin)) * 100;
 		// If min is not 0, then calcs are off hopefully by a step.
@@ -56,10 +63,9 @@ window.addEventListener("load", function () {
 			const elementId = element.getAttribute("id");
 			const elementFunction = element.getAttribute("data-function");
 			if (elementFunction === "volume-slider") {
-				handleVolumeSlider(element);
+				handleVolumeSlider(element, false);
 				element.addEventListener("change", () => {
 					handleVolumeSlider(element);
-					console.log(parseInt(element.value));
 				});
 			}
 			// Scanning speed range inputs.

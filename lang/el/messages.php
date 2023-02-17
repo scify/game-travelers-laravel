@@ -71,7 +71,14 @@ return [
     'pawn_your_choice' => 'Εσύ!',
     'select_pawn' => 'Διάλεξε πιόνι', // Choose Player 1 Pawn
     'select_pawn_coplayer' => 'Διάλεξε το πιόνι του αντιπάλου σου', // Choose Player 2 Pawn
-
+    /* Sounds */
+    'sound' => 'Ήχος',
+    'sound_settings' => 'Ρυθμίσεις ήχου',
+    'sounds_custom' => 'Προσωπικοί ήχοι',
+    'sounds_defeat' => 'Ήχοι ήττας',
+    'sounds_reward' => 'Ήχοι επιβράβευσης',
+    'sounds_try_again' => 'Ήχοι «δοκίμασε ξανά»',
+    'sounds_win' => 'Ήχοι νίκης',
     /* Switcher */
     'switcher' => [
         'break' => 'Διακοπή',

@@ -71,7 +71,14 @@ return [
     'pawn_your_choice' => 'Your choice!',
     'select_pawn' => 'Choose your pawn', // Choose Player 1 Pawn
     'select_pawn_coplayer' => 'Choose your co-player\'s pawn', // Choose Player 2 Pawn
-
+    /* Sounds */
+    'sound' => 'Sound',
+    'sound_settings' => 'Sound Settings',
+    'sounds_custom' => 'Personal Sounds',
+    'sounds_defeat' => 'Defeat Sounds',
+    'sounds_reward' => 'Reward Sounds',
+    'sounds_try_again' => 'Try Again Sounds',
+    'sounds_win' => 'Win Sounds',
     /* Switcher */
     'switcher' => [
         'break' => 'Break',
