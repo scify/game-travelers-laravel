@@ -5,10 +5,8 @@
     :headerBackground="'background-dash-up'"
     >
     @section('scripts')
-        <x-settingsScripts
-            :music="'music.feelin_good'"
-            :volume=$musicVolume
-        />
+        <x-settingsScripts />
+        {{-- Music playback is controlled via #musicVolumeSlider --}}
     @endsection
 
     <!-- section header -->
@@ -56,20 +54,22 @@
                         <div class="position-relative">
                             <div>
                                 <input
-                                    class="form-range form-volume-slider"
                                     type="range"
                                     name="musicVolume"
-                                    data-function="volume-slider"
-                                    data-prevent-min-value="false"
-                                    value="{{ $musicVolume }}"
-                                    min="0"
-                                    max="1"
-                                    step="0.1"
+                                    data-function="volume-slider" {{-- Used by JS --}}
+                                    data-prevent-min-value="false" {{-- Used by JS --}}
+                                    data-music="music.feelin_good" {{-- Used by JS --}}
+                                    data-music-volume="{{ $musicVolume }}" {{-- Used/Updated by JS --}}
+                                    value="{{ $musicVolume }}" {{-- Used/Updated by JS --}}
+                                    min="0" {{-- Used by JS --}}
+                                    max="1" {{-- Used by JS --}}
+                                    step="0.1" {{-- Used by JS --}}
                                     tabindex="1"
-                                    id="musicVolume"
+                                    class="form-range form-volume-slider"
+                                    id="musicVolumeSlider"
                                 />
                             </div>
-                            <div class="position-relative volume-slider--progress" data-function="volume-progress" id="musicVolumeProgress" aria-hidden="true">
+                            <div class="position-relative volume-slider--progress" data-function="volume-progress" id="musicVolumeSliderProgress" aria-hidden="true">
                             </div>
                         </div>
                     </div>
@@ -80,7 +80,6 @@
                         <div class="position-relative">
                             <div>
                                 <input
-                                    class="form-range form-volume-slider"
                                     type="range"
                                     name="soundVolume"
                                     data-function="volume-slider"
@@ -90,10 +89,11 @@
                                     max="1"
                                     step="0.1"
                                     tabindex="2"
-                                    id="soundVolume"
+                                    id="soundVolumeSlider"
+                                    class="form-range form-volume-slider"
                                 />
                             </div>
-                            <div class="position-relative volume-slider--progress" data-function="volume-progress" id="soundVolumeProgress" aria-hidden="true" >
+                            <div class="position-relative volume-slider--progress" data-function="volume-progress" id="soundVolumeSliderProgress" aria-hidden="true" >
                             </div>
                         </div>
                     </div>
