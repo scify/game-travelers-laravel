@@ -136,7 +136,7 @@ kbd {
     transition: all ease-in 0.2s;
     --alert-bg-opacity: 88%;
     --bs-alert-bg: hsla(42, 77%, 93%, var(--alert-bg-opacity));
-    --bs-alert-color: #4a3713;
+    --bs-alert-color: #4a3a13;
     --bs-alert-border-color: hsla(39, 35%, 67%, 90%);
     &.progressive-alert {
         @include media-breakpoint-up(md) {
