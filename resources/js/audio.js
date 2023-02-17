@@ -13,14 +13,18 @@
 	 * Allows the playback of music via the HTMLAudioElement.
 	 * Volume is set to 10% but can be adjusted with the optional audioVolume parameter (gets overriden by window.Laravel.playerAudio.playerMusicVolume)
 	 * @param audioFile One of the audio files available via Laravel.audioFiles in folder.subfolder.file (with no extension) format.
-	 * @param audioVolume Optional: Set the volume (defaults to 0.1), max: 1.0 (legacy - gets overriden by individual player settings).
+	 * @param volumeOverride Optionally force set the volume to a certain level (0 to 1 - defaults to false).
 	 * @param audioLoop Optional: Defaults to true. Set to false to disable loop.
 	 *
 	 * @example
 	 * window.music("music.songfile")
 	 * //  Plays the music on /audio/music/songfile.mp3
 	 */
-	const music = function (audioFile, audioVolume = 0.1, audioLoop = true) {
+	const music = function (
+		audioFile,
+		volumeOverride = false,
+		audioLoop = true
+	) {
 		if (!window.Laravel.audioFiles) {
 			console.log("Music files not found");
 			return;
@@ -38,6 +42,7 @@
 		var folderPath = "/audio/" + folders.join("/");
 		var audio = new Audio(folderPath + "/" + filename);
 
+		var audioVolume = 1;
 		// Set the audioVolume according to player's wishes, if any.
 		if (
 			window.Laravel.playerAudio &&
@@ -48,6 +53,11 @@
 		) {
 			audioVolume = window.Laravel.playerAudio.playerMusicVolume;
 		}
+		// Override volume settings no matter what:
+		if (volumeOverride) {
+			audioVolume = volumeOverride;
+		}
+		console.log(`Music audioVolume is set to: ${audioVolume}`);
 
 		audio.volume = audioVolume;
 		audio.loop = audioLoop;
@@ -62,11 +72,14 @@
 	 * Allows playback of random files (see examples). Allows callbacks to be
 	 * executed when the playback is finished. Optionally, you can interrupt any
 	 * sounds that are already playing by passing interrupt as a third parameter.
-	 * Volume level defaults to 1 (100%) unless window.Laravel.playerAudio.playerSoundVolume is set.
+	 * Volume level defaults to 1 (100%) unless:
+	 * - the global window.Laravel.playerAudio.playerSoundVolume is set
+	 * - the function is called with the optional volumeOverride parameter
 	 *
 	 * @param audiofile One of the audio files available via window.Laravel.audioFiles in folder.subfolder.file format (with no extension).
 	 * @param callback Optional callback function to be executed on audio.onended event.
 	 * @param interrupt Optionally interrupt previous playback if true (defaults to false).
+	 * @param volumeOverride Optionally force set the volume to a certain level (0 to 1 - defaults to false).
 	 *
 	 * @example
 	 * window.sound("sounds.before_opponents_turn.dice")
@@ -82,9 +95,14 @@
 	 * // Stops any other sound(s) and immediately start playing welcome_1.mp3
 	 * @example
 	 * window.sound("sounds.game_start.welcome_2", null, false, 0.6)
-	 * // Plays the sound file on /audio/sounds/game_start/welcome_2.mp3 with a volume of 0.6 (60%)
+	 * // Plays the sound file on /audio/sounds/game_start/welcome_2.mp3, forcing the volume to 0.6 (60%)
 	 */
-	const sound = function (audiofile, callback = null, interrupt = false) {
+	const sound = function (
+		audiofile,
+		callback = null,
+		interrupt = false,
+		volumeOverride = false
+	) {
 		// Exit if no audioFiles are found.
 		if (!window.Laravel.audioFiles) {
 			console.log("Audio files not found");
@@ -210,6 +228,10 @@
 			window.Laravel.playerAudio.playerSoundVolume <= 1
 		) {
 			audioVolume = window.Laravel.playerAudio.playerSoundVolume;
+		}
+		// Override volume settings no matter what:
+		if (volumeOverride) {
+			audioVolume = volumeOverride;
 		}
 		console.log(`Sound audioVolume is set to: ${audioVolume}`);
 

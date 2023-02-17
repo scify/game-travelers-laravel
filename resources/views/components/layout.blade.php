@@ -41,7 +41,7 @@
     @yield('css', '') {{-- Optional: Additional CSS stylesheets, if needed. --}}
 </head>
 <body>
-    <div class="travelers">
+    <div class="travelers @isset($overflow)add-overflow-margin @endisset">
         <div class="travelers-container">
             @include('layout.header')
             <section class="content">

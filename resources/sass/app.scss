@@ -844,4 +844,11 @@ img.splash {
     .trvl-header.centered {
         padding-top: 0 !important;
     }
+    .trvl-header.add-overflow-margin {
+        margin-top: 2rem;
+    }
+}
+// Add addition margin for overflow on container
+.add-overflow-margin {
+    margin-bottom: 2rem;
 }
