@@ -14,7 +14,9 @@ return [
     'meta_description' => '"Travellers" is a web game specially designed for children with disabilities.',
     'meta_keywords' =>
 'disability games,game,game disability,travellers,travellers game',
+    'game_note' => 'The game is designed for desktop and laptop computers.',
     /* Generic */
+    'alert_notice' => 'Notice',
     'close' => 'Close', // i.e. "Close" window
     'congratulations' => 'Congratulations',
     'continue' => 'Continue', // i.e. "Continue" to the next step
