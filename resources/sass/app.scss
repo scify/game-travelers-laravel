@@ -119,12 +119,34 @@ kbd {
     color: var(--trvl-c-white);
 }
 
+.bi {
+    width: 1.25em;
+    height: 1.25em;
+    fill: currentColor;
+}
+
 // Alerts
 .alert-danger {
     font-weight: 500;
     --bs-alert-color: var(--trvl-danger-color);
     --bs-alert-bg: var(--trvl-danger-bg);
     --bs-alert-border-color: var(--trvl-danger-border-color);
+}
+.alert-note {
+    transition: all ease-in 0.2s;
+    --alert-bg-opacity: 88%;
+    --bs-alert-bg: hsla(42, 77%, 93%, var(--alert-bg-opacity));
+    --bs-alert-color: #4a3713;
+    --bs-alert-border-color: hsla(39, 35%, 67%, 90%);
+    &.progressive-alert {
+        @include media-breakpoint-up(md) {
+            --alert-bg-opacity: 0%;
+            --bs-alert-border-color: hsla(39, 59%, 18%, 90%);
+        }
+        @include media-breakpoint-up(lg) {
+            --bs-alert-border-color: transparent;
+        }
+    }
 }
 
 /* Main Landing Pages Content (non-game related pages) */
