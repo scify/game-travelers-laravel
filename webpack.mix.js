@@ -30,6 +30,9 @@ mix.copyDirectory("resources/images", "public/images");
 mix.copy("resources/images/favicons/favicon.ico", "public");
 // Deploy audio
 mix.copyDirectory("resources/audio", "public/audio");
+// Copy Bootstrap Icon Fonts (woff & woff2)
+mix.copy("node_modules/bootstrap-icons/font/fonts", "public/css/fonts");
+
 // Start mixing JS & SCSS
 mix.js("resources/js/app.js", "public/js")
 	.js("resources/js/vue.js", "public/js") // vue dependencies
