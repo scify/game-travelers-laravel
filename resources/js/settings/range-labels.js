@@ -32,17 +32,19 @@ window.addEventListener("load", function () {
 
 		// Play a sound via window.sound to the set volume:
 		if (audioConfirmation) {
-			if (typeof window.sound === "function" && window.sound !== null) {
+			if (typeof window.sound === "function") {
 				window.sound("fx.select", null, true, rangeValue);
 			}
 		}
 		// Calculate the visual representation of the set volume.
 		const rangePercent =
 			((rangeValue - rangeMin) / (rangeMax - rangeMin)) * 100;
-		// If min is not 0, then calcs are off hopefully by a step.
+		// If min is not 0, then calculations are off hopefully by a step.
+		/*
 		if (rangeMin > 0) {
 			rangeValue = rangeValue - rangeStep;
 		}
+		*/
 		// Acquire the div which is used as the input's progress bar:
 		const rangeElementId = rangeElement.getAttribute("id");
 		const rangeProgressId = rangeElementId + "Progress";
@@ -63,7 +65,10 @@ window.addEventListener("load", function () {
 			(rangePercent / 100) * triangleHeightRange + triangleHeightMin;
 		// Set CSS variables:
 		progressElement.style.setProperty("--sliderProgress", sliderProgress);
-		progressElement.style.setProperty("--sliderOpacity", sliderOpacity);
+		progressElement.style.setProperty(
+			"--sliderOpacity",
+			sliderOpacity.toString()
+		);
 		progressElement.style.setProperty(
 			"--sliderHeight",
 			sliderHeight + "em"

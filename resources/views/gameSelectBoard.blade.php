@@ -3,7 +3,7 @@
     :hasUserMenu=true
     :headerBackground="'background-dash-up'"
 >
-    {{--This page was designed responsively in order to support any amount of
+    {{-- This page was designed responsively in order to support any amount of
         boards, therefore you can simply use the x-selectBoardButton component
         as many times as needed. If one of the boards is not available for any
         reason, it can be disabled by setting :comingsoon = true (instead of the
