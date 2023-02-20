@@ -6,7 +6,9 @@ $body-bg: #c3d0c9; // # Travelers Green: #c3d0c9 as of Nov 25, 2022. Def: #f8faf
 // Falling back to the default values instead of the overrides but setting
 // Manrope as the default font for all sans-serifs and a few more system fonts.
 // @see https://getbootstrap.com/docs/5.2/utilities/text/#variables
-$font-family-sans-serif: 'Manrope', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans","Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-sans-serif: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 $font-size-base: 1rem; // default: 1rem (instead of 0.9rem), at about ~16px
 $line-height-base: 1.5; // default: 1.5 (instead of 1.6)
 // Enabling negative margins.
@@ -17,29 +19,31 @@ $enable-negative-margins: true;
 // @see https://getbootstrap.com/docs/5.0/utilities/spacing/
 $spacer: 1rem;
 $spacers: (
-  0: 0,
-  1: $spacer * .25,
-  2: $spacer * .5,
-  3: $spacer,
-  4: $spacer * 1.5,
-  5: $spacer * 3,
-  6: $spacer * 6,
-  7: $spacer * 12,
+    0: 0,
+    1: $spacer * 0.25,
+    2: $spacer * 0.5,
+    3: $spacer,
+    4: $spacer * 1.5,
+    5: $spacer * 3,
+    6: $spacer * 6,
+    7: $spacer * 12,
 );
+
 // Rangers
 // As 5.1 at least doesn't allow full customisation via CSS, here is what we
 // can do via the Sass variables:
-$form-range-track-bg:             rgba(0, 0, 0, 0.1);
-$form-range-track-border-radius:  2rem;
+$form-range-track-bg: rgba(0, 0, 0, 0.1);
+$form-range-track-border-radius: 2rem;
 
-$form-range-thumb-width:                   1.1rem;
-$form-range-thumb-height:                  1.1rem;
-$form-range-thumb-border:                  0;
-$form-range-thumb-border-radius:           2rem;
-$form-range-thumb-box-shadow:              0 .1rem .25rem rgba(#000, .1);
-$form-range-thumb-focus-box-shadow:        0 0 0 1px $body-bg, 0 0 0 0.3rem rgb(120, 181, 148);
+$form-range-thumb-width: 1.1rem;
+$form-range-thumb-height: 1.1rem;
+$form-range-thumb-border: 0;
+$form-range-thumb-border-radius: 2rem;
+$form-range-thumb-box-shadow: 0 0.1rem 0.25rem rgba(#000, 0.1);
+$form-range-thumb-focus-box-shadow: 0 0 0 1px $body-bg,
+    0 0 0 0.3rem rgb(120, 181, 148);
 // $form-range-thumb-focus-box-shadow-width:  $input-focus-width; // For focus box shadow issue in Edge
-$form-range-thumb-active-bg:               tint-color(#383735, 70%);
+$form-range-thumb-active-bg: tint-color(#383735, 70%);
 // $form-range-thumb-disabled-bg:             $gray-500;
 //
 // Note:

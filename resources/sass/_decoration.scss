@@ -69,19 +69,13 @@
         only screen and (min-resolution: 2dppx) {
         background-image: url("/images/backgrounds/bg-g1-side-group-1@2x.png");
     }
-    &.responsive-hide {
-        @include media-breakpoint-down(sm) {
-            background-image: url("/images/backgrounds/bg-g1-side-back-2.png");
-            @media only screen and (-webkit-min-device-pixel-ratio: 2),
-                only screen and (min--moz-device-pixel-ratio: 2),
-                only screen and (min-device-pixel-ratio: 2),
-                only screen and (min-resolution: 2dppx) {
-                background-image: url("/images/backgrounds/bg-g1-side-back-2@2x.png");
-            }
+    &.responsive-hide-completely {
+        @include media-breakpoint-down(md) {
+            background-image: none;
         }
     }
-    &.responsive-hide-sm {
-        @media (max-width: 767.98px) {
+    &.responsive-hide {
+        @include media-breakpoint-down(sm) {
             background-image: url("/images/backgrounds/bg-g1-side-back-2.png");
             @media only screen and (-webkit-min-device-pixel-ratio: 2),
                 only screen and (min--moz-device-pixel-ratio: 2),

@@ -133,15 +133,17 @@ kbd {
     --bs-alert-border-color: var(--trvl-danger-border-color);
 }
 .alert-note {
-    transition: all ease-in 0.2s;
-    --alert-bg-opacity: 88%;
-    --bs-alert-bg: hsla(42, 77%, 93%, var(--alert-bg-opacity));
-    --bs-alert-color: #4a3a13;
-    --bs-alert-border-color: hsla(39, 35%, 67%, 90%);
+    transition: var(--trvl-transition);
+    --alert-bg-opacity: 99%;
+    --bs-alert-bg: hsla(var(--trvl-c-brown-hsl), var(--alert-bg-opacity));
+    --bs-alert-color: hsl(var(--trvl-c-brown-hs), 12%);
+    --bs-alert-border-radius: 1rem;
+    --bs-alert-border-color: hsla(var(--trvl-c-brown-hs), 72%, 90%);
     &.progressive-alert {
         @include media-breakpoint-up(md) {
             --alert-bg-opacity: 0%;
-            --bs-alert-border-color: hsla(39, 59%, 18%, 90%);
+            --bs-alert-border-color: var(--trvl-c-black);
+            --bs-alert-color: var(---trvl-c-black);
         }
         @include media-breakpoint-up(lg) {
             --bs-alert-border-color: transparent;
@@ -153,7 +155,7 @@ kbd {
 section.landing {
     // Utilities
     &.mb-lg-n350 {
-        @media (min-width: 992px) {
+        @include media-breakpoint-up(lg) {
             margin-bottom: -350px;
         }
     }
@@ -166,30 +168,30 @@ section.landing {
         span {
             white-space: nowrap;
         }
-        @media (max-width: 991.98px) {
+        @include media-breakpoint-down(lg) {
             font-size: calc(1.4rem + 1.5vw);
         }
     }
     // Sub-sections
     .landing-trees {
         img.img-xl {
-            @media (min-width: 992px) {
+            @include media-breakpoint-up(lg) {
                 display: inline-block !important;
             }
-            @media (max-width: 991.98px) {
+            @include media-breakpoint-down(lg) {
                 display: none !important;
             }
         }
         img.img-lg {
-            @media (min-width: 768px) and (max-width: 991.98px) {
+            @include media-breakpoint-only(md) {
                 display: inline-block !important;
             }
-            @media (max-width: 767.98px) {
+            @include media-breakpoint-down(md) {
                 display: none !important;
             }
         }
         img.img-sm {
-            @media (min-width: 768px) {
+            @include media-breakpoint-up(md) {
                 display: none !important;
             }
         }
