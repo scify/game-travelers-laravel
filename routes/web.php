@@ -14,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SetupGameController;
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\CustomAudioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -160,4 +161,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('board/fromVue', [BoardController::class, 'fromVue'])
         ->name('to.backend');
+
+    Route::post('audio/upload', [CustomAudioController::class, 'uploadCustomAudioFile'])
+        ->name('audio.upload');
 });

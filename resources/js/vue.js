@@ -27,6 +27,11 @@ Vue.component(
 	require("./components/BoardComponent.vue").default
 );
 
+Vue.component(
+	"custom-audios-component",
+	require("./components/CustomAudiosComponent.vue").default
+);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

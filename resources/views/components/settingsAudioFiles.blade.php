@@ -18,7 +18,10 @@
 
             @foreach ($playerAudioFile as $audioKey => $audioFile)
 
-            <form>
+            <form
+                method="post"
+                action="{{ route('audio.upload') }}"
+            >
                 @csrf
 
                 <div class="input-group input-group-sm mb-3 audiofiles-item">

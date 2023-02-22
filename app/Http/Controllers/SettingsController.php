@@ -170,6 +170,7 @@ class SettingsController extends Controller
             'settingsAudio',
             [
                 'name' => $name,
+                'player_id' => $player_id,
                 'musicVolume' => $musicVolume,
                 'soundVolume' => $soundVolume,
                 'playerAudioFiles' => $playerAudioFiles,
