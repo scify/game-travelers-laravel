@@ -34,7 +34,9 @@ class BoardController extends Controller
             'scanning_speed' => $player[0]->scanning_speed,
             'dice_type' => $player[0]->dice_type,
             'difficulty' => $player[0]->difficulty,
-            'movement_mode' => $player[0]->movement_mode
+            'movement_mode' => $player[0]->movement_mode,
+            'music_volume' => (float)$player[0]->music_volume,
+            'sound_volume' => (float)$player[0]->sound_volume,
         ];
         $game = $this->gameRepository->allWhere(['id' => $game_id]);
         $game_data = [

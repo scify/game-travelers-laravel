@@ -62,6 +62,7 @@
     */
 
     // $playerAudio should be passed to the view. If not, it defaults to false.
+
     if (!isset($playerAudio)) {
         $playerAudio = false;
     }

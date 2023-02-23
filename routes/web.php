@@ -93,13 +93,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/settings/profile/{player_id}/{from}/{game_id}', [SettingsController::class, 'profileSave'])
         ->name('settings.profile')->middleware(EnsureIdsAreValid::class);
 
-    // Audio settings: @todo Integrate with back-end
-    // Route::view('/settings/audio', 'settingsAudio')->name('settings.audio');
-    Route::get('/settings/audio/{player_id}/{from}/{game_id}', [SettingsController::class, 'audioShow'])
-    ->name('settings.audio')->middleware(EnsureIdsAreValid::class);
-    Route::post('/settings/audio/{player_id}/{from}/{game_id}', [SettingsController::class, 'audioSave'])
-    ->name('settings.audio')->middleware(EnsureIdsAreValid::class);
-
     Route::get('/settings/controls/{player_id}/{from}/{game_id}', [SettingsController::class, 'controlsShow'])
         ->name('settings.controls')->middleware(EnsureIdsAreValid::class);
 
@@ -161,6 +154,15 @@ Route::middleware('auth')->group(function () {
 
     Route::post('board/fromVue', [BoardController::class, 'fromVue'])
         ->name('to.backend');
+
+    Route::get('/settings/audio/{player_id}/{from}/{game_id}', [CustomAudioController::class, 'audioShow'])
+        ->name('settings.audio')->middleware(EnsureIdsAreValid::class);
+
+    Route::post('/settings/audio/{player_id}/{from}/{game_id}', [CustomAudioController::class, 'audioSave'])
+        ->name('settings.audio')->middleware(EnsureIdsAreValid::class);
+
+    Route::post('audio/updateVolumes', [CustomAudioController::class, 'updateVolumes'])
+        ->name('audio.updateVolumes');
 
     Route::post('audio/upload', [CustomAudioController::class, 'uploadCustomAudioFile'])
         ->name('audio.upload');
