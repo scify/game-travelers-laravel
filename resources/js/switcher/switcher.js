@@ -97,7 +97,7 @@ function switcher() {
 		typeof window.Switcher === "object" &&
 		"music" in window.Switcher &&
 		typeof window.Switcher.music === "string"
-			? window.music(window.Switcher.music, "0.2", true)
+			? window.music(window.Switcher.music, false, true)
 			: null;
 
 	function removeSwitcherClasses() {

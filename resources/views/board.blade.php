@@ -1,6 +1,7 @@
 <x-layoutBlank
     :title="__('messages.app_name')"
-    :hasVue=true
+    :has-vue=true
+    :player-audio=$playerAudio
 >
 @section('scripts')
     <script>

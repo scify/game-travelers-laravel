@@ -31,8 +31,9 @@ class SetupGameController extends Controller
         View::share('avatarName', $avatarName);
         View::share('playerName', $name);
         View::share('showSettings', true);
-        $switcher = $this->getSwitcher($players);
-        return view('gameSelectExisting', ['switcher' => $switcher]);
+        $switcher = $this->getSwitcher($players[0]);
+        $playerAudio = $this->getPlayerAudio($players[0]);
+        return view("gameSelectExisting", ["switcher" => $switcher, "playerAudio" => $playerAudio]);
     }
 
     public function continueSave(Request $request, int $player_id, string $from, int $game_id)
@@ -70,8 +71,9 @@ class SetupGameController extends Controller
         View::share('playerName', $name);
         View::share('showSettings', true);
         $boards = $this->gameRepository->getBoards();
-        $switcher = $this->getSwitcher($players);
-        return view('gameSelectBoard', ['switcher' => $switcher, 'boards' => $boards]);
+        $switcher = $this->getSwitcher($players[0]);
+        $playerAudio = $this->getPlayerAudio($players[0]);
+        return view("gameSelectBoard", ["switcher" => $switcher, "playerAudio" => $playerAudio, "boards" => $boards]);
     }
 
     public function boardSave(Request $request, int $player_id, string $from, int $game_id)
@@ -118,8 +120,10 @@ class SetupGameController extends Controller
         View::share('avatarName', $avatarName);
         View::share('playerName', $name);
         View::share('showSettings', true);
-        $switcher = $this->getSwitcher($players);
-        return view('gameSelectMode', ['switcher' => $switcher]);
+        $switcher = $this->getSwitcher($players[0]);
+        $playerAudio = $this->getPlayerAudio($players[0]);
+
+        return view("gameSelectMode", ["switcher" => $switcher, "playerAudio" => $playerAudio]);
     }
 
     public function modeSave(Request $request, int $player_id, string $from, int $game_id)
@@ -155,9 +159,10 @@ class SetupGameController extends Controller
         $game = $this->gameRepository->allWhere(['id' => $game_id], ['board_id']);
         $board = $game[0]->board_id;
         $pawns = $this->gameRepository->getPawns();
-        $switcher = $this->getSwitcher($players);
+        $switcher = $this->getSwitcher($players[0]);
+        $playerAudio = $this->getPlayerAudio($players[0]);
 
-        return view('gameSelectPawn', ['board' => $board, 'pawns' => $pawns, 'switcher' => $switcher]);
+        return view('gameSelectPawn', ['board' => $board, 'pawns' => $pawns, 'switcher' => $switcher, 'playerAudio' => $playerAudio]);
     }
 
     public function pawnSave(Request $request, int $player_id, string $from, int $game_id)
@@ -201,11 +206,19 @@ class SetupGameController extends Controller
         $game = $this->gameRepository->allWhere(['id' => $game_id], ['board_id', 'pawn_id_1']);
         $board = $game[0]->board_id;
         $pawns = $this->gameRepository->getPawns();
-        $switcher = $this->getSwitcher($players);
+        $switcher = $this->getSwitcher($players[0]);
+        $playerAudio = $this->getPlayerAudio($players[0]);
         $player_one_pawn_id = $game[0]->pawn_id_1;
+
         return view(
-            'gameSelectPawnTwo',
-            ['board' => $board, 'player_one_pawn_id' => $player_one_pawn_id, 'pawns' => $pawns, 'switcher' => $switcher]
+            "gameSelectPawnTwo",
+            [
+                "board" => $board,
+                "player_one_pawn_id" => $player_one_pawn_id,
+                "pawns" => $pawns,
+                "switcher" => $switcher,
+                "playerAudio" => $playerAudio
+            ]
         );
     }
 
@@ -238,9 +251,10 @@ class SetupGameController extends Controller
         View::share('playerName', $name);
         View::share('showSettings', true);
 
-        $switcher = $this->getSwitcher($players);
+        $switcher = $this->getSwitcher($players[0]);
+        $playerAudio = $this->getPlayerAudio($players[0]);
 
-        return view('gameSelectOptions', ['switcher' => $switcher]);
+        return view("gameSelectOptions", ["switcher" => $switcher, "playerAudio" => $playerAudio]);
     }
 
     public function optionsSave(Request $request, int $player_id, string $from, int $game_id)
@@ -268,24 +282,45 @@ class SetupGameController extends Controller
     /**
      * Retrieve Switcher Settings for a player.
      *
-     * @param App\Repository\Player\PlayerRepository $players
+     * @param App\Repository\Player\PlayerRepository $player
      *   The player object to retrieve settings for.
      * @return array
      *   An array containing the control mode (1= automatic, 2=manual), scanning
      *   speed, automatic selection button, manual selection button, and manual
      *   navigation button for the player.
      */
-    private function getSwitcher($players)
+    private function getSwitcher($player)
     {
         $switcher = [
-            'controlMode' => $players[0]->auto,
-            'scanningSpeed' => $players[0]->scanning_speed,
-            'automaticSelectionButton' => $players[0]->select_key,
-            'manualSelectionButton' => $players[0]->select_key,
-            'manualNavigationButton' => $players[0]->navigate_key,
+            'controlMode' => $player->auto,
+            'scanningSpeed' => $player->scanning_speed,
+            'automaticSelectionButton' => $player->select_key,
+            'manualSelectionButton' => $player->select_key,
+            'manualNavigationButton' => $player->navigate_key,
         ];
         return $switcher;
     }
+
+    /**
+     * Retrieve Audio Settings for a player.
+     * As we don't need custom sound files for options, playerAudiofiles is
+     * not even set (it will default to false on page-rendering). What we do
+     * need on gameSelect*.blade.php is music and sound volume, along with the
+     * updateVolumesUrl. Yay!
+     *
+     *  @param App\Repository\Player\PlayerRepository $players
+    */
+    private function getPlayerAudio($player)
+    {
+        $playerAudio = [
+            'playerMusicVolume' => $player->music_volume,
+            'playerSoundVolume' => $player->sound_volume,
+            'updateVolumesUrl' => route('audio.updateVolumes'),
+        ];
+        return $playerAudio;
+    }
+
+
 
     private function checkIfActiveGameHasStarted($game_id)
     {

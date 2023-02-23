@@ -1,4 +1,4 @@
-<x-layout :title="'VUE PAGE TITLE HERE'" :hasVue=true>
+<x-layout :title="'VUE PAGE TITLE HERE'" :has-vue=true>
 
     {{-- Note that #app has no stylesheets yet so class="container"
     has been added to make sure it's inside Bootstrap's width limits. --}}

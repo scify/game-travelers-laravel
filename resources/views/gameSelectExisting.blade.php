@@ -1,4 +1,9 @@
-<x-layout :title="'Νέο παιχνίδι ή συνέχεια προηγούμενου; | Ταξιδιώτες'" :hasUserMenu=true :headerBackground="'background-dash-up'">
+<x-layout
+    :title="'Νέο παιχνίδι ή συνέχεια προηγούμενου; | Ταξιδιώτες'"
+    :has-user-menu=true
+    :header-background="'background-dash-up'"
+    :player-audio=$playerAudio
+>
     {{--This page was designed as an accessible modal for use in combination
         with Switcher.js. It is based on gameSelectOptions.php and uses the
         same x-selectOptionsButton components.--}}

@@ -1,13 +1,15 @@
 <x-layout
     :title="__('messages.sound_settings') . ' | ' . __('messages.app_name')"
-    :hasUserMenu=true
+    :has-user-menu=true
     :overflow=true
-    :headerBackground="'background-dash-up'"
-    :hasVue=true
+    :header-background="'background-dash-up'"
+    :has-vue=true
+    :player-audio=$playerAudio
 >
+
     @section('scripts')
-    <x-settingsScripts />
-    {{--Music playback is controlled via #musicVolumeSlider--}}
+        <x-settingsScripts />
+        {{--Music playback is controlled via #musicVolumeSlider--}}
     @endsection
 
 

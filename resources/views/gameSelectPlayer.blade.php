@@ -1,7 +1,7 @@
 <x-layout
     :title="'Διάλεξε παίκτη | Νέο παιχνίδι | Ταξιδιώτες'"
-    :hasUserMenu=true
-    :headerBackground="'background-dash-up'"
+    :has-user-menu=true
+    :header-background="'background-dash-up'"
 >
     {{-- To be fair this would have been a nice Vue app. For now it's a form
          with custom JS. Note that as in the playerProfileNew form, the avatars

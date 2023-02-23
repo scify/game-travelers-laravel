@@ -1,4 +1,9 @@
-<x-layout :title="'Διάλεξε τύπο παιχνιδιού | Νέο παιχνίδι | Ταξιδιώτες'" :hasUserMenu=true :headerBackground="'background-dash-up'">
+<x-layout
+    :title="'Διάλεξε τύπο παιχνιδιού | Νέο παιχνίδι | Ταξιδιώτες'"
+    :has-user-menu=true
+    :header-background="'background-dash-up'"
+    :player-audio=$playerAudio
+>
     {{--This page was designed responsively in order to support any amount of
         modes, therefore you can simply use the x-selectModeButton component as
         many times as needed. If one of the modes is not available for any
