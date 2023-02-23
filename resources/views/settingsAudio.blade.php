@@ -10,6 +10,7 @@
     {{--Music playback is controlled via #musicVolumeSlider--}}
     @endsection
 
+
     <!-- section header -->
     <div class="gamesettings-header container-xxl px-4 mb-2 mb-lg-3 mt-3 pt-3 pb-3">
         {{--New / Existing diff: mb - 2 mb - lg - 3 mt - 3 pt - 3 pb - 3--}}
@@ -61,8 +62,8 @@
                                     data-function="volume-slider" {{-- Used by JS --}}
                                     data-prevent-min-value="false" {{-- Used by JS --}}
                                     data-music="music.feelin_good" {{-- Used by JS --}}
-                                    data-music-volume="{{ $musicVolume }}" {{-- Used/Updated by JS --}}
-                                value="{{ $musicVolume }}" {{--Used / Updated by JS--}}
+                                    data-music-volume="{{ $playerAudio['playerMusicVolume'] }}" {{-- Used/Updated by JS --}}
+                                value="{{ $playerAudio['playerMusicVolume'] }}" {{--Used / Updated by JS--}}
                                 min="0" {{--Used by JS--}}
                                 max="1" {{--Used by JS--}}
                                 step="0.1" {{--Used by JS--}}
@@ -87,7 +88,7 @@
                                     name="soundVolume"
                                     data-function="volume-slider"
                                     data-prevent-min-value="true"
-                                    value="{{ $soundVolume }}"
+                                    value="{{ $playerAudio['playerSoundVolume'] }}"
                                     min="0"
                                     max="1"
                                     step="0.1"
@@ -107,7 +108,7 @@
                 <div id="app">
                     <custom-audios-component
                         :player-id='{{ $player_id }}'
-                        :player-audio-files='@json($playerAudioFiles)'
+                        :player-audio-files='@json($playerAudio["playerAudioFiles"])'
                     >
                     </custom-audios-component>
                 </div>

@@ -105,6 +105,11 @@ window.addEventListener("load", function () {
 							case "-":
 								music.volume = Math.max(0, music.volume - 0.1);
 								volumeKeyDown = true;
+								console.log(
+									"!!!" +
+										window.Laravel.playerAudio
+											.updateVolumesUrl
+								);
 								break;
 							case "=":
 								music.volume = Math.min(1, music.volume + 0.1);

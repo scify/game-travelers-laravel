@@ -185,6 +185,7 @@ export default {
 	props: {
 		backendUrl: String,
 		boardUrl: String,
+		updateVolumesUrl: String,
 		continueUrl: String,
 		playerId: Number,
 		gameId: Number,
@@ -210,6 +211,8 @@ export default {
 	data: function () {
 		return {
 			ignoreInput: false,
+			musicVolume: this.playerData["music_volume"],
+			soundVolume: this.playerData["sound_volume"],
 			playerName: this.playerData["name"],
 			avatarId: this.playerData["avatar_id"],
 			autoMove: this.playerData["auto"],
@@ -267,10 +270,14 @@ export default {
 			window.setTimeout(() => {
 				this.gameEnd = 0;
 				if (this.board === 1)
-					this.music = window.music("music.great_ideas");
+					this.music = window.music(
+						"music.great_ideas",
+						this.musicVolume
+					);
 				else if (this.board === 2)
 					this.music = window.music(
-						"music.in_the_land_of_make_believe"
+						"music.in_the_land_of_make_believe",
+						this.musicVolume
 					);
 
 				this.showPawn1 = true;
@@ -293,6 +300,22 @@ export default {
 					this.sendToBackend();
 				}
 			}, 500);
+		},
+		updateVolumes() {
+			let data = {
+				player_id: this.playerId,
+				music_volume: this.musicVolume,
+			};
+			axios
+				.post(this.updateVolumesUrl, data, {
+					headers: {
+						Accept: "application/json",
+					},
+				})
+				.then(function () {})
+				.catch(function (error) {
+					alert(error);
+				});
 		},
 		sendToBackend() {
 			let data = {
@@ -887,16 +910,16 @@ export default {
 			);
 		},
 		increaseMusic() {
-			let volume = this.music.volume;
-			volume += 0.1;
-			if (volume > 1) volume = 1.0;
-			this.music.volume = volume;
+			this.musicVolume += 0.1;
+			if (this.musicVolume > 1) this.musicVolume = 1.0;
+			this.music.volume = this.musicVolume;
+			this.updateVolumes();
 		},
 		decreaseMusic() {
-			let volume = this.music.volume;
-			volume -= 0.1;
-			if (volume <= 0) volume = 0;
-			this.music.volume = volume;
+			this.musicVolume -= 0.1;
+			if (this.musicVolume <= 0) this.musicVolume = 0;
+			this.music.volume = this.musicVolume;
+			this.updateVolumes();
 		},
 		getStartSrc() {
 			return this.getBoardPath() + "start.png";

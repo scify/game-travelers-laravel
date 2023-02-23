@@ -22,7 +22,7 @@ class Player extends Model {
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'id', 'user_id', 'name', 'avatar_id', 'auto', 'select_key', 'navigate_key', 'help_after_x_mistakes', 'scanning_speed', 'dice_type', 'board_size', 'difficulty', 'movement_mode'
+        'id', 'user_id', 'name', 'avatar_id', 'auto', 'select_key', 'navigate_key', 'help_after_x_mistakes', 'scanning_speed', 'dice_type', 'board_size', 'difficulty', 'movement_mode', 'music_volume', 'sound_volume'
     ];
 
     use SoftDeletes;

@@ -16,6 +16,7 @@
         <board-component
             :player-id='{{ $player_id }}'
             :backend-url="'{{ route('to.backend') }}'"
+            :update-volumes-url="'{{ route('audio.updateVolumes') }}'"
             :continue-url="'{{ route('select.continue', [$player_id, 'continue', $game_id]) }}'"
             :board-url="'{{ route('select.board', [$player_id, 'board', 0]) }}'"
             :game-id='{{ $game_id }}'
