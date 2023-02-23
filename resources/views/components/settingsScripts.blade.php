@@ -15,7 +15,7 @@ if (isset($switcher) && is_array($switcher)) {
     if (isset($music) && is_string($music)) {
         $switcher['music'] = trim($music);
     }
-    if (isset($musicVolume) && is_numeric($musicVolume)) {
+    if (isset($playerAudio["musicVolume"]) && is_numeric($playerAudio["musicVolume"])) {
         $switcher['musicVolume'] = floatval($musicVolume);
         if ($musicVolume >= 0 && $musicVolume <= 1) {
             $switcher['musicVolume'] = $musicVolume;

@@ -56,6 +56,7 @@
 		// Override volume settings no matter what:
 		if (volumeOverride) {
 			audioVolume = volumeOverride;
+			console.log("Music audioVolume override");
 		}
 		console.log(`Music audioVolume is set to: ${audioVolume}`);
 

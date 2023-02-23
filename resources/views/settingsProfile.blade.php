@@ -1,4 +1,8 @@
-<x-layout :title="'Προφίλ παίκτη | Ταξιδιώτες'" :hasUserMenu=true :headerBackground="'background-dash-up'">
+<x-layout
+    :title="'Προφίλ παίκτη | Ταξιδιώτες'"
+    :has-user-menu=true
+    :header-background="'background-dash-up'"
+>
     {{-- Note: This is the exact same page as the one for New Players BUT with
         a modified header. According to the design these pages should be
         different, yet they have the exact same form, fields and purpose. Their

@@ -46,6 +46,7 @@ if (isset($switcher) && is_array($switcher)) {
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
+                <h4>Πλήκτρα πλοήγησης</h4>
                 @if($switcher['controlMode']==1)
                     <p>{{ __("messages.switcher.help_automatic") }}</p>
                     <p>
@@ -62,6 +63,8 @@ if (isset($switcher) && is_array($switcher)) {
                         <kbd>{{ $switcher['manualSelectionButton'] }}</kbd>.
                     </p>
                 @endif
+                <h4>Βοηθητικά πλήκτρα</h4>
+                    Αυξομείωση έντασης μουσικής με <kbd>+</kbd> και <kbd>-</kbd>.
             </div>
             <div class="modal-footer">
                 @if($switcher['controlMode']==1)

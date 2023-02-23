@@ -1,7 +1,8 @@
 <x-layout
     :title="__('messages.select_board') . ' | ' . __('messages.new_game') . ' | ' . __('messages.app_name')"
-    :hasUserMenu=true
-    :headerBackground="'background-dash-up'"
+    :has-user-menu=true
+    :header-background="'background-dash-up'"
+    :player-audio=$playerAudio
 >
     {{-- This page was designed responsively in order to support any amount of
         boards, therefore you can simply use the x-selectBoardButton component

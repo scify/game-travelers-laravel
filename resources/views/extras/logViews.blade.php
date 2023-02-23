@@ -351,15 +351,15 @@
                         pages on this site, but with some optional parameters
                         set...
                     </dd>
-                    <dt><a href="{{ url('/demo/hasVue') }}">Demo: Vue (&lt;x-layout :hasVue=true&gt;)</a></dt>
+                    <dt><a href="{{ url('/demo/hasVue') }}">Demo: Vue (&lt;x-layout :has-vue=true&gt;)</a></dt>
                     <dd>✔️ So, if the default &lt;x-layout&gt; has no Vue.js how can we have
                         a Vue.js page? Simply use the layout with the optional
-                        parameter <strong>hasVue=true</strong>. This page loads
+                        parameter <strong>has-vue=true</strong>. This page loads
                         the example Vue components that Aris initially created
                         for the project. Not that the <strong>#app</strong>
                         element is not styled at the moment.
                     </dd>
-                    <dt><a href="{{ url('/demo/hasVueBlank') }}">Demo: Vue (&lt;x-layoutBlank :hasVue=true&gt;)</a></dt>
+                    <dt><a href="{{ url('/demo/hasVueBlank') }}">Demo: Vue (&lt;x-layoutBlank :has-vue=true&gt;)</a></dt>
                     <dd>✔️ Same as above but using the &lt;x-layoutBlank&gt; layout component.
                     </dd>
         </div>

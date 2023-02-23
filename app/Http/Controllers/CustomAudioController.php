@@ -34,7 +34,7 @@ class CustomAudioController extends Controller
         $musicVolume = $player->music_volume;
         $soundVolume = $player->sound_volume;
 
-        // playerAudioFiles expedrimentation.
+        // playerAudioFiles experimentation.
         $playerAudioFiles = [];
         $playerAudioFiles["sounds_win"] = [
             "sounds.game.win_1" => false,
@@ -57,14 +57,15 @@ class CustomAudioController extends Controller
             "sounds.game.try_again_3" => false,
         ];
 
-        $playerAudio = $this->getPlayerAudio($player_id,$musicVolume, $soundVolume, $playerAudioFiles);
+        $playerAudio = $this->getPlayerAudio($player_id, $musicVolume, $soundVolume, $playerAudioFiles);
 
         \View::share('avatarName', $avatarName);
         \View::share('playerName', $name);
         \View::share('showSettings', true);
 
         return view(
-            'settingsAudio', [
+            'settingsAudio',
+            [
                 'name' => $name,
                 'player_id' => $player_id,
                 'playerAudio' => $playerAudio,
@@ -83,8 +84,8 @@ class CustomAudioController extends Controller
             abort(403, __('messages.unauthorized_action'));
         }
         $input = $request->only('musicVolume', 'soundVolume');
-        $music_volume = (float)$input['musicVolume'];
-        $sound_volume = (float)$input['soundVolume'];
+        $music_volume = (float) $input['musicVolume'];
+        $sound_volume = (float) $input['soundVolume'];
         $this->updateVolumesToDB($player_id, $music_volume, $sound_volume);
         return \Redirect::route('settings', [$player_id, $back_route, $game_id]);
     }
@@ -98,15 +99,17 @@ class CustomAudioController extends Controller
     public function updateVolumes(Request $request)
     {
         $player_id = $request->player_id;
-        $music_volume = (float)$request->music_volume;
+        $music_volume = (float) $request->music_volume;
         $this->updateVolumesToDB($player_id, $music_volume);
         return response([]);
     }
 
     protected function updateVolumesToDB(int $player_id, float $music_volume, float $sound_volume = 0)
-    {   $entry = ['music_volume' => $music_volume];
-        if ($sound_volume > 0)
+    {
+        $entry = ['music_volume' => $music_volume];
+        if ($sound_volume > 0) {
             $entry = ['music_volume' => $music_volume, 'sound_volume' => $sound_volume];
+        }
         $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
     }
 

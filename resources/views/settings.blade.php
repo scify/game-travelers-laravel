@@ -1,4 +1,4 @@
-<x-layout :title="'Ρυθμίσεις παίκτη | Ταξιδιώτες'" :hasUserMenu=true>
+<x-layout :title="'Ρυθμίσεις παίκτη | Ταξιδιώτες'" :has-user-menu=true>
     {{-- Note that player's name appears on currentPageDescription and is
         passed to the delete player modal via a component, so don't forget
         to update this page with proper values returned from the Controller.
