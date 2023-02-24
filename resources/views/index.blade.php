@@ -224,37 +224,37 @@
     </div>
 
     <!-- section--screenshots -->
-    <section class="landing bg-brown px-4 pt-4 pb-6">
-        <div class="container-lg pb-4">
+    <section class="landing bg-brown px-4 py-2">
+        <div class="container-lg text-center pb-4">
             <div class="landing-screenshots justify-content-start py-6">
-                <div class="screenshot px-0 px-sm-5 px-xl-0 pb-5">
-                    <div class="offset-xl-0">
+                <div class="screenshot px-0 px-sm-5 pb-4">
+                    <div>
                         <h2>
                             <span>Προσαρμόζεται πλήρως</span>
                             <span>στις ανάγκες του παιδιού</span>
                         </h2>
                     </div>
-                    <div class="pt-2 offset-xl-1">
+                    <div class="pt-2">
                         <img class="img-fluid screenshot rounded"
                             loading="lazy"
-                            srcset="{{ asset('images/landing/screenshots/screenshot-01@2x.png') }} 2x"
-                            src="{{ asset('images/landing/screenshots/screenshot-01.png') }}"
-                            width="760" height="427"
-                            alt="Εικόνα στην οποία απεικονίζονται οι ρυθμίσεις του παιχνιδιού οι οποίες σχετίζονται με τον τρόπο πλοήγησης σε αυτό. Εμφανίζονται οι ρυθμίσεις για το στυλ πλοήγησης (έχει επιλεχθεί «αυτόματο»), την ταχύτητα σάρωσης (8 δευτερόλεπτα) και τη βοήθεια μετά από αριθμό λαθών (έχει επιλεχθεί 1)."
+                            srcset="{{ asset('images/landing/screenshots/screenshot_01@2x.png') }} 2x"
+                            src="{{ asset('images/landing/screenshots/screenshot_01.png') }}"
+                            width="1366" height="862"
+                            alt="Εικόνα στην οποία απεικονίζονται οι ρυθμίσεις του παιχνιδιού οι οποίες σχετίζονται με τον τρόπο πλοήγησης σε αυτό. Εμφανίζονται οι ρυθμίσεις για το στιλ πλοήγησης (έχει επιλεχθεί «αυτόματο»), την ταχύτητα σάρωσης (κάθε 2 δευτερόλεπτα) και τη βοήθεια μετά από αριθμό λαθών (έχει επιλεχθεί 3)."
                         >
                     </div>
                 </div>
-                <div class="screenshot pt-6 px-0 px-sm-5 px-xl-0">
-                    <div class="pt-2 offset-xl-4 text-center">
+                <div class="screenshot pt-5 px-0 px-sm-5">
+                    <div class="pt-2 text-center">
                         <h2 class="pb-2">
                             <span>Διαφορετικό προφίλ</span>
                             <span>για κάθε παίκτη</span>
                         </h2>
                         <img class="img-fluid screenshot rounded"
                             loading="lazy"
-                            srcset="{{ asset('images/landing/screenshots/screenshot-02@2x.png') }} 2x"
-                            src="{{ asset('images/landing/screenshots/screenshot-02.png') }}"
-                            width="760" height="427"
+                            srcset="{{ asset('images/landing/screenshots/screenshot_02@2x.png') }} 2x"
+                            src="{{ asset('images/landing/screenshots/screenshot_02.png') }}"
+                            width="1366" height="862"
                             alt="Εικόνα στην οποία εμφανίζεται η οθόνη επιλογής προφίλ παίκτη στο παιχνίδι. Παρουσιάζονται συνολικά 14 προφίλ, όπως επίσης και το πλήκτρο που επιτρέπει τη δημιουργία ακόμη περισσότερων."
                         >
                     </div>
@@ -264,15 +264,15 @@
     </section>
 
     <!--section--four--blocks -->
-    <section class="landing bg-light px-4 pt-6 pb-4 pt-xl-7 pb-xl-6">
+    <section class="landing bg-light px-4 pt-6 pb-5 pt-xl-7 pb-xl-7">
         <div class="landing-blocks landing-blocks--four container-xxl py-2 px-4">
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-around gy-6">
                 <div class="col">
                     <div class="landing-block landing-block--abstract-round m-auto">
                         <img class=""
                             loading="lazy"
-                            srcset="{{ asset('images/landing/four-blocks/puzzle@2x.png') }} 2x"
-                            src="{{ asset('images/landing/four-blocks/puzzle.png') }}"
+                            srcset="{{ asset('images/landing/blocks-circle/block_1@2x.png') }} 2x"
+                            src="{{ asset('images/landing/blocks-circle/block_1.png') }}"
                             width="226" height="243"
                             aria-role="presentation"
                             alt=""
@@ -288,8 +288,8 @@
                     <div class="landing-block landing-block--abstract-round m-auto">
                         <img class=""
                             loading="lazy"
-                            srcset="{{ asset('images/landing/four-blocks/hearts@2x.png') }} 2x"
-                            src="{{ asset('images/landing/four-blocks/hearts.png') }}"
+                            srcset="{{ asset('images/landing/blocks-circle/block_2@2x.png') }} 2x"
+                            src="{{ asset('images/landing/blocks-circle/block_2.png') }}"
                             width="226" height="243"
                             aria-role="presentation"
                             alt=""
@@ -306,8 +306,8 @@
                     <div class="landing-block landing-block--abstract-round m-auto">
                         <img class=""
                             loading="lazy"
-                            srcset="{{ asset('images/landing/four-blocks/pencil@2x.png') }} 2x"
-                            src="{{ asset('images/landing/four-blocks/pencil.png') }}"
+                            srcset="{{ asset('images/landing/blocks-circle/block_3@2x.png') }} 2x"
+                            src="{{ asset('images/landing/blocks-circle/block_3.png') }}"
                             width="226" height="243"
                             aria-role="presentation"
                             alt=""
@@ -323,8 +323,8 @@
                     <div class="landing-block landing-block--abstract-round m-auto">
                         <img class=""
                             loading="lazy"
-                            srcset="{{ asset('images/landing/four-blocks/rainbow@2x.png') }} 2x"
-                            src="{{ asset('images/landing/four-blocks/rainbow.png') }}"
+                            srcset="{{ asset('images/landing/blocks-circle/block_4@2x.png') }} 2x"
+                            src="{{ asset('images/landing/blocks-circle/block_4.png') }}"
                             width="226" height="243"
                             aria-role="presentation"
                             alt=""
@@ -346,30 +346,38 @@
     </div>
 
     <!-- section--laptop -->
-    <section class="landing bg-brown px-4 pt-4 pb-5 pt-lg-6 pb-lg-7">
-        <picture>
-            <source type="image/webp" srcset="{{ asset('images/landing/laptop/laptop.webp') }}">
-            <source type="image/png" srcset="{{ asset('images/landing/laptop/laptop.png') }}">
-            <img
-                class="img-fluid mx-auto d-block px-sm-5 px-xxl-0"
-                loading="lazy"
-                src="{{ asset('images/landing/laptop/laptop.png') }}"
-                width="1042" height="765"
-                alt="Εικαστική σύνθεση στην οποία απεικονίζονται μερικοί από τους χαρακτήρες του παιχνιδιού μπροστά από την οθόνη ενός φορητού υπολογιστή. Στην οθόνη του εμφανίζεται μια από τις πίστες του παιχνιδιού «Ταξιδιώτες»."
-            >
-          </picture>
+    <section class="landing bg-brown px-4 pt-4 pb-5">
+        <div class="landing-ingame">
+            <div class="text-center pb-5">
+                <h2>
+                    <span>Πολύχρωμα γραφικά</span>
+                    <span>που μαγνητίζουν το βλέμμα των παιδιών</span>
+                </h2>
+            </div>
+            <picture>
+                <source type="image/webp" srcset="{{ asset('images/landing/laptop/laptop_screenshot.webp') }}">
+                <source type="image/png" srcset="{{ asset('images/landing/laptop/laptop_screenshot.png') }}">
+                <img
+                    class="img-fluid mx-auto d-block px-sm-5 px-xxl-0"
+                    loading="lazy"
+                    src="{{ asset('images/landing/laptop/laptop_screenshot.png') }}"
+                    width="1042" height="765"
+                    alt="Εικαστική σύνθεση στην οποία απεικονίζονται μερικοί από τους χαρακτήρες του παιχνιδιού μπροστά από την οθόνη ενός φορητού υπολογιστή. Σε αυτήν εμφανίζεται μια από τις πίστες του παιχνιδιού «Ταξιδιώτες»."
+                >
+            </picture>
+        </div>
     </section>
 
     <!-- section--portraits -->
-    <section class="landing bg-brown px-4 pt-4 pb-5 pt-lg-6 pb-lg-7">
+    <section class="landing bg-brown px-4 pt-4 pb-6">
         <picture>
-            <source type="image/webp" srcset="{{ asset('images/landing/portraits/portraits.webp') }}">
-            <source type="image/png" srcset="{{ asset('images/landing/portraits/portraits.png') }}">
+            <source type="image/webp" srcset="{{ asset('images/landing/portraits/chars.webp') }}">
+            <source type="image/png" srcset="{{ asset('images/landing/portraits/chars.png') }}">
             <img
                 class="img-fluid mx-auto d-block px-3 px-sm-6 px-xxl-3"
                 loading="lazy"
-                src="{{ asset('images/landing/portraits/portraits.png') }}"
-                width="1168" height="863"
+                src="{{ asset('images/landing/portraits/chars.png') }}"
+                width="1118" height="413"
                 alt="Εικαστική σύνθεση στην οποία απεικονίζονται πορτρέτα με κάποιους από τους χαρακτήρες του παιχνιδιού «Ταξιδιώτες»."
             >
           </picture>
@@ -381,12 +389,28 @@
             &nbsp;
         </div>
 
+        <!-- section--simple-call -->
+        <section class="landing bg-light px-4 py-5">
+            <div class="landing-call-to-action container-lg text-center">
+                <div class="text-center">
+                    <h1 class="action text-center">
+                        Σε τι διαφέρει από τα υπόλοιπα παιχνίδια;
+                    </h1>
+                </div>
+                <div class="landing-call pt-4 text-center">
+                    <a href="{{ route('login') }}" class="btn btn-primary btn-lg text-nowrap responsive-expand">
+                        μάθε εδώ
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <!-- section--partners -->
-        <section class="landing bg-light px-4 pt-4 pb-4 pt-lg-6">
+        <section class="landing bg-light px-4 pt-4 pb-5 pt-lg-5">
             <div class="landing-partners container-lg px-0 px-xl-5 px-xxl-6">
                 <div class="px-2 px-lg-6 px-xl-6 pb-5 text-center">
                     Το παιχνίδι αναπτύχθηκε σε στενή συνεργασία με ειδικούς παιδαγωγούς
-                    από φορείς εγνωσμένου κύρους: η ΕΛΕΠΑΠ, το <span class="text-nowrap">ΚΑΣΠ Χατζηπατέρειο</span>, το <span class="text-nowrap">Ειδικό Σχολείο</span> <span class="text-nowrap">Αγριάς Μαγνησίας</span>
+                    από φορείς εγνωσμένου κύρους: την ΕΛΕΠΑΠ, το <span class="text-nowrap">ΚΑΣΠ Χατζηπατέρειο</span>, το <span class="text-nowrap">Ειδικό Σχολείο</span> <span class="text-nowrap">Αγριάς Μαγνησίας</span>
                     και το Κέντρο Κοινωνικής Πρόνοιας <span class="text-nowrap">Περιφέρειας Αττικής</span>.
                 </div>
                 <div class="landing-partners--logos container py-5">
@@ -423,43 +447,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="partner px-2 px-lg-6 px-xl-6 pt-5 pb-5 text-center">
-                    <strong>
-                    Με την χρηματοδότηση
-                    <span class="text-nowrap">του Ομίλου Ηρακλή</span>
-                    </strong>
-                    <div class="pt-2 px-4 px-sm-0">
-                        <a href="https://www.lafarge.gr" target="_blank">
-                            <img class="img-fluid"
-                                loading="lazy"
-                                src="{{ asset('images/landing/partners/iraklis.png') }}"
-                                width="488" height="142"
-                                alt="Όμιλος Ηρακλής"
-                            >
-                        </a>
-                    </div>
-                </div>
             </div>
         </section>
 
         <!-- section--simple-call -->
-        <section class="landing bg-light px-4 py-6">
-            <div class="landing-call container-lg text-center">
+        <section class="landing bg-light px-4 pt-5 pb-3">
+            <div class="landing-call-to-action container-lg text-center">
                 <div class="text-center">
                     <h1 class="action text-center">
-                        Ενδιαφέρεσαι για το παιχνίδι;
+                        Πάμε να παίξουμε;
                     </h1>
                 </div>
                 <div class="landing-call pt-4 text-center">
                     <a href="{{ route('login') }}" class="btn btn-primary btn-lg text-nowrap responsive-expand">
-                        παίξε
+                        παίξε εδώ
                     </a>
                 </div>
             </div>
         </section>
 
         <!-- section--links -->
-        <section class="landing bg-light px-4 py-6">
+        <section class="landing bg-light px-4 py-6 d-none">
             <div class="landing-links container-lg text-center">
                 <div class="text-center">
                     <h1>
@@ -482,7 +490,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 link">
-                        <a href="http://gamesfortheblind.org" target="_blank">Games for the Blind</a>
+                        <a href="https://gamesfortheblind.org" target="_blank">Games for the Blind</a>
                         <div class="pt-2">
                             Και άλλα ηλεκτρονικά παιχνίδια
                             για τυφλά παιδιά
