@@ -15,6 +15,7 @@
     --bs-btn-bg: var(--trvl-btn-bg);
     --bs-btn-hover-color: var(--trvl-btn-hover-color);
     --bs-btn-hover-bg: var(--trvl-btn-hover-bg);
+    --bs-btn-active-bg: var(--trvl-btn-active-bg);
     --bs-btn-disabled-color: var(--trvl-btn-disabled-color);
     --bs-btn-disabled-bg: var(--trvl-btn-disabled-bg);
     --bs-btn-disabled-border-color: var(--trvl-btn-disabled-border-color);
@@ -25,6 +26,7 @@
     --bs-btn-bg: #bfcfd0;
     --bs-btn-hover-color: var(--trvl-btn-color);
     --bs-btn-hover-bg: #bacaca;
+    --bs-btn-active-bg: #c6e1d3;
     --bs-btn-disabled-color: var(--trvl-btn-disabled-color);
     --bs-btn-disabled-bg: #bacaca;
     --bs-btn-disabled-border-color: var(--trvl-btn-disabled-border-color);
@@ -34,7 +36,6 @@
     --bs-btn-border-color: var(--trvl-btn-border-color);
     --bs-btn-hover-border-color: var(--trvl-btn-hover-border-color);
     --bs-btn-active-color: var(--trvl-btn-active-color);
-    --bs-btn-active-bg: var(--trvl-btn-active-bg);
     --bs-btn-active-border-color: var(--trvl-btn-active-border-color);
     --bs-btn-active-shadow: inset 0 3px 5px rgba(var(--trvl-c-dark-rgb), 0.125);
     --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
@@ -113,7 +114,7 @@
         }
     }
     &:hover > .balloon,
-    &:focus > .balloon {
+    &:focus-visible > .balloon {
         opacity: 1;
         // animation: btn-fly-in 0.5s linear forwards;
         @media (max-width: 575.98px) {
@@ -448,6 +449,8 @@ body.switcher {
     button.responsive-expand,
     a.responsive-expand {
         width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     a.btn-circle.responsive-expand {
         border-radius: 1rem;

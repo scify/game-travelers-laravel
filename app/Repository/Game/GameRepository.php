@@ -67,11 +67,12 @@ class GameRepository extends Repository
                 'description' => 'Πίστα πόλης',
                 'comingsoon' => true,
                 'audio' => [
+                    // @todo: Fix (ADD) the missing assets.
                     'focus' => 'sounds.game_start.board_3_focus',
                     'select' => 'sounds.game_start.board_3_select',
                 ],
                 'preview' => [
-                    // @todo: Fix (replace) the missing asset.
+                    // @todo: Fix (ADD) the missing assets (using board_2 previews instead for now).
                     'asset' => $public_path . '/board_2/preview', // extensions: .png, @2x.png
                     'alt' => 'Προεπισκόπηση πίστας πόλης',
                     'width' => $preview_width,
@@ -173,11 +174,13 @@ class GameRepository extends Repository
         return $pawns;
     }
 
-    public function gameExists(int $game_id, int $user_id): bool {
+    public function gameExists(int $game_id, int $user_id): bool
+    {
         return Game::where(['id' => $game_id, 'user_id' => $user_id, 'active' => true])->exists();
     }
 
-    public function gameExistsAsInactive(int $game_id, int $user_id): bool {
+    public function gameExistsAsInactive(int $game_id, int $user_id): bool
+    {
         return Game::where(['id' => $game_id, 'user_id' => $user_id, 'active' => false])->exists();
     }
 }
