@@ -102,7 +102,7 @@ kbd {
     color: var(--trvl-color);
 }
 .bg-lg-green {
-    @media (min-width: 992px) {
+    @include media-breakpoint-up(xl) {
         --bs-bg-opacity: 1;
         background-color: rgba(
             var(--trvl-bg-rgb),
@@ -154,8 +154,9 @@ kbd {
 /* Main Landing Pages Content (non-game related pages) */
 section.landing {
     // Utilities
-    &.mb-lg-n350 {
-        @include media-breakpoint-up(lg) {
+    &.mb-xl-n350,
+    .mb-xl-n350 {
+        @include media-breakpoint-up(xl) {
             margin-bottom: -350px;
         }
     }
@@ -170,6 +171,46 @@ section.landing {
         }
         @include media-breakpoint-down(lg) {
             font-size: calc(1.4rem + 1.5vw);
+        }
+        @include media-breakpoint-down(sm) {
+            font-size: calc(1rem + 1.6vw);
+        }
+    }
+    .landing-call-to-action {
+        .btn {
+            --bs-btn-font-size: 2.1em;
+            box-shadow: 0 0.6rem 0.6rem
+                    rgba(var(--trvl-btn-hover-shadow-rgb), 0.2),
+                0 0.3rem rgba(var(--trvl-btn-hover-shadow-rgb), 0.1);
+            @include media-breakpoint-down(md) {
+                font-size: calc(0.95em + 1.6vw);
+            }
+        }
+        .btn:hover {
+            box-shadow: 0 0.6rem 1rem
+                    rgba(var(--trvl-btn-hover-shadow-rgb), 0.4),
+                0 0.3rem rgba(var(--trvl-btn-hover-shadow-rgb), 0.2);
+        }
+    }
+    .landing-made-by {
+        .scify,
+        .sponsor {
+            font-size: 1.9rem;
+            @include media-breakpoint-down(md) {
+                font-size: calc(1rem + 1.6vw);
+            }
+        }
+        .scify img {
+            @include media-breakpoint-down(sm) {
+                width: 50px;
+                height: auto;
+            }
+        }
+        .sponsor img {
+            @include media-breakpoint-down(sm) {
+                width: 200px;
+                height: auto;
+            }
         }
     }
     // Sub-sections
@@ -200,20 +241,21 @@ section.landing {
         .landing-block {
             position: relative;
             &--abstract {
+                margin: 0 auto;
                 width: 264px;
                 height: 398px;
-                background-image: url("/images/landing/three-blocks/background-abstract.png");
+                background-image: url("/images/landing/blocks-abstract/background-abstract.png");
                 background-size: 264px 398px;
                 background-repeat: no-repeat;
                 @media only screen and (-webkit-min-device-pixel-ratio: 2),
                     only screen and (min--moz-device-pixel-ratio: 2),
                     only screen and (min-device-pixel-ratio: 2),
                     only screen and (min-resolution: 2dppx) {
-                    background-image: url("/images/landing/three-blocks/background-abstract@2x.png");
+                    background-image: url("/images/landing/blocks-abstract/background-abstract@2x.png");
                 }
                 .landing-block--label {
                     top: -140px;
-                    left: 10%;
+                    left: 2%;
                     width: 220px;
                     overflow: hidden;
                     text-overflow: ellipsis;
@@ -243,7 +285,7 @@ section.landing {
                 position: relative;
                 h2 {
                     font-weight: 600;
-                    font-size: 1.2rem;
+                    font-size: 1.15rem;
                     text-align: center;
                     span {
                         white-space: nowrap;
@@ -254,10 +296,6 @@ section.landing {
     }
     .landing-numbers {
         text-align: center;
-        background-image: url("/images/landing/numbers/dashline.png");
-        background-size: 731px 962px;
-        background-repeat: no-repeat;
-        background-position: 0% 0%;
         h2 {
             font-weight: 500;
             font-size: 2.5rem;
@@ -265,22 +303,9 @@ section.landing {
                 font-size: calc(1.25rem + 1.5vw);
             }
         }
-        @media only screen and (-webkit-min-device-pixel-ratio: 2),
-            only screen and (min--moz-device-pixel-ratio: 2),
-            only screen and (min-device-pixel-ratio: 2),
-            only screen and (min-resolution: 2dppx) {
-            background-image: url("/images/landing/numbers/dashline@2x.png");
-        }
-        @media (max-width: 767.98px) {
-            background-position: 100% -700%;
-        }
-        @media (min-width: 768px) {
-            min-height: 962px;
-        }
         &--one {
-            padding-top: 6rem;
+            padding-top: 0;
             @media (min-width: 992px) {
-                padding-top: 11rem;
                 margin-left: 4%;
             }
         }
@@ -406,6 +431,15 @@ section.landing {
 // Landing header
 .trvl-landing-header {
     margin-bottom: -8rem;
+    .logo {
+        h1 {
+        }
+        img.img-fluid {
+            @include media-breakpoint-down(sm) {
+                width: 65vw;
+            }
+        }
+    }
 }
 // Landing footer
 .trvl-landing-footer {
