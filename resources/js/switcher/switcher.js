@@ -202,6 +202,31 @@ function switcher() {
 		return false;
 	}
 
+	function saveMusicVolume(volume) {
+		let postUrl = window.Laravel.playerAudio.updateVolumesUrl;
+		let playerUrl = window.Laravel.playerAudio.playerUrl;
+		let lastIndex = playerUrl.lastIndexOf("/");
+		let playerId = playerUrl.slice(lastIndex + 1);
+		let csrfToken = document.querySelector(
+			"meta[name='csrf-token']"
+		).content;
+		let data = {
+			_token: csrfToken,
+			player_id: playerId,
+			music_volume: volume,
+		};
+		let post = JSON.stringify(data);
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", postUrl, true);
+		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+		xhr.send(post);
+		xhr.onload = function () {
+			if (xhr.status === 201) {
+				console.log("Post successfully created!");
+			}
+		};
+	}
+
 	function handleSwitchKey(event) {
 		const allowedList = window.SwitcherKeys.allowedList;
 		const escapeList = window.SwitcherKeys.escapeList;
@@ -246,12 +271,14 @@ function switcher() {
 						if (event.key === "-" || event.key === "_") {
 							if (music !== null) {
 								music.volume = Math.max(0, music.volume - 0.1);
+								saveMusicVolume(music.volume);
 								return false;
 							}
 						}
 						if (event.key === "=" || event.key === "+") {
 							if (music !== null) {
 								music.volume = Math.min(1, music.volume + 0.1);
+								saveMusicVolume(music.volume);
 								return false;
 							}
 						}
