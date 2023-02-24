@@ -29,12 +29,7 @@
                 </div>
                 <div class="col-10 text-center" id="currentPageHeader">
                     <h1 id="currentPageLabel">{{ __("messages.select_pawn_coplayer") }}</h1>
-                    <p>
-                        <strong class="fs-5" id="currentPageDescription">
-                            {{--Use `&nbsp;` if no description.--}}
-                            &nbsp;
-                        </strong>
-                    </p>
+
                 </div>
                 <div class="col-1">
                     {{--  Reserved for header navigation buttons. --}}
@@ -43,7 +38,7 @@
         </div>
         <!-- / section header -->
 
-        <div class="section gameselect container-xxl pt-3 px-4 px-lg-6">
+        <div class="section gameselectpawn container-xxl pt-3 px-4 px-lg-6 mb-5">
             <div class="row text-center justify-content-center gy-4 gy-xxl-2">
                 @foreach ($pawns as $pawn)
                     @php

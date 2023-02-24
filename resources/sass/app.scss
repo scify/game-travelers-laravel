@@ -80,12 +80,13 @@ a:focus-visible {
 
 header img,
 footer img {
-    display: block;
+    display: inline-block;
 }
 
 kbd {
     font-weight: 600;
-    font-family: "Manrope";
+    font-family: "Manrope", SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
 }
 
 /* Bootstrap friendly global tags */
@@ -552,7 +553,7 @@ img.splash {
         padding-bottom: 2rem;
     }
 }
-// Manual height calculations based on the background heights.
+// Manual height calculations based on the background heights :(.
 .gamestart {
     min-height: 520px;
 }
@@ -562,6 +563,9 @@ img.splash {
 }
 .gameselect {
     min-height: 495px;
+}
+.gameselectpawn {
+    min-height: 493px;
 }
 
 /* User */
@@ -747,11 +751,11 @@ img.splash {
 .trvl-footer {
     // bottom: 50px;
     position: relative;
-    .scify {
+    .d-flex {
         position: absolute;
-        top: -53px; // --trvl-footer-height-negative (hard-coded for compatibility)
+        top: -40px; // --trvl-footer-height-negative (hard-coded for compatibility)
         top: var(--trvl-footer-height-negative);
-        float: left;
+        // float: left;
     }
 }
 
@@ -822,10 +826,10 @@ img.splash {
     }
 }
 
-@media (max-width: 575.98px) {
+@include media-breakpoint-down(sm) {
     .section,
     div.trvl-main-content {
-        margin-bottom: 4rem;
+        // margin-bottom: 2rem;
     }
     .text-start-end,
     .text-start-end-start-end {
@@ -835,9 +839,37 @@ img.splash {
         text-align: center;
     }
     .trvl-footer {
-        .scify {
+        .d-flex {
+            margin-top: 2.5rem;
             left: calc(100vw - 1.25rem - var(--trvl-footer-width));
             top: calc(var(--trvl-footer-height-negative) - 1rem);
+        }
+    }
+}
+// Footer optimizations for extremely small viewports:
+@media (max-width: 400px) {
+    footer {
+        padding: 0 !important;
+    }
+    .trvl-footer {
+        .d-flex {
+            position: relative;
+            width: 180px;
+            left: 0;
+            flex-direction: column !important;
+            margin: 0 auto;
+            div {
+                width: 180px;
+                text-align: center;
+                margin-top: 0.75rem;
+            }
+            div.scify {
+                margin-top: 2rem;
+            }
+        }
+        img {
+            width: auto;
+            height: auto;
         }
     }
 }

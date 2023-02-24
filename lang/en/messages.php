@@ -15,6 +15,8 @@ return [
     'meta_keywords' =>
 'disability games,game,game disability,travellers,travellers game',
     'game_note' => 'The game is designed for desktop and laptop computers.',
+    'game_developed_by' => 'Developed by SciFY',
+    'game_sponsored_by' => 'Kindly sponsored by Heracles Group',
     /* Generic */
     'alert_notice' => 'Notice',
     'close' => 'Close', // i.e. "Close" window
@@ -85,10 +87,13 @@ return [
     'switcher' => [
         'break' => 'Break',
         'continue' => 'Continue',
+        'keys_navigation' => 'Navigation Keys',
+        'keys_support' => 'Support Keys',
         'help_automatic' => 'If you like to temporarily stop auto-scanning please select «Break».',
         'help_automatic_button_select' => 'To make a selection press:',
         'help_manual_button_navigate' => 'To move/navigate press:',
         'help_manual_button_select' => 'To make a selection press:',
+        'help_volume' => 'Increase or decrease music volume with', // keyup and keyminus
         'set_button' => 'press a key', // press key
         'set_button_invalid' => 'invalid key', // invalid button (please keep it short)
     ],

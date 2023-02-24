@@ -262,7 +262,7 @@
                 </fieldset>
             </div>
 
-            <div id="navGroup" class="form-actions d-flex align-items-end flex-column pb-0 pb-lg-3">
+            <div id="navGroup" class="form-actions d-flex align-items-end flex-column pb-0 pb-lg-3 mb-0 mb-sm-5 mb-lg-0">
                 <button
                     class="btn btn-primary btn-lg responsive-expand"
                     id="submitButton"

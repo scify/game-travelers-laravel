@@ -31,6 +31,10 @@
     --trvl-c-green-pale: #78b594;
     --trvl-c-green-pale-rgb: 120, 181, 148;
     --trvl-c-green-pale-hsl: 148deg, 29%, 59%;
+    // Browns
+    --trvl-c-yellow: #d8c46f;
+    --trvl-c-brown-light: #ffecc8;
+    --trvl-c-brown-bright: #faefe4;
     // Cyans
     --trvl-c-cyan-dark: #287971; // e.g. Coming soon
     /* Various default colours */
@@ -46,8 +50,8 @@
 /* Traveler's default variables */
 :root {
     --trvl-header-height: calc(145px - 1rem);
-    --trvl-footer-width: 105px;
-    --trvl-footer-height: 53px;
+    --trvl-footer-width: 333px;
+    --trvl-footer-height: 40px;
     --trvl-footer-height-negative: calc(-1 * var(--trvl-footer-height));
     --trvl-transition: all ease-in 0.2s;
 }
@@ -74,7 +78,7 @@
     --trvl-btn-hover-bg: var(--trvl-c-white);
     --trvl-btn-hover-color: var(--color-black);
     --trvl-btn-hover-border-color: var(--trvl-c-black);
-    --trvl-btn-active-bg: var(--trvl-c-green-light);
+    --trvl-btn-active-bg: var(--trvl-c-brown-bright); // --trvl-c-green-light
     --trvl-btn-active-color: var(--trvl-c-green-dark);
     --trvl-btn-active-border-color: var(--trvl-c-green-dark);
     --trvl-btn-disabled-bg: #f4f2f0;

@@ -303,7 +303,7 @@
                 </fieldset>
             </div>
 
-            <div id="navGroup" class="form-actions d-flex align-items-end mt-4 mt-sm-0 flex-column">
+            <div id="navGroup" class="form-actions d-flex align-items-end mt-4 mt-sm-0 mb-0 mb-sm-5 mb-lg-0 flex-column">
                 <button
                     class="btn btn-primary btn-lg responsive-expand"
                     id="submitButton"

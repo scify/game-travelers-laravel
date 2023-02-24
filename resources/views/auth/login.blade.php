@@ -68,7 +68,7 @@
                             <i class="bi bi-info-circle-fill flex-shrink-0 me-4"></i>
                             <div>{{ __("messages.game_note") }}</div>
                         </div>
-                        <div class="form-actions p-4 text-center">
+                        <div class="form-actions pb-5 pb-xl-0 p-3 text-center">
                             <button class="btn btn-primary btn-lg text-nowrap responsive-expand" tabindex="4" type="submit" id="submit">{{ __("messages.login") }}</button>
                         </div>
                     </div>
