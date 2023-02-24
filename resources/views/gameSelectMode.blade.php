@@ -60,15 +60,7 @@
                     :tabindex=2
                     :comingsoon=null {{--Προσεχώς: true / null (default)--}}
                 />
-                <x-selectModeButton
-                    :asset="'mode-double'"
-                    :title="'Διπλό'"
-                    :mode=3
-                    :alt="'Διπλό παιχνίδι'"
-                    :audio-select="'sounds.game_start.mode_3_select'"
-                    :tabindex=3
-                    :comingsoon=true {{--Προσεχώς: true / null (default)--}}
-                />
+                <!-- option for two player game removed -->
             </div>
             <div class="row gx-0 pt-6 pt-sm-0 pt-md-0 pt-lg-0 pt-xl-6 pt-xxl-6">
                 <div class="col-12">
