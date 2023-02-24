@@ -72,8 +72,7 @@ class GameRepository extends Repository
                     'select' => 'sounds.game_start.board_3_select',
                 ],
                 'preview' => [
-                    // @todo: Fix (ADD) the missing assets (using board_2 previews instead for now).
-                    'asset' => $public_path . '/board_2/preview', // extensions: .png, @2x.png
+                    'asset' => $public_path . '/board_3/preview', // extensions: .png, @2x.png
                     'alt' => 'Προεπισκόπηση πίστας πόλης',
                     'width' => $preview_width,
                     'height' => $preview_height,

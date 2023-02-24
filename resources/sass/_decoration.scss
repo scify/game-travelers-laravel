@@ -164,7 +164,7 @@
         only screen and (min-resolution: 2dppx) {
         background-image: url("/images/backgrounds/bg-g3-side-flowers@2x.png");
     }
-    @media (max-width: 575.98px) {
+    @include media-breakpoint-down(sm) {
         background-image: none;
     }
 }
@@ -172,13 +172,13 @@
 /* Landing page(s) curves */
 .trvl-curve {
     background-repeat: no-repeat;
-    &--landing-three-blocks--sm-lg-dash {
-        @media (max-width: 991.98px) {
+    &--landing-four-abstract-blocks--sm-xl-dash {
+        @include media-breakpoint-down(xl) {
             background-image: url("/images/landing/curves/curve-landing_one-xl-dash.svg");
             background-position: 0% 5%;
             background-repeat: no-repeat;
             background-size: 1440px 302px;
-            @media (max-width: 575.98px) {
+            @include media-breakpoint-down(sm) {
                 background-position: 20% 0%;
             }
         }
@@ -187,10 +187,10 @@
         background-image: url("/images/landing/curves/curve-landing_one-lg-green.svg");
         background-position: 0% 0%;
         background-size: 100% 243px;
-        @media (max-width: 575.98px) {
+        @include media-breakpoint-down(sm) {
             background-size: 100% 243px;
         }
-        @media (min-width: 992px) {
+        @include media-breakpoint-up(xl) {
             background: none;
         }
     }
@@ -211,6 +211,9 @@
     }
     &--landing-two {
         height: 149px;
+        @include media-breakpoint-up(md) {
+            margin-top: -109px;
+        }
         &--color {
             background-position: 0% 50%;
             background-size: 100% 149px;

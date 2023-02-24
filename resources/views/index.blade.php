@@ -1,11 +1,8 @@
-<x-layoutContent
-    :title="__('messages.app_name')"
-    :header-background-color="'white'"
->
+<x-layoutLanding :title="__('messages.app_name')">
 
     <!-- section--tree-forest -->
     <section class="landing bg-green px-4">
-        <div class="container-lg pt-2 px-4 pb-6 pb-lg-7">
+        <div class="container-lg pt-2 px-4">
             <div class="landing-trees d-flex justify-content-center">
                 <img class="img-xl"
                     loading="lazy"
@@ -37,68 +34,128 @@
             <div class="landing-call pt-4 text-center">
                 <h1 class="action">
                     <span>Ταξίδι στο παιχνίδι,</span>
-                    <span>για όλα τα παιδιά!</span>
+                    <span>για παιδιά με αναπηρία!</span>
                 </h1>
             </div>
             <div class="landing-call-to-action pt-4 text-center">
                 <a href="{{ route('login') }}" class="btn btn-primary btn-lg text-nowrap responsive-expand">
-                    παίξε
+                    παίξε εδώ
                 </a>
+            </div>
+        </div>
+        <div class="landing-made-by container-lg text-center pt-5 pb-5">
+            <div class="row">
+                <div class="col-12 col-md-5 pt-5 pt-md-0 order-2 order-md-1 scify">
+                    <div>Ανάπτυξη</div>
+                    <div>
+                        <a href="https://www.scify.gr" target="_blank">
+                            <img
+                                class="img-fluid"
+                                loading="lazy"
+                                srcset="{{ asset('images/logos/74h_scify@2x.png') }} 2x"
+                                src="{{ asset('images/logos/74h_scify.png') }}"
+                                width="56" height="74"
+                                alt="SciFY - Science for You"
+                            >
+                        </a>
+                    </div>
+                </div>
+                <div class="col-0 col-md-2 order-2" aria-role="presentation"></div>
+                <div class="col-12 col-md-5 order-1 order-md-3 sponsor">
+                    <div class="text-nowrap">Ευγενική χορηγία</div>
+                    <div>
+                        <a href="https://www.lafarge.gr" target="_blank">
+                            <img
+                                class="img-fluid"
+                                loading="lazy"
+                                srcset="{{ asset('images/logos/74h_iraklis@2x.png') }} 2x"
+                                src="{{ asset('images/logos/74h_iraklis.png') }}"
+                                width="263" height="74"
+                                alt="Ηρακλής - Όμιλος εταιριών"
+                            >
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- section--three-blocks -->
-    <section class="landing trvl-curve trvl-curve--landing-one-lg--color--green bg-light bg-lg-green px-0 mb-lg-n350">
-        <div class="trvl-curve trvl-curve--landing-three-blocks--sm-lg-dash px-4">
-            <div class="container-lg pt-2 px-4">
-                <div class="landing-blocks landing-blocks--three">
-                    <div class="d-flex flex-column flex-lg-row justify-content-around align-items-center">
-                        <div class="landing-block landing-block--abstract">
-                            <img class=""
-                                loading="lazy"
-                                srcset="{{ asset('images/landing/three-blocks/balloon@2x.png') }} 2x"
-                                src="{{ asset('images/landing/three-blocks/balloon.png') }}"
-                                width="264" height="398"
-                                aria-role="presentation"
-                                alt=""
-                            >
-                            <div class="landing-block--label">
-                                <h2>
-                                    <span>Ευκαιρία για παιχνίδι</span>
-                                    <span>και χαρά</span>
-                                </h2>
+    <!-- section--four-abstrack-blocks -->
+    <section class="landing trvl-curve trvl-curve--landing-one-lg--color--green bg-light bg-lg-green px-0 mb-xl-n350">
+        <div class="trvl-curve trvl-curve--landing-four-abstract-blocks--sm-xl-dash px-4">
+            <div class="pt-2 px-4">
+                <div class="container text-center landing-blocks landing-blocks--three">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 justify-content-around align-items-center gy-5">
+                        <div class="col">
+                            <div class="landing-block landing-block--abstract">
+                                <img class=""
+                                    loading="lazy"
+                                    srcset="{{ asset('images/landing/blocks-abstract/block_1@2x.png') }} 2x"
+                                    src="{{ asset('images/landing/blocks-abstract/block_1.png') }}"
+                                    width="264" height="398"
+                                    aria-role="presentation"
+                                    alt=""
+                                >
+                                <div class="landing-block--label">
+                                    <h2>
+                                        <span>Σχεδιασμένο για παιδιά</span>
+                                        <span>με εγκεφαλική παράλυση</span>
+                                    </h2>
+                                </div>
                             </div>
                         </div>
-                        <div class="landing-block landing-block--abstract mt-6 mt-lg-0">
-                            <img class=""
-                                loading="lazy"
-                                srcset="{{ asset('images/landing/three-blocks/unicorn@2x.png') }} 2x"
-                                src="{{ asset('images/landing/three-blocks/unicorn.png') }}"
-                                width="264" height="398"
-                                aria-role="presentation"
-                                alt=""
-                            >
-                            <div class="landing-block--label">
-                                <h2>
-                                    <span>Ενισχύει την αυτονομία</span>
-                                    <span>και την αυτοπεποίθηση<span>
-                                </h2>
+                        <div class="col">
+                            <div class="landing-block landing-block--abstract">
+                                <img class=""
+                                    loading="lazy"
+                                    srcset="{{ asset('images/landing/blocks-abstract/block_2@2x.png') }} 2x"
+                                    src="{{ asset('images/landing/blocks-abstract/block_2.png') }}"
+                                    width="264" height="398"
+                                    aria-role="presentation"
+                                    alt=""
+                                >
+                                <div class="landing-block--label">
+                                    <h2>
+                                        <span>Ευκαιρία για παιχνίδι</span>
+                                        <span>και χαρά</span>
+                                    </h2>
+                                </div>
                             </div>
                         </div>
-                        <div class="landing-block landing-block--abstract mt-6 mt-lg-0">
-                            <img class=""
-                                loading="lazy"
-                                srcset="{{ asset('images/landing/three-blocks/vase@2x.png') }} 2x"
-                                src="{{ asset('images/landing/three-blocks/vase.png') }}"
-                                width="264" height="398"
-                                aria-role="presentation"
-                                alt=""
-                            >
-                            <div class="landing-block--label">
-                                <h2>
-                                    <span>Ενισχύει τη μάθηση</span>
-                                </h2>
+                        <div class="col">
+                            <div class="landing-block landing-block--abstract">
+                                <img class=""
+                                    loading="lazy"
+                                    srcset="{{ asset('images/landing/blocks-abstract/block_3@2x.png') }} 2x"
+                                    src="{{ asset('images/landing/blocks-abstract/block_3.png') }}"
+                                    width="264" height="398"
+                                    aria-role="presentation"
+                                    alt=""
+                                >
+                                <div class="landing-block--label">
+                                    <h2>
+                                        <span>Με τη συνεργασία</span>
+                                        <span>ειδικών παιδαγωγών<span>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="landing-block landing-block--abstract">
+                                <img class=""
+                                    loading="lazy"
+                                    srcset="{{ asset('images/landing/blocks-abstract/block_4@2x.png') }} 2x"
+                                    src="{{ asset('images/landing/blocks-abstract/block_4.png') }}"
+                                    width="264" height="398"
+                                    aria-role="presentation"
+                                    alt=""
+                                >
+                                <div class="landing-block--label">
+                                    <h2>
+                                        <span>Ενισχύει την αυτονομία</span>
+                                        <span>και την αυτοπεποίθηση</span>
+                                    </h2>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -108,14 +165,14 @@
     </section>
 
     <!-- curve--landing-one-xl -->
-    <div aria-role="presentation" class="d-none d-lg-block trvl-curve trvl-curve--landing-one-xl trvl-curve--landing-one-xl--color trvl-curve--landing-one-xl--color--green bg-light">
+    <div aria-role="presentation" class="d-none d-xl-block trvl-curve trvl-curve--landing-one-xl trvl-curve--landing-one-xl--color trvl-curve--landing-one-xl--color--green bg-light">
         <div class="trvl-curve trvl-curve--landing-one-xl trvl-curve--landing-one-xl--dash">
             &nbsp;
         </div>
     </div>
 
     <!-- section--landing-numbers -->
-    <section class="landing bg-light px-4 pt-0 pt-lg-4 pt-lg-6">
+    <section class="landing bg-light px-4 pt-0 pt-lg-4">
         <div class="container-lg pt-2">
             <div class="landing-numbers py-1 py-md-6 d-flex flex-column justify-content-around ">
                 <div class="landing-numbers--one d-flex flex-column flex-lg-row align-items-center">
@@ -127,7 +184,7 @@
                         aria-role="presentation"
                         alt=""
                     >
-                    <div class="ps-0 ps-md-4 pt-4 pt-md-0">
+                    <div class="ps-0 ps-md-4 pt-4 pt-lg-0">
                         <h2>Για παιδιά με αναπηρία</h2>
                     </div>
                 </div>
@@ -140,7 +197,7 @@
                         aria-role="presentation"
                         alt=""
                     >
-                    <div class="ps-0 ps-md-4 pt-4 pt-md-0">
+                    <div class="ps-0 ps-md-4 pt-4 pt-lg-0">
                         <h2>Για φορείς φροντίδας ΑμεΑ</h2>
                     </div>
                 </div>
@@ -153,7 +210,7 @@
                         aria-role="presentation"
                         alt=""
                     >
-                    <div class="ps-0 ps-md-4 pt-4 pt-md-0">
+                    <div class="ps-0 ps-md-4 pt-4 pt-lg-0">
                         <h2>...και για όλους!</h2>
                     </div>
                 </div>
