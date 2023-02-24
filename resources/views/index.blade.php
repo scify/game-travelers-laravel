@@ -398,7 +398,7 @@
                     </h1>
                 </div>
                 <div class="landing-call pt-4 text-center">
-                    <a href="{{ route('login') }}" class="btn btn-primary btn-lg text-nowrap responsive-expand">
+                    <a href="{{ route('about') }}" class="btn btn-primary btn-lg text-nowrap responsive-expand">
                         μάθε εδώ
                     </a>
                 </div>
