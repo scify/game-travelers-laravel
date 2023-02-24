@@ -316,6 +316,7 @@ class SetupGameController extends Controller
             'playerMusicVolume' => $player->music_volume,
             'playerSoundVolume' => $player->sound_volume,
             'updateVolumesUrl' => route('audio.updateVolumes'),
+            'playerUrl' => '/player/'.$player->id, // see concept below
         ];
         return $playerAudio;
     }

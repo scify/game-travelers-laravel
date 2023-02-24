@@ -6,7 +6,6 @@
     :has-vue=true
     :player-audio=$playerAudio
 >
-
     @section('scripts')
         <x-settingsScripts />
         {{--Music playback is controlled via #musicVolumeSlider--}}

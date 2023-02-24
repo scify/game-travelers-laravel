@@ -4,6 +4,29 @@
 window.addEventListener("load", function () {
 	const rangeElements = document.querySelectorAll("input[type='range']");
 
+	function saveVolumes(volume, isMusic) {
+		let postUrl = window.Laravel.playerAudio.updateVolumesUrl;
+		let playerUrl = window.Laravel.playerAudio.playerUrl;
+		let lastIndex = playerUrl.lastIndexOf("/");
+		let playerId = playerUrl.slice(lastIndex + 1);
+		let csrfToken = document.querySelector(
+			"meta[name='csrf-token']"
+		).content;
+		let data = isMusic
+			? { _token: csrfToken, player_id: playerId, music_volume: volume }
+			: { _token: csrfToken, player_id: playerId, sound_volume: volume };
+		let post = JSON.stringify(data);
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", postUrl, true);
+		xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+		xhr.send(post);
+		xhr.onload = function () {
+			if (xhr.status === 201) {
+				console.log("Post successfully created!");
+			}
+		};
+	}
+
 	function handleVolumeSlider(
 		rangeElement,
 		audioConfirmation = true,
@@ -14,6 +37,11 @@ window.addEventListener("load", function () {
 		const rangeMax = parseFloat(rangeElement.max);
 		const rangeStep = parseFloat(rangeElement.step);
 		let rangeValue = rangeElement.value;
+		if (music === null) {
+			saveVolumes(rangeValue, false);
+		} else {
+			saveVolumes(rangeValue, true);
+		}
 		const preventMinValue =
 			rangeElement.dataset.preventMinValue === "true" || false;
 		// Disallow minimum value if data-prevent-min-value=true:
@@ -105,11 +133,6 @@ window.addEventListener("load", function () {
 							case "-":
 								music.volume = Math.max(0, music.volume - 0.1);
 								volumeKeyDown = true;
-								console.log(
-									"!!!" +
-										window.Laravel.playerAudio
-											.updateVolumesUrl
-								);
 								break;
 							case "=":
 								music.volume = Math.min(1, music.volume + 0.1);

@@ -99,18 +99,22 @@ class CustomAudioController extends Controller
     public function updateVolumes(Request $request)
     {
         $player_id = $request->player_id;
-        $music_volume = (float) $request->music_volume;
-        $this->updateVolumesToDB($player_id, $music_volume);
+        $music_volume = $request->has("music_volume") ? $request->music_volume : null;
+        $sound_volume = $request->has("sound_volume") ? $request->sound_volume : null;
+        $this->updateVolumesToDB($player_id, $music_volume, $sound_volume);
         return response([]);
     }
 
-    protected function updateVolumesToDB(int $player_id, float $music_volume, float $sound_volume = 0)
+    protected function updateVolumesToDB(int $player_id, float $music_volume = null, float $sound_volume = null)
     {
-        $entry = ['music_volume' => $music_volume];
-        if ($sound_volume > 0) {
+        if ($music_volume != null || $sound_volume != null) {
             $entry = ['music_volume' => $music_volume, 'sound_volume' => $sound_volume];
+            if ($music_volume == null)
+                $entry = ['sound_volume' => $sound_volume];
+            else if ($sound_volume == null)
+                $entry = ['music_volume' => $music_volume];
+            $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
         }
-        $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
     }
 
     protected function getPlayerAudio(int $player_id, float $musicVolume, float $soundVolume, $playerAudioFiles)
@@ -122,7 +126,7 @@ class CustomAudioController extends Controller
             'playerMusicVolume' => $musicVolume,
             'playerSoundVolume' => $soundVolume,
             'updateVolumesUrl' => route('audio.updateVolumes'),
-            'playerUrl' => '/player/b5b72dd79161d837bef10dd3d54de385', // see concept below
+            'playerUrl' => '/player/'.$player_id, // see concept below
             'playerAudioFiles' => $playerAudioFiles
         ];
         return $playerAudio;
