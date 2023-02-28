@@ -434,6 +434,89 @@ class BoardController extends Controller
                     'value' => -5,
                 ],
             ];
+        } elseif ($board_id == 3) {
+            return [
+                1 => [
+                    'name' => 'Map',
+                    'value' => 1,
+                ],
+                2 => [
+                    'name' => 'Friend',
+                    'value' => 1,
+                ],
+                3 => [
+                    'name' => 'Shortcut',
+                    'value' => 1,
+                ],
+                4 => [
+                    'name' => 'Policeman',
+                    'value' => 3,
+                ],
+                5 => [
+                    'name' => 'Bikes',
+                    'value' => 3,
+                ],
+                6 => [
+                    'name' => 'Car',
+                    'value' => 3,
+                ],
+                7 => [
+                    'name' => 'Kid',
+                    'value' => 3,
+                ],
+                8 => [
+                    'name' => 'Metrofast',
+                    'value' => 5,
+                ],
+                9 => [
+                    'name' => 'Grandma',
+                    'value' => 5,
+                ],
+                10 => [
+                    'name' => 'Bus',
+                    'value' => 5,
+                ],
+                -1 => [
+                    'name' => 'Brokenbus',
+                    'value' => -1,
+                ],
+                -2 => [
+                    'name' => 'Sandwich',
+                    'value' => -1,
+                ],
+                -3 => [
+                    'name' => 'Cat',
+                    'value' => -1,
+                ],
+                -4 => [
+                    'name' => 'Tire',
+                    'value' => -3,
+                ],
+                -5 => [
+                    'name' => 'Sign',
+                    'value' => -3,
+                ],
+                -6 => [
+                    'name' => 'Metro',
+                    'value' => -3,
+                ],
+                -7 => [
+                    'name' => 'Wind',
+                    'value' => -3,
+                ],
+                -8 => [
+                    'name' => 'Traffic',
+                    'value' => -5,
+                ],
+                -9 => [
+                    'name' => 'Rain',
+                    'value' => -5,
+                ],
+                -10 => [
+                    'name' => 'Note',
+                    'value' => -5,
+                ],
+            ];
         } else {
             return [];
         }
