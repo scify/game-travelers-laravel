@@ -34,7 +34,7 @@
                     <h1 id="currentPageLabel">Ρυθμίσεις δυσκολίας</h1>
                     <p>
                         <strong id="currentPageDescription">
-                            Επίλεξε βαθμό δυσκολίας για τον παίκτη <em> {{ $name }}</em>.
+                            Επίλεξε βαθμό δυσκολίας για τον παίκτη <span>@php echo rtrim($name, '.'); @endphp</span>.
                         </strong>
                     </p>
                 </div>
