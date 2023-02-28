@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BusinessLogicLayer\CustomAudio\CustomAudioManager;
 use App\Repository\Player\PlayerRepository;
 use Illuminate\Http\Request;
 
@@ -9,10 +10,12 @@ class CustomAudioController extends Controller
 {
 
     protected PlayerRepository $playerRepository;
+    protected CustomAudioManager $customAudioManager;
 
-    public function __construct(PlayerRepository $playerRepository)
+    public function __construct(PlayerRepository $playerRepository, CustomAudioManager $customAudioManager)
     {
         $this->playerRepository = $playerRepository;
+        $this->customAudioManager = $customAudioManager;
     }
 
     /**
@@ -26,6 +29,11 @@ class CustomAudioController extends Controller
         if ($player_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
+
+        if (!$this->customAudioManager->userExists($player_id)) {
+            $this->customAudioManager->createFolder($player_id);
+        }
+
         $player = $this->playerRepository->find($player_id, ['name', 'avatar_id', 'music_volume', 'sound_volume']);
         $name = $player->name;
         $avatar_id = $player->avatar_id;
@@ -119,16 +127,14 @@ class CustomAudioController extends Controller
 
     protected function getPlayerAudio(int $player_id, float $musicVolume, float $soundVolume, $playerAudioFiles)
     {
-        /*$player = $this->playerRepository->find($player_id, ['music_volume', 'sound_volume']);
-        $musicVolume = $player->music_volume;
-        $soundVolume = $player->sound_volume;*/
         $playerAudio = [
             'playerMusicVolume' => $musicVolume,
             'playerSoundVolume' => $soundVolume,
             'updateVolumesUrl' => route('audio.updateVolumes'),
-            'playerUrl' => '/player/'.$player_id, // see concept below
+            'playerUrl' => '/player/'.$player_id,
             'playerAudioFiles' => $playerAudioFiles
         ];
         return $playerAudio;
     }
+
 }
