@@ -22,8 +22,7 @@
                         {{ __('messages.continue') }}
                     </a>
                 @else
-                    <img src="{{ asset('images/icons/checkmark24.svg') }}" alt="{{ $alt ?? __('messages.continue') }}"
-                         width="128" height="128">
+                    <i class="bi bi-check" aria-label="{{ $alt ?? __('messages.continue') }}"></i>
                 @endisset
             </div>
         </div>

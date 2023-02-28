@@ -38,7 +38,7 @@
                     <h1 id="currentPageLabel">Διαμόρφωση προφίλ</h1>
                     <p>
                         <strong id="currentPageDescription">
-                            Διάλεξε ένα όνομα και μία φατσούλα για το προφίλ του παίκτη <em>{{ $name }}</em>. {{-- Player Name goes here. --}}
+                            Διάλεξε ένα όνομα και μία φατσούλα για το προφίλ του παίκτη <span>@php echo rtrim($name, '.'); @endphp</span>.
                         </strong>
                     </p>
                 </div>
