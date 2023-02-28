@@ -45,31 +45,3 @@
 </div>
 <!-- / audioFiles -->
 
-
-<style type="text/css">
-
-/* @todo transfer to app.css */
-
-.settings .audiofiles h3 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    }
-.settings .audiofiles-category--header {
-    --bs-border-style: solid;
-    --bs-border-width: 2px;
-    --bs-border-color: rgba(var(--trvl-color-rgb), 0.8);
-}
-.audiofiles-item .input-group {
-    --bs-accordion-btn-focus-box-shadow: 0 0 0 0 rgba(var(--trvl-c-green-pale-rgb), 0.4); /* 0 0 0 0.25rem rgba(var(--trvl-c-green-pale-rgb), 0.4); */
-}
-.audiofiles-item .input-group-text {
-    background: rgba(var(--trvl-color-rgb), 0.9);
-    color: var(--trvl-c-bright);
-    border: 1px solid rgba(var(--trvl-color-rgb), 0.5);
-}
-.audiofiles-item .form-control {
-    background: rgba(var(--trvl-color-rgb), 0.04);
-    border: 0px solid rgba(var(--trvl-color-rgb), 0.5);
-}
-
-</style>
