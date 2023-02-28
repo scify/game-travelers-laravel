@@ -64,7 +64,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="ms-4 me-4 ms-lg-0 mt-4 p-4 alert alert-note progressive-alert d-flex align-items-center" role="alert">
+                        <div class="ms-3 me-3 ms-lg-0 mt-4 p-4 alert alert-note progressive-alert d-flex align-items-center" role="alert">
                             <i class="bi bi-info-circle-fill flex-shrink-0 me-4"></i>
                             <div>{{ __("messages.game_note") }}</div>
                         </div>
