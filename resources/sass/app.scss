@@ -432,6 +432,23 @@ section.landing {
             }
         }
     }
+    .landing-text {
+        h3 {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        h4 {
+            font-weight: 700;
+            font-size: 1.4rem;
+        }
+        .border-secondary {
+            --bs-secondary-rgb: var(--trvl-color-rgb);
+        }
+        ol,
+        ul {
+            padding-left: 3rem;
+        }
+    }
 }
 // Landing header
 .trvl-landing-header {
