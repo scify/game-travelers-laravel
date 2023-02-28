@@ -65,9 +65,8 @@ class GameRepository extends Repository
                 'id' => 3,
                 'name' => 'Πόλη',
                 'description' => 'Πίστα πόλης',
-                'comingsoon' => true,
+                'comingsoon' => null,
                 'audio' => [
-                    // @todo: Fix (ADD) the missing assets.
                     'focus' => 'sounds.game_start.board_3_focus',
                     'select' => 'sounds.game_start.board_3_select',
                 ],
