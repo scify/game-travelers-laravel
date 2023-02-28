@@ -27,7 +27,7 @@
                 <h1 id="currentPageLabel">{{ __("messages.sound_settings") }}</h1>
                 <p>
                     <strong id="currentPageDescription">
-                        Ένταση ήχου και προσωπικοί ήχοι για τον παίκτη <em> {{ $name }}</em>.
+                        Ένταση ήχου και προσωπικοί ήχοι για τον παίκτη <span>@php echo rtrim($name, '.'); @endphp</span>.
                     </strong>
                 </p>
             </div>

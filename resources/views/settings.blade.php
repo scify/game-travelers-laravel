@@ -26,7 +26,7 @@
                     <h1 id="currentPageLabel">Ρυθμίσεις</h1>
                     <p>
                         <strong class="fs-5" id="currentPageDescription">
-                            Διαμόρφωση επιλογών για τον παίκτη <em>{{ $name }}</em>. {{-- Player Name goes here. --}}
+                            Διαμόρφωση επιλογών για τον παίκτη <span>@php echo rtrim($name, '.'); @endphp</span>. {{-- Player Name goes here. --}}
                         </strong>
                     </p>
                 </div>
