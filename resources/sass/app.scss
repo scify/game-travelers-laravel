@@ -776,7 +776,7 @@ img.splash {
     }
 }
 
-// Success
+/* Success pages */
 .confirmation-page {
     min-height: 632px;
     h1 {
@@ -807,6 +807,11 @@ img.splash {
         text-decoration: none;
         color: rgba(var(--trvl-c-dark-rgb), 0.8);
     }
+    .bi {
+        font-size: 18rem;
+        line-height: 18rem;
+        opacity: 0.9;
+    }
     a.confirmation-animation {
         animation: animation-confirm-button 1.2s;
         animation-iteration-count: 2;
@@ -830,6 +835,20 @@ img.splash {
         }
         100% {
             transform: scale(1);
+        }
+    }
+}
+// Small screens footer optimization
+body.passwordRequestSuccess {
+    footer {
+        @media (max-width: 400px) {
+            background: var(--trvl-c-brown);
+        }
+        &.pb-5 {
+            padding-bottom: 0 !important;
+        }
+        .d-flex {
+            bottom: 0.5rem;
         }
     }
 }

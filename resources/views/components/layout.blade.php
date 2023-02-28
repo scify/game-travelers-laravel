@@ -40,7 +40,7 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     @yield('css', '') {{-- Optional: Additional CSS stylesheets, if needed. --}}
 </head>
-<body>
+<body {{ $attributes }}>
     <div class="travelers @isset($overflow)add-overflow-margin @endisset">
         <div class="travelers-container">
             @include('layout.header')
