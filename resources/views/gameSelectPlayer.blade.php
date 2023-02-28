@@ -53,7 +53,7 @@
         </div>
         <!-- / section header -->
 
-        <div class="section gamestart container-xxl px-4"> {{-- Deco class: "background-dash-down" removed due to conflict with buttons.--}}
+        <div class="section gamestart container-xxl px-4 pb-4 pb-sm-5 pb-xxl-0"> {{-- Deco class: "background-dash-down" removed due to conflict with buttons.--}}
             <div class="row gx-0">
                 <div class="background background-group-2--col background-group-2--tree-1 col-2 col-xxl-2 d-none d-lg-block d-print-none" role="presentation">
                 </div>
