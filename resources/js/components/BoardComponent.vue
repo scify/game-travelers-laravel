@@ -279,6 +279,11 @@ export default {
 						"music.in_the_land_of_make_believe",
 						this.musicVolume
 					);
+				else if (this.board === 3)
+					this.music = window.music(
+						"music.movin_on",
+						this.musicVolume
+					);
 
 				this.showPawn1 = true;
 				this.showPawn2 = true;
@@ -929,7 +934,10 @@ export default {
 		},
 		getExtrasSrc() {
 			if (this.board === 2) return this.getBoardPath() + "extras.png";
-			else return "";
+			else if (this.board === 3) {
+				if (this.boardSize === 3) return "";
+				else return this.getBoardPath() + "extras.png";
+			} else return "";
 		},
 		getMaxBoardPosition() {
 			let max_value = 15;
