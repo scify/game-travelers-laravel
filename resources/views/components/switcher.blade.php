@@ -48,7 +48,6 @@ if (isset($switcher) && is_array($switcher)) {
             <div class="modal-body">
                 <h4>{{ __("messages.switcher.keys_navigation") }}</h4>
                 @if($switcher['controlMode']==1)
-                    <p>{{ __("messages.switcher.help_automatic") }}</p>
                     <p>
                         {{ __("messages.switcher.help_automatic_button_select") }}
                         <kbd>{{ $switcher['automaticSelectionButton'] }}</kbd>.
@@ -65,6 +64,9 @@ if (isset($switcher) && is_array($switcher)) {
                 @endif
                 <h4>{{ __("messages.switcher.keys_support") }}</h4>
                     {{ __("messages.switcher.help_volume") }} <kbd>+</kbd> &amp; <kbd>-</kbd>.
+                    @if($switcher['controlMode']==1)
+                        <div class="pt-5">{{ __("messages.switcher.help_automatic") }}</div>
+                    @endif
             </div>
             <div class="modal-footer">
                 @if($switcher['controlMode']==1)

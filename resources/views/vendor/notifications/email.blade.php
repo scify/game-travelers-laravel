@@ -40,7 +40,7 @@
 {{ $salutation }}
 @else
 {{ __('notifications.regards') }},<br>
-{{ config('app.name') }}
+{{ __('messages.app_name') }}
 @endif
 
 {{-- Subcopy --}}

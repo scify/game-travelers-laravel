@@ -12,7 +12,6 @@
             <div class="trvl-landing-footer--links flex-grow-1">
                 <ul>
                     <li><a href="#{{-- @todo --}}">Επικοινώνησε μαζί μας</a></li>
-                    <li class="d-none"><a href="#{{-- @todo --}}">Cookies Policy</a></li>
                     <li>
                         <a href="{{ route('privacy-policy') }}">
                             {{ __("messages.privacy_policy")}}
@@ -21,9 +20,9 @@
                 </ul>
             </div>
 
-            <div class="trvl-landing-footer--social pt-5 pt-sm-0">
+            <div class="trvl-landing-footer--social pt-2 pt-sm-0">
                 <div class="social-container">
-                    <u>Ακολούθησέ μας</u>
+                    Ακολούθησέ μας
                     <ul class="social-links">
                         <li class="social-links--linkedin">
                             <a href="https://linkedin.com/company/scify-not-for-profit-company" target="_blank" rel="noopener noreferrer">
@@ -63,15 +62,27 @@
             </div>
 
         </div>
-        <div class="trvl-landing-footer--row--2 d-flex pt-0 pt-sm-5 flex-row-reverse flex-sm-row">
+        <div class="trvl-landing-footer--row--2 d-flex pt-3 pt-sm-2 flex-row text-center">
 
-            <div class="scify">
-                <a href="http://www.scify.org" target="_blank">
+            <div class="scify logo text-center">
+                <span>Ανάπτυξη</span><br />
+                <a href="https://www.scify.gr" target="_blank">
                     <img
-                        srcset="{{ asset('images/SciFY@2x.png') }} 2x"
-                        src="{{ asset('images/SciFY.png') }}"
-                        width="105" height="53"
-                        alt="Created by SciFY"
+                        srcset="{{ asset('images/logos/53h_scify@2x.png') }} 2x"
+                        src="{{ asset('images/logos/53h_scify.png') }}"
+                        width="40" height="53"
+                        alt="SciFY - Science for You"
+                    >
+                </a>
+            </div>
+            <div class="sponsor logo text-center">
+                <span>Ευγενική χορηγία</span><br />
+                <a href="https://www.lafarge.gr" target="_blank">
+                    <img
+                        srcset="{{ asset('images/logos/53h_iraklis@2x.png') }} 2x"
+                        src="{{ asset('images/logos/53h_iraklis.png') }}"
+                        width="130" height="53"
+                        alt="Ηρακλής - Όμιλος εταιριών"
                     >
                 </a>
             </div>

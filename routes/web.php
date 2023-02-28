@@ -48,9 +48,10 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-// Landing page: @todo Approve & promote landing page to index
+// Landing page: @todo Approve & promote landing page to index.
 Route::view('/landing-page', 'index')->name('landing-page');
-
+// About page: @todo: Vasilis' approval.
+Route::view('/about', 'about')->name('about');
 
 // Privacy Policy
 Route::view('/privacy-policy', 'privacy-policy.page')->name('privacy-policy');
