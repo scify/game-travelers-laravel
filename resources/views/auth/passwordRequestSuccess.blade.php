@@ -1,4 +1,4 @@
-<x-layout :title="__('messages.password_reset') . ' | ' . __('messages.app_name')" class="passwordRequestSuccess">
+<x-layout :title="__('messages.password_reset') . ' | ' . __('messages.app_name')">
     @section('scripts')
         {{-- Optional: Custom JS scripts --}}
     @endsection

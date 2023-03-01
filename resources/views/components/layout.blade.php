@@ -40,8 +40,8 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     @yield('css', '') {{-- Optional: Additional CSS stylesheets, if needed. --}}
 </head>
-<body {{ $attributes }}>
-    <div class="travelers @isset($overflow)add-overflow-margin @endisset">
+<body>
+    <div class="travelers layout--{{ str_replace('.', '-', Route::currentRouteName()) }} @isset($overflow)add-overflow-margin @endisset">
         <div class="travelers-container">
             @include('layout.header')
             <section class="content">
