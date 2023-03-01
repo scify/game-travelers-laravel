@@ -115,11 +115,11 @@ class CustomAudioController extends Controller
 
     protected function updateVolumesToDB(int $player_id, float $music_volume = null, float $sound_volume = null)
     {
-        if ($music_volume != null || $sound_volume != null) {
+        if (!is_null($music_volume) || !is_null($sound_volume)) {
             $entry = ['music_volume' => $music_volume, 'sound_volume' => $sound_volume];
-            if ($music_volume == null)
+            if (is_null($music_volume))
                 $entry = ['sound_volume' => $sound_volume];
-            else if ($sound_volume == null)
+            else if (is_null($sound_volume))
                 $entry = ['music_volume' => $music_volume];
             $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
         }
