@@ -1,5 +1,5 @@
 <x-layout
-    :title="'Διάλεξε παίκτη | Νέο παιχνίδι | Ταξιδιώτες'"
+    :title="'Διάλεξε παίκτη | Νέο παιχνίδι | ' . __('messages.app_name')"
     :has-user-menu=true
     :header-background="'background-dash-up'"
 >

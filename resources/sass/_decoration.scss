@@ -16,6 +16,9 @@
     @include media-breakpoint-down(xl) {
         min-height: 100vh;
     }
+    @include media-breakpoint-down(sm) {
+        background-position: 30% bottom;
+    }
 }
 
 // Game Header dash-line & Floating Dash

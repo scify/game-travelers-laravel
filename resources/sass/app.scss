@@ -811,6 +811,10 @@ img.splash {
         font-size: 18rem;
         line-height: 18rem;
         opacity: 0.9;
+        @media (max-width: 400px) {
+            position: relative;
+            top: -5rem;
+        }
     }
     a.confirmation-animation {
         animation: animation-confirm-button 1.2s;
@@ -835,20 +839,6 @@ img.splash {
         }
         100% {
             transform: scale(1);
-        }
-    }
-}
-// Small screens footer optimization
-body.passwordRequestSuccess {
-    footer {
-        @media (max-width: 400px) {
-            background: var(--trvl-c-brown);
-        }
-        &.pb-5 {
-            padding-bottom: 0 !important;
-        }
-        .d-flex {
-            bottom: 0.5rem;
         }
     }
 }
@@ -976,6 +966,19 @@ body.passwordRequestSuccess {
         img {
             width: auto;
             height: auto;
+        }
+    }
+}
+// Footer optimization for specific routes:
+div.layout--password-request-success footer,
+div.layout--password-reset-success footer {
+    @include media-breakpoint-down(sm) {
+        background: var(--trvl-c-brown);
+        &.pb-5 {
+            padding-bottom: 0 !important;
+        }
+        .d-flex {
+            top: calc(var(--trvl-footer-height-negative) - 2.5rem);
         }
     }
 }
