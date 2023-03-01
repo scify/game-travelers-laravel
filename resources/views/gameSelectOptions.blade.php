@@ -29,7 +29,7 @@
                     {{-- @todo: Μμμμμ. Δεν είναι ικανοποιητικά σαφής ο τίτλος
                         επίσης επαναλαμβάνει όσα αναφέρονται στη σελίδα:
                         see @sgameSelectMode.blade.php . Αλλαγή; --}}
-                    <h1 id="currentPageLabel">Διάλεξε παιχνίδι</h1>
+                    <h1 id="currentPageLabel">Θες βοήθεια;</h1>
                     <p>
                         <strong class="fs-5" id="currentPageDescription">
                             {{--Use `&nbsp;` if no description.--}}

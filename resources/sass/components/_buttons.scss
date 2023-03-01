@@ -310,6 +310,7 @@ body.switcher {
 }
 .board-label {
     top: 1rem;
+    transition: all 0.16s ease-in-out;
     &.blank {
         font-size: 1.3rem;
         top: -8.5rem;
@@ -320,25 +321,53 @@ body.switcher {
 .btn-pawn:hover .pawn-img {
     background-color: rgba(var(--trvl-c-white-rgb), 0.25);
 }
-// Switcher Focus & Active states (overrides mouse:hover)
+// Pawn Switcher Focus & Active states (overrides mouse:hover)
 .btn-pawn.switcher-focus .pawn-img,
 .btn-pawn.switcher-active .pawn-img {
     background-color: rgba(var(--trvl-c-white-rgb), 0.5);
 }
 
+// Default Text Buttons Hover for mouse navigation
 .btn-board:hover .board-label,
 .btn-board:focus .board-label,
 .btn-board:focus-visible .board-label {
-    /* font-size: 1.8rem; */
-    scale: 1.6;
+    scale: 1.3;
     font-weight: 800;
     &.blank {
-        scale: 1.3;
+        scale: 1.15;
     }
     @media (prefers-reduced-motion) {
         scale: 1 !important;
     }
 }
+// Board Buttons Switcher states (overrides mouse hover)
+.btn-board.switcher-focus .board-label,
+.btn-board.switcher-active .board-label {
+    scale: 1.6;
+}
+// Text Buttons Switcher states (overrides mouse hover)
+.btn-board.switcher-focus .board-label.blank,
+.btn-board.switcher-active .board-label.blank {
+    scale: 1.3;
+}
+// Text Buttons Active state:
+.btn-board:active > span.board-img.blank,
+.btn-board.switcher-active > span.board-img.blank {
+    background-image: linear-gradient(
+        180deg,
+        hsl(30deg 17% 98%) 16%,
+        hsl(30deg 17% 97%) 50%,
+        hsl(30deg 17% 97%) 58%,
+        hsl(30deg 17% 96%) 61%,
+        hsl(30deg 17% 96%) 62%,
+        hsl(30deg 17% 95%) 64%,
+        hsl(30deg 18% 95%) 65%,
+        hsl(30deg 18% 94%) 69%,
+        hsl(30deg 18% 94%) 78%,
+        hsl(30deg 18% 93%) 100%
+    );
+}
+
 // Disabled Board & Pawn
 .btn-pawn.disabled:focus,
 .btn-pawn.disabled:focus-visible,
