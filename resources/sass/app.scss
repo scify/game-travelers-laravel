@@ -380,6 +380,91 @@ section.landing {
             }
         }
     }
+    .landing-testimonials {
+        --carousel-width: 1096px;
+        --carousel-height: 562px;
+        --carousel-square-size: 500px;
+        --carousel-font-size: 1.6rem;
+        @include media-breakpoint-only(lg) {
+            --carousel-width: 800px;
+            --carousel-height: 512px;
+            --carousel-square-size: 398px;
+            --carousel-font-size: 1.4rem;
+        }
+        @include media-breakpoint-only(md) {
+            --carousel-width: 700px;
+            --carousel-height: 512px;
+            --carousel-square-size: 338px;
+            --carousel-font-size: 1.2rem;
+        }
+        @include media-breakpoint-down(md) {
+            --carousel-width: 540px;
+            --carousel-height: 512px;
+            --carousel-square-size: auto;
+            --carousel-font-size: 1.4rem;
+        }
+        @include media-breakpoint-down(sm) {
+            --carousel-width: calc(100vw - 4rem);
+            --carousel-height: calc(110vw - 4rem);
+            --carousel-square-size: auto;
+            --carousel-font-size: calc(0.7rem + 1.5vw);
+        }
+        .carousel {
+            width: var(--carousel-width);
+            margin: 0 auto;
+            border-radius: 4rem;
+            background: var(--trvl-c-brown);
+        }
+        .carousel-indicators [data-bs-target] {
+            background-color: var(--trvl-c-black);
+        }
+        .carousel-control-prev,
+        .carousel-control-next {
+            color: var(--trvl-c-black);
+            width: 8%;
+            @include media-breakpoint-down(md) {
+                width: 15%;
+            }
+        }
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 4rem;
+            height: 4rem;
+        }
+        .carousel-item {
+            width: var(--carousel-width);
+            height: var(--carousel-height);
+        }
+        .testimonial {
+            margin-inline: 6rem;
+            margin-block: 4rem;
+            @include media-breakpoint-down(sm) {
+                margin-inline: 2rem;
+                margin-block: 2rem;
+            }
+        }
+        .testimonial-img {
+            margin-inline-end: 3rem;
+            width: var(--carousel-square-size);
+            height: var(--carousel-square-size);
+            .img {
+                border-radius: 3rem;
+            }
+        }
+        .testimonial-text {
+            width: var(--carousel-square-size);
+            text-align: center;
+            font-size: var(--carousel-font-size);
+            font-weight: 500;
+            .quote {
+                font-style: italic;
+            }
+            .source {
+                font-weight: 700;
+                padding-block-start: 2rem;
+            }
+        }
+    }
     .landing-partners {
         font-size: 1.275rem;
         font-weight: 600;
