@@ -29,7 +29,7 @@
                     <p>
                         <strong class="fs-5" id="currentPageDescription">
                             {{--Use `&nbsp;` if no description.--}}
-                            Μονό, διπλό ή με αντίπαλό σου τον υπολογιστή;
+                            Μονό ή με αντίπαλό σου τον υπολογιστή;
                         </strong>
                     </p>
                 </div>
