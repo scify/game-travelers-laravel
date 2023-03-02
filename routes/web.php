@@ -167,4 +167,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('audio/upload', [CustomAudioController::class, 'uploadCustomAudioFile'])
         ->name('audio.upload');
+
+    Route::post('audio/remove', [CustomAudioController::class, 'removeCustomAudioFile'])
+        ->name('audio.remove');
 });
