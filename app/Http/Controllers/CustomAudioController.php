@@ -30,8 +30,8 @@ class CustomAudioController extends Controller
             abort(403, __('messages.unauthorized_action'));
         }
 
-        if (!$this->customAudioManager->userExists($player_id)) {
-            $this->customAudioManager->createFolder($player_id);
+        if ($this->customAudioManager->userExists($player_id)) {
+
         }
 
         $player = $this->playerRepository->find($player_id, ['name', 'avatar_id', 'music_volume', 'sound_volume']);
@@ -100,8 +100,18 @@ class CustomAudioController extends Controller
 
     public function uploadCustomAudioFile(Request $request)
     {
-        $user_id = auth()->user()->id;
-        dd($user_id);
+        $player_id = $request->player_id;
+        $audio_name = $request->audio_name;
+        $audio_path = $request->path;
+        $index = $request->index;
+        $this->createFolderForPlayerIfRequired($player_id);
+        return response(['index' => $index]);
+    }
+
+    public function removeCustomAudioFile(Request $request)
+    {
+        $player_id = $request->player_id;
+        $this->createFolderForPlayerIfRequired($player_id);
     }
 
     public function updateVolumes(Request $request)
@@ -135,6 +145,12 @@ class CustomAudioController extends Controller
             'playerAudioFiles' => $playerAudioFiles
         ];
         return $playerAudio;
+    }
+
+    protected function createFolderForPlayerIfRequired(int $player_id) {
+        if (!$this->customAudioManager->userExists($player_id)) {
+            $this->customAudioManager->createFolder($player_id);
+        }
     }
 
 }
