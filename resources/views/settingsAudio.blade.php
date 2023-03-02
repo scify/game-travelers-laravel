@@ -109,6 +109,8 @@
                 <div id="app">
                     <custom-audios-component
                         :player-id='{{ $player_id }}'
+                        :upload-audio-url="'{{ route('audio.upload') }}'"
+                        :remove-audio-url="'{{ route('audio.remove') }}'"
                         :player-audio-files='@json($playerAudio["playerAudioFiles"])'
                     >
                     </custom-audios-component>
