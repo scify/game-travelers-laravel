@@ -413,7 +413,7 @@ section.landing {
             width: var(--carousel-width);
             margin: 0 auto;
             border-radius: 4rem;
-            background: var(--trvl-c-brown);
+            background: var(--trvl-c-green);
         }
         .carousel-indicators [data-bs-target] {
             background-color: var(--trvl-c-black);
@@ -447,7 +447,11 @@ section.landing {
             margin-inline-end: 3rem;
             width: var(--carousel-square-size);
             height: var(--carousel-square-size);
-            .img {
+            img {
+                display: block;
+                border-radius: 3rem;
+            }
+            svg {
                 border-radius: 3rem;
             }
         }
@@ -482,6 +486,19 @@ section.landing {
             border-top: 1px solid;
             border-color: rgba(var(--trvl-color-rgb), 0.9);
             border-bottom: 1px solid;
+        }
+        .silent {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.925rem;
+            font-weight: 600;
+            letter-spacing: 0.02rem;
+            a {
+                display: block;
+                text-decoration: none !important;
+                color: var(--trvl-c-black);
+            }
         }
     }
     .landing-links {
@@ -518,6 +535,12 @@ section.landing {
         }
     }
     .landing-text {
+        h1,
+        h2,
+        h3,
+        h4 {
+            margin-top: 1.5rem;
+        }
         h3 {
             font-weight: 700;
             font-size: 1.5rem;
@@ -532,6 +555,9 @@ section.landing {
         ol,
         ul {
             padding-left: 3rem;
+        }
+        hr {
+            display: none;
         }
     }
 }
