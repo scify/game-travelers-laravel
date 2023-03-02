@@ -460,10 +460,11 @@ export default {
 		key_press(e) {
 			let self = this;
 			let key = e.key;
-			if (key === "e" || key === "E" || key === "ε" || key === "Ε")
+			if (key === "e" || key === "E" || key === "ε" || key === "Ε") {
 				if (this.gameEnd === 0) window.location.href = this.continueUrl;
-				else window.location.href = this.boardUrl;
-			else if (key === "-" || key === "_") this.decreaseMusic();
+				else if (this.gameEnd !== -100)
+					window.location.href = this.boardUrl;
+			} else if (key === "-" || key === "_") this.decreaseMusic();
 			else if (key === "=" || key === "+") this.increaseMusic();
 			else if (key === "n" || key === "N" || key === "ν" || key === "Ν")
 				if (self.showNumbers) self.showNumbers = false;
@@ -508,7 +509,7 @@ export default {
 						this.gameMode
 				);
 				if (isSelect || isNavigate) {
-					if (this.gameEnd !== 0)
+					if (this.gameEnd === 1 || this.gameEnd === -1)
 						window.location.href = this.boardUrl;
 					else if (this.gamePhase === 1) {
 						this.ignoreInput = true;
