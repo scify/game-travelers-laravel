@@ -14,6 +14,7 @@ return [
     'meta_description' => '"Travellers" is a web game specially designed for children with disabilities.',
     'meta_keywords' =>
 'disability games,game,game disability,travellers,travellers game',
+    'meta_logo_image_alt' => 'Travellers game logo',
     'game_note' => 'The game is designed for desktop and laptop computers.',
     'game_developed_by' => 'Developed by SciFY',
     'game_sponsored_by' => 'Kindly sponsored by Heracles Group',

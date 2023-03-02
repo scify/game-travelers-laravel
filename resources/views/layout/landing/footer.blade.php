@@ -68,6 +68,7 @@
                 <span>Ανάπτυξη</span><br />
                 <a href="https://www.scify.gr" target="_blank">
                     <img
+                        srcset="{{ asset('images/logos/53h_scify@3x.png') }} 3x"
                         srcset="{{ asset('images/logos/53h_scify@2x.png') }} 2x"
                         src="{{ asset('images/logos/53h_scify.png') }}"
                         width="40" height="53"
@@ -79,6 +80,7 @@
                 <span>Ευγενική χορηγία</span><br />
                 <a href="https://www.lafarge.gr" target="_blank">
                     <img
+                        srcset="{{ asset('images/logos/53h_iraklis@3x.png') }} 3x"
                         srcset="{{ asset('images/logos/53h_iraklis@2x.png') }} 2x"
                         src="{{ asset('images/logos/53h_iraklis.png') }}"
                         width="130" height="53"
