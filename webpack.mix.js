@@ -1,6 +1,12 @@
 const mix = require("laravel-mix");
-
 const ESLintPlugin = require("eslint-webpack-plugin");
+
+// Dependency for ImageminPlugin
+// https://webpack.js.org/plugins/copy-webpack-plugin/
+const CopyPlugin = require("copy-webpack-plugin");
+// Images optimization  via ImageminPlugin
+// https://github.com/Klathmon/imagemin-webpack-plugin
+const ImageminPlugin = require("imagemin-webpack-plugin").default;
 
 mix.disableSuccessNotifications();
 
@@ -9,6 +15,21 @@ mix.webpackConfig({
 		new ESLintPlugin({
 			fix: true,
 			extensions: ["js", "vue"],
+		}),
+		new CopyPlugin({
+			patterns: [{ from: "resources/images", to: "images" }],
+		}),
+		// Note: This will only run via npm run prod. All the copied images
+		// will be optimized. This takes a lot of time and resources.
+		new ImageminPlugin({
+			disable: process.env.NODE_ENV !== "production", // Disable during development
+			// Using optipng lossless compression for PNG assets.
+			// https://github.com/imagemin/imagemin-optipng
+			optipng: {
+				optimizationLevel: 3,
+			},
+			// Optimizing all these types of images which have been copied:
+			test: /\.(jpe?g|png|gif|svg)$/i,
 		}),
 	],
 });
@@ -24,8 +45,6 @@ mix.webpackConfig({
  |
  */
 
-// Deploy images
-mix.copyDirectory("resources/images", "public/images");
 // Handle favicon.ico
 mix.copy("resources/images/favicons/favicon.ico", "public");
 // Deploy audio
