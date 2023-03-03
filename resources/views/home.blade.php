@@ -493,7 +493,7 @@
                 </div>
                 <div class="landing-partners--logos container py-5">
                     <div class="row row-cols-1 row-cols-sm-2 gy-5 justify-content-around text-center">
-                        <div>
+                        <div class="d-none">
                             <a href="https://elepap.gr" target="_blank">
                                 <img class="img-fluid"
                                     loading="lazy"
@@ -520,7 +520,7 @@
                             &amp; ΝΗΠΙΑΓΩΓΕΙΟ ΑΓΡΙΑΣ
                             </a>
                         </div>
-                        <div >
+                        <div class="d-none">
                             <a href="https://www.kkppa.gr" target="_blank">
                                 <img class="img-fluid"
                                     loading="lazy"
