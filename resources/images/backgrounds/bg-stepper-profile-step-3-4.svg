@@ -1,15 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="251" height="66" viewBox="0 0 251 66" preserveAspectRatio="none">
-  <defs>
-    <clipPath id="clip-path">
-      <rect id="Rectangle_231" data-name="Rectangle 231" width="251" height="66" transform="translate(-20837 -10147)" fill="#fff" stroke="#707070" stroke-width="1"/>
-    </clipPath>
-    <clipPath id="clip-path-2">
-      <rect id="Rectangle_230" data-name="Rectangle 230" width="731" height="66" transform="translate(-21317 -10437)" fill="#fff" stroke="#707070" stroke-width="1"/>
-    </clipPath>
-  </defs>
-  <g id="Mask_Group_23" data-name="Mask Group 23" transform="translate(20837 10147)" clip-path="url(#clip-path)">
-    <g id="Mask_Group_22" data-name="Mask Group 22" transform="translate(0 290)" clip-path="url(#clip-path-2)">
-      <path id="Graphic_dash_line" data-name="Graphic dash line" d="M-22260.145-14937.874a187.284,187.284,0,0,0,31.852,2.8c84.969,0,158.711-62.288,218.793-62.063" transform="translate(1423.256 4562.551)" fill="none" stroke="#383735" stroke-linecap="round" stroke-width="4"/>
-    </g>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="251" height="66" preserveAspectRatio="none"><defs><clipPath id="a"><path data-name="Rectangle 231" transform="translate(-20837 -10147)" fill="#fff" stroke="#707070" d="M0 0h251v66H0z"/></clipPath><clipPath id="b"><path data-name="Rectangle 230" transform="translate(-21317 -10437)" fill="#fff" stroke="#707070" d="M0 0h731v66H0z"/></clipPath></defs><g data-name="Mask Group 23" transform="translate(20837 10147)" clip-path="url(#a)"><g data-name="Mask Group 22" transform="translate(0 290)" clip-path="url(#b)"><path data-name="Graphic dash line" d="M-20836.889-10375.323a187.284 187.284 0 0031.852 2.8c84.969 0 158.711-62.288 218.793-62.063" fill="none" stroke="#383735" stroke-linecap="round" stroke-width="4"/></g></g></svg>
