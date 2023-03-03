@@ -1,10 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="149" height="66" viewBox="0 0 149 66" preserveAspectRatio="none">
-  <defs>
-    <clipPath id="clip-path">
-      <rect id="Rectangle_225" data-name="Rectangle 225" width="149" height="66" transform="translate(-21954 -10677)" fill="#fff" stroke="#707070" stroke-width="1"/>
-    </clipPath>
-  </defs>
-  <g id="Mask_Group_15" data-name="Mask Group 15" transform="translate(21954 10677)" clip-path="url(#clip-path)">
-    <path id="Graphic_dash_line" data-name="Graphic dash line" d="M-22502.428-14975.933c20.168-11.485,44.139-20.8,76.172-20.8,32.459,0,54.479,9.593,72.863,21.578" transform="translate(548.057 4322.139)" fill="none" stroke="#383735" stroke-linecap="round" stroke-width="4"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="149" height="66" preserveAspectRatio="none"><defs><clipPath id="a"><path data-name="Rectangle 225" transform="translate(-21954 -10677)" fill="#fff" stroke="#707070" d="M0 0h149v66H0z"/></clipPath></defs><g data-name="Mask Group 15" transform="translate(21954 10677)" clip-path="url(#a)"><path data-name="Graphic dash line" d="M-21954.371-10653.794c20.168-11.485 44.139-20.8 76.172-20.8 32.459 0 54.479 9.593 72.863 21.578" fill="none" stroke="#383735" stroke-linecap="round" stroke-width="4"/></g></svg>

@@ -1,11 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="208" preserveAspectRatio="none" viewBox="0 0 1440 208">
-  <defs>
-    <clipPath id="a">
-      <path fill="#fff" stroke="#707070" d="M-635-14112H805v208H-635z" data-name="Rectangle 312"/>
-    </clipPath>
-  </defs>
-  <g clip-path="url(#a)" data-name="abstract header_white" transform="translate(635 14112)">
-    <path fill="#faf9f8" d="M-634.051-14026.777s303.389 106.613 586.588 96.229 438.463-76.837 594.409-73.069 227.665 55.66 259.917 98.693S805-12880 805-12880H-635Z" data-name="Path 12710"/>
-  </g>
-</svg>
-
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="208" preserveAspectRatio="none"><defs><clipPath id="a"><path fill="#fff" stroke="#707070" d="M-635-14112H805v208H-635z" data-name="Rectangle 312"/></clipPath></defs><g clip-path="url(#a)" data-name="abstract header_white" transform="translate(635 14112)"><path fill="#faf9f8" d="M-634.051-14026.777s303.389 106.613 586.588 96.229 438.463-76.837 594.409-73.069 227.665 55.66 259.917 98.693S805-12880 805-12880H-635z" data-name="Path 12710"/></g></svg>
