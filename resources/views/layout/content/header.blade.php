@@ -25,7 +25,7 @@ foreach ($supportedColors as $color) {
 ])>
     <div class="container-xxl p-4 px-sm-5 px-lg-4">
         <div class="logo d-flex justify-content-center">
-            <a href="{{ url('/') }}">
+            <a href="{{ route('home') }}">
                 <img src="{{ asset('images/logo.svg') }}" width="145" height="79" role="img" alt="{{ __('messages.app_name') }}">
             </a>
         </div>

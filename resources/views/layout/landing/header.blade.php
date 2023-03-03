@@ -2,7 +2,7 @@
 <header class="trvl-landing-header bg-green">
     <div class="container-xxl p-4 px-sm-5 px-lg-4">
         <div class="logo d-flex justify-content-center">
-            <a class="d-block text-center" href="{{ url('/') }}">
+            <a class="d-block text-center" href="{{ route('home') }}">
                 <img
                     class="img-fluid"
                     src="{{ asset('images/logo_blue.svg') }}"
