@@ -28,12 +28,18 @@ use App\Http\Controllers\CustomAudioController;
  */
 require __DIR__ . '/auth.php';
 
-// Temporary splash screen implementation to hide the /log diary out of sight.
+
+// Home / Index / Landing page:
+Route::view('/', 'home')->name('home');
+// About page.
+Route::view('/about', 'about')->name('about');
+
+/*
 Route::get('/', function () {
     //return view('splash');
     return redirect()->route('login');
 })->name('home');
-
+*/
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('administration')->middleware('can:manage-platform')->name('administration.')->group(function () {
@@ -48,10 +54,6 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-// Landing page: @todo Approve & promote landing page to index.
-Route::view('/landing-page', 'index')->name('landing-page');
-// About page: @todo: Vasilis' approval.
-Route::view('/about', 'about')->name('about');
 
 // Privacy Policy
 Route::view('/privacy-policy', 'privacy-policy.page')->name('privacy-policy');
