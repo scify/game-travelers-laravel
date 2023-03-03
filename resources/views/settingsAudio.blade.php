@@ -107,13 +107,26 @@
 
 
                 <div id="app">
-                    <custom-audios-component
-                        :player-id='{{ $player_id }}'
-                        :upload-audio-url="'{{ route('audio.upload') }}'"
-                        :remove-audio-url="'{{ route('audio.remove') }}'"
-                        :player-audio-files='@json($playerAudio["playerAudioFiles"])'
-                    >
-                    </custom-audios-component>
+                    <div class="border-bottom border-1 my-3">
+                        <h2>{{ __("messages.sounds_custom") }}</h2>
+                    </div>
+                    <div id="audioFiles" class="audiofiles mb-5">
+                        @foreach ($playerAudio["playerAudioFiles"] as $key => $playerAudioFile)
+                            <div class="audiofiles-category pb-1 audiofiles-category_{{ $loop->iteration }}">
+                                <div class="audiofiles-category--header my-3 border-bottom border-1">
+                                    <h3>{{ __("messages.$key") }}</h3>
+                                </div>
+                                <div class="audiofiles-category--body">
+                                    <custom-audios-component
+                                        :player-id='{{ $player_id }}'
+                                        :upload-audio-url="'{{ route('audio.upload') }}'"
+                                        :remove-audio-url="'{{ route('audio.remove') }}'"
+                                        :audios='@json($playerAudioFile)'
+                                    ></custom-audios-component>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
                 <div id="navGroup" class="form-actions d-flex align-items-end flex-column py-3">
                     <button

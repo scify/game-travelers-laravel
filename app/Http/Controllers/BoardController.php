@@ -297,7 +297,6 @@ class BoardController extends Controller
                     'name' => 'Mermaid',
                     'value' => 3,
                 ],
-
                 8 => [
                     'name' => 'Car',
                     'value' => 5,
