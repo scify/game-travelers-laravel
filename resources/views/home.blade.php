@@ -507,6 +507,7 @@
                             <a href="https://kasp.gr" target="_blank">
                                 <img class="img-fluid"
                                     loading="lazy"
+                                    srcset="{{ asset('images/landing/partners/kasp@2x.png') }} 2x"
                                     src="{{ asset('images/landing/partners/kasp.png') }}"
                                     width="78" height="90"
                                     alt="«Χατζηπατέρειο» Κέντρο Αποκατάστασης & Στήριξης Παιδιού (Κ.Α.Σ.Π.)"
