@@ -158,18 +158,18 @@ Route::middleware('auth')->group(function () {
     Route::post('board/fromVue', [BoardController::class, 'fromVue'])
         ->name('to.backend');
 
-    Route::get('/settings/audio/{player_id}/{from}/{game_id}', [CustomAudioController::class, 'audioShow'])
+    /*Route::get('/settings/audio/{player_id}/{from}/{game_id}', [CustomAudioController::class, 'audioShow'])
         ->name('settings.audio')->middleware(EnsureIdsAreValid::class);
 
     Route::post('/settings/audio/{player_id}/{from}/{game_id}', [CustomAudioController::class, 'audioSave'])
-        ->name('settings.audio')->middleware(EnsureIdsAreValid::class);
+        ->name('settings.audio')->middleware(EnsureIdsAreValid::class);*/
 
     Route::post('audio/updateVolumes', [CustomAudioController::class, 'updateVolumes'])
         ->name('audio.updateVolumes');
 
-    Route::post('audio/upload', [CustomAudioController::class, 'uploadCustomAudioFile'])
+    /*Route::post('audio/upload', [CustomAudioController::class, 'uploadCustomAudioFile'])
         ->name('audio.upload');
 
     Route::post('audio/remove', [CustomAudioController::class, 'removeCustomAudioFile'])
-        ->name('audio.remove');
+        ->name('audio.remove');*/
 });

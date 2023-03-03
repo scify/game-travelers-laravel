@@ -45,7 +45,7 @@
                         <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="profile" tabindex="1">
                             <span class="balloon"></span> Προφίλ παίκτη
                         </button>
-                        <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="audio" tabindex="2">
+                        <button class="btn btn-lg btn-primary btn-balloon d-none" type="submit" name="submit" value="audio" tabindex="2">
                             <span class="balloon"></span> Μουσική & ήχος
                         </button>
                         <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="controls" tabindex="3">
