@@ -21,7 +21,7 @@ mix.webpackConfig({
 		}),
 		// Note: This will only run via npm run prod. All the copied images
 		// will be optimized. This takes a lot of time and resources.
-		new ImageminPlugin({
+		/*new ImageminPlugin({
 			disable: process.env.NODE_ENV !== "production", // Disable during development
 			// Using optipng lossless compression for PNG assets.
 			// https://github.com/imagemin/imagemin-optipng
@@ -30,7 +30,7 @@ mix.webpackConfig({
 			},
 			// Optimizing all these types of images which have been copied:
 			test: /\.(jpe?g|png|gif|svg)$/i,
-		}),
+		}),*/
 	],
 });
 
