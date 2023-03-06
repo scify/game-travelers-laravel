@@ -397,7 +397,7 @@
                     <div class="carousel-indicators">
                       <button type="button" data-bs-target="#carouselTestimonials" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                       <button type="button" data-bs-target="#carouselTestimonials" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                      <button class="d-none" type="button" data-bs-target="#carouselTestimonials" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                      <button type="button" data-bs-target="#carouselTestimonials" data-bs-slide-to="2" aria-label="Slide 3"></button>
                     </div>
                     <div class="carousel-inner">
 
@@ -418,6 +418,28 @@
                                     </div>
                                     <div class="source">
                                         Απόστολος Μιχαλόπουλος, Διευθυντής Ειδικού Δημοτικού Σχολείου Αγριάς Βόλου
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-item">
+                            <div class="testimonial d-flex justify-content-between">
+                                <div class="testimonial-img d-none d-md-block">
+                                    <img class="img-fluid"
+                                        loading="lazy"
+                                        srcset="{{ asset('images/landing/slides/slide_02@2x.jpg') }} 2x"
+                                        src="{{ asset('images/landing/slides/slide_02.jpg') }}"
+                                        width="500" height="500"
+                                        alt="Ένα άλλο παιδί κάθεται επίσης μπροστά από υπολογιστή σε σχολική αίθουσα και παίζει το παιχνίδι «Ταξιδιώτες»"
+                                    >
+                                </div>
+                                <div class="testimonial-text">
+                                    <div class="quote">
+                                        «Εξαιρετικό! Ενδεικτικά, μαθητής μας με τεράστια διάσπαση προσοχής έμεινε συγκεντρωμένος καθ'όλη τη διάρκεια του παιχνιδιού!»
+                                    </div>
+                                    <div class="source">
+                                        Χριστίνα Κουζούτη, Δασκάλα Ειδικής Αγωγής ΠΕ71, Ειδικό Δημοτικό Σχολείο Αγριάς Βόλου
                                     </div>
                                 </div>
                             </div>
