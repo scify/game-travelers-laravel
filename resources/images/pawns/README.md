@@ -1,6 +1,6 @@
 # Notes on Pawns Images
 
-Even though the characters are always the same, their images (appearance) differs based on the selected game board. For example, some characters on the island board are dressed in hawaiian shirts, while the same characters on the mountain board are wearing jackets.
+Even though the characters are always the same, their images (appearance) differs based on the selected game board. For example, some characters on the island board are dressed in Hawaiian shirts, while the same characters on the mountain board are wearing jackets.
 
 Pawn images have been organized in sub-folders according to the board on which they belong to:
 
@@ -28,7 +28,7 @@ The filenames should always be the same, regardless of the folder.
 
 ### Pawn order
 
-Note that these are not in random order: Their ordered list number corresponts to the ID used on the back-end to determine the user's selection.
+Note that these are not in random order: Their ordered list number corresponds to the ID used on the back-end to determine the user's selection.
 
 ### Pawn usage
 
