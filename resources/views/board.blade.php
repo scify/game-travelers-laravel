@@ -45,7 +45,7 @@
                 <h5><i class="bi bi-joystick"></i>{{ __("messages.switcher.help_title_automatic") }}</h5>
                     <p>
                         {{ __("messages.switcher.help_automatic_button_select") }}
-                        <kbd>{{ $player_data["select_key"] }}</kbd>.
+                        <kbd>{{ $player_data["select_key"] }}</kbd>
                     </p>
                 @else
                 <h5><i class="bi bi-joystick"></i>{{ __("messages.switcher.help_title_manual") }}</h5>
