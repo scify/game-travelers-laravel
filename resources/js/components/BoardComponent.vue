@@ -40,7 +40,7 @@
 						<img
 							@mouseover="infoState = 1"
 							@mouseleave="infoState = 0"
-							v-on:click="showPopUp = true"
+							@click="switcherModal()"
 							v-bind:src="this.computeInfoSrc"
 							style="
 								z-index: 50;
@@ -305,6 +305,19 @@ export default {
 					this.sendToBackend();
 				}
 			}, 500);
+		},
+		switcherModal() {
+			const switcherModalEl = document.getElementById("switcherModal");
+			const bsSwitcherModal =
+				// eslint-disable-next-line no-undef
+				bootstrap.Modal.getOrCreateInstance(switcherModalEl, {
+					keyboard: true,
+					focus: true,
+					backdrop: true,
+				});
+			window.sound("fx.modal");
+			bsSwitcherModal.show();
+			return false;
 		},
 		updateVolumes() {
 			let data = {

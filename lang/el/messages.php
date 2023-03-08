@@ -88,13 +88,21 @@ return [
     'switcher' => [
         'break' => 'Διακοπή',
         'continue' => 'Συνέχεια',
+        'dismiss' => 'Κλείσιμο', // Close modal
         'keys_navigation' => 'Πλήκτρα πλοήγησης',
         'keys_support' => 'Βοηθητικά πλήκτρα',
         'help_automatic' => 'Για προσωρινή διακοπή της αυτόματης σάρωσης επιλέξτε «Διακοπή». Αν επιλέξετε «Συνέχεια» η αυτόματη σάρωση θα συνεχιστεί.',
         'help_automatic_button_select' => 'Η επιλογή της υποδεδειγμένης ενέργειας πραγματοποιείται με το πλήκτρο:',
+        'help_exit' => 'Έξοδος από το παιχνίδι και επιστροφή στο μενού με:',
         'help_manual_button_navigate' => 'Η μετάβαση στην επόμενη διαθέσιμη επιλογή γίνεται με το πλήκτρο:',
         'help_manual_button_select' => 'Η επικύρωση της υποδεδειγμένης επιλογής γίνεται με το πλήκτρο:',
+        'help_numbers' => 'Εμφάνιση ή απόκρυψη των αριθμών στην πίστα με: ',
         'help_volume' => 'Αυξομείωση έντασης μουσικής με',
+        'help_title_automatic' => 'Αυτόματη πλοήγηση',
+        'help_title_exit' => 'Έξοδος',
+        'help_title_manual' => 'Χειροκίνητη πλοήγηση',
+        'help_title_numbers' => 'Νούμερα στις θέσεις',
+        'help_title_volume' => 'Ένταση μουσικής',
         'set_button' => 'όρισε πλήκτρο', // press key
         'set_button_invalid' => 'μη αποδεκτό', // invalid button (please keep it short)
     ],

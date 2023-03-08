@@ -862,6 +862,14 @@ img.splash {
     --bs-modal-border-radius: 3rem;
     --bs-modal-header-padding: 1.5rem 3rem;
     --bs-modal-padding: 1rem 3rem;
+    &--white {
+        --bs-modal-bg: var(--trvl-c-white);
+        --bs-modal-header-border-color: var(--trvl-c-white);
+        --bs-modal-footer-border-color: var(--trvl-c-white);
+    }
+    .bi {
+        padding-right: 0.5rem;
+    }
 }
 .modal-title {
     font-size: 1.6rem;

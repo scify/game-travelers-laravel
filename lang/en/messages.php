@@ -88,13 +88,21 @@ return [
     'switcher' => [
         'break' => 'Break',
         'continue' => 'Continue',
+        'dismiss' => 'Close', // Close modal
         'keys_navigation' => 'Navigation Keys',
         'keys_support' => 'Support Keys',
         'help_automatic' => 'If you like to temporarily stop auto-scanning please select «Break».',
         'help_automatic_button_select' => 'To make a selection press:',
+        'help_exit' => 'Exit and return to menu',
         'help_manual_button_navigate' => 'To move/navigate press:',
         'help_manual_button_select' => 'To make a selection press:',
+        'help_numbers' => 'Show or hide numbers',
         'help_volume' => 'Increase or decrease music volume with', // keyup and keyminus
+        'help_title_automatic' => 'Automatic Navigation',
+        'help_title_exit' => 'Exit',
+        'help_title_manual' => 'Manual Navigation',
+        'help_title_numbers' => 'Board Numbers',
+        'help_title_volume' => 'Music Volume',
         'set_button' => 'press a key', // press key
         'set_button_invalid' => 'invalid key', // invalid button (please keep it short)
     ],
