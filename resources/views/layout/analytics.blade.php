@@ -1,0 +1,24 @@
+<!-- Check the 'targeting' cookie: -->
+
+@if(isset($_COOKIE[config('cookies_consent.cookie_prefix')
+. 'cookies_consent_targeting']) && config('app.google_analytics_id'))
+
+<!-- Google Analytics -->
+<script defer async>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    window.ga('create', '{{ config('app.google_analytics_id') }}', 'auto');
+    window.ga('set', 'anonymizeIp', true);
+    window.ga('send', 'pageview');
+</script>
+@endif

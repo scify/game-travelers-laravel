@@ -13,6 +13,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.0",
+        "scify/laravel-cookies-consent": "^1.0",
         "sentry/sentry-laravel": "^3.2",
         "spatie/laravel-sitemap": "^6.2",
         "symfony/http-client": "^6.2",

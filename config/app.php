@@ -231,5 +231,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+    'google_analytics_id' => env('GOOGLE_ANALYTICS_ID', false)
 
 ];

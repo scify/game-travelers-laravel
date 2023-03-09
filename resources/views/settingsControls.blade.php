@@ -153,7 +153,7 @@
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col">
-                                            πλοήγηση
+                                            μετακίνηση
                                         </div>
                                         <div class="col pb-1">
                                             <!-- @TODO: Accessibility -->
