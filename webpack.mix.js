@@ -1,12 +1,14 @@
 const mix = require("laravel-mix");
 const ESLintPlugin = require("eslint-webpack-plugin");
 
-// Dependency for ImageminPlugin
+// Much faster copying of assets via CopyWebpackPlugin.
 // https://webpack.js.org/plugins/copy-webpack-plugin/
 const CopyPlugin = require("copy-webpack-plugin");
+
 // Images optimization  via ImageminPlugin
 // https://github.com/Klathmon/imagemin-webpack-plugin
-const ImageminPlugin = require("imagemin-webpack-plugin").default;
+// No longer in use (in addition to docker fails due to gifsicle dependency).
+// const ImageminPlugin = require("imagemin-webpack-plugin").default;
 
 mix.disableSuccessNotifications();
 
@@ -20,7 +22,9 @@ mix.webpackConfig({
 			patterns: [{ from: "resources/images", to: "images" }],
 		}),
 		// Note: This will only run via npm run prod. All the copied images
-		// will be optimized. This takes a lot of time and resources.
+		// will be optimized. Due to the large amount of images, this takes
+		// more than 2 hours on production and has been removed while the images
+		// have been optimized on dev and pushed to production manually.
 		/*new ImageminPlugin({
 			disable: process.env.NODE_ENV !== "production", // Disable during development
 			// Using optipng lossless compression for PNG assets.
