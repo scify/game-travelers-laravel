@@ -30,6 +30,8 @@ _ide_helper_models.php
 .idea/
 *.~lock.*
 *.md.backup
+# Ignore DDEV configuration (at least until its settings are finalised)
+*.ddev/
 # General macOS
 .DS_Store
 .AppleDouble
