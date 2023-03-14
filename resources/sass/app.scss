@@ -122,6 +122,105 @@ kbd {
     color: var(--trvl-c-white);
 }
 
+// Cookie-consent plugin overrides:
+.laravel-cookies-consent {
+    --consent-checkbox: var(--trvl-bg);
+    --consent-text: var(--trvl-btn-bg);
+    --consent-background: var(--trvl-color);
+    // Going highter than all of Bootstrap's Z-index values:
+    z-index: 1100 !important;
+    // Initial values:
+    color: var(--consent-text) !important;
+    background-color: var(--consent-background) !important;
+    line-height: 1.1;
+
+    .cookies-title {
+        font-weight: 600;
+    }
+    .cookies-close::before, .cookies-close::after {
+        height: 1.25rem !important;
+        top: 65% !important;
+        left: 30% !important;
+    }
+    .form-group {
+        display: flex;
+        &+ .form-group {
+            margin-top: 0.6em;
+        }
+    }
+    label {
+        margin-left: 0.5em;
+        user-select: none;
+    }
+    input[type="checkbox"] {
+        // Hiding native checkbox:
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        background-color: var(--consent-background);
+        box-shadow: none;
+        margin: 0;
+        // Setting-up the box:
+        font: inherit;
+        color: currentColor !important;
+        width: 1.1em;
+        height: 1.1em;
+        border: 0.1em solid currentColor !important;
+        border-radius: 0.15em;
+        transform: translate(0, -0.075em);
+        display: grid;
+        align-content: center;
+        justify-content: center;
+        &::before {
+            content: "";
+            width: 0.7em;
+            height: 0.7em;
+            box-shadow: inset 1em 1em var(--consent-background);
+            // Square
+            clip-path: polygon(0 0, 50% 0, 100% 0, 100% 100%, 50% 100%, 0 100%);
+            // Transform
+            transform-origin: center;
+            transition: 0.15s cubic-bezier(0.075, 0.82, 0.165, 1);
+            transition-property: background-color, clip-path;
+        }
+        &:checked::before {
+            // Checkmark.
+            clip-path: polygon(24% 34%, 0 65%, 50% 100%, 100% 16%, 70% 0%, 43% 62%);
+        }
+        &:checked {
+            background-color: var(--consent-checkbox);
+        }
+        &:focus-visible {
+            outline: 2px solid var(--trvl-bg);
+            outline-offset: 2px;
+        }
+        &:disabled {
+            cursor: not-allowed !important;
+            opacity: 0.5;
+        }
+    }
+    .consent-form-container {
+        .consent-buttons {
+            .consent-submit {
+                font-weight: 600;
+                text-decoration: none;
+                &.consent-accept {
+                    color: var(--trvl-color);
+                    background-color: var(--trvl-btn-bg) !important;
+                    border-color: var(--trvl-btn-border-color) !important;
+                    &:focus-visible {
+                        outline: 0.2em var(--trvl-c-green) solid;
+                    }
+                }
+                &.consent-decline-all {
+                    color: var(--trvl-btn-bg) !important;
+                    background-color: var(--trvl-color) !important;
+                    border-color: var(--trvl-btn-bg) !important;
+                }
+            }
+        }
+    }
+}
+
 // Alerts
 .alert-danger {
     font-weight: 500;
@@ -565,8 +664,6 @@ section.landing {
 .trvl-landing-header {
     margin-bottom: -8rem;
     .logo {
-        h1 {
-        }
         img.img-fluid {
             @include media-breakpoint-down(sm) {
                 width: 65vw;
@@ -1042,10 +1139,6 @@ img.splash {
 }
 
 @include media-breakpoint-down(sm) {
-    .section,
-    div.trvl-main-content {
-        // margin-bottom: 2rem;
-    }
     .text-start-end,
     .text-start-end-start-end {
         text-align: left;
