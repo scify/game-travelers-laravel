@@ -124,15 +124,15 @@ kbd {
 
 // Cookie-consent plugin overrides:
 .laravel-cookies-consent {
-    --consent-checkbox: var(--trvl-bg);
-    --consent-text: var(--trvl-btn-bg);
-    --consent-background: var(--trvl-color);
+    --consent-checkbox: var(--trvl-c-green); // hex (e.g. #ff0000)
+    --consent-background: var(--trvl-color-rgb); // RGB values, e.g. "255, 0, 0"
+    --consent-text: var(--trvl-btn-bg); // hex (e.g. #ff0000)
     // Going highter than all of Bootstrap's Z-index values:
     z-index: 1100 !important;
     // Initial values:
     color: var(--consent-text) !important;
-    background-color: var(--consent-background) !important;
-    line-height: 1.1;
+    background-color: rgba(var(--consent-background),0.95) !important;
+    border-color: rgba(var(--consent-background), 0.7) !important;
 
     .cookies-title {
         font-weight: 600;
@@ -144,6 +144,7 @@ kbd {
     }
     .form-group {
         display: flex;
+        line-height: 1.1;
         &+ .form-group {
             margin-top: 0.6em;
         }
@@ -174,7 +175,7 @@ kbd {
             content: "";
             width: 0.7em;
             height: 0.7em;
-            box-shadow: inset 1em 1em var(--consent-background);
+            box-shadow: inset 1em 1em rgb(var(--consent-background));
             // Square
             clip-path: polygon(0 0, 50% 0, 100% 0, 100% 100%, 50% 100%, 0 100%);
             // Transform
@@ -203,6 +204,7 @@ kbd {
             .consent-submit {
                 font-weight: 600;
                 text-decoration: none;
+                line-height: 1.1;
                 &.consent-accept {
                     color: var(--trvl-color);
                     background-color: var(--trvl-btn-bg) !important;
@@ -213,7 +215,7 @@ kbd {
                 }
                 &.consent-decline-all {
                     color: var(--trvl-btn-bg) !important;
-                    background-color: var(--trvl-color) !important;
+                    background-color: rgb(var(--consent-background)) !important;
                     border-color: var(--trvl-btn-bg) !important;
                 }
             }
