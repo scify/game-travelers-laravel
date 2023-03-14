@@ -93,4 +93,3 @@
 
     </div>
 </footer>
-@include ("layout.analytics")

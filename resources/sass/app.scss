@@ -205,18 +205,22 @@ kbd {
                 font-weight: 600;
                 text-decoration: none;
                 line-height: 1.1;
+                color: var(--trvl-color) !important;
+                background-color: var(--trvl-btn-bg) !important;
+                border-color: var(--trvl-btn-border-color) !important;
                 &.consent-accept {
-                    color: var(--trvl-color);
-                    background-color: var(--trvl-btn-bg) !important;
-                    border-color: var(--trvl-btn-border-color) !important;
                     &:focus-visible {
                         outline: 0.2em var(--trvl-c-green) solid;
                     }
                 }
                 &.consent-decline-all {
+                    // Note that all buttons should have the same shape/size/
+                    // /color/font and therefore no variations are acceptable.
+                    /*
                     color: var(--trvl-btn-bg) !important;
                     background-color: rgb(var(--consent-background)) !important;
                     border-color: var(--trvl-btn-bg) !important;
+                    */
                 }
             }
         }

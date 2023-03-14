@@ -25,5 +25,7 @@
     </div>
     @include('layout.landing.footer')
     @yield('scripts', '') {{-- Optional: JS scripts loaded after DOM is rendered --}}
+    <x-laravel-cookies-consent></x-laravel-cookies-consent>
+    @include ("layout.analytics")
 </body>
 </html>

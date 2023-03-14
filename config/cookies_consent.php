@@ -25,11 +25,11 @@ return [
     */
     'cookies' => [
         'strictly_necessary',
-        'targeting',
+        'analytics',
     ],
     'enabled' => [
         'strictly_necessary',
-        'targeting',
+        'analytics',
     ],
     'required' => ['strictly_necessary'],
     /*
