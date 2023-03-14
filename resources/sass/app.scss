@@ -477,8 +477,12 @@ section.landing {
                 display: inline;
                 font-size: calc(1.2rem + 1.6vw);
             }
+            @include media-breakpoint-down(md) {
+                display: inline;
+                font-size: calc(1.1rem + 1.6vw);
+            }
             @include media-breakpoint-down(sm) {
-                font-size: calc(1rem + 1.6vw);
+                font-size: calc(0.9rem + 1.6vw);
                 span {
                     white-space: normal;
                 }
