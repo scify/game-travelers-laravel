@@ -12,9 +12,13 @@
  */
 
 require("./bootstrap");
+// Travelers Language variables.
 require("./lang.js");
+// Universal functions.
+// require("./common.js");
+// Travelers Switcher Keys.
 require("./keys.js");
-// Temporary custom-made audio player.
+// Travelers Audio-player.
 require("./audio.js");
 
 // import {AudioPlayer} from 'audio-player.js'

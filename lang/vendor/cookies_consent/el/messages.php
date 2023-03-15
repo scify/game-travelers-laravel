@@ -6,7 +6,7 @@ return [
     'read_more_text' => 'Περισσότερα.',
     'read_more_link' => '/privacy-policy',
     'cookie_analytics' => 'ΣΤΑΤΙΣΤΙΚΗΣ ΑΝΑΛΥΣΗΣ',
-    'cookie_strictly_necessary' => 'ΑΠΟΛΥΤΩΣ ΑΝΑΓΚΑΙΑ',
+    'cookie_strictly_necessary' => 'ΑΠΟΛΥΤΩΣ ΑΠΑΡΑΙΤΗΤΑ',
     'cookie_performance' => 'ΕΠΙΔΟΣΗΣ',
     'cookie_targeting' => 'ΣΤΟΧΕΥΣΗΣ',
     'cookie_functionality' => 'ΛΕΙΤΟΥΡΓΙΚΟΤΗΤΑΣ',
