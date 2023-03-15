@@ -1,3 +1,4 @@
+<!-- resources/views/layout/components/layout/analytics.blade.php -->
 <x-laravel-cookies-consent />
 <!-- Check the 'targeting' cookie: -->
 @if(isset($_COOKIE[config('cookies_consent.cookie_prefix')

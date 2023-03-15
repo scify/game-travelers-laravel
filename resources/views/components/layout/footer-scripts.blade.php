@@ -1,4 +1,4 @@
-<!-- resources/views/layout/footer-scripts.blade.php -->
+<!-- resources/views/layout/components/footer-scripts.blade.php -->
 @php
     // Laravel language files (translations) to JSON
     // @author Pavlos Isaris

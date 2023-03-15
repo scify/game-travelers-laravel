@@ -26,6 +26,6 @@
     </div>
     @include("components.layout.landing.footer")
     @yield('scripts', '') {{-- Optional: JS scripts loaded after DOM is rendered --}}
-    @include ("layout.analytics")
+    @include("components.layout.analytics")
 </body>
 </html>

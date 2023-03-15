@@ -4,7 +4,7 @@ return [
     'title' => 'Αυτός ο ιστότοπος χρησιμοποιεί cookies',
     'body' => 'Αυτός ο ιστότοπος χρησιμοποιεί cookies για τη βελτίωση της εμπειρίας χρήστη. Χρησιμοποιώντας τον ιστότοπό μας, συναινείτε σε όλα τα cookies σύμφωνα με την Πολιτική μας για τα cookies.',
     'read_more_text' => 'Περισσότερα.',
-    'read_more_link' => '/privacy-policy',
+    'read_more_link' => '/privacy-policy#cookies',
     'cookie_analytics' => 'ΣΤΑΤΙΣΤΙΚΗΣ ΑΝΑΛΥΣΗΣ',
     'cookie_strictly_necessary' => 'ΑΠΟΛΥΤΩΣ ΑΠΑΡΑΙΤΗΤΑ',
     'cookie_performance' => 'ΕΠΙΔΟΣΗΣ',

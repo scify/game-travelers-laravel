@@ -4,7 +4,7 @@ return [
     'title' => 'This website uses cookies',
     'body' => 'This website uses cookies to improve user experience. By using our website you consent to all cookies in accordance with our Cookie Policy.',
     'read_more_text' => 'Read more.',
-    'read_more_link' => '/privacy-policy',
+    'read_more_link' => '/privacy-policy#cookies',
     'cookie_analytics' => 'ANALYSIS',
     'cookie_strictly_necessary' => 'STRICTLY NECESSARY',
     'cookie_performance' => 'PERFORMANCE',
