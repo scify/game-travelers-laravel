@@ -7,7 +7,7 @@
     </div>
     <div class="user float-end">
         @isset($hasUserMenu)
-            @include('layout.user')
+            @include('components.layout.user')
         @endisset
     </div>
 </header>

@@ -8,8 +8,8 @@
 <!doctype html>
 <html lang="{{ config('app.locale') }}">
 <head>
-    @include('layout.meta')
-    @include('layout.favicons')
+    @include("components.layout.meta")
+    @include("components.layout.favicons")
     <link rel="canonical" href="{{ url()->current() }}">
     <script src="{{ mix('js/app.js') }}" defer></script>
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
@@ -23,7 +23,7 @@
             </section>
         </div>
     </div>
-    @include('layout.footer-scripts')
+    @include('components.layout.footer-scripts')
     @yield('scripts', '') {{-- Optional: JS scripts loaded after DOM is rendered --}}
     @isset($hasVue)<script src="{{ mix('js/vue.js') }}" defer></script>@endisset
     @include ("layout.analytics")

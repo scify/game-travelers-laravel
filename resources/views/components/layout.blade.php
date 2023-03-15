@@ -33,8 +33,8 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-    @include('layout.meta')
-    @include('layout.favicons')
+    @include("components.layout.meta")
+    @include("components.layout.favicons")
     <link rel="canonical" href="{{ url()->current() }}">
     <script src="{{ mix('js/app.js') }}" defer></script>
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
@@ -43,16 +43,16 @@
 <body>
     <div class="travelers layout--{{ str_replace('.', '-', Route::currentRouteName()) }} @isset($overflow)add-overflow-margin @endisset">
         <div class="travelers-container">
-            @include('layout.header')
+            @include('components.layout.header')
             <section class="content">
                 {{ $slot }}
             </section>
-            @include('layout.footer')
+            @include('components.layout.footer')
         </div>
     </div>
-    @include('layout.footer-scripts')
+    @include('components.layout.footer-scripts')
     @yield('scripts', '') {{-- Optional: JS scripts loaded after DOM is rendered --}}
     @isset($hasVue)<script src="{{ mix('js/vue.js') }}" defer></script>@endisset
-    @include ("layout.analytics")
+    @include ("components.layout.analytics")
 </body>
 </html>

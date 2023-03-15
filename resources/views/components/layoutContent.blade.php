@@ -12,19 +12,19 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-    @include('layout.meta')
-    @include('layout.favicons')
+    @include("components.layout.meta")
+    @include("components.layout.favicons")
     <link rel="canonical" href="{{ url()->current() }}">
     <script src="{{ mix('js/app.js') }}" defer></script>
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     @yield('css', '') {{-- Optional: Additional CSS stylesheets, if needed. --}}
 </head>
 <body>
-    @include('layout.content.header')
+    @include('components.layout.content.header')
     <div class="content-non-interactive mb-n2">
         {{ $slot }}
     </div>
-    @include('layout.landing.footer')
+    @include("components.layout.landing.footer")
     @yield('scripts', '') {{-- Optional: JS scripts loaded after DOM is rendered --}}
     @include ("layout.analytics")
 </body>
