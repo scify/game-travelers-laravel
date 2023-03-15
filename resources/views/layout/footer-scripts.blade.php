@@ -114,5 +114,3 @@
 ])}}
 </script>
 
-    @include ("layout.analytics")
-

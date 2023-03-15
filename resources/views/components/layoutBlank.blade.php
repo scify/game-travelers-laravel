@@ -26,5 +26,6 @@
     @include('layout.footer-scripts')
     @yield('scripts', '') {{-- Optional: JS scripts loaded after DOM is rendered --}}
     @isset($hasVue)<script src="{{ mix('js/vue.js') }}" defer></script>@endisset
+    @include ("layout.analytics")
 </body>
 </html>

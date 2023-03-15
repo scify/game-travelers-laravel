@@ -1,3 +1,4 @@
+<x-laravel-cookies-consent />
 <!-- Check the 'targeting' cookie: -->
 @if(isset($_COOKIE[config('cookies_consent.cookie_prefix')
 . 'cookies_consent_targeting']) && config('app.google_analytics_id'))
