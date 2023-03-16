@@ -1,0 +1,119 @@
+/** Laravel-Cookies-Consent overrides.
+/* Default plugin style-sheet overrides:
+/* @link https://github.com/scify/laravel-cookies-consent/blob/main/resources/assets/css/style.css
+ */
+.laravel-cookies-consent {
+    // Colors settings:
+    --consent-checkbox: var(--trvl-bg);
+    --consent-background-rgb: var(--trvl-color-rgb);
+    --consent-text: var(--trvl-btn-bg);
+    --consent-focus: var(--consent-checkbox);
+
+    // Going highter than all of Bootstrap's Z-index values:
+    z-index: 1100 !important;
+    // Modal colours
+    color: var(--consent-text) !important;
+    background-color: rgba(var(--consent-background-rgb), 0.95) !important;
+    border-color: rgba(var(--consent-background-rgb), 0.7) !important;
+    .cookies-close::before,
+    .cookies-close::after {
+        height: 1.25rem !important;
+        top: 65% !important;
+        left: 30% !important;
+    }
+    .cookies-title {
+        font-weight: 600;
+    }
+    .form-group {
+        display: flex;
+        line-height: 1.1;
+        & + .form-group {
+            margin-top: 0.6em;
+        }
+    }
+    label {
+        margin-left: 0.5em;
+        user-select: none;
+    }
+    input[type="checkbox"] {
+        // Hiding native checkbox:
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        background-color: var(--consent-background-rgb);
+        box-shadow: none;
+        margin: 0;
+        // Setting-up the box:
+        font: inherit;
+        color: currentColor !important;
+        width: 1.1em;
+        height: 1.1em;
+        border: 0.1em solid currentColor !important;
+        border-radius: 0.15em;
+        transform: translate(0, -0.075em);
+        display: grid;
+        align-content: center;
+        justify-content: center;
+        &::before {
+            content: "";
+            width: 0.7em;
+            height: 0.7em;
+            box-shadow: inset 1em 1em rgb(var(--consent-background-rgb));
+            // Square
+            clip-path: polygon(0 0, 50% 0, 100% 0, 100% 100%, 50% 100%, 0 100%);
+            // Transform
+            transform-origin: center;
+            transition: 0.15s cubic-bezier(0.075, 0.82, 0.165, 1);
+            transition-property: background-color, clip-path;
+        }
+        &:checked::before {
+            // Checkmark.
+            clip-path: polygon(
+                24% 34%,
+                0 65%,
+                50% 100%,
+                100% 16%,
+                70% 0%,
+                43% 62%
+            );
+        }
+        &:checked {
+            background-color: var(--consent-checkbox);
+        }
+        &:focus-visible {
+            outline: 2px solid var(--consent-focus);
+            outline-offset: 2px;
+        }
+        &:disabled {
+            cursor: not-allowed !important;
+            opacity: 0.5;
+        }
+    }
+    .consent-form-container {
+        .consent-buttons {
+            .consent-submit {
+                // Reverse Contrast
+                font-weight: 600;
+                text-decoration: none;
+                line-height: 1.1;
+                color: rgb(var(--consent-background-rgb), 1) !important;
+                background-color: var(--consent-text) !important;
+                border-color: var(--consent-text) !important;
+                &.consent-accept,
+                &.consent-decline-all {
+                    &:focus-visible {
+                        outline: 0.2em var(--consent-focus) solid;
+                    }
+                }
+                &.consent-decline-all {
+                    // Note that all buttons should have the same shape/size/
+                    // /color/font and therefore no variations are acceptable.
+                    /*
+                    color: var(--trvl-btn-bg) !important;
+                    background-color: rgb(var(--consent-background)) !important;
+                    border-color: var(--trvl-btn-bg) !important;
+                    */
+                }
+            }
+        }
+    }
+}

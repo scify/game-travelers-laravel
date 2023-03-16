@@ -12,14 +12,9 @@
 // - Bold: 700
 // - ExtraBold: 800
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap");
-//@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;900&display=swap');
-//@import url('https://fonts.googleapis.com/css2?family=Nunito');
-//@import url('https://fonts.googleapis.com/css2?family=Mansalva:wght@400&display=swap');
 // Note:
 // Instead of the import, we can manually add the non-variable OFL licensed
 // version of the font, build for all platforms and all the weights and styles
-// Please @see "_fonts.scss" for more information about this implementation.
-// @import "fonts";
 //
 // Override default Bootstrap variables
 @import "variables";
@@ -31,12 +26,13 @@
 // Travelers base theme & CSS Variables
 @import "base";
 //
-// Travelers base theme components
+// Travelers base-theme components
 @import "components/avatars";
 @import "components/buttons";
 @import "components/forms";
 @import "components/icons";
 @import "components/stepper";
+@import "components/laravel-cookies-consent";
 //
 // Misc CSS stylesheets
 @import "decoration";
@@ -120,111 +116,6 @@ kbd {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--trvl-bg-salmon-rgb), var(--bs-bg-opacity));
     color: var(--trvl-c-white);
-}
-
-// Cookie-consent plugin overrides:
-.laravel-cookies-consent {
-    --consent-checkbox: var(--trvl-c-green); // hex (e.g. #ff0000)
-    --consent-background: var(--trvl-color-rgb); // RGB values, e.g. "255, 0, 0"
-    --consent-text: var(--trvl-btn-bg); // hex (e.g. #ff0000)
-    // Going highter than all of Bootstrap's Z-index values:
-    z-index: 1100 !important;
-    // Initial values:
-    color: var(--consent-text) !important;
-    background-color: rgba(var(--consent-background),0.95) !important;
-    border-color: rgba(var(--consent-background), 0.7) !important;
-
-    .cookies-title {
-        font-weight: 600;
-    }
-    .cookies-close::before, .cookies-close::after {
-        height: 1.25rem !important;
-        top: 65% !important;
-        left: 30% !important;
-    }
-    .form-group {
-        display: flex;
-        line-height: 1.1;
-        &+ .form-group {
-            margin-top: 0.6em;
-        }
-    }
-    label {
-        margin-left: 0.5em;
-        user-select: none;
-    }
-    input[type="checkbox"] {
-        // Hiding native checkbox:
-        -webkit-appearance: none !important;
-        appearance: none !important;
-        background-color: var(--consent-background);
-        box-shadow: none;
-        margin: 0;
-        // Setting-up the box:
-        font: inherit;
-        color: currentColor !important;
-        width: 1.1em;
-        height: 1.1em;
-        border: 0.1em solid currentColor !important;
-        border-radius: 0.15em;
-        transform: translate(0, -0.075em);
-        display: grid;
-        align-content: center;
-        justify-content: center;
-        &::before {
-            content: "";
-            width: 0.7em;
-            height: 0.7em;
-            box-shadow: inset 1em 1em rgb(var(--consent-background));
-            // Square
-            clip-path: polygon(0 0, 50% 0, 100% 0, 100% 100%, 50% 100%, 0 100%);
-            // Transform
-            transform-origin: center;
-            transition: 0.15s cubic-bezier(0.075, 0.82, 0.165, 1);
-            transition-property: background-color, clip-path;
-        }
-        &:checked::before {
-            // Checkmark.
-            clip-path: polygon(24% 34%, 0 65%, 50% 100%, 100% 16%, 70% 0%, 43% 62%);
-        }
-        &:checked {
-            background-color: var(--consent-checkbox);
-        }
-        &:focus-visible {
-            outline: 2px solid var(--trvl-bg);
-            outline-offset: 2px;
-        }
-        &:disabled {
-            cursor: not-allowed !important;
-            opacity: 0.5;
-        }
-    }
-    .consent-form-container {
-        .consent-buttons {
-            .consent-submit {
-                font-weight: 600;
-                text-decoration: none;
-                line-height: 1.1;
-                color: var(--trvl-color) !important;
-                background-color: var(--trvl-btn-bg) !important;
-                border-color: var(--trvl-btn-border-color) !important;
-                &.consent-accept {
-                    &:focus-visible {
-                        outline: 0.2em var(--trvl-c-green) solid;
-                    }
-                }
-                &.consent-decline-all {
-                    // Note that all buttons should have the same shape/size/
-                    // /color/font and therefore no variations are acceptable.
-                    /*
-                    color: var(--trvl-btn-bg) !important;
-                    background-color: rgb(var(--consent-background)) !important;
-                    border-color: var(--trvl-btn-bg) !important;
-                    */
-                }
-            }
-        }
-    }
 }
 
 // Alerts
