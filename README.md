@@ -156,3 +156,8 @@ sudo nano /etc/hosts
 - At Chrome
   install [Xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc?utm_source=chrome-app-launcher-info-dialog)
 - At PhpStorm/IntelliJ click the "Start listening for PHP debug connections"
+
+
+
+## How to contribute
+- Send us a pull request describing your improvements/fixes/features
