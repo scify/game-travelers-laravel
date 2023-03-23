@@ -385,102 +385,14 @@
           </picture>
     </section>
 
-    <!-- floating-dash -->
+    <!-- floating-dash  -->
     <div class="floating-dash-container position-relative bg-green mb-2">
         <div class="floating-dash position-relative" aria-role="presentation">
             &nbsp;
         </div>
-        <!-- section--testimonials -->
-        <section class="landing bg-green px-4 pt-5 pb-6">
-            <div class="landing-testimonials d-flex ">
-                <div id="carouselTestimonials" class="carousel carousel-dark slide" data-bs-ride="false">
-                    <div class="carousel-indicators">
-                      <button type="button" data-bs-target="#carouselTestimonials" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                      <button type="button" data-bs-target="#carouselTestimonials" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                      <button type="button" data-bs-target="#carouselTestimonials" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-
-                        <div class="carousel-item active">
-                            <div class="testimonial d-flex justify-content-between">
-                                <div class="testimonial-img d-none d-md-block">
-                                    <img class="img-fluid"
-                                        loading="lazy"
-                                        srcset="{{ asset('images/landing/slides/slide_01@2x.jpg') }} 2x"
-                                        src="{{ asset('images/landing/slides/slide_01.jpg') }}"
-                                        width="500" height="500"
-                                        alt="Παιδί κάθεται μπροστά από υπολογιστή σε σχολική αίθουσα και παίζει το παιχνίδι «Ταξιδιώτες»"
-                                    >
-                                </div>
-                                <div class="testimonial-text">
-                                    <div class="quote">
-                                        «Τα παιδιά ενθουσιάστηκαν πολύ! Τους κέντρισε το ενδιαφέρον και αύξησε σημαντικά τον χρόνο συγκέντρωσης και ενασχόλησης τους με το παιχνίδι»
-                                    </div>
-                                    <div class="source">
-                                        Απόστολος Μιχαλόπουλος, Διευθυντής Ειδικού Δημοτικού Σχολείου Αγριάς Βόλου
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="carousel-item">
-                            <div class="testimonial d-flex justify-content-between">
-                                <div class="testimonial-img d-none d-md-block">
-                                    <img class="img-fluid"
-                                        loading="lazy"
-                                        srcset="{{ asset('images/landing/slides/slide_02@2x.jpg') }} 2x"
-                                        src="{{ asset('images/landing/slides/slide_02.jpg') }}"
-                                        width="500" height="500"
-                                        alt="Ένα άλλο παιδί κάθεται επίσης μπροστά από υπολογιστή σε σχολική αίθουσα και παίζει το παιχνίδι «Ταξιδιώτες»"
-                                    >
-                                </div>
-                                <div class="testimonial-text">
-                                    <div class="quote">
-                                        «Εξαιρετικό! Ενδεικτικά, μαθητής μας με τεράστια διάσπαση προσοχής έμεινε συγκεντρωμένος καθ'όλη τη διάρκεια του παιχνιδιού!»
-                                    </div>
-                                    <div class="source">
-                                        Χριστίνα Κουζούτη, Δασκάλα Ειδικής Αγωγής ΠΕ71, Ειδικό Δημοτικό Σχολείο Αγριάς Βόλου
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="carousel-item">
-                            <div class="testimonial d-flex justify-content-between">
-                                <div class="testimonial-img d-none d-md-block">
-                                    <img class="img-fluid"
-                                        loading="lazy"
-                                        srcset="{{ asset('images/landing/slides/slide_03b@2x.jpg') }} 2x"
-                                        src="{{ asset('images/landing/slides/slide_03b.jpg') }}"
-                                        width="500" height="500"
-                                        alt="Παιδί που κάθεται μπροστά από φορητό υπολογιστή και παίζει το παιχνίδι «Ταξιδιώτες» με τη βοήθεια ειδικού μοχλού."
-                                    >
-                                </div>
-                                <div class="testimonial-text">
-                                    <div class="quote">
-                                        «Είναι πλήρως προσαρμοσμένο στο δυναμικό τους, τα παιδια χαίρονται, βοηθάει στην τριβή τους με την τεχνολογία!»
-                                    </div>
-                                    <div class="source">
-                                        Μαριαλένα Ξιξή, Εργοθεραπεύτρια, ΚΑΣΠ Χατζηπατέρειο
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselTestimonials" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselTestimonials" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-                  </div>
-
-            </div>
-        </section>
-
+        <!-- section-testimonials -->
+        <x-landing.sectionTestimonials :carousel-slides=$carouselSlides>
+        </x-landing.sectionTestimonials>
     </div>
 
     <!-- floating-dash -->
@@ -510,17 +422,20 @@
             <div class="landing-partners container-lg px-0 px-xl-5 px-xxl-6">
                 <div class="px-2 px-lg-6 px-xl-6 pb-5 text-center">
                     Το παιχνίδι αναπτύχθηκε σε στενή συνεργασία με ειδικούς παιδαγωγούς
-                    από φορείς εγνωσμένου κύρους: την ΕΛΕΠΑΠ, το <span class="text-nowrap">ΚΑΣΠ Χατζηπατέρειο</span>, το <span class="text-nowrap">Ειδικό Σχολείο</span> <span class="text-nowrap">Αγριάς Μαγνησίας</span>
+                    από φορείς εγνωσμένου κύρους:
+                    την ΕΛΕΠΑΠ, το <span class="text-nowrap">ΚΑΣΠ Χατζηπατέρειο</span>,
+                    το <span class="text-nowrap">Ειδικό Σχολείο</span> <span class="text-nowrap">Αγριάς Μαγνησίας</span>
                     και το Κέντρο Κοινωνικής Πρόνοιας <span class="text-nowrap">Περιφέρειας Αττικής</span>.
                 </div>
                 <div class="landing-partners--logos container py-5">
-                    <div class="row row-cols-1 row-cols-sm-2 gy-5 justify-content-around text-center">
-                        <div class="d-none">
+                    <div class="row row-cols-1 row-cols-sm-3 gy-5 justify-content-around text-center">
+                        <div>
                             <a href="https://elepap.gr" target="_blank">
                                 <img class="img-fluid"
                                     loading="lazy"
+                                    srcset="{{ asset('images/landing/partners/elepap@2x.png') }} 2x"
                                     src="{{ asset('images/landing/partners/elepap.png') }}"
-                                    width="203" height="90"
+                                    width="219" height="90"
                                     alt="ΕΛΕΠΑΠ"
                                 >
                             </a>
@@ -572,41 +487,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- section--links -->
-        <section class="landing bg-light px-4 py-6 d-none">
-            <div class="landing-links container-lg text-center">
-                <div class="text-center">
-                    <h1>
-                        Άλλες βοηθητικές τεχνολογίες για ΑμεΑ
-                    </h1>
-                </div>
-                <div class="row pt-5 gy-5 landing-links">
-                    <div class="col-lg-4 link">
-                        <a href="https://talkandplay.scify.org" target="_blank">Talk and Play</a>
-                        <div class="pt-2">
-                            Σύστημα επικοινωνίας και ψυχαγωγίας
-                            για παιδιά με εγκεφαλική παράλυση
-                        </div>
-                    </div>
-                    <div class="col-lg-4 link">
-                        <a href="https://memoristudio.scify.org" target="_blank">Memor-i Studio</a>
-                        <div class="pt-2">
-                            Ηλεκτρονικά παιχνίδια για τυφλά παιδιά.
-                            Πλατφόρμα ανάπτυξης νέων παιχνιδιών
-                        </div>
-                    </div>
-                    <div class="col-lg-4 link">
-                        <a href="https://gamesfortheblind.org" target="_blank">Games for the Blind</a>
-                        <div class="pt-2">
-                            Και άλλα ηλεκτρονικά παιχνίδια
-                            για τυφλά παιδιά
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
 
     </div>
 </x-layout>

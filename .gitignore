@@ -10,6 +10,7 @@ public/mix-manifest.json
 public/sitemap.xml
 public/web.config
 public/*.ico
+public/*.html
 resources/sass/*.css
 resources/sass/*.css.map
 /storage/*.key
@@ -38,4 +39,3 @@ _ide_helper_models.php
 .LSOverride
 # Linux temp files
 .fuse_hidden*
-public/*.html

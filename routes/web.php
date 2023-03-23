@@ -30,7 +30,9 @@ require __DIR__ . '/auth.php';
 
 
 // Home / Index / Landing page:
-Route::view('/', 'home')->name('home');
+//Route::view('/', 'home')->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 // About page.
 Route::view('/about', 'about')->name('about');
 
