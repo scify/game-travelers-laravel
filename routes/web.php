@@ -28,20 +28,12 @@ use App\Http\Controllers\CustomAudioController;
  */
 require __DIR__ . '/auth.php';
 
-
-// Home / Index / Landing page:
-//Route::view('/', 'home')->name('home');
+// Non-game pages.
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// About page.
 Route::view('/about', 'about')->name('about');
+Route::view('/credits', 'credits')->name('credits');
+Route::view('/privacy-policy', 'privacy-policy.page')->name('privacy-policy');
 
-/*
-Route::get('/', function () {
-    //return view('splash');
-    return redirect()->route('login');
-})->name('home');
-*/
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('administration')->middleware('can:manage-platform')->name('administration.')->group(function () {
@@ -55,10 +47,6 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 });
-
-
-// Privacy Policy
-Route::view('/privacy-policy', 'privacy-policy.page')->name('privacy-policy');
 
 //Integrated pages
 Route::middleware('auth')->group(function () {

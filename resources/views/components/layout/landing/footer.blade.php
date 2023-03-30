@@ -12,6 +12,7 @@
             <div class="trvl-landing-footer--links flex-grow-1">
                 <ul>
                     <li><a href="http://www.scify.gr/site/el/contact" target="_blank">Επικοινώνησε μαζί μας</a></li>
+                    <li><a href="{{ route('credits') }}">Συντελεστές</a></li>
                     <li>
                         <a href="{{ route('privacy-policy') }}">
                             {{ __("messages.privacy_policy")}}

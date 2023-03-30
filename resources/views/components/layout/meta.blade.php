@@ -2,7 +2,7 @@
 <meta name="application-name" content="{{ __('messages.app_name') }}">
 <meta name="author" content="SciFY">
 <meta name="description" content="{{ $description ?? __('messages.meta_description') }}">
-<meta name="keywords" content="{{ __('messages.meta_keywords') }}">
+<meta name="keywords" content="@include('components.layout.keywords.keywords-'.app()->getLocale())">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <title>{{ $title ?? __('messages.app_name') }}</title>
 <meta name="og:title" property="og:title" content="{{ $title ?? __('messages.app_name') }}">

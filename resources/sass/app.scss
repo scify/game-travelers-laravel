@@ -560,6 +560,31 @@ section.landing {
             display: none;
         }
     }
+    .landing-credits {
+        h1 {
+            font-size: 1.9rem; // ~30px
+            font-weight: 700;
+            @include media-breakpoint-down(md) {
+                font-size: calc(1.2rem + 1.5vw);
+            }
+        }
+        h2 {
+            font-size: 1.25rem; // ~20px
+            font-weight: 600;
+        }
+        dl {
+            margin-top: 2rem;
+        }
+        dt {
+            margin-top: 1.5rem;
+        }
+        dd {
+            font-size: 1.25rem;
+            a {
+                text-decoration: none;
+            }
+        }
+    }
 }
 // Landing header
 .trvl-landing-header {
