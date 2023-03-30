@@ -1,6 +1,6 @@
 <x-layoutContent
     :title="__('messages.privacy_policy') . ' | ' . __('messages.app_name')"
-    :description="'This is the privacy policy page'"
+    :description="'Πολιτική απορρήτου για τους «Ταξιδιώτες».'"
     :header-background-color="'green'"
 >
 
