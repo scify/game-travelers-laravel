@@ -2,7 +2,7 @@
 <x-laravel-cookies-consent />
 <!-- Check the 'targeting' cookie: -->
 @if(isset($_COOKIE[config('cookies_consent.cookie_prefix')
-. 'cookies_consent_targeting']) && config('app.google_analytics_id'))
+. 'cookies_consent_analytics']) && config('app.google_analytics_id'))
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('app.google_analytics_id') }}"></script>
