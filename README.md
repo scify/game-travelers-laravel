@@ -150,6 +150,12 @@ sudo nano /etc/hosts
 127.0.0.1       dev.taxidiotes
 ```
 
+## About the music files
+
+The directories under `resources/audio/fx` and `resources/audio/music` should contain audio (.mp3) files that are not checked in source control, because of copyright issues.
+
+Please check `resources/audio/fx/README.md` and `resources/audio/music/README.md` , in order to see which files you should download and put there.
+
 ## How to debug
 
 - Install and configure Xdebug on your machine

@@ -2,9 +2,21 @@
 
 ## License
 
-**THESE FILES SHOULD NOT BE INCLUDED IN A PUBLIC REPOSITORY OF THE GAME DUE TO LICENSE RESTRICTIONS**
+**THE FILES IN THIS DIRECTORY SHOULD NOT BE CHECKED IN SOURCE CONTROL.**
 
-	You cannot make our music available for download or tell others that they can do so. You cannot resell it in any form, or tell others that they can do so. You cannot redistribute it in any form aside from its part in your production. 
+The directory should contain the following files:
+
+```text
+feelin_good.mp3
+
+great_ideas.mp3
+
+in_the_land_of_make_believe.mp3
+
+movin_on.mp3
+```
+
+The real files are copyrighted, so you should download your own files, name them appropriately, and paste them here.
 
 ## Credits
 
