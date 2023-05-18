@@ -6,10 +6,10 @@ username="${2:-$USER}"
 folder="${3:-.}"
 
 # Add user to webserver group
-usermod -a -G "$groupname" "$username"
+# usermod -a -G "$groupname" "$username"
 
 # Change storage ownership to normal user/ webserver group
-chown -R "$username":"$groupname" "$folder"/storage
+# chown -R "$username":"$groupname" "$folder"/storage
 
 chmod 775 "$folder"/storage
 
