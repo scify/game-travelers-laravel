@@ -48,9 +48,9 @@
                 <div class="col-12 col-md-5 pt-5 pt-md-0 order-2 order-md-1 scify">
                     <div>Ανάπτυξη</div>
                     <div>
-                        <a href="https://www.scify.gr" target="_blank">
+                        <a href="https://www.scify.gr">
                             <img
-                                class="img-fluid"
+                                class="img-fluid logo logo-h74 scify"
                                 loading="lazy"
                                 srcset="{{ asset('images/logos/74h_scify@3x.png') }} 3x"
                                 srcset="{{ asset('images/logos/74h_scify@2x.png') }} 2x"
@@ -61,18 +61,19 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-0 col-md-2 order-2" aria-role="presentation"></div>
+                <div class="col-0 col-md-2 order-2" aria-hidden="true"></div>
                 <div class="col-12 col-md-5 order-1 order-md-3 sponsor">
                     <div class="text-nowrap">Ευγενική χορηγία</div>
                     <div>
-                        <a href="https://www.lafarge.gr" target="_blank">
+                        <a href="https://www.lafarge.gr">
+                            <!-- 263 x 74 -->
                             <img
-                                class="img-fluid"
+                                class="img-fluid logo logo-h74 sponsor"
                                 loading="lazy"
-                                srcset="{{ asset('images/logos/74h_iraklis@3x.png') }} 3x"
-                                srcset="{{ asset('images/logos/74h_iraklis@2x.png') }} 2x"
-                                src="{{ asset('images/logos/74h_iraklis.png') }}"
-                                width="263" height="74"
+                                srcset="{{ asset('images/logos/74h_heracles@3x.png') }} 3x"
+                                srcset="{{ asset('images/logos/74h_heracles@2x.png') }} 2x"
+                                src="{{ asset('images/logos/74h_heracles.png') }}"
+                                width="414" height="74"
                                 alt="Ηρακλής - Όμιλος εταιριών"
                             >
                         </a>

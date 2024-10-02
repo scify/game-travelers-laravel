@@ -63,12 +63,13 @@
             </div>
 
         </div>
-        <div class="trvl-landing-footer--row--2 d-flex pt-3 pt-sm-2 flex-row text-center">
+        <div class="trvl-landing-footer--row--2 pt-3 pt-sm-2 footer-credits">
 
-            <div class="scify logo text-center">
-                <span>Ανάπτυξη</span><br />
-                <a href="https://www.scify.gr" target="_blank">
+            <div class="scify text-center">
+                <span>Ανάπτυξη</span>
+                <a href="https://www.scify.gr">
                     <img
+                        class="img-fluid logo logo-h53 scify"
                         srcset="{{ asset('images/logos/53h_scify@3x.png') }} 3x"
                         srcset="{{ asset('images/logos/53h_scify@2x.png') }} 2x"
                         src="{{ asset('images/logos/53h_scify.png') }}"
@@ -77,14 +78,15 @@
                     >
                 </a>
             </div>
-            <div class="sponsor logo text-center">
-                <span>Ευγενική χορηγία</span><br />
-                <a href="https://www.lafarge.gr" target="_blank">
+            <div class="sponsor text-center">
+                <span>Ευγενική χορηγία</span>
+                <a href="https://www.lafarge.gr">
                     <img
-                        srcset="{{ asset('images/logos/53h_iraklis@3x.png') }} 3x"
-                        srcset="{{ asset('images/logos/53h_iraklis@2x.png') }} 2x"
-                        src="{{ asset('images/logos/53h_iraklis.png') }}"
-                        width="130" height="53"
+                        class="img-fluid logo logo-h53 sponsor"
+                        srcset="{{ asset('images/logos/53h_heracles@3x.png') }} 3x"
+                        srcset="{{ asset('images/logos/53h_heracles@2x.png') }} 2x"
+                        src="{{ asset('images/logos/53h_heracles.png') }}"
+                        width="297" height="53"
                         alt="Ηρακλής - Όμιλος εταιριών"
                     >
                 </a>
