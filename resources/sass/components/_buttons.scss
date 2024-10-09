@@ -130,8 +130,7 @@
         0.9rem + 0.1vw
     ); // The "i" is moving closer to base as the screen gets smaller, to avoid being on-top of possible wrapped elements.
     padding: 0;
-    margin: 0;
-    margin-left: 3px;
+    margin: 0 0 0 3px;
     cursor: help !important;
     width: 22px;
     height: 22px;
@@ -198,7 +197,7 @@ body.switcher {
 }
 
 .btn-board,
-.btn-pawn {
+.btn-pawn, .btn-video {
     --bs-btn-disabled-opacity: 1;
     --bs-btn-disabled-border-color: transparent;
     display: block;
@@ -246,21 +245,22 @@ body.switcher {
     }
 }
 
-.btn-pawn {
-    width: 136px;
-    height: 212px;
-    border-radius: 18px;
-}
-
 .btn-board {
     width: 352px;
     height: 244px;
     border-radius: 42px;
 }
 
+.btn-pawn {
+    width: 136px;
+    height: 212px;
+    border-radius: 18px;
+}
+
 // Board & Pawn Images
 .board-img,
-.pawn-img {
+.pawn-img,
+.video-thumb {
     margin: 0;
     padding: 0;
     border-width: 0;
@@ -285,6 +285,62 @@ body.switcher {
         display: block;
     }
 }
+
+.btn-video {
+    --btn-width: 380px;
+    --btn-height: 260px;
+    display: grid;
+    place-items: center;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    position: relative;
+    width: var(--btn-width);
+    height: var(--btn-height);
+    max-width: 100%;
+    border: 0.3rem solid var(--trvl-c-dark);
+    border-radius: 1.8125rem;
+    overflow: clip;
+    img {
+        display: block;
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        width: var(--btn-width);
+        height: var(--btn-height);
+        object-fit: cover;
+        scale: 1.4;
+        transition: scale ease-in-out .2s;
+    }
+    &::after {
+        display: block;
+        content: '';
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        width: calc(var(--btn-width) * 0.3125);
+        height: calc(var(--btn-width) * 0.3125);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cpath fill='%23000' opacity='1' d='M120 60c0 33.137-26.863 60-60 60S0 93.137 0 60 26.863 0 60 0s60 26.863 60 60M50.925 38.198A3.75 3.75 0 0 0 45 41.25v37.5a3.75 3.75 0 0 0 5.925 3.052l26.25-18.75a3.75 3.75 0 0 0 0-6.104Z'/%3E%3Cpath fill='%23fff' opacity='1' d='M50.925 38.198A3.75 3.75 0 0 0 45 41.25v37.5a3.75 3.75 0 0 0 5.925 3.052l26.25-18.75a3.75 3.75 0 0 0 0-6.104Z'/%3E%3C/svg%3E");
+        z-index: 2;
+        transition: opacity ease-in-out .2s;
+        opacity: 0.7;
+    }
+    &:hover {
+        &::after {
+            opacity: 1;
+        }
+        @media (prefers-reduced-motion: no-preference) {
+            &:hover img {
+                scale: 1.5;
+            }
+        }
+    }
+    &:focus-visible {
+        box-shadow: 0 0 0 0.3rem var(--trvl-c-dark);
+        &::after {
+            opacity: 1;
+        }
+    }
+
+}
+
 // Board & Pawn labels
 .board-label,
 .pawn-label {
@@ -412,7 +468,6 @@ body.switcher {
     position: absolute;
     border-style: solid;
     transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
     border: none;
     font-weight: 800;
     z-index: 201;

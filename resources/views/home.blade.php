@@ -9,7 +9,6 @@
                     srcset="{{ asset('images/landing/trees/trees-xl@2x.png') }} 2x"
                     src="{{ asset('images/landing/trees/trees-xl.png') }}"
                     width="928" height="250"
-                    aria-role="presentation"
                     alt=""
                     style="display: none;"
                 >
@@ -18,7 +17,6 @@
                     srcset="{{ asset('images/landing/trees/trees-lg@2x.png') }} 2x"
                     src="{{ asset('images/landing/trees/trees-lg.png') }}"
                     width="628" height="236"
-                    aria-role="presentation"
                     alt=""
                     style="display: none;"
                 >
@@ -27,7 +25,6 @@
                     srcset="{{ asset('images/landing/trees/tree@2x.png') }} 2x"
                     src="{{ asset('images/landing/trees/tree.png') }}"
                     width="124" height="191"
-                    aria-role="presentation"
                     alt=""
                 >
             </div>
@@ -52,8 +49,7 @@
                             <img
                                 class="img-fluid logo logo-h74 scify"
                                 loading="lazy"
-                                srcset="{{ asset('images/logos/74h_scify@3x.png') }} 3x"
-                                srcset="{{ asset('images/logos/74h_scify@2x.png') }} 2x"
+                                srcset="{{ asset('images/logos/74h_scify@3x.png') }} 3x, {{ asset('images/logos/74h_scify@2x.png') }} 2x"
                                 src="{{ asset('images/logos/74h_scify.png') }}"
                                 width="56" height="74"
                                 alt="SciFY - Science for You"
@@ -70,8 +66,7 @@
                             <img
                                 class="img-fluid logo logo-h74 sponsor"
                                 loading="lazy"
-                                srcset="{{ asset('images/logos/74h_heracles@3x.png') }} 3x"
-                                srcset="{{ asset('images/logos/74h_heracles@2x.png') }} 2x"
+                                srcset="{{ asset('images/logos/74h_heracles@3x.png') }} 3x, {{ asset('images/logos/74h_heracles@2x.png') }} 2x"
                                 src="{{ asset('images/logos/74h_heracles.png') }}"
                                 width="414" height="74"
                                 alt="Ηρακλής - Όμιλος εταιριών"
@@ -83,7 +78,7 @@
         </div>
     </section>
 
-    <!-- section--four-abstrack-blocks -->
+    <!-- section--four-abstract-blocks -->
     <section class="landing trvl-curve trvl-curve--landing-one-lg--color--green bg-light bg-lg-green px-0 mb-xl-n350">
         <div class="trvl-curve trvl-curve--landing-four-abstract-blocks--sm-xl-dash px-4">
             <div class="pt-2 px-4">
@@ -96,7 +91,6 @@
                                     srcset="{{ asset('images/landing/blocks-abstract/block_1@2x.png') }} 2x"
                                     src="{{ asset('images/landing/blocks-abstract/block_1.png') }}"
                                     width="264" height="398"
-                                    aria-role="presentation"
                                     alt=""
                                 >
                                 <div class="landing-block--label">
@@ -114,7 +108,6 @@
                                     srcset="{{ asset('images/landing/blocks-abstract/block_2@2x.png') }} 2x"
                                     src="{{ asset('images/landing/blocks-abstract/block_2.png') }}"
                                     width="264" height="398"
-                                    aria-role="presentation"
                                     alt=""
                                 >
                                 <div class="landing-block--label">
@@ -132,13 +125,12 @@
                                     srcset="{{ asset('images/landing/blocks-abstract/block_3@2x.png') }} 2x"
                                     src="{{ asset('images/landing/blocks-abstract/block_3.png') }}"
                                     width="264" height="398"
-                                    aria-role="presentation"
                                     alt=""
                                 >
                                 <div class="landing-block--label">
                                     <h2>
                                         <span>Με τη συνεργασία</span>
-                                        <span>ειδικών παιδαγωγών<span>
+                                        <span>ειδικών παιδαγωγών</span>
                                     </h2>
                                 </div>
                             </div>
@@ -150,7 +142,6 @@
                                     srcset="{{ asset('images/landing/blocks-abstract/block_4@2x.png') }} 2x"
                                     src="{{ asset('images/landing/blocks-abstract/block_4.png') }}"
                                     width="264" height="398"
-                                    aria-role="presentation"
                                     alt=""
                                 >
                                 <div class="landing-block--label">
@@ -168,7 +159,7 @@
     </section>
 
     <!-- curve--landing-one-xl -->
-    <div aria-role="presentation" class="d-none d-xl-block trvl-curve trvl-curve--landing-one-xl trvl-curve--landing-one-xl--color trvl-curve--landing-one-xl--color--green bg-light">
+    <div aria-hidden="true" class="d-none d-xl-block trvl-curve trvl-curve--landing-one-xl trvl-curve--landing-one-xl--color trvl-curve--landing-one-xl--color--green bg-light">
         <div class="trvl-curve trvl-curve--landing-one-xl trvl-curve--landing-one-xl--dash">
             &nbsp;
         </div>
@@ -184,7 +175,6 @@
                         srcset="{{ asset('images/landing/numbers/one@2x.png') }} 2x"
                         src="{{ asset('images/landing/numbers/one.png') }}"
                         width="168" height="162"
-                        aria-role="presentation"
                         alt=""
                     >
                     <div class="ps-0 ps-md-4 pt-4 pt-lg-0">
@@ -197,7 +187,6 @@
                         srcset="{{ asset('images/landing/numbers/two@2x.png') }} 2x"
                         src="{{ asset('images/landing/numbers/two.png') }}"
                         width="168" height="162"
-                        aria-role="presentation"
                         alt=""
                     >
                     <div class="ps-0 ps-md-4 pt-4 pt-lg-0">
@@ -210,7 +199,6 @@
                         srcset="{{ asset('images/landing/numbers/three@2x.png') }} 2x"
                         src="{{ asset('images/landing/numbers/three.png') }}"
                         width="168" height="162"
-                        aria-role="presentation"
                         alt=""
                     >
                     <div class="ps-0 ps-md-4 pt-4 pt-lg-0">
@@ -222,7 +210,7 @@
     </section>
 
     <!-- curve--landing-two -->
-    <div aria-role="presentation" class="trvl-curve trvl-curve--landing-two trvl-curve--landing-two--color trvl-curve--landing-two--color--brown bg-light">
+    <div aria-hidden="true" class="trvl-curve trvl-curve--landing-two trvl-curve--landing-two--color trvl-curve--landing-two--color--brown bg-light">
         &nbsp;
     </div>
 
@@ -243,7 +231,7 @@
                             srcset="{{ asset('images/landing/screenshots/screenshot_01@2x.png') }} 2x"
                             src="{{ asset('images/landing/screenshots/screenshot_01.png') }}"
                             width="1366" height="862"
-                            alt="Εικόνα στην οποία απεικονίζονται οι ρυθμίσεις του παιχνιδιού οι οποίες σχετίζονται με τον τρόπο πλοήγησης σε αυτό. Εμφανίζονται οι ρυθμίσεις για το στιλ πλοήγησης (έχει επιλεχθεί «αυτόματο»), την ταχύτητα σάρωσης (κάθε 2 δευτερόλεπτα) και τη βοήθεια μετά από αριθμό λαθών (έχει επιλεχθεί 3)."
+                            alt="Εικόνα απο το παιχνίδι Ταξιδιώτες με τις ρυθμίσεις του, οι οποίες σχετίζονται με τον τρόπο πλοήγησης σε αυτό. Παρουσιάζονται οι επιλογές για το στιλ πλοήγησης (έχει επιλεχθεί «αυτόματο»), την ταχύτητα σάρωσης (κάθε 2 δευτερόλεπτα) και τη βοήθεια, που παρέχεται στον παίκτη, μετά από συγκεκριμένο αριθμό λαθών (έχει επιλεχθεί ο αριθμός 3)."
                         >
                     </div>
                 </div>
@@ -258,7 +246,7 @@
                             srcset="{{ asset('images/landing/screenshots/screenshot_02@2x.png') }} 2x"
                             src="{{ asset('images/landing/screenshots/screenshot_02.png') }}"
                             width="1366" height="862"
-                            alt="Εικόνα στην οποία εμφανίζεται η οθόνη επιλογής προφίλ παίκτη στο παιχνίδι. Παρουσιάζονται συνολικά 14 προφίλ, όπως επίσης και το πλήκτρο που επιτρέπει τη δημιουργία ακόμη περισσότερων."
+                            alt="Εικόνα από το παιχνίδι Ταξιδιώτες και συγκεκριμένα την οθόνη επιλογής προφίλ παίκτη στο παιχνίδι. Παρουσιάζονται συνολικά 14 προφίλ, όπως επίσης και το πλήκτρο που επιτρέπει τη δημιουργία ακόμη περισσότερων."
                         >
                     </div>
                 </div>
@@ -277,7 +265,6 @@
                             srcset="{{ asset('images/landing/blocks-circle/block_1@2x.png') }} 2x"
                             src="{{ asset('images/landing/blocks-circle/block_1.png') }}"
                             width="226" height="243"
-                            aria-role="presentation"
                             alt=""
                         >
                         <div class="landing-block--label">
@@ -294,7 +281,6 @@
                             srcset="{{ asset('images/landing/blocks-circle/block_2@2x.png') }} 2x"
                             src="{{ asset('images/landing/blocks-circle/block_2.png') }}"
                             width="226" height="243"
-                            aria-role="presentation"
                             alt=""
                         >
                         <div class="landing-block--label">
@@ -312,7 +298,6 @@
                             srcset="{{ asset('images/landing/blocks-circle/block_3@2x.png') }} 2x"
                             src="{{ asset('images/landing/blocks-circle/block_3.png') }}"
                             width="226" height="243"
-                            aria-role="presentation"
                             alt=""
                         >
                         <div class="landing-block--label">
@@ -329,7 +314,6 @@
                             srcset="{{ asset('images/landing/blocks-circle/block_4@2x.png') }} 2x"
                             src="{{ asset('images/landing/blocks-circle/block_4.png') }}"
                             width="226" height="243"
-                            aria-role="presentation"
                             alt=""
                         >
                         <div class="landing-block--label">
@@ -344,7 +328,7 @@
     </section>
 
     <!-- curve--landing-two -->
-    <div aria-role="presentation" class="trvl-curve trvl-curve--landing-two trvl-curve--landing-two--color trvl-curve--landing-two--color--brown bg-light">
+    <div aria-hidden="true" class="trvl-curve trvl-curve--landing-two trvl-curve--landing-two--color trvl-curve--landing-two--color--brown bg-light">
         &nbsp;
     </div>
 
@@ -387,18 +371,45 @@
     </section>
 
     <!-- floating-dash  -->
-    <div class="floating-dash-container position-relative bg-green mb-2">
-        <div class="floating-dash position-relative" aria-role="presentation">
+    <div class="floating-dash-container position-relative bg-light mb-2">
+        <div class="floating-dash position-relative" aria-hidden="true">
             &nbsp;
         </div>
-        <!-- section-testimonials -->
-        <x-landing.sectionTestimonials :carousel-slides=$carouselSlides>
-        </x-landing.sectionTestimonials>
+
+        <!-- section-gameplay-videos -->
+        <section class="landing bg-light px-4 py-3 py-md-6" id="gameplay-videos">
+            <div class="container-lg landing-gameplay-videos">
+                <div class="text-center pb-2">
+                    <h1 id="gameplay-videos-label">Πάρε μια γεύση από το παιχνίδι</h1>
+                </div>
+                <div class="container-lg pt-5 pb-6 px-4 px-md-5 px-lg-6">
+                    <div class="row text-center gap-4">
+                        <div class="col gameplay-video">
+                            <a href="https://www.youtube.com/watch?v=SXi1U0Zzzkw" target="_blank" class="btn btn-video mx-auto" aria-labelledby="video-1-label">
+                                <img class="video-thumb" src="{{ asset('images/landing/thumbs/SXi1U0Zzzkw.webp') }}" alt="" />
+                                <span id="video-1-label" class="visually-hidden">Δείτε πώς να παίξετε το παιχνίδι, με ζάρι με χρώματα, χωρίς αριθμούς, υπολογισμούς και αυτόματο scanning. Η αναπαραγωγή του βίντεο θα γίνει σε νέο παράθυρο.</span>
+                            </a>
+                        </div>
+                        <div class="col gameplay-video">
+                            <a href="https://www.youtube.com/watch?v=CaiOV7vu554" target="_blank" class="btn btn-video mx-auto" aria-labelledby="video-2-label">
+                                <img class="video-thumb" src="{{ asset('images/landing/thumbs/CaiOV7vu554.webp') }}" alt="" />
+                                <span id="video-2-label" class="visually-hidden">Δείτε πώς να παίξετε το παιχνίδι, με ζάρι με αριθμούς, ιδανικό για παιδιά που μπορούν να καταλάβουν αριθμούς και να κάνουν υπολογισμούς. Η αναπαραγωγή του βίντεο θα γίνει σε νέο παράθυρο.</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
     </div>
 
+    <!-- section-testimonials -->
+    <x-landing.sectionTestimonials :carousel-slides='$carouselSlides'>
+    </x-landing.sectionTestimonials>
+
     <!-- floating-dash -->
-    <div class="floating-dash-container position-relative bg-light mb-2">
-        <div class="floating-dash position-relative" aria-role="presentation">
+    <div class="floating-dash-container position-relative bg-light">
+        <div class="floating-dash position-relative" aria-hidden="true">
             &nbsp;
         </div>
 
@@ -453,7 +464,7 @@
                             </a>
                         </div>
                         <div class="silent">
-                            <a href="http://dim-eid-agrias.mag.sch.gr/" target="_blank">
+                            <a href="https://dim-eid-agrias.mag.sch.gr/" target="_blank">
                             ΕΙΔΙΚΟ ΔΗΜΟΤΙΚΟ ΣΧΟΛΕΙΟ<br />
                             &amp; ΝΗΠΙΑΓΩΓΕΙΟ ΑΓΡΙΑΣ
                             </a>
@@ -490,4 +501,4 @@
         </section>
 
     </div>
-</x-layout>
+</x-layoutLanding>

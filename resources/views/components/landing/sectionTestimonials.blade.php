@@ -1,5 +1,6 @@
 <!-- /resources/views/component/homeTestimonials.blade.php -->
-<section class="landing bg-green px-4 pt-5 pb-6">
+<section class="landing bg-green px-4 pt-5 pb-6 text-center" aria-labelledby="landing-testimonials-label">
+    <h1 id="landing-testimonials-label" class="visually-hidden">Μαρτυρίες</h1>
     <div class="landing-testimonials d-flex ">
         <div id="carouselTestimonials" class="carousel carousel-dark slide" data-bs-ride="true" data-bs-interval="7000">
             <div class="carousel-indicators">
@@ -52,6 +53,6 @@
                 <span class="visually-hidden">Next</span>
             </button>
             </div>
-
+        </div>
     </div>
 </section>
