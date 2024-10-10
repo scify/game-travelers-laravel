@@ -33,7 +33,6 @@
                 src="{{ asset('images/misc/vase.png') }}"
                 class="mt-5"
                 alt=""
-                aria-role="presentation"
                 width="104"
                 height="173"
             >

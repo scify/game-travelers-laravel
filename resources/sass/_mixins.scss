@@ -1,0 +1,24 @@
+@mixin font-size-xl {
+    font-size: 3rem; // 48px
+    line-height: 1.2;
+    @supports (font-size: clamp(1em, 2em, 3em)) {
+        font-size: clamp(1.5rem, 4vw + 1rem, 3rem);
+    }
+}
+
+@mixin font-size-lg {
+    font-size: 2.5rem; // 40px
+    @supports (font-size: clamp(1em, 2em, 3em)) {
+        font-size: clamp(1.25rem, 4vw + 0.8rem, 2.5rem);
+    }
+}
+
+@mixin font-wrap-conditional($breakpoint: md) {
+    line-height: 1.2;
+    @include media-breakpoint-up($breakpoint) {
+        line-height: 1.4;
+        span {
+            white-space: nowrap;
+        }
+    }
+}

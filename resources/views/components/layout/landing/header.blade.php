@@ -14,7 +14,7 @@
         </div>
     </div>
 </header>
-<div aria-role="presentation" class="trvl-curve trvl-curve--header-extended bg-green">
+<div aria-hidden="true" class="trvl-curve trvl-curve--header-extended bg-green">
     <div class="trvl-curve trvl-curve--header trvl-curve--header--dash">
         &nbsp;
     </div>

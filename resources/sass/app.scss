@@ -37,12 +37,15 @@
 // Misc CSS stylesheets
 @import "decoration";
 
+// Custom mix-ins
+@import "mixins";
+
 /* Global constants and Bootstrap extensions */
 body {
     background-color: var(--trvl-bg);
     color: var(--trvl-color);
     min-height: 100vh;
-    min-width: 340px;
+    min-width: 320px;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -54,6 +57,7 @@ h4,
 h5,
 h6 {
     font-weight: 800;
+    text-wrap: balance;
 }
 
 a,
@@ -64,14 +68,8 @@ a:visited {
     outline: none;
 }
 a:focus-visible {
-    outline-color: hsla(
-        0,
-        0%,
-        0%,
-        0.7
-    ); // hsla(var(--trvl-shadow-focus-hsl), 0.75)
-    outline-width: 0.3rem;
-    outline-style: solid;
+    // hsla(var(--trvl-shadow-focus-hsl), 0.75)
+    outline: hsla(0, 0%, 0%, 0.7) solid 0.3rem;
 }
 
 header img,
@@ -159,18 +157,9 @@ section.landing {
     // Generic
     h1.action {
         text-align: center;
-        line-height: 1.4;
-        font-size: 3rem; // ~50px
         font-weight: 700;
-        span {
-            white-space: nowrap;
-        }
-        @include media-breakpoint-down(lg) {
-            font-size: calc(1.4rem + 1.5vw);
-        }
-        @include media-breakpoint-down(sm) {
-            font-size: calc(1rem + 1.6vw);
-        }
+        @include font-size-xl;
+        @include font-wrap-conditional;
     }
     .landing-call-to-action {
         .btn {
@@ -295,10 +284,7 @@ section.landing {
         text-align: center;
         h2 {
             font-weight: 500;
-            font-size: 2.5rem;
-            @media (max-width: 991.98px) {
-                font-size: calc(1.25rem + 1.5vw);
-            }
+            @include font-size-lg;
         }
         &--one {
             padding-top: 0;
@@ -307,7 +293,7 @@ section.landing {
             }
         }
         &--two {
-            padding-top: 6rem;
+            padding-top: 4rem;
             @media (min-width: 992px) {
                 padding-top: 5rem;
                 margin-left: 21%;
@@ -318,7 +304,7 @@ section.landing {
             }
         }
         &--three {
-            padding-top: 6rem;
+            padding-top: 4rem;
             @media (min-width: 992px) {
                 padding-top: 8rem;
                 margin-left: 8%;
@@ -328,14 +314,8 @@ section.landing {
     .landing-screenshots {
         h2 {
             font-weight: 500;
-            font-size: 2.5rem;
-            line-height: 1.4;
-            span {
-                white-space: nowrap;
-            }
-            @media (max-width: 991.98px) {
-                font-size: calc(1.25rem + 1.5vw);
-            }
+            @include font-size-lg;
+            @include font-wrap-conditional;
         }
         .screenshot {
             > .offset-xl-0 {
@@ -358,32 +338,16 @@ section.landing {
     }
     .landing-ingame {
         h2 {
-            font-size: 2.9rem; // ~50px
             font-weight: 700;
-            span {
-                display: block;
-                white-space: nowrap;
-            }
-            @include media-breakpoint-down(xl) {
-                display: inline;
-                font-size: calc(1.2rem + 1.6vw);
-            }
-            @include media-breakpoint-down(md) {
-                display: inline;
-                font-size: calc(1.1rem + 1.6vw);
-            }
-            @include media-breakpoint-down(sm) {
-                font-size: calc(0.9rem + 1.6vw);
-                span {
-                    white-space: normal;
-                }
-            }
+            @include font-size-xl;
+            @include font-wrap-conditional(lg);
         }
     }
     .landing-gameplay-videos {
         h1, h2 {
-            font-size: 2.9rem; // ~50px
             font-weight: 700;
+            @include font-size-xl;
+            @include font-wrap-conditional(lg);
         }
     }
     .landing-testimonials {
@@ -414,6 +378,10 @@ section.landing {
             --carousel-height: calc(110vw - 4rem);
             --carousel-square-size: auto;
             --carousel-font-size: calc(0.7rem + 1.5vw);
+        }
+        @media (max-width: 379.98px) {
+            --carousel-width: 98vw;
+            --carousel-height: 15lh;
         }
         .carousel {
             width: var(--carousel-width);
@@ -1104,11 +1072,13 @@ img.splash {
         text-align: center;
     }
     .trvl-footer {
+        /**
         .d-flex {
             margin-top: 2.5rem;
             left: calc(100vw - 1.25rem - var(--trvl-footer-width));
             top: calc(var(--trvl-footer-height-negative) - 1rem);
         }
+         */
     }
 }
 // Footer optimizations for extremely small viewports:
@@ -1116,7 +1086,7 @@ img.splash {
     footer {
         padding: 0 !important;
     }
-    .trvl-footer {
+/*    .trvl-footer {
         .d-flex {
             position: relative;
             width: 180px;
@@ -1136,7 +1106,7 @@ img.splash {
             width: auto;
             height: auto;
         }
-    }
+    }*/
 }
 // Footer optimization for specific routes:
 div.layout--password-request-success footer,

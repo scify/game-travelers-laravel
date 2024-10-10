@@ -31,7 +31,7 @@ foreach ($supportedColors as $color) {
         </div>
     </div>
 </header>
-<div aria-role="presentation" @class([
+<div aria-hidden="true" @class([
     'trvl-curve',
     'trvl-curve--header',
     'trvl-curve--header--color',

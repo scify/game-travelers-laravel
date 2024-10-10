@@ -309,6 +309,7 @@ body.switcher {
         object-fit: cover;
         scale: 1.4;
         transition: scale ease-in-out .2s;
+        max-width: 100%;
     }
     &::after {
         display: block;

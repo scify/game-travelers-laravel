@@ -1,5 +1,5 @@
 <!-- /resources/views/component/homeTestimonials.blade.php -->
-<section class="landing bg-green px-4 pt-5 pb-6 text-center" aria-labelledby="landing-testimonials-label">
+<section class="landing bg-green px-0 px-md-4 pt-5 pb-6 text-center" aria-labelledby="landing-testimonials-label">
     <h1 id="landing-testimonials-label" class="visually-hidden">Μαρτυρίες</h1>
     <div class="landing-testimonials d-flex ">
         <div id="carouselTestimonials" class="carousel carousel-dark slide" data-bs-ride="true" data-bs-interval="7000">
@@ -16,34 +16,31 @@
             <div class="carousel-inner">
                 {{-- Carousel Slides --}}
                 @foreach ($carouselSlides as $slide)
-                @if($slide["active"])
-                <div class="carousel-item active">
-                @else
-                <div class="carousel-item">
-                @endif
-                    <div class="testimonial d-flex justify-content-between">
-                        <div class="testimonial-img d-none d-md-block">
-                            <img class="img-fluid"
-                                loading="lazy"
-                                srcset="{{ asset('images/landing/slides/'.$slide['asset'].'@2x.jpg') }} 2x"
-                                src="{{ asset('images/landing/slides/'.$slide['asset'].'.jpg') }}"
-                                width="500" height="500"
-                                alt="{{ $slide['alt'] }}"
-                            >
-                        </div>
-                        <div class="testimonial-text">
-                            <div class="quote">
-                                «{{ $slide['quote'] }}»
+                    <div class="carousel-item {{ $slide['active'] ? 'active' : '' }}">
+                        <div class="testimonial d-flex justify-content-between">
+                            <div class="testimonial-img d-none d-md-block">
+                                <img class="img-fluid"
+                                    loading="lazy"
+                                    srcset="{{ asset('images/landing/slides/'.$slide['asset'].'@2x.jpg') }} 2x"
+                                    src="{{ asset('images/landing/slides/'.$slide['asset'].'.jpg') }}"
+                                    width="500" height="500"
+                                    alt="{{ $slide['alt'] }}"
+                                >
                             </div>
-                            <div class="source">
-                                {{ $slide['source'] }}
+                            <div class="testimonial-text">
+                                <div class="quote">
+                                    «{{ $slide['quote'] }}»
+                                </div>
+                                <div class="source">
+                                    {{ $slide['source'] }}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
 
             </div>
+
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselTestimonials" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -52,7 +49,6 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-            </div>
         </div>
     </div>
 </section>
