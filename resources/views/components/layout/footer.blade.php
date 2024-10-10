@@ -6,8 +6,7 @@
             <a href="https://www.scify.gr" class="d-block">
                 <img
                     class="img-fluid logo logo-h53"
-                    srcset="{{ asset('images/logos/53h_scify@3x.png') }} 3x"
-                    srcset="{{ asset('images/logos/53h_scify@2x.png') }} 2x"
+                    srcset="{{ asset('images/logos/53h_scify@3x.png') }} 3x, {{ asset('images/logos/53h_scify@2x.png') }} 2x"
                     src="{{ asset('images/logos/53h_scify.png') }}"
                     width="32" height="40"
                     alt="{{ __("messages.game_developed_by") }}"
@@ -19,8 +18,7 @@
             <a href="https://www.lafarge.gr" class="d-block">
                 <img
                     class="img-fluid logo logo-h53"
-                    srcset="{{ asset('images/logos/53h_heracles@3x.png') }} 3x"
-                    srcset="{{ asset('images/logos/53h_heracles@2x.png') }} 2x"
+                    srcset="{{ asset('images/logos/53h_heracles@3x.png') }} 3x, {{ asset('images/logos/53h_heracles@2x.png') }} 2x"
                     src="{{ asset('images/logos/53h_heracles.png') }}"
                     width="123" height="22"
                     alt="{{ __("messages.game_sponsored_by") }}"

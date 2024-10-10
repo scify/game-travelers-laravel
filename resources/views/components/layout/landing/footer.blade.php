@@ -70,7 +70,7 @@
                 <a href="https://www.scify.gr">
                     <img
                         class="img-fluid logo logo-h53 scify"
-                        srcset="{{ asset('images/logos/53h_scify@3x.png') }} 3x asset('images/logos/53h_scify@2x.png') }} 2x"
+                        srcset="{{ asset('images/logos/53h_scify@3x.png') }} 3x, asset('images/logos/53h_scify@2x.png') }} 2x"
                         src="{{ asset('images/logos/53h_scify.png') }}"
                         width="40" height="53"
                         alt="SciFY - Science for You"
@@ -82,7 +82,7 @@
                 <a href="https://www.lafarge.gr">
                     <img
                         class="img-fluid logo logo-h53 sponsor"
-                        srcset="{{ asset('images/logos/53h_heracles@3x.png') }} 3x {{ asset('images/logos/53h_heracles@2x.png') }} 2x"
+                        srcset="{{ asset('images/logos/53h_heracles@3x.png') }} 3x, {{ asset('images/logos/53h_heracles@2x.png') }} 2x"
                         src="{{ asset('images/logos/53h_heracles.png') }}"
                         width="297" height="53"
                         alt="Ηρακλής - Όμιλος εταιριών"
