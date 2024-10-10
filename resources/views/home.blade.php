@@ -386,13 +386,13 @@
                     <div class="container-lg pt-5 pb-6 px-4 px-md-5 px-lg-6">
                         <div class="row text-center gap-4">
                             <div class="col gameplay-video">
-                                <a href="https://www.youtube.com/watch?v=SXi1U0Zzzkw" target="_blank" class="btn btn-video mx-auto" aria-labelledby="video-1-label">
+                                <a href="https://www.youtube.com/watch?v=SXi1U0Zzzkw" target="_blank" rel="noopener noreferrer" class="btn btn-video mx-auto" aria-labelledby="video-1-label">
                                     <img class="video-thumb" src="{{ asset('images/landing/thumbs/SXi1U0Zzzkw.webp') }}" alt="" />
                                     <span id="video-1-label" class="visually-hidden">Δείτε πώς να παίξετε το παιχνίδι, με ζάρι με χρώματα, χωρίς αριθμούς, υπολογισμούς και αυτόματο scanning. Η αναπαραγωγή του βίντεο θα γίνει σε νέο παράθυρο.</span>
                                 </a>
                             </div>
                             <div class="col gameplay-video">
-                                <a href="https://www.youtube.com/watch?v=CaiOV7vu554" target="_blank" class="btn btn-video mx-auto" aria-labelledby="video-2-label">
+                                <a href="https://www.youtube.com/watch?v=CaiOV7vu554" target="_blank" rel="noopener noreferrer" class="btn btn-video mx-auto" aria-labelledby="video-2-label">
                                     <img class="video-thumb" src="{{ asset('images/landing/thumbs/CaiOV7vu554.webp') }}" alt="" />
                                     <span id="video-2-label" class="visually-hidden">Δείτε πώς να παίξετε το παιχνίδι, με ζάρι με αριθμούς, ιδανικό για παιδιά που μπορούν να καταλάβουν αριθμούς και να κάνουν υπολογισμούς. Η αναπαραγωγή του βίντεο θα γίνει σε νέο παράθυρο.</span>
                                 </a>
@@ -443,7 +443,7 @@
                     <div class="landing-partners--logos container py-5">
                         <div class="row row-cols-1 row-cols-sm-3 gy-5 justify-content-around text-center">
                             <div>
-                                <a href="https://elepap.gr" target="_blank">
+                                <a href="https://elepap.gr" target="_blank" rel="noopener">
                                     <img class="img-fluid"
                                         loading="lazy"
                                         srcset="{{ asset('images/landing/partners/elepap@2x.png') }} 2x"
@@ -454,7 +454,7 @@
                                 </a>
                             </div>
                             <div>
-                                <a href="https://kasp.gr" target="_blank">
+                                <a href="https://kasp.gr" target="_blank" rel="noopener">
                                     <img class="img-fluid"
                                         loading="lazy"
                                         srcset="{{ asset('images/landing/partners/kasp@2x.png') }} 2x"
@@ -465,13 +465,13 @@
                                 </a>
                             </div>
                             <div class="silent">
-                                <a href="https://dim-eid-agrias.mag.sch.gr/" target="_blank">
+                                <a href="https://dim-eid-agrias.mag.sch.gr/" target="_blank" rel="noopener">
                                 ΕΙΔΙΚΟ ΔΗΜΟΤΙΚΟ ΣΧΟΛΕΙΟ<br />
                                 &amp; ΝΗΠΙΑΓΩΓΕΙΟ ΑΓΡΙΑΣ
                                 </a>
                             </div>
                             <div class="d-none">
-                                <a href="https://www.kkppa.gr" target="_blank">
+                                <a href="https://www.kkppa.gr" target="_blank" rel="noopener">
                                     <img class="img-fluid"
                                         loading="lazy"
                                         src="{{ asset('images/landing/partners/kkppa.png') }}"
