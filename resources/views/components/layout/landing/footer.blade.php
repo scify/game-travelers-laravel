@@ -18,6 +18,12 @@
                             {{ __("messages.privacy_policy")}}
                         </a>
                     </li>
+                    <li>
+                        <a href="javascript:void(0);" onclick="toggleCookieBanner()" onkeyup="if (event.key === 'Enter') toggleCookieBanner()"
+                           role="button" aria-label="{{ __('cookies_consent::messages.cookies_settings') }}">
+                            {{ __('cookies_consent::messages.cookies_settings') }}
+                        </a>
+                    </li>
                 </ul>
             </div>
 
