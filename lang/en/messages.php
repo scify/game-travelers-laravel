@@ -10,6 +10,8 @@ return [
     */
     'app_name' => 'Travellers',
     'privacy_policy' => 'Privacy Policy',
+    'cookies_policy' => 'Cookies Policy',
+    'terms_of_use' => 'Terms of Use',
     'meta_title' => 'Travellers, a game from SciFY.',
     'meta_description' => '"Travellers" is a web game specially designed for children with disabilities.',
     'meta_logo_image_alt' => 'Travellers game logo',

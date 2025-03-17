@@ -14,8 +14,18 @@
                     <li><a href="http://www.scify.gr/site/el/contact" target="_blank" rel="noopener">Επικοινώνησε μαζί μας</a></li>
                     <li><a href="{{ route('credits') }}">Συντελεστές</a></li>
                     <li>
-                        <a href="{{ route('privacy-policy') }}">
+                        <a href="https://go.scify.gr/game-travellers-privacy-policy-gr" target="_blank" rel="noopener">
                             {{ __("messages.privacy_policy")}}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://go.scify.gr/game-travellers-cookies-policy-gr" target="_blank" rel="noopener">
+                            {{ __("messages.cookies_policy")}}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://go.scify.gr/game-travellers-terms-of-use-gr" target="_blank" rel="noopener">
+                            {{ __("messages.terms_of_use")}}
                         </a>
                     </li>
                     <li>

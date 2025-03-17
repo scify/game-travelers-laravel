@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fefcf835b6c7abecbaf43e08976e1fe0",
+    "content-hash": "88e2c0c61a16ab052443b5252ae59107",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4609,34 +4609,34 @@
             "time": "2024-04-27T21:32:50+00:00"
         },
         {
-            "name": "scify/laravel-cookies-consent",
-            "version": "v4.0.2",
+            "name": "scify/laravel-cookie-guard",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/scify/laravel-cookies-consent.git",
-                "reference": "9f2397ef83502f45a5f34354f7b2248a0f207433"
+                "url": "https://github.com/scify/laravel-cookie-guard.git",
+                "reference": "327e4009bbe835933d84dc4583ff561e47640ec8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scify/laravel-cookies-consent/zipball/9f2397ef83502f45a5f34354f7b2248a0f207433",
-                "reference": "9f2397ef83502f45a5f34354f7b2248a0f207433",
+                "url": "https://api.github.com/repos/scify/laravel-cookie-guard/zipball/327e4009bbe835933d84dc4583ff561e47640ec8",
+                "reference": "327e4009bbe835933d84dc4583ff561e47640ec8",
                 "shasum": ""
             },
             "require": {
-                "php": "^7|^8"
+                "php": "^8"
             },
             "require-dev": {
+                "larastan/larastan": "^3.1",
                 "laravel/pint": "^1.6",
-                "nunomaduro/collision": "^7.0",
-                "nunomaduro/larastan": "^2.0.1",
-                "orchestra/testbench": "^8.0",
-                "pestphp/pest": "^2.0",
-                "pestphp/pest-plugin-laravel": "^v2.2",
+                "nunomaduro/collision": "^8.0",
+                "orchestra/testbench": "^10.0",
+                "pestphp/pest": "^3.7",
+                "pestphp/pest-plugin-laravel": "^v3.1",
                 "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan-deprecation-rules": "^1.0",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpunit/phpunit": "^10.4",
-                "spatie/laravel-ray": "^1.26"
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpunit/phpunit": "^11.5",
+                "spatie/laravel-ray": "^1.39"
             },
             "type": "library",
             "extra": {
@@ -4662,26 +4662,26 @@
             "authors": [
                 {
                     "name": "Paul Isaris",
-                    "email": "paulisaris@gmail.com",
+                    "email": "paul@scify.com",
                     "role": "Developer"
                 }
             ],
             "description": "A Laravel package that provides a Cookies consent floating window and publishes the Cookies for the different consent categories",
-            "homepage": "https://github.com/scify/laravel-cookies-consent",
+            "homepage": "https://github.com/scify/laravel-cookie-guard",
             "keywords": [
                 "cookies",
                 "gdpr",
                 "laravel",
                 "laravel cookies",
                 "laravel gdpr",
-                "laravel-cookies-consent",
+                "laravel-cookie-guard",
                 "scify"
             ],
             "support": {
-                "issues": "https://github.com/scify/laravel-cookies-consent/issues",
-                "source": "https://github.com/scify/laravel-cookies-consent/tree/v4.0.2"
+                "issues": "https://github.com/scify/laravel-cookie-guard/issues",
+                "source": "https://github.com/scify/laravel-cookie-guard/tree/v4.0.1"
             },
-            "time": "2025-02-17T11:52:27+00:00"
+            "time": "2025-03-14T08:05:08+00:00"
         },
         {
             "name": "sentry/sdk",
@@ -10827,6 +10827,6 @@
     "platform": {
         "php": "^7.4|^8.0"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

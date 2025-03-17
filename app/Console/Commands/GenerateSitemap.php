@@ -41,8 +41,7 @@ class GenerateSitemap extends Command {
         $sitemapGenerator->add(Url::create('/')->setPriority(1.0)->addImage(asset('images/taxidiotes_logo.webp'), 'Ταξιδιώτες | Διασκέδασε παίζοντας!')->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY));
         $sitemapGenerator->add(Url::create('/login')->setPriority(0.9)->addImage(asset('images/taxidiotes_logo.webp'), 'Ταξιδιώτες | Είσοδος')->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY));
         $sitemapGenerator->add(Url::create('/register')->setPriority(0.9)->addImage(asset('images/taxidiotes_logo.webp'), 'Ταξιδιώτες | Εγγραφή')->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY));
-//        $sitemapGenerator->add(Url::create('/about')->setPriority(0.8)->addImage(asset('images/taxidiotes_logo.webp'), 'Ταξιδιώτες | Σχετικά')->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY));
-        $sitemapGenerator->add(Url::create('/privacy-policy')->setPriority(0.2)->addImage(asset('images/taxidiotes_logo.webp'), 'Ταξιδιώτες | Όροι χρήσης')->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY));
+        $sitemapGenerator->add(Url::create('/about')->setPriority(0.8)->addImage(asset('images/taxidiotes_logo.webp'), 'Ταξιδιώτες | Σχετικά')->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY));
         $sitemapGenerator->writeToFile(public_path('sitemap.xml'));
 
         return CommandAlias::SUCCESS;

@@ -32,7 +32,7 @@ require __DIR__ . '/auth.php';
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::view('/about', 'about')->name('about');
 Route::view('/credits', 'credits')->name('credits');
-Route::view('/privacy-policy', 'privacy-policy.page')->name('privacy-policy');
+Route::view('/cookies-policy', 'cookies')->name('cookies-policy');
 
 
 Route::middleware(['auth'])->group(function () {

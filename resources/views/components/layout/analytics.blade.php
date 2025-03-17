@@ -1,5 +1,6 @@
 <!-- resources/views/layout/components/layout/analytics.blade.php -->
-<x-laravel-cookies-consent />
+<x-laravel-cookie-guard-scripts></x-laravel-cookie-guard-scripts>
+<x-laravel-cookie-guard></x-laravel-cookie-guard>
 <!-- Check the 'targeting' cookie: -->
 @if(isset($_COOKIE[config('cookies_consent.cookie_prefix') . 'cookies_consent']))
     @php
