@@ -1,4 +1,4 @@
-window._ = require("lodash");
+//window._ = require("lodash");
 
 try {
 	// Note that "bootstrap" defaults to boostrap.esm.js. The bundle instead
