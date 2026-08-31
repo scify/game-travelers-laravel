@@ -28,7 +28,7 @@
         "prettier": "^2.8.8",
         "prettier-stylelint": "^0.4.2",
         "resolve-url-loader": "^3.1.5",
-        "sass": "^1.102.0",
+        "sass": "^1.103.1",
         "sass-loader": "^11.1.1",
         "stylelint": "^14.16.1",
         "stylelint-config-prettier": "^9.0.5",
