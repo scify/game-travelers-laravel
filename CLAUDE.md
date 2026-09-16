@@ -21,6 +21,7 @@ npm run dev                    # build CSS and JS, copy images and audio into pu
 npm run watch                  # rebuild on change
 npm run prod                   # minified production build
 php artisan sitemap:generate   # public/sitemap.xml
+php artisan test               # feature tests (SQLite in memory, no build needed)
 ./vendor/bin/pint --test -v    # PHP code style check; drop --test to fix
 ```
 
