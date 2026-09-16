@@ -34,16 +34,32 @@ class PlayerProfileTest extends TestCase {
         $response->assertRedirect(route('controls.player', [$player->id, 'user', 0]));
     }
 
-    // The check lowercases with strtolower(), which leaves Greek capitals alone, so only an exact
-    // duplicate is caught today. Making it mb_strtolower() is a behaviour change, tracked in the plan.
-    public function test_a_duplicate_player_name_is_rejected(): void {
+    public function test_a_duplicate_player_name_is_rejected_case_insensitively(): void {
         $this->actingAs($this->seededUser())
             ->from(route('new.player', [0, 'user', 0]))
-            ->post(route('new.player', [0, 'user', 0]), ['name' => 'Κώστας Παπ.', 'avatarId' => 3])
+            ->post(route('new.player', [0, 'user', 0]), ['name' => 'κώστας παπ.', 'avatarId' => 3])
             ->assertRedirect(route('new.player', [0, 'user', 0]))
             ->assertSessionHasErrors('name');
 
         $this->assertSame(2, Player::where('user_id', 2)->count());
+    }
+
+    public function test_renaming_a_player_from_the_settings_is_saved(): void {
+        $this->actingAs($this->seededUser())
+            ->post(route('settings.profile', [1, 'user', 0]), ['name' => 'Κωνσταντίνος', 'avatarId' => 6])
+            ->assertRedirect(route('settings', [1, 'user', 0]));
+
+        $this->assertDatabaseHas('players', ['id' => 1, 'name' => 'Κωνσταντίνος', 'avatar_id' => 6]);
+    }
+
+    public function test_renaming_a_player_to_another_players_name_is_rejected_case_insensitively(): void {
+        $this->actingAs($this->seededUser())
+            ->from(route('settings.profile', [1, 'user', 0]))
+            ->post(route('settings.profile', [1, 'user', 0]), ['name' => 'ΝΊΚΗ ΚΑΡΑΓ.', 'avatarId' => 5])
+            ->assertRedirect(route('settings.profile', [1, 'user', 0]))
+            ->assertSessionHasErrors('name');
+
+        $this->assertDatabaseHas('players', ['id' => 1, 'name' => 'Κώστας Παπ.']);
     }
 
     public function test_controls_are_saved_and_the_flow_continues_with_difficulty(): void {

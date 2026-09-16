@@ -83,7 +83,7 @@ class UserController extends Controller
         $players = $this->playerRepository->allWhere(['user_id' => $user_id], ['id', 'name']);
         $name_found = false;
         foreach ($players as $player) {
-            if ($player->id != $player_id && strtolower($player->name) == strtolower($name))
+            if ($player->id != $player_id && mb_strtolower($player->name) == mb_strtolower($name))
                 $name_found = true;
         }
         if ($name_found) {
