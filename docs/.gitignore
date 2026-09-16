@@ -1,0 +1,5 @@
+# docs/local/ holds private notes (audits, plans, drafts, reviews).
+# Never reference its files from committed files.
+# The .gitkeep keeps the directory in git.
+local/*
+!local/.gitkeep

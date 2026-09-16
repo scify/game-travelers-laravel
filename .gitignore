@@ -39,3 +39,6 @@ _ide_helper_models.php
 .LSOverride
 # Linux temp files
 .fuse_hidden*
+# Local notes and settings, never committed
+*.local
+*.local.*
