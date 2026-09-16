@@ -156,12 +156,12 @@ The directories under `resources/audio/fx` and `resources/audio/music` should co
 
 Please check `resources/audio/fx/README.md` and `resources/audio/music/README.md` , in order to see which files you should download and put there.
 
-In order to upload the files in a remote environment (staging or production server, for example), you can use `scp`:
+To upload the files to a server, you can use `scp`, for example:
 
 ```bash
-scp -r -P 1337 /path/to/local/fx/* project_taxidiotes@server:/home/project_taxidiotes/www/resources/audio/fx
+scp -r /path/to/local/fx/* user@server:/path/to/project/resources/audio/fx
 
-scp -r -P 1337 /path/to/local/music/* project_taxidiotes@server:/home/project_taxidiotes/www/resources/audio/music
+scp -r /path/to/local/music/* user@server:/path/to/project/resources/audio/music
 ```
 
 ## How to debug
