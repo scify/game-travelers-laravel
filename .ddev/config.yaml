@@ -1,0 +1,27 @@
+# DDEV configuration for local development.
+# Reference: https://ddev.readthedocs.io/en/stable/users/configuration/config/
+name: travelers
+type: laravel
+docroot: public
+php_version: "8.4"
+webserver_type: nginx-fpm
+xdebug_enabled: false
+additional_hostnames: []
+additional_fqdns: []
+database:
+    type: mysql
+    version: "8.0"
+# Uploaded files live in storage/, outside the web root.
+upload_dirs:
+    - storage
+use_dns_when_possible: true
+timezone: Europe/Athens
+composer_version: "2"
+web_environment: []
+# Node.js version. Must match .nvmrc; the post-start hook below keeps them in step.
+nodejs_version: "24.21.0"
+corepack_enable: false
+ddev_version_constraint: ">= 1.25.3"
+hooks:
+    post-start:
+        - exec: bash .ddev/scripts/sync-node-version.sh
