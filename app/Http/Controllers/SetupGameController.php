@@ -8,19 +8,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 
-class SetupGameController extends Controller
-{
+class SetupGameController extends Controller {
     protected PlayerRepository $playerRepository;
     protected GameRepository $gameRepository;
 
-    public function __construct(PlayerRepository $playerRepository, GameRepository $gameRepository)
-    {
+    public function __construct(PlayerRepository $playerRepository, GameRepository $gameRepository) {
         $this->playerRepository = $playerRepository;
         $this->gameRepository = $gameRepository;
     }
 
-    public function continueShow(Request $request, int $player_id, string $from, int $game_id)
-    {
+    public function continueShow(Request $request, int $player_id, string $from, int $game_id) {
         if ($player_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
@@ -33,12 +30,11 @@ class SetupGameController extends Controller
         View::share('showSettings', true);
         $switcher = $this->getSwitcher($players[0]);
         $playerAudio = $this->getPlayerAudio($players[0]);
-        return view("gameSelectExisting", ["switcher" => $switcher, "playerAudio" => $playerAudio]);
+
+        return view('gameSelectExisting', ['switcher' => $switcher, 'playerAudio' => $playerAudio]);
     }
 
-    public function continueSave(Request $request, int $player_id, string $from, int $game_id)
-    {
-
+    public function continueSave(Request $request, int $player_id, string $from, int $game_id) {
         if ($player_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
@@ -47,14 +43,14 @@ class SetupGameController extends Controller
         if ($selected == 1) {
             $entry = ['active' => false];
             $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
+
             return Redirect::route('select.board', [$player_id, 'board', 0]);
         } else {
             return Redirect::route('board', [$player_id, $game_id]);
         }
     }
 
-    public function boardShow(Request $request, int $player_id, string $from, int $game_id)
-    {
+    public function boardShow(Request $request, int $player_id, string $from, int $game_id) {
         if ($player_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
@@ -73,12 +69,11 @@ class SetupGameController extends Controller
         $boards = $this->gameRepository->getBoards();
         $switcher = $this->getSwitcher($players[0]);
         $playerAudio = $this->getPlayerAudio($players[0]);
-        return view("gameSelectBoard", ["switcher" => $switcher, "playerAudio" => $playerAudio, "boards" => $boards]);
+
+        return view('gameSelectBoard', ['switcher' => $switcher, 'playerAudio' => $playerAudio, 'boards' => $boards]);
     }
 
-    public function boardSave(Request $request, int $player_id, string $from, int $game_id)
-    {
-
+    public function boardSave(Request $request, int $player_id, string $from, int $game_id) {
         if ($player_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
@@ -89,7 +84,7 @@ class SetupGameController extends Controller
         if ($game_id == 0) {
             //check if an active game already exists
             $active_games = $this->gameRepository->allWhere(['player_id' => $player_id, 'active' => true], ['id']);
-            if (sizeof($active_games) == 0) {
+            if (count($active_games) == 0) {
                 $game = $this->gameRepository->create($entry);
                 $game_id = $game->id;
             } else {
@@ -103,8 +98,7 @@ class SetupGameController extends Controller
         return Redirect::route('select.mode', [$player_id, 'mode', $game_id]);
     }
 
-    public function modeShow(Request $request, int $player_id, string $from, int $game_id)
-    {
+    public function modeShow(Request $request, int $player_id, string $from, int $game_id) {
         if ($player_id == 0 || $game_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
@@ -123,11 +117,10 @@ class SetupGameController extends Controller
         $switcher = $this->getSwitcher($players[0]);
         $playerAudio = $this->getPlayerAudio($players[0]);
 
-        return view("gameSelectMode", ["switcher" => $switcher, "playerAudio" => $playerAudio]);
+        return view('gameSelectMode', ['switcher' => $switcher, 'playerAudio' => $playerAudio]);
     }
 
-    public function modeSave(Request $request, int $player_id, string $from, int $game_id)
-    {
+    public function modeSave(Request $request, int $player_id, string $from, int $game_id) {
         if ($player_id == 0 || $game_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
@@ -135,11 +128,11 @@ class SetupGameController extends Controller
         $selected_mode_id = (int) $request->only('mode')['mode'];
         $entry = ['mode_id' => $selected_mode_id];
         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
+
         return Redirect::route('select.pawn', [$player_id, 'pawn', $game_id]);
     }
 
-    public function pawnShow(Request $request, int $player_id, string $from, int $game_id)
-    {
+    public function pawnShow(Request $request, int $player_id, string $from, int $game_id) {
         if ($player_id == 0 || $game_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
@@ -165,8 +158,7 @@ class SetupGameController extends Controller
         return view('gameSelectPawn', ['board' => $board, 'pawns' => $pawns, 'switcher' => $switcher, 'playerAudio' => $playerAudio]);
     }
 
-    public function pawnSave(Request $request, int $player_id, string $from, int $game_id)
-    {
+    public function pawnSave(Request $request, int $player_id, string $from, int $game_id) {
         if ($player_id == 0 || $game_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
@@ -185,8 +177,7 @@ class SetupGameController extends Controller
         }
     }
 
-    public function pawnTwoShow(Request $request, int $player_id, string $from, int $game_id)
-    {
+    public function pawnTwoShow(Request $request, int $player_id, string $from, int $game_id) {
         if ($player_id == 0 || $game_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
@@ -211,19 +202,18 @@ class SetupGameController extends Controller
         $player_one_pawn_id = $game[0]->pawn_id_1;
 
         return view(
-            "gameSelectPawnTwo",
+            'gameSelectPawnTwo',
             [
-                "board" => $board,
-                "player_one_pawn_id" => $player_one_pawn_id,
-                "pawns" => $pawns,
-                "switcher" => $switcher,
-                "playerAudio" => $playerAudio
+                'board' => $board,
+                'player_one_pawn_id' => $player_one_pawn_id,
+                'pawns' => $pawns,
+                'switcher' => $switcher,
+                'playerAudio' => $playerAudio,
             ]
         );
     }
 
-    public function pawnTwoSave(Request $request, int $player_id, string $from, int $game_id)
-    {
+    public function pawnTwoSave(Request $request, int $player_id, string $from, int $game_id) {
         if ($player_id == 0 || $game_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
@@ -231,11 +221,11 @@ class SetupGameController extends Controller
         $selected_pawn_id_2 = (int) $request->only('pawn')['pawn'];
         $entry = ['pawn_id_2' => $selected_pawn_id_2];
         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
+
         return Redirect::route('select.options', [$player_id, 'option', $game_id]);
     }
 
-    public function optionsShow(Request $request, int $player_id, string $from, int $game_id)
-    {
+    public function optionsShow(Request $request, int $player_id, string $from, int $game_id) {
         if ($player_id == 0 || $game_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
@@ -254,11 +244,10 @@ class SetupGameController extends Controller
         $switcher = $this->getSwitcher($players[0]);
         $playerAudio = $this->getPlayerAudio($players[0]);
 
-        return view("gameSelectOptions", ["switcher" => $switcher, "playerAudio" => $playerAudio]);
+        return view('gameSelectOptions', ['switcher' => $switcher, 'playerAudio' => $playerAudio]);
     }
 
-    public function optionsSave(Request $request, int $player_id, string $from, int $game_id)
-    {
+    public function optionsSave(Request $request, int $player_id, string $from, int $game_id) {
         if ($player_id == 0 || $game_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
@@ -276,21 +265,21 @@ class SetupGameController extends Controller
             abort(403, __('messages.unauthorized_action'));
         }
         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
+
         return Redirect::route('board', [$player_id, $game_id]);
     }
 
     /**
      * Retrieve Switcher Settings for a player.
      *
-     * @param App\Repository\Player\PlayerRepository $player
+     * @param  App\Repository\Player\PlayerRepository  $player
      *   The player object to retrieve settings for.
      * @return array
      *   An array containing the control mode (1= automatic, 2=manual), scanning
      *   speed, automatic selection button, manual selection button, and manual
      *   navigation button for the player.
      */
-    private function getSwitcher($player)
-    {
+    private function getSwitcher($player) {
         $switcher = [
             'controlMode' => $player->auto,
             'scanningSpeed' => $player->scanning_speed,
@@ -298,6 +287,7 @@ class SetupGameController extends Controller
             'manualSelectionButton' => $player->select_key,
             'manualNavigationButton' => $player->navigate_key,
         ];
+
         return $switcher;
     }
 
@@ -308,28 +298,26 @@ class SetupGameController extends Controller
      * need on gameSelect*.blade.php is music and sound volume, along with the
      * updateVolumesUrl. Yay!
      *
-     *  @param App\Repository\Player\PlayerRepository $players
-    */
-    private function getPlayerAudio($player)
-    {
+     *  @param  App\Repository\Player\PlayerRepository  $players
+     */
+    private function getPlayerAudio($player) {
         $playerAudio = [
             'playerMusicVolume' => $player->music_volume,
             'playerSoundVolume' => $player->sound_volume,
             'updateVolumesUrl' => route('audio.updateVolumes'),
-            'playerUrl' => '/player/'.$player->id, // see concept below
+            'playerUrl' => '/player/' . $player->id, // see concept below
         ];
+
         return $playerAudio;
     }
 
-
-
-    private function checkIfActiveGameHasStarted($game_id)
-    {
+    private function checkIfActiveGameHasStarted($game_id) {
         if ($game_id == 0) {
             return false;
         }
 
         $games = $this->gameRepository->allWhere(['id' => $game_id], ['started']);
+
         return $games[0]->started;
     }
 }

@@ -22,7 +22,7 @@ abstract class Repository implements RepositoryInterface {
     protected $modelInstance;
 
     /**
-     * @param App $app
+     * @param  App  $app
      *
      * @throws RepositoryException|BindingResolutionException
      */
@@ -65,8 +65,8 @@ abstract class Repository implements RepositoryInterface {
     }
 
     /**
-     * @param int $perPage
-     * @param array $columns
+     * @param  int  $perPage
+     * @param  array  $columns
      * @return mixed
      */
     public function paginate($perPage = 15, $columns = ['*']) {
@@ -74,7 +74,7 @@ abstract class Repository implements RepositoryInterface {
     }
 
     /**
-     * @param array $data
+     * @param  array  $data
      * @return mixed
      */
     public function create(array $data) {
@@ -82,9 +82,9 @@ abstract class Repository implements RepositoryInterface {
     }
 
     /**
-     * @param array $data
+     * @param  array  $data
      * @param $id
-     * @param string $attribute
+     * @param  string  $attribute
      * @return mixed
      */
     public function update(array $data, $id, string $attribute = 'id') {
@@ -118,7 +118,7 @@ abstract class Repository implements RepositoryInterface {
 
     /**
      * @param $id
-     * @param array $columns
+     * @param  array  $columns
      * @return mixed
      */
     public function find($id, $columns = ['*']) {

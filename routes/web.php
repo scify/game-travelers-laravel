@@ -5,16 +5,16 @@
  * Contains App's web routes.
  */
 
+use App\Http\Controllers\BoardController;
+use App\Http\Controllers\CustomAudioController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\SetupGameController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\EnsureIdsAreValid;
 use App\Models\User;
 use App\Notifications\UserRegistered;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\SettingsController;
-use App\Http\Controllers\SetupGameController;
-use App\Http\Controllers\BoardController;
-use App\Http\Controllers\CustomAudioController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +43,8 @@ Route::middleware(['auth'])->group(function () {
                 $user = User::findOrFail(1);
             }
             $user->notify(new UserRegistered($user));
-            return "Email sent to: " . $user->email;
+
+            return 'Email sent to: ' . $user->email;
         });
     });
 });
@@ -135,7 +136,7 @@ Route::middleware('auth')->group(function () {
         ->name('select.options')->middleware(EnsureIdsAreValid::class);
 
     Route::get('home', function () {
-        return redirect()->route('select.player', [0, "user", 0]);
+        return redirect()->route('select.player', [0, 'user', 0]);
     });
 
     Route::get('logout', function () {

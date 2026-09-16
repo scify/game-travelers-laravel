@@ -5,22 +5,17 @@ namespace App\Http\Controllers;
 use App\Repository\Game\GameRepository;
 use App\Repository\Player\PlayerRepository;
 use Illuminate\Http\Request;
-use phpDocumentor\Reflection\Types\Boolean;
 
-class BoardController extends Controller
-{
-
+class BoardController extends Controller {
     protected PlayerRepository $playerRepository;
     protected GameRepository $gameRepository;
 
-    public function __construct(PlayerRepository $playerRepository, GameRepository $gameRepository)
-    {
+    public function __construct(PlayerRepository $playerRepository, GameRepository $gameRepository) {
         $this->playerRepository = $playerRepository;
         $this->gameRepository = $gameRepository;
     }
 
-    public function play(Request $request, int $player_id, int $game_id)
-    {
+    public function play(Request $request, int $player_id, int $game_id) {
         if ($player_id == 0 || $game_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
@@ -62,8 +57,7 @@ class BoardController extends Controller
         return view('board', ['player_id' => $player_id, 'playerAudio' => $playerAudio, 'game_id' => $game_id, 'player_data' => $player_data, 'game_data' => $game_data, 'cards' => $this->getCards($game[0]->board_id)]);
     }
 
-    public function fromVue(Request $request)
-    {
+    public function fromVue(Request $request) {
         $user_id = auth()->user()->id;
         $player_id = $request->player_id;
         $game_id = $request->game_id;
@@ -76,7 +70,7 @@ class BoardController extends Controller
         $game_mode = $request->game_mode;
         $board_id = $request->board_id;
         $games = $this->gameRepository->allWhere(['id' => $game_id]);
-        if (sizeof($games) != 1) {
+        if (count($games) != 1) {
             return response(['message' => 'Game not found'], 302);
         } else {
             $game = $games[0];
@@ -104,10 +98,12 @@ class BoardController extends Controller
                 if ($first_player_turn) {
                     $entry = ['active' => false, 'location_1' => $active_player_pos];
                     $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
+
                     return response(['gameEnded' => 1]);
                 } else {
                     $entry = ['active' => false, 'location_2' => $active_player_pos];
                     $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
+
                     return response(['gameEnded' => -1]);
                 }
             } elseif ($game_phase == 1) { // asked to roll dice and compute new target position
@@ -121,6 +117,7 @@ class BoardController extends Controller
                 if ($dice_type == 3) {
                     $dice_result = $this->getColourIdOfPos($new_position);
                 }
+
                 return response(['gameEnded' => 0, 'newPosition' => $new_position, 'diceResult' => $dice_result]);
             } elseif ($game_phase == 2) { // move performed by die roll in the front-end
                 //check if call is made again before
@@ -142,6 +139,7 @@ class BoardController extends Controller
                         }
                         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
                     }
+
                     return response(['gameEnded' => 0, 'drawCard' => $random_card, 'firstPlayerTurn' => $db_first_player_turn]);
                 } else {
                     if ($game_phase != $db_game_phase) {
@@ -156,6 +154,7 @@ class BoardController extends Controller
                             $entry = ['latest_random_result' => 0, 'game_phase' => 2, 'location_2' => $active_player_pos, 'first_player_turn' => $first_player_turn_new_value];
                         }
                         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
+
                         return response(['gameEnded' => 0, 'drawCard' => 0, 'firstPlayerTurn' => $first_player_turn_new_value]);
                     } else {
                         return response(['gameEnded' => 0, 'drawCard' => 0, 'firstPlayerTurn' => $db_first_player_turn]);
@@ -174,6 +173,7 @@ class BoardController extends Controller
                         $entry = ['latest_random_result' => 0, 'game_phase' => 3, 'location_2' => $active_player_pos, 'first_player_turn' => $first_player_turn_new_value];
                     }
                     $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
+
                     return response(['gameEnded' => 0, 'firstPlayerTurn' => $first_player_turn_new_value]);
                 } else {
                     return response(['gameEnded' => 0, 'firstPlayerTurn' => $db_first_player_turn]);
@@ -182,8 +182,7 @@ class BoardController extends Controller
         }
     }
 
-    protected function rollDieForPlayerAndReturnNewPosition($pos, $board_size, $tutorial_mode, $first_player_turn, $difficulty): int
-    {
+    protected function rollDieForPlayerAndReturnNewPosition($pos, $board_size, $tutorial_mode, $first_player_turn, $difficulty): int {
         $final_pos = $this->getFinalPos($board_size);
         $roll_threshold = $final_pos - $pos;
         if ($roll_threshold > 6) {
@@ -213,11 +212,11 @@ class BoardController extends Controller
                 return 4;
             }
         }
+
         return $pos + $dice_result;
     }
 
-    protected function getFinalPos(int $board_size): int
-    {
+    protected function getFinalPos(int $board_size): int {
         if ($board_size == 1) {
             return 15;
         } elseif ($board_size == 2) {
@@ -227,8 +226,7 @@ class BoardController extends Controller
         }
     }
 
-    protected function getColourIdOfPos(int $pos): int
-    {
+    protected function getColourIdOfPos(int $pos): int {
         $modulo = $pos % 6;
         if ($modulo === 0) {
             return 6;
@@ -237,8 +235,7 @@ class BoardController extends Controller
         }
     }
 
-    protected function getAValidCard($board_size, $pos, $board_id, $is_tutorial): int
-    {
+    protected function getAValidCard($board_size, $pos, $board_id, $is_tutorial): int {
         $max = $this->getFinalPos($board_size);
         $random = rand(1, 10);
         if (!$is_tutorial) {
@@ -262,11 +259,11 @@ class BoardController extends Controller
                 $random = rand(1, 3);
             }
         }
+
         return $random;
     }
 
-    protected function getCards($board_id)
-    {
+    protected function getCards($board_id) {
         if ($board_id == 1) {
             return [
                 1 => [

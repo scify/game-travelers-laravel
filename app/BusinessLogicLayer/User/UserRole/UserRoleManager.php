@@ -56,7 +56,7 @@ class UserRoleManager {
     }
 
     /**
-     * Checks if a given @param User $user the @see User instance
+     * Checks if a given @param  User  $user the @see User instance
      *
      * @return bool
      *
@@ -79,9 +79,9 @@ class UserRoleManager {
     }
 
     /**
-     * Checks if a given @param User $user the @see User instance
+     * Checks if a given @param  User  $user the @see User instance
      *
-     * @param int $roleId
+     * @param  int  $roleId
      * @return bool
      *
      * @see User has the admin role
@@ -95,9 +95,9 @@ class UserRoleManager {
     }
 
     /**
-     * Checks if a role (identified by role id) exists in a given collection of @param Collection $userRoles the user roles collection
+     * Checks if a role (identified by role id) exists in a given collection of @param  Collection  $userRoles the user roles collection
      *
-     * @param int $roleId
+     * @param  int  $roleId
      * @return bool
      *
      * @see UserRole

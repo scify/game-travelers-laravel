@@ -14,11 +14,10 @@ use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller {
-
     protected UserManager $userManager;
 
     /**
-     * @param UserManager $userManager
+     * @param  UserManager  $userManager
      */
     public function __construct(UserManager $userManager) {
         $this->userManager = $userManager;
@@ -38,9 +37,8 @@ class RegisteredUserController extends Controller {
     /**
      * Handle an incoming registration request.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return RedirectResponse
-     *
      */
     public function store(Request $request) {
         $captchaInput1 = (int) $request->get('captchaNumber1');
@@ -57,7 +55,7 @@ class RegisteredUserController extends Controller {
 
         $user = $this->userManager->create([
             'email' => trim($request->email),
-            'password' => trim($request->password)
+            'password' => trim($request->password),
         ]);
 
         $user->notify(new UserRegistered($user));

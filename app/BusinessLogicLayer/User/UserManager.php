@@ -5,7 +5,6 @@ namespace App\BusinessLogicLayer\User;
 use App\BusinessLogicLayer\User\UserRole\UserRoleManager;
 use App\Models\User;
 use App\Repository\User\UserRepository;
-use App\Repository\User\UserRole\UserRolesLkp;
 use Illuminate\Support\Facades\Hash;
 
 class UserManager {
@@ -29,12 +28,13 @@ class UserManager {
         $email = $requestData['email'];
         $user = $this->userRepository->create([
             'email' => $email,
-            'password' => $requestData['password']
+            'password' => $requestData['password'],
         ]);
         $this->userRoleManager->assignRegisteredUserRoleTo($user);
         if (isset($requestData['admin']) && $requestData['admin']) {
             $this->userRoleManager->assignAdminUserRoleTo($user);
         }
+
         return $user;
     }
 

@@ -5,25 +5,22 @@ namespace App\Repository\Game;
 use App\Models\Game;
 use App\Repository\Repository;
 
-class GameRepository extends Repository
-{
-    public function getModelClassName()
-    {
+class GameRepository extends Repository {
+    public function getModelClassName() {
         return Game::class;
     }
 
     /**
-    * Returns an array of the game's boards.
-    *
-    * Note: 1x previews have been lossless optimized with optipng, while the 2x
-    * assets have been compressed with pngquant's default fs8. The original
-    * images have been keept in the images-source folder, which does not make
-    * itself public.
-    *
-    * @return array
-    */
-    public function getBoards()
-    {
+     * Returns an array of the game's boards.
+     *
+     * Note: 1x previews have been lossless optimized with optipng, while the 2x
+     * assets have been compressed with pngquant's default fs8. The original
+     * images have been keept in the images-source folder, which does not make
+     * itself public.
+     *
+     * @return array
+     */
+    public function getBoards() {
         $public_path = 'images/boards';
         $preview_width = 352;
         $preview_height = 244;
@@ -83,16 +80,15 @@ class GameRepository extends Repository
     }
 
     /**
-    * Returns an array of the game's pawns.
-    *
-    * Note: 1x & 2x previews have been lossless optimized with optipng. The
-    * original images have been keept in the images-source folder, which does
-    * not make itself public.
-    *
-    * @return array
-    */
-    public function getPawns()
-    {
+     * Returns an array of the game's pawns.
+     *
+     * Note: 1x & 2x previews have been lossless optimized with optipng. The
+     * original images have been keept in the images-source folder, which does
+     * not make itself public.
+     *
+     * @return array
+     */
+    public function getPawns() {
         $path = 'images/pawns';
         $width = 136;
         $height = 212;
@@ -169,16 +165,15 @@ class GameRepository extends Repository
                 'height' => $height,
             ],
         ];
+
         return $pawns;
     }
 
-    public function gameExists(int $game_id, int $user_id): bool
-    {
+    public function gameExists(int $game_id, int $user_id): bool {
         return Game::where(['id' => $game_id, 'user_id' => $user_id, 'active' => true])->exists();
     }
 
-    public function gameExistsAsInactive(int $game_id, int $user_id): bool
-    {
+    public function gameExistsAsInactive(int $game_id, int $user_id): bool {
         return Game::where(['id' => $game_id, 'user_id' => $user_id, 'active' => false])->exists();
     }
 }
