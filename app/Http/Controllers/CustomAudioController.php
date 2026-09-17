@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use App\BusinessLogicLayer\CustomAudio\CustomAudioManager;
 use App\Repository\Player\PlayerRepository;
 use Illuminate\Http\Request;
+use Redirect;
+use View;
 
-class CustomAudioController extends Controller {
+class CustomAudioController extends Controller
+{
     protected PlayerRepository $playerRepository;
+
     protected CustomAudioManager $customAudioManager;
 
-    public function __construct(PlayerRepository $playerRepository, CustomAudioManager $customAudioManager) {
+    public function __construct(PlayerRepository $playerRepository, CustomAudioManager $customAudioManager)
+    {
         $this->playerRepository = $playerRepository;
         $this->customAudioManager = $customAudioManager;
     }
@@ -21,7 +26,8 @@ class CustomAudioController extends Controller {
      * I am pretty sure that this function returns some values which might be
      * helpful when the back-end is trully implemented.
      */
-    public function audioShow(Request $request, int $player_id, string $back_route, int $game_id) {
+    public function audioShow(Request $request, int $player_id, string $back_route, int $game_id)
+    {
         if ($player_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
@@ -62,9 +68,9 @@ class CustomAudioController extends Controller {
 
         $playerAudio = $this->getPlayerAudio($player_id, $musicVolume, $soundVolume, $playerAudioFiles);
 
-        \View::share('avatarName', $avatarName);
-        \View::share('playerName', $name);
-        \View::share('showSettings', true);
+        View::share('avatarName', $avatarName);
+        View::share('playerName', $name);
+        View::share('showSettings', true);
 
         return view(
             'settingsAudio',
@@ -81,7 +87,8 @@ class CustomAudioController extends Controller {
      *
      * I am pretty sure that this function does not save anything.
      */
-    public function audioSave(Request $request, int $player_id, string $back_route, int $game_id) {
+    public function audioSave(Request $request, int $player_id, string $back_route, int $game_id)
+    {
         if ($player_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
@@ -90,10 +97,11 @@ class CustomAudioController extends Controller {
         $sound_volume = (float) $input['soundVolume'];
         $this->updateVolumesToDB($player_id, $music_volume, $sound_volume);
 
-        return \Redirect::route('settings', [$player_id, $back_route, $game_id]);
+        return Redirect::route('settings', [$player_id, $back_route, $game_id]);
     }
 
-    public function uploadCustomAudioFile(Request $request) {
+    public function uploadCustomAudioFile(Request $request)
+    {
         $player_id = $request->player_id;
         $audio_name = $request->audio_name;
         $audio_path = $request->path;
@@ -103,12 +111,14 @@ class CustomAudioController extends Controller {
         return response(['index' => $index]);
     }
 
-    public function removeCustomAudioFile(Request $request) {
+    public function removeCustomAudioFile(Request $request)
+    {
         $player_id = $request->player_id;
         $this->createFolderForPlayerIfRequired($player_id);
     }
 
-    public function updateVolumes(Request $request) {
+    public function updateVolumes(Request $request)
+    {
         $player_id = $request->player_id;
         $music_volume = $request->has('music_volume') ? $request->music_volume : null;
         $sound_volume = $request->has('sound_volume') ? $request->sound_volume : null;
@@ -117,8 +127,9 @@ class CustomAudioController extends Controller {
         return response([]);
     }
 
-    protected function updateVolumesToDB(int $player_id, ?float $music_volume = null, ?float $sound_volume = null) {
-        if (!is_null($music_volume) || !is_null($sound_volume)) {
+    protected function updateVolumesToDB(int $player_id, ?float $music_volume = null, ?float $sound_volume = null)
+    {
+        if (! is_null($music_volume) || ! is_null($sound_volume)) {
             $entry = ['music_volume' => $music_volume, 'sound_volume' => $sound_volume];
             if (is_null($music_volume)) {
                 $entry = ['sound_volume' => $sound_volume];
@@ -129,7 +140,8 @@ class CustomAudioController extends Controller {
         }
     }
 
-    protected function getPlayerAudio(int $player_id, float $musicVolume, float $soundVolume, $playerAudioFiles) {
+    protected function getPlayerAudio(int $player_id, float $musicVolume, float $soundVolume, $playerAudioFiles)
+    {
         $playerAudio = [
             'playerMusicVolume' => $musicVolume,
             'playerSoundVolume' => $soundVolume,
@@ -141,8 +153,9 @@ class CustomAudioController extends Controller {
         return $playerAudio;
     }
 
-    protected function createFolderForPlayerIfRequired(int $player_id) {
-        if (!$this->customAudioManager->userExists($player_id)) {
+    protected function createFolderForPlayerIfRequired(int $player_id)
+    {
+        if (! $this->customAudioManager->userExists($player_id)) {
             $this->customAudioManager->createFolder($player_id);
         }
     }

@@ -22,19 +22,21 @@ namespace Tests\Feature;
 
 // Imports alphabetical within groups: App\, Illuminate\, PHPUnit\, Tests\
 
-class SomethingTest extends TestCase {
+class SomethingTest extends TestCase
+{
     use LazilyRefreshDatabase;
 
     protected $seed = true;
 
     #[Test]
-    public function descriptive_snake_case_name(): void {
+    public function descriptive_snake_case_name(): void
+    {
         // Arrange, act, assert
     }
 }
 ```
 
-Braces open on the same line (`pint.json`). `LazilyRefreshDatabase` defers migration and seeding to the first query, so a test that touches no table costs nothing. Base class `Tests\TestCase`, also for unit tests.
+Braces of classes and methods open on the next line, braces of control structures on the same line (`pint.json`, Laravel preset). `LazilyRefreshDatabase` defers migration and seeding to the first query, so a test that touches no table costs nothing. Base class `Tests\TestCase`, also for unit tests.
 
 ## Naming
 

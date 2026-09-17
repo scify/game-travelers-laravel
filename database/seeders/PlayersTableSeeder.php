@@ -5,14 +5,17 @@ namespace Database\Seeders;
 use App\Repository\Player\PlayerRepository;
 use Illuminate\Database\Seeder;
 
-class PlayersTableSeeder extends Seeder {
+class PlayersTableSeeder extends Seeder
+{
     protected PlayerRepository $playerRepository;
 
-    public function __construct(PlayerRepository $playerRepository) {
+    public function __construct(PlayerRepository $playerRepository)
+    {
         $this->playerRepository = $playerRepository;
     }
 
-    public function run() {
+    public function run()
+    {
         echo "\nRunning Player Seeder...\n";
 
         $player_ids = $this->playerRepository->allWhere(['user_id' => 2], ['id'])->pluck('id')->all();

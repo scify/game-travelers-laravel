@@ -12,8 +12,10 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\HtmlString;
 
-abstract class TestCase extends BaseTestCase {
-    protected function setUp(): void {
+abstract class TestCase extends BaseTestCase
+{
+    protected function setUp(): void
+    {
         parent::setUp();
 
         // The suite never touches the network: an unfaked request through the Http facade fails the test.
@@ -21,30 +23,36 @@ abstract class TestCase extends BaseTestCase {
 
         // Views call mix() for CSS and JS. Tests run without a front-end build,
         // so return the plain path instead of reading public/mix-manifest.json.
-        $this->app->instance(Mix::class, new class {
-            public function __invoke(string $path, string $manifestDirectory = ''): HtmlString {
+        $this->app->instance(Mix::class, new class()
+        {
+            public function __invoke(string $path, string $manifestDirectory = ''): HtmlString
+            {
                 return new HtmlString($manifestDirectory . $path);
             }
         });
     }
 
     /** The seeded administrator (id 1, admin-taxidiotes@scify.org). */
-    protected function seededAdmin(): User {
+    protected function seededAdmin(): User
+    {
         return User::findOrFail(1);
     }
 
     /** The seeded registered user (id 2, user-taxidiotes@scify.org) who owns the two seeded players. */
-    protected function seededUser(): User {
+    protected function seededUser(): User
+    {
         return User::findOrFail(2);
     }
 
     /** The first seeded player of the seeded user (id 1, "Κώστας Παπ."). */
-    protected function seededPlayer(): Player {
+    protected function seededPlayer(): Player
+    {
         return Player::findOrFail(1);
     }
 
     /** A game for the given player, ready to be played. Override any column through $attributes. */
-    protected function startedGame(Player $player, array $attributes = []): Game {
+    protected function startedGame(Player $player, array $attributes = []): Game
+    {
         return Game::create(array_merge([
             'user_id' => $player->user_id,
             'player_id' => $player->id,

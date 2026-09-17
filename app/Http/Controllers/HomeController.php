@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-class HomeController extends Controller {
+class HomeController extends Controller
+{
     /**
      * Show the index.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index() {
+    public function index()
+    {
         $carouselSlides = $this->getRandomActiveHomeCarouselSlides();
 
         return view('home', compact('carouselSlides'));
@@ -22,7 +24,8 @@ class HomeController extends Controller {
      *
      * @return array
      */
-    private function getHomeCarouselSlides() {
+    private function getHomeCarouselSlides()
+    {
         // All images are stored on images/landing/slides.
         $width = 500; // Image dimensions are fixed for now.
         $height = 500;
@@ -87,7 +90,8 @@ class HomeController extends Controller {
      *
      * @return void
      */
-    private function getRandomActiveHomeCarouselSlides() {
+    private function getRandomActiveHomeCarouselSlides()
+    {
         $slides = $this->getHomeCarouselSlides();
         $randIndex = rand(1, count($slides));
         foreach ($slides as $index => &$slide) {

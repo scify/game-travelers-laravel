@@ -5,17 +5,22 @@ namespace App\Http\Controllers;
 use App\Repository\Game\GameRepository;
 use App\Repository\Player\PlayerRepository;
 use Illuminate\Http\Request;
+use Redirect;
 
-class UserController extends Controller {
+class UserController extends Controller
+{
     protected PlayerRepository $playerRepository;
+
     protected GameRepository $gameRepository;
 
-    public function __construct(PlayerRepository $playerRepository, GameRepository $gameRepository) {
+    public function __construct(PlayerRepository $playerRepository, GameRepository $gameRepository)
+    {
         $this->playerRepository = $playerRepository;
         $this->gameRepository = $gameRepository;
     }
 
-    public function show(Request $request, int $player_id, string $from, int $game_id) {
+    public function show(Request $request, int $player_id, string $from, int $game_id)
+    {
         $user_id = auth()->user()->id;
         $players = $this->playerRepository->allWhere(['user_id' => $user_id]);
         $players_info = [];
@@ -32,31 +37,33 @@ class UserController extends Controller {
         return view('gameSelectPlayer', ['players' => $players_info, 'avatars' => $this->playerRepository->getAvatars()]);
     }
 
-    public function select(Request $request, int $player_id, string $from, int $game_id) {
+    public function select(Request $request, int $player_id, string $from, int $game_id)
+    {
         $player_id = $request->only('player')['player'];
         $action = $request->only('submit')['submit'];
         if ($action == 'start') {
             $active_games = $this->gameRepository->allWhere(['player_id' => $player_id, 'active' => true], ['id', 'started']);
             if (count($active_games) == 0) {
-                return \Redirect::route('select.board', ['player_id' => $player_id, 'from' => 'board', 'game_id' => 0]);
-            } else {
-                $game_id = $active_games[0]->id;
-                if ($active_games[0]->started) {
-                    return \Redirect::route('select.continue', ['player_id' => $player_id, 'from' => 'continue', 'game_id' => $game_id]);
-                } else {
-                    $this->gameRepository->delete($game_id);
-
-                    return \Redirect::route('select.board', ['player_id' => $player_id, 'from' => 'board', 'game_id' => 0]);
-                }
+                return Redirect::route('select.board', ['player_id' => $player_id, 'from' => 'board', 'game_id' => 0]);
             }
-        } elseif ($action == 'settings') {
-            return \Redirect::route('settings', ['player_id' => $player_id, 'from' => 'user', 'game_id' => 0]);
-        } else {
-            abort(403, __('messages.unauthorized_action'));
+            $game_id = $active_games[0]->id;
+            if ($active_games[0]->started) {
+                return Redirect::route('select.continue', ['player_id' => $player_id, 'from' => 'continue', 'game_id' => $game_id]);
+            }
+            $this->gameRepository->delete($game_id);
+
+            return Redirect::route('select.board', ['player_id' => $player_id, 'from' => 'board', 'game_id' => 0]);
+
         }
+        if ($action == 'settings') {
+            return Redirect::route('settings', ['player_id' => $player_id, 'from' => 'user', 'game_id' => 0]);
+        }
+        abort(403, __('messages.unauthorized_action'));
+
     }
 
-    public function newPlayer(Request $request, int $player_id, string $from, int $game_id) {
+    public function newPlayer(Request $request, int $player_id, string $from, int $game_id)
+    {
         $name = '';
         $avatar_id = 0;
         if ($player_id != 0) {
@@ -70,7 +77,8 @@ class UserController extends Controller {
         return view('settingsProfileNew', ['name' => $name, 'selectedAvatarId' => $avatar_id, 'avatars' => $this->playerRepository->getAvatars()]);
     }
 
-    public function savePlayer(Request $request, int $player_id, string $from, int $game_id) {
+    public function savePlayer(Request $request, int $player_id, string $from, int $game_id)
+    {
         $user_id = auth()->user()->id;
         $input = $request->only('name', 'avatarId');
         $name = trim($input['name']);
@@ -83,22 +91,23 @@ class UserController extends Controller {
             }
         }
         if ($name_found) {
-            return \Redirect::back()->withErrors(['name' => ['exists']]);
-        } else {
-            if ($player_id == 0) {
-                $entry = ['user_id' => $user_id, 'name' => $name, 'avatar_id' => $avatar_id];
-                $player = $this->playerRepository->create($entry);
-                $player_id = $player->id;
-            } else {
-                $entry = ['name' => $name, 'avatar_id' => $avatar_id];
-                $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
-            }
-
-            return \Redirect::route('controls.player', [$player_id, $from, 0]);
+            return Redirect::back()->withErrors(['name' => ['exists']]);
         }
+        if ($player_id == 0) {
+            $entry = ['user_id' => $user_id, 'name' => $name, 'avatar_id' => $avatar_id];
+            $player = $this->playerRepository->create($entry);
+            $player_id = $player->id;
+        } else {
+            $entry = ['name' => $name, 'avatar_id' => $avatar_id];
+            $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
+        }
+
+        return Redirect::route('controls.player', [$player_id, $from, 0]);
+
     }
 
-    public function controlsConfigure(Request $request, int $player_id, string $from, int $game_id) {
+    public function controlsConfigure(Request $request, int $player_id, string $from, int $game_id)
+    {
         if ($player_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
@@ -126,7 +135,8 @@ class UserController extends Controller {
         return view('settingsControlsNew', ['control_mode' => $control_mode, 'control_auto_select' => $control_auto_select, 'control_manual_select' => $control_manual_select, 'control_manual_nav' => $control_manual_nav, 'help_after_tries' => $help_after_tries, 'scanning_speed' => $scanning_speed]);
     }
 
-    public function controlsSave(Request $request, int $player_id, string $from, int $game_id = 0) {
+    public function controlsSave(Request $request, int $player_id, string $from, int $game_id = 0)
+    {
         $input = $request->only('controlType', 'controlAutomaticSelectionButton', 'controlManualSelectionButton', 'controlManualNavigationButton', 'helpAfterTries', 'scanningSpeed');
         $control_mode = (int) $input['controlType'];
         $control_auto_select = $input['controlAutomaticSelectionButton'];
@@ -143,15 +153,17 @@ class UserController extends Controller {
         $action = $request->only('submit')['submit'];
 
         if ($action == 'back' || $action == 'profile') {
-            return \Redirect::route('new.player', [$player_id, $from, 0]);
-        } elseif ($action == 'next' || $action == 'save') {
-            return \Redirect::route('difficulty.player', [$player_id, $from, 0]);
-        } else {
-            abort(403, __('messages.unauthorized_action'));
+            return Redirect::route('new.player', [$player_id, $from, 0]);
         }
+        if ($action == 'next' || $action == 'save') {
+            return Redirect::route('difficulty.player', [$player_id, $from, 0]);
+        }
+        abort(403, __('messages.unauthorized_action'));
+
     }
 
-    public function difficultyConfigure(Request $request, int $player_id, string $from, int $game_id = 0) {
+    public function difficultyConfigure(Request $request, int $player_id, string $from, int $game_id = 0)
+    {
         if ($player_id == 0) {
             abort(403, __('messages.unauthorized_action'));
         }
@@ -170,7 +182,8 @@ class UserController extends Controller {
         return view('settingsDifficultyNew', ['dice_type' => $dice_type, 'board_size' => $board_size, 'difficulty' => $difficulty, 'movement_mode' => $movement_mode]);
     }
 
-    public function difficultySave(Request $request, int $player_id, string $from, int $game_id = 0) {
+    public function difficultySave(Request $request, int $player_id, string $from, int $game_id = 0)
+    {
         $input = $request->only('dice', 'gameDuration', 'level', 'movement');
         $dice_type = (int) $input['dice'];
         $board_size = (int) $input['gameDuration'];
@@ -181,13 +194,15 @@ class UserController extends Controller {
         $player = $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
         $action = $request->only('submit')['submit'];
         if ($action == 'profile') {
-            return \Redirect::route('new.player', [$player_id, $from, 0]);
-        } elseif ($action == 'back' || $action == 'controls') {
-            return \Redirect::route('controls.player', [$player_id, $from, 0]);
-        } elseif ($action == 'save') {
-            return \Redirect::route('select.player', [0, $from, 0]);
-        } else {
-            abort(403, __('messages.unauthorized_action'));
+            return Redirect::route('new.player', [$player_id, $from, 0]);
         }
+        if ($action == 'back' || $action == 'controls') {
+            return Redirect::route('controls.player', [$player_id, $from, 0]);
+        }
+        if ($action == 'save') {
+            return Redirect::route('select.player', [0, $from, 0]);
+        }
+        abort(403, __('messages.unauthorized_action'));
+
     }
 }

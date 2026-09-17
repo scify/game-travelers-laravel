@@ -5,14 +5,17 @@ namespace Database\Seeders;
 use App\Repository\User\UserRepository;
 use Illuminate\Database\Seeder;
 
-class UsersTableSeeder extends Seeder {
+class UsersTableSeeder extends Seeder
+{
     protected UserRepository $userRepository;
 
-    public function __construct(UserRepository $userRepository) {
+    public function __construct(UserRepository $userRepository)
+    {
         $this->userRepository = $userRepository;
     }
 
-    public function run() {
+    public function run()
+    {
         echo "\nRunning User Seeder...\n";
         echo env('DEFAULT_USER_PASSWORD_FOR_SEED') . "\n";
 

@@ -115,12 +115,6 @@ parameters:
 			path: app/Models/UserRole/UserRoleLkp.php
 
 		-
-			message: '#^PHPDoc tag @var has invalid value \(\)\: Unexpected token "\\n     ", expected type at offset 58 on line 4$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Repository/Repository.php
-
-		-
 			message: '#^Called ''env'' outside of the config directory which returns null when the config is cached, use ''config''\.$#'
 			identifier: larastan.noEnvCallsOutsideOfConfig
 			count: 3

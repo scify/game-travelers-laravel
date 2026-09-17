@@ -24,12 +24,11 @@ Route::view('/about', 'about')->name('about');
 Route::view('/credits', 'credits')->name('credits');
 Route::view('/cookies-policy', 'cookies')->name('cookies-policy');
 
-
 Route::middleware(['auth'])->group(function () {
     Route::prefix('administration')->middleware('can:manage-platform')->name('administration.')->group(function () {
         Route::get('test-email/{email}', function (Request $request) {
             $user = User::where(['email' => $request->email])->first();
-            if (!$user) {
+            if (! $user) {
                 $user = User::findOrFail(1);
             }
             $user->notify(new UserRegistered($user));
@@ -39,7 +38,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-//Integrated pages
+// Integrated pages
 Route::middleware('auth')->group(function () {
     Route::get('/select/player/{player_id}/{from}/{game_id}', [UserController::class, 'show'])
         ->name('select.player');

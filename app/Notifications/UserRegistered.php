@@ -7,7 +7,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class UserRegistered extends Notification {
+class UserRegistered extends Notification
+{
     use Queueable;
 
     /**
@@ -17,7 +18,8 @@ class UserRegistered extends Notification {
      */
     protected User $user;
 
-    public function __construct(User $user) {
+    public function __construct(User $user)
+    {
         $this->user = $user;
     }
 
@@ -25,9 +27,11 @@ class UserRegistered extends Notification {
      * Get the notification's delivery channels.
      *
      * @param  mixed  $notifiable
+     *
      * @return array
      */
-    public function via($notifiable) {
+    public function via($notifiable)
+    {
         return ['mail'];
     }
 
@@ -35,10 +39,12 @@ class UserRegistered extends Notification {
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
+     *
      * @return MailMessage
      */
-    public function toMail($notifiable) {
-        return (new MailMessage)
+    public function toMail($notifiable)
+    {
+        return (new MailMessage())
             ->subject(__('notifications.registration_subject'))
             ->greeting(__('notifications.registration_greeting'))
             ->line('<div style="text-align:center; height: 200px;"><img class="badgeImg" style="height: 200px; margin-bottom: 0;" src='
@@ -51,9 +57,11 @@ class UserRegistered extends Notification {
      * Get the array representation of the notification.
      *
      * @param  mixed  $notifiable
+     *
      * @return array
      */
-    public function toArray($notifiable) {
+    public function toArray($notifiable)
+    {
         return [
             //
         ];

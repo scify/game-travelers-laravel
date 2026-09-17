@@ -33,7 +33,7 @@ Business logic lives in `app/BusinessLogicLayer/` (managers) and data access in 
 
 ### Code style, project specifics
 
-- **PHP:** Laravel Pint, configured in `pint.json`: opening braces on the same line, one space around the `.` operator.
+- **PHP:** Laravel Pint with the shared `pint.json`: Laravel preset plus `declare(strict_types=1)`, strict comparisons and `mb_` string functions.
 - **JavaScript and Vue:** tabs, double quotes, semicolons (`.eslintrc.json`). ESLint runs with `--fix` inside the webpack build.
 - **SCSS:** Stylelint with `stylelint-config-standard-scss`.
 - **Everything else:** 4 spaces, LF, UTF-8, final newline (`.editorconfig`).

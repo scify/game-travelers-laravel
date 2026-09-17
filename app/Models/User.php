@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable {
+class User extends Authenticatable
+{
     use HasFactory, Notifiable;
 
     /**
@@ -49,12 +50,14 @@ class User extends Authenticatable {
      */
     protected $with = ['roles'];
 
-    public function roles(): BelongsToMany {
+    public function roles(): BelongsToMany
+    {
         return $this->belongsToMany(UserRoleLkp::class, 'user_roles', 'user_id', 'role_id')
             ->wherePivot('deleted_at', null);
     }
 
-    public function userRoles(): HasMany {
+    public function userRoles(): HasMany
+    {
         return $this->hasMany(UserRole::class, 'user_id', 'id');
     }
 }

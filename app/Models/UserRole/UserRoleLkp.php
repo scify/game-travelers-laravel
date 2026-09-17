@@ -5,7 +5,8 @@ namespace App\Models\UserRole;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class UserRoleLkp extends Model {
+class UserRoleLkp extends Model
+{
     use SoftDeletes;
 
     /**

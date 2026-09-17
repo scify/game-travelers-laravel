@@ -133,8 +133,7 @@ return [
     // Note that this list is the exact same as the one on Laravel, but it is
     // included in here for easier translation to other languages.
     // @see /vendor/laravel/framework/src/Illuminate/Validation/Rules/Password.php
-    'password' =>
-    [
+    'password' => [
         'mixed' => 'The :attribute must contain at least one uppercase and one lowercase letter.',
         'letters' => 'The :attribute must contain at least one letter.',
         'symbols' => 'The :attribute must contain at least one symbol.',

@@ -10,12 +10,15 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class UserRepository extends Repository {
-    public function getModelClassName() {
+class UserRepository extends Repository
+{
+    public function getModelClassName()
+    {
         return User::class;
     }
 
-    public function create(array $data) {
+    public function create(array $data)
+    {
         $storeArr = [
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -27,7 +30,8 @@ class UserRepository extends Repository {
         return parent::create($storeArr);
     }
 
-    public function getUsersWithAdminRoleStatus(int $userIdToExclude): Collection {
+    public function getUsersWithAdminRoleStatus(int $userIdToExclude): Collection
+    {
         return collect(DB::select('select u.id, u.name, u.email,
                                     (
                                     select ur.id from user_roles ur
@@ -40,7 +44,8 @@ class UserRepository extends Repository {
                             group by u.id, is_admin;', [UserRolesLkp::ADMIN, $userIdToExclude]));
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $user = $this->find($id);
         $user->email = $user->email . '_deleted_' . Carbon::now()->timestamp;
         $user->save();
@@ -48,7 +53,8 @@ class UserRepository extends Repository {
         return parent::delete($id);
     }
 
-    public function getAllShapesUsers(): Collection {
+    public function getAllShapesUsers(): Collection
+    {
         return User::whereNotNull('shapes_auth_token')->get();
     }
 }

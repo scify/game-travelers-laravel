@@ -13,13 +13,15 @@ use Tests\TestCase;
  * The board's Vue component talks to the backend through POST board/fromVue.
  * game_phase 1 asks for a dice roll, game_phase 2 reports the move, game_phase 3 reports a card's move.
  */
-class BoardTest extends TestCase {
+class BoardTest extends TestCase
+{
     use LazilyRefreshDatabase;
 
     protected $seed = true;
 
     #[Test]
-    public function board_page_renders_for_game_owner(): void {
+    public function board_page_renders_for_game_owner(): void
+    {
         $game = $this->startedGame($this->seededPlayer());
 
         $this->actingAs($this->seededUser())
@@ -29,7 +31,8 @@ class BoardTest extends TestCase {
     }
 
     #[Test]
-    public function dice_roll_moves_target_one_to_six_squares_and_is_stored(): void {
+    public function dice_roll_moves_target_one_to_six_squares_and_is_stored(): void
+    {
         $game = $this->startedGame($this->seededPlayer());
 
         $response = $this->actingAs($this->seededUser())
@@ -45,7 +48,8 @@ class BoardTest extends TestCase {
     }
 
     #[Test]
-    public function repeated_dice_roll_returns_stored_result(): void {
+    public function repeated_dice_roll_returns_stored_result(): void
+    {
         $game = $this->startedGame($this->seededPlayer(), ['game_phase' => 1, 'latest_random_result' => 4]);
 
         $this->actingAs($this->seededUser())
@@ -55,7 +59,8 @@ class BoardTest extends TestCase {
     }
 
     #[Test]
-    public function move_to_plain_square_is_stored_and_turn_stays_with_solo_player(): void {
+    public function move_to_plain_square_is_stored_and_turn_stays_with_solo_player(): void
+    {
         // Square 4 has colour 4: no card.
         $game = $this->startedGame($this->seededPlayer(), ['game_phase' => 1, 'latest_random_result' => 4]);
 
@@ -68,7 +73,8 @@ class BoardTest extends TestCase {
     }
 
     #[Test]
-    public function move_to_card_square_draws_card(): void {
+    public function move_to_card_square_draws_card(): void
+    {
         // Squares with colour 3 or 5 draw a card; square 3 is one of them.
         $game = $this->startedGame($this->seededPlayer(), ['game_phase' => 1, 'latest_random_result' => 3]);
 
@@ -82,7 +88,8 @@ class BoardTest extends TestCase {
     }
 
     #[Test]
-    public function reaching_last_square_ends_game(): void {
+    public function reaching_last_square_ends_game(): void
+    {
         $game = $this->startedGame($this->seededPlayer(), ['game_phase' => 1, 'latest_random_result' => 30, 'location_1' => 27]);
 
         $this->actingAs($this->seededUser())
@@ -94,7 +101,8 @@ class BoardTest extends TestCase {
     }
 
     #[Test]
-    public function user_cannot_play_game_owned_by_another_user(): void {
+    public function user_cannot_play_game_owned_by_another_user(): void
+    {
         $otherPlayer = Player::create(['user_id' => 1, 'name' => 'Ξένος', 'avatar_id' => 1]);
         $otherGame = $this->startedGame($otherPlayer);
 
@@ -104,7 +112,8 @@ class BoardTest extends TestCase {
     }
 
     #[Test]
-    public function unknown_game_is_reported_as_not_found(): void {
+    public function unknown_game_is_reported_as_not_found(): void
+    {
         // The controller answers 302 with a message, not 404. Kept as is: the Vue component relies on the body.
         $this->actingAs($this->seededUser())
             ->postJson(route('to.backend'), $this->payload(999))
@@ -116,9 +125,11 @@ class BoardTest extends TestCase {
      * The payload the Vue component sends, for a solo game on the island board with a normal die.
      *
      * @param  array<string, int>  $overrides
+     *
      * @return array<string, int>
      */
-    private function payload(int $gameId, array $overrides = []): array {
+    private function payload(int $gameId, array $overrides = []): array
+    {
         return array_merge([
             'player_id' => 1,
             'game_id' => $gameId,

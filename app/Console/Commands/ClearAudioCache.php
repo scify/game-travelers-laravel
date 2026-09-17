@@ -5,7 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
 
-class ClearAudioCache extends Command {
+class ClearAudioCache extends Command
+{
     /**
      * The name and signature of the console command.
      *
@@ -25,16 +26,16 @@ class ClearAudioCache extends Command {
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
-    public function handle(): int {
+    public function handle(): int
+    {
         $res = Cache::forget('audioFiles');
         echo 'Clear: ' . $res . "\n\n";
 

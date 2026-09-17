@@ -7,7 +7,8 @@ use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
 use Symfony\Component\Console\Command\Command as CommandAlias;
 
-class GenerateSitemap extends Command {
+class GenerateSitemap extends Command
+{
     /**
      * The name and signature of the console command.
      *
@@ -27,16 +28,16 @@ class GenerateSitemap extends Command {
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
-    public function handle(): int {
+    public function handle(): int
+    {
         $sitemapGenerator = Sitemap::create();
         $sitemapGenerator->add(Url::create('/')->setPriority(1.0)->addImage(asset('images/taxidiotes_logo.webp'), 'Ταξιδιώτες | Διασκέδασε παίζοντας!')->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY));
         $sitemapGenerator->add(Url::create('/login')->setPriority(0.9)->addImage(asset('images/taxidiotes_logo.webp'), 'Ταξιδιώτες | Είσοδος')->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY));

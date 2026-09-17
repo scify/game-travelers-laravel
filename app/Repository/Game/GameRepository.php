@@ -5,8 +5,10 @@ namespace App\Repository\Game;
 use App\Models\Game;
 use App\Repository\Repository;
 
-class GameRepository extends Repository {
-    public function getModelClassName() {
+class GameRepository extends Repository
+{
+    public function getModelClassName()
+    {
         return Game::class;
     }
 
@@ -20,7 +22,8 @@ class GameRepository extends Repository {
      *
      * @return array
      */
-    public function getBoards() {
+    public function getBoards()
+    {
         $public_path = 'images/boards';
         $preview_width = 352;
         $preview_height = 244;
@@ -88,7 +91,8 @@ class GameRepository extends Repository {
      *
      * @return array
      */
-    public function getPawns() {
+    public function getPawns()
+    {
         $path = 'images/pawns';
         $width = 136;
         $height = 212;
@@ -169,11 +173,13 @@ class GameRepository extends Repository {
         return $pawns;
     }
 
-    public function gameExists(int $game_id, int $user_id): bool {
+    public function gameExists(int $game_id, int $user_id): bool
+    {
         return Game::where(['id' => $game_id, 'user_id' => $user_id, 'active' => true])->exists();
     }
 
-    public function gameExistsAsInactive(int $game_id, int $user_id): bool {
+    public function gameExistsAsInactive(int $game_id, int $user_id): bool
+    {
         return Game::where(['id' => $game_id, 'user_id' => $user_id, 'active' => false])->exists();
     }
 }

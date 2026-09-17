@@ -9,19 +9,22 @@ use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-class DatabaseSeederTest extends TestCase {
+class DatabaseSeederTest extends TestCase
+{
     use LazilyRefreshDatabase;
 
     protected $seed = true;
 
     #[Test]
-    public function seeder_creates_two_roles(): void {
+    public function seeder_creates_two_roles(): void
+    {
         $this->assertDatabaseHas('user_roles_lkp', ['id' => 1, 'name' => 'Platform Administrator']);
         $this->assertDatabaseHas('user_roles_lkp', ['id' => 2, 'name' => 'Registered User']);
     }
 
     #[Test]
-    public function seeder_creates_administrator_and_user_with_roles(): void {
+    public function seeder_creates_administrator_and_user_with_roles(): void
+    {
         $this->assertDatabaseHas('users', ['id' => 1, 'email' => 'admin-taxidiotes@scify.org']);
         $this->assertDatabaseHas('users', ['id' => 2, 'email' => 'user-taxidiotes@scify.org']);
         $this->assertDatabaseHas('user_roles', ['user_id' => 1, 'role_id' => 1]);
@@ -29,7 +32,8 @@ class DatabaseSeederTest extends TestCase {
     }
 
     #[Test]
-    public function seeder_gives_user_two_players_with_default_controls(): void {
+    public function seeder_gives_user_two_players_with_default_controls(): void
+    {
         $players = Player::where('user_id', 2)->orderBy('id')->get();
 
         $this->assertCount(2, $players);

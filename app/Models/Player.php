@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Player extends Model {
+class Player extends Model
+{
+    use SoftDeletes;
+
     /**
      * The table associated with the model.
      *
@@ -19,14 +22,12 @@ class Player extends Model {
      *
      * @var array
      */
-
     protected $fillable = [
         'id', 'user_id', 'name', 'avatar_id', 'auto', 'select_key', 'navigate_key', 'help_after_x_mistakes', 'scanning_speed', 'dice_type', 'board_size', 'difficulty', 'movement_mode', 'music_volume', 'sound_volume',
     ];
 
-    use SoftDeletes;
-
-    public function user(): BelongsTo {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }

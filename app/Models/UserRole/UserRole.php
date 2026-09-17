@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class UserRole extends Model {
+class UserRole extends Model
+{
     use SoftDeletes;
 
     /**
@@ -26,11 +27,13 @@ class UserRole extends Model {
         'role_id', 'user_id',
     ];
 
-    public function user(): BelongsTo {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function role(): BelongsTo {
+    public function role(): BelongsTo
+    {
         return $this->belongsTo(UserRoleLkp::class, 'role_id', 'id');
     }
 }

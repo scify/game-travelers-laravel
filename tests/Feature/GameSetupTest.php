@@ -10,7 +10,8 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-class GameSetupTest extends TestCase {
+class GameSetupTest extends TestCase
+{
     use LazilyRefreshDatabase;
 
     protected $seed = true;
@@ -18,7 +19,8 @@ class GameSetupTest extends TestCase {
     /**
      * @return array<string, array{route: string, from: string}>
      */
-    public static function setupPageProvider(): array {
+    public static function setupPageProvider(): array
+    {
         return [
             'board' => ['route' => 'select.board', 'from' => 'board'],
             'mode' => ['route' => 'select.mode', 'from' => 'mode'],
@@ -28,7 +30,8 @@ class GameSetupTest extends TestCase {
     }
 
     #[Test]
-    public function selecting_board_creates_game_and_asks_for_mode(): void {
+    public function selecting_board_creates_game_and_asks_for_mode(): void
+    {
         $response = $this->actingAs($this->seededUser())
             ->post(route('select.board', [1, 'board', 0]), ['board' => 1]);
 
@@ -38,7 +41,8 @@ class GameSetupTest extends TestCase {
     }
 
     #[Test]
-    public function selecting_solo_mode_asks_for_pawn(): void {
+    public function selecting_solo_mode_asks_for_pawn(): void
+    {
         $game = $this->startedGame($this->seededPlayer(), ['started' => false, 'mode_id' => 2]);
 
         $this->actingAs($this->seededUser())
@@ -49,7 +53,8 @@ class GameSetupTest extends TestCase {
     }
 
     #[Test]
-    public function selecting_pawn_in_solo_mode_skips_second_pawn(): void {
+    public function selecting_pawn_in_solo_mode_skips_second_pawn(): void
+    {
         $game = $this->startedGame($this->seededPlayer(), ['started' => false, 'mode_id' => 1, 'pawn_id_1' => 0, 'pawn_id_2' => 0]);
 
         $this->actingAs($this->seededUser())
@@ -60,7 +65,8 @@ class GameSetupTest extends TestCase {
     }
 
     #[Test]
-    public function selecting_pawn_in_two_player_mode_asks_for_second_pawn(): void {
+    public function selecting_pawn_in_two_player_mode_asks_for_second_pawn(): void
+    {
         $game = $this->startedGame($this->seededPlayer(), ['started' => false, 'mode_id' => 2, 'pawn_id_1' => 0, 'pawn_id_2' => 0]);
 
         $this->actingAs($this->seededUser())
@@ -71,7 +77,8 @@ class GameSetupTest extends TestCase {
     }
 
     #[Test]
-    public function selecting_second_pawn_asks_for_options(): void {
+    public function selecting_second_pawn_asks_for_options(): void
+    {
         $game = $this->startedGame($this->seededPlayer(), ['started' => false, 'mode_id' => 2, 'pawn_id_1' => 1, 'pawn_id_2' => 0]);
 
         $this->actingAs($this->seededUser())
@@ -82,7 +89,8 @@ class GameSetupTest extends TestCase {
     }
 
     #[Test]
-    public function declining_tutorial_starts_game_and_opens_board(): void {
+    public function declining_tutorial_starts_game_and_opens_board(): void
+    {
         $game = $this->startedGame($this->seededPlayer(), ['started' => false, 'use_tutorial' => true, 'selected_board_size' => 1]);
 
         $this->actingAs($this->seededUser())
@@ -93,7 +101,8 @@ class GameSetupTest extends TestCase {
     }
 
     #[Test]
-    public function choosing_tutorial_is_remembered(): void {
+    public function choosing_tutorial_is_remembered(): void
+    {
         $game = $this->startedGame($this->seededPlayer(), ['started' => false]);
 
         $this->actingAs($this->seededUser())
@@ -105,7 +114,8 @@ class GameSetupTest extends TestCase {
 
     #[Test]
     #[DataProvider('setupPageProvider')]
-    public function setup_page_of_started_game_redirects_to_board(string $route, string $from): void {
+    public function setup_page_of_started_game_redirects_to_board(string $route, string $from): void
+    {
         $game = $this->startedGame($this->seededPlayer());
 
         $this->actingAs($this->seededUser())
@@ -114,7 +124,8 @@ class GameSetupTest extends TestCase {
     }
 
     #[Test]
-    public function selecting_board_reuses_active_game_of_player(): void {
+    public function selecting_board_reuses_active_game_of_player(): void
+    {
         $game = $this->startedGame($this->seededPlayer(), ['started' => false, 'board_id' => 2]);
 
         $this->actingAs($this->seededUser())

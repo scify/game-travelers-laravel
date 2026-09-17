@@ -7,7 +7,8 @@ use App\Support\Dev\Ddev;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Boost\Mcp\ToolExecutor;
 
-class AppServiceProvider extends ServiceProvider {
+class AppServiceProvider extends ServiceProvider
+{
     /**
      * The path logged-in users are sent to after login and registration,
      * and when they open a guest-only page.
@@ -17,14 +18,16 @@ class AppServiceProvider extends ServiceProvider {
     /**
      * Register any application services.
      */
-    public function register(): void {
+    public function register(): void
+    {
         $this->bindBoost();
     }
 
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void {
+    public function boot(): void
+    {
         $this->app->make(UserRoleManager::class)->registerUserPolicies();
     }
 
@@ -37,15 +40,16 @@ class AppServiceProvider extends ServiceProvider {
      * not exist, so its tool executor falls back to Boost's PHP_BINARY default.
      * Boost is a development dependency; without it the method returns early.
      */
-    private function bindBoost(): void {
-        if (!Ddev::isActive() || !class_exists(ToolExecutor::class)) {
+    private function bindBoost(): void
+    {
+        if (! Ddev::isActive() || ! class_exists(ToolExecutor::class)) {
             return;
         }
 
         $this->app->bind(ToolExecutor::class, static function (): ToolExecutor {
             config(['boost.executable_paths.php' => null]);
 
-            return new ToolExecutor;
+            return new ToolExecutor();
         });
     }
 }
