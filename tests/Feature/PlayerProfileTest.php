@@ -1,23 +1,28 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
 use App\Models\Player;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class PlayerProfileTest extends TestCase {
-    use RefreshDatabase;
+    use LazilyRefreshDatabase;
 
     protected $seed = true;
 
-    public function test_the_new_player_form_opens(): void {
+    #[Test]
+    public function new_player_form_opens(): void {
         $this->actingAs($this->seededUser())
             ->get(route('new.player', [0, 'user', 0]))
             ->assertOk();
     }
 
-    public function test_a_new_player_is_created_and_the_flow_continues_with_controls(): void {
+    #[Test]
+    public function new_player_is_created_with_trimmed_name(): void {
         $this->actingAs($this->seededUser())
             ->post(route('new.player', [0, 'user', 0]), ['name' => ' Μαρία ', 'avatarId' => 3]);
 
@@ -26,7 +31,8 @@ class PlayerProfileTest extends TestCase {
         $this->assertSame(3, $player->avatar_id);
     }
 
-    public function test_creating_a_player_redirects_to_its_controls(): void {
+    #[Test]
+    public function creating_player_redirects_to_its_controls(): void {
         $response = $this->actingAs($this->seededUser())
             ->post(route('new.player', [0, 'user', 0]), ['name' => 'Μαρία', 'avatarId' => 3]);
 
@@ -34,7 +40,8 @@ class PlayerProfileTest extends TestCase {
         $response->assertRedirect(route('controls.player', [$player->id, 'user', 0]));
     }
 
-    public function test_a_duplicate_player_name_is_rejected_case_insensitively(): void {
+    #[Test]
+    public function duplicate_player_name_is_rejected_case_insensitively(): void {
         $this->actingAs($this->seededUser())
             ->from(route('new.player', [0, 'user', 0]))
             ->post(route('new.player', [0, 'user', 0]), ['name' => 'κώστας παπ.', 'avatarId' => 3])
@@ -44,7 +51,8 @@ class PlayerProfileTest extends TestCase {
         $this->assertSame(2, Player::where('user_id', 2)->count());
     }
 
-    public function test_renaming_a_player_from_the_settings_is_saved(): void {
+    #[Test]
+    public function renaming_player_from_settings_is_saved(): void {
         $this->actingAs($this->seededUser())
             ->post(route('settings.profile', [1, 'user', 0]), ['name' => 'Κωνσταντίνος', 'avatarId' => 6])
             ->assertRedirect(route('settings', [1, 'user', 0]));
@@ -52,7 +60,8 @@ class PlayerProfileTest extends TestCase {
         $this->assertDatabaseHas('players', ['id' => 1, 'name' => 'Κωνσταντίνος', 'avatar_id' => 6]);
     }
 
-    public function test_renaming_a_player_to_another_players_name_is_rejected_case_insensitively(): void {
+    #[Test]
+    public function renaming_player_to_name_of_another_player_is_rejected_case_insensitively(): void {
         $this->actingAs($this->seededUser())
             ->from(route('settings.profile', [1, 'user', 0]))
             ->post(route('settings.profile', [1, 'user', 0]), ['name' => 'ΝΊΚΗ ΚΑΡΑΓ.', 'avatarId' => 5])
@@ -62,7 +71,8 @@ class PlayerProfileTest extends TestCase {
         $this->assertDatabaseHas('players', ['id' => 1, 'name' => 'Κώστας Παπ.']);
     }
 
-    public function test_controls_are_saved_and_the_flow_continues_with_difficulty(): void {
+    #[Test]
+    public function saving_controls_continues_to_difficulty(): void {
         $this->actingAs($this->seededUser())
             ->post(route('controls.player', [1, 'user', 0]), [
                 'controlType' => 2,
@@ -85,7 +95,8 @@ class PlayerProfileTest extends TestCase {
         ]);
     }
 
-    public function test_difficulty_is_saved_and_the_flow_returns_to_player_selection(): void {
+    #[Test]
+    public function saving_difficulty_returns_to_player_selection(): void {
         $this->actingAs($this->seededUser())
             ->post(route('difficulty.player', [1, 'user', 0]), [
                 'dice' => 3,
@@ -105,7 +116,8 @@ class PlayerProfileTest extends TestCase {
         ]);
     }
 
-    public function test_volumes_are_saved_from_the_board(): void {
+    #[Test]
+    public function volumes_are_saved_from_board(): void {
         $this->actingAs($this->seededUser())
             ->post(route('audio.updateVolumes'), ['player_id' => 1, 'music_volume' => 0.5, 'sound_volume' => 0.7])
             ->assertOk();

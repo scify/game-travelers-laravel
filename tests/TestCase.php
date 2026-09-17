@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests;
 
 use App\Models\Game;
@@ -7,11 +9,15 @@ use App\Models\Player;
 use App\Models\User;
 use Illuminate\Foundation\Mix;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\HtmlString;
 
 abstract class TestCase extends BaseTestCase {
     protected function setUp(): void {
         parent::setUp();
+
+        // The suite never touches the network: an unfaked request through the Http facade fails the test.
+        Http::preventStrayRequests();
 
         // Views call mix() for CSS and JS. Tests run without a front-end build,
         // so return the plain path instead of reading public/mix-manifest.json.

@@ -1,20 +1,39 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class PublicPagesTest extends TestCase {
-    use RefreshDatabase;
+    use LazilyRefreshDatabase;
 
-    public function test_public_pages_render_for_guests(): void {
-        foreach (['/', '/about', '/credits', '/cookies-policy', '/login', '/register'] as $uri) {
-            $this->get($uri)->assertOk();
-        }
+    /**
+     * @return array<string, array{uri: string}>
+     */
+    public static function publicPageProvider(): array {
+        return [
+            'landing' => ['uri' => '/'],
+            'about' => ['uri' => '/about'],
+            'credits' => ['uri' => '/credits'],
+            'cookie policy' => ['uri' => '/cookies-policy'],
+            'login' => ['uri' => '/login'],
+            'register' => ['uri' => '/register'],
+        ];
     }
 
-    public function test_home_page_shows_the_game_title_and_the_testimonials(): void {
+    #[Test]
+    #[DataProvider('publicPageProvider')]
+    public function public_page_renders_for_guest(string $uri): void {
+        $this->get($uri)->assertOk();
+    }
+
+    #[Test]
+    public function landing_page_shows_game_title_and_testimonials(): void {
         $this->get('/')
             ->assertOk()
             ->assertSee('Ταξιδιώτες')
