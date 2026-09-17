@@ -1,0 +1,14 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - phpstan-baseline.neon
+
+parameters:
+
+    paths:
+        - app/
+        - database/
+        - routes/
+        - tests/
+
+    # Level 5 to start (plan Q13); raise as the ported code gains types.
+    level: 5
