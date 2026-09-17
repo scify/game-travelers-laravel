@@ -1,119 +1,119 @@
-/** Laravel-Cookies-Consent overrides.
-/* Default plugin style-sheet overrides:
-/* @link https://github.com/scify/laravel-cookies-consent/blob/main/resources/assets/css/style.css
+/** Cookie consent overrides (scify/laravel-cookie-guard).
+ *
+ * The package styles itself through CSS custom properties scoped to its
+ * wrapper and its floating button; the full list lives in its published
+ * public/vendor/scify/laravel-cookie-guard/_variables.css. That file is
+ * republished on every composer update, so nothing is edited there: the
+ * game's palette is applied from here instead. The policy page renders
+ * inside the same wrapper, so it is covered too.
+ *
+ * The package's own variables file loads after the game's stylesheet and
+ * declares the same properties on the same ids, so the selectors carry
+ * `body` to outrank it whatever the load order.
  */
-.laravel-cookies-consent {
-    // Colors settings:
-    --consent-checkbox: var(--trvl-bg);
-    --consent-background-rgb: var(--trvl-color-rgb);
-    --consent-text: var(--trvl-btn-bg);
-    --consent-focus: var(--consent-checkbox);
+body #scify-cookies-consent-wrapper,
+body #scify-cookie-consent-floating-button {
+    // Typography: the game's font stack.
+    --scify-cookies-font-family: var(--bs-body-font-family);
 
-    // Going highter than all of Bootstrap's Z-index values:
-    z-index: 1100 !important;
-    // Modal colours
-    color: var(--consent-text) !important;
-    background-color: rgba(var(--consent-background-rgb), 0.95) !important;
-    border-color: rgba(var(--consent-background-rgb), 0.7) !important;
-    .cookies-close::before,
-    .cookies-close::after {
-        height: 1.25rem !important;
-        top: 65% !important;
-        left: 30% !important;
+    // Surface and text.
+    --scify-cookies-bg-color: var(--trvl-bg-light);
+    --scify-cookies-text-color: var(--trvl-color);
+
+    // Links as in the game. The accent for checked switches and open
+    // accordion titles is the palette's dark cyan, the one colour with
+    // enough contrast on the light surface (4.95:1).
+    --scify-cookies-primary-color: var(--trvl-c-cyan-dark);
+    --scify-cookies-link-color: var(--trvl-link);
+    --scify-cookies-link-hover-color: var(--trvl-c-cyan-dark);
+    --scify-cookies-accordion-btn-text-color: var(--trvl-c-cyan-dark);
+    --scify-cookies-always-active-message-color: var(--trvl-c-cyan-dark);
+    --scify-cookies-name-text-color: var(--trvl-c-crimson);
+
+    // Buttons: the game's primary button as designed, nothing new, at the
+    // base font size so four labels fit a dialog. Same shape, size, colour
+    // and font for every action, accept and reject alike.
+    --scify-cookies-btn-bg-color: var(--trvl-btn-bg);
+    --scify-cookies-btn-text-color: var(--trvl-btn-color);
+    --scify-cookies-btn-border-color: var(--trvl-btn-border-color);
+    --scify-cookies-btn-border-width: var(--bs-border-width);
+    --scify-cookies-btn-border-radius: 1.4em;
+    --scify-cookies-btn-text-font-size: 1rem;
+    --scify-cookies-btn-padding: 0.4em 1.6em;
+    --scify-cookies-btn-padding-lg: 0.4em 1.6em;
+    --scify-cookies-primary-hover-color: var(--trvl-btn-hover-bg); // Hover background.
+    --scify-cookies-btn-hover-text-color: var(--trvl-btn-hover-color);
+    --scify-cookies-btn-hover-border-color: var(--trvl-btn-hover-border-color);
+
+    // The floating button: the accent rather than the buttons' black, which
+    // is too bold for a corner. Dark cyan is the palette's one green that
+    // passes 3:1 on the light surface; the pale green does not.
+    --scify-cookies-floating-btn-bg-color: var(--trvl-btn-bg);
+    --scify-cookies-floating-btn-text-color: var(--trvl-c-cyan-dark);
+    --scify-cookies-floating-btn-border-color: var(--trvl-c-cyan-dark);
+    --scify-cookies-floating-btn-hover-bg-color: var(--trvl-c-green-light);
+    --scify-cookies-floating-btn-hover-text-color: var(--trvl-c-cyan-dark);
+
+    // The "preferences saved" toast.
+    --scify-cookies-success-message-bg-color: var(--trvl-c-green-light);
+    --scify-cookies-success-message-text-color: var(--trvl-c-green-dark);
+    --scify-cookies-success-message-border-color: var(--trvl-c-green-pale);
+
+}
+
+// States the variables do not reach: the game's hover shadow, focus ring and
+// active colours. The extra class outranks the package's rules.
+#scify-cookies-consent-wrapper .scify-cookies-consent-banner .btn.btn-light {
+    font-weight: 600;
+
+    &:hover {
+        box-shadow: 0 0.3rem rgba(var(--trvl-btn-hover-shadow-rgb), 0.1);
     }
-    .cookies-title {
-        font-weight: 600;
+
+    &:focus-visible {
+        box-shadow: 0 0 0 0.3rem rgba(var(--trvl-btn-focus-shadow-rgb), 0.6);
     }
-    .form-group {
-        display: flex;
-        line-height: 1.1;
-        & + .form-group {
-            margin-top: 0.6em;
-        }
+
+    &:active {
+        color: var(--trvl-btn-active-color);
+        background-color: var(--trvl-btn-active-bg);
+        border-color: var(--trvl-btn-active-border-color);
     }
-    label {
-        margin-left: 0.5em;
-        user-select: none;
+}
+
+// Room between the actions. The package fuses the stacked buttons into one
+// block by dropping their inner borders, which suits its square buttons and
+// not the game's pills; the columns get the gap instead, inner sides only,
+// since the package's pl-0 and pr-0 keep the outer edges flush.
+#scify-cookies-consent-wrapper .scify-cookies-consent-banner .cookie-actions {
+    .row {
+        row-gap: 0.5rem;
     }
-    input[type="checkbox"] {
-        // Hiding native checkbox:
-        -webkit-appearance: none !important;
-        appearance: none !important;
-        background-color: var(--consent-background-rgb);
-        box-shadow: none;
-        margin: 0;
-        // Setting-up the box:
-        font: inherit;
-        color: currentColor !important;
-        width: 1.1em;
-        height: 1.1em;
-        border: 0.1em solid currentColor !important;
-        border-radius: 0.15em;
-        transform: translate(0, -0.075em);
-        display: grid;
-        align-content: center;
-        justify-content: center;
-        &::before {
-            content: "";
-            width: 0.7em;
-            height: 0.7em;
-            box-shadow: inset 1em 1em rgb(var(--consent-background-rgb));
-            // Square
-            clip-path: polygon(0 0, 50% 0, 100% 0, 100% 100%, 50% 100%, 0 100%);
-            // Transform
-            transform-origin: center;
-            transition: 0.15s cubic-bezier(0.075, 0.82, 0.165, 1);
-            transition-property: background-color, clip-path;
-        }
-        &:checked::before {
-            // Checkmark.
-            clip-path: polygon(
-                24% 34%,
-                0 65%,
-                50% 100%,
-                100% 16%,
-                70% 0%,
-                43% 62%
-            );
-        }
-        &:checked {
-            background-color: var(--consent-checkbox);
-        }
-        &:focus-visible {
-            outline: 2px solid var(--consent-focus);
-            outline-offset: 2px;
-        }
-        &:disabled {
-            cursor: not-allowed !important;
-            opacity: 0.5;
+
+    .row > [class*="col-"] {
+        padding: 0 0.375rem;
+
+        @include media-breakpoint-down(lg) {
+            padding: 0;
         }
     }
-    .consent-form-container {
-        .consent-buttons {
-            .consent-submit {
-                // Reverse Contrast
-                font-weight: 600;
-                text-decoration: none;
-                line-height: 1.1;
-                color: rgb(var(--consent-background-rgb), 1) !important;
-                background-color: var(--consent-text) !important;
-                border-color: var(--consent-text) !important;
-                &.consent-accept,
-                &.consent-decline-all {
-                    &:focus-visible {
-                        outline: 0.2em var(--consent-focus) solid;
-                    }
-                }
-                &.consent-decline-all {
-                    // Note that all buttons should have the same shape/size/
-                    // /color/font and therefore no variations are acceptable.
-                    /*
-                    color: var(--trvl-btn-bg) !important;
-                    background-color: rgb(var(--consent-background)) !important;
-                    border-color: var(--trvl-btn-bg) !important;
-                    */
-                }
-            }
-        }
+
+    .btn.btn-light {
+        // The fusion rules carry two ids and use the shorthand, which zeroes
+        // the width and sets the style to none: both need restoring, and
+        // nothing but !important reaches them.
+        border-width: var(--scify-cookies-btn-border-width) !important;
+        border-style: solid !important;
+    }
+}
+
+#scify-cookie-consent-floating-button {
+    &:hover {
+        box-shadow: 0 0.3rem rgba(var(--trvl-btn-hover-shadow-rgb), 0.1);
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 0.3rem rgba(var(--trvl-btn-focus-shadow-rgb), 0.6);
     }
 }
