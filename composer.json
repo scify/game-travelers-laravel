@@ -18,12 +18,17 @@
         "symfony/mailgun-mailer": "^8.1.6"
     },
     "require-dev": {
+        "driftingly/rector-laravel": "^2.5.0",
         "fakerphp/faker": "^1.24.1",
         "larastan/larastan": "^3.10.0",
+        "laravel/boost": "^2.5.5",
+        "laravel/pail": "^1.2.7",
+        "laravel/pao": "^1.1.4",
         "laravel/pint": "^1.30.5",
         "mockery/mockery": "^1.6.15",
         "nunomaduro/collision": "^8.9.5",
-        "phpunit/phpunit": "^13.3.1"
+        "phpunit/phpunit": "^13.3.1",
+        "rector/rector": "^2.6.3"
     },
     "autoload": {
         "psr-4": {
@@ -38,17 +43,14 @@
         }
     },
     "scripts": {
-        "test": [
-            "@php artisan config:clear --ansi @no_additional_args",
-            "@php artisan test"
-        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
-            "@php artisan vendor:publish --tag=cookies-consent-public --ansi --force"
+            "@php artisan vendor:publish --tag=cookies-consent-public --ansi --force",
+            "@php artisan view:clear --ansi"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -58,6 +60,31 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ],
+        "lint": [
+            "rector",
+            "pint --parallel --format agent"
+        ],
+        "test:lint": [
+            "pint --parallel --test --format agent",
+            "rector --dry-run"
+        ],
+        "test:unit": "php artisan test",
+        "test:types": [
+            "phpstan"
+        ],
+        "test": [
+            "@test:lint",
+            "@test:types",
+            "@test:unit"
+        ],
+        "test:agent": [
+            "@putenv CLAUDE_CODE=1",
+            "@test"
+        ],
+        "lint:agent": [
+            "@putenv CLAUDE_CODE=1",
+            "@lint"
         ]
     },
     "extra": {
