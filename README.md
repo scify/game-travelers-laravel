@@ -90,6 +90,18 @@ In order to run the styler, run :
 
 ```
 
+## AI agent guidelines - Laravel Boost
+
+The sources of the instructions for AI coding agents are in `.ai/guidelines/`. They are composed with [Laravel Boost](https://github.com/laravel/boost), along with Laravel guidelines and related skills, into the file your agent reads: `CLAUDE.md` for Claude Code, `AGENTS.md` for Codex, and so on. The generated files are ignored by git. To generate them run:
+
+```bash
+php artisan boost:install
+```
+
+After a change in `.ai/guidelines/`, run `php artisan boost:update` to refresh the generated file.
+
+If your PHP does not run on the machine where your agent runs, for example under DDEV, set the `BOOST_*_EXECUTABLE_PATH` variables in `.env` before installing. They are listed at the end of `.env.example`.
+
 ## Apache configuration example:
 
 ```

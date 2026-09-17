@@ -1,6 +1,6 @@
 # Testing Conventions
 
-PHPUnit 13 with Laravel's testing utilities, SQLite in memory, no front-end build. These conventions are canonical for new tests and for refactoring existing ones. The root `CLAUDE.md` rule "Every installation is someone else's" applies to tests too: no installation's names, hosts or ids in fixtures beyond what the seeders provide.
+PHPUnit 13 with Laravel's testing utilities, SQLite in memory, no front-end build. These conventions are canonical for new tests and for refactoring existing ones. The project guideline "Every installation is someone else's" (`.ai/guidelines/10-project.blade.php`) applies to tests too: no installation's names, hosts or ids in fixtures beyond what the seeders provide.
 
 ## Essentials
 

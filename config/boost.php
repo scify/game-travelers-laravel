@@ -47,6 +47,7 @@ return [
     'guidelines' => [
         'exclude' => [
             'deployments',
+            'php',
             'pint/core',
             'tests',
         ],

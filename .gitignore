@@ -59,3 +59,12 @@ _ide_helper_models.php
 # Local notes and settings, never committed
 *.local
 *.local.*
+
+# Laravel Boost: generated per developer, see the README
+.agents
+.claude
+/.github/copilot-instructions.md
+/.mcp.json
+/AGENTS.md
+/CLAUDE.md
+/boost.json
