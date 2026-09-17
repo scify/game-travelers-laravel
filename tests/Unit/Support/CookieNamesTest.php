@@ -23,7 +23,7 @@ class CookieNamesTest extends TestCase {
 
     #[Test]
     public function laravel_session_derives_from_app_name(): void {
-        $this->assertSame('travelers-game-session', CookieNames::laravelSession(null, 'Travelers Game'));
+        $this->assertSame('travelers_game_session', CookieNames::laravelSession(null, 'Travelers Game'));
     }
 
     #[Test]

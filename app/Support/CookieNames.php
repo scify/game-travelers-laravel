@@ -23,10 +23,11 @@ final readonly class CookieNames {
     }
 
     /**
-     * Session cookie name, shared by config/session.php and the cookie policy.
+     * Session cookie name in Laravel 9's shape, `my_app_session`, so an upgraded installation keeps its cookie.
+     * Shared by config/session.php and the cookie policy.
      */
     public static function laravelSession(?string $configuredName, string $appName): string {
-        return $configuredName ?? Str::slug($appName) . '-session';
+        return $configuredName ?? Str::slug($appName, '_') . '_session';
     }
 
     /**
