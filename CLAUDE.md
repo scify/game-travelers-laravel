@@ -29,6 +29,8 @@ php artisan test               # feature tests (SQLite in memory, no build neede
 ./vendor/bin/pint --test -v    # PHP code style check; drop --test to fix
 ```
 
+Testing conventions, naming and hermeticity rules: `tests/CLAUDE.md`.
+
 ## Architecture
 
 Business logic lives in `app/BusinessLogicLayer/` (managers) and data access in `app/Repository/` (one repository per model, all extending `Repository`). Controllers use these.
