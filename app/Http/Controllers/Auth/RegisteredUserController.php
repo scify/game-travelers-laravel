@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Throwable;
 
 class RegisteredUserController extends Controller {
     protected UserManager $userManager;
@@ -58,7 +59,13 @@ class RegisteredUserController extends Controller {
             'password' => trim($request->password),
         ]);
 
-        $user->notify(new UserRegistered($user));
+        // The welcome mail must not take the registration down with it: the user
+        // row exists, so report the failure and let them in.
+        try {
+            $user->notify(new UserRegistered($user));
+        } catch (Throwable $e) {
+            report($e);
+        }
 
         event(new Registered($user));
 
