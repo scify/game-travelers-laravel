@@ -8,6 +8,10 @@ Taxidiotes (Ταξιδιώτες, "Travelers") is a web board game for children 
 
 It is a [Laravel](https://laravel.com/) 13 application. Blade renders every page; a single Vue 2 component renders the game board. Styles are Bootstrap 5.3 and Sass, compiled by [Laravel Mix](https://laravel-mix.com/) (webpack 5). The default language is Greek with English as fallback. The timezone is Europe/Athens.
 
+## Every installation is someone else's
+
+This repository is open source and installed by others, each with their own app name, domain, analytics id and mail setup. A change here changes every installation, not one site. Nothing in `config/`, `resources/` or `lang/` may assume a particular installation: no names, hosts, ids or cookie names spelt out. Whatever differs between installations comes from `.env`, is documented in `.env.example`, and when two settings must agree it is derived once, from that source, in code that is tested (see `app/Support/CookieNames.php`). Prefer the framework's defaults to pinned values.
+
 ## Development Commands
 
 Run from the project root. The README describes the full first-time setup.
