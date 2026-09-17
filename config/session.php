@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Str;
+use App\Support\CookieNames;
 
 return [
 
@@ -125,12 +125,12 @@ return [
     | the framework. Typically, you should not need to change this value
     | since doing so does not grant a meaningful security improvement.
     |
+    | The cookie policy (config/cookies_consent.php) declares the same name
+    | through CookieNames, so the two stay equal.
+    |
     */
 
-    'cookie' => env(
-        'SESSION_COOKIE',
-        Str::slug((string) env('APP_NAME', 'laravel')).'-session'
-    ),
+    'cookie' => CookieNames::laravelSession(env('SESSION_COOKIE'), (string) env('APP_NAME', 'laravel')),
 
     /*
     |--------------------------------------------------------------------------
