@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Taxidiotes (Ταξιδιώτες, "Travelers") is a web board game for children with disabilities, live at [taxidiotes.scify.org](https://taxidiotes.scify.org/). Every screen is driven by two keys, navigate and select, with a configurable scanning speed, so the game can be played with switches.
 
-It is a [Laravel](https://laravel.com/) 9 application. Blade renders every page; a single Vue 2 component renders the game board. Styles are Bootstrap 5.3 and Sass, compiled by [Laravel Mix](https://laravel-mix.com/) (webpack 5). The default language is Greek with English as fallback. The timezone is Europe/Athens.
+It is a [Laravel](https://laravel.com/) 13 application. Blade renders every page; a single Vue 2 component renders the game board. Styles are Bootstrap 5.3 and Sass, compiled by [Laravel Mix](https://laravel-mix.com/) (webpack 5). The default language is Greek with English as fallback. The timezone is Europe/Athens.
 
 ## Development Commands
 

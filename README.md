@@ -6,7 +6,7 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
 [![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://GitHub.com/scify)
 
-Laravel 9 Web Application for the Taksidiotes Game Web app
+Laravel 13 Web Application for the Taksidiotes Game Web app
 
 [Project URL](https://taxidiotes.scify.org/)
 
@@ -29,7 +29,7 @@ Also, make sure that the `APP_URL` is set to the correct domain and port that yo
 
 ## First time install (setup database and install dependencies)
 
-0. Make sure php 8.0 (or newer) is installed.
+0. Make sure PHP 8.4 is installed.
 
 
 1. After cloning the project, create an .env file (should be a copy of .env.example),
@@ -78,7 +78,7 @@ php artisan sitemap:generate
 
 ## PHP code style - Laravel Pint
 
-This application uses [Laravel Pint](https://laravel.com/docs/9.x/pint) in order to perform code-style.
+This application uses [Laravel Pint](https://laravel.com/docs/13.x/pint) in order to perform code-style.
 
 In order to run the styler, run :
 
@@ -135,12 +135,6 @@ cd storage/
 sudo find . -type f -exec chmod 664 {} \;
 
 sudo find . -type d -exec chmod 775 {} \;
-```
-
-Or run the `set-file-permissions.sh` script (needs sudo):
-
-```bash
-sudo ./set-file-permissions.sh www-data ${USER} .
 ```
 
 Change hosts file so dev.taxidiotes points to localhost:

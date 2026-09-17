@@ -10,8 +10,6 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\HtmlString;
 
 abstract class TestCase extends BaseTestCase {
-    use CreatesApplication;
-
     protected function setUp(): void {
         parent::setUp();
 

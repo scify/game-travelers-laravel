@@ -1,42 +1,61 @@
-/node_modules
-/public/hot
-/public/storage
-/public/audio
-/public/images
-public/css
-public/fonts
-public/js
-public/mix-manifest.json
-public/sitemap.xml
-public/web.config
-public/*.ico
-public/*.html
-resources/sass/*.css
-resources/sass/*.css.map
-/storage/*.key
-/vendor
+# Laravel default
+*.log
+.DS_Store
 .env
 .env.backup
+.env.production
+.phpactor.json
 .phpunit.result.cache
-docker-compose.override.yml
+/.codex
+/.cursor/
+/.idea
+/.nova
+/.phpunit.cache
+/.vscode
+/.zed
+/auth.json
+/node_modules
+/public/build
+/public/fonts-manifest.dev.json
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/vendor
+_ide_helper.php
 Homestead.json
 Homestead.yaml
-npm-debug.log
-yarn-error.log
-/.idea
-/.vscode
-_ide_helper.php
+Thumbs.db
+
+# Laravel Mix outputs, until the move to Vite
+/public/audio
+/public/css
+/public/fonts
+/public/images
+/public/js
+/public/mix-manifest.json
+/resources/sass/*.css
+/resources/sass/*.css.map
+
+# Generated on the server
+/public/sitemap.xml
+/public/web.config
+/public/*.ico
+/public/*.html
+
+# IDE helpers
 _ide_helper_models.php
 .phpstorm.meta.php
-.idea/
 *.~lock.*
 *.md.backup
-# General macOS
-.DS_Store
+
+# macOS
 .AppleDouble
 .LSOverride
-# Linux temp files
+
+# Linux
 .fuse_hidden*
+
 # Local notes and settings, never committed
 *.local
 *.local.*

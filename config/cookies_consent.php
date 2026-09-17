@@ -22,6 +22,7 @@ return [
     'use_separate_page' => true, // Set to true to use a separate page for cookies explanation
     'categories_collapsed_by_default' => true, // Set to false to collapse only the optional categories
     'cookie_policy_page_custom_url' => '/cookies-policy', // Set to a custom URL for the cookie policy page
+    'use_floating_modal' => false, // Set to true to disable the use of showModal() on the dialog HTML element
     /*
     |--------------------------------------------------------------------------
     | Editor
@@ -80,9 +81,6 @@ return [
                 'policy_external_link' => 'https://policies.google.com/privacy?hl=en-US',
             ],
         ],
-    ],
-    'enabled' => [
-        'strictly_necessary',
     ],
     'required' => ['strictly_necessary'],
     /*

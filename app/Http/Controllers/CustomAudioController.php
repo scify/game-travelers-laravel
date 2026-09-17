@@ -117,7 +117,7 @@ class CustomAudioController extends Controller {
         return response([]);
     }
 
-    protected function updateVolumesToDB(int $player_id, float $music_volume = null, float $sound_volume = null) {
+    protected function updateVolumesToDB(int $player_id, ?float $music_volume = null, ?float $sound_volume = null) {
         if (!is_null($music_volume) || !is_null($sound_volume)) {
             $entry = ['music_volume' => $music_volume, 'sound_volume' => $sound_volume];
             if (is_null($music_volume)) {

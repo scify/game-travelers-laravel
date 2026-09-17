@@ -1,33 +1,29 @@
 {
-    "name": "laravel/laravel",
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "scify/game-travelers-laravel",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
-    "license": "MIT",
+    "description": "Taxidiotes, a switch-accessible board game for children.",
+    "keywords": ["laravel", "game", "accessibility", "switch-access"],
+    "license": "Apache-2.0",
     "require": {
-        "php": "^7.4|^8.0",
-        "doctrine/dbal": "^3.5",
-        "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^9.0",
-        "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.0",
-        "scify/laravel-cookie-guard": "^4.0",
-        "sentry/sentry-laravel": "^3.2",
-        "spatie/laravel-sitemap": "^6.2",
-        "symfony/http-client": "^6.2",
-        "symfony/mailgun-mailer": "^6.2"
+        "php": "^8.4",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*",
+        "laravel/framework": "^13.26.1",
+        "laravel/tinker": "^3.0.2",
+        "scify/laravel-cookie-guard": "^5.1.0",
+        "sentry/sentry-laravel": "^4.27.0",
+        "spatie/laravel-sitemap": "^8.2.0",
+        "symfony/http-client": "^8.1.7",
+        "symfony/mailgun-mailer": "^8.1.6"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.9.1",
-        "fossbarrow/laravel-phpcs": "dev-main",
-        "laravel/pint": "^1.3",
-        "laravel/sail": "^1.0.1",
-        "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+        "fakerphp/faker": "^1.24.1",
+        "larastan/larastan": "^3.10.0",
+        "laravel/pint": "^1.30.5",
+        "mockery/mockery": "^1.6.15",
+        "nunomaduro/collision": "^8.9.5",
+        "phpunit/phpunit": "^13.3.1"
     },
     "autoload": {
         "psr-4": {
@@ -42,12 +38,17 @@
         }
     },
     "scripts": {
+        "test": [
+            "@php artisan config:clear --ansi @no_additional_args",
+            "@php artisan test"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan vendor:publish --tag=cookies-consent-public --ansi --force"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -55,7 +56,8 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "post-install-cmd": [
+        "pre-package-uninstall": [
+            "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
         ]
     },
     "extra": {
@@ -65,12 +67,15 @@
     },
     "config": {
         "optimize-autoloader": true,
+        "platform": {
+            "php": "8.4.1"
+        },
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
