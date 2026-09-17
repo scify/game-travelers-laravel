@@ -5,7 +5,6 @@ namespace App\Repository;
 use Illuminate\Container\Container as App;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 
 abstract class Repository implements RepositoryInterface {
@@ -132,52 +131,11 @@ abstract class Repository implements RepositoryInterface {
         );
     }
 
-    public function updateOrCreateCaseInsensitive($criteria, $data, $caseInsensitiveColumnName = null) {
-        if ($caseInsensitiveColumnName && isset($criteria[$caseInsensitiveColumnName])) {
-            // should look for case-insensitive
-            $val = str_replace("'", "\'", $criteria[$caseInsensitiveColumnName]);
-            $model = $this->modelInstance->whereRaw('LOWER(`' . $caseInsensitiveColumnName . "`) LIKE '" .
-                strtolower($val) . "'")->first();
-
-            if ($model) {
-                return $this->update($data, $model->id);
-            }
-
-            return $this->create($data);
-        } else {
-            return $this->modelInstance->updateOrCreate(
-                $criteria,
-                $data
-            );
-        }
-    }
-
     public function firstOrCreate($criteria, $data) {
         return $this->modelInstance->firstOrCreate(
             $criteria,
             $data
         );
-    }
-
-    public function findBy($attribute, $value, $columns = ['*'], $caseInsensitive = false, $withRelationships = []) {
-        if ($caseInsensitive) {
-            $query = $this->modelInstance->whereRaw('LOWER(`' . $attribute . "`) LIKE '" .
-                strtolower($value) . "'");
-        } else {
-            $query = $this->modelInstance->where($attribute, '=', $value);
-        }
-
-        if (count($withRelationships) > 0) {
-            $query = $query->with($withRelationships);
-        }
-
-        $model = $query->first();
-
-        if (!$model) {
-            throw new ModelNotFoundException("Model with criteria: '" . $attribute . "' equal to '" . $value . "' was not found.");
-        }
-
-        return $model;
     }
 
     public function where(array $whereArray, array $columns = ['*'], $withRelationships = []) {

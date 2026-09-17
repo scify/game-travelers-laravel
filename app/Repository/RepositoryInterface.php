@@ -15,8 +15,6 @@ interface RepositoryInterface {
 
     public function find($id, $columns = ['*']);
 
-    public function findBy($field, $value, $columns = ['*']);
-
     public function updateOrCreate($criteria, $data);
 
     public function firstOrCreate($criteria, $data);
