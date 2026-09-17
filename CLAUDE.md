@@ -56,4 +56,5 @@ Business logic lives in `app/BusinessLogicLayer/` (managers) and data access in 
 - **JavaScript and Vue:** tabs, double quotes, semicolons (`.eslintrc.json`). ESLint runs with `--fix` inside the webpack build.
 - **SCSS:** Stylelint with `stylelint-config-standard-scss`.
 - **Everything else:** 4 spaces, LF, UTF-8, final newline (`.editorconfig`).
+- **Prose (documentation, comments, commit messages, reports):** plain international English. Short sentences, one idea each, no idioms. Technical terms stay where they are the exact word. Many people read this project, and not all of them code.
 - **Commits:** [Conventional Commits](https://www.conventionalcommits.org/) (`feat`, `fix`, `refactor`, `docs`, `build`, `chore`). Messages name packages and versions, never people, hosts or other projects.
