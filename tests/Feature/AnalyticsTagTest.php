@@ -17,8 +17,6 @@ use Tests\TestCase;
 class AnalyticsTagTest extends TestCase {
     use LazilyRefreshDatabase;
 
-    private const CONSENT_COOKIE = 'game_travellers_cookies_consent';
-
     /**
      * @return array<string, array{consent: array<string, bool>|null, loaded: bool}>
      */
@@ -31,7 +29,7 @@ class AnalyticsTagTest extends TestCase {
     }
 
     protected function tearDown(): void {
-        unset($_COOKIE[self::CONSENT_COOKIE]);
+        unset($_COOKIE[$this->consentCookie()]);
 
         parent::tearDown();
     }
@@ -44,7 +42,7 @@ class AnalyticsTagTest extends TestCase {
     public function google_tag_follows_analytics_consent(?array $consent, bool $loaded): void {
         config()->set('app.google_analytics_id', 'G-ABC123');
         if ($consent !== null) {
-            $_COOKIE[self::CONSENT_COOKIE] = json_encode($consent, JSON_THROW_ON_ERROR);
+            $_COOKIE[$this->consentCookie()] = json_encode($consent, JSON_THROW_ON_ERROR);
         }
 
         $response = $this->get('/')->assertOk();
@@ -54,5 +52,9 @@ class AnalyticsTagTest extends TestCase {
         } else {
             $response->assertDontSee('googletagmanager.com');
         }
+    }
+
+    private function consentCookie(): string {
+        return config()->string('cookies_consent.cookie_prefix') . 'cookies_consent';
     }
 }

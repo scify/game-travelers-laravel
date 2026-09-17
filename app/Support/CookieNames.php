@@ -16,6 +16,13 @@ final readonly class CookieNames {
     private function __construct() {}
 
     /**
+     * Consent cookie prefix; the package appends `cookies_consent` to it without a separator.
+     */
+    public static function consentPrefix(string $appName): string {
+        return Str::slug($appName, '_') . '_';
+    }
+
+    /**
      * Session cookie name, shared by config/session.php and the cookie policy.
      */
     public static function laravelSession(?string $configuredName, string $appName): string {

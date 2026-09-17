@@ -2,21 +2,19 @@
 
 use App\Support\CookieNames;
 
-$cookiePrefix = 'game_travellers_';
+$appName = (string) env('APP_NAME', 'laravel');
+$cookiePrefix = CookieNames::consentPrefix($appName);
 
 return [
-    /**
-     * This prefix will be applied when setting and getting all cookies.
-     * If not set, the cookies will not be prefixed.
-     * If set, a good strategy is to also add a trailing underscore "_", that will be added between the field value, and each cookie.
-     * For example, if `cookie_prefix` is set to `my_app_`, then the consent is stored in a cookie named `my_app_cookies_consent`.
-     * Example:
+    /*
+     * Prefix of the consent cookie. The package appends `cookies_consent` to it without a
+     * separator, so the prefix ends with an underscore. It is derived from the application
+     * name: "My App" gives `my_app_` and the cookie `my_app_cookies_consent`.
+     * The cookie stores one boolean per category:
      *
      * {
-     *    "my_app_cookies_consent": {
-     *       "strictly_necessary": true,
-     *      "analytics": false
-     *   }
+     *    "strictly_necessary": true,
+     *    "analytics": false
      * }
      */
     'cookie_prefix' => $cookiePrefix,
@@ -59,7 +57,7 @@ return [
             ],
             [
                 // Derived exactly as config/session.php derives it; the test suite keeps the two in step.
-                'name' => CookieNames::laravelSession(env('SESSION_COOKIE'), (string) env('APP_NAME', 'laravel')),
+                'name' => CookieNames::laravelSession(env('SESSION_COOKIE'), $appName),
                 'description' => 'cookies_consent::messages.cookie_laravel_session_description',
                 'duration' => 'cookies_consent::messages.hours',
                 'duration_count' => 2,
