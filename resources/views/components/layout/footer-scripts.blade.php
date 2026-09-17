@@ -58,7 +58,7 @@
     // $playerAudio should be passed as a parameter to <x-layout>. If not, it
     // defaults to an empty array with some default parameters (see below).
     // For a more detailed documentation see the example below:
-    // @see docs/examples/examplePlayerAudio.php
+    // @see resources/js/audio.js (window.Laravel.playerAudio)
     //
     */
     if ( (!isset($playerAudio)) || ($playerAudio == false) ) {

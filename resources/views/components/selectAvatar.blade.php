@@ -10,8 +10,7 @@
     - Parameters:
       @var array<int, array<string, mixed>> $avatars
         An array of the available avatars in the App.
-        @example ../../../docs/examples/exampleDataAvatarModel.php
-        @example ../../../docs/examples/exampleData.php
+        @see \App\Repository\Player\PlayerRepository::getAvatars()
       @var int $tabindex [optional]
         Accessibility. The given tabindex will assigned to the first avatar,
         while the rest will get the tabindex of the previous avatar + 1. Default

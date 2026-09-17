@@ -10,7 +10,7 @@
     - Parameters:
       @var array<int, array<string, mixed>> $players_with_avatars
         An array of the the User's Players with their Avatars.
-        @example ../../../docs/examples/exampleData.php
+        @see \App\Http\Controllers\UserController::show()
       @var int selectedPlayerId [optional]
         Forms. Equals to the unique player ID of a "checked" (aka selected)
         Player. Default value is 0 (user has not selected any players).
