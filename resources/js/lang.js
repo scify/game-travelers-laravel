@@ -9,17 +9,13 @@
  * @return {string} Retrieved translation with placeholders.
  *
  * @example
- * window.trans("messages.app_name")
+ * trans("messages.app_name")
  * // returns the translation for "app_name" in "lang/??/messages"
  */
-(function () {
-    'use strict';
-    const trans = function (key, replace = {}) {
-        let translation = key.split('.').reduce((t, i) => t[i] || null, window.Laravel.translations);
-        for (const placeholder in replace) {
-            translation = translation.replace(`:${placeholder}`, replace[placeholder]);
-        }
-        return translation;
-    };
-    window.trans = trans;
-})();
+export function trans(key, replace = {}) {
+    let translation = key.split('.').reduce((t, i) => t[i] || null, window.Laravel.translations);
+    for (const placeholder in replace) {
+        translation = translation.replace(`:${placeholder}`, replace[placeholder]);
+    }
+    return translation;
+}

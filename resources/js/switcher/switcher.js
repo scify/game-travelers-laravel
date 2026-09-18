@@ -6,6 +6,7 @@
 
 import { music, sound } from '@/audio.js';
 import { log } from '@/debug.js';
+import { SwitcherKeys } from '@/keys.js';
 import { saveVolume } from '@/volumes.js';
 
 // Blurs any items with focus.
@@ -39,17 +40,17 @@ function switcher() {
                 : 2;
         automaticSelectionButton =
             window.Switcher.automaticSelectionButton !== undefined &&
-            window.SwitcherKeys.allowedList.includes(window.Switcher.automaticSelectionButton)
+            SwitcherKeys.allowedList.includes(window.Switcher.automaticSelectionButton)
                 ? window.Switcher.automaticSelectionButton
                 : 'Space';
         manualSelectionButton =
             window.Switcher.manualSelectionButton !== undefined &&
-            window.SwitcherKeys.allowedList.includes(window.Switcher.manualSelectionButton)
+            SwitcherKeys.allowedList.includes(window.Switcher.manualSelectionButton)
                 ? window.Switcher.manualSelectionButton
                 : 'Space';
         manualNavigationButton =
             window.Switcher.manualNavigationButton !== undefined &&
-            window.SwitcherKeys.allowedList.includes(window.Switcher.manualNavigationButton)
+            SwitcherKeys.allowedList.includes(window.Switcher.manualNavigationButton)
                 ? window.Switcher.manualNavigationButton
                 : 'Enter';
     } else {
@@ -207,8 +208,8 @@ function switcher() {
     }
 
     function handleSwitchKey(event) {
-        const allowedList = window.SwitcherKeys.allowedList;
-        const escapeList = window.SwitcherKeys.escapeList;
+        const allowedList = SwitcherKeys.allowedList;
+        const escapeList = SwitcherKeys.escapeList;
         let returnKey;
         // Note that even if extremely useful, event.keyCode is deprecated.
         // Instead, we parse the event.key (@see key-assigner.js).

@@ -1,11 +1,13 @@
 /* Key Assigner Functions
  * Handles the input for buttons which allow each player via their own personal
  * settings, to set custom keys for Navigation and Selection for the Switcher.
- * These functions require and use the array window.SwitcherKeys.allowedList,
+ * These functions require and use the array SwitcherKeys.allowedList from keys.js,
  * which includes a list of all the keys which are relatively safe to use.
  */
 
 import { log } from '@/debug.js';
+import { SwitcherKeys } from '@/keys.js';
+import { trans } from '@/lang.js';
 
 (function () {
     'use strict';
@@ -54,12 +56,12 @@ import { log } from '@/debug.js';
             let keyAssignerText;
             keyAssignerText = keyAssigner.textContent;
             if (
-                keyAssignerText === window.trans('messages.switcher.set_button_invalid') ||
-                keyAssignerText === window.trans('messages.switcher.set_button')
+                keyAssignerText === trans('messages.switcher.set_button_invalid') ||
+                keyAssignerText === trans('messages.switcher.set_button')
             ) {
                 keyAssignerText = keyAssigner.getAttribute('data-key-selected');
             }
-            keyAssigner.textContent = window.trans('messages.switcher.set_button_invalid');
+            keyAssigner.textContent = trans('messages.switcher.set_button_invalid');
             if (!keyAssigner.classList.contains('invalid')) {
                 keyAssigner.classList.add('invalid');
                 timeoutId = setTimeout(() => {
@@ -98,7 +100,7 @@ import { log } from '@/debug.js';
 
                     /** KeyUp event listener for Key Assigner. */
                     function assignerKeyUpHandler(event) {
-                        const allowedList = window.SwitcherKeys.allowedList;
+                        const allowedList = SwitcherKeys.allowedList;
                         // Override the default behavior of keys.
                         event.preventDefault();
                         // When a key is pressed, get its key value.
@@ -203,7 +205,7 @@ import { log } from '@/debug.js';
                         window.removeEventListener('keyup', assignerKeyUpHandler);
                     }
                     // Set keyAssigner to active
-                    keyAssigner.textContent = window.trans('messages.switcher.set_button');
+                    keyAssigner.textContent = trans('messages.switcher.set_button');
                     keyAssigner.classList.add('active');
                     keyAssigner.classList.add('first-trigger');
                     // Cancel the whole thing by a single click of the mouse:

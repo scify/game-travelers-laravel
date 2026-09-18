@@ -3,6 +3,7 @@
  */
 
 import { music, sound } from '@/audio.js';
+import { trans } from '@/lang.js';
 import { saveVolume } from '@/volumes.js';
 
 window.addEventListener('load', function () {
@@ -128,23 +129,15 @@ window.addEventListener('load', function () {
             if (elementId === 'scanningSpeed') {
                 const label = document.querySelector(`[for="${elementId}"]`);
                 if (Number.parseInt(element.value) === 1) {
-                    label.textContent = `${window.trans('messages.every')} ${
-                        element.value
-                    } ${window.trans('messages.second')}`;
+                    label.textContent = `${trans('messages.every')} ${element.value} ${trans('messages.second')}`;
                 } else {
-                    label.textContent = `${window.trans('messages.every')} ${
-                        element.value
-                    } ${window.trans('messages.seconds')}`;
+                    label.textContent = `${trans('messages.every')} ${element.value} ${trans('messages.seconds')}`;
                 }
                 element.addEventListener('change', () => {
                     if (Number.parseInt(element.value) === 1) {
-                        label.textContent = `${window.trans(
-                            'messages.every',
-                        )} ${element.value} ${window.trans('messages.second')}`;
+                        label.textContent = `${trans('messages.every')} ${element.value} ${trans('messages.second')}`;
                     } else {
-                        label.textContent = `${window.trans('messages.every')} ${element.value} ${window.trans(
-                            'messages.seconds',
-                        )}`;
+                        label.textContent = `${trans('messages.every')} ${element.value} ${trans('messages.seconds')}`;
                     }
                     const ruler = document.querySelector(`div[data-role="ruler"][data-value="${element.value}"]`);
                     if (ruler) {

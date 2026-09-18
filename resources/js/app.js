@@ -12,9 +12,5 @@
  */
 
 import '@/bootstrap';
-// Travelers Language variables.
-import '@/lang.js';
 // Universal functions.
 // require("./common.js");
-// Travelers Switcher Keys.
-import '@/keys.js';
