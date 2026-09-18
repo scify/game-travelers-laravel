@@ -20,6 +20,13 @@ export default defineConfig(
         rules: {
             curly: ['error', 'all'],
             eqeqeq: ['error', 'always'],
+            'no-restricted-globals': [
+                'error',
+                { name: 'isFinite', message: 'Use Number.isFinite.' },
+                { name: 'isNaN', message: 'Use Number.isNaN.' },
+                { name: 'parseFloat', message: 'Use Number.parseFloat.' },
+                { name: 'parseInt', message: 'Use Number.parseInt.' },
+            ],
             'no-unused-expressions': 'error',
             'no-var': 'error',
             'prefer-const': 'error',
