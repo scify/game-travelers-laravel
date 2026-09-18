@@ -39,6 +39,8 @@ final class GenerateSitemap extends Command
             ['route' => 'login', 'frequency' => 'yearly', 'priority' => '0.9', 'caption' => $this->pageTitle('messages.login')],
             ['route' => 'register', 'frequency' => 'yearly', 'priority' => '0.9', 'caption' => $this->pageTitle('messages.registration')],
             ['route' => 'about', 'frequency' => 'yearly', 'priority' => '0.8', 'caption' => $this->pageTitle('messages.about_title')],
+            ['route' => 'credits', 'frequency' => 'yearly', 'priority' => '0.8', 'caption' => $this->pageTitle('messages.credits')],
+            ['route' => 'cookies-policy', 'frequency' => 'yearly', 'priority' => '0.3', 'caption' => $this->pageTitle('messages.cookies_policy')],
         ];
     }
 

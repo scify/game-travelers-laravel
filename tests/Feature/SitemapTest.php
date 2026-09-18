@@ -50,6 +50,8 @@ class SitemapTest extends TestCase
             'login' => ['login'],
             'registration' => ['register'],
             'about' => ['about'],
+            'credits' => ['credits'],
+            'cookie policy' => ['cookies-policy'],
         ];
     }
 
@@ -69,7 +71,7 @@ class SitemapTest extends TestCase
             iterator_to_array($this->generatedSitemap()->url, false),
         );
 
-        $this->assertSame([route('home'), route('login'), route('register'), route('about')], $locations);
+        $this->assertSame([route('home'), route('login'), route('register'), route('about'), route('credits'), route('cookies-policy')], $locations);
     }
 
     #[Test]
