@@ -15,6 +15,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\EnsureIdsAreValid;
 use App\Models\User;
 use App\Notifications\UserRegistered;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,9 +28,9 @@ Route::view('/about', 'about')->name('about');
 Route::view('/credits', 'credits')->name('credits');
 Route::view('/cookies-policy', 'cookies')->name('cookies-policy');
 
-Route::middleware(['auth'])->group(function () {
-    Route::prefix('administration')->middleware('can:manage-platform')->name('administration.')->group(function () {
-        Route::get('test-email/{email}', function (Request $request) {
+Route::middleware(['auth'])->group(function (): void {
+    Route::prefix('administration')->middleware('can:manage-platform')->name('administration.')->group(function (): void {
+        Route::get('test-email/{email}', function (Request $request): string {
             $user = User::query()->where(['email' => $request->email])->first();
             if (! $user) {
                 $user = User::query()->findOrFail(1);
@@ -41,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Integrated pages
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function (): void {
     Route::get('/select/player/{player_id}/{from}/{game_id}', [UserController::class, 'show'])
         ->name('select.player');
 
@@ -128,7 +130,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('home', fn () => to_route('select.player', [0, 'user', 0]));
 
-    Route::get('logout', fn () => view('logoutDummy'))->name('dummy.logout');
+    Route::get('logout', fn (): Factory|View => view('logoutDummy'))->name('dummy.logout');
 
     Route::get('board/{player_id}/{game_id}', [BoardController::class, 'play'])
         ->name('board')->middleware(EnsureIdsAreValid::class);

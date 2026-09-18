@@ -6,13 +6,15 @@ namespace App\Http\Controllers;
 
 use App\Repository\Game\GameRepository;
 use App\Repository\Player\PlayerRepository;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function __construct(protected PlayerRepository $playerRepository, protected GameRepository $gameRepository) {}
 
-    public function show(Request $request, int $player_id, string $from, int $game_id)
+    public function show(Request $request, int $player_id, string $from, int $game_id): Factory|View
     {
         $user_id = auth()->user()->id;
         $players = $this->playerRepository->allWhere(['user_id' => $user_id]);
@@ -55,7 +57,7 @@ class UserController extends Controller
 
     }
 
-    public function newPlayer(Request $request, int $player_id, string $from, int $game_id)
+    public function newPlayer(Request $request, int $player_id, string $from, int $game_id): Factory|View
     {
         $name = '';
         $avatar_id = 0;
@@ -99,7 +101,7 @@ class UserController extends Controller
 
     }
 
-    public function controlsConfigure(Request $request, int $player_id, string $from, int $game_id)
+    public function controlsConfigure(Request $request, int $player_id, string $from, int $game_id): Factory|View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
         $control_mode = 1;
@@ -153,7 +155,7 @@ class UserController extends Controller
 
     }
 
-    public function difficultyConfigure(Request $request, int $player_id, string $from, int $game_id = 0)
+    public function difficultyConfigure(Request $request, int $player_id, string $from, int $game_id = 0): Factory|View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
         $dice_type = 1;

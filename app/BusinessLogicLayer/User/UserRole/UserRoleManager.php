@@ -19,7 +19,7 @@ class UserRoleManager
 
     public function registerUserPolicies(): void
     {
-        Gate::define('manage-platform', fn ($user) => $this->userHasAdminRole($user));
+        Gate::define('manage-platform', fn (User $user): bool => $this->userHasAdminRole($user));
     }
 
     public function getAllUserRoles()

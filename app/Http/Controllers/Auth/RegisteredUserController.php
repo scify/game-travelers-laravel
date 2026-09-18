@@ -11,6 +11,7 @@ use App\Providers\AppServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
@@ -35,7 +36,7 @@ class RegisteredUserController extends Controller
      *
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): Redirector|RedirectResponse
     {
         $captchaInput1 = (int) $request->input('captchaNumber1');
         $captchaInput2 = (int) $request->input('captchaNumber2');

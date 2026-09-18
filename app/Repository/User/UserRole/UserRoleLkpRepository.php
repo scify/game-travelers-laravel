@@ -9,7 +9,7 @@ use App\Repository\Repository;
 
 class UserRoleLkpRepository extends Repository
 {
-    public function getModelClassName()
+    public function getModelClassName(): string
     {
         return UserRoleLkp::class;
     }

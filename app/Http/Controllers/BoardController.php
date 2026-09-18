@@ -6,13 +6,15 @@ namespace App\Http\Controllers;
 
 use App\Repository\Game\GameRepository;
 use App\Repository\Player\PlayerRepository;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class BoardController extends Controller
 {
     public function __construct(protected PlayerRepository $playerRepository, protected GameRepository $gameRepository) {}
 
-    public function play(Request $request, int $player_id, int $game_id)
+    public function play(Request $request, int $player_id, int $game_id): Factory|View
     {
         abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
         $player = $this->playerRepository->allWhere(['id' => $player_id]);
@@ -183,7 +185,7 @@ class BoardController extends Controller
 
     }
 
-    protected function rollDieForPlayerAndReturnNewPosition($pos, $board_size, $tutorial_mode, $first_player_turn, $difficulty): int
+    protected function rollDieForPlayerAndReturnNewPosition($pos, int $board_size, $tutorial_mode, $first_player_turn, $difficulty): int
     {
         $final_pos = $this->getFinalPos($board_size);
         // At most six, at least one: random_int() refuses an inverted range.
@@ -243,7 +245,7 @@ class BoardController extends Controller
 
     }
 
-    protected function getAValidCard($board_size, $pos, $board_id, $is_tutorial): int
+    protected function getAValidCard(int $board_size, $pos, $board_id, $is_tutorial): int
     {
         $max = $this->getFinalPos($board_size);
         $random = random_int(1, 10);
@@ -272,7 +274,7 @@ class BoardController extends Controller
         return $random;
     }
 
-    protected function getCards($board_id)
+    protected function getCards($board_id): array
     {
         if ($board_id === 1) {
             return [

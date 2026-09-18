@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 class HomeController extends Controller
 {
     /**
      * Show the index.
-     *
-     * @return Renderable
      */
-    public function index()
+    public function index(): Factory|View
     {
         $carouselSlides = $this->getRandomActiveHomeCarouselSlides();
 
@@ -25,10 +24,8 @@ class HomeController extends Controller
      *
      * Returns an array of carouselSlides. Quick & dirty implementation before
      * this is also converted to a model for full customisation and control.
-     *
-     * @return array
      */
-    private function getHomeCarouselSlides()
+    private function getHomeCarouselSlides(): array
     {
         // All images are stored on images/landing/slides.
         $width = 500; // Image dimensions are fixed for now.
@@ -91,10 +88,8 @@ class HomeController extends Controller
      * Adds active = TRUE in one of the slides provided by the Carousel Slides
      * Data Provider in order to allow Bootstrap's implementation to show a
      * different slide first, on each page refresh. I know.
-     *
-     * @return void
      */
-    private function getRandomActiveHomeCarouselSlides()
+    private function getRandomActiveHomeCarouselSlides(): array
     {
         $slides = $this->getHomeCarouselSlides();
         $randIndex = random_int(1, count($slides));

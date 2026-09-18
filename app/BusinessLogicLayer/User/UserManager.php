@@ -37,7 +37,7 @@ class UserManager
         return $user;
     }
 
-    public function isAdmin($user): bool
+    public function isAdmin(User $user): bool
     {
         return $this->userRoleManager->userHasAdminRole($user);
     }
@@ -87,7 +87,7 @@ class UserManager
         $users = $this->userRepository->getUsersWithAdminRoleStatus(-1);
 
         return $users->filter(
-            fn ($obj) => $obj->is_admin === 1)->map(
+            fn ($obj): bool => $obj->is_admin === 1)->map(
                 fn ($obj) => $this->userRepository->find($obj->id));
     }
 

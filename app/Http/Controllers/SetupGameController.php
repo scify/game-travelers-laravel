@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\Player;
 use App\Repository\Game\GameRepository;
 use App\Repository\Player\PlayerRepository;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -14,7 +15,7 @@ class SetupGameController extends Controller
 {
     public function __construct(protected PlayerRepository $playerRepository, protected GameRepository $gameRepository) {}
 
-    public function continueShow(Request $request, int $player_id, string $from, int $game_id)
+    public function continueShow(Request $request, int $player_id, string $from, int $game_id): Factory|\Illuminate\Contracts\View\View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
         $players = $this->playerRepository->allWhere(['id' => $player_id]);
@@ -289,7 +290,7 @@ class SetupGameController extends Controller
         ];
     }
 
-    private function checkIfActiveGameHasStarted($game_id)
+    private function checkIfActiveGameHasStarted(int $game_id)
     {
         if ($game_id === 0) {
             return false;

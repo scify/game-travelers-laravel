@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
@@ -18,7 +19,7 @@ class PasswordResetLinkController extends Controller
      *
      * @return View
      */
-    public function create()
+    public function create(): Factory|\Illuminate\Contracts\View\View
     {
         return view('auth.passwordReset');
     }

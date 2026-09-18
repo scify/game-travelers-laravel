@@ -11,7 +11,7 @@ class PlayersTableSeeder extends Seeder
 {
     public function __construct(protected PlayerRepository $playerRepository) {}
 
-    public function run()
+    public function run(): void
     {
         echo "\nRunning Player Seeder...\n";
 

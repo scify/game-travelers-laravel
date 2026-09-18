@@ -10,17 +10,9 @@ use Illuminate\Database\Seeder;
 
 class UserRolesTableSeeder extends Seeder
 {
-    protected $userRepository;
+    public function __construct(protected UserRepository $userRepository, protected UserRoleManager $userRoleManager) {}
 
-    protected $userRoleManager;
-
-    public function __construct(UserRepository $userRepository, UserRoleManager $userRoleManager)
-    {
-        $this->userRepository = $userRepository;
-        $this->userRoleManager = $userRoleManager;
-    }
-
-    public function run()
+    public function run(): void
     {
         echo "\nRunning User Role Seeder...\n";
 

@@ -9,12 +9,12 @@ use App\Repository\Repository;
 
 class PlayerRepository extends Repository
 {
-    public function getModelClassName()
+    public function getModelClassName(): string
     {
         return Player::class;
     }
 
-    public function getAvatars()
+    public function getAvatars(): array
     {
         $width = 100;
         $height = 100;

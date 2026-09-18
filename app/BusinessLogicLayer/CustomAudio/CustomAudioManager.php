@@ -19,7 +19,7 @@ class CustomAudioManager
 
     }
 
-    public function createFolder(int $userId)
+    public function createFolder(int $userId): void
     {
         Storage::disk('local')->createDirectory('custom-sounds/' . $userId);
     }

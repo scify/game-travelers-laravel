@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserRepository extends Repository
 {
-    public function getModelClassName()
+    public function getModelClassName(): string
     {
         return User::class;
     }

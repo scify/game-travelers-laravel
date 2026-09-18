@@ -11,7 +11,7 @@ class UserRoleLkpTableSeeder extends Seeder
 {
     public function __construct(protected UserRoleLkpRepository $userRoleLkpRepository) {}
 
-    public function run()
+    public function run(): void
     {
         echo "\nRunning User Role lkp Seeder...\n";
 

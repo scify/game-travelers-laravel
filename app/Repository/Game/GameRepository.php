@@ -9,7 +9,7 @@ use App\Repository\Repository;
 
 class GameRepository extends Repository
 {
-    public function getModelClassName()
+    public function getModelClassName(): string
     {
         return Game::class;
     }
@@ -21,10 +21,8 @@ class GameRepository extends Repository
      * assets have been compressed with pngquant's default fs8. The original
      * images have been keept in the images-source folder, which does not make
      * itself public.
-     *
-     * @return array
      */
-    public function getBoards()
+    public function getBoards(): array
     {
         $public_path = 'images/boards';
         $preview_width = 352;
@@ -90,10 +88,8 @@ class GameRepository extends Repository
      * Note: 1x & 2x previews have been lossless optimized with optipng. The
      * original images have been keept in the images-source folder, which does
      * not make itself public.
-     *
-     * @return array
      */
-    public function getPawns()
+    public function getPawns(): array
     {
         $path = 'images/pawns';
         $width = 136;

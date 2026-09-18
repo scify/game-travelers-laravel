@@ -31,18 +31,6 @@ parameters:
 			path: app/Http/Controllers/BoardController.php
 
 		-
-			message: '#^Method App\\Http\\Controllers\\HomeController\:\:getRandomActiveHomeCarouselSlides\(\) with return type void returns array but should not return anything\.$#'
-			identifier: return.void
-			count: 1
-			path: app/Http/Controllers/HomeController.php
-
-		-
-			message: '#^Result of method App\\Http\\Controllers\\HomeController\:\:getRandomActiveHomeCarouselSlides\(\) \(void\) is used\.$#'
-			identifier: method.void
-			count: 1
-			path: app/Http/Controllers/HomeController.php
-
-		-
 			message: '#^PHPDoc type array of property App\\Models\\User\:\:\$with is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$with\.$#'
 			identifier: property.phpDocType
 			count: 1

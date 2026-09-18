@@ -7,8 +7,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\AppServiceProvider;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -19,7 +21,7 @@ class AuthenticatedSessionController extends Controller
      *
      * @return View
      */
-    public function create()
+    public function create(): Factory|\Illuminate\Contracts\View\View
     {
         return view('auth.login');
     }
@@ -43,7 +45,7 @@ class AuthenticatedSessionController extends Controller
      *
      * @return RedirectResponse
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request): Redirector|RedirectResponse
     {
         Auth::guard('web')->logout();
 

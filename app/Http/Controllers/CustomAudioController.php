@@ -6,7 +6,10 @@ namespace App\Http\Controllers;
 
 use App\BusinessLogicLayer\CustomAudio\CustomAudioManager;
 use App\Repository\Player\PlayerRepository;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\View;
 
 class CustomAudioController extends Controller
@@ -19,7 +22,7 @@ class CustomAudioController extends Controller
      * I am pretty sure that this function returns some values which might be
      * helpful when the back-end is trully implemented.
      */
-    public function audioShow(Request $request, int $player_id, string $back_route, int $game_id)
+    public function audioShow(Request $request, int $player_id, string $back_route, int $game_id): Factory|\Illuminate\Contracts\View\View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -89,7 +92,7 @@ class CustomAudioController extends Controller
         return to_route('settings', [$player_id, $back_route, $game_id]);
     }
 
-    public function uploadCustomAudioFile(Request $request)
+    public function uploadCustomAudioFile(Request $request): ResponseFactory|Response
     {
         $player_id = $request->integer('player_id');
         $audio_name = $request->audio_name;
@@ -100,13 +103,13 @@ class CustomAudioController extends Controller
         return response(['index' => $index]);
     }
 
-    public function removeCustomAudioFile(Request $request)
+    public function removeCustomAudioFile(Request $request): void
     {
         $player_id = $request->integer('player_id');
         $this->createFolderForPlayerIfRequired($player_id);
     }
 
-    public function updateVolumes(Request $request)
+    public function updateVolumes(Request $request): ResponseFactory|Response
     {
         // The browser posts the id and the slider values as strings; read them typed.
         $player_id = $request->integer('player_id');
@@ -130,7 +133,7 @@ class CustomAudioController extends Controller
         }
     }
 
-    protected function getPlayerAudio(int $player_id, float $musicVolume, float $soundVolume, $playerAudioFiles)
+    protected function getPlayerAudio(int $player_id, float $musicVolume, float $soundVolume, $playerAudioFiles): array
     {
         $playerAudio = [
             'playerMusicVolume' => $musicVolume,

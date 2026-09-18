@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Repository\Player\PlayerRepository;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -12,7 +13,7 @@ class SettingsController extends Controller
 {
     public function __construct(protected PlayerRepository $playerRepository) {}
 
-    public function settingsShow(Request $request, int $player_id, string $back_route, int $game_id)
+    public function settingsShow(Request $request, int $player_id, string $back_route, int $game_id): Factory|\Illuminate\Contracts\View\View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -63,7 +64,7 @@ class SettingsController extends Controller
         }
     }
 
-    public function profileShow(Request $request, int $player_id, string $back_route, int $game_id)
+    public function profileShow(Request $request, int $player_id, string $back_route, int $game_id): Factory|\Illuminate\Contracts\View\View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -103,7 +104,7 @@ class SettingsController extends Controller
 
     }
 
-    public function controlsShow(Request $request, int $player_id, string $back_route, int $game_id)
+    public function controlsShow(Request $request, int $player_id, string $back_route, int $game_id): Factory|\Illuminate\Contracts\View\View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 

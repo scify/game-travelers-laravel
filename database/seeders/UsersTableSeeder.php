@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder
 {
     public function __construct(protected UserRepository $userRepository) {}
 
-    public function run()
+    public function run(): void
     {
         echo "\nRunning User Seeder...\n";
         echo env('DEFAULT_USER_PASSWORD_FOR_SEED') . "\n";
