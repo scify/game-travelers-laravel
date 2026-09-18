@@ -62,7 +62,7 @@ function switcher() {
     // Configuration
     // Add delay for CSS transitions on top of the defined scanningSpeed. This
     // value for now is hardcoded, as all the CSS transitions are set to 300ms.
-    const transitionSpeed = 300; // in milisecconds
+    const transitionSpeed = 300; // in milliseconds
     const classFocus = 'switcher-focus'; // Focus switcher CSS class
     const classActive = 'switcher-active'; // Active switcher CSS class
     const switcherElements = document.querySelectorAll('[data-tabindex]:not([disabled])');
@@ -73,9 +73,13 @@ function switcher() {
         `Switcher active (mode: ${controlMode} ${scanningSpeed}s, s: ${selectionButton}, n: ${navigationButton})`,
     );
     // Audio (voice narration) on page-load?
-    typeof window.Switcher === 'object' && 'audio' in window.Switcher && typeof window.Switcher.audio === 'string'
-        ? window.sound(window.Switcher.audio)
-        : null;
+    if (
+        typeof window.Switcher === 'object' &&
+        'audio' in window.Switcher &&
+        typeof window.Switcher.audio === 'string'
+    ) {
+        window.sound(window.Switcher.audio);
+    }
     // Music on page-load?
     const music =
         typeof window.Switcher === 'object' && 'music' in window.Switcher && typeof window.Switcher.music === 'string'
@@ -90,7 +94,7 @@ function switcher() {
     }
 
     // If no switcher elements are found, then return (exit).
-    if (switcherElements.length == 0) {
+    if (switcherElements.length === 0) {
         console.log('No elements found with data-tabindex attribute');
         return;
     }
@@ -149,7 +153,7 @@ function switcher() {
             const currentFocusIndex = 0;
             validSwitcherElements[currentFocusIndex].focus();
             validSwitcherElements[currentFocusIndex].classList.add(classFocus);
-            // Note: Keydown for immediate reponse, instead of the keyup used
+            // Note: Keydown for immediate response, instead of the keyup used
             // on key-assigner.js.
             window.addEventListener('keydown', handleSwitchKey);
         }
@@ -200,7 +204,7 @@ function switcher() {
         const escapeList = window.SwitcherKeys.escapeList;
         let returnKey;
         // Note that even if extremely useful, event.keyCode is deprecated.
-        // Instead we parse the event.key (@see key-assigner.js).
+        // Instead, we parse the event.key (@see key-assigner.js).
         if (event.key.length) {
             const charCode = event.key.charCodeAt(0);
             // event.code checks
@@ -221,7 +225,7 @@ function switcher() {
             } else {
                 // event.key checks
                 if (charCode === 32) {
-                    // Space is one of the unicode characters
+                    // Space is one of the Unicode characters
                     // which is read as " ". To make our life
                     // easier, we simply convert it to "Space".
                     console.log('Space accepted');
@@ -295,7 +299,7 @@ function switcher() {
             for (let i = 0; i < validSwitcherElements.length; i++) {
                 if (validSwitcherElements[i].classList.contains(classFocus)) {
                     currentFocusIndex = i;
-                    if (currentFocusIndex == validSwitcherElements.length - 1) {
+                    if (currentFocusIndex === validSwitcherElements.length - 1) {
                         nextFocusIndex = 0;
                     } else {
                         nextFocusIndex = currentFocusIndex + 1;

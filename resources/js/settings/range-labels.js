@@ -30,7 +30,7 @@ window.addEventListener('load', function () {
         const rangeMin = parseFloat(rangeElement.min);
         const rangeMax = parseFloat(rangeElement.max);
         const rangeStep = parseFloat(rangeElement.step);
-        let rangeValue = rangeElement.value;
+        let rangeValue = parseFloat(rangeElement.value);
         if (music === null) {
             saveVolumes(rangeValue, false);
         } else {
@@ -38,7 +38,7 @@ window.addEventListener('load', function () {
         }
         const preventMinValue = rangeElement.dataset.preventMinValue === 'true' || false;
         // Disallow minimum value if data-prevent-min-value=true:
-        if (preventMinValue && rangeValue == rangeMin) {
+        if (preventMinValue && rangeValue === rangeMin) {
             rangeValue = rangeMin + rangeStep;
             rangeElement.value = rangeValue;
         }

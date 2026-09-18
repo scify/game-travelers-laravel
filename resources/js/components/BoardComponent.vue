@@ -540,7 +540,7 @@ export default {
                 } else {
                     self.showNumbers = true;
                 }
-            } else if (self.showPopUp == true) {
+            } else if (self.showPopUp) {
                 self.showPopUp = false;
             } else if (!this.ignoreInput) {
                 log('Key pressed and NOT ignored:\t(' + e.key + ')');
