@@ -139,7 +139,7 @@ kbd {
         @include media-breakpoint-up(md) {
             --alert-bg-opacity: 0%;
             --bs-alert-border-color: var(--trvl-c-black);
-            --bs-alert-color: var(---trvl-c-black);
+            --bs-alert-color: var(--trvl-c-black);
         }
         @include media-breakpoint-up(lg) {
             --bs-alert-border-color: transparent;
