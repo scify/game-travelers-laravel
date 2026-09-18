@@ -18,9 +18,3 @@ import '@/lang.js';
 // require("./common.js");
 // Travelers Switcher Keys.
 import '@/keys.js';
-// Travelers Audio-player.
-import '@/audio.js';
-
-// import {AudioPlayer} from 'audio-player.js'
-// window.AudioPlayer = AudioPlayer;
-// window.AudioPlayer.init()

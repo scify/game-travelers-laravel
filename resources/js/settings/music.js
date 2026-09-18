@@ -1,3 +1,4 @@
+import { music } from '@/audio.js';
 import { log } from '@/debug.js';
 
 window.addEventListener('load', switcher);
@@ -8,24 +9,24 @@ function switcher() {
         'music' in window.Switcher &&
         typeof window.Switcher.music === 'string'
     ) {
-        const musicVolume = window.Switcher.musicVolume || 0.2; // Default volume
+        const musicVolume = window.Switcher.musicVolume ?? 0.2; // Default volume
         log(`Switcher reports volume: ${musicVolume}`);
-        const music = window.music(window.Switcher.music, musicVolume, true);
+        const backgroundMusic = music(window.Switcher.music, musicVolume, true);
 
-        if (music !== null) {
+        if (backgroundMusic !== null) {
             window.addEventListener('keydown', (event) => {
                 switch (event.key) {
                     case '_':
-                        music.volume = Math.max(0, music.volume - 0.1);
+                        backgroundMusic.volume = Math.max(0, backgroundMusic.volume - 0.1);
                         break;
                     case '-':
-                        music.volume = Math.max(0, music.volume - 0.1);
+                        backgroundMusic.volume = Math.max(0, backgroundMusic.volume - 0.1);
                         break;
                     case '=':
-                        music.volume = Math.min(1, music.volume + 0.1);
+                        backgroundMusic.volume = Math.min(1, backgroundMusic.volume + 0.1);
                         break;
                     case '+':
-                        music.volume = Math.min(1, music.volume + 0.1);
+                        backgroundMusic.volume = Math.min(1, backgroundMusic.volume + 0.1);
                         break;
                 }
             });

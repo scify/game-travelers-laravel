@@ -4,6 +4,7 @@
  * @see ../lang.js
  */
 
+import { music, sound } from '@/audio.js';
 import { log } from '@/debug.js';
 import { saveVolume } from '@/volumes.js';
 
@@ -79,12 +80,12 @@ function switcher() {
         'audio' in window.Switcher &&
         typeof window.Switcher.audio === 'string'
     ) {
-        window.sound(window.Switcher.audio);
+        sound(window.Switcher.audio);
     }
     // Music on page-load?
-    const music =
+    const backgroundMusic =
         typeof window.Switcher === 'object' && 'music' in window.Switcher && typeof window.Switcher.music === 'string'
-            ? window.music(window.Switcher.music, false, true)
+            ? music(window.Switcher.music, false, true)
             : null;
 
     function removeSwitcherClasses() {
@@ -129,7 +130,7 @@ function switcher() {
         validSwitcherElements[fromIndex].blur();
         validSwitcherElements[toIndex].focus();
         validSwitcherElements[toIndex].classList.add(classFocus);
-        window.sound('fx.select');
+        sound('fx.select');
     }
 
     // Marks the element active and clicks it once the sounds have played.
@@ -138,14 +139,14 @@ function switcher() {
         element.classList.remove(classFocus);
         element.classList.add(classActive);
         window.removeEventListener('keydown', handleSwitchKey);
-        window.sound(
+        sound(
             'fx.navigate',
             function () {
                 const narration = element.dataset.audioSelect;
                 if (narration === undefined) {
                     element.click();
                 } else {
-                    window.sound(narration, function () {
+                    sound(narration, function () {
                         element.click();
                     });
                 }
@@ -197,7 +198,7 @@ function switcher() {
                 focus: false,
                 backdrop: 'static',
             });
-        window.sound('fx.modal');
+        sound('fx.modal');
         bsSwitcherModal.show();
         switcherModalEl.addEventListener('hidden.bs.modal', function () {
             removeSwitcherClasses();
@@ -247,16 +248,16 @@ function switcher() {
                             return false;
                         }
                         if (event.key === '-' || event.key === '_') {
-                            if (music !== null) {
-                                music.volume = Math.max(0, music.volume - 0.1);
-                                saveVolume('music_volume', music.volume);
+                            if (backgroundMusic !== null) {
+                                backgroundMusic.volume = Math.max(0, backgroundMusic.volume - 0.1);
+                                saveVolume('music_volume', backgroundMusic.volume);
                                 return false;
                             }
                         }
                         if (event.key === '=' || event.key === '+') {
-                            if (music !== null) {
-                                music.volume = Math.min(1, music.volume + 0.1);
-                                saveVolume('music_volume', music.volume);
+                            if (backgroundMusic !== null) {
+                                backgroundMusic.volume = Math.min(1, backgroundMusic.volume + 0.1);
+                                saveVolume('music_volume', backgroundMusic.volume);
                                 return false;
                             }
                         }

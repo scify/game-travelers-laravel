@@ -155,6 +155,7 @@
 <script>
 import axios from 'axios';
 import { markRaw } from 'vue';
+import { music, sound } from '@/audio.js';
 import { createDebugTools, emit, enabled as debugEnabled, log } from '@/debug.js';
 import BoardDebugStrip from '@/components/BoardDebugStrip.vue';
 
@@ -337,11 +338,11 @@ export default {
             window.setTimeout(() => {
                 this.gameEnd = 0;
                 if (this.board === 1) {
-                    this.music = window.music('music.great_ideas', this.musicVolume);
+                    this.music = music('music.great_ideas', this.musicVolume);
                 } else if (this.board === 2) {
-                    this.music = window.music('music.in_the_land_of_make_believe', this.musicVolume);
+                    this.music = music('music.in_the_land_of_make_believe', this.musicVolume);
                 } else if (this.board === 3) {
-                    this.music = window.music('music.movin_on', this.musicVolume);
+                    this.music = music('music.movin_on', this.musicVolume);
                 }
 
                 this.showPawn1 = true;
@@ -352,13 +353,13 @@ export default {
 
                     if (this.firstPlayerTurn) {
                         if (this.pos1 === 0) {
-                            window.sound('sounds.game.start');
+                            sound('sounds.game.start');
                         } else {
-                            window.sound(this.getOurTurnSound());
+                            sound(this.getOurTurnSound());
                         }
                     } else {
                         const self = this;
-                        window.sound(this.getOtherTurnSound(), function () {
+                        sound(this.getOtherTurnSound(), function () {
                             self.sendToBackend();
                         });
                     }
@@ -377,7 +378,7 @@ export default {
                     focus: true,
                     backdrop: true,
                 });
-            window.sound('fx.modal');
+            sound('fx.modal');
             bsSwitcherModal.show();
             return false;
         },
@@ -413,7 +414,7 @@ export default {
             const self = this;
             if (self.gamePhase === 1) {
                 this.rollingAnimation = true;
-                window.sound('sounds.game.dice', null, true);
+                sound('sounds.game.dice', null, true);
                 this.rollAnimation = false;
             }
             axios
@@ -431,9 +432,9 @@ export default {
                             self.debugEmit('ended', self.gameEnd);
                             self.music.pause();
                             if (self.gameEnd === 1) {
-                                const sound = window.sound('sounds.game.win');
-                                sound.volume = 0.2;
-                                window.sound('sounds.game.win_[1-8]');
+                                const endingSound = sound('sounds.game.win');
+                                endingSound.volume = 0.2;
+                                sound('sounds.game.win_[1-8]');
                                 window.setTimeout(() => {
                                     self.winFrame = 1;
                                 }, 1500);
@@ -444,9 +445,9 @@ export default {
                                     self.winFrame = 3;
                                 }, 2500);
                             } else {
-                                const sound = window.sound('sounds.game.defeat');
-                                sound.volume = 0.2;
-                                window.sound('sounds.game.defeat_[1-3]');
+                                const endingSound = sound('sounds.game.defeat');
+                                endingSound.volume = 0.2;
+                                sound('sounds.game.defeat_[1-3]');
                             }
                             window.setTimeout(() => {
                                 if (self.gameEnd === 1) {
@@ -472,16 +473,16 @@ export default {
 
                                     if (self.firstPlayerTurn) {
                                         if (self.tutorial && self.pos1 === 4) {
-                                            window.sound('sounds.tutorial.bravo_roll_again', function () {
+                                            sound('sounds.tutorial.bravo_roll_again', function () {
                                                 self.ignoreInput = false;
                                             });
                                         } else {
-                                            window.sound(self.getOurTurnSound(), function () {
+                                            sound(self.getOurTurnSound(), function () {
                                                 self.ignoreInput = false;
                                             });
                                         }
                                     } else {
-                                        window.sound(self.getOtherTurnSound(), function () {
+                                        sound(self.getOtherTurnSound(), function () {
                                             if (self.gameMode === 2) {
                                                 window.setTimeout(() => {
                                                     self.sendToBackend();
@@ -504,11 +505,11 @@ export default {
                                 self.gamePhase = 1;
                                 self.debugEmit('phase', 1);
                                 if (self.firstPlayerTurn) {
-                                    window.sound(self.getOurTurnSound(), function () {
+                                    sound(self.getOurTurnSound(), function () {
                                         self.ignoreInput = false;
                                     });
                                 } else if (self.gameMode === 2) {
-                                    window.sound(self.getOtherTurnSound(), function () {
+                                    sound(self.getOtherTurnSound(), function () {
                                         self.sendToBackend();
                                     });
                                 }
@@ -595,7 +596,7 @@ export default {
                         this.sendToBackend();
                     } else if (this.gamePhase === 2) {
                         if (isNavigate) {
-                            window.sound('fx.select');
+                            sound('fx.select');
                             let initialPos = this.pos1;
                             if (!this.firstPlayerTurn) {
                                 initialPos = this.pos2;
@@ -617,10 +618,10 @@ export default {
                             if (this.newPosition === this.blueIndex) {
                                 this.blue_blinking_allowed = false;
                                 this.ignoreInput = true;
-                                window.sound(
+                                sound(
                                     'sounds.game.clapping',
                                     function () {
-                                        window.sound(self.getRewardSound());
+                                        sound(self.getRewardSound());
                                         self.applyCorrectMovement();
                                     },
                                     true,
@@ -631,12 +632,12 @@ export default {
                                 if (this.mistakes === this.maxMistakes) {
                                     this.blue_blinking_allowed = false;
                                     // treat the choice as correct
-                                    window.sound('sounds.game.help_[1-4]', function () {
+                                    sound('sounds.game.help_[1-4]', function () {
                                         self.mistakes = 0;
                                         self.applyCorrectMovement();
                                     });
                                 } else {
-                                    window.sound('sounds.game.try_again_[1-6]', null, true);
+                                    sound('sounds.game.try_again_[1-6]', null, true);
                                     window.setTimeout(function () {
                                         self.ignoreInput = false;
                                     }, 600);
@@ -654,10 +655,10 @@ export default {
         },
         playStepSound() {
             if (this.stepSoundSwitch) {
-                window.sound('sounds.game.footstep1');
+                sound('sounds.game.footstep1');
                 this.stepSoundSwitch = false;
             } else {
-                window.sound('sounds.game.footstep2');
+                sound('sounds.game.footstep2');
                 this.stepSoundSwitch = true;
             }
         },
@@ -810,7 +811,7 @@ export default {
                         if (self.diceType !== 3) {
                             sound_forward = 'sounds.tutorial.Pawn_4_forward';
                         }
-                        window.sound(sound_forward, function () {
+                        sound(sound_forward, function () {
                             if (self.movementMode === 3) {
                                 self.blueIndex = 4;
                                 self.blue_position_show = true;
@@ -821,9 +822,9 @@ export default {
                             if (self.diceType !== 3) {
                                 we_should_go_here_sound = 'sounds.tutorial.We_Should_Go_Here';
                             }
-                            window.sound(we_should_go_here_sound, function () {
+                            sound(we_should_go_here_sound, function () {
                                 if (self.movementMode > 1) {
-                                    window.sound('sounds.tutorial.Choose_this_Pawn_goes_there', function () {
+                                    sound('sounds.tutorial.Choose_this_Pawn_goes_there', function () {
                                         if (self.movementMode === 3) {
                                             self.blue_position_show = false;
                                             self.blueIndex = -1;
@@ -839,13 +840,13 @@ export default {
                             if (self.diceType !== 3) {
                                 sound_to_play = 'sounds.tutorial.Roll_2_You_Choose_Now';
                             }
-                            window.sound(sound_to_play, function () {
+                            sound(sound_to_play, function () {
                                 self.activateSelector(newPosition);
                             });
                         } else {
-                            window.sound('sounds.tutorial.We_Should_Go_Here', function () {
+                            sound('sounds.tutorial.We_Should_Go_Here', function () {
                                 if (self.movementMode > 1) {
-                                    window.sound('sounds.tutorial.Choose_this_Pawn_goes_there');
+                                    sound('sounds.tutorial.Choose_this_Pawn_goes_there');
                                 }
                             });
                             self.activateSelector(newPosition);
@@ -892,12 +893,12 @@ export default {
                         this.debugEmit('moved', { position: this.pos1 });
                         if (this.tutorial && this.firstPlayerTurn) {
                             if (this.pos1 === 9 && this.tutorialYouKnowHowToPlayFlag === 0) {
-                                window.sound('sounds.tutorial.Aha_Lets_see', function () {
+                                sound('sounds.tutorial.Aha_Lets_see', function () {
                                     self.tutorialYouKnowHowToPlayFlag += 1;
                                     self.sendToBackend();
                                 });
                             } else if (this.tutorialYouKnowHowToPlayFlag === 1) {
-                                window.sound('sounds.tutorial.Now_you_know_how_to_play', function () {
+                                sound('sounds.tutorial.Now_you_know_how_to_play', function () {
                                     self.tutorialYouKnowHowToPlayFlag += 1;
                                     self.sendToBackend();
                                 });
@@ -935,17 +936,17 @@ export default {
             this.ignoreInput = true;
             this.blue_blinking_allowed = false;
             this.cardName = '';
-            let sound = 'sounds.cards.';
+            let cardSound = 'sounds.cards.';
             if (!this.firstPlayerTurn) {
-                sound += 'opponent_';
+                cardSound += 'opponent_';
             }
             if (this.latestCardValue > 0) {
-                window.sound(sound + 'F' + this.latestCardValue + this.getPawnSex(), function () {
+                sound(cardSound + 'F' + this.latestCardValue + this.getPawnSex(), function () {
                     self.latestCardValue = 0;
                     self.applyCorrectMovement();
                 });
             } else {
-                window.sound(sound + 'B' + Math.abs(this.latestCardValue) + this.getPawnSex(), function () {
+                sound(cardSound + 'B' + Math.abs(this.latestCardValue) + this.getPawnSex(), function () {
                     self.latestCardValue = 0;
                     self.applyCorrectMovement();
                 });
@@ -984,7 +985,7 @@ export default {
         },
         playCardSound() {
             const self = this;
-            window.sound('sounds.cards.' + this.cardName + '_' + this.board + this.getPawnSex(), function () {
+            sound('sounds.cards.' + this.cardName + '_' + this.board + this.getPawnSex(), function () {
                 self.applyCardMovement();
             });
         },

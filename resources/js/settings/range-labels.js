@@ -2,18 +2,19 @@
  * Range Labels Functions.
  */
 
+import { music, sound } from '@/audio.js';
 import { saveVolume } from '@/volumes.js';
 
 window.addEventListener('load', function () {
     const rangeElements = document.querySelectorAll("input[type='range']");
 
-    function handleVolumeSlider(rangeElement, audioConfirmation = true, music = null) {
+    function handleVolumeSlider(rangeElement, audioConfirmation = true, backgroundMusic = null) {
         // Get input[type='range'] parameters directly from the element.
         const rangeMin = Number.parseFloat(rangeElement.min);
         const rangeMax = Number.parseFloat(rangeElement.max);
         const rangeStep = Number.parseFloat(rangeElement.step);
         let rangeValue = Number.parseFloat(rangeElement.value);
-        if (music === null) {
+        if (backgroundMusic === null) {
             saveVolume('sound_volume', rangeValue);
         } else {
             saveVolume('music_volume', rangeValue);
@@ -25,18 +26,18 @@ window.addEventListener('load', function () {
             rangeElement.value = String(rangeValue);
         }
         // Update the element's data-music-volume for volume if it is set.
-        if (music !== null && rangeElement.dataset.musicVolume !== undefined) {
+        if (backgroundMusic !== null && rangeElement.dataset.musicVolume !== undefined) {
             rangeElement.dataset.musicVolume = String(rangeValue);
             // Change the actual music volume
             if (rangeValue >= 0.0 && rangeValue <= 1.0) {
-                music.volume = rangeValue;
+                backgroundMusic.volume = rangeValue;
             }
         }
 
         // Play a sound via window.sound to the set volume:
         if (audioConfirmation) {
             if (typeof window.sound === 'function') {
-                window.sound('fx.select', null, true, rangeValue);
+                sound('fx.select', null, true, rangeValue);
             }
         }
         // Calculate the visual representation of the set volume.
@@ -79,7 +80,7 @@ window.addEventListener('load', function () {
                 // Initialise music playback:
                 const musicData = element.dataset.music;
                 const musicVolumeData = element.dataset.musicVolume;
-                let music = null;
+                let backgroundMusic = null;
                 if (
                     musicData !== null &&
                     musicData !== undefined &&
@@ -87,40 +88,40 @@ window.addEventListener('load', function () {
                     musicVolumeData !== undefined
                 ) {
                     element.value = musicVolumeData;
-                    music = window.music(musicData, musicVolumeData, true);
+                    backgroundMusic = music(musicData, Number.parseFloat(musicVolumeData), true);
                     // Bind keydown events for music:
                     window.addEventListener('keydown', (event) => {
                         let volumeKeyDown = false;
                         switch (event.key) {
                             case '_':
-                                music.volume = Math.max(0, music.volume - 0.1);
+                                backgroundMusic.volume = Math.max(0, backgroundMusic.volume - 0.1);
                                 volumeKeyDown = true;
                                 break;
                             case '-':
-                                music.volume = Math.max(0, music.volume - 0.1);
+                                backgroundMusic.volume = Math.max(0, backgroundMusic.volume - 0.1);
                                 volumeKeyDown = true;
                                 break;
                             case '=':
-                                music.volume = Math.min(1, music.volume + 0.1);
+                                backgroundMusic.volume = Math.min(1, backgroundMusic.volume + 0.1);
                                 volumeKeyDown = true;
                                 break;
                             case '+':
-                                music.volume = Math.min(1, music.volume + 0.1);
+                                backgroundMusic.volume = Math.min(1, backgroundMusic.volume + 0.1);
                                 volumeKeyDown = true;
                                 break;
                         }
                         if (volumeKeyDown) {
-                            element.dataset.musicVolume = music.volume.toFixed(1);
-                            element.value = music.volume.toFixed(1);
+                            element.dataset.musicVolume = backgroundMusic.volume.toFixed(1);
+                            element.value = backgroundMusic.volume.toFixed(1);
                             element.dispatchEvent(new Event('change'));
                         }
                     });
                 }
                 // Initialise volume slider:
-                handleVolumeSlider(element, false, music);
+                handleVolumeSlider(element, false, backgroundMusic);
                 // Bind change events on slider:
                 element.addEventListener('change', () => {
-                    handleVolumeSlider(element, true, music);
+                    handleVolumeSlider(element, true, backgroundMusic);
                 });
             }
             /* Scanning Speed Range Inputs */
