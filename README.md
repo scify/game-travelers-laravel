@@ -76,19 +76,19 @@ In order to run the generator for the current application installation, run the 
 php artisan sitemap:generate
 ```
 
-## PHP code style - Laravel Pint
+## Code quality
 
-This application uses [Laravel Pint](https://laravel.com/docs/13.x/pint) in order to perform code-style.
-
-In order to run the styler, run :
+The composer scripts run the shared tools: [Laravel Pint](https://laravel.com/docs/13.x/pint) for code style, [Rector](https://getrector.com/) for automated refactoring and [Larastan](https://github.com/larastan/larastan) for static analysis.
 
 ```bash
-
-./vendor/bin/pint --test -v # the --test will not do any changes, it will just output the changes needed
-
-./vendor/bin/pint -v # this command will actually perform the code style changes 
-
+composer lint        # fix: Rector, then Pint
+composer test:lint   # check only: Pint, then Rector; changes nothing
+composer test:types  # Larastan
+composer test:unit   # the test suite
+composer test        # all three checks, in that order
 ```
+
+Run `composer test` before you commit. The `lint:agent` and `test:agent` variants print output made for AI agents.
 
 ## AI agent guidelines - Laravel Boost
 

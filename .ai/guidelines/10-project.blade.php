@@ -50,3 +50,4 @@ Run from the project root. The README describes the full first-time setup.
 - `{{ $assist->nodePackageManagerCommand('run dev') }}`: build CSS and JS, copy images and audio into `public/`. `run watch` rebuilds on change; `run prod` is the minified production build
 - `{{ $assist->artisanCommand('sitemap:generate') }}`: writes `public/sitemap.xml`
 - `{{ $assist->artisanCommand('test') }}`: feature tests (SQLite in memory, no build needed). Conventions in `tests/CLAUDE.md`
+- `{{ $assist->composerCommand('test') }}`: code style, static analysis and the test suite in one run. Green before every commit
