@@ -1,16 +1,11 @@
 # Taxidiotes Game Web Application
 
-[![JavaScript Style Guide: Good Parts](https://img.shields.io/badge/code%20style-goodparts-brightgreen.svg?style=flat)](https://github.com/dwyl/goodparts "JavaScript The Good Parts")
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
-[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://GitHub.com/scify)
+[![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/scify/game-travelers-laravel/issues)
 
-Laravel 13 Web Application for the Taksidiotes Game Web app
+The Laravel 13 web application of the Taxidiotes game.
 
 [Project URL](https://taxidiotes.scify.org/)
-
-# Installation Instructions:
 
 ## First time install
 
@@ -29,50 +24,21 @@ The same steps, one at a time:
 5. Link `public/storage` to `storage/app/public`: `php artisan storage:link`
 6. Install the front-end dependencies: `npm install`. Then `npm run dev` starts the development server with hot reload, and `npm run build` writes the production build.
 
-## SEO - Generate Sitemap
+## About the music files
 
-This application uses [Spatie - Laravel Sitemap](https://github.com/spatie/laravel-sitemap) plugin, in order to create
-the `public/sitemap.xml` file (which is excluded from git), that will be crawled by the search engines.
-In order to run the generator for the current application installation, run the embedded Laravel command:
+The directories `public/audio/fx` and `public/audio/music` should contain audio (.mp3) files that are not checked in source control, because of copyright issues.
 
-```bash
-php artisan sitemap:generate
-```
+Please check `public/audio/fx/README.md` and `public/audio/music/README.md`, in order to see which files you should download and put there.
 
-## Code quality
-
-The composer scripts run the PHP tools: [Laravel Pint](https://laravel.com/docs/13.x/pint) for code style, [Rector](https://getrector.com/) for automated refactoring and [Larastan](https://github.com/larastan/larastan) for static analysis. The npm scripts run [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) over the JavaScript and Vue files, and [Stylelint](https://stylelint.io/) over the SCSS and the Vue style blocks.
+To upload the files to a server, you can use `scp`, for example:
 
 ```bash
-composer lint        # fix: Rector, Pint, then the npm lint scripts
-composer test:lint   # check only: Pint, Rector, then the npm check scripts; changes nothing
-composer test:types  # Larastan
-composer test:unit   # the test suite
-composer test        # all three checks, in that order
+scp -r /path/to/local/fx/* user@server:/path/to/project/public/audio/fx
 
-npm run lint              # fix: ESLint, then Prettier
-npm run lint:styles       # fix: Stylelint
-npm run test:lint         # check only: ESLint, then Prettier; changes nothing
-npm run test:lint:styles  # check only: Stylelint
+scp -r /path/to/local/music/* user@server:/path/to/project/public/audio/music
 ```
 
-Run `composer test` before you commit. The `lint:agent` and `test:agent` variants print output made for AI agents.
-
-To raise the dependencies, `composer update:requirements` rewrites the Composer constraints to the installed versions (`composer bump`) and the npm pins to the latest releases at least seven days old, the same age `.npmrc` requires for installs. Then `composer update`, `npm install`, `composer test`, and read the diff before you commit.
-
-## AI agent guidelines - Laravel Boost
-
-The sources of the instructions for AI coding agents are in `.ai/guidelines/`. They are composed with [Laravel Boost](https://github.com/laravel/boost), along with Laravel guidelines and related skills, into the file your agent reads: `CLAUDE.md` for Claude Code, `AGENTS.md` for Codex, and so on. The generated files are ignored by git. To generate them run:
-
-```bash
-php artisan boost:install
-```
-
-After a change in `.ai/guidelines/`, run `php artisan boost:update` to refresh the generated file.
-
-If your PHP does not run on the machine where your agent runs, for example under DDEV, set the `BOOST_*_EXECUTABLE_PATH` variables in `.env` before installing. They are listed at the end of `.env.example`.
-
-## Apache configuration example:
+## Apache configuration example
 
 ```
 % sudo touch /etc/apache2/sites-available/taxidiotes.conf
@@ -126,19 +92,49 @@ sudo nano /etc/hosts
 127.0.0.1       dev.taxidiotes
 ```
 
-## About the music files
+## SEO - Generate Sitemap
 
-The directories `public/audio/fx` and `public/audio/music` should contain audio (.mp3) files that are not checked in source control, because of copyright issues.
-
-Please check `public/audio/fx/README.md` and `public/audio/music/README.md`, in order to see which files you should download and put there.
-
-To upload the files to a server, you can use `scp`, for example:
+This application uses [Spatie - Laravel Sitemap](https://github.com/spatie/laravel-sitemap) plugin, in order to create
+the `public/sitemap.xml` file (which is excluded from git), that will be crawled by the search engines.
+In order to run the generator for the current application installation, run the embedded Laravel command:
 
 ```bash
-scp -r /path/to/local/fx/* user@server:/path/to/project/public/audio/fx
-
-scp -r /path/to/local/music/* user@server:/path/to/project/public/audio/music
+php artisan sitemap:generate
 ```
+
+## Front end
+
+Vite builds four script entries and one stylesheet, listed in `vite.config.js`:
+
+- `resources/js/app.js`, on every page: the Bootstrap and axios set-up.
+- `resources/js/board.js`, on the board: Vue 3 and the components in `resources/js/components/`.
+- `resources/js/settings.js`, on the settings pages, and `resources/js/switcher.js`, the switch scanning on the game setup pages.
+- `resources/sass/app.scss`: Bootstrap 5 with the theme, and the Manrope font, self-hosted through Fontsource.
+
+Shared modules live in `resources/js/lib/` and are imported through the `@` alias, for example `@/lib/audio.js`. The values Blade publishes on `window` are declared in `resources/js/types/global.d.ts`.
+
+The build targets Chrome and Edge 109, Firefox 115, Safari and iOS 15. `npm run dev` serves the assets with hot reload and `npm run build` writes `public/build/`. Images and sounds are served from `public/images` and `public/audio` by URL.
+
+## Code quality
+
+The composer scripts run the PHP tools: [Laravel Pint](https://laravel.com/docs/13.x/pint) for code style, [Rector](https://getrector.com/) for automated refactoring and [Larastan](https://github.com/larastan/larastan) for static analysis. The npm scripts run [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) over the JavaScript and Vue files, and [Stylelint](https://stylelint.io/) over the SCSS and the Vue style blocks.
+
+```bash
+composer lint        # fix: Rector, Pint, then the npm lint scripts
+composer test:lint   # check only: Pint, Rector, then the npm check scripts; changes nothing
+composer test:types  # Larastan
+composer test:unit   # the test suite
+composer test        # all three checks, in that order
+
+npm run lint              # fix: ESLint, then Prettier
+npm run lint:styles       # fix: Stylelint
+npm run test:lint         # check only: ESLint, then Prettier; changes nothing
+npm run test:lint:styles  # check only: Stylelint
+```
+
+Run `composer test` before you commit. The `lint:agent` and `test:agent` variants print output made for AI agents.
+
+To raise the dependencies, `composer update:requirements` rewrites the Composer constraints to the installed versions (`composer bump`) and the npm pins to the latest releases at least seven days old, the same age `.npmrc` requires for installs. Then `composer update`, `npm install`, `composer test`, and read the diff before you commit.
 
 ## How to debug
 
@@ -167,6 +163,18 @@ The same tools are available to scripts as `window.travelersDebug`: `state()`, `
 - At Chrome
   install [Xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc?utm_source=chrome-app-launcher-info-dialog)
 - At PhpStorm/IntelliJ click the "Start listening for PHP debug connections"
+
+## AI agent guidelines - Laravel Boost
+
+The sources of the instructions for AI coding agents are in `.ai/guidelines/`. They are composed with [Laravel Boost](https://github.com/laravel/boost), along with Laravel guidelines and related skills, into the file your agent reads: `CLAUDE.md` for Claude Code, `AGENTS.md` for Codex, and so on. The generated files are ignored by git. To generate them run:
+
+```bash
+php artisan boost:install
+```
+
+After a change in `.ai/guidelines/`, run `php artisan boost:update` to refresh the generated file.
+
+If your PHP does not run on the machine where your agent runs, for example under DDEV, set the `BOOST_*_EXECUTABLE_PATH` variables in `.env` before installing. They are listed at the end of `.env.example`.
 
 ## How to contribute
 - Send us a pull request describing your improvements/fixes/features
