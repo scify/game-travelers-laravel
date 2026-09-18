@@ -1,6 +1,9 @@
 /*
  * Range Labels Functions.
  */
+
+import { log } from '../debug.js';
+
 window.addEventListener('load', function () {
     const rangeElements = document.querySelectorAll("input[type='range']");
 
@@ -20,7 +23,7 @@ window.addEventListener('load', function () {
         xhr.send(post);
         xhr.onload = function () {
             if (xhr.status === 201) {
-                console.log('Post successfully created!');
+                log('Post successfully created!');
             }
         };
     }

@@ -5,6 +5,9 @@
  * - A hidden input element with id=#selectedAvatarId.
  * - A submit button with the id=#submitButton.
  */
+
+import { log } from '../debug.js';
+
 window.addEventListener('load', function () {
     let btnId;
     // Should only run on pages with avatarsContainer & for related buttons.
@@ -23,11 +26,11 @@ window.addEventListener('load', function () {
             function updateUserMenuButton(idValue) {
                 const userMenuButtonImage = document.getElementById('userMenuButtonImage');
                 const userMenuButtonLabel = document.getElementById('userMenuButtonLabel');
-                console.log('Updating User Menu Button');
+                log('Updating User Menu Button');
                 // Update User Menu if needed:
                 if (userMenuButtonImage && !isNaN(idValue)) {
                     if (idValue > 0) {
-                        console.log(idValue);
+                        log(idValue);
                         const selectedButton = avatarsContainer.querySelector(`img[data-player-id='${idValue}'`);
                         userMenuButtonImage.setAttribute('alt', 'Ενημερωμένο');
                         userMenuButtonImage.setAttribute('src', selectedButton.getAttribute('src'));

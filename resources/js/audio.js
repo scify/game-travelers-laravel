@@ -1,3 +1,5 @@
+import { log } from './debug.js';
+
 (function () {
     'use strict';
     // Experimental Audio Functions
@@ -33,13 +35,13 @@
      */
     const music = function (audioFile, volumeOverride = false, audioLoop = true) {
         if (!window.Laravel.audioFiles) {
-            console.log('Music files not found');
+            log('Music files not found');
             return;
         }
         const folders = audioFile.split('.');
         const found = folders.reduce((obj, key) => obj && obj[key], window.Laravel.audioFiles);
         if (!found) {
-            console.log('Sound file not found');
+            log('Sound file not found');
             return;
         }
         const filename = folders.pop() + '.mp3';
@@ -60,9 +62,9 @@
         // Override volume settings no matter what:
         if (volumeOverride) {
             audioVolume = volumeOverride;
-            console.log('Music audioVolume override');
+            log('Music audioVolume override');
         }
-        console.log(`Music audioVolume is set to: ${audioVolume}`);
+        log(`Music audioVolume is set to: ${audioVolume}`);
 
         audio.volume = audioVolume;
         audio.loop = audioLoop;
@@ -107,7 +109,7 @@
     const sound = function (audioFile, callback = null, interrupt = false, volumeOverride = false) {
         // Exit if no audioFiles are found.
         if (!window.Laravel.audioFiles) {
-            console.log('Audio files not found');
+            log('Audio files not found');
             return;
         }
         // Prevent simultaneous playback.
@@ -172,13 +174,13 @@
             }
             const randomNum = randomInt(start, end);
             audioFile = audioFile.replace(match[0], randomNum.toString());
-            console.log(`Almost random sound(tm) chosen: ${audioFile}`);
+            log(`Almost random sound(tm) chosen: ${audioFile}`);
         }
         // Check if Default sound exists.
         const folders = audioFile.split('.');
         const found = folders.reduce((obj, key) => obj && obj[key], window.Laravel.audioFiles);
         if (!found) {
-            console.log('Sound file not found');
+            log('Sound file not found');
             return;
         }
         // But, is there a custom player sound?
@@ -198,7 +200,7 @@
         // Trying to play the requested audio file.
         // Note that there is no easy-way to handle exceptions on promise, so
         // this console.log is probably the only useful thing for debugging.
-        console.log(`Playing audio: ${folderPath}/${filename}`);
+        log(`Playing audio: ${folderPath}/${filename}`);
         const audio = new Audio(folderPath + '/' + filename);
         window.travelersSounds.push({ audio: audio, file: filename });
         audio.onended = function () {
@@ -224,7 +226,7 @@
         if (volumeOverride) {
             audioVolume = volumeOverride;
         }
-        console.log(`Sound audioVolume is set to: ${audioVolume}`);
+        log(`Sound audioVolume is set to: ${audioVolume}`);
 
         audio.volume = audioVolume;
         audio.play().catch((error) => {

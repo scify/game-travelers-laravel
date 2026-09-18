@@ -1,3 +1,5 @@
+import { log } from '../debug.js';
+
 window.addEventListener('load', switcher);
 function switcher() {
     // Music on page-load?
@@ -7,7 +9,7 @@ function switcher() {
         typeof window.Switcher.music === 'string'
     ) {
         const musicVolume = window.Switcher.musicVolume || 0.2; // Default volume
-        console.log(`Switcher reports volume: ${musicVolume}`);
+        log(`Switcher reports volume: ${musicVolume}`);
         const music = window.music(window.Switcher.music, musicVolume, true);
 
         if (music !== null) {

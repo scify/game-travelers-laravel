@@ -4,6 +4,8 @@
  * @see ../lang.js
  */
 
+import { log } from '../debug.js';
+
 // Blurs any items with focus.
 window.onpageshow = function (e) {
     if (e.persisted) {
@@ -69,9 +71,7 @@ function switcher() {
     const validSwitcherElements = [];
 
     // Switcher enabled.
-    console.log(
-        `Switcher active (mode: ${controlMode} ${scanningSpeed}s, s: ${selectionButton}, n: ${navigationButton})`,
-    );
+    log(`Switcher active (mode: ${controlMode} ${scanningSpeed}s, s: ${selectionButton}, n: ${navigationButton})`);
     // Audio (voice narration) on page-load?
     if (
         typeof window.Switcher === 'object' &&
@@ -95,7 +95,7 @@ function switcher() {
 
     // If no switcher elements are found, then return (exit).
     if (switcherElements.length === 0) {
-        console.log('No elements found with data-tabindex attribute');
+        log('No elements found with data-tabindex attribute');
         return;
     }
 
@@ -194,7 +194,7 @@ function switcher() {
         xhr.send(post);
         xhr.onload = function () {
             if (xhr.status === 201) {
-                console.log('Post successfully created!');
+                log('Post successfully created!');
             }
         };
     }
@@ -216,10 +216,10 @@ function switcher() {
                     return false;
                 }
                 if (allowedList.indexOf(event.code) !== -1) {
-                    console.log('Key-code accepted.');
+                    log('Key-code accepted.');
                     returnKey = event.code;
                 } else {
-                    console.log(`Not accepted key-code ${event.code}`);
+                    log(`Not accepted key-code ${event.code}`);
                     return false;
                 }
             } else {
@@ -228,11 +228,11 @@ function switcher() {
                     // Space is one of the Unicode characters
                     // which is read as " ". To make our life
                     // easier, we simply convert it to "Space".
-                    console.log('Space accepted');
+                    log('Space accepted');
                     returnKey = 'Space';
                 } else {
                     if (allowedList.indexOf(event.key) !== -1) {
-                        console.log('Key accepted.');
+                        log('Key accepted.');
                         returnKey = event.key;
                     } else {
                         if (escapeList.indexOf(event.key) !== -1) {
@@ -254,7 +254,7 @@ function switcher() {
                                 return false;
                             }
                         }
-                        console.log(`Not accepted key ${event.key}`);
+                        log(`Not accepted key ${event.key}`);
                         return false;
                     }
                 }

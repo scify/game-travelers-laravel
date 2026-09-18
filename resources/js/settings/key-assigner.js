@@ -4,6 +4,9 @@
  * These functions require and use the array window.SwitcherKeys.allowedList,
  * which includes a list of all the keys which are relatively safe to use.
  */
+
+import { log } from '../debug.js';
+
 (function () {
     'use strict';
 
@@ -109,10 +112,10 @@
                                 // Key is "named" (e.g. LeftAlt):
                                 if (allowedList.indexOf(event.code) !== -1) {
                                     returnKey = event.code;
-                                    console.log('Key Code accepted.');
+                                    log('Key Code accepted.');
                                 } else {
                                     keyAssigner.classList.add('invalid');
-                                    console.log('Not accepted key code.');
+                                    log('Not accepted key code.');
                                     invalidateKeyAssigner(keyAssigner);
                                     return false;
                                 }
@@ -122,15 +125,15 @@
                                     // Space is one of the unicode characters
                                     // which is read as " ". To make our life
                                     // easier, we simply convert it to "Space".
-                                    console.log('Space accepted');
+                                    log('Space accepted');
                                     returnKey = 'Space';
                                 } else {
                                     if (allowedList.indexOf(event.key) !== -1) {
-                                        console.log('Key accepted');
+                                        log('Key accepted');
                                         returnKey = event.key;
                                     } else {
                                         keyAssigner.classList.add('invalid');
-                                        console.log(`Not accepted key ${event.key}.`);
+                                        log(`Not accepted key ${event.key}.`);
                                         invalidateKeyAssigner(keyAssigner);
                                         return false;
                                     }
@@ -144,7 +147,7 @@
                             }
                         }
                         if (returnKey === 'Error') {
-                            console.log('Error!');
+                            log('Error!');
                             returnKey = keyAssigner.getAttribute('data-key-selected');
                         }
                         const setInputId = keyAssigner.getAttribute('data-sets-input');
@@ -177,7 +180,7 @@
                                 // in question is either Space or Enter in which
                                 // case the other assigner reverts to the
                                 // unassigned key.
-                                console.log('Switching Other Key Assigner.');
+                                log('Switching Other Key Assigner.');
                                 otherAssigner.setAttribute(
                                     'data-key-selected',
                                     returnKey === 'Space' ? 'Enter' : 'Space',

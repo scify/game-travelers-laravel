@@ -125,6 +125,7 @@
 
 <script>
 import { useId } from 'vue';
+import { log } from '../debug.js';
 
 export default {
     props: {
@@ -149,7 +150,7 @@ export default {
         };
     },
     mounted() {
-        console.log('Component mounted.');
+        log('Component mounted.');
     },
     methods: {},
 };
