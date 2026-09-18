@@ -11,8 +11,8 @@
 Code quality tools are your friends. Don't try to ignore or silence them, ever!
 
 - **ALWAYS run code quality tools before completing work** (not in parallel):
-    - `{{ $assist->composerCommand('lint:agent') }}` - Format PHP code (agent-optimised output via pao)
-    - `{{ $assist->composerCommand('test:agent') }}` - Run static analysis and tests (agent-optimised output via pao)
+    - `{{ $assist->composerCommand('lint:agent') }}` - Format PHP, JavaScript, Vue and SCSS (agent-optimised output via pao)
+    - `{{ $assist->composerCommand('test:agent') }}` - Run the code style checks, static analysis and tests (agent-optimised output via pao)
 - **Never leave code with formatting or static analysis errors**
 - **Use project configuration**: Don't override defaults
 @if($assist->hasPackage('larastan/larastan'))

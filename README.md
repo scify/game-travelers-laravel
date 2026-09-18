@@ -12,59 +12,22 @@ Laravel 13 Web Application for the Taksidiotes Game Web app
 
 # Installation Instructions:
 
-## Pre-initialization steps
+## First time install
 
-After cloning the project, create an .env file (should be a copy of .env.example),
-containing the information about your database name and credentials:
-
-```bash
-cp .env.example .env
-```
-
-Take a look at the `.env` file that was created. You may need to update the `DB_*` variables, in order to set up the DB
-connection.
-Also, make sure that the `APP_URL` is set to the correct domain and port that you will be using.
-
-<hr>
-
-## First time install (setup database and install dependencies)
-
-0. Make sure PHP 8.4 is installed.
-
-
-1. After cloning the project, create an .env file (should be a copy of .env.example),
-   containing the information about your database name and credentials.
-   Then run ```php artisan migrate``` to create the DB schema and
-   ```php artisan db:seed``` in order to insert the starter data to the DB
-
-2. Install laravel/back-end dependencies
-```bash
-composer install
-```
-
-3. Front-end dependencies
-
-If you are using [`nvm`](https://github.com/nvm-sh/nvm), run this command in order to sync to the correct NodeJS version for the project:
+`composer setup` runs every step below in one go: the PHP and front-end dependencies, an `.env` file with a fresh `APP_KEY`, the database schema and the `public/storage` link. It prints the next steps when it is done. Under DDEV, prefix the commands with `ddev`.
 
 ```bash
-nvm use
+composer setup
 ```
 
-Then, install and compile the front-end dependencies:
+The same steps, one at a time:
 
-```bash
-npm install
-
-npm run dev
-```
-
-4. Create the symbolic link for user-uploaded files.
-
-```bash
-php artisan storage:link
-```
-
-in order to link the `/public/storage` folder with the `/storage/app/public` directory.
+1. Make sure PHP 8.4 is installed with the extensions listed in `composer.json`, and the Node.js version in `.nvmrc` (`nvm use` selects it).
+2. Install the PHP dependencies: `composer install`
+3. Copy `.env.example` to `.env`, then generate the application key: `php artisan key:generate`. Check the `DB_*` variables and `APP_URL`.
+4. Create the database schema: `php artisan migrate`. For the starter data, two users and sample players: `php artisan db:seed`; `DEFAULT_USER_PASSWORD_FOR_SEED` in `.env` is their password.
+5. Link `public/storage` to `storage/app/public`: `php artisan storage:link`
+6. Install the front-end dependencies: `npm install`. Then `npm run dev` starts the development server with hot reload, and `npm run build` writes the production build.
 
 ## SEO - Generate Sitemap
 
@@ -81,8 +44,8 @@ php artisan sitemap:generate
 The composer scripts run the PHP tools: [Laravel Pint](https://laravel.com/docs/13.x/pint) for code style, [Rector](https://getrector.com/) for automated refactoring and [Larastan](https://github.com/larastan/larastan) for static analysis. The npm scripts run [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) over the JavaScript and Vue files, and [Stylelint](https://stylelint.io/) over the SCSS and the Vue style blocks.
 
 ```bash
-composer lint        # fix: Rector, then Pint
-composer test:lint   # check only: Pint, then Rector; changes nothing
+composer lint        # fix: Rector, Pint, then the npm lint scripts
+composer test:lint   # check only: Pint, Rector, then the npm check scripts; changes nothing
 composer test:types  # Larastan
 composer test:unit   # the test suite
 composer test        # all three checks, in that order
@@ -93,7 +56,9 @@ npm run test:lint         # check only: ESLint, then Prettier; changes nothing
 npm run test:lint:styles  # check only: Stylelint
 ```
 
-Run `composer test` and the two npm checks before you commit. The `lint:agent` and `test:agent` variants print output made for AI agents.
+Run `composer test` before you commit. The `lint:agent` and `test:agent` variants print output made for AI agents.
+
+To raise the dependencies, `composer update:requirements` rewrites the Composer constraints to the installed versions (`composer bump`) and the npm pins to the latest releases at least seven days old, the same age `.npmrc` requires for installs. Then `composer update`, `npm install`, `composer test`, and read the diff before you commit.
 
 ## AI agent guidelines - Laravel Boost
 

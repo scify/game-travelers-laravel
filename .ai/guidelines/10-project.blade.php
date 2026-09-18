@@ -43,6 +43,7 @@ Business logic lives in `app/BusinessLogicLayer/` (managers) and data access in 
 
 Run from the project root. The README describes the full first-time setup.
 
+- `{{ $assist->composerCommand('setup') }}`: first-time setup in one run: dependencies, `.env` with a key, the schema, the storage link; prints the next steps
 - `{{ $assist->composerCommand('install') }}`: PHP dependencies
 - `{{ $assist->artisanCommand('migrate --seed') }}`: database schema and starter data
 - `{{ $assist->artisanCommand('storage:link') }}`: links `public/storage` to `storage/app/public`
@@ -52,4 +53,4 @@ Run from the project root. The README describes the full first-time setup.
 - `{{ $assist->composerCommand('dev') }}`: Pail and the Vite dev server in one terminal (`artisan dev`); on a local PHP also `artisan serve`. If pages still ask the dev server for their assets after it stopped, delete the stale `public/hot`
 - `{{ $assist->artisanCommand('sitemap:generate') }}`: writes `public/sitemap.xml`
 - `{{ $assist->artisanCommand('test') }}`: feature tests (SQLite in memory, no build needed). Conventions in `tests/CLAUDE.md`
-- `{{ $assist->composerCommand('test') }}`: code style, static analysis and the test suite in one run. Green before every commit
+- `{{ $assist->composerCommand('test') }}`: PHP and front-end code style, static analysis and the test suite in one run. Green before every commit

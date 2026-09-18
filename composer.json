@@ -7,8 +7,20 @@
     "license": "Apache-2.0",
     "require": {
         "php": "^8.4",
+        "ext-ctype": "*",
+        "ext-curl": "*",
+        "ext-dom": "*",
+        "ext-fileinfo": "*",
+        "ext-filter": "*",
+        "ext-hash": "*",
+        "ext-mbstring": "*",
+        "ext-openssl": "*",
+        "ext-pcre": "*",
         "ext-pdo": "*",
         "ext-pdo_mysql": "*",
+        "ext-session": "*",
+        "ext-tokenizer": "*",
+        "ext-xml": "*",
         "laravel/framework": "^13.26.1",
         "laravel/tinker": "^3.0.2",
         "scify/laravel-cookie-guard": "^5.1.0",
@@ -43,6 +55,26 @@
         }
     },
     "scripts": {
+        "setup": [
+            "@php -r \"echo \\\"\\033[32mSetting up the development environment...\\033[0m\\n\\\";\"",
+            "composer install",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php -r \"preg_match('/^APP_KEY=.+$/m', file_get_contents('.env')) || passthru('php artisan key:generate --ansi');\"",
+            "@php artisan migrate --force",
+            "@php artisan storage:link",
+            "npm install",
+            "@php -r \"echo \\\"\\n\\033[32mSetup complete.\\033[0m\\n\\\";\"",
+            "@php -r \"echo \\\"\\033[33mNext steps:\\033[0m\\n\\\";\"",
+            "@php -r \"echo \\\"  - Starter data, two users and sample players: artisan migrate:fresh --seed (DEFAULT_USER_PASSWORD_FOR_SEED in .env)\\n\\\";\"",
+            "@php -r \"echo \\\"  - Copyrighted audio, not in git: public/audio/fx/README.md and public/audio/music/README.md\\n\\\";\"",
+            "@php -r \"echo \\\"  - Hot reload: composer dev\\n\\\";\""
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "@putenv NO_COLOR=",
+            "@putenv FORCE_COLOR=1",
+            "@php artisan dev --ansi"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
@@ -61,19 +93,21 @@
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
         ],
-        "dev": [
-            "Composer\\Config::disableProcessTimeout",
-            "@putenv NO_COLOR=",
-            "@putenv FORCE_COLOR=1",
-            "@php artisan dev --ansi"
+        "update:requirements": [
+            "composer bump",
+            "npx npm-check-updates -u --cooldown 7d"
         ],
         "lint": [
             "rector",
-            "pint --parallel --format agent"
+            "pint --parallel --format agent",
+            "npm run lint",
+            "npm run lint:styles"
         ],
         "test:lint": [
             "pint --parallel --test --format agent",
-            "rector --dry-run"
+            "rector --dry-run",
+            "npm run test:lint",
+            "npm run test:lint:styles"
         ],
         "test:unit": "php artisan test",
         "test:types": [
@@ -107,7 +141,14 @@
         "sort-packages": true,
         "allow-plugins": {
             "php-http/discovery": true
-        }
+        },
+        "policy": {
+            "abandoned": {
+                "audit": "fail"
+            }
+        },
+        "platform-check": true,
+        "secure-http": true
     },
     "minimum-stability": "stable",
     "prefer-stable": true
