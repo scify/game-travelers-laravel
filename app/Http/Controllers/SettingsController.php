@@ -94,9 +94,11 @@ class SettingsController extends Controller
                 $name_found = true;
             }
         }
+
         if ($name_found) {
             return back()->withErrors(['name' => ['exists']]);
         }
+
         $entry = ['name' => $name, 'avatar_id' => $avatar_id];
         $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
 
@@ -124,6 +126,7 @@ class SettingsController extends Controller
             $control_manual_select = $control_select;
             $control_manual_nav = $control_nav;
         }
+
         $help_after_tries = $players[0]->help_after_x_mistakes;
         $scanning_speed = $players[0]->scanning_speed;
 
@@ -149,8 +152,9 @@ class SettingsController extends Controller
         if ($control_mode === 2) {
             $select = $control_manual_select;
         }
+
         $entry = ['auto' => $control_mode, 'select_key' => $select, 'navigate_key' => $control_manual_nav, 'help_after_x_mistakes' => $help_after_tries, 'scanning_speed' => $scanning_speed];
-        $player = $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
+        $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
 
         return to_route('settings', [$player_id, $back_route, $game_id]);
     }
@@ -160,6 +164,7 @@ class SettingsController extends Controller
         if ($player_id === 0) {
             return to_route('select.player', [0, 'user', 0]);
         }
+
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id', 'dice_type', 'board_size', 'difficulty', 'movement_mode']);
         $name = $players[0]->name;
         $avatar_id = $players[0]->avatar_id;
@@ -186,7 +191,7 @@ class SettingsController extends Controller
         $difficulty = (int) $input['level'];
         $movement_mode = (int) $input['movement'];
         $entry = ['dice_type' => $dice_type, 'board_size' => $board_size, 'difficulty' => $difficulty, 'movement_mode' => $movement_mode];
-        $player = $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
+        $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
 
         return to_route('settings', [$player_id, $back_route, $game_id]);
     }

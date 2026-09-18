@@ -84,6 +84,7 @@ class UserRoleManager
         if ($this->userHasRole($user, $roleId)) {
             return $this->userRoleRepository->where($arr)->first();
         }
+
         $this->storeUserRoleInCache($user->id, $roleId);
         // check if exists but is soft deleted
         $existingRole = $this->userRoleRepository->getUserRoleWithTrashed($arr);

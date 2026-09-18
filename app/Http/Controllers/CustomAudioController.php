@@ -95,8 +95,6 @@ class CustomAudioController extends Controller
     public function uploadCustomAudioFile(Request $request): ResponseFactory|Response
     {
         $player_id = $request->integer('player_id');
-        $audio_name = $request->audio_name;
-        $audio_path = $request->path;
         $index = $request->index;
         $this->createFolderForPlayerIfRequired($player_id);
 
@@ -129,21 +127,20 @@ class CustomAudioController extends Controller
             } elseif (is_null($sound_volume)) {
                 $entry = ['music_volume' => $music_volume];
             }
+
             $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
         }
     }
 
     protected function getPlayerAudio(int $player_id, float $musicVolume, float $soundVolume, $playerAudioFiles): array
     {
-        $playerAudio = [
+        return [
             'playerMusicVolume' => $musicVolume,
             'playerSoundVolume' => $soundVolume,
             'updateVolumesUrl' => route('audio.updateVolumes'),
             'playerUrl' => '/player/' . $player_id,
             'playerAudioFiles' => $playerAudioFiles,
         ];
-
-        return $playerAudio;
     }
 
     protected function createFolderForPlayerIfRequired(int $player_id)

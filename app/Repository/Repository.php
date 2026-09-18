@@ -38,6 +38,7 @@ abstract class Repository implements RepositoryInterface
         if ($orderColumn) {
             $query = $query->orderBy($orderColumn, $order ?: 'asc');
         }
+
         if (count($withRelationships) > 0) {
             $query = $query->with($withRelationships);
         }
@@ -52,6 +53,7 @@ abstract class Repository implements RepositoryInterface
         if ($orderColumn) {
             $query = $query->orderBy($orderColumn, $order ?: 'asc');
         }
+
         if (count($withRelationships) > 0) {
             $query = $query->with($withRelationships);
         }

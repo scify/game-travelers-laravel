@@ -18,7 +18,8 @@ class PlayerRepository extends Repository
     {
         $width = 100;
         $height = 100;
-        $avatars = [
+
+        return [
             1 => [  // Avatar's Unique ID
                 'id' => 1, // Repeating id for convenience.
                 'asset' => 'boy-1', // Extensions .png, @2x.png and svg implied.
@@ -69,8 +70,6 @@ class PlayerRepository extends Repository
             ],
 
         ];
-
-        return $avatars;
     }
 
     public function playerExists(int $player_id, int $user_id): bool

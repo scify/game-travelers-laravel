@@ -28,7 +28,7 @@ class GameRepository extends Repository
         $preview_width = 352;
         $preview_height = 244;
 
-        $boards = [
+        return [
             1 => [
                 'id' => 1,
                 'name' => 'Νησί',
@@ -78,8 +78,6 @@ class GameRepository extends Repository
                 ],
             ],
         ];
-
-        return $boards;
     }
 
     /**
@@ -95,7 +93,7 @@ class GameRepository extends Repository
         $width = 136;
         $height = 212;
 
-        $pawns = [
+        return [
             1 => [
                 'id' => 1,
                 'name' => 'Ιάσονας',
@@ -167,8 +165,6 @@ class GameRepository extends Repository
                 'height' => $height,
             ],
         ];
-
-        return $pawns;
     }
 
     public function gameExists(int $game_id, int $user_id): bool

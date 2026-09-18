@@ -248,6 +248,7 @@ class SetupGameController extends Controller
         if ($selected_option === 2) {
             $tutorial = false;
         }
+
         $entry = ['use_tutorial' => $tutorial, 'started' => true, 'selected_board_size' => $board_size];
         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
 

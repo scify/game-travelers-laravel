@@ -6,9 +6,11 @@ namespace App\Http\Controllers;
 
 use App\Repository\Game\GameRepository;
 use App\Repository\Player\PlayerRepository;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class BoardController extends Controller
 {
@@ -55,7 +57,7 @@ class BoardController extends Controller
         return view('board', ['player_id' => $player_id, 'playerAudio' => $playerAudio, 'game_id' => $game_id, 'player_data' => $player_data, 'game_data' => $game_data, 'cards' => $this->getCards($game[0]->board_id)]);
     }
 
-    public function fromVue(Request $request)
+    public function fromVue(Request $request): ResponseFactory|Response|null
     {
         $user_id = auth()->user()->id;
         $player_id = $request->integer('player_id');
@@ -72,6 +74,7 @@ class BoardController extends Controller
         if (count($games) !== 1) {
             return response(['message' => 'Game not found'], 302);
         }
+
         $game = $games[0];
 
         if ($user_id !== $game->user_id || $player_id !== $game->player_id) {
@@ -86,6 +89,7 @@ class BoardController extends Controller
         if (! $first_player_turn) {
             $db_active_player_pos = $game->location_2;
         }
+
         $latest_random_result = $game->latest_random_result;
         $active_player_pos = $location_2;
         if ($first_player_turn) {
@@ -100,12 +104,14 @@ class BoardController extends Controller
 
                 return response(['gameEnded' => 1]);
             }
+
             $entry = ['active' => false, 'location_2' => $active_player_pos];
             $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
 
             return response(['gameEnded' => -1]);
 
         }
+
         if ($game_phase === 1) { // asked to roll dice and compute new target position
             $new_position = $latest_random_result;
             if ($game_phase !== $db_game_phase || $latest_random_result === 0) {
@@ -113,6 +119,7 @@ class BoardController extends Controller
                 $entry = ['latest_random_result' => $new_position, 'game_phase' => 1];
                 $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
             }
+
             $dice_result = $new_position - $active_player_pos;
             if ($dice_type === 3) {
                 $dice_result = $this->getColourIdOfPos($new_position);
@@ -120,29 +127,34 @@ class BoardController extends Controller
 
             return response(['gameEnded' => 0, 'newPosition' => $new_position, 'diceResult' => $dice_result]);
         }
+
         if ($game_phase === 2) { // move performed by die roll in the front-end
             // check if call is made again before
 
             if ($game_phase === $db_game_phase) {
                 $active_player_pos = $db_active_player_pos;
             }
+
             // check if you must draw card
             $colour_id = $this->getColourIdOfPos($active_player_pos);
             if ($colour_id === 3 || $colour_id === 5) {
                 if ($db_game_phase !== $game_phase) {
                     $latest_random_result = $this->getAValidCard($board_size, $active_player_pos, $board_id, $tutorial_mode);
                 }
+
                 $random_card = $latest_random_result;
                 if ($game_phase !== $db_game_phase) {
                     $entry = ['latest_random_result' => $latest_random_result, 'game_phase' => 2, 'location_1' => $active_player_pos];
                     if (! $first_player_turn) {
                         $entry = ['latest_random_result' => $latest_random_result, 'game_phase' => 2, 'location_2' => $active_player_pos];
                     }
+
                     $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
                 }
 
                 return response(['gameEnded' => 0, 'drawCard' => $random_card, 'firstPlayerTurn' => $db_first_player_turn]);
             }
+
             if ($game_phase !== $db_game_phase) {
                 $first_player_turn_new_value = true;
                 if ($game_mode > 1) { // switch player only if the game is not solo
@@ -150,10 +162,12 @@ class BoardController extends Controller
                         $first_player_turn_new_value = false;
                     }
                 }
+
                 $entry = ['latest_random_result' => 0, 'game_phase' => 2, 'location_1' => $active_player_pos, 'first_player_turn' => $first_player_turn_new_value];
                 if (! $first_player_turn) {
                     $entry = ['latest_random_result' => 0, 'game_phase' => 2, 'location_2' => $active_player_pos, 'first_player_turn' => $first_player_turn_new_value];
                 }
+
                 $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
 
                 return response(['gameEnded' => 0, 'drawCard' => 0, 'firstPlayerTurn' => $first_player_turn_new_value]);
@@ -162,6 +176,7 @@ class BoardController extends Controller
             return response(['gameEnded' => 0, 'drawCard' => 0, 'firstPlayerTurn' => $db_first_player_turn]);
 
         }
+
         if ($game_phase === 3) { // move performed by card
             if ($game_phase !== $db_game_phase) {
                 $first_player_turn_new_value = true;
@@ -170,10 +185,12 @@ class BoardController extends Controller
                         $first_player_turn_new_value = false;
                     }
                 }
+
                 $entry = ['latest_random_result' => 0, 'game_phase' => 3, 'location_1' => $active_player_pos, 'first_player_turn' => $first_player_turn_new_value];
                 if (! $first_player_turn) {
                     $entry = ['latest_random_result' => 0, 'game_phase' => 3, 'location_2' => $active_player_pos, 'first_player_turn' => $first_player_turn_new_value];
                 }
+
                 $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
 
                 return response(['gameEnded' => 0, 'firstPlayerTurn' => $first_player_turn_new_value]);
@@ -182,6 +199,8 @@ class BoardController extends Controller
             return response(['gameEnded' => 0, 'firstPlayerTurn' => $db_first_player_turn]);
 
         }
+
+        return null;
 
     }
 
@@ -203,9 +222,11 @@ class BoardController extends Controller
             if ($pos === 0) {
                 return 4;
             }
+
             if ($pos === 4) {
                 return 6;
             }
+
             if ($pos === 6) {
                 return 9;
             }
@@ -213,6 +234,7 @@ class BoardController extends Controller
             if ($pos === 0) {
                 return 1;
             }
+
             if ($pos === 1) {
                 return 4;
             }
@@ -226,6 +248,7 @@ class BoardController extends Controller
         if ($board_size === 1) {
             return 15;
         }
+
         if ($board_size === 2) {
             return 30;
         }
@@ -255,6 +278,7 @@ class BoardController extends Controller
                 $random *= -1;
             }
         }
+
         $value = $this->getCards($board_id)[$random]['value'];
         $new_pos = $value + $pos;
         if ($new_pos <= 0) { // the card was negative we need a smaller card
@@ -360,6 +384,7 @@ class BoardController extends Controller
                 ],
             ];
         }
+
         if ($board_id === 2) {
             return [
                 1 => [
@@ -444,6 +469,7 @@ class BoardController extends Controller
                 ],
             ];
         }
+
         if ($board_id === 3) {
             return [
                 1 => [

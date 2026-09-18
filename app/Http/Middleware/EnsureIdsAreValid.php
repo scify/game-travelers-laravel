@@ -39,6 +39,7 @@ class EnsureIdsAreValid
                 if ($this->gameRepository->gameExistsAsInactive($game_id, $user_id)) {
                     return to_route('select.board', [$player_id, 'board', 0]);
                 }
+
                 abort(403, __('messages.unauthorized_action'));
 
             }

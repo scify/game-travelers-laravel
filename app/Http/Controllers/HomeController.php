@@ -16,7 +16,7 @@ class HomeController extends Controller
     {
         $carouselSlides = $this->getRandomActiveHomeCarouselSlides();
 
-        return view('home', compact('carouselSlides'));
+        return view('home', ['carouselSlides' => $carouselSlides]);
     }
 
     /**
@@ -30,7 +30,8 @@ class HomeController extends Controller
         // All images are stored on images/landing/slides.
         $width = 500; // Image dimensions are fixed for now.
         $height = 500;
-        $slides = [
+
+        return [
             1 => [  // Slide's Unique ID
                 'id' => 1, // Repeating id for convenience.
                 'asset' => 'slide_1', // Filename. Extensions .jpg & @2x.jpg are implied.
@@ -78,8 +79,6 @@ class HomeController extends Controller
             ],
 
         ];
-
-        return $slides;
     }
 
     /**

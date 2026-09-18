@@ -56,8 +56,8 @@ class RegisteredUserController extends Controller
         // row exists, so report the failure and let them in.
         try {
             $user->notify(new UserRegistered($user));
-        } catch (Throwable $e) {
-            report($e);
+        } catch (Throwable $throwable) {
+            report($throwable);
         }
 
         event(new Registered($user));

@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function (): void {
             if (! $user) {
                 $user = User::query()->findOrFail(1);
             }
+
             $user->notify(new UserRegistered($user));
 
             return 'Email sent to: ' . $user->email;

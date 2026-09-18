@@ -41,18 +41,22 @@ class UserController extends Controller
             if (count($active_games) === 0) {
                 return to_route('select.board', ['player_id' => $player_id, 'from' => 'board', 'game_id' => 0]);
             }
+
             $game_id = $active_games[0]->id;
             if ($active_games[0]->started) {
                 return to_route('select.continue', ['player_id' => $player_id, 'from' => 'continue', 'game_id' => $game_id]);
             }
+
             $this->gameRepository->delete($game_id);
 
             return to_route('select.board', ['player_id' => $player_id, 'from' => 'board', 'game_id' => 0]);
 
         }
+
         if ($action === 'settings') {
             return to_route('settings', ['player_id' => $player_id, 'from' => 'user', 'game_id' => 0]);
         }
+
         abort(403, __('messages.unauthorized_action'));
 
     }
@@ -85,9 +89,11 @@ class UserController extends Controller
                 $name_found = true;
             }
         }
+
         if ($name_found) {
             return back()->withErrors(['name' => ['exists']]);
         }
+
         if ($player_id === 0) {
             $entry = ['user_id' => $user_id, 'name' => $name, 'avatar_id' => $avatar_id];
             $player = $this->playerRepository->create($entry);
@@ -121,6 +127,7 @@ class UserController extends Controller
                 $control_manual_select = $control_select;
                 $control_manual_nav = $control_nav;
             }
+
             $help_after_tries = $players[0]->help_after_x_mistakes;
             $scanning_speed = $players[0]->scanning_speed;
         }
@@ -141,16 +148,19 @@ class UserController extends Controller
         if ($control_mode === 2) {
             $select = $control_manual_select;
         }
+
         $entry = ['auto' => $control_mode, 'select_key' => $select, 'navigate_key' => $control_manual_nav, 'help_after_x_mistakes' => $help_after_tries, 'scanning_speed' => $scanning_speed];
-        $player = $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
+        $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
         $action = $request->only('submit')['submit'];
 
         if ($action === 'back' || $action === 'profile') {
             return to_route('new.player', [$player_id, $from, 0]);
         }
+
         if ($action === 'next' || $action === 'save') {
             return to_route('difficulty.player', [$player_id, $from, 0]);
         }
+
         abort(403, __('messages.unauthorized_action'));
 
     }
@@ -182,17 +192,20 @@ class UserController extends Controller
         $movement_mode = (int) $input['movement'];
 
         $entry = ['dice_type' => $dice_type, 'board_size' => $board_size, 'difficulty' => $difficulty, 'movement_mode' => $movement_mode];
-        $player = $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
+        $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
         $action = $request->only('submit')['submit'];
         if ($action === 'profile') {
             return to_route('new.player', [$player_id, $from, 0]);
         }
+
         if ($action === 'back' || $action === 'controls') {
             return to_route('controls.player', [$player_id, $from, 0]);
         }
+
         if ($action === 'save') {
             return to_route('select.player', [0, $from, 0]);
         }
+
         abort(403, __('messages.unauthorized_action'));
 
     }
