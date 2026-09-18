@@ -1,12 +1,12 @@
 <x-layoutContent
-    :title="'Σε τι διαφέρουν οι «Ταξιδιώτες» από άλλα παιχνίδια; | ' . __('messages.app_name')"
+    :title="__('messages.about_title') . ' | ' . __('messages.app_name')"
     :description="'Το πόσο σημαντικό είναι να  που να παίζουν τα παιδιά με αναπηρία παιχνίδια είναι ξεκάθαρο. Τι ιδιαίτερες ανάγκες όμως έχουν τα παιδιά με εγκεφαλική παράλυση ώστε να πρέπει το παιχνίδι «Ταξιδιώτες» να σχεδιαστεί πολύ προσεκτικά σε συνεργασία με ειδικούς επιστήμονες;'"
     :header-background-color="'green'"
 >
 
     <section class="landing bg-light px-4 mb-n4">
         <div class="landing-text container-lg pt-5 px-lg-6 px-xxl-7">
-            <h1>Σε τι διαφέρουν οι «Ταξιδιώτες» από άλλα παιχνίδια;</h1>
+            <h1>{{ __('messages.about_title') }}</h1>
             <hr class="border border-3 border-secondary " />
             <p class="lead pb-4">
                 Το πόσο σημαντικό είναι να παίζουν τα παιδιά με αναπηρία παιχνίδια είναι ξεκάθαρο.

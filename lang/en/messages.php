@@ -25,6 +25,7 @@ return [
     'close' => 'Close', // i.e. "Close" window
     'congratulations' => 'Congratulations',
     'continue' => 'Continue', // i.e. "Continue" to the next step
+    'credits' => 'Credits',
     'email' => 'Email',
     'every' => 'every', // every
     'login' => 'Login',
@@ -34,6 +35,8 @@ return [
     'seconds' => 'seconds', // plural seconds (time)
     /* Forms Generic */
     'error_form' => 'Please, fill the fields of this form based on the instructions bellow:',
+    /* about.blade.php */
+    'about_title' => 'How do "Travellers" differ from other games?',
     /* splash.blade.php */
     'coming_soon' => 'Coming soon',
     'coming_soon_description' => 'Travellers: Coming soon from SciFY',

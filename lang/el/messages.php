@@ -25,6 +25,7 @@ return [
     'close' => 'Κλείσιμο', // i.e. "Close" window
     'congratulations' => 'Συγχαρητήρια',
     'continue' => 'Συνέχεια', // i.e. "Continue" to the next step
+    'credits' => 'Συντελεστές',
     'email' => 'Email',
     'every' => 'κάθε', // every
     'login' => 'Σύνδεση',
@@ -34,6 +35,8 @@ return [
     'seconds' => 'δευτερόλεπτα', // plural seconds (time)
     /* Forms Generic */
     'error_form' => 'Για να ολοκληρωθεί επιτυχώς η διαδικασία θα πρέπει να συμπληρώσετε τα πεδία σύμφωνα με τις σχετικές υποδείξεις:',
+    /* about.blade.php */
+    'about_title' => 'Σε τι διαφέρουν οι «Ταξιδιώτες» από άλλα παιχνίδια;',
     /* splash.blade.php */
     'coming_soon' => 'Προσεχώς',
     'coming_soon_description' => 'Ταξιδιώτες: Προσεχώς από τη SciFY',
