@@ -116,10 +116,13 @@ export function sound(audioFile, callback = null, interrupt = false, volumeOverr
         travelersSounds = [];
     }
 
-    /** Checks for custom player files, based on the audioFile provided. */
+    /**
+     * Checks for custom player files, based on the audioFile provided.
+     * No page provides them while the audio settings route stays parked.
+     */
     function getPlayerAudioFile(audioFile) {
         // Custom Player Audio Files Support
-        if (window.Laravel.playerAudioFiles && window.Laravel.playerUrl) {
+        if (window.Laravel.playerAudio.playerAudioFiles && window.Laravel.playerAudio.playerUrl) {
             const playerFolders = audioFile.split('.');
             // We are only interested in the last part (for now)...
             const lastPart = playerFolders[playerFolders.length - 1];
@@ -132,7 +135,7 @@ export function sound(audioFile, callback = null, interrupt = false, volumeOverr
                     playerFolders[playerFolders.length - 1] = lastPart.replace(lastNumber, i);
                     const playerAudioFound = playerFolders.reduce(
                         (obj, key) => obj && obj[key],
-                        window.Laravel.playerAudioFiles,
+                        window.Laravel.playerAudio.playerAudioFiles,
                     );
                     if (playerAudioFound) {
                         possibleMatches.push(playerAudioFound);
@@ -145,7 +148,7 @@ export function sound(audioFile, callback = null, interrupt = false, volumeOverr
             } else {
                 const playerAudioNoDigitFound = playerFolders.reduce(
                     (obj, key) => obj && obj[key],
-                    window.Laravel.playerAudioFiles,
+                    window.Laravel.playerAudio.playerAudioFiles,
                 );
                 if (playerAudioNoDigitFound) {
                     return playerAudioNoDigitFound;
@@ -185,7 +188,7 @@ export function sound(audioFile, callback = null, interrupt = false, volumeOverr
         // Play the custom player sound...
         // e.g. /player/b5b72dd79161d837bef10dd3d54de385/welcome_1.mp3
         filename = playerAudioFile;
-        folderPath = window.Laravel.playerUrl;
+        folderPath = window.Laravel.playerAudio.playerUrl;
     } else {
         // Play the default sound...
         filename = folders.pop() + '.mp3';

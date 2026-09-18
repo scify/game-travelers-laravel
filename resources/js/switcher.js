@@ -28,16 +28,12 @@ function switcher() {
     let controlMode, scanningSpeed, automaticSelectionButton, manualSelectionButton, manualNavigationButton;
 
     if (window.Switcher instanceof Object) {
-        controlMode =
-            !Number.isNaN(Number.parseInt(window.Switcher.controlMode)) &&
-            (Number.parseInt(window.Switcher.controlMode) === 1 || Number.parseInt(window.Switcher.controlMode) === 2)
-                ? Number.parseInt(window.Switcher.controlMode)
-                : 1;
+        controlMode = window.Switcher.controlMode === 2 ? 2 : 1;
         scanningSpeed =
-            !Number.isNaN(Number.parseInt(window.Switcher.scanningSpeed)) &&
-            Number.parseInt(window.Switcher.scanningSpeed) >= 1 &&
-            Number.parseInt(window.Switcher.scanningSpeed) <= 10
-                ? Number.parseInt(window.Switcher.scanningSpeed)
+            Number.isInteger(window.Switcher.scanningSpeed) &&
+            window.Switcher.scanningSpeed >= 1 &&
+            window.Switcher.scanningSpeed <= 10
+                ? window.Switcher.scanningSpeed
                 : 2;
         automaticSelectionButton =
             window.Switcher.automaticSelectionButton !== undefined &&
