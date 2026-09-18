@@ -9,6 +9,17 @@
     window.travelersSounds = [];
 
     /**
+     * Random integer between min and max, both included.
+     * @param {number} min
+     * @param {number} max
+     * @returns {number}
+     */
+    const randomInt = function (min, max) {
+        const [value] = crypto.getRandomValues(new Uint32Array(1));
+        return min + Math.floor((value / 2 ** 32) * (max - min + 1));
+    };
+
+    /**
      * Music
      * Allows the playback of music via the HTMLAudioElement.
      * Volume is set to 10% but can be adjusted with the optional audioVolume parameter (override by window.Laravel.playerAudio.playerMusicVolume)
@@ -131,7 +142,7 @@
                         }
                     }
                     if (possibleMatches.length > 0) {
-                        const randomPlayerIndex = Math.floor(Math.random() * possibleMatches.length);
+                        const randomPlayerIndex = randomInt(0, possibleMatches.length - 1);
                         return possibleMatches[randomPlayerIndex];
                     }
                 } else {
@@ -159,7 +170,7 @@
             if (start > end) {
                 [start, end] = [end, start];
             }
-            const randomNum = Math.floor(Math.random() * (end - start + 1) + start);
+            const randomNum = randomInt(start, end);
             audioFile = audioFile.replace(match[0], randomNum.toString());
             console.log(`Almost random sound(tm) chosen: ${audioFile}`);
         }

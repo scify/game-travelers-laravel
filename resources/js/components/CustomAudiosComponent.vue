@@ -1,10 +1,14 @@
 <template>
     <div class="audiofiles-category--body">
         <div class="input-group input-group-sm mb-3 audiofiles-item">
-            <label class="input-group-text">
+            <label
+                class="input-group-text"
+                :for="`${uid}-sound1`"
+            >
                 {{ sound1 }}
             </label>
             <input
+                :id="`${uid}-sound1`"
                 class="form-control"
                 type="file"
                 accept="audio/mpeg,.mp3"
@@ -37,10 +41,14 @@
             </button>
         </div>
         <div class="input-group input-group-sm mb-3 audiofiles-item">
-            <label class="input-group-text">
+            <label
+                class="input-group-text"
+                :for="`${uid}-sound2`"
+            >
                 {{ sound2 }}
             </label>
             <input
+                :id="`${uid}-sound2`"
                 class="form-control"
                 type="file"
                 accept="audio/mpeg,.mp3"
@@ -73,10 +81,14 @@
             </button>
         </div>
         <div class="input-group input-group-sm mb-3 audiofiles-item">
-            <label class="input-group-text">
+            <label
+                class="input-group-text"
+                :for="`${uid}-sound3`"
+            >
                 {{ sound3 }}
             </label>
             <input
+                :id="`${uid}-sound3`"
                 class="form-control"
                 type="file"
                 accept="audio/mpeg,.mp3"
@@ -112,6 +124,8 @@
 </template>
 
 <script>
+import { useId } from 'vue';
+
 export default {
     props: {
         playerId: { type: Number, required: true },
@@ -123,6 +137,9 @@ export default {
                 return {};
             },
         },
+    },
+    setup() {
+        return { uid: useId() };
     },
     data: function () {
         return {
