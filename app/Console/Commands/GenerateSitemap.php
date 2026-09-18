@@ -28,7 +28,7 @@ final class GenerateSitemap extends Command
     }
 
     /**
-     * The public pages by route name; each logo caption is the page's title.
+     * The public pages by route name, ranked; each logo caption is the page's title.
      *
      * @return list<array{route: string, frequency: string, priority: string, caption: string}>
      */
@@ -36,10 +36,10 @@ final class GenerateSitemap extends Command
     {
         return [
             ['route' => 'home', 'frequency' => 'monthly', 'priority' => '1.0', 'caption' => Lang::string('messages.app_name')],
-            ['route' => 'login', 'frequency' => 'yearly', 'priority' => '0.9', 'caption' => $this->pageTitle('messages.login')],
-            ['route' => 'register', 'frequency' => 'yearly', 'priority' => '0.9', 'caption' => $this->pageTitle('messages.registration')],
-            ['route' => 'about', 'frequency' => 'yearly', 'priority' => '0.8', 'caption' => $this->pageTitle('messages.about_title')],
+            ['route' => 'about', 'frequency' => 'yearly', 'priority' => '0.9', 'caption' => $this->pageTitle('messages.about_title')],
             ['route' => 'credits', 'frequency' => 'yearly', 'priority' => '0.8', 'caption' => $this->pageTitle('messages.credits')],
+            ['route' => 'login', 'frequency' => 'yearly', 'priority' => '0.7', 'caption' => $this->pageTitle('messages.login')],
+            ['route' => 'register', 'frequency' => 'yearly', 'priority' => '0.7', 'caption' => $this->pageTitle('messages.registration')],
             ['route' => 'cookies-policy', 'frequency' => 'yearly', 'priority' => '0.3', 'caption' => $this->pageTitle('messages.cookies_policy')],
         ];
     }

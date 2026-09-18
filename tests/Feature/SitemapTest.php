@@ -66,12 +66,19 @@ class SitemapTest extends TestCase
     #[Test]
     public function sitemap_lists_public_pages_by_priority(): void
     {
-        $locations = array_map(
-            static fn (SimpleXMLElement $url): string => (string) $url->loc,
-            iterator_to_array($this->generatedSitemap()->url, false),
-        );
+        $priorities = [];
+        foreach ($this->generatedSitemap()->url as $url) {
+            $priorities[(string) $url->loc] = (string) $url->priority;
+        }
 
-        $this->assertSame([route('home'), route('login'), route('register'), route('about'), route('credits'), route('cookies-policy')], $locations);
+        $this->assertSame([
+            route('home') => '1.0',
+            route('about') => '0.9',
+            route('credits') => '0.8',
+            route('login') => '0.7',
+            route('register') => '0.7',
+            route('cookies-policy') => '0.3',
+        ], $priorities);
     }
 
     #[Test]
