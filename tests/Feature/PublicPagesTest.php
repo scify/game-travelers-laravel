@@ -36,6 +36,13 @@ class PublicPagesTest extends TestCase
     }
 
     #[Test]
+    #[DataProvider('publicPageProvider')]
+    public function public_page_contains_no_unrendered_blade_echo(string $uri): void
+    {
+        $this->get($uri)->assertDontSeeHtml("asset('");
+    }
+
+    #[Test]
     public function landing_page_shows_game_title_and_testimonials(): void
     {
         $this->get('/')
