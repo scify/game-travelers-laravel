@@ -7,10 +7,8 @@ namespace Tests;
 use App\Models\Game;
 use App\Models\Player;
 use App\Models\User;
-use Illuminate\Foundation\Mix;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\HtmlString;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -21,15 +19,9 @@ abstract class TestCase extends BaseTestCase
         // The suite never touches the network: an unfaked request through the Http facade fails the test.
         Http::preventStrayRequests();
 
-        // Views call mix() for CSS and JS. Tests run without a front-end build,
-        // so return the plain path instead of reading public/mix-manifest.json.
-        $this->app->instance(Mix::class, new class()
-        {
-            public function __invoke(string $path, string $manifestDirectory = ''): HtmlString
-            {
-                return new HtmlString($manifestDirectory . $path);
-            }
-        });
+        // Views call @vite for CSS and JS. Tests run without a front-end build,
+        // so the directive renders nothing instead of reading public/build/manifest.json.
+        $this->withoutVite();
     }
 
     /** The seeded administrator (id 1, admin-taxidiotes@scify.org). */

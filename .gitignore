@@ -27,14 +27,6 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 
-# Laravel Mix outputs, until the move to Vite
-/public/css
-/public/fonts
-/public/js
-/public/mix-manifest.json
-/resources/sass/*.css
-/resources/sass/*.css.map
-
 # Generated on the server
 /public/sitemap.xml
 /public/web.config

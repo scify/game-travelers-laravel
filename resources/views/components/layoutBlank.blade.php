@@ -11,8 +11,7 @@
     @include("components.layout.meta")
     @include("components.layout.favicons")
     <link rel="canonical" href="{{ url()->current() }}">
-    <script src="{{ mix('js/app.js') }}" defer></script>
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @yield('css', '') {{-- Optional: Additional CSS stylesheets, if needed. --}}
 </head>
 <body>
@@ -25,7 +24,7 @@
     </div>
     @include('components.layout.footer-scripts')
     @yield('scripts', '') {{-- Optional: JS scripts loaded after DOM is rendered --}}
-    @isset($hasVue)<script src="{{ mix('js/vue.js') }}" defer></script>@endisset
+    @isset($hasVue)@vite('resources/js/board.js')@endisset
     @include("components.layout.analytics")
 </body>
 </html>

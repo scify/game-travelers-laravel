@@ -14,8 +14,7 @@
     @include("components.layout.meta")
     @include("components.layout.favicons")
     <link rel="canonical" href="{{ url()->current() }}">
-    <script src="{{ mix('js/app.js') }}" defer></script>
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     @yield('css', '') {{-- Optional: Additional CSS stylesheets, if needed. --}}
 </head>
 <body>

@@ -10,7 +10,7 @@
         @see resources/js/settings/avatar-selection.js
     --}}
     @section('scripts')
-        <script src="{{ mix('js/functions/settings.js') }}" defer></script>
+        @vite('resources/js/settings/index.js')
     @endsection
 
     <!-- new player step 1/3 content -->

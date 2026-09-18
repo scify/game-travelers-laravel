@@ -6,7 +6,7 @@
         @see resources/js/settings/key-assigner.js.
     --}}
     @section('scripts')
-        <script src="{{ mix('js/functions/settings.js') }}" defer></script>
+        @vite('resources/js/settings/index.js')
     @endsection
 
     <!-- new player step 2/3 content -->

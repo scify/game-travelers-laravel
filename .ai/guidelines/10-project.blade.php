@@ -20,21 +20,21 @@ Business logic lives in `app/BusinessLogicLayer/` (managers) and data access in 
 - `app/Http/Middleware/EnsureIdsAreValid.php`: guards every route that carries `{player_id}` and `{game_id}`.
 - `app/Models/`: `User`, `Player` (a user's game profiles, soft deleted), `Game`, `UserRole/`.
 - `routes/web.php`: all game routes require `auth` and follow `/{step}/{player_id}/{from}/{game_id}`. `routes/auth.php`: login and registration.
-- `resources/views/`: Blade templates. `components/layout.blade.php` is the page shell. It loads `js/vue.js` only when the view sets `$hasVue`.
-- `resources/js/app.js`: Bootstrap, translations (`lang.js`), key handling (`keys.js`) and the audio player (`audio.js`), loaded on every page. `vue.js`: Vue and the two components in `components/`, loaded only on the board.
-- `resources/js/settings/*.js` and `resources/js/switcher/*.js`: bundled into `public/js/functions/settings.js` and `switcher.js`.
+- `resources/views/`: Blade templates. `components/layout.blade.php` is the page shell. It loads the `board.js` entry only when the view sets `$hasVue`.
+- `resources/js/app.js`: Bootstrap, translations (`lang.js`), key handling (`keys.js`) and the audio player (`audio.js`), loaded on every page. `board.js`: Vue and the two components in `components/`, mounted from Blade markup, loaded only where a view sets `$hasVue`.
+- `resources/js/settings/index.js` (the settings pages' scripts) and `resources/js/switcher/switcher.js`: the two other Vite entries, loaded by the views that need them. `vite.config.js` lists the five entries.
 - `resources/sass/app.scss`: Bootstrap customisation and the theme's components.
 - `public/images/`: about 5000 files, tracked and served as they are. Optimise images before committing them; the build does not.
 - `public/audio/`: `sounds/` is in git. `fx/` and `music/` hold copyrighted files that are not in git; their README files list what to download. The game loads audio by URL, never through the bundler.
 - `lang/el/`, `lang/en/`: translations.
 - `database/seeders/`: two users (@verbatim`admin-taxidiotes@scify.org`, `user-taxidiotes@scify.org`@endverbatim, password from `DEFAULT_USER_PASSWORD_FOR_SEED` in `.env`), roles and sample players.
 
-**Build output:** everything in `public/` is generated and ignored by git, except `.htaccess`, `index.php`, `robots.txt`, `favicon.ico`, `images/`, `audio/` and `vendor/` (assets published by the cookie consent package). Never edit generated files; change `resources/` and rebuild.
+**Build output:** Vite writes `public/build/`; everything in `public/` is generated and ignored by git, except `.htaccess`, `index.php`, `robots.txt`, `favicon.ico`, `images/`, `audio/` and `vendor/` (assets published by the cookie consent package). Never edit generated files; change `resources/` and rebuild.
 
 ### Code style, project specifics
 
 - **PHP:** Laravel Pint with the shared `pint.json`: Laravel preset plus `declare(strict_types=1)`, strict comparisons and `mb_` string functions.
-- **JavaScript and Vue:** tabs, double quotes, semicolons (`.eslintrc.json`). ESLint runs with `--fix` inside the webpack build.
+- **JavaScript and Vue:** tabs, double quotes, semicolons (`.eslintrc.json`).
 - **SCSS:** Stylelint with `stylelint-config-standard-scss`.
 - **Everything else:** 4 spaces, LF, UTF-8, final newline (`.editorconfig`).
 - **Commits:** Conventional Commits (`feat`, `fix`, `refactor`, `docs`, `build`, `chore`). Messages name packages and versions, never people, hosts or other projects.
@@ -47,7 +47,8 @@ Run from the project root. The README describes the full first-time setup.
 - `{{ $assist->artisanCommand('migrate --seed') }}`: database schema and starter data
 - `{{ $assist->artisanCommand('storage:link') }}`: links `public/storage` to `storage/app/public`
 - `{{ $assist->nodePackageManagerCommand('install') }}`: front-end dependencies (Node.js version in `.nvmrc`)
-- `{{ $assist->nodePackageManagerCommand('run dev') }}`: build CSS and JS, copy images and audio into `public/`. `run watch` rebuilds on change; `run prod` is the minified production build
+- `{{ $assist->nodePackageManagerCommand('run dev') }}`: Vite's development server with hot reload; under DDEV the browser reaches it through the port in `.ddev/config.yaml`
+- `{{ $assist->nodePackageManagerCommand('run build') }}`: the production build into `public/build/`; `run prod` is its alias for the deploy workflow
 - `{{ $assist->artisanCommand('sitemap:generate') }}`: writes `public/sitemap.xml`
 - `{{ $assist->artisanCommand('test') }}`: feature tests (SQLite in memory, no build needed). Conventions in `tests/CLAUDE.md`
 - `{{ $assist->composerCommand('test') }}`: code style, static analysis and the test suite in one run. Green before every commit

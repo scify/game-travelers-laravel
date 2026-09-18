@@ -1,14 +1,9 @@
-//window._ = require("lodash");
+import * as bootstrap from "bootstrap";
+import axios from "axios";
 
-try {
-	// Note that "bootstrap" defaults to boostrap.esm.js. The bundle instead
-	// includes popper and follows the non-esm syntax (=same as the one used
-	// in this script). window.bootstrap = was required to access bootstrap
-	// object via JavaScript and create custom interactive elements.
-	window.bootstrap = require("bootstrap/dist/js/bootstrap.bundle");
-} catch (e) {
-	console.error(e);
-}
+// Bootstrap's components are created from plain scripts and from the board
+// (bootstrap.Modal, bootstrap.Tooltip), so the namespace stays global.
+window.bootstrap = bootstrap;
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -16,7 +11,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = require("axios");
+window.axios = axios;
 
 window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 

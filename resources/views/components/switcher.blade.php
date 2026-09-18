@@ -92,4 +92,4 @@ if (isset($switcher) && is_array($switcher)) {
 <script>
     window.Switcher = {{ Js::from($switcher)}};
 </script>
-<script src="{{ mix('js/functions/switcher.js') }}" defer></script>
+@vite('resources/js/switcher/switcher.js')

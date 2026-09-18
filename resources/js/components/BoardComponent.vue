@@ -1106,7 +1106,7 @@ export default {
 	transition: opacity 0.5s;
 }
 
-.fade-enter,
+.fade-enter-from,
 .fade-leave-to {
 	opacity: 0;
 }
@@ -1116,7 +1116,7 @@ export default {
 	transition: opacity 0.5s;
 }
 
-.fade_blue-enter,
+.fade_blue-enter-from,
 .fade_blue-leave-to {
 	opacity: 0;
 }
@@ -1126,7 +1126,7 @@ export default {
 	transition: opacity 3s;
 }
 
-.fade_loose-enter,
+.fade_loose-enter-from,
 .fade_loose-leave-to {
 	opacity: 0;
 }
@@ -1136,7 +1136,7 @@ export default {
 	transition: opacity 1s;
 }
 
-.fade_init-enter,
+.fade_init-enter-from,
 .fade_init-leave-to {
 	opacity: 0;
 }
@@ -1169,7 +1169,7 @@ export default {
 	transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
-.slide-fade-enter,
+.slide-fade-enter-from,
 .slide-fade-leave-to {
 	transform: translateY(200px);
 	opacity: 0;

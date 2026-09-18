@@ -10,7 +10,7 @@
         elements as the settingsControlsNew.blade.php view.
         --}}
     @section('scripts')
-        <script src="{{ mix('js/functions/settings.js') }}" defer></script>
+        @vite('resources/js/settings/index.js')
     @endsection
 
     <form

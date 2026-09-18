@@ -19,9 +19,11 @@
 // Override default Bootstrap variables
 @import "variables";
 // Bootstrap
-@import "~bootstrap/scss/bootstrap";
+@import "bootstrap/scss/bootstrap";
 // Bootstrap Icons
-@import "~bootstrap-icons/font/bootstrap-icons.scss";
+// Vite hashes the icon fonts into public/build; the package defaults to a ./fonts folder next to the CSS.
+$bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
+@import "bootstrap-icons/font/bootstrap-icons.scss";
 //
 // Travelers base theme & CSS Variables
 @import "base";

@@ -8,7 +8,7 @@
          @see resources/js/settings/dice-selection.js
     --}}
     @section('scripts')
-        <script src="{{ mix('js/functions/settings.js') }}" defer></script>
+        @vite('resources/js/settings/index.js')
     @endsection
 
     <!-- new player step 3/3 content -->

@@ -21,6 +21,14 @@ web_environment: []
 # Node.js version. Must match .nvmrc; the post-start hook below keeps them in step.
 nodejs_version: "24.21.0"
 corepack_enable: false
+# Vite's development server, reached by the browser through the DDEV router.
+# The https port is VITE_DEV_PORT in .env (see vite.config.js); each project
+# on the same machine needs its own pair.
+web_extra_exposed_ports:
+    - name: vite
+      container_port: 5151
+      http_port: 5150
+      https_port: 5151
 ddev_version_constraint: ">= 1.25.3"
 hooks:
     post-start:
