@@ -15,4 +15,14 @@ export default defineConfig(
         },
     },
     prettier,
+    {
+        // After the Prettier config, which turns curly off; "all" is the setting it allows.
+        rules: {
+            curly: ['error', 'all'],
+            eqeqeq: ['error', 'always'],
+            'no-unused-expressions': 'error',
+            'no-var': 'error',
+            'prefer-const': 'error',
+        },
+    },
 );
