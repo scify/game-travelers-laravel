@@ -55,6 +55,11 @@ export default defineConfig(({ command, mode }) => {
         // web server does, and the build must leave those URLs untouched.
         publicDir: command === 'serve' ? 'public' : false,
         build: {
+            // The oldest browsers a school may still run: the last Chrome, Edge and
+            // Firefox for Windows 7 and 8.1, and the Safari of iPadOS 15. Lightning CSS
+            // and the JavaScript transform lower the output to them; the default
+            // target emits range media queries these browsers read as no match.
+            target: ['chrome109', 'edge109', 'firefox115', 'safari15', 'ios15'],
             rolldownOptions: {
                 external: [/^\/images\//, /^\/audio\//],
             },
