@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use App\BusinessLogicLayer\User\UserRole\UserRoleManager;
 use App\Support\Dev\Ddev;
+use Illuminate\Foundation\DevCommands;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Boost\Mcp\ToolExecutor;
 
@@ -31,6 +32,19 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->app->make(UserRoleManager::class)->registerUserPolicies();
+        $this->configureDevCommands();
+    }
+
+    /**
+     * Trim the `artisan dev` process set to what this application uses.
+     */
+    private function configureDevCommands(): void
+    {
+        // Plain interleaved output in the terminal's own buffer:
+        DevCommands::inline();
+        DevCommands::except('queue', ...(Ddev::isActive() ? ['server'] : []));
+        // @link https://github.com/laravel/multiplex/issues/24
+        DevCommands::register('exec node_modules/.bin/vite', 'vite');
     }
 
     /**

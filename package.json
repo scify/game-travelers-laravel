@@ -21,6 +21,7 @@
         "vue": "3.5.41"
     },
     "devDependencies": {
+        "@laravel/multiplex": "0.4.3",
         "@vitejs/plugin-vue": "6.0.8",
         "laravel-vite-plugin": "3.2.0",
         "sass": "1.103.0",

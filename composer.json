@@ -61,6 +61,12 @@
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
         ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "@putenv NO_COLOR=",
+            "@putenv FORCE_COLOR=1",
+            "@php artisan dev --ansi"
+        ],
         "lint": [
             "rector",
             "pint --parallel --format agent"

@@ -49,6 +49,7 @@ Run from the project root. The README describes the full first-time setup.
 - `{{ $assist->nodePackageManagerCommand('install') }}`: front-end dependencies (Node.js version in `.nvmrc`)
 - `{{ $assist->nodePackageManagerCommand('run dev') }}`: Vite's development server with hot reload; under DDEV the browser reaches it through the port in `.ddev/config.yaml`
 - `{{ $assist->nodePackageManagerCommand('run build') }}`: the production build into `public/build/`; `run prod` is its alias for the deploy workflow
+- `{{ $assist->composerCommand('dev') }}`: Pail and the Vite dev server in one terminal (`artisan dev`); on a local PHP also `artisan serve`. If pages still ask the dev server for their assets after it stopped, delete the stale `public/hot`
 - `{{ $assist->artisanCommand('sitemap:generate') }}`: writes `public/sitemap.xml`
 - `{{ $assist->artisanCommand('test') }}`: feature tests (SQLite in memory, no build needed). Conventions in `tests/CLAUDE.md`
 - `{{ $assist->composerCommand('test') }}`: code style, static analysis and the test suite in one run. Green before every commit
