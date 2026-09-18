@@ -10,6 +10,7 @@ PHPUnit 13 with Laravel's testing utilities, SQLite in memory, no front-end buil
 - `#[Test]` on every method, `snake_case` names, no `test_` prefix.
 - Seeded data comes from `Tests\TestCase` helpers (`seededAdmin()`, `seededUser()`, `seededPlayer()`, `startedGame()`); do not recreate what the seeders provide. The one factory, `UserFactory`, is unused; propose a factory before writing the same setup by hand a third time.
 - Run the minimum: `vendor/bin/phpunit --filter method_name` or a file path. The full suite before declaring work complete.
+- Eloquent calls start from `Model::query()` (`Player::query()->where(...)`, `Game::query()->create(...)`). Rector rewrites the magic static forms, so `composer test:lint` fails on `Player::where(...)`.
 
 ## Class Structure
 
