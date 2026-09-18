@@ -3,7 +3,7 @@ import laravel from "laravel-vite-plugin";
 import process from "node:process";
 import { defineConfig, loadEnv } from "vite";
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ command, mode }) => {
 	// Vite exposes .env to this file only through loadEnv.
 	const env = loadEnv(mode, process.cwd());
 
@@ -49,11 +49,15 @@ export default defineConfig(({ mode }) => {
 				vue: "vue/dist/vue.esm-bundler.js",
 			},
 		},
-		// public/ is the web root and holds the images, the audio and the favicon
-		// as they are. Vite checks absolute URLs against it, never copies it:
-		publicDir: "public",
+		// public/ is the web root: the images and the audio are served from /images
+		// and /audio as they are. In development Laravel links the stylesheet from
+		// the dev server, so the dev server serves public/ itself; in production the
+		// web server does, and the build must leave those URLs untouched.
+		publicDir: command === "serve" ? "public" : false,
 		build: {
-			copyPublicDir: false,
+			rolldownOptions: {
+				external: [/^\/images\//, /^\/audio\//],
+			},
 		},
 		css: {
 			preprocessorOptions: {
