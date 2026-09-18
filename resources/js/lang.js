@@ -13,18 +13,13 @@
  * // returns the translation for "app_name" in "lang/??/messages"
  */
 (function () {
-	"use strict";
-	const trans = function (key, replace = {}) {
-		let translation = key
-			.split(".")
-			.reduce((t, i) => t[i] || null, window.Laravel.translations);
-		for (const placeholder in replace) {
-			translation = translation.replace(
-				`:${placeholder}`,
-				replace[placeholder]
-			);
-		}
-		return translation;
-	};
-	window.trans = trans;
+    'use strict';
+    const trans = function (key, replace = {}) {
+        let translation = key.split('.').reduce((t, i) => t[i] || null, window.Laravel.translations);
+        for (const placeholder in replace) {
+            translation = translation.replace(`:${placeholder}`, replace[placeholder]);
+        }
+        return translation;
+    };
+    window.trans = trans;
 })();

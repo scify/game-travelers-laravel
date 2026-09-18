@@ -1,21 +1,23 @@
 // Backgrounds: Flowers & Mountains & Trees
 .background,
 .trvl-bg {
-    input:not([type="checkbox"]) {
+    input:not([type='checkbox']) {
         background-color: hsla(var(--trvl-bg-hsl), 0.2);
     }
 }
 
 .background-mountains {
     min-height: 632px;
-    background-image: url("/images/backgrounds/bg-wide-trees.png");
+    background-image: url('/images/backgrounds/bg-wide-trees.png');
     background-repeat: no-repeat;
     background-position-x: right;
     background-position-y: bottom;
     background-size: 1366px 768px;
+
     @include media-breakpoint-down(xl) {
         min-height: 100vh;
     }
+
     @include media-breakpoint-down(sm) {
         background-position: 30% bottom;
     }
@@ -24,11 +26,12 @@
 // Game Header dash-line & Floating Dash
 .background-dash-up {
     // header
-    background-image: url("/images/backgrounds/bg-head-dash-2.png");
+    background-image: url('/images/backgrounds/bg-head-dash-2.png');
     background-repeat: no-repeat;
     background-position: 30% 60%;
     background-size: 1370px 142px;
     min-height: 195px;
+
     @include media-breakpoint-down(xxl) {
         background-position-y: bottom;
         background-position-x: center;
@@ -42,10 +45,11 @@
     top: -10rem;
     margin-bottom: -10rem;
     height: 203px;
-    background-image: url("/images/landing/curves/curve-footer-dash.svg");
+    background-image: url('/images/landing/curves/curve-footer-dash.svg');
     background-position: 50% 50%;
     background-size: 1440px 203px;
     background-repeat: no-repeat;
+
     @include media-breakpoint-down(lg) {
         top: -8rem;
         margin-bottom: -8rem;
@@ -61,24 +65,28 @@
 .background-group-1,
 .trvl-bg--group-1 {
     min-height: 632px;
-    background-image: url("/images/backgrounds/bg-g1-side-group-1.png");
+    background-image: url('/images/backgrounds/bg-g1-side-group-1.png');
     background-repeat: no-repeat;
     background-position-x: right;
     background-position-y: top;
     background-size: 351px 632px;
+
     @media (resolution >= 2dppx) {
-        background-image: url("/images/backgrounds/bg-g1-side-group-1@2x.png");
+        background-image: url('/images/backgrounds/bg-g1-side-group-1@2x.png');
     }
+
     &.responsive-hide-completely {
         @include media-breakpoint-down(md) {
             background-image: none;
         }
     }
+
     &.responsive-hide {
         @include media-breakpoint-down(sm) {
-            background-image: url("/images/backgrounds/bg-g1-side-back-2.png");
+            background-image: url('/images/backgrounds/bg-g1-side-back-2.png');
+
             @media (resolution >= 2dppx) {
-                background-image: url("/images/backgrounds/bg-g1-side-back-2@2x.png");
+                background-image: url('/images/backgrounds/bg-g1-side-back-2@2x.png');
             }
         }
     }
@@ -89,17 +97,19 @@
  * (decoration) Trees to the left  & the right of the page.
  * (queries) Media queries to hide trees in less than XXL sizes.
  */
-@media (min-width: 1400px) {
+@media (width >= 1400px) {
     .col-xxl-8.background-group-2--col {
         width: 78% !important;
     }
+
     .col-xxl-2.background-group-2--col {
         width: 11% !important;
     }
 }
+
 .background-group-2--tree-1 {
     // the left one
-    background-image: url("/images/backgrounds/bg-g2-side-tree-2.png");
+    background-image: url('/images/backgrounds/bg-g2-side-tree-2.png');
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: bottom;
@@ -107,17 +117,20 @@
     position: relative;
     bottom: -3rem;
     left: -2rem;
+
     // min-width:136px;
 }
+
 .background-group-2--tree-2 {
     // the right one
-    background-image: url("/images/backgrounds/bg-g2-side-tree-1.png");
+    background-image: url('/images/backgrounds/bg-g2-side-tree-1.png');
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: top;
     background-size: 116px 179px;
     position: relative;
     top: -5rem;
+
     // min-width:136px;
 }
 
@@ -127,31 +140,37 @@
  *
  */
 .background-group-3--dash {
-    background-image: url("/images/backgrounds/bg-g2-dash-down.png");
+    background-image: url('/images/backgrounds/bg-g2-dash-down.png');
     background-repeat: no-repeat;
     background-position: 0% 75%;
     background-size: 1368px 139px;
+
     @media (resolution >= 2dppx) {
-        background-image: url("/images/backgrounds/bg-g2-dash-down@2x.png");
+        background-image: url('/images/backgrounds/bg-g2-dash-down@2x.png');
     }
 }
+
 .background-group-3--abstract {
-    background-image: url("/images/backgrounds/bg-g3-abstract.png");
+    background-image: url('/images/backgrounds/bg-g3-abstract.png');
     background-repeat: no-repeat;
     background-position: 0% 20%;
     background-size: 83px 159px;
+
     @media (resolution >= 2dppx) {
-        background-image: url("/images/backgrounds/bg-g3-abstract@2x.png");
+        background-image: url('/images/backgrounds/bg-g3-abstract@2x.png');
     }
 }
+
 .background-group-3--flowers {
-    background-image: url("/images/backgrounds/bg-g3-side-flowers.png");
+    background-image: url('/images/backgrounds/bg-g3-side-flowers.png');
     background-repeat: no-repeat;
     background-position: 100% 20%;
     background-size: 323px 541px;
+
     @media (resolution >= 2dppx) {
-        background-image: url("/images/backgrounds/bg-g3-side-flowers@2x.png");
+        background-image: url('/images/backgrounds/bg-g3-side-flowers@2x.png');
     }
+
     @include media-breakpoint-down(sm) {
         background-image: none;
     }
@@ -160,85 +179,107 @@
 /* Landing page(s) curves */
 .trvl-curve {
     background-repeat: no-repeat;
+
     &--landing-four-abstract-blocks--sm-xl-dash {
         @include media-breakpoint-down(xl) {
-            background-image: url("/images/landing/curves/curve-landing_one-xl-dash.svg");
+            background-image: url('/images/landing/curves/curve-landing_one-xl-dash.svg');
             background-position: 0% 5%;
             background-repeat: no-repeat;
             background-size: 1440px 302px;
+
             @include media-breakpoint-down(sm) {
                 background-position: 20% 0%;
             }
         }
     }
+
     &--landing-one-lg--color--green {
-        background-image: url("/images/landing/curves/curve-landing_one-lg-green.svg");
+        background-image: url('/images/landing/curves/curve-landing_one-lg-green.svg');
         background-position: 0% 0%;
         background-size: 100% 243px;
+
         @include media-breakpoint-down(sm) {
             background-size: 100% 243px;
         }
+
         @include media-breakpoint-up(xl) {
             background: none;
         }
     }
+
     &--landing-one-xl {
         height: 302px;
+
         &--color {
             background-position: 0% 50%;
             background-size: 100% 302px;
+
             &--green {
-                background-image: url("/images/landing/curves/curve-landing_one-xl-green.svg");
+                background-image: url('/images/landing/curves/curve-landing_one-xl-green.svg');
             }
         }
+
         &--dash {
-            background-image: url("/images/landing/curves/curve-landing_one-xl-dash.svg");
+            background-image: url('/images/landing/curves/curve-landing_one-xl-dash.svg');
             background-position: 50% 50%;
             background-size: 1440px 302px;
         }
     }
+
     &--landing-two {
         height: 149px;
+
         @include media-breakpoint-up(md) {
             margin-top: -109px;
         }
+
         &--color {
             background-position: 0% 50%;
             background-size: 100% 149px;
+
             &--brown {
-                background-image: url("/images/landing/curves/curve-landing_two-brown.svg");
+                background-image: url('/images/landing/curves/curve-landing_two-brown.svg');
             }
         }
     }
+
     &--footer {
         height: 203px;
+
         &--color {
             background-position: 0% 50%;
             background-size: 100% 203px;
+
             &--green {
-                background-image: url("/images/landing/curves/curve-footer-green.svg");
+                background-image: url('/images/landing/curves/curve-footer-green.svg');
             }
         }
+
         &--dash {
-            background-image: url("/images/landing/curves/curve-footer-dash.svg");
+            background-image: url('/images/landing/curves/curve-footer-dash.svg');
             background-position: 50% 50%;
             background-size: 1440px 203px;
         }
     }
+
     &--header {
         height: 208px;
+
         &--color {
             background-position: 0% 50%;
             background-size: 100% 208px;
+
             &--green {
-                background-image: url("/images/landing/curves/curve-header-green.svg");
+                background-image: url('/images/landing/curves/curve-header-green.svg');
             }
+
             &--white {
-                background-image: url("/images/landing/curves/curve-header-white.svg");
+                background-image: url('/images/landing/curves/curve-header-white.svg');
             }
         }
+
         &--dash {
-            background-image: url("/images/landing/curves/curve-header-dash.svg");
+            background-image: url('/images/landing/curves/curve-header-dash.svg');
             background-position: 50% 50%;
             background-size: 1440px 208px;
         }
@@ -247,8 +288,8 @@
 
 /* Responsiveness */
 // Portrait phones
-@media (max-width: 575.98px) {
-    .background input:not([type="checkbox"]) {
+@media (width <= 575.98px) {
+    .background input:not([type='checkbox']) {
         background-color: hsla(var(--trvl-bg-hsl), 0.4);
     }
 }

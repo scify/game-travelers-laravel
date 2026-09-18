@@ -1,11 +1,13 @@
 .gamesettings .avatar-col,
 .gamestart .avatar-col {
     min-height: 160px;
+
     // min-width: 140px;
 }
 
 .avatars-row {
     justify-content: start;
+
     &.justify-content-around {
         margin-bottom: 6rem;
     }
@@ -17,84 +19,103 @@
 
 .btn-avatar,
 .btn-avatar-options {
-    --bs-btn-focus-box-shadow: 0 0 0 0.3rem
-        rgba(var(--bs-btn-focus-shadow-rgb), 0.5);
+    --bs-btn-focus-box-shadow: 0 0 0 0.3rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5);
     --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
+
     transition: all 0.2s ease-out;
     padding: 0;
+
     &.btn-sm,
     &.btn-sm img {
         width: 88px;
         height: 88px;
     }
+
     &.btn-md,
     &.btn-md img {
         width: 100px;
         height: 100px;
     }
+
     &:focus,
     &:focus-visible:not(:hover) {
         scale: 1.1;
     }
+
     &:hover {
         scale: 1.1;
     }
+
     &.selected {
         scale: 1.2;
+
         &:hover {
             scale: 1.2;
         }
+
         &:focus,
         &:focus-visible:not(:hover) {
             scale: 1.2;
         }
     }
+
     &.btn-sm.selected {
         scale: 1.15;
+
         &:hover {
             scale: 1.15;
         }
+
         &:focus,
         &:focus-visible:not(:hover) {
             scale: 1.15;
         }
     }
+
     &.faded {
         opacity: 0.7;
+
         img {
             filter: grayscale(100%) opacity(0.6);
         }
     }
+
     @media (prefers-reduced-motion) {
         scale: 1 !important;
     }
 }
+
 .btn-avatar {
     --bs-btn-active-bg: var(--trvl-btn-active-bg);
     --bs-btn-hover-bg: var(--trvl-btn-hover-bg);
+
     background-color: var(--trvl-btn-bg);
     border: none;
 }
+
 .btn-avatar-options {
     --bs-btn-active-bg: var(--trvl-btn-active-bg);
     --bs-btn-border-color: var(--trvl-btn-border-color);
     --bs-btn-hover-border-color: var(--trvl-btn-border-color);
     --bs-btn-border-width: 5px;
+
     background-color: transparent;
-    box-shadow: inset 0 0.3rem 0.1rem
-        rgba(var(--trvl-btn-hover-shadow-rgb), 0.1) !important;
+    box-shadow: inset 0 0.3rem 0.1rem rgba(var(--trvl-btn-hover-shadow-rgb), 0.1) !important;
     display: block;
     margin: 0 auto;
+
     &:hover {
-        box-shadow: inset 0 0.3rem 0.1rem
-                rgba(var(--trvl-btn-hover-shadow-rgb), 0.5),
+        box-shadow:
+            inset 0 0.3rem 0.1rem rgba(var(--trvl-btn-hover-shadow-rgb), 0.5),
             0 0.3rem rgba(var(--trvl-btn-hover-shadow-rgb), 0.1) !important;
     }
+
     &:focus,
     &:focus-visible {
         --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
-        box-shadow: inset 0 0.3rem 0.1rem
-                rgba(var(--trvl-btn-hover-shadow-rgb), 0.5),
+
+        box-shadow:
+            inset 0 0.3rem 0.1rem rgba(var(--trvl-btn-hover-shadow-rgb), 0.5),
             0 0.3rem rgba(var(--trvl-btn-hover-shadow-rgb), 0.1),
             0 0 0 0.3rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5) !important;
     }
@@ -106,6 +127,7 @@
     margin: 0 !important;
     padding: 0 !important;
 }
+
 .btn-sm.btn-avatar-options img {
     position: relative;
     display: inline-block;
@@ -114,6 +136,7 @@
     width: 78px;
     height: 78px;
 }
+
 .btn-md.btn-avatar-options img {
     position: relative;
     display: inline-block;
@@ -135,17 +158,19 @@
     text-align: center;
     white-space: nowrap;
 }
+
 .label-avatar {
     top: 0.5rem;
     overflow-x: hidden;
     text-overflow: ellipsis;
     max-width: 120px;
 }
+
 .label-avatar-options {
     top: 0.5rem;
 }
 
-button[role="radio"].selected + label {
+button[role='radio'].selected + label {
     font-weight: 600;
 }
 
@@ -154,10 +179,12 @@ button[role="radio"].selected + label {
     // scale: 0.9;
     color: rgba(var(--trvl-color-rgb), 1);
 }
+
 .btn-avatar.selected > .label-avatar {
     scale: 0.9;
     color: rgba(var(--trvl-color-rgb), 1);
 }
+
 .btn-avatar > .label-avatar.hidden {
     left: -3000px;
     right: -3000px;

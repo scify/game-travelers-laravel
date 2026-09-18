@@ -18,6 +18,7 @@
     --trvl-c-dfdae7: #dfdae7; // Not in use: White-purple-ish
     --trvl-c-d8c46f: #d8c46f; // Not in use: Yellow-ish
     --trvl-c-c0ceeb: #c0ceeb; // Not in use: Blue-ish
+
     /* Extended colour palette */
     // Reds
     --trvl-c-salmon-dark: #804343;
@@ -25,21 +26,25 @@
     --trvl-c-salmon-light-text: #5f1111;
     --trvl-c-crimson: #6c1414; // actually a variation of salmon
     --trvl-c-crimson-hsl: 0, 69%, 25%;
+
     // Greens
     --trvl-c-green-light: #edf9dd;
     --trvl-c-green-dark: #22241f;
     --trvl-c-green-pale: #78b594;
     --trvl-c-green-pale-rgb: 120, 181, 148;
     --trvl-c-green-pale-hsl: 148deg, 29%, 59%;
+
     // Browns
     --trvl-c-yellow: #d8c46f;
     --trvl-c-brown-light: #ffecc8;
     --trvl-c-brown-bright: #faefe4;
+
     // Cyans
     --trvl-c-cyan-dark: #287971; // e.g. Coming soon
+
     /* Various default colours */
-    --color-white: #ffffff;
-    --color-black: #000000;
+    --color-white: #fff;
+    --color-black: #000;
     --color-black-rgb: 0, 0, 0;
     --color-gray: #a0a0a0;
     --color-gray-rgb: 160, 160, 160;
@@ -71,6 +76,7 @@
     --trvl-color: var(--trvl-c-black);
     --trvl-color-rgb: var(--trvl-c-black-rgb);
     --trvl-link: var(--trvl-c-black);
+
     // Buttons
     --trvl-btn-bg: var(--trvl-c-white);
     --trvl-btn-color: var(--color-black);
@@ -87,9 +93,11 @@
     --trvl-btn-hover-shadow-rgb: var(--color-gray-dark-rgb);
     --trvl-btn-focus-shadow-rgb: var(--trvl-c-green-pale-rgb);
     --trvl-shadow-focus-hsl: var(--trvl-c-green-pale-hsl);
+
     // Dropdowns
     --trvl-dropdown-bg: var(--trvl-c-brown);
     --trvl-modal-bg: var(--trvl-c-brown);
+
     // Extensions
     --trvl-c-bright: var(--color-white);
     --trvl-c-dark: var(--color-black);
@@ -97,10 +105,7 @@
     --trvl-danger: var(--trvl-c-crimson);
     --trvl-danger-hsl: var(--trvl-c-crimson-hsl);
     --trvl-danger-color: var(--trvl-c-dark);
-    --trvl-danger-bg: hsla(
-        var(--trvl-c-salmon-hsl),
-        0.8
-    ); // was hsl(0, 75%, 89%, 0.9);
+    --trvl-danger-bg: hsla(var(--trvl-c-salmon-hsl), 0.8); // was hsl(0, 75%, 89%, 0.9);
     --trvl-danger-light-text: var(--trvl-c-salmon-light-text);
     --trvl-danger-light-bg: var(--trvl-c-salmon-light);
     --trvl-danger-border-color: var(--trvl-c-salmon-dark);
@@ -110,6 +115,7 @@
     :root {
         // ok, just joking...
         --trvl-bg: var(--trvl-c-green);
+
         // or not?
     }
 }

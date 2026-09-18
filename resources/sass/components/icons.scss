@@ -12,21 +12,24 @@
     border-radius: 50%;
     background: transparent;
     color: var(--trvl-color);
-    @media (max-width: 575.98px) {
+
+    @media (width <= 575.98px) {
         &-right {
             left: -0.5rem;
         }
     }
 }
+
 .kicon:hover {
     color: var(--color-black);
-    background: hsla(40, 3%, 21%, 0.1);
-    box-shadow: 0 0 0 0.5rem hsla(40, 3%, 21%, 0.1);
+    background: hsla(40deg, 3%, 21%, 0.1);
+    box-shadow: 0 0 0 0.5rem hsla(40deg, 3%, 21%, 0.1);
 }
 
 .kicon:focus:not(:hover),
 .kicon:focus-visible:not(:hover) {
     --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
+
     box-shadow: 0 0 0 0.3rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5);
 }
 
@@ -42,6 +45,7 @@
     width: 1.7rem; // 25px
     height: 1.7rem;
 }
+
 .kicon svg {
     box-shadow: none !important;
 }

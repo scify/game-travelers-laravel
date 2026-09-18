@@ -58,7 +58,6 @@ body #scify-cookie-consent-floating-button {
     --scify-cookies-success-message-bg-color: var(--trvl-c-green-light);
     --scify-cookies-success-message-text-color: var(--trvl-c-green-dark);
     --scify-cookies-success-message-border-color: var(--trvl-c-green-pale);
-
 }
 
 // States the variables do not reach: the game's hover shadow, focus ring and
@@ -90,7 +89,7 @@ body #scify-cookie-consent-floating-button {
         row-gap: 0.5rem;
     }
 
-    .row > [class*="col-"] {
+    .row > [class*='col-'] {
         padding: 0 0.375rem;
 
         @include media-breakpoint-down(lg) {

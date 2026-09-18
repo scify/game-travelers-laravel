@@ -2,6 +2,7 @@
 .stepper {
     margin-bottom: 2.5em;
     min-height: 66px;
+
     .btn {
         --bs-btn-border-width: 3px;
         --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
@@ -13,6 +14,7 @@
         --bs-btn-disabled-bg: #2f3130;
         --bs-btn-disabled-border-color: #2f3130;
         --bs-btn-disabled-opacity: 1;
+
         position: relative;
         padding: 0;
         margin: 0;
@@ -21,6 +23,7 @@
         height: 66px;
         font-size: 32px;
         font-weight: 800;
+
         &.past {
             --bs-btn-color: #444947; // #2f3130; // var(--trvl-bg);
             --bs-btn-bg: var(--trvl-btn-bg);
@@ -30,6 +33,7 @@
             --bs-btn-hover-color: #2f3130; // #2f3130
             --bs-btn-hover-border-color: #2f3130;
         }
+
         &.current,
         :disabled {
             --bs-btn-bg: #2f3130;
@@ -38,96 +42,114 @@
             --bs-btn-hover-color: var(--trvl-btn-bg);
         }
     }
+
     .step1 {
         min-height: 66px;
+
         &-1 {
-            background-image: url("/images/backgrounds/bg-stepper-profile-step-1-1.png");
+            background-image: url('/images/backgrounds/bg-stepper-profile-step-1-1.png');
             background-repeat: no-repeat;
             background-position-x: right;
             background-position-y: center;
             background-size: 149px 66px;
         }
+
         &-2 {
-            background-image: url("/images/backgrounds/bg-stepper-profile-step-1-2.png");
+            background-image: url('/images/backgrounds/bg-stepper-profile-step-1-2.png');
             background-repeat: no-repeat;
             background-position-x: left;
             background-position-y: center;
             background-size: 1203px 66px;
+
             .btn {
                 left: -20px;
                 top: 10px;
             }
         }
     }
+
     .step2 {
         min-height: 66px;
+
         &-1 {
-            background-image: url("/images/backgrounds/bg-stepper-profile-step-2-1.svg");
+            background-image: url('/images/backgrounds/bg-stepper-profile-step-2-1.svg');
             background-repeat: no-repeat;
             background-position-x: right;
             background-position-y: center;
             background-size: 149px 66px;
         }
+
         &-2 {
-            background-image: url("/images/backgrounds/bg-stepper-profile-step-2-2.svg");
+            background-image: url('/images/backgrounds/bg-stepper-profile-step-2-2.svg');
             background-repeat: no-repeat;
             background-position-x: left;
             background-position-y: center;
             background-size: 100% 66px;
+
             .btn {
                 left: -20px;
                 top: 10px;
             }
         }
+
         &-3 {
-            background-image: url("/images/backgrounds/bg-stepper-profile-step-2-3.svg");
+            background-image: url('/images/backgrounds/bg-stepper-profile-step-2-3.svg');
             background-repeat: no-repeat;
             background-position-x: left;
             background-position-y: center;
             background-size: 100% 66px;
+
             .btn {
                 left: -50px;
                 top: 10px;
             }
         }
     }
+
     .step3 {
         min-height: 66px;
+
         &-1 {
-            background-image: url("/images/backgrounds/bg-stepper-profile-step-3-1.svg");
+            background-image: url('/images/backgrounds/bg-stepper-profile-step-3-1.svg');
             background-repeat: no-repeat;
             background-position-x: right;
             background-position-y: center;
             background-size: 149px 66px;
         }
+
         &-2 {
-            background-image: url("/images/backgrounds/bg-stepper-profile-step-3-2.svg");
+            background-image: url('/images/backgrounds/bg-stepper-profile-step-3-2.svg');
             background-repeat: no-repeat;
             background-position-x: left;
             background-position-y: center;
             background-size: 100% 66px;
+
             .btn {
                 left: -20px;
                 top: 10px;
             }
         }
+
         &-3 {
-            background-image: url("/images/backgrounds/bg-stepper-profile-step-3-3.svg");
+            background-image: url('/images/backgrounds/bg-stepper-profile-step-3-3.svg');
             background-repeat: no-repeat;
             background-position-x: left;
             background-position-y: center;
             background-size: 100% 66px;
+
             .btn {
                 left: -50px;
                 top: 10px;
             }
         }
+
         &-4 {
-            background-image: url("/images/backgrounds/bg-stepper-profile-step-3-4.svg");
+            background-image: url('/images/backgrounds/bg-stepper-profile-step-3-4.svg');
             background-repeat: no-repeat;
             background-position-x: left;
             background-position-y: center;
             background-size: 251px 66px;
+
             .btn {
                 left: -50px;
                 top: 20px;
