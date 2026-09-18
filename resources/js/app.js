@@ -11,15 +11,15 @@
  * component (@see /views/components/layout.blade.php ).
  */
 
-import './bootstrap';
+import '@/bootstrap';
 // Travelers Language variables.
-import './lang.js';
+import '@/lang.js';
 // Universal functions.
 // require("./common.js");
 // Travelers Switcher Keys.
-import './keys.js';
+import '@/keys.js';
 // Travelers Audio-player.
-import './audio.js';
+import '@/audio.js';
 
 // import {AudioPlayer} from 'audio-player.js'
 // window.AudioPlayer = AudioPlayer;

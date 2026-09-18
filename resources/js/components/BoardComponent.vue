@@ -155,8 +155,8 @@
 <script>
 import axios from 'axios';
 import { markRaw } from 'vue';
-import { createDebugTools, emit, enabled as debugEnabled, log } from '../debug.js';
-import BoardDebugStrip from './BoardDebugStrip.vue';
+import { createDebugTools, emit, enabled as debugEnabled, log } from '@/debug.js';
+import BoardDebugStrip from '@/components/BoardDebugStrip.vue';
 
 export default {
     components: { BoardDebugStrip },

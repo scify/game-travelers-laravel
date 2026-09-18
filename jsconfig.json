@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "paths": {
+            "@/*": ["resources/js/*"]
+        },
+        "target": "es2022"
+    },
+    "include": ["resources/js/**/*", "eslint.config.js", "vite.config.js"],
+    "exclude": ["node_modules", "public"]
+}

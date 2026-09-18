@@ -7,8 +7,8 @@
  * (see the alias in vite.config.js).
  */
 import { createApp } from 'vue';
-import BoardComponent from './components/BoardComponent.vue';
-import CustomAudiosComponent from './components/CustomAudiosComponent.vue';
+import BoardComponent from '@/components/BoardComponent.vue';
+import CustomAudiosComponent from '@/components/CustomAudiosComponent.vue';
 
 createApp({})
     .component('board-component', BoardComponent)

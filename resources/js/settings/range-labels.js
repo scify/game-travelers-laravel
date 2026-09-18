@@ -2,7 +2,7 @@
  * Range Labels Functions.
  */
 
-import { saveVolume } from '../volumes.js';
+import { saveVolume } from '@/volumes.js';
 
 window.addEventListener('load', function () {
     const rangeElements = document.querySelectorAll("input[type='range']");

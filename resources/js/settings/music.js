@@ -1,4 +1,4 @@
-import { log } from '../debug.js';
+import { log } from '@/debug.js';
 
 window.addEventListener('load', switcher);
 function switcher() {

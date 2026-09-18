@@ -4,8 +4,8 @@
  * @see ../lang.js
  */
 
-import { log } from '../debug.js';
-import { saveVolume } from '../volumes.js';
+import { log } from '@/debug.js';
+import { saveVolume } from '@/volumes.js';
 
 // Blurs any items with focus.
 window.onpageshow = function (e) {

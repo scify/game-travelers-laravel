@@ -125,7 +125,7 @@
 
 <script>
 import { useId } from 'vue';
-import { log } from '../debug.js';
+import { log } from '@/debug.js';
 
 export default {
     props: {

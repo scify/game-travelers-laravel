@@ -3,7 +3,7 @@
  * window.Laravel.playerAudio (updateVolumesUrl and playerUrl).
  */
 import axios from 'axios';
-import { log } from './debug.js';
+import { log } from '@/debug.js';
 
 /**
  * @param {'music_volume'|'sound_volume'} field

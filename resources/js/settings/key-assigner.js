@@ -5,7 +5,7 @@
  * which includes a list of all the keys which are relatively safe to use.
  */
 
-import { log } from '../debug.js';
+import { log } from '@/debug.js';
 
 (function () {
     'use strict';

@@ -44,6 +44,7 @@ export default defineConfig(({ command, mode }) => {
         ],
         resolve: {
             alias: {
+                '@': '/resources/js',
                 // The board and the audio settings mount their components from
                 // Blade markup, so Vue compiles those templates in the browser:
                 vue: 'vue/dist/vue.esm-bundler.js',
