@@ -11,15 +11,7 @@ use Redirect;
 
 class UserController extends Controller
 {
-    protected PlayerRepository $playerRepository;
-
-    protected GameRepository $gameRepository;
-
-    public function __construct(PlayerRepository $playerRepository, GameRepository $gameRepository)
-    {
-        $this->playerRepository = $playerRepository;
-        $this->gameRepository = $gameRepository;
-    }
+    public function __construct(protected PlayerRepository $playerRepository, protected GameRepository $gameRepository) {}
 
     public function show(Request $request, int $player_id, string $from, int $game_id)
     {

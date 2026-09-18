@@ -12,25 +12,20 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 use Throwable;
 
 class RegisteredUserController extends Controller
 {
-    protected UserManager $userManager;
-
-    public function __construct(UserManager $userManager)
-    {
-        $this->userManager = $userManager;
-    }
+    public function __construct(protected UserManager $userManager) {}
 
     /**
      * Display the registration view.
      */
     public function create(): View
     {
-        $captchaNumbers = [rand(1, 49), rand(1, 49)];
+        $captchaNumbers = [random_int(1, 49), random_int(1, 49)];
 
         return view('auth.register', ['captchaNumbers' => $captchaNumbers]);
     }
@@ -49,7 +44,7 @@ class RegisteredUserController extends Controller
 
         $request->validate([
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::min(8)->letters()->numbers()],
+            'password' => ['required', 'confirmed', Password::min(8)->letters()->numbers()],
             'captcha' => ['required', 'numeric', $captchaRule],
         ]);
 

@@ -11,15 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserManager
 {
-    protected UserRepository $userRepository;
-
-    protected UserRoleManager $userRoleManager;
-
-    public function __construct(UserRoleManager $userRoleManager, UserRepository $userRepository)
-    {
-        $this->userRoleManager = $userRoleManager;
-        $this->userRepository = $userRepository;
-    }
+    public function __construct(protected UserRoleManager $userRoleManager, protected UserRepository $userRepository) {}
 
     /**
      * Creates a @User record and assigns the RegisteredUser role
@@ -95,12 +87,8 @@ class UserManager
         $users = $this->userRepository->getUsersWithAdminRoleStatus(-1);
 
         return $users->filter(
-            function ($obj) {
-                return $obj->is_admin === 1;
-            })->map(
-                function ($obj) {
-                    return $this->userRepository->find($obj->id);
-                });
+            fn ($obj) => $obj->is_admin === 1)->map(
+                fn ($obj) => $this->userRepository->find($obj->id));
     }
 
     public function getUserRoles()

@@ -15,21 +15,11 @@ use Illuminate\Support\Facades\Gate;
 
 class UserRoleManager
 {
-    private UserRoleRepository $userRoleRepository;
-
-    private UserRoleLkpRepository $userRoleLkpRepository;
-
-    public function __construct(UserRoleRepository $userRoleRepository, UserRoleLkpRepository $userRoleLkpRepository)
-    {
-        $this->userRoleRepository = $userRoleRepository;
-        $this->userRoleLkpRepository = $userRoleLkpRepository;
-    }
+    public function __construct(private readonly UserRoleRepository $userRoleRepository, private readonly UserRoleLkpRepository $userRoleLkpRepository) {}
 
     public function registerUserPolicies(): void
     {
-        Gate::define('manage-platform', function ($user) {
-            return $this->userHasAdminRole($user);
-        });
+        Gate::define('manage-platform', fn ($user) => $this->userHasAdminRole($user));
     }
 
     public function getAllUserRoles()

@@ -10,15 +10,7 @@ use Illuminate\Http\Request;
 
 class BoardController extends Controller
 {
-    protected PlayerRepository $playerRepository;
-
-    protected GameRepository $gameRepository;
-
-    public function __construct(PlayerRepository $playerRepository, GameRepository $gameRepository)
-    {
-        $this->playerRepository = $playerRepository;
-        $this->gameRepository = $gameRepository;
-    }
+    public function __construct(protected PlayerRepository $playerRepository, protected GameRepository $gameRepository) {}
 
     public function play(Request $request, int $player_id, int $game_id)
     {
@@ -196,14 +188,12 @@ class BoardController extends Controller
     protected function rollDieForPlayerAndReturnNewPosition($pos, $board_size, $tutorial_mode, $first_player_turn, $difficulty): int
     {
         $final_pos = $this->getFinalPos($board_size);
-        $roll_threshold = $final_pos - $pos;
-        if ($roll_threshold > 6) {
-            $roll_threshold = 6;
-        }
+        // At most six, at least one: random_int() refuses an inverted range.
+        $roll_threshold = min(6, max(1, $final_pos - $pos));
 
-        $dice_result = rand(1, $roll_threshold);
+        $dice_result = random_int(1, $roll_threshold);
         if ($difficulty === 1 && $first_player_turn) {
-            $dice_result2 = rand(1, $roll_threshold);
+            $dice_result2 = random_int(1, $roll_threshold);
             if ($dice_result2 > $dice_result) {
                 $dice_result = $dice_result2;
             }
@@ -258,9 +248,9 @@ class BoardController extends Controller
     protected function getAValidCard($board_size, $pos, $board_id, $is_tutorial): int
     {
         $max = $this->getFinalPos($board_size);
-        $random = rand(1, 10);
+        $random = random_int(1, 10);
         if (! $is_tutorial) {
-            $randomPolarity = rand(1, 2);
+            $randomPolarity = random_int(1, 2);
             if ($randomPolarity === 2) {
                 $random *= -1;
             }
@@ -268,16 +258,16 @@ class BoardController extends Controller
         $value = $this->getCards($board_id)[$random]['value'];
         $new_pos = $value + $pos;
         if ($new_pos <= 0) { // the card was negative we need a smaller card
-            $random = -1 * rand(1, 7);
+            $random = -1 * random_int(1, 7);
             $value = $this->getCards($board_id)[$random]['value'];
             if (($value + $pos) <= 0) {
-                $random = -1 * rand(1, 3);
+                $random = -1 * random_int(1, 3);
             }
         } elseif ($new_pos > $max) { // the card was positive we need a smaller positive card
-            $random = rand(1, 7);
+            $random = random_int(1, 7);
             $value = $this->getCards($board_id)[$random]['value'];
             if (($value + $pos) > $max) {
-                $random = rand(1, 3);
+                $random = random_int(1, 3);
             }
         }
 

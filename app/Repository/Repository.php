@@ -17,16 +17,10 @@ abstract class Repository implements RepositoryInterface
     protected $modelInstance;
 
     /**
-     * @var App
-     */
-    private $app;
-
-    /**
      * @throws RepositoryException|BindingResolutionException
      */
-    public function __construct(App $app)
+    public function __construct(private readonly App $app)
     {
-        $this->app = $app;
         $this->makeModelInstance();
     }
 
@@ -42,7 +36,7 @@ abstract class Repository implements RepositoryInterface
         $query = $this->modelInstance;
 
         if ($orderColumn) {
-            $query = $query->orderBy($orderColumn, $order ? $order : 'asc');
+            $query = $query->orderBy($orderColumn, $order ?: 'asc');
         }
         if (count($withRelationships) > 0) {
             $query = $query->with($withRelationships);
@@ -56,7 +50,7 @@ abstract class Repository implements RepositoryInterface
         $query = $this->modelInstance->where($whereArray);
 
         if ($orderColumn) {
-            $query = $query->orderBy($orderColumn, $order ? $order : 'asc');
+            $query = $query->orderBy($orderColumn, $order ?: 'asc');
         }
         if (count($withRelationships) > 0) {
             $query = $query->with($withRelationships);

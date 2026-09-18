@@ -11,12 +11,7 @@ use View;
 
 class SettingsController extends Controller
 {
-    protected PlayerRepository $playerRepository;
-
-    public function __construct(PlayerRepository $playerRepository)
-    {
-        $this->playerRepository = $playerRepository;
-    }
+    public function __construct(protected PlayerRepository $playerRepository) {}
 
     public function settingsShow(Request $request, int $player_id, string $back_route, int $game_id)
     {
@@ -39,30 +34,16 @@ class SettingsController extends Controller
         $action = $request->only('submit')['submit'];
         switch ($action) {
             case 'back':
-                switch ($back_route) {
-                    case 'user':
-                        return Redirect::route('select.player', [0, 'user', 0]);
-
-                    case 'continue':
-                        return Redirect::route('select.continue', [$player_id, 'continue', $game_id]);
-
-                    case 'board':
-                        return Redirect::route('select.board', [$player_id, 'board', $game_id]);
-
-                    case 'mode':
-                        return Redirect::route('select.mode', [$player_id, 'mode', $game_id]);
-
-                    case 'pawn':
-                        return Redirect::route('select.pawn', [$player_id, 'pawn', $game_id]);
-
-                    case 'pawn-two':
-                        return Redirect::route('select.pawnTwo', [$player_id, 'pawn-two', $game_id]);
-
-                    case 'option':
-                        return Redirect::route('select.options', [$player_id, 'option', $game_id]);
-                    default:
-                        return Redirect::route('select.player', [0, 'user', 0]);
-                }
+                return match ($back_route) {
+                    'user' => Redirect::route('select.player', [0, 'user', 0]),
+                    'continue' => Redirect::route('select.continue', [$player_id, 'continue', $game_id]),
+                    'board' => Redirect::route('select.board', [$player_id, 'board', $game_id]),
+                    'mode' => Redirect::route('select.mode', [$player_id, 'mode', $game_id]),
+                    'pawn' => Redirect::route('select.pawn', [$player_id, 'pawn', $game_id]),
+                    'pawn-two' => Redirect::route('select.pawnTwo', [$player_id, 'pawn-two', $game_id]),
+                    'option' => Redirect::route('select.options', [$player_id, 'option', $game_id]),
+                    default => Redirect::route('select.player', [0, 'user', 0]),
+                };
 
             case 'profile':
                 return Redirect::route('settings.profile', [$player_id, $back_route, $game_id]);

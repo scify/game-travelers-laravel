@@ -12,15 +12,7 @@ use View;
 
 class CustomAudioController extends Controller
 {
-    protected PlayerRepository $playerRepository;
-
-    protected CustomAudioManager $customAudioManager;
-
-    public function __construct(PlayerRepository $playerRepository, CustomAudioManager $customAudioManager)
-    {
-        $this->playerRepository = $playerRepository;
-        $this->customAudioManager = $customAudioManager;
-    }
+    public function __construct(protected PlayerRepository $playerRepository, protected CustomAudioManager $customAudioManager) {}
 
     /**
      * Show player's audio settings "dummy" function.

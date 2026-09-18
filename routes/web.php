@@ -6,9 +6,9 @@ declare(strict_types=1);
  * @file
  * Contains App's web routes.
  */
-
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\CustomAudioController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SetupGameController;
 use App\Http\Controllers\UserController;
@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 require __DIR__ . '/auth.php';
 
 // Non-game pages.
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/about', 'about')->name('about');
 Route::view('/credits', 'credits')->name('credits');
 Route::view('/cookies-policy', 'cookies')->name('cookies-policy');
@@ -126,13 +126,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/select/options/{player_id}/{from}/{game_id}', [SetupGameController::class, 'optionsSave'])
         ->name('select.options')->middleware(EnsureIdsAreValid::class);
 
-    Route::get('home', function () {
-        return redirect()->route('select.player', [0, 'user', 0]);
-    });
+    Route::get('home', fn () => redirect()->route('select.player', [0, 'user', 0]));
 
-    Route::get('logout', function () {
-        return view('logoutDummy');
-    })->name('dummy.logout');
+    Route::get('logout', fn () => view('logoutDummy'))->name('dummy.logout');
 
     Route::get('board/{player_id}/{game_id}', [BoardController::class, 'play'])
         ->name('board')->middleware(EnsureIdsAreValid::class);

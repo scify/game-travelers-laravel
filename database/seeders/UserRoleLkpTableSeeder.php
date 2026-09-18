@@ -9,12 +9,7 @@ use Illuminate\Database\Seeder;
 
 class UserRoleLkpTableSeeder extends Seeder
 {
-    protected UserRoleLkpRepository $userRoleLkpRepository;
-
-    public function __construct(UserRoleLkpRepository $userRoleLkpRepository)
-    {
-        $this->userRoleLkpRepository = $userRoleLkpRepository;
-    }
+    public function __construct(protected UserRoleLkpRepository $userRoleLkpRepository) {}
 
     public function run()
     {

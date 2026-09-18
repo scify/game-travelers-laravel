@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Support\Renderable;
+
 class HomeController extends Controller
 {
     /**
      * Show the index.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
     public function index()
     {
@@ -95,7 +97,7 @@ class HomeController extends Controller
     private function getRandomActiveHomeCarouselSlides()
     {
         $slides = $this->getHomeCarouselSlides();
-        $randIndex = rand(1, count($slides));
+        $randIndex = random_int(1, count($slides));
         foreach ($slides as $index => &$slide) {
             $slide['active'] = ($index === $randIndex);
         }

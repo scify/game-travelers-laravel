@@ -13,17 +13,14 @@ class UserRegistered extends Notification
 {
     use Queueable;
 
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
-    protected User $user;
-
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
+    public function __construct(
+        /**
+         * Create a new notification instance.
+         *
+         * @return void
+         */
+        protected User $user
+    ) {}
 
     /**
      * Get the notification's delivery channels.
@@ -46,7 +43,7 @@ class UserRegistered extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage())
+        return new MailMessage()
             ->subject(__('notifications.registration_subject'))
             ->greeting(__('notifications.registration_greeting'))
             ->line('<div style="text-align:center; height: 200px;"><img class="badgeImg" style="height: 200px; margin-bottom: 0;" src='

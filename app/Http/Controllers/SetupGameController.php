@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Player;
 use App\Repository\Game\GameRepository;
 use App\Repository\Player\PlayerRepository;
 use Illuminate\Http\Request;
@@ -12,15 +13,7 @@ use Illuminate\Support\Facades\View;
 
 class SetupGameController extends Controller
 {
-    protected PlayerRepository $playerRepository;
-
-    protected GameRepository $gameRepository;
-
-    public function __construct(PlayerRepository $playerRepository, GameRepository $gameRepository)
-    {
-        $this->playerRepository = $playerRepository;
-        $this->gameRepository = $gameRepository;
-    }
+    public function __construct(protected PlayerRepository $playerRepository, protected GameRepository $gameRepository) {}
 
     public function continueShow(Request $request, int $player_id, string $from, int $game_id)
     {
@@ -288,15 +281,12 @@ class SetupGameController extends Controller
     /**
      * Retrieve Switcher Settings for a player.
      *
-     * @param  App\Repository\Player\PlayerRepository  $player
-     *                                                          The player object to retrieve settings for.
-     *
      * @return array
      *               An array containing the control mode (1= automatic, 2=manual), scanning
      *               speed, automatic selection button, manual selection button, and manual
      *               navigation button for the player.
      */
-    private function getSwitcher($player)
+    private function getSwitcher(Player $player): array
     {
         $switcher = [
             'controlMode' => $player->auto,
@@ -315,10 +305,8 @@ class SetupGameController extends Controller
      * not even set (it will default to false on page-rendering). What we do
      * need on gameSelect*.blade.php is music and sound volume, along with the
      * updateVolumesUrl. Yay!
-     *
-     * @param  App\Repository\Player\PlayerRepository  $players
      */
-    private function getPlayerAudio($player)
+    private function getPlayerAudio(Player $player): array
     {
         $playerAudio = [
             'playerMusicVolume' => $player->music_volume,

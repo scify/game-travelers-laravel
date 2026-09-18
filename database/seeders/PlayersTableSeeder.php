@@ -9,12 +9,7 @@ use Illuminate\Database\Seeder;
 
 class PlayersTableSeeder extends Seeder
 {
-    protected PlayerRepository $playerRepository;
-
-    public function __construct(PlayerRepository $playerRepository)
-    {
-        $this->playerRepository = $playerRepository;
-    }
+    public function __construct(protected PlayerRepository $playerRepository) {}
 
     public function run()
     {

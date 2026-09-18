@@ -43,42 +43,6 @@ parameters:
 			path: app/Http/Controllers/HomeController.php
 
 		-
-			message: '#^Access to property \$auto on an unknown class App\\Http\\Controllers\\App\\Repository\\Player\\PlayerRepository\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Http/Controllers/SetupGameController.php
-
-		-
-			message: '#^Access to property \$navigate_key on an unknown class App\\Http\\Controllers\\App\\Repository\\Player\\PlayerRepository\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Http/Controllers/SetupGameController.php
-
-		-
-			message: '#^Access to property \$scanning_speed on an unknown class App\\Http\\Controllers\\App\\Repository\\Player\\PlayerRepository\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Http/Controllers/SetupGameController.php
-
-		-
-			message: '#^Access to property \$select_key on an unknown class App\\Http\\Controllers\\App\\Repository\\Player\\PlayerRepository\.$#'
-			identifier: class.notFound
-			count: 2
-			path: app/Http/Controllers/SetupGameController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$players$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/SetupGameController.php
-
-		-
-			message: '#^Parameter \$player of method App\\Http\\Controllers\\SetupGameController\:\:getSwitcher\(\) has invalid type App\\Http\\Controllers\\App\\Repository\\Player\\PlayerRepository\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Http/Controllers/SetupGameController.php
-
-		-
 			message: '#^PHPDoc type array of property App\\Models\\Player\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
 			identifier: property.phpDocType
 			count: 1
