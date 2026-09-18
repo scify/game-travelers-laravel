@@ -11,10 +11,10 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "lint": "eslint . --fix && prettier \"resources/**/*.{js,vue}\" eslint.config.js vite.config.js --write --log-level warn",
+        "lint": "eslint . --fix && prettier \"resources/**/*.{js,ts,vue}\" eslint.config.js vite.config.js --write --log-level warn",
         "lint:styles": "stylelint \"resources/**/*.{scss,vue}\" --fix",
         "prod": "vite build",
-        "test:lint": "eslint . && prettier \"resources/**/*.{js,vue}\" eslint.config.js vite.config.js --check --log-level warn",
+        "test:lint": "eslint . && prettier \"resources/**/*.{js,ts,vue}\" eslint.config.js vite.config.js --check --log-level warn",
         "test:lint:styles": "stylelint \"resources/**/*.{scss,vue}\""
     },
     "dependencies": {
