@@ -20,6 +20,7 @@ use App\Notifications\UserRegistered;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
@@ -29,6 +30,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::view('/about', 'about')->name('about');
 Route::view('/credits', 'credits')->name('credits');
 Route::view('/cookies-policy', 'cookies')->name('cookies-policy');
+
+// For crawlers. The sitemap it names is written by sitemap:generate.
+Route::get('robots.txt', fn (): Response => response()->view('robots')->header('Content-Type', 'text/plain'));
 
 Route::middleware(['auth'])->group(function (): void {
     Route::prefix('administration')->middleware('can:manage-platform')->name('administration.')->group(function (): void {

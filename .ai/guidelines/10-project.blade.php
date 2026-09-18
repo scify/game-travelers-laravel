@@ -19,7 +19,8 @@ Business logic lives in `app/BusinessLogicLayer/` (managers) and data access in 
 - `app/Http/Controllers/`: `HomeController` (landing page), `UserController` (select and create a player), `SettingsController` (profile, controls, difficulty), `SetupGameController` (continue, board, mode, pawns, options), `BoardController` (the game; `fromVue` receives the board's state), `CustomAudioController` (volumes), `Auth/` (login, registration).
 - `app/Http/Middleware/EnsureIdsAreValid.php`: guards every route that carries `{player_id}` and `{game_id}`.
 - `app/Models/`: `User`, `Player` (a user's game profiles, soft deleted), `Game`, `UserRole/`.
-- `routes/web.php`: all game routes require `auth` and follow `/{step}/{player_id}/{from}/{game_id}`. `routes/auth.php`: login and registration.
+- `app/Console/Commands/`: `GenerateSitemap` (`sitemap:generate`, run by the deployment; its `pages()` method is the list of public pages by route name, rendered by `resources/views/sitemap.blade.php`), `ClearAudioCache` (`audios:clear`, forgets the cached audio file list).
+- `routes/web.php`: all game routes require `auth` and follow `/{step}/{player_id}/{from}/{game_id}`; `robots.txt` is a route, rendering `resources/views/robots.blade.php`, so it can name the installation's sitemap URL. `routes/auth.php`: login and registration.
 - `resources/views/`: Blade templates. `components/layout.blade.php` is the page shell. It loads the `board.js` entry only when the view sets `$hasVue`.
 - `resources/js/`: four Vite entries at the root. `app.js` (Bootstrap and axios set-up, loaded on every page), `board.js` (Vue and the components in `components/`, mounted from Blade markup, loaded only where a view sets `$hasVue`), `settings.js` (the settings pages' scripts, one file each in `settings/`) and `switcher.js` (switch scanning on the game setup pages). Shared modules live in `lib/`: `audio.js` (`sound()` and `music()`), `debug.js` (the logger and event bus behind the board's debug tools, on only where `App\Support\DebugMode` says so, a local installation with `APP_DEBUG`), `keys.js` (the keys a player may assign), `lang.js` (`trans()`), `volumes.js` (saving a player's volumes). Imports use the `@` alias for `resources/js`. The only `window` globals are `window.bootstrap`, for one inline Blade script, and `window.travelersDebug`.
 - **Debug mode:** F2 on the board opens a strip that stages the game (`POST debug/game/{game_id}/state`, a 404 unless `DebugMode` is on) and plays through real key events. Scripts use `window.travelersDebug` (`state()`, `press()`, `roll()`, `move()`, `setState()`, `on()`, `once()`); never reach into the Vue instance. The README describes it.
@@ -30,7 +31,7 @@ Business logic lives in `app/BusinessLogicLayer/` (managers) and data access in 
 - `lang/el/`, `lang/en/`: translations.
 - `database/seeders/`: two users (@verbatim`admin-taxidiotes@scify.org`, `user-taxidiotes@scify.org`@endverbatim, password from `DEFAULT_USER_PASSWORD_FOR_SEED` in `.env`), roles and sample players.
 
-**Build output:** Vite writes `public/build/`; everything in `public/` is generated and ignored by git, except `.htaccess`, `index.php`, `robots.txt`, `favicon.ico`, `images/`, `audio/` and `vendor/` (assets published by the cookie consent package). Never edit generated files; change `resources/` and rebuild.
+**Build output:** Vite writes `public/build/`; everything in `public/` is generated and ignored by git, except `.htaccess`, `index.php`, `favicon.ico`, `images/`, `audio/` and `vendor/` (assets published by the cookie consent package). Never edit generated files; change `resources/` and rebuild.
 
 ### Code style, project specifics
 

@@ -94,13 +94,15 @@ sudo nano /etc/hosts
 
 ## SEO - Generate Sitemap
 
-This application uses [Spatie - Laravel Sitemap](https://github.com/spatie/laravel-sitemap) plugin, in order to create
-the `public/sitemap.xml` file (which is excluded from git), that will be crawled by the search engines.
-In order to run the generator for the current application installation, run the embedded Laravel command:
+The public pages are listed in `public/sitemap.xml`, which is excluded from git. Generate it after every deployment; the
+URLs in it are the installation's own:
 
 ```bash
 php artisan sitemap:generate
 ```
+
+The pages it lists are the `pages()` method of `app/Console/Commands/GenerateSitemap.php`, by route name; a new public
+page is added there. `robots.txt` is served by the application and points crawlers to the sitemap.
 
 ## Front end
 

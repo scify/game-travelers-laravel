@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: {{ url('sitemap.xml') }}

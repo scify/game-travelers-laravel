@@ -25,11 +25,11 @@
         "laravel/tinker": "^3.0.2",
         "scify/laravel-cookie-guard": "^5.1.0",
         "sentry/sentry-laravel": "^4.27.0",
-        "spatie/laravel-sitemap": "^8.2.0",
         "symfony/http-client": "^8.1.7",
         "symfony/mailgun-mailer": "^8.1.6"
     },
     "require-dev": {
+        "ext-simplexml": "*",
         "driftingly/rector-laravel": "^2.5.0",
         "fakerphp/faker": "^1.24.1",
         "larastan/larastan": "^3.10.0",
