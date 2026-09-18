@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'google_analytics' => [
         '_ga_description' => 'Set by Google Analytics to distinguish unique users. Google may use this data to deliver, maintain, and improve their services, measure advertising effectiveness, and personalise content and ads.',

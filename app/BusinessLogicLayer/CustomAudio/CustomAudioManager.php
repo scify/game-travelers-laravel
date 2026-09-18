@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\BusinessLogicLayer\CustomAudio;
 
 use Illuminate\Support\Facades\Storage;

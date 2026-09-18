@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Support\CookieNames;
 
 $appName = (string) env('APP_NAME', 'laravel');

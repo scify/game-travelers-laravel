@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\BusinessLogicLayer\CustomAudio\CustomAudioManager;
@@ -102,7 +104,7 @@ class CustomAudioController extends Controller
 
     public function uploadCustomAudioFile(Request $request)
     {
-        $player_id = $request->player_id;
+        $player_id = $request->integer('player_id');
         $audio_name = $request->audio_name;
         $audio_path = $request->path;
         $index = $request->index;
@@ -113,15 +115,16 @@ class CustomAudioController extends Controller
 
     public function removeCustomAudioFile(Request $request)
     {
-        $player_id = $request->player_id;
+        $player_id = $request->integer('player_id');
         $this->createFolderForPlayerIfRequired($player_id);
     }
 
     public function updateVolumes(Request $request)
     {
-        $player_id = $request->player_id;
-        $music_volume = $request->has('music_volume') ? $request->music_volume : null;
-        $sound_volume = $request->has('sound_volume') ? $request->sound_volume : null;
+        // The browser posts the id and the slider values as strings; read them typed.
+        $player_id = $request->integer('player_id');
+        $music_volume = $request->has('music_volume') ? $request->float('music_volume') : null;
+        $sound_volume = $request->has('sound_volume') ? $request->float('sound_volume') : null;
         $this->updateVolumesToDB($player_id, $music_volume, $sound_volume);
 
         return response([]);

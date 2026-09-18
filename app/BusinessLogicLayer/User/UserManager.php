@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\BusinessLogicLayer\User;
 
 use App\BusinessLogicLayer\User\UserRole\UserRoleManager;
