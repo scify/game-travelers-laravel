@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Illuminate\Support\Facades\Lang;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -49,5 +50,15 @@ class PublicPagesTest extends TestCase
             ->assertOk()
             ->assertSee('Ταξιδιώτες')
             ->assertSee('ΕΛΕΠΑΠ');
+    }
+
+    #[Test]
+    public function cookie_policy_page_is_titled_as_cookie_policy(): void
+    {
+        $title = Lang::string('messages.cookies_policy') . ' | ' . Lang::string('messages.app_name');
+
+        $this->get('/cookies-policy')
+            ->assertOk()
+            ->assertSeeHtml('<title>' . e($title) . '</title>');
     }
 }

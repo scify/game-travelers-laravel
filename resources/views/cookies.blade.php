@@ -1,6 +1,6 @@
 <x-layoutContent
-    :title="__('messages.privacy_policy') . ' | ' . __('messages.app_name')"
-    :description="'Πολιτική απορρήτου για τους «Ταξιδιώτες».'"
+    :title="__('messages.cookies_policy') . ' | ' . __('messages.app_name')"
+    :description="'Πολιτική Cookies για τους «Ταξιδιώτες».'"
     :header-background-color="'green'"
 >
 
