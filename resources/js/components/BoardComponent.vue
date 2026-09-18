@@ -1,6 +1,6 @@
 <template>
 	<div class="w-100 h-100 p-0 m-0">
-		<Transition name="fade_init">
+		<Transition name="fade-init">
 			<div
 				v-if="this.gameEnd === 0"
 				class="w-100 h-100 p-0 m-0"
@@ -36,7 +36,6 @@
 						v-bind:src="this.getExtrasSrc()"
 						style="z-index: 4; position: absolute; display: block"
 					/>
-					<Transition name="fade">
 						<img
 							@mouseover="infoState = 1"
 							@mouseleave="infoState = 0"
@@ -50,7 +49,6 @@
 								top: calc(50% - 340px);
 							"
 						/>
-					</Transition>
 					<Transition name="fade">
 						<img
 							v-if="this.showPopUp"
@@ -63,7 +61,7 @@
 							"
 						/>
 					</Transition>
-					<Transition name="fade_blue">
+					<Transition name="fade-blue">
 						<img
 							v-if="this.blue_position_show"
 							v-bind:src="this.computeBlueSrc"
@@ -116,7 +114,7 @@
 						<img
 							:class="{
 								shake: this.rollingAnimation,
-								moveUpDown: this.rollAnimation,
+								'move-up-down': this.rollAnimation,
 							}"
 							v-if="this.center_src.length > 0"
 							v-bind:src="this.center_src"
@@ -130,7 +128,7 @@
 				</div>
 			</div>
 		</Transition>
-		<Transition name="fade_init">
+		<Transition name="fade-init">
 			<div
 				v-if="this.showWin"
 				class="w-100 h-100 p-0 m-0"
@@ -138,7 +136,7 @@
 					backgroundImage: this.computeBackgroundSrc,
 				}"
 			>
-				<Transition name="fade_init">
+				<Transition name="fade-init">
 					<img
 						v-if="this.winFrame > 0"
 						v-bind:src="this.winFrame1"
@@ -161,7 +159,7 @@
 				</Transition>
 			</div>
 		</Transition>
-		<Transition name="fade_loose">
+		<Transition name="fade-loose">
 			<div
 				v-if="this.showLoose"
 				class="w-100 h-100 p-0 m-0"
@@ -174,6 +172,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
 	mounted() {
 		console.log("Component mounted.");
@@ -183,12 +183,12 @@ export default {
 		this.init();
 	},
 	props: {
-		backendUrl: String,
-		boardUrl: String,
-		updateVolumesUrl: String,
-		continueUrl: String,
-		playerId: Number,
-		gameId: Number,
+		backendUrl: { type: String, required: true },
+		boardUrl: { type: String, required: true },
+		updateVolumesUrl: { type: String, required: true },
+		continueUrl: { type: String, required: true },
+		playerId: { type: Number, required: true },
+		gameId: { type: Number, required: true },
 		playerData: {
 			type: Object,
 			default: function () {
@@ -1087,11 +1087,11 @@ export default {
 	}
 }
 
-.moveUpDown {
-	animation: moveUpDown 1s linear infinite;
+.move-up-down {
+	animation: move-up-down 1s linear infinite;
 }
 
-@keyframes moveUpDown {
+@keyframes move-up-down {
 	0%,
 	100% {
 		transform: translateY(5px);
@@ -1111,33 +1111,33 @@ export default {
 	opacity: 0;
 }
 
-.fade_blue-enter-active,
-.fade_blue-leave-active {
+.fade-blue-enter-active,
+.fade-blue-leave-active {
 	transition: opacity 0.5s;
 }
 
-.fade_blue-enter-from,
-.fade_blue-leave-to {
+.fade-blue-enter-from,
+.fade-blue-leave-to {
 	opacity: 0;
 }
 
-.fade_loose-enter-active,
-.fade_loose-leave-active {
+.fade-loose-enter-active,
+.fade-loose-leave-active {
 	transition: opacity 3s;
 }
 
-.fade_loose-enter-from,
-.fade_loose-leave-to {
+.fade-loose-enter-from,
+.fade-loose-leave-to {
 	opacity: 0;
 }
 
-.fade_init-enter-active,
-.fade_init-leave-active {
+.fade-init-enter-active,
+.fade-init-leave-active {
 	transition: opacity 1s;
 }
 
-.fade_init-enter-from,
-.fade_init-leave-to {
+.fade-init-enter-from,
+.fade-init-leave-to {
 	opacity: 0;
 }
 

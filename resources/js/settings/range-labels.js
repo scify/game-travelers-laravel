@@ -92,13 +92,13 @@ window.addEventListener("load", function () {
 		const sliderHeight =
 			(rangePercent / 100) * triangleHeightRange + triangleHeightMin;
 		// Set CSS variables:
-		progressElement.style.setProperty("--sliderProgress", sliderProgress);
+		progressElement.style.setProperty("--slider-progress", sliderProgress);
 		progressElement.style.setProperty(
-			"--sliderOpacity",
+			"--slider-opacity",
 			sliderOpacity.toString()
 		);
 		progressElement.style.setProperty(
-			"--sliderHeight",
+			"--slider-height",
 			sliderHeight + "em"
 		);
 	}

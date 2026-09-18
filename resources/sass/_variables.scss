@@ -1,7 +1,6 @@
 // Body
 // Using Bootstrap's default, but keeping the option open for a Travelers green.
 $body-bg: #c3d0c9; // # Travelers Green: #c3d0c9 as of Nov 25, 2022. Def: #f8fafc;
-//
 // Typography
 // Falling back to the default values instead of the overrides but setting
 // Manrope as the default font for all sans-serifs and a few more system fonts.
@@ -13,7 +12,6 @@ $font-size-base: 1rem; // default: 1rem (instead of 0.9rem), at about ~16px
 $line-height-base: 1.5; // default: 1.5 (instead of 1.6)
 // Enabling negative margins.
 $enable-negative-margins: true;
-//
 // Spacers
 // Using the default values, but adding 6 & 7 to the array for 6rem and 12rem.
 // @see https://getbootstrap.com/docs/5.0/utilities/spacing/
@@ -45,7 +43,6 @@ $form-range-thumb-focus-box-shadow: 0 0 0 1px $body-bg,
 // $form-range-thumb-focus-box-shadow-width:  $input-focus-width; // For focus box shadow issue in Edge
 $form-range-thumb-active-bg: tint-color(#383735, 70%);
 // $form-range-thumb-disabled-bg:             $gray-500;
-//
 // Note:
 // Web design is thankfully moving back to CSS and its variables which have
 // become far more popular than their Sass counterparts as they are far more

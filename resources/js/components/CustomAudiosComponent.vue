@@ -54,9 +54,9 @@
 <script>
 export default {
 	props: {
-		playerId: Number,
-		uploadAudioUrl: String,
-		removeAudioUrl: String,
+		playerId: { type: Number, required: true },
+		uploadAudioUrl: { type: String, required: true },
+		removeAudioUrl: { type: String, required: true },
 		audios: {
 			type: Object,
 			default: function () {
