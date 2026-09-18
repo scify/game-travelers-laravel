@@ -54,8 +54,8 @@ class RegisteredUserController extends Controller
         ]);
 
         $user = $this->userManager->create([
-            'email' => trim($request->email),
-            'password' => trim($request->password),
+            'email' => mb_trim($request->email),
+            'password' => mb_trim($request->password),
         ]);
 
         // The welcome mail must not take the registration down with it: the user

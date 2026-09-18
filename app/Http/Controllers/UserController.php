@@ -83,7 +83,7 @@ class UserController extends Controller
     {
         $user_id = auth()->user()->id;
         $input = $request->only('name', 'avatarId');
-        $name = trim($input['name']);
+        $name = mb_trim($input['name']);
         $avatar_id = (int) $input['avatarId'];
         $players = $this->playerRepository->allWhere(['user_id' => $user_id], ['id', 'name']);
         $name_found = false;

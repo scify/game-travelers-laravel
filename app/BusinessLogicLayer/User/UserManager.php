@@ -63,7 +63,7 @@ class UserManager
     public function update(int $id, array $requestData): User
     {
         $user = $this->userRepository->update([
-            'email' => trim($requestData['email']),
+            'email' => mb_trim($requestData['email']),
         ], $id);
         if ($requestData['password']) {
             $user = $this->userRepository->update([
