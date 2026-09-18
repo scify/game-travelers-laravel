@@ -14,12 +14,6 @@ use Laravel\Boost\Mcp\ToolExecutor;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * The path logged-in users are sent to after login and registration,
-     * and when they open a guest-only page.
-     */
-    public const string HOME = '/home';
-
-    /**
      * Register any application services.
      */
     public function register(): void

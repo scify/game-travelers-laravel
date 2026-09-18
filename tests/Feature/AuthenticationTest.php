@@ -42,21 +42,21 @@ class AuthenticationTest extends TestCase
     }
 
     #[Test]
-    public function login_sends_user_home(): void
+    public function login_sends_user_to_dashboard(): void
     {
         $this->post('/login', [
             'email' => 'user-taxidiotes@scify.org',
             'password' => 'develop',
-        ])->assertRedirect('/home');
+        ])->assertRedirect(route('dashboard'));
 
         $this->assertAuthenticatedAs($this->seededUser());
     }
 
     #[Test]
-    public function home_sends_user_to_player_selection(): void
+    public function dashboard_sends_user_to_player_selection(): void
     {
         $this->actingAs($this->seededUser())
-            ->get('/home')
+            ->get(route('dashboard'))
             ->assertRedirect(route('select.player', [0, 'user', 0]));
     }
 
@@ -86,7 +86,7 @@ class AuthenticationTest extends TestCase
     {
         Notification::fake();
 
-        $this->post('/register', $this->registration())->assertRedirect('/home');
+        $this->post('/register', $this->registration())->assertRedirect(route('dashboard'));
 
         $user = User::query()->where('email', 'new-player@example.org')->firstOrFail();
         $this->assertAuthenticatedAs($user);
@@ -101,7 +101,7 @@ class AuthenticationTest extends TestCase
         config()->set('mail.from.address', '');
         $log = Log::spy();
 
-        $this->post('/register', $this->registration())->assertRedirect('/home');
+        $this->post('/register', $this->registration())->assertRedirect(route('dashboard'));
 
         $user = User::query()->where('email', 'new-player@example.org')->firstOrFail();
         $this->assertAuthenticatedAs($user);
@@ -115,6 +115,14 @@ class AuthenticationTest extends TestCase
 
         $this->assertGuest();
         $this->assertDatabaseMissing('users', ['email' => 'new-player@example.org']);
+    }
+
+    #[Test]
+    public function logged_in_user_opening_login_is_sent_to_dashboard(): void
+    {
+        $this->actingAs($this->seededUser())
+            ->get(route('login'))
+            ->assertRedirect(route('dashboard'));
     }
 
     /**

@@ -135,7 +135,7 @@ Route::middleware('auth')->group(function (): void {
     Route::post('/select/options/{player_id}/{from}/{game_id}', [SetupGameController::class, 'optionsSave'])
         ->name('select.options')->middleware(EnsureIdsAreValid::class);
 
-    Route::get('home', fn () => to_route('select.player', [0, 'user', 0]));
+    Route::get('home', fn () => to_route('select.player', [0, 'user', 0]))->name('dashboard');
 
     Route::get('logout', fn (): Factory|View => view('logoutDummy'))->name('dummy.logout');
 
