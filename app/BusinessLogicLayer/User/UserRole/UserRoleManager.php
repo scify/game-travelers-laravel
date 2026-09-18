@@ -115,17 +115,12 @@ class UserRoleManager
         return $userRoles->contains($roleId);
     }
 
-    private function checkCacheOrDBForRoleAndStore(User $user, $roleId)
+    private function checkCacheOrDBForRoleAndStore(User $user, int $roleId): bool
     {
-        $cacheKey = $this->getRoleCacheKey($user->id, $roleId);
-        $result = Cache::get($cacheKey . $user->id);
-        if ($result === null) {
-            $userRoles = $user->roles;
-            $result = $this->rolesInclude($userRoles, $roleId);
-            $this->storeUserRoleInCache($user->id, $roleId);
-        }
-
-        return $result;
+        return Cache::rememberForever(
+            $this->getRoleCacheKey($user->id, $roleId),
+            fn (): bool => $this->rolesInclude($user->roles, $roleId),
+        );
     }
 
     private function storeUserRoleInCache(int $userId, int $roleId): bool
@@ -140,8 +135,11 @@ class UserRoleManager
         Cache::forget($this->getRoleCacheKey($user->id, $roleId));
     }
 
+    /**
+     * Versioned key: a change of format makes every entry written under the previous format unreachable.
+     */
     private function getRoleCacheKey(int $userId, int $roleId): string
     {
-        return 'user_' . $userId . '_role_' . $roleId;
+        return 'user-role:' . $userId . ':' . $roleId;
     }
 }
