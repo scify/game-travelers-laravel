@@ -288,15 +288,13 @@ class SetupGameController extends Controller
      */
     private function getSwitcher(Player $player): array
     {
-        $switcher = [
+        return [
             'controlMode' => $player->auto,
             'scanningSpeed' => $player->scanning_speed,
             'automaticSelectionButton' => $player->select_key,
             'manualSelectionButton' => $player->select_key,
             'manualNavigationButton' => $player->navigate_key,
         ];
-
-        return $switcher;
     }
 
     /**
@@ -308,14 +306,12 @@ class SetupGameController extends Controller
      */
     private function getPlayerAudio(Player $player): array
     {
-        $playerAudio = [
+        return [
             'playerMusicVolume' => $player->music_volume,
             'playerSoundVolume' => $player->sound_volume,
             'updateVolumesUrl' => route('audio.updateVolumes'),
             'playerUrl' => '/player/' . $player->id, // see concept below
         ];
-
-        return $playerAudio;
     }
 
     private function checkIfActiveGameHasStarted($game_id)
