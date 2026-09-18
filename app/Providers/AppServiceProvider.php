@@ -7,6 +7,7 @@ namespace App\Providers;
 use App\BusinessLogicLayer\User\UserRole\UserRoleManager;
 use App\Support\Dev\Ddev;
 use Illuminate\Foundation\DevCommands;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Boost\Mcp\ToolExecutor;
 
@@ -16,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      * The path logged-in users are sent to after login and registration,
      * and when they open a guest-only page.
      */
-    public const HOME = '/home';
+    public const string HOME = '/home';
 
     /**
      * Register any application services.
@@ -29,22 +30,10 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot(UserRoleManager $userRoleManager): void
     {
-        $this->app->make(UserRoleManager::class)->registerUserPolicies();
-        $this->configureDevCommands();
-    }
-
-    /**
-     * Trim the `artisan dev` process set to what this application uses.
-     */
-    private function configureDevCommands(): void
-    {
-        // Plain interleaved output in the terminal's own buffer:
-        DevCommands::inline();
-        DevCommands::except('queue', ...(Ddev::isActive() ? ['server'] : []));
-        // @link https://github.com/laravel/multiplex/issues/24
-        DevCommands::register('exec node_modules/.bin/vite', 'vite');
+        $this->configureCommands();
+        $this->configureGates($userRoleManager);
     }
 
     /**
@@ -67,5 +56,29 @@ class AppServiceProvider extends ServiceProvider
 
             return new ToolExecutor();
         });
+    }
+
+    /**
+     * Configure the application's commands.
+     */
+    private function configureCommands(): void
+    {
+        DB::prohibitDestructiveCommands(
+            $this->app->isProduction(),
+        );
+
+        // Plain interleaved output in the terminal's own buffer:
+        DevCommands::inline();
+        DevCommands::except('queue', ...(Ddev::isActive() ? ['server'] : []));
+        // @link https://github.com/laravel/multiplex/issues/24
+        DevCommands::register('exec node_modules/.bin/vite', 'vite');
+    }
+
+    /**
+     * Register the gates the user roles grant.
+     */
+    private function configureGates(UserRoleManager $userRoleManager): void
+    {
+        $userRoleManager->registerUserPolicies();
     }
 }
