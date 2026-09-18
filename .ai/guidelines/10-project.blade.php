@@ -24,12 +24,12 @@ Business logic lives in `app/BusinessLogicLayer/` (managers) and data access in 
 - `resources/js/app.js`: Bootstrap, translations (`lang.js`), key handling (`keys.js`) and the audio player (`audio.js`), loaded on every page. `vue.js`: Vue and the two components in `components/`, loaded only on the board.
 - `resources/js/settings/*.js` and `resources/js/switcher/*.js`: bundled into `public/js/functions/settings.js` and `switcher.js`.
 - `resources/sass/app.scss`: Bootstrap customisation and the theme's components.
-- `resources/images/`: about 5000 files, copied to `public/images/` on every build. Optimise images before committing them; the build does not.
-- `resources/audio/`: `sounds/` is in git. `fx/` and `music/` hold copyrighted files that are not in git; their README files list what to download. Everything is copied to `public/audio/`.
+- `public/images/`: about 5000 files, tracked and served as they are. Optimise images before committing them; the build does not.
+- `public/audio/`: `sounds/` is in git. `fx/` and `music/` hold copyrighted files that are not in git; their README files list what to download. The game loads audio by URL, never through the bundler.
 - `lang/el/`, `lang/en/`: translations.
 - `database/seeders/`: two users (@verbatim`admin-taxidiotes@scify.org`, `user-taxidiotes@scify.org`@endverbatim, password from `DEFAULT_USER_PASSWORD_FOR_SEED` in `.env`), roles and sample players.
 
-**Build output:** everything in `public/` is generated and ignored by git, except `.htaccess`, `index.php`, `robots.txt` and `vendor/` (assets published by the cookie consent package). Never edit generated files; change `resources/` and rebuild.
+**Build output:** everything in `public/` is generated and ignored by git, except `.htaccess`, `index.php`, `robots.txt`, `favicon.ico`, `images/`, `audio/` and `vendor/` (assets published by the cookie consent package). Never edit generated files; change `resources/` and rebuild.
 
 ### Code style, project specifics
 

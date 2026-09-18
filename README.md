@@ -158,16 +158,16 @@ sudo nano /etc/hosts
 
 ## About the music files
 
-The directories under `resources/audio/fx` and `resources/audio/music` should contain audio (.mp3) files that are not checked in source control, because of copyright issues.
+The directories `public/audio/fx` and `public/audio/music` should contain audio (.mp3) files that are not checked in source control, because of copyright issues.
 
-Please check `resources/audio/fx/README.md` and `resources/audio/music/README.md` , in order to see which files you should download and put there.
+Please check `public/audio/fx/README.md` and `public/audio/music/README.md`, in order to see which files you should download and put there.
 
 To upload the files to a server, you can use `scp`, for example:
 
 ```bash
-scp -r /path/to/local/fx/* user@server:/path/to/project/resources/audio/fx
+scp -r /path/to/local/fx/* user@server:/path/to/project/public/audio/fx
 
-scp -r /path/to/local/music/* user@server:/path/to/project/resources/audio/music
+scp -r /path/to/local/music/* user@server:/path/to/project/public/audio/music
 ```
 
 ## How to debug

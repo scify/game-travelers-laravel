@@ -19,7 +19,7 @@
     });
 
     // Default Sound files to JSON
-    $audioPath = base_path("resources/audio/");
+    $audioPath = public_path('audio');
     $audioFiles = Cache::rememberForever('audioFiles', function () use ($audioPath) {
         return collect(File::directories($audioPath))
             ->mapWithKeys(function ($directory) {

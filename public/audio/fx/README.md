@@ -1,4 +1,4 @@
-# Music
+# Sound effects
 
 ## License
 

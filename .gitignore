@@ -28,10 +28,8 @@ Homestead.yaml
 Thumbs.db
 
 # Laravel Mix outputs, until the move to Vite
-/public/audio
 /public/css
 /public/fonts
-/public/images
 /public/js
 /public/mix-manifest.json
 /resources/sass/*.css
@@ -40,7 +38,6 @@ Thumbs.db
 # Generated on the server
 /public/sitemap.xml
 /public/web.config
-/public/*.ico
 /public/*.html
 
 # IDE helpers
