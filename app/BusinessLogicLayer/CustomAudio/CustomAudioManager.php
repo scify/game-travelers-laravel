@@ -9,7 +9,7 @@ class CustomAudioManager
     public function userExists(int $userId): bool
     {
         $file = Storage::disk('local')->get('custom-sounds/' . $userId);
-        if ($file == null) {
+        if ($file === null) {
             return false;
         }
 

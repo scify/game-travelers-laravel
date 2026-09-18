@@ -19,7 +19,7 @@ class PlayersTableSeeder extends Seeder
         echo "\nRunning Player Seeder...\n";
 
         $player_ids = $this->playerRepository->allWhere(['user_id' => 2], ['id'])->pluck('id')->all();
-        if (count($player_ids) == 0) {
+        if (count($player_ids) === 0) {
             $data = [
                 ['user_id' => 2, 'name' => 'Κώστας Παπ.', 'avatar_id' => 5],
                 ['user_id' => 2, 'name' => 'Νίκη Καραγ.', 'avatar_id' => 3],

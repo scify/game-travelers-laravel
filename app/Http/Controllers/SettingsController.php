@@ -18,7 +18,7 @@ class SettingsController extends Controller
 
     public function settingsShow(Request $request, int $player_id, string $back_route, int $game_id)
     {
-        if ($player_id == 0) {
+        if ($player_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
 
@@ -85,7 +85,7 @@ class SettingsController extends Controller
 
     public function profileShow(Request $request, int $player_id, string $back_route, int $game_id)
     {
-        if ($player_id == 0) {
+        if ($player_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
 
@@ -102,7 +102,7 @@ class SettingsController extends Controller
 
     public function profileSave(Request $request, int $player_id, string $back_route, int $game_id)
     {
-        if ($player_id == 0) {
+        if ($player_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
 
@@ -113,7 +113,7 @@ class SettingsController extends Controller
         $players = $this->playerRepository->allWhere(['user_id' => $user_id], ['id', 'name']);
         $name_found = false;
         foreach ($players as $player) {
-            if ($player->id != $player_id && mb_strtolower($player->name) == mb_strtolower($name)) {
+            if ($player->id !== $player_id && mb_strtolower($player->name) === mb_strtolower($name)) {
                 $name_found = true;
             }
         }
@@ -129,7 +129,7 @@ class SettingsController extends Controller
 
     public function controlsShow(Request $request, int $player_id, string $back_route, int $game_id)
     {
-        if ($player_id == 0) {
+        if ($player_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
 
@@ -143,9 +143,9 @@ class SettingsController extends Controller
         $control_manual_nav = 'Space';
         $control_select = $players[0]->select_key;
         $control_nav = $players[0]->navigate_key;
-        if ($control_mode == 1) {
+        if ($control_mode === 1) {
             $control_auto_select = $control_select;
-        } elseif ($control_mode == 2) {
+        } elseif ($control_mode === 2) {
             $control_manual_select = $control_select;
             $control_manual_nav = $control_nav;
         }
@@ -161,7 +161,7 @@ class SettingsController extends Controller
 
     public function controlsSave(Request $request, int $player_id, string $back_route, int $game_id)
     {
-        if ($player_id == 0) {
+        if ($player_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
 
@@ -173,7 +173,7 @@ class SettingsController extends Controller
         $help_after_tries = (int) $input['helpAfterTries'];
         $scanning_speed = (int) $input['scanningSpeed'];
         $select = $control_auto_select;
-        if ($control_mode == 2) {
+        if ($control_mode === 2) {
             $select = $control_manual_select;
         }
         $entry = ['auto' => $control_mode, 'select_key' => $select, 'navigate_key' => $control_manual_nav, 'help_after_x_mistakes' => $help_after_tries, 'scanning_speed' => $scanning_speed];
@@ -184,7 +184,7 @@ class SettingsController extends Controller
 
     public function difficultyShow(Request $request, int $player_id, string $back_route, int $game_id)
     {
-        if ($player_id == 0) {
+        if ($player_id === 0) {
             return Redirect::route('select.player', [0, 'user', 0]);
         }
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id', 'dice_type', 'board_size', 'difficulty', 'movement_mode']);
@@ -205,7 +205,7 @@ class SettingsController extends Controller
 
     public function difficultySave(Request $request, int $player_id, string $back_route, int $game_id)
     {
-        if ($player_id == 0) {
+        if ($player_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
 

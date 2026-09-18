@@ -35,13 +35,13 @@ class EnsureIdsAreValid
         $player_id = (int) $parameters['player_id'];
         $game_id = (int) $parameters['game_id'];
         $user_id = auth()->id();
-        if ($player_id == 0) {
+        if ($player_id === 0) {
             return $next($request);
         }
 
         if (! $this->playerRepository->playerExists($player_id, $user_id)) {
             abort(403, __('messages.unauthorized_action'));
-        } elseif ($game_id != 0) {
+        } elseif ($game_id !== 0) {
             if (! $this->gameRepository->gameExists($game_id, $user_id)) {
                 if ($this->gameRepository->gameExistsAsInactive($game_id, $user_id)) {
                     return Redirect::route('select.board', [$player_id, 'board', 0]);

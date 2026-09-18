@@ -20,7 +20,7 @@ class BoardController extends Controller
 
     public function play(Request $request, int $player_id, int $game_id)
     {
-        if ($player_id == 0 || $game_id == 0) {
+        if ($player_id === 0 || $game_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
         $player = $this->playerRepository->allWhere(['id' => $player_id]);
@@ -64,23 +64,23 @@ class BoardController extends Controller
     public function fromVue(Request $request)
     {
         $user_id = auth()->user()->id;
-        $player_id = $request->player_id;
-        $game_id = $request->game_id;
-        $first_player_turn = $request->first_player_turn;
-        $location_1 = $request->location_1;
-        $location_2 = $request->location_2;
-        $dice_type = $request->dice_type;
-        $game_phase = $request->game_phase;
-        $difficulty = $request->difficulty;
-        $game_mode = $request->game_mode;
-        $board_id = $request->board_id;
+        $player_id = $request->integer('player_id');
+        $game_id = $request->integer('game_id');
+        $first_player_turn = $request->integer('first_player_turn');
+        $location_1 = $request->integer('location_1');
+        $location_2 = $request->integer('location_2');
+        $dice_type = $request->integer('dice_type');
+        $game_phase = $request->integer('game_phase');
+        $difficulty = $request->integer('difficulty');
+        $game_mode = $request->integer('game_mode');
+        $board_id = $request->integer('board_id');
         $games = $this->gameRepository->allWhere(['id' => $game_id]);
-        if (count($games) != 1) {
+        if (count($games) !== 1) {
             return response(['message' => 'Game not found'], 302);
         }
         $game = $games[0];
 
-        if ($user_id != $game->user_id || $player_id != $game->player_id) {
+        if ($user_id !== $game->user_id || $player_id !== $game->player_id) {
             return response(['message' => __('messages.unauthorized_action')], 403);
         }
 
@@ -99,7 +99,7 @@ class BoardController extends Controller
         }
 
         // check if game is over
-        if ($active_player_pos == $this->getFinalPos($board_size)) {
+        if ($active_player_pos === $this->getFinalPos($board_size)) {
             if ($first_player_turn) {
                 $entry = ['active' => false, 'location_1' => $active_player_pos];
                 $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
@@ -112,34 +112,34 @@ class BoardController extends Controller
             return response(['gameEnded' => -1]);
 
         }
-        if ($game_phase == 1) { // asked to roll dice and compute new target position
+        if ($game_phase === 1) { // asked to roll dice and compute new target position
             $new_position = $latest_random_result;
-            if ($game_phase != $db_game_phase || $latest_random_result == 0) {
+            if ($game_phase !== $db_game_phase || $latest_random_result === 0) {
                 $new_position = $this->rollDieForPlayerAndReturnNewPosition($active_player_pos, $board_size, $tutorial_mode, $first_player_turn, $difficulty);
                 $entry = ['latest_random_result' => $new_position, 'game_phase' => 1];
                 $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
             }
             $dice_result = $new_position - $active_player_pos;
-            if ($dice_type == 3) {
+            if ($dice_type === 3) {
                 $dice_result = $this->getColourIdOfPos($new_position);
             }
 
             return response(['gameEnded' => 0, 'newPosition' => $new_position, 'diceResult' => $dice_result]);
         }
-        if ($game_phase == 2) { // move performed by die roll in the front-end
+        if ($game_phase === 2) { // move performed by die roll in the front-end
             // check if call is made again before
 
-            if ($game_phase == $db_game_phase) {
+            if ($game_phase === $db_game_phase) {
                 $active_player_pos = $db_active_player_pos;
             }
             // check if you must draw card
             $colour_id = $this->getColourIdOfPos($active_player_pos);
-            if ($colour_id == 3 || $colour_id == 5) {
-                if ($db_game_phase != $game_phase) {
+            if ($colour_id === 3 || $colour_id === 5) {
+                if ($db_game_phase !== $game_phase) {
                     $latest_random_result = $this->getAValidCard($board_size, $active_player_pos, $board_id, $tutorial_mode);
                 }
                 $random_card = $latest_random_result;
-                if ($game_phase != $db_game_phase) {
+                if ($game_phase !== $db_game_phase) {
                     $entry = ['latest_random_result' => $latest_random_result, 'game_phase' => 2, 'location_1' => $active_player_pos];
                     if (! $first_player_turn) {
                         $entry = ['latest_random_result' => $latest_random_result, 'game_phase' => 2, 'location_2' => $active_player_pos];
@@ -149,7 +149,7 @@ class BoardController extends Controller
 
                 return response(['gameEnded' => 0, 'drawCard' => $random_card, 'firstPlayerTurn' => $db_first_player_turn]);
             }
-            if ($game_phase != $db_game_phase) {
+            if ($game_phase !== $db_game_phase) {
                 $first_player_turn_new_value = true;
                 if ($game_mode > 1) { // switch player only if the game is not solo
                     if ($first_player_turn) {
@@ -168,8 +168,8 @@ class BoardController extends Controller
             return response(['gameEnded' => 0, 'drawCard' => 0, 'firstPlayerTurn' => $db_first_player_turn]);
 
         }
-        if ($game_phase == 3) { // move performed by card
-            if ($game_phase != $db_game_phase) {
+        if ($game_phase === 3) { // move performed by card
+            if ($game_phase !== $db_game_phase) {
                 $first_player_turn_new_value = true;
                 if ($game_mode > 1) { // switch player only if the game is not solo
                     if ($first_player_turn) {
@@ -200,7 +200,7 @@ class BoardController extends Controller
         }
 
         $dice_result = rand(1, $roll_threshold);
-        if ($difficulty == 1 && $first_player_turn) {
+        if ($difficulty === 1 && $first_player_turn) {
             $dice_result2 = rand(1, $roll_threshold);
             if ($dice_result2 > $dice_result) {
                 $dice_result = $dice_result2;
@@ -208,20 +208,20 @@ class BoardController extends Controller
         }
 
         if ($tutorial_mode && $first_player_turn) {
-            if ($pos == 0) {
+            if ($pos === 0) {
                 return 4;
             }
-            if ($pos == 4) {
+            if ($pos === 4) {
                 return 6;
             }
-            if ($pos == 6) {
+            if ($pos === 6) {
                 return 9;
             }
         } elseif ($tutorial_mode && ! $first_player_turn) {
-            if ($pos == 0) {
+            if ($pos === 0) {
                 return 1;
             }
-            if ($pos == 1) {
+            if ($pos === 1) {
                 return 4;
             }
         }
@@ -231,10 +231,10 @@ class BoardController extends Controller
 
     protected function getFinalPos(int $board_size): int
     {
-        if ($board_size == 1) {
+        if ($board_size === 1) {
             return 15;
         }
-        if ($board_size == 2) {
+        if ($board_size === 2) {
             return 30;
         }
 
@@ -259,7 +259,7 @@ class BoardController extends Controller
         $random = rand(1, 10);
         if (! $is_tutorial) {
             $randomPolarity = rand(1, 2);
-            if ($randomPolarity == 2) {
+            if ($randomPolarity === 2) {
                 $random *= -1;
             }
         }
@@ -284,7 +284,7 @@ class BoardController extends Controller
 
     protected function getCards($board_id)
     {
-        if ($board_id == 1) {
+        if ($board_id === 1) {
             return [
                 1 => [
                     'name' => 'Fish',
@@ -368,7 +368,7 @@ class BoardController extends Controller
                 ],
             ];
         }
-        if ($board_id == 2) {
+        if ($board_id === 2) {
             return [
                 1 => [
                     'name' => 'Map',
@@ -452,7 +452,7 @@ class BoardController extends Controller
                 ],
             ];
         }
-        if ($board_id == 3) {
+        if ($board_id === 3) {
             return [
                 1 => [
                     'name' => 'Map',

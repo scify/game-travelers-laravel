@@ -28,7 +28,7 @@ class CustomAudioController extends Controller
      */
     public function audioShow(Request $request, int $player_id, string $back_route, int $game_id)
     {
-        if ($player_id == 0) {
+        if ($player_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
 
@@ -89,7 +89,7 @@ class CustomAudioController extends Controller
      */
     public function audioSave(Request $request, int $player_id, string $back_route, int $game_id)
     {
-        if ($player_id == 0) {
+        if ($player_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
         $input = $request->only('musicVolume', 'soundVolume');

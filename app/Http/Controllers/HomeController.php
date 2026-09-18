@@ -95,7 +95,7 @@ class HomeController extends Controller
         $slides = $this->getHomeCarouselSlides();
         $randIndex = rand(1, count($slides));
         foreach ($slides as $index => &$slide) {
-            $slide['active'] = ($index == $randIndex);
+            $slide['active'] = ($index === $randIndex);
         }
 
         return $slides;

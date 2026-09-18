@@ -78,10 +78,6 @@ class UserRoleManager
      */
     public function userHasRole(User $user, int $roleId): bool
     {
-        if ($user == null) {
-            return false;
-        }
-
         return $this->checkCacheOrDBForRoleAndStore($user, $roleId);
     }
 
@@ -123,7 +119,7 @@ class UserRoleManager
     {
         $cacheKey = $this->getRoleCacheKey($user->id, $roleId);
         $result = Cache::get($cacheKey . $user->id);
-        if ($result == null) {
+        if ($result === null) {
             $userRoles = $user->roles;
             $result = $this->rolesInclude($userRoles, $roleId);
             $this->storeUserRoleInCache($user->id, $roleId);

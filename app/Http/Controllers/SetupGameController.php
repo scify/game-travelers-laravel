@@ -22,7 +22,7 @@ class SetupGameController extends Controller
 
     public function continueShow(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id == 0) {
+        if ($player_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
         $players = $this->playerRepository->allWhere(['id' => $player_id]);
@@ -40,12 +40,12 @@ class SetupGameController extends Controller
 
     public function continueSave(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id == 0) {
+        if ($player_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
         $selected = (int) $request->only('option')['option'];
 
-        if ($selected == 1) {
+        if ($selected === 1) {
             $entry = ['active' => false];
             $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
 
@@ -58,7 +58,7 @@ class SetupGameController extends Controller
 
     public function boardShow(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id == 0) {
+        if ($player_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
 
@@ -82,17 +82,17 @@ class SetupGameController extends Controller
 
     public function boardSave(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id == 0) {
+        if ($player_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
 
         $user_id = auth()->user()->id;
         $selected_board_id = (int) $request->only('board')['board'];
         $entry = ['user_id' => $user_id, 'player_id' => $player_id, 'board_id' => $selected_board_id];
-        if ($game_id == 0) {
+        if ($game_id === 0) {
             // check if an active game already exists
             $active_games = $this->gameRepository->allWhere(['player_id' => $player_id, 'active' => true], ['id']);
-            if (count($active_games) == 0) {
+            if (count($active_games) === 0) {
                 $game = $this->gameRepository->create($entry);
                 $game_id = $game->id;
             } else {
@@ -108,7 +108,7 @@ class SetupGameController extends Controller
 
     public function modeShow(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id == 0 || $game_id == 0) {
+        if ($player_id === 0 || $game_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
 
@@ -131,7 +131,7 @@ class SetupGameController extends Controller
 
     public function modeSave(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id == 0 || $game_id == 0) {
+        if ($player_id === 0 || $game_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
 
@@ -144,7 +144,7 @@ class SetupGameController extends Controller
 
     public function pawnShow(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id == 0 || $game_id == 0) {
+        if ($player_id === 0 || $game_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
 
@@ -171,7 +171,7 @@ class SetupGameController extends Controller
 
     public function pawnSave(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id == 0 || $game_id == 0) {
+        if ($player_id === 0 || $game_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
 
@@ -182,7 +182,7 @@ class SetupGameController extends Controller
         $game = $this->gameRepository->allWhere(['id' => $game_id], ['mode_id']);
         $mode = $game[0]->mode_id;
 
-        if ($mode == 1) {
+        if ($mode === 1) {
             return Redirect::route('select.options', [$player_id, 'option', $game_id]);
         }
 
@@ -192,7 +192,7 @@ class SetupGameController extends Controller
 
     public function pawnTwoShow(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id == 0 || $game_id == 0) {
+        if ($player_id === 0 || $game_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
 
@@ -229,7 +229,7 @@ class SetupGameController extends Controller
 
     public function pawnTwoSave(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id == 0 || $game_id == 0) {
+        if ($player_id === 0 || $game_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
 
@@ -242,7 +242,7 @@ class SetupGameController extends Controller
 
     public function optionsShow(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id == 0 || $game_id == 0) {
+        if ($player_id === 0 || $game_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
         if ($this->checkIfActiveGameHasStarted($game_id)) {
@@ -265,7 +265,7 @@ class SetupGameController extends Controller
 
     public function optionsSave(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id == 0 || $game_id == 0) {
+        if ($player_id === 0 || $game_id === 0) {
             abort(403, __('messages.unauthorized_action'));
         }
 
@@ -274,13 +274,10 @@ class SetupGameController extends Controller
 
         $selected_option = (int) $request->only('option')['option'];
         $tutorial = true;
-        if ($selected_option == 2) {
+        if ($selected_option === 2) {
             $tutorial = false;
         }
         $entry = ['use_tutorial' => $tutorial, 'started' => true, 'selected_board_size' => $board_size];
-        if ($game_id == null) {
-            abort(403, __('messages.unauthorized_action'));
-        }
         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
 
         return Redirect::route('board', [$player_id, $game_id]);
@@ -333,7 +330,7 @@ class SetupGameController extends Controller
 
     private function checkIfActiveGameHasStarted($game_id)
     {
-        if ($game_id == 0) {
+        if ($game_id === 0) {
             return false;
         }
 
