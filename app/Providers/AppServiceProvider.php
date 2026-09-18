@@ -48,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
             return;
         }
 
-        $this->app->bind(ToolExecutor::class, static function (): ToolExecutor {
+        $this->app->bind(static function (): ToolExecutor {
             config(['boost.executable_paths.php' => null]);
 
             return new ToolExecutor();

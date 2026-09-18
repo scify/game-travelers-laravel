@@ -14,9 +14,7 @@ class BoardController extends Controller
 
     public function play(Request $request, int $player_id, int $game_id)
     {
-        if ($player_id === 0 || $game_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
         $player = $this->playerRepository->allWhere(['id' => $player_id]);
         $player_data = [
             'name' => $player[0]->name,

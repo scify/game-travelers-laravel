@@ -29,9 +29,9 @@ Route::view('/cookies-policy', 'cookies')->name('cookies-policy');
 Route::middleware(['auth'])->group(function () {
     Route::prefix('administration')->middleware('can:manage-platform')->name('administration.')->group(function () {
         Route::get('test-email/{email}', function (Request $request) {
-            $user = User::where(['email' => $request->email])->first();
+            $user = User::query()->where(['email' => $request->email])->first();
             if (! $user) {
-                $user = User::findOrFail(1);
+                $user = User::query()->findOrFail(1);
             }
             $user->notify(new UserRegistered($user));
 
@@ -126,7 +126,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/select/options/{player_id}/{from}/{game_id}', [SetupGameController::class, 'optionsSave'])
         ->name('select.options')->middleware(EnsureIdsAreValid::class);
 
-    Route::get('home', fn () => redirect()->route('select.player', [0, 'user', 0]));
+    Route::get('home', fn () => to_route('select.player', [0, 'user', 0]));
 
     Route::get('logout', fn () => view('logoutDummy'))->name('dummy.logout');
 

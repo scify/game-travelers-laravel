@@ -10,7 +10,6 @@ use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Redirect;
 
 class EnsureIdsAreValid
 {
@@ -38,7 +37,7 @@ class EnsureIdsAreValid
         } elseif ($game_id !== 0) {
             if (! $this->gameRepository->gameExists($game_id, $user_id)) {
                 if ($this->gameRepository->gameExistsAsInactive($game_id, $user_id)) {
-                    return Redirect::route('select.board', [$player_id, 'board', 0]);
+                    return to_route('select.board', [$player_id, 'board', 0]);
                 }
                 abort(403, __('messages.unauthorized_action'));
 

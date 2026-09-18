@@ -7,8 +7,7 @@ namespace App\Http\Controllers;
 use App\BusinessLogicLayer\CustomAudio\CustomAudioManager;
 use App\Repository\Player\PlayerRepository;
 use Illuminate\Http\Request;
-use Redirect;
-use View;
+use Illuminate\Support\Facades\View;
 
 class CustomAudioController extends Controller
 {
@@ -22,9 +21,7 @@ class CustomAudioController extends Controller
      */
     public function audioShow(Request $request, int $player_id, string $back_route, int $game_id)
     {
-        if ($player_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
         if ($this->customAudioManager->userExists($player_id)) {
         }
@@ -83,15 +80,13 @@ class CustomAudioController extends Controller
      */
     public function audioSave(Request $request, int $player_id, string $back_route, int $game_id)
     {
-        if ($player_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
         $input = $request->only('musicVolume', 'soundVolume');
         $music_volume = (float) $input['musicVolume'];
         $sound_volume = (float) $input['soundVolume'];
         $this->updateVolumesToDB($player_id, $music_volume, $sound_volume);
 
-        return Redirect::route('settings', [$player_id, $back_route, $game_id]);
+        return to_route('settings', [$player_id, $back_route, $game_id]);
     }
 
     public function uploadCustomAudioFile(Request $request)

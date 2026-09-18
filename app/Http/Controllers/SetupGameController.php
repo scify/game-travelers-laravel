@@ -8,7 +8,6 @@ use App\Models\Player;
 use App\Repository\Game\GameRepository;
 use App\Repository\Player\PlayerRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 
 class SetupGameController extends Controller
@@ -17,9 +16,7 @@ class SetupGameController extends Controller
 
     public function continueShow(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
         $players = $this->playerRepository->allWhere(['id' => $player_id]);
         $name = $players[0]->name;
         $avatar_id = $players[0]->avatar_id;
@@ -35,30 +32,26 @@ class SetupGameController extends Controller
 
     public function continueSave(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
         $selected = (int) $request->only('option')['option'];
 
         if ($selected === 1) {
             $entry = ['active' => false];
             $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
 
-            return Redirect::route('select.board', [$player_id, 'board', 0]);
+            return to_route('select.board', [$player_id, 'board', 0]);
         }
 
-        return Redirect::route('board', [$player_id, $game_id]);
+        return to_route('board', [$player_id, $game_id]);
 
     }
 
     public function boardShow(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
         if ($this->checkIfActiveGameHasStarted($game_id)) {
-            return Redirect::route('board', [$player_id, $game_id]);
+            return to_route('board', [$player_id, $game_id]);
         }
 
         $players = $this->playerRepository->allWhere(['id' => $player_id]);
@@ -77,9 +70,7 @@ class SetupGameController extends Controller
 
     public function boardSave(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
         $user_id = auth()->user()->id;
         $selected_board_id = (int) $request->only('board')['board'];
@@ -98,17 +89,15 @@ class SetupGameController extends Controller
             $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
         }
 
-        return Redirect::route('select.mode', [$player_id, 'mode', $game_id]);
+        return to_route('select.mode', [$player_id, 'mode', $game_id]);
     }
 
     public function modeShow(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id === 0 || $game_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
 
         if ($this->checkIfActiveGameHasStarted($game_id)) {
-            return Redirect::route('board', [$player_id, $game_id]);
+            return to_route('board', [$player_id, $game_id]);
         }
 
         $players = $this->playerRepository->allWhere(['id' => $player_id]);
@@ -126,25 +115,21 @@ class SetupGameController extends Controller
 
     public function modeSave(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id === 0 || $game_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
 
         $selected_mode_id = (int) $request->only('mode')['mode'];
         $entry = ['mode_id' => $selected_mode_id];
         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
 
-        return Redirect::route('select.pawn', [$player_id, 'pawn', $game_id]);
+        return to_route('select.pawn', [$player_id, 'pawn', $game_id]);
     }
 
     public function pawnShow(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id === 0 || $game_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
 
         if ($this->checkIfActiveGameHasStarted($game_id)) {
-            return Redirect::route('board', [$player_id, $game_id]);
+            return to_route('board', [$player_id, $game_id]);
         }
 
         $players = $this->playerRepository->allWhere(['id' => $player_id]);
@@ -166,9 +151,7 @@ class SetupGameController extends Controller
 
     public function pawnSave(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id === 0 || $game_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
 
         $selected_pawn_id = (int) $request->only('pawn')['pawn'];
         $entry = ['pawn_id_1' => $selected_pawn_id];
@@ -178,21 +161,19 @@ class SetupGameController extends Controller
         $mode = $game[0]->mode_id;
 
         if ($mode === 1) {
-            return Redirect::route('select.options', [$player_id, 'option', $game_id]);
+            return to_route('select.options', [$player_id, 'option', $game_id]);
         }
 
-        return redirect()->route('select.pawnTwo', [$player_id, 'pawn-two', $game_id]);
+        return to_route('select.pawnTwo', [$player_id, 'pawn-two', $game_id]);
 
     }
 
     public function pawnTwoShow(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id === 0 || $game_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
 
         if ($this->checkIfActiveGameHasStarted($game_id)) {
-            return Redirect::route('board', [$player_id, $game_id]);
+            return to_route('board', [$player_id, $game_id]);
         }
 
         $players = $this->playerRepository->allWhere(['id' => $player_id]);
@@ -224,24 +205,20 @@ class SetupGameController extends Controller
 
     public function pawnTwoSave(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id === 0 || $game_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
 
         $selected_pawn_id_2 = (int) $request->only('pawn')['pawn'];
         $entry = ['pawn_id_2' => $selected_pawn_id_2];
         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
 
-        return Redirect::route('select.options', [$player_id, 'option', $game_id]);
+        return to_route('select.options', [$player_id, 'option', $game_id]);
     }
 
     public function optionsShow(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id === 0 || $game_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
         if ($this->checkIfActiveGameHasStarted($game_id)) {
-            return Redirect::route('board', [$player_id, $game_id]);
+            return to_route('board', [$player_id, $game_id]);
         }
 
         $players = $this->playerRepository->allWhere(['id' => $player_id]);
@@ -260,9 +237,7 @@ class SetupGameController extends Controller
 
     public function optionsSave(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id === 0 || $game_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
 
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['board_size']);
         $board_size = $players[0]->board_size;
@@ -275,7 +250,7 @@ class SetupGameController extends Controller
         $entry = ['use_tutorial' => $tutorial, 'started' => true, 'selected_board_size' => $board_size];
         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
 
-        return Redirect::route('board', [$player_id, $game_id]);
+        return to_route('board', [$player_id, $game_id]);
     }
 
     /**

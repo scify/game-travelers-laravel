@@ -7,8 +7,8 @@ namespace App\Repository\User;
 use App\Models\User;
 use App\Repository\Repository;
 use App\Repository\User\UserRole\UserRolesLkp;
-use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -49,7 +49,7 @@ class UserRepository extends Repository
     public function delete($id)
     {
         $user = $this->find($id);
-        $user->email = $user->email . '_deleted_' . Carbon::now()->timestamp;
+        $user->email = $user->email . '_deleted_' . Date::now()->timestamp;
         $user->save();
 
         return parent::delete($id);
@@ -57,6 +57,6 @@ class UserRepository extends Repository
 
     public function getAllShapesUsers(): Collection
     {
-        return User::whereNotNull('shapes_auth_token')->get();
+        return User::query()->whereNotNull('shapes_auth_token')->get();
     }
 }

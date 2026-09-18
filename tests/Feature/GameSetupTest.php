@@ -35,7 +35,7 @@ class GameSetupTest extends TestCase
         $response = $this->actingAs($this->seededUser())
             ->post(route('select.board', [1, 'board', 0]), ['board' => 1]);
 
-        $game = Game::where('player_id', 1)->firstOrFail();
+        $game = Game::query()->where('player_id', 1)->firstOrFail();
         $response->assertRedirect(route('select.mode', [1, 'mode', $game->id]));
         $this->assertDatabaseHas('games', ['id' => $game->id, 'user_id' => 2, 'board_id' => 1, 'active' => 1, 'started' => 0]);
     }
@@ -132,7 +132,7 @@ class GameSetupTest extends TestCase
             ->post(route('select.board', [1, 'board', 0]), ['board' => 3])
             ->assertRedirect(route('select.mode', [1, 'mode', $game->id]));
 
-        $this->assertSame(1, Game::where('player_id', 1)->count());
+        $this->assertSame(1, Game::query()->where('player_id', 1)->count());
         $this->assertDatabaseHas('games', ['id' => $game->id, 'board_id' => 3]);
     }
 }

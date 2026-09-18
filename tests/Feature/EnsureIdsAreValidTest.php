@@ -42,7 +42,7 @@ class EnsureIdsAreValidTest extends TestCase
     #[Test]
     public function game_owned_by_another_user_is_forbidden(): void
     {
-        $otherPlayer = Player::create(['user_id' => 1, 'name' => 'Ξένος', 'avatar_id' => 1]);
+        $otherPlayer = Player::query()->create(['user_id' => 1, 'name' => 'Ξένος', 'avatar_id' => 1]);
         $otherGame = $this->startedGame($otherPlayer);
 
         $this->actingAs($this->seededUser())

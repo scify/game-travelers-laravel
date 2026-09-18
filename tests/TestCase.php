@@ -35,25 +35,25 @@ abstract class TestCase extends BaseTestCase
     /** The seeded administrator (id 1, admin-taxidiotes@scify.org). */
     protected function seededAdmin(): User
     {
-        return User::findOrFail(1);
+        return User::query()->findOrFail(1);
     }
 
     /** The seeded registered user (id 2, user-taxidiotes@scify.org) who owns the two seeded players. */
     protected function seededUser(): User
     {
-        return User::findOrFail(2);
+        return User::query()->findOrFail(2);
     }
 
     /** The first seeded player of the seeded user (id 1, "Κώστας Παπ."). */
     protected function seededPlayer(): Player
     {
-        return Player::findOrFail(1);
+        return Player::query()->findOrFail(1);
     }
 
     /** A game for the given player, ready to be played. Override any column through $attributes. */
     protected function startedGame(Player $player, array $attributes = []): Game
     {
-        return Game::create(array_merge([
+        return Game::query()->create(array_merge([
             'user_id' => $player->user_id,
             'player_id' => $player->id,
             'board_id' => 1,

@@ -34,7 +34,7 @@ class DatabaseSeederTest extends TestCase
     #[Test]
     public function seeder_gives_user_two_players_with_default_controls(): void
     {
-        $players = Player::where('user_id', 2)->orderBy('id')->get();
+        $players = Player::query()->where('user_id', 2)->orderBy('id')->get();
 
         $this->assertCount(2, $players);
         $this->assertSame(['Κώστας Παπ.', 'Νίκη Καραγ.'], $players->pluck('name')->all());

@@ -37,8 +37,8 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $captchaInput1 = (int) $request->get('captchaNumber1');
-        $captchaInput2 = (int) $request->get('captchaNumber2');
+        $captchaInput1 = (int) $request->input('captchaNumber1');
+        $captchaInput2 = (int) $request->input('captchaNumber2');
         $sum = $captchaInput1 + $captchaInput2;
         $captchaRule = 'size:' . $sum;
 

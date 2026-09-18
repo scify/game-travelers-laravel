@@ -88,7 +88,7 @@ class AuthenticationTest extends TestCase
 
         $this->post('/register', $this->registration())->assertRedirect('/home');
 
-        $user = User::where('email', 'new-player@example.org')->firstOrFail();
+        $user = User::query()->where('email', 'new-player@example.org')->firstOrFail();
         $this->assertAuthenticatedAs($user);
         $this->assertFalse(Gate::forUser($user)->allows('manage-platform'));
         Notification::assertSentTo($user, UserRegistered::class);
@@ -103,7 +103,7 @@ class AuthenticationTest extends TestCase
 
         $this->post('/register', $this->registration())->assertRedirect('/home');
 
-        $user = User::where('email', 'new-player@example.org')->firstOrFail();
+        $user = User::query()->where('email', 'new-player@example.org')->firstOrFail();
         $this->assertAuthenticatedAs($user);
         $log->shouldHaveReceived('error')->once();
     }

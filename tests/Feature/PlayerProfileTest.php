@@ -29,7 +29,7 @@ class PlayerProfileTest extends TestCase
         $this->actingAs($this->seededUser())
             ->post(route('new.player', [0, 'user', 0]), ['name' => ' Μαρία ', 'avatarId' => 3]);
 
-        $player = Player::where('name', 'Μαρία')->firstOrFail();
+        $player = Player::query()->where('name', 'Μαρία')->firstOrFail();
         $this->assertSame(2, $player->user_id);
         $this->assertSame(3, $player->avatar_id);
     }
@@ -40,7 +40,7 @@ class PlayerProfileTest extends TestCase
         $response = $this->actingAs($this->seededUser())
             ->post(route('new.player', [0, 'user', 0]), ['name' => 'Μαρία', 'avatarId' => 3]);
 
-        $player = Player::where('name', 'Μαρία')->firstOrFail();
+        $player = Player::query()->where('name', 'Μαρία')->firstOrFail();
         $response->assertRedirect(route('controls.player', [$player->id, 'user', 0]));
     }
 
@@ -53,7 +53,7 @@ class PlayerProfileTest extends TestCase
             ->assertRedirect(route('new.player', [0, 'user', 0]))
             ->assertSessionHasErrors('name');
 
-        $this->assertSame(2, Player::where('user_id', 2)->count());
+        $this->assertSame(2, Player::query()->where('user_id', 2)->count());
     }
 
     #[Test]

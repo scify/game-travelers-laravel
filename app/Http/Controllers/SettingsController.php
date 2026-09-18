@@ -6,8 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Repository\Player\PlayerRepository;
 use Illuminate\Http\Request;
-use Redirect;
-use View;
+use Illuminate\Support\Facades\View;
 
 class SettingsController extends Controller
 {
@@ -15,9 +14,7 @@ class SettingsController extends Controller
 
     public function settingsShow(Request $request, int $player_id, string $back_route, int $game_id)
     {
-        if ($player_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id']);
         $name = $players[0]->name;
@@ -35,32 +32,32 @@ class SettingsController extends Controller
         switch ($action) {
             case 'back':
                 return match ($back_route) {
-                    'user' => Redirect::route('select.player', [0, 'user', 0]),
-                    'continue' => Redirect::route('select.continue', [$player_id, 'continue', $game_id]),
-                    'board' => Redirect::route('select.board', [$player_id, 'board', $game_id]),
-                    'mode' => Redirect::route('select.mode', [$player_id, 'mode', $game_id]),
-                    'pawn' => Redirect::route('select.pawn', [$player_id, 'pawn', $game_id]),
-                    'pawn-two' => Redirect::route('select.pawnTwo', [$player_id, 'pawn-two', $game_id]),
-                    'option' => Redirect::route('select.options', [$player_id, 'option', $game_id]),
-                    default => Redirect::route('select.player', [0, 'user', 0]),
+                    'user' => to_route('select.player', [0, 'user', 0]),
+                    'continue' => to_route('select.continue', [$player_id, 'continue', $game_id]),
+                    'board' => to_route('select.board', [$player_id, 'board', $game_id]),
+                    'mode' => to_route('select.mode', [$player_id, 'mode', $game_id]),
+                    'pawn' => to_route('select.pawn', [$player_id, 'pawn', $game_id]),
+                    'pawn-two' => to_route('select.pawnTwo', [$player_id, 'pawn-two', $game_id]),
+                    'option' => to_route('select.options', [$player_id, 'option', $game_id]),
+                    default => to_route('select.player', [0, 'user', 0]),
                 };
 
             case 'profile':
-                return Redirect::route('settings.profile', [$player_id, $back_route, $game_id]);
+                return to_route('settings.profile', [$player_id, $back_route, $game_id]);
 
             case 'audio':
-                return Redirect::route('settings.audio', [$player_id, $back_route, $game_id]);
+                return to_route('settings.audio', [$player_id, $back_route, $game_id]);
 
             case 'controls':
-                return Redirect::route('settings.controls', [$player_id, $back_route, $game_id]);
+                return to_route('settings.controls', [$player_id, $back_route, $game_id]);
 
             case 'difficulty':
-                return Redirect::route('settings.difficulty', [$player_id, $back_route, $game_id]);
+                return to_route('settings.difficulty', [$player_id, $back_route, $game_id]);
 
             case 'deletePlayer':
                 $this->playerRepository->delete($player_id);
 
-                return Redirect::route('select.player', [0, 'user', 0]);
+                return to_route('select.player', [0, 'user', 0]);
             default:
                 abort(403, __('messages.unauthorized_action'));
         }
@@ -68,9 +65,7 @@ class SettingsController extends Controller
 
     public function profileShow(Request $request, int $player_id, string $back_route, int $game_id)
     {
-        if ($player_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id']);
         $name = $players[0]->name;
@@ -85,9 +80,7 @@ class SettingsController extends Controller
 
     public function profileSave(Request $request, int $player_id, string $back_route, int $game_id)
     {
-        if ($player_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
         $user_id = auth()->user()->id;
         $input = $request->only('name', 'avatarId');
@@ -101,20 +94,18 @@ class SettingsController extends Controller
             }
         }
         if ($name_found) {
-            return Redirect::back()->withErrors(['name' => ['exists']]);
+            return back()->withErrors(['name' => ['exists']]);
         }
         $entry = ['name' => $name, 'avatar_id' => $avatar_id];
         $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
 
-        return Redirect::route('settings', [$player_id, $back_route, $game_id]);
+        return to_route('settings', [$player_id, $back_route, $game_id]);
 
     }
 
     public function controlsShow(Request $request, int $player_id, string $back_route, int $game_id)
     {
-        if ($player_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id', 'auto', 'select_key', 'navigate_key', 'help_after_x_mistakes', 'scanning_speed']);
         $name = $players[0]->name;
@@ -144,9 +135,7 @@ class SettingsController extends Controller
 
     public function controlsSave(Request $request, int $player_id, string $back_route, int $game_id)
     {
-        if ($player_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
         $input = $request->only('controlType', 'controlAutomaticSelectionButton', 'controlManualSelectionButton', 'controlManualNavigationButton', 'helpAfterTries', 'scanningSpeed');
         $control_mode = (int) $input['controlType'];
@@ -162,13 +151,13 @@ class SettingsController extends Controller
         $entry = ['auto' => $control_mode, 'select_key' => $select, 'navigate_key' => $control_manual_nav, 'help_after_x_mistakes' => $help_after_tries, 'scanning_speed' => $scanning_speed];
         $player = $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
 
-        return Redirect::route('settings', [$player_id, $back_route, $game_id]);
+        return to_route('settings', [$player_id, $back_route, $game_id]);
     }
 
     public function difficultyShow(Request $request, int $player_id, string $back_route, int $game_id)
     {
         if ($player_id === 0) {
-            return Redirect::route('select.player', [0, 'user', 0]);
+            return to_route('select.player', [0, 'user', 0]);
         }
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id', 'dice_type', 'board_size', 'difficulty', 'movement_mode']);
         $name = $players[0]->name;
@@ -188,9 +177,7 @@ class SettingsController extends Controller
 
     public function difficultySave(Request $request, int $player_id, string $back_route, int $game_id)
     {
-        if ($player_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
         $input = $request->only('dice', 'gameDuration', 'level', 'movement');
         $dice_type = (int) $input['dice'];
@@ -200,6 +187,6 @@ class SettingsController extends Controller
         $entry = ['dice_type' => $dice_type, 'board_size' => $board_size, 'difficulty' => $difficulty, 'movement_mode' => $movement_mode];
         $player = $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
 
-        return Redirect::route('settings', [$player_id, $back_route, $game_id]);
+        return to_route('settings', [$player_id, $back_route, $game_id]);
     }
 }

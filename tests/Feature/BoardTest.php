@@ -25,9 +25,7 @@ class BoardTest extends TestCase
         $game = $this->startedGame($this->seededPlayer());
 
         $this->actingAs($this->seededUser())
-            ->get(route('board', [1, $game->id]))
-            ->assertOk()
-            ->assertSee('<board-component', false);
+            ->get(route('board', [1, $game->id]))->assertOk()->assertSeeHtml('<board-component');
     }
 
     #[Test]
@@ -103,7 +101,7 @@ class BoardTest extends TestCase
     #[Test]
     public function user_cannot_play_game_owned_by_another_user(): void
     {
-        $otherPlayer = Player::create(['user_id' => 1, 'name' => 'Ξένος', 'avatar_id' => 1]);
+        $otherPlayer = Player::query()->create(['user_id' => 1, 'name' => 'Ξένος', 'avatar_id' => 1]);
         $otherGame = $this->startedGame($otherPlayer);
 
         $this->actingAs($this->seededUser())

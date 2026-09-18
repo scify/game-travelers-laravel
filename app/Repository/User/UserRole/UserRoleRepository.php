@@ -16,6 +16,6 @@ class UserRoleRepository extends Repository
 
     public function getUserRoleWithTrashed($data)
     {
-        return UserRole::where($data)->withTrashed()->first();
+        return UserRole::query()->where($data)->withTrashed()->first();
     }
 }

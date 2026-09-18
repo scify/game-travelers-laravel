@@ -75,6 +75,6 @@ class PlayerRepository extends Repository
 
     public function playerExists(int $player_id, int $user_id): bool
     {
-        return Player::where(['id' => $player_id, 'user_id' => $user_id])->exists();
+        return Player::query()->where(['id' => $player_id, 'user_id' => $user_id])->exists();
     }
 }

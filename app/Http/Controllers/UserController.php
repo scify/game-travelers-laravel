@@ -7,7 +7,6 @@ namespace App\Http\Controllers;
 use App\Repository\Game\GameRepository;
 use App\Repository\Player\PlayerRepository;
 use Illuminate\Http\Request;
-use Redirect;
 
 class UserController extends Controller
 {
@@ -38,19 +37,19 @@ class UserController extends Controller
         if ($action === 'start') {
             $active_games = $this->gameRepository->allWhere(['player_id' => $player_id, 'active' => true], ['id', 'started']);
             if (count($active_games) === 0) {
-                return Redirect::route('select.board', ['player_id' => $player_id, 'from' => 'board', 'game_id' => 0]);
+                return to_route('select.board', ['player_id' => $player_id, 'from' => 'board', 'game_id' => 0]);
             }
             $game_id = $active_games[0]->id;
             if ($active_games[0]->started) {
-                return Redirect::route('select.continue', ['player_id' => $player_id, 'from' => 'continue', 'game_id' => $game_id]);
+                return to_route('select.continue', ['player_id' => $player_id, 'from' => 'continue', 'game_id' => $game_id]);
             }
             $this->gameRepository->delete($game_id);
 
-            return Redirect::route('select.board', ['player_id' => $player_id, 'from' => 'board', 'game_id' => 0]);
+            return to_route('select.board', ['player_id' => $player_id, 'from' => 'board', 'game_id' => 0]);
 
         }
         if ($action === 'settings') {
-            return Redirect::route('settings', ['player_id' => $player_id, 'from' => 'user', 'game_id' => 0]);
+            return to_route('settings', ['player_id' => $player_id, 'from' => 'user', 'game_id' => 0]);
         }
         abort(403, __('messages.unauthorized_action'));
 
@@ -85,7 +84,7 @@ class UserController extends Controller
             }
         }
         if ($name_found) {
-            return Redirect::back()->withErrors(['name' => ['exists']]);
+            return back()->withErrors(['name' => ['exists']]);
         }
         if ($player_id === 0) {
             $entry = ['user_id' => $user_id, 'name' => $name, 'avatar_id' => $avatar_id];
@@ -96,15 +95,13 @@ class UserController extends Controller
             $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
         }
 
-        return Redirect::route('controls.player', [$player_id, $from, 0]);
+        return to_route('controls.player', [$player_id, $from, 0]);
 
     }
 
     public function controlsConfigure(Request $request, int $player_id, string $from, int $game_id)
     {
-        if ($player_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
         $control_mode = 1;
         $control_auto_select = 'Enter';
         $control_manual_select = 'Enter';
@@ -147,10 +144,10 @@ class UserController extends Controller
         $action = $request->only('submit')['submit'];
 
         if ($action === 'back' || $action === 'profile') {
-            return Redirect::route('new.player', [$player_id, $from, 0]);
+            return to_route('new.player', [$player_id, $from, 0]);
         }
         if ($action === 'next' || $action === 'save') {
-            return Redirect::route('difficulty.player', [$player_id, $from, 0]);
+            return to_route('difficulty.player', [$player_id, $from, 0]);
         }
         abort(403, __('messages.unauthorized_action'));
 
@@ -158,9 +155,7 @@ class UserController extends Controller
 
     public function difficultyConfigure(Request $request, int $player_id, string $from, int $game_id = 0)
     {
-        if ($player_id === 0) {
-            abort(403, __('messages.unauthorized_action'));
-        }
+        abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
         $dice_type = 1;
         $board_size = 2;
         $difficulty = 1;
@@ -188,13 +183,13 @@ class UserController extends Controller
         $player = $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
         $action = $request->only('submit')['submit'];
         if ($action === 'profile') {
-            return Redirect::route('new.player', [$player_id, $from, 0]);
+            return to_route('new.player', [$player_id, $from, 0]);
         }
         if ($action === 'back' || $action === 'controls') {
-            return Redirect::route('controls.player', [$player_id, $from, 0]);
+            return to_route('controls.player', [$player_id, $from, 0]);
         }
         if ($action === 'save') {
-            return Redirect::route('select.player', [0, $from, 0]);
+            return to_route('select.player', [0, $from, 0]);
         }
         abort(403, __('messages.unauthorized_action'));
 

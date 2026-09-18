@@ -177,11 +177,11 @@ class GameRepository extends Repository
 
     public function gameExists(int $game_id, int $user_id): bool
     {
-        return Game::where(['id' => $game_id, 'user_id' => $user_id, 'active' => true])->exists();
+        return Game::query()->where(['id' => $game_id, 'user_id' => $user_id, 'active' => true])->exists();
     }
 
     public function gameExistsAsInactive(int $game_id, int $user_id): bool
     {
-        return Game::where(['id' => $game_id, 'user_id' => $user_id, 'active' => false])->exists();
+        return Game::query()->where(['id' => $game_id, 'user_id' => $user_id, 'active' => false])->exists();
     }
 }

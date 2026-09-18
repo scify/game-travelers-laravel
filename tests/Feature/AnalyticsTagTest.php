@@ -52,7 +52,7 @@ class AnalyticsTagTest extends TestCase
         $response = $this->get('/')->assertOk();
 
         if ($loaded) {
-            $response->assertSee('https://www.googletagmanager.com/gtag/js?id=G-ABC123', false);
+            $response->assertSeeHtml('https://www.googletagmanager.com/gtag/js?id=G-ABC123');
         } else {
             $response->assertDontSee('googletagmanager.com');
         }
