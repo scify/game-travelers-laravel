@@ -3,6 +3,7 @@
     // Laravel language files (translations) to JSON
     // @author Pavlos Isaris
     // @link https://raw.githubusercontent.com/scify/Crowdsourcing-Platform/master/resources/views/partials/footer-scripts.blade.php
+    use App\Support\DebugMode;
     use Illuminate\Support\Facades\Cache;
     use Illuminate\Support\Facades\File;
     $currentLocale = app()->getLocale();
@@ -111,6 +112,7 @@
         'translations' => json_decode($translations),
         'audioFiles' => json_decode($audioFiles),
         'playerAudio' => $playerAudio,
+        'debug' => DebugMode::enabled(app()),
 ])}}
 </script>
 

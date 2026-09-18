@@ -144,13 +144,22 @@
                 }"
             ></div>
         </Transition>
+        <BoardDebugStrip
+            v-if="debugTools"
+            :tools="debugTools"
+            :last-event="debugLastEvent"
+        />
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+import { markRaw } from 'vue';
+import { createDebugTools, emit, enabled as debugEnabled, log } from '../debug.js';
+import BoardDebugStrip from './BoardDebugStrip.vue';
 
 export default {
+    components: { BoardDebugStrip },
     props: {
         backendUrl: { type: String, required: true },
         boardUrl: { type: String, required: true },
@@ -158,6 +167,7 @@ export default {
         continueUrl: { type: String, required: true },
         playerId: { type: Number, required: true },
         gameId: { type: Number, required: true },
+        debugStateUrl: { type: String, default: null },
         playerData: {
             type: Object,
             default: function () {
@@ -227,6 +237,9 @@ export default {
             infoState: 0,
             showPopUp: false,
             showNumbers: true,
+            debug: debugEnabled(),
+            debugTools: null,
+            debugLastEvent: '',
         };
     },
     computed: {
@@ -284,10 +297,21 @@ export default {
         },
     },
     mounted() {
-        console.log('Component mounted.');
+        log('Component mounted.');
         window.addEventListener('keypress', (e) => {
             this.key_press(e);
         });
+        if (this.debug) {
+            this.debugTools = markRaw(
+                createDebugTools({
+                    state: () => this.debugSnapshot(),
+                    keys: () => ({ select: this.selectKey, navigate: this.navigateKey }),
+                    setVolumes: (muted) => this.setDebugVolumes(muted),
+                    stateUrl: this.debugStateUrl,
+                }),
+            );
+            window.travelersDebug = this.debugTools;
+        }
         this.init();
     },
     methods: {
@@ -381,10 +405,11 @@ export default {
                 })
                 .then(function (response) {
                     if (response.status > 300) {
-                        console.log(response);
+                        log(response);
                     } else {
                         self.gameEnd = response.data.gameEnded;
                         if (self.gameEnd !== 0) {
+                            self.debugEmit('ended', self.gameEnd);
                             self.music.pause();
                             if (self.gameEnd === 1) {
                                 let sound = window.sound('sounds.game.win');
@@ -421,6 +446,7 @@ export default {
                                     self.setCenter(true, 0);
                                     self.rollAnimation = true;
                                     self.gamePhase = 1;
+                                    self.debugEmit('phase', 1);
 
                                     if (self.firstPlayerTurn) {
                                         if (self.tutorial && self.pos1 === 4)
@@ -443,6 +469,7 @@ export default {
                                     let card = self.cards[response.data.drawCard];
                                     self.cardName = card['name'];
                                     self.latestCardValue = card['value'];
+                                    self.debugEmit('card', { name: card['name'], value: card['value'] });
                                     self.playCardSound();
                                 }
                             } else if (self.gamePhase === 3) {
@@ -450,6 +477,7 @@ export default {
                                 self.setCenter(true, 0);
                                 self.rollAnimation = true;
                                 self.gamePhase = 1;
+                                self.debugEmit('phase', 1);
                                 if (self.firstPlayerTurn)
                                     window.sound(self.getOurTurnSound(), function () {
                                         self.ignoreInput = false;
@@ -481,7 +509,7 @@ export default {
                 else self.showNumbers = true;
             else if (self.showPopUp == true) self.showPopUp = false;
             else if (!this.ignoreInput) {
-                console.log('Key pressed and NOT ignored:\t(' + e.key + ')');
+                log('Key pressed and NOT ignored:\t(' + e.key + ')');
                 if (key === ' ') key = 'Space';
                 let isSelect = false;
                 let isNavigate = false;
@@ -490,7 +518,8 @@ export default {
                     if (this.movementMode === 1) isSelect = true;
                     else isNavigate = true;
                 }
-                console.log(
+                this.debugEmit('input', { key, isSelect, isNavigate });
+                log(
                     'isSelect:\t' +
                         isSelect +
                         '\tisNavigate:\t' +
@@ -575,7 +604,8 @@ export default {
                     }
                 }
             } else {
-                console.log('Key pressed and IGNORED:\t(' + e.key + ')');
+                log('Key pressed and IGNORED:\t(' + e.key + ')');
+                this.debugEmit('input', { key: e.key, ignored: true });
             }
         },
         playStepSound() {
@@ -650,6 +680,7 @@ export default {
             this.center_src = src + '.png';
         },
         activateSelector(newPosition) {
+            this.debugEmit('selector', { target: newPosition });
             this.ignoreInput = false;
             let pos = this.pos1;
             if (!this.firstPlayerTurn) pos = this.pos2;
@@ -699,6 +730,7 @@ export default {
             this.mistakes = 0;
             this.newPosition = newPosition;
             this.setCenter(true, diceResult);
+            this.debugEmit('rolled', { newPosition, diceResult });
             if (this.gameMode === 2 && !this.firstPlayerTurn) this.applyCorrectMovement();
             //check this in pvp
             else {
@@ -768,6 +800,7 @@ export default {
                 window.setTimeout(() => {
                     if (this.pos1 !== end) this.activate_movement_rotation(end, this.pos1);
                     else {
+                        this.debugEmit('moved', { position: this.pos1 });
                         if (this.tutorial && this.firstPlayerTurn) {
                             if (this.pos1 === 9 && this.tutorialYouKnowHowToPlayFlag === 0)
                                 window.sound('sounds.tutorial.Aha_Lets_see', function () {
@@ -793,7 +826,10 @@ export default {
                 }, 500);
                 window.setTimeout(() => {
                     if (this.pos2 !== end) this.activate_movement_rotation(end, this.pos2);
-                    else this.sendToBackend();
+                    else {
+                        this.debugEmit('moved', { position: this.pos2 });
+                        this.sendToBackend();
+                    }
                 }, 1000);
             }
         },
@@ -821,6 +857,7 @@ export default {
             pos += this.latestCardValue;
             this.gamePhase = 3;
             this.newPosition = pos;
+            this.debugEmit('phase', 3);
             this.setCenter(false, this.latestCardValue);
             if (this.firstPlayerTurn) {
                 this.ignoreInput = false;
@@ -883,6 +920,44 @@ export default {
         },
         getOtherTurnSound() {
             return 'sounds.game.other_turn_[1-8]';
+        },
+        // Debug mode, see resources/js/debug.js: the board publishes its progress and a snapshot of its state.
+        debugEmit(event, payload) {
+            if (!this.debug) return;
+            this.debugLastEvent = event + ' ' + JSON.stringify(payload ?? null);
+            emit(event, payload);
+        },
+        debugSnapshot() {
+            return {
+                gamePhase: this.gamePhase,
+                firstPlayerTurn: this.firstPlayerTurn,
+                pos1: this.pos1,
+                pos2: this.pos2,
+                newPosition: this.newPosition,
+                blueIndex: this.blueIndex,
+                blueShown: this.blue_position_show,
+                ignoreInput: this.ignoreInput,
+                mistakes: this.mistakes,
+                cardName: this.cardName,
+                latestCardValue: this.latestCardValue,
+                gameEnd: this.gameEnd,
+                showWin: this.showWin,
+                showLoose: this.showLoose,
+                board: this.board,
+                boardSize: this.boardSize,
+                gameMode: this.gameMode,
+                diceType: this.diceType,
+                movementMode: this.movementMode,
+                autoMove: this.autoMove,
+                selectKey: this.selectKey,
+                navigateKey: this.navigateKey,
+                scanningSpeed: this.scanningSpeed,
+                tutorial: this.tutorial,
+            };
+        },
+        setDebugVolumes(muted) {
+            if (window.Laravel.playerAudio) window.Laravel.playerAudio.playerSoundVolume = muted ? 0 : this.soundVolume;
+            if (this.music) this.music.volume = muted ? 0 : this.musicVolume;
         },
     },
 };

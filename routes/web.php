@@ -8,10 +8,12 @@ declare(strict_types=1);
  */
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\CustomAudioController;
+use App\Http\Controllers\Debug\GameStateController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SetupGameController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\EnsureDebugMode;
 use App\Http\Middleware\EnsureIdsAreValid;
 use App\Models\User;
 use App\Notifications\UserRegistered;
@@ -138,6 +140,10 @@ Route::middleware('auth')->group(function (): void {
 
     Route::post('board/fromVue', [BoardController::class, 'fromVue'])
         ->name('to.backend');
+
+    // Stages a game for testing from the board's debug strip; a 404 unless DebugMode is on.
+    Route::post('debug/game/{game_id}/state', [GameStateController::class, 'store'])
+        ->name('debug.game.state')->middleware(EnsureDebugMode::class);
 
     /*Route::get('/settings/audio/{player_id}/{from}/{game_id}', [CustomAudioController::class, 'audioShow'])
         ->name('settings.audio')->middleware(EnsureIdsAreValid::class);

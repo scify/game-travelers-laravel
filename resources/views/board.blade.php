@@ -23,7 +23,8 @@
             :game-id='{{ $game_id }}'
             :player-data='@json($player_data)'
             :game-data='@json($game_data)'
-            :cards='@json($cards)'>
+            :cards='@json($cards)'
+            @if($debug_state_url) :debug-state-url="'{{ $debug_state_url }}'" @endif>
         </board-component>
     </div>
 </div>

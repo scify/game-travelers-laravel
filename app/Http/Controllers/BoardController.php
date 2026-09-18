@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Repository\Game\GameRepository;
 use App\Repository\Player\PlayerRepository;
+use App\Support\DebugMode;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -54,7 +55,10 @@ class BoardController extends Controller
             'updateVolumesUrl' => route('audio.updateVolumes'),
         ];
 
-        return view('board', ['player_id' => $player_id, 'playerAudio' => $playerAudio, 'game_id' => $game_id, 'player_data' => $player_data, 'game_data' => $game_data, 'cards' => $this->getCards($game[0]->board_id)]);
+        // The debug strip stages the game through this URL; the page carries it only where the route exists.
+        $debug_state_url = DebugMode::enabled(app()) ? route('debug.game.state', $game_id) : null;
+
+        return view('board', ['player_id' => $player_id, 'playerAudio' => $playerAudio, 'game_id' => $game_id, 'player_data' => $player_data, 'game_data' => $game_data, 'cards' => $this->getCards($game[0]->board_id), 'debug_state_url' => $debug_state_url]);
     }
 
     public function fromVue(Request $request): ResponseFactory|Response|null

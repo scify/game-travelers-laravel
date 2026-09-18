@@ -142,12 +142,31 @@ scp -r /path/to/local/music/* user@server:/path/to/project/public/audio/music
 
 ## How to debug
 
+### Debug mode: the board's strip and `travelersDebug`
+
+In a local installation with `APP_ENV=local` and `APP_DEBUG=true`, the board carries debug tools. Elsewhere the route below answers 404 and the board renders no strip.
+
+Press **F2** on the board to open the strip. It shows the game's state (phase, turn, positions, target square, selector, mistakes, card, whether input is ignored, the last event), a form that stages the game, and three buttons.
+
+- **Stage a state:** fill any of the fields and press *Apply and reload*. The strip posts to `debug/game/{game_id}/state`, which writes the columns of the game row (the game must belong to the logged-in user), and the page reloads with the game in that state. Empty fields keep their value. *Next roll lands on* needs phase 1: the backend returns that square instead of rolling. *Next card* needs phase 2 and a pawn on a card square (colour 3 or 5, so squares 3, 5, 9, 11, 15, 17 and so on): the backend draws that card, positive indexes move forward, negative ones back.
+- **Roll (select key)** presses the player's select key: in phase 1 it rolls the dice, in phase 3 it resolves the card on screen.
+- **Move to target** presses navigate until the selector sits on the target and then select, or waits for the scanning selector to reach it, exactly as the player would through a switch.
+- **Mute** silences new sounds; the game still waits for each narration to end, so a turn takes as long as it takes.
+
+Recipes:
+
+- **A card:** pos1 13, phase 1, next roll lands on 17. Apply, Roll, Move. The card is dealt; Roll again resolves it.
+- **The win screens:** pos1 29, phase 1, next roll lands on 30. Apply, Roll, Move.
+- **Help after the configured mistakes:** pos1 0, phase 1, next roll lands on 4. Apply, Roll, then press *Roll (select key)* while the selector is on any square but 4, as many times as the player's mistakes setting allows.
+
+The same tools are available to scripts as `window.travelersDebug`: `state()`, `press(key)`, `roll()`, `move()`, `mute(true|false)`, `setState({ pos1, pos2, phase, turn, next, card })`, and `on(event, handler)` or `once(event)` for the events the board emits while it plays: `input`, `rolled`, `selector`, `moved`, `card`, `phase`, `ended`. Never reach into the Vue instance; everything a test needs is published here.
+
+### Xdebug
+
 - Install and configure Xdebug on your machine
 - At Chrome
   install [Xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc?utm_source=chrome-app-launcher-info-dialog)
 - At PhpStorm/IntelliJ click the "Start listening for PHP debug connections"
-
-
 
 ## How to contribute
 - Send us a pull request describing your improvements/fixes/features

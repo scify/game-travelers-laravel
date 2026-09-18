@@ -21,7 +21,8 @@ Business logic lives in `app/BusinessLogicLayer/` (managers) and data access in 
 - `app/Models/`: `User`, `Player` (a user's game profiles, soft deleted), `Game`, `UserRole/`.
 - `routes/web.php`: all game routes require `auth` and follow `/{step}/{player_id}/{from}/{game_id}`. `routes/auth.php`: login and registration.
 - `resources/views/`: Blade templates. `components/layout.blade.php` is the page shell. It loads the `board.js` entry only when the view sets `$hasVue`.
-- `resources/js/app.js`: Bootstrap, translations (`lang.js`), key handling (`keys.js`) and the audio player (`audio.js`), loaded on every page. `board.js`: Vue and the two components in `components/`, mounted from Blade markup, loaded only where a view sets `$hasVue`.
+- `resources/js/app.js`: Bootstrap, translations (`lang.js`), key handling (`keys.js`) and the audio player (`audio.js`), loaded on every page. `board.js`: Vue and the two components in `components/`, mounted from Blade markup, loaded only where a view sets `$hasVue`. `debug.js`: the logger and event bus behind the board's debug tools, on only where `App\Support\DebugMode` says so (a local installation with `APP_DEBUG`).
+- **Debug mode:** F2 on the board opens a strip that stages the game (`POST debug/game/{game_id}/state`, a 404 unless `DebugMode` is on) and plays through real key events. Scripts use `window.travelersDebug` (`state()`, `press()`, `roll()`, `move()`, `setState()`, `on()`, `once()`); never reach into the Vue instance. The README describes it.
 - `resources/js/settings/index.js` (the settings pages' scripts) and `resources/js/switcher/switcher.js`: the two other Vite entries, loaded by the views that need them. `vite.config.js` lists the five entries.
 - `resources/sass/app.scss`: Bootstrap customisation and the theme's components.
 - `public/images/`: about 5000 files, tracked and served as they are. Optimise images before committing them; the build does not.
