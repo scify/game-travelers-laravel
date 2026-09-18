@@ -164,9 +164,9 @@ import { log } from './debug.js';
         // Almost Random Sound (tm) playback.
         const match = audioFile.match(/\[([0-9]+)-([0-9]+)]/);
         if (match) {
-            let start = parseInt(match[1], 10);
-            let end = parseInt(match[2], 10);
-            if (isNaN(start) || isNaN(end)) {
+            let start = Number.parseInt(match[1], 10);
+            let end = Number.parseInt(match[2], 10);
+            if (Number.isNaN(start) || Number.isNaN(end)) {
                 return;
             }
             if (start > end) {

@@ -30,10 +30,10 @@ window.addEventListener('load', function () {
 
     function handleVolumeSlider(rangeElement, audioConfirmation = true, music = null) {
         // Get input[type='range'] parameters directly from the element.
-        const rangeMin = parseFloat(rangeElement.min);
-        const rangeMax = parseFloat(rangeElement.max);
-        const rangeStep = parseFloat(rangeElement.step);
-        let rangeValue = parseFloat(rangeElement.value);
+        const rangeMin = Number.parseFloat(rangeElement.min);
+        const rangeMax = Number.parseFloat(rangeElement.max);
+        const rangeStep = Number.parseFloat(rangeElement.step);
+        let rangeValue = Number.parseFloat(rangeElement.value);
         if (music === null) {
             saveVolumes(rangeValue, false);
         } else {
@@ -147,7 +147,7 @@ window.addEventListener('load', function () {
             /* Scanning Speed Range Inputs */
             if (elementId === 'scanningSpeed') {
                 const label = document.querySelector(`[for="${elementId}"]`);
-                if (parseInt(element.value) === 1) {
+                if (Number.parseInt(element.value) === 1) {
                     label.textContent = `${window.trans('messages.every')} ${
                         element.value
                     } ${window.trans('messages.second')}`;
@@ -157,7 +157,7 @@ window.addEventListener('load', function () {
                     } ${window.trans('messages.seconds')}`;
                 }
                 element.addEventListener('change', () => {
-                    if (parseInt(element.value) === 1) {
+                    if (Number.parseInt(element.value) === 1) {
                         label.textContent = `${window.trans(
                             'messages.every',
                         )} ${element.value} ${window.trans('messages.second')}`;

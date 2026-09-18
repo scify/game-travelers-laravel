@@ -21,14 +21,14 @@ window.addEventListener('load', function () {
             // Variables for reading/validating/processing various form elements.
             const idInput = document.getElementById('avatarsContainerInput');
             const nameInput = document.getElementById('playerNameInput');
-            const initialFormIdValue = idInput ? parseInt(idInput.value) : 0;
+            const initialFormIdValue = idInput ? Number.parseInt(idInput.value) : 0;
 
             function updateUserMenuButton(idValue) {
                 const userMenuButtonImage = document.getElementById('userMenuButtonImage');
                 const userMenuButtonLabel = document.getElementById('userMenuButtonLabel');
                 log('Updating User Menu Button');
                 // Update User Menu if needed:
-                if (userMenuButtonImage && !isNaN(idValue)) {
+                if (userMenuButtonImage && !Number.isNaN(idValue)) {
                     if (idValue > 0) {
                         log(idValue);
                         const selectedButton = avatarsContainer.querySelector(`img[data-player-id='${idValue}'`);
@@ -51,7 +51,7 @@ window.addEventListener('load', function () {
             function updateSubmitButtonState() {
                 const submitButton = document.getElementById('submitButton');
                 const secondaryButton = document.getElementById('secondaryButton');
-                const idValue = idInput ? parseInt(idInput.value) : 0;
+                const idValue = idInput ? Number.parseInt(idInput.value) : 0;
 
                 // Nothing to update if (primary) Submit Button does not exist.
                 if (!submitButton) {
@@ -60,10 +60,10 @@ window.addEventListener('load', function () {
                 // If nameInput, then we are on the create new profile page.
                 if (nameInput) {
                     const nameValue = nameInput.value;
-                    submitButton.disabled = !(nameValue.length >= 2 && !isNaN(idValue) && idValue > 0);
+                    submitButton.disabled = !(nameValue.length >= 2 && !Number.isNaN(idValue) && idValue > 0);
                     // If !nameInput, then we are updating/selectin player.
                 } else {
-                    if (!isNaN(idValue) && idValue > 0) {
+                    if (!Number.isNaN(idValue) && idValue > 0) {
                         updateUserMenuButton(idValue);
                         submitButton.disabled = false;
                         if (secondaryButton) {
@@ -121,7 +121,7 @@ window.addEventListener('load', function () {
                     } else {
                         btnId = btn.getAttribute('data-avatar-id');
                     }
-                    if (parseInt(btnId) === initialFormIdValue) {
+                    if (Number.parseInt(btnId) === initialFormIdValue) {
                         btn.classList.remove('faded');
                         btn.classList.add('selected');
                         btn.setAttribute('aria-checked', 'true');

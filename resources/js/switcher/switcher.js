@@ -25,15 +25,15 @@ function switcher() {
 
     if (window.Switcher instanceof Object) {
         controlMode =
-            !isNaN(parseInt(window.Switcher.controlMode)) &&
-            (parseInt(window.Switcher.controlMode) === 1 || parseInt(window.Switcher.controlMode) === 2)
-                ? parseInt(window.Switcher.controlMode)
+            !Number.isNaN(Number.parseInt(window.Switcher.controlMode)) &&
+            (Number.parseInt(window.Switcher.controlMode) === 1 || Number.parseInt(window.Switcher.controlMode) === 2)
+                ? Number.parseInt(window.Switcher.controlMode)
                 : 1;
         scanningSpeed =
-            !isNaN(parseInt(window.Switcher.scanningSpeed)) &&
-            parseInt(window.Switcher.scanningSpeed) >= 1 &&
-            parseInt(window.Switcher.scanningSpeed) <= 10
-                ? parseInt(window.Switcher.scanningSpeed)
+            !Number.isNaN(Number.parseInt(window.Switcher.scanningSpeed)) &&
+            Number.parseInt(window.Switcher.scanningSpeed) >= 1 &&
+            Number.parseInt(window.Switcher.scanningSpeed) <= 10
+                ? Number.parseInt(window.Switcher.scanningSpeed)
                 : 2;
         automaticSelectionButton =
             window.Switcher.automaticSelectionButton !== undefined &&
@@ -103,7 +103,7 @@ function switcher() {
     for (let i = 0; i < switcherElements.length; i++) {
         const element = switcherElements[i];
         const tabindex = element.getAttribute('data-tabindex');
-        if (!isNaN(tabindex) && parseInt(tabindex) === +tabindex) {
+        if (Number.parseInt(tabindex) === Number(tabindex)) {
             validSwitcherElements.push(element);
         }
     }
