@@ -154,6 +154,7 @@
 
 <script>
 import axios from 'axios';
+import { Modal } from 'bootstrap';
 import { markRaw } from 'vue';
 import { music, sound } from '@/audio.js';
 import { createDebugTools, emit, enabled as debugEnabled, log } from '@/debug.js';
@@ -371,13 +372,11 @@ export default {
         },
         switcherModal() {
             const switcherModalEl = document.getElementById('switcherModal');
-            const bsSwitcherModal =
-                // eslint-disable-next-line no-undef
-                bootstrap.Modal.getOrCreateInstance(switcherModalEl, {
-                    keyboard: true,
-                    focus: true,
-                    backdrop: true,
-                });
+            const bsSwitcherModal = Modal.getOrCreateInstance(switcherModalEl, {
+                keyboard: true,
+                focus: true,
+                backdrop: true,
+            });
             sound('fx.modal');
             bsSwitcherModal.show();
             return false;

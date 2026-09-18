@@ -1,8 +1,8 @@
 import * as bootstrap from 'bootstrap';
 import axios from 'axios';
 
-// Bootstrap's components are created from plain scripts and from the board
-// (bootstrap.Modal, bootstrap.Tooltip), so the namespace stays global.
+// Blade's inline scripts create Bootstrap components (the message offcanvas),
+// so the namespace stays global; modules import what they use.
 window.bootstrap = bootstrap;
 
 /**
@@ -11,9 +11,7 @@ window.bootstrap = bootstrap;
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = axios;
-
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -24,7 +22,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 const token = document.head.querySelector("meta[name='csrf-token']");
 
 if (token) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }

@@ -4,6 +4,7 @@
  * @see ../lang.js
  */
 
+import { Modal } from 'bootstrap';
 import { music, sound } from '@/audio.js';
 import { log } from '@/debug.js';
 import { SwitcherKeys } from '@/keys.js';
@@ -192,13 +193,11 @@ function switcher() {
 
     function switcherModal() {
         const switcherModalEl = document.getElementById('switcherModal');
-        const bsSwitcherModal =
-            // eslint-disable-next-line no-undef
-            bootstrap.Modal.getOrCreateInstance(switcherModalEl, {
-                keyboard: false,
-                focus: false,
-                backdrop: 'static',
-            });
+        const bsSwitcherModal = Modal.getOrCreateInstance(switcherModalEl, {
+            keyboard: false,
+            focus: false,
+            backdrop: 'static',
+        });
         sound('fx.modal');
         bsSwitcherModal.show();
         switcherModalEl.addEventListener('hidden.bs.modal', function () {
