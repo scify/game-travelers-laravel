@@ -9,9 +9,13 @@
         "npm": ">=11.19.0"
     },
     "scripts": {
-        "dev": "vite",
         "build": "vite build",
-        "prod": "vite build"
+        "dev": "vite",
+        "lint": "eslint . --fix && prettier \"resources/**/*.{js,vue}\" eslint.config.js vite.config.js --write --log-level warn",
+        "lint:styles": "stylelint \"resources/**/*.{scss,vue}\" --fix",
+        "prod": "vite build",
+        "test:lint": "eslint . && prettier \"resources/**/*.{js,vue}\" eslint.config.js vite.config.js --check --log-level warn",
+        "test:lint:styles": "stylelint \"resources/**/*.{scss,vue}\""
     },
     "dependencies": {
         "@popperjs/core": "2.11.8",
@@ -21,10 +25,22 @@
         "vue": "3.5.41"
     },
     "devDependencies": {
+        "@eslint/js": "10.0.1",
         "@laravel/multiplex": "0.4.3",
         "@vitejs/plugin-vue": "6.0.8",
+        "eslint": "10.8.1",
+        "eslint-config-prettier": "10.1.8",
+        "eslint-plugin-vue": "10.10.0",
+        "globals": "17.12.0",
         "laravel-vite-plugin": "3.2.0",
+        "postcss": "8.5.26",
+        "postcss-html": "2.0.0",
+        "prettier": "3.9.6",
         "sass": "1.103.0",
+        "stylelint": "17.14.1",
+        "stylelint-config-standard-scss": "17.0.0",
+        "stylelint-config-standard-vue": "2.0.0",
+        "stylelint-prettier": "5.0.3",
         "vite": "8.2.2"
     }
 }

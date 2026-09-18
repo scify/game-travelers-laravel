@@ -78,7 +78,7 @@ php artisan sitemap:generate
 
 ## Code quality
 
-The composer scripts run the shared tools: [Laravel Pint](https://laravel.com/docs/13.x/pint) for code style, [Rector](https://getrector.com/) for automated refactoring and [Larastan](https://github.com/larastan/larastan) for static analysis.
+The composer scripts run the PHP tools: [Laravel Pint](https://laravel.com/docs/13.x/pint) for code style, [Rector](https://getrector.com/) for automated refactoring and [Larastan](https://github.com/larastan/larastan) for static analysis. The npm scripts run [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) over the JavaScript and Vue files, and [Stylelint](https://stylelint.io/) over the SCSS and the Vue style blocks.
 
 ```bash
 composer lint        # fix: Rector, then Pint
@@ -86,9 +86,14 @@ composer test:lint   # check only: Pint, then Rector; changes nothing
 composer test:types  # Larastan
 composer test:unit   # the test suite
 composer test        # all three checks, in that order
+
+npm run lint              # fix: ESLint, then Prettier
+npm run lint:styles       # fix: Stylelint
+npm run test:lint         # check only: ESLint, then Prettier; changes nothing
+npm run test:lint:styles  # check only: Stylelint
 ```
 
-Run `composer test` before you commit. The `lint:agent` and `test:agent` variants print output made for AI agents.
+Run `composer test` and the two npm checks before you commit. The `lint:agent` and `test:agent` variants print output made for AI agents.
 
 ## AI agent guidelines - Laravel Boost
 

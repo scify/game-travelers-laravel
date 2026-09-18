@@ -33,9 +33,9 @@ Business logic lives in `app/BusinessLogicLayer/` (managers) and data access in 
 
 ### Code style, project specifics
 
-- **PHP:** Laravel Pint with the shared `pint.json`: Laravel preset plus `declare(strict_types=1)`, strict comparisons and `mb_` string functions.
-- **JavaScript and Vue:** tabs, double quotes, semicolons (`.eslintrc.json`).
-- **SCSS:** Stylelint with `stylelint-config-standard-scss`.
+- **PHP:** Laravel Pint under `pint.json`: Laravel preset plus `declare(strict_types=1)`, strict comparisons and `mb_` string functions.
+- **JavaScript and Vue:** ESLint (`eslint.config.js`: the recommended rules and `eslint-plugin-vue`) and Prettier (`.prettierrc`: 4 spaces, single quotes, 120 columns, one attribute per line).
+- **SCSS and Vue style blocks:** Stylelint (`.stylelintrc.json`: `stylelint-config-standard-scss`, `stylelint-config-standard-vue`, Prettier through `stylelint-prettier`).
 - **Everything else:** 4 spaces, LF, UTF-8, final newline (`.editorconfig`).
 - **Commits:** Conventional Commits (`feat`, `fix`, `refactor`, `docs`, `build`, `chore`). Messages name packages and versions, never people, hosts or other projects.
 

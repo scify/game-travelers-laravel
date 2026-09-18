@@ -1,3 +1,21 @@
 {
-    "extends": ["stylelint-config-standard-scss", "stylelint-config-prettier"]
+    "extends": [
+        "stylelint-config-standard-scss",
+        "stylelint-config-standard-vue/scss",
+        "stylelint-prettier/recommended"
+    ],
+    "rules": {
+        "selector-class-pattern": [
+            "^[a-z]([a-z0-9-]+)?(__([a-z0-9]+-?)+)?(--([a-z0-9]+-?)+){0,2}$",
+            {
+                "message": "Expected class selector \"%s\" to be kebab-case; BEM separators (__ and --) are allowed",
+                "resolveNestedSelectors": true
+            }
+        ]
+    },
+    "ignoreFiles": [
+        "**/*",
+        "!resources/sass/**/*.scss",
+        "!resources/js/**/*.vue"
+    ]
 }
