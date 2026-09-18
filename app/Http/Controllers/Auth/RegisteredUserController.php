@@ -53,10 +53,8 @@ class RegisteredUserController extends Controller
             'captcha' => ['required', 'numeric', $captchaRule],
         ]);
 
-        $user = $this->userManager->create([
-            'email' => mb_trim($request->email),
-            'password' => mb_trim($request->password),
-        ]);
+        // The framework's TrimStrings middleware trims the email and leaves the password alone, on purpose.
+        $user = $this->userManager->create($request->only('email', 'password'));
 
         // The welcome mail must not take the registration down with it: the user
         // row exists, so report the failure and let them in.
