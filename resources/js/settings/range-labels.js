@@ -2,31 +2,10 @@
  * Range Labels Functions.
  */
 
-import { log } from '../debug.js';
+import { saveVolume } from '../volumes.js';
 
 window.addEventListener('load', function () {
     const rangeElements = document.querySelectorAll("input[type='range']");
-
-    function saveVolumes(volume, isMusic) {
-        const postUrl = window.Laravel.playerAudio.updateVolumesUrl;
-        const playerUrl = window.Laravel.playerAudio.playerUrl;
-        const lastIndex = playerUrl.lastIndexOf('/');
-        const playerId = playerUrl.slice(lastIndex + 1);
-        const csrfToken = document.querySelector("meta[name='csrf-token']").content;
-        const data = isMusic
-            ? { _token: csrfToken, player_id: playerId, music_volume: volume }
-            : { _token: csrfToken, player_id: playerId, sound_volume: volume };
-        const post = JSON.stringify(data);
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', postUrl, true);
-        xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
-        xhr.send(post);
-        xhr.onload = function () {
-            if (xhr.status === 201) {
-                log('Post successfully created!');
-            }
-        };
-    }
 
     function handleVolumeSlider(rangeElement, audioConfirmation = true, music = null) {
         // Get input[type='range'] parameters directly from the element.
@@ -35,19 +14,19 @@ window.addEventListener('load', function () {
         const rangeStep = Number.parseFloat(rangeElement.step);
         let rangeValue = Number.parseFloat(rangeElement.value);
         if (music === null) {
-            saveVolumes(rangeValue, false);
+            saveVolume('sound_volume', rangeValue);
         } else {
-            saveVolumes(rangeValue, true);
+            saveVolume('music_volume', rangeValue);
         }
         const preventMinValue = rangeElement.dataset.preventMinValue === 'true' || false;
         // Disallow minimum value if data-prevent-min-value=true:
         if (preventMinValue && rangeValue === rangeMin) {
             rangeValue = rangeMin + rangeStep;
-            rangeElement.value = rangeValue;
+            rangeElement.value = String(rangeValue);
         }
         // Update the element's data-music-volume for volume if it is set.
         if (music !== null && rangeElement.dataset.musicVolume !== undefined) {
-            rangeElement.dataset.musicVolume = rangeValue;
+            rangeElement.dataset.musicVolume = String(rangeValue);
             // Change the actual music volume
             if (rangeValue >= 0.0 && rangeValue <= 1.0) {
                 music.volume = rangeValue;
@@ -97,7 +76,7 @@ window.addEventListener('load', function () {
             const elementFunction = element.getAttribute('data-function');
             /* Volume Sliders */
             if (elementFunction === 'volume-slider') {
-                // Initialize music playback:
+                // Initialise music playback:
                 const musicData = element.dataset.music;
                 const musicVolumeData = element.dataset.musicVolume;
                 let music = null;

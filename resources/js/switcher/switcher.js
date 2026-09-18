@@ -5,6 +5,7 @@
  */
 
 import { log } from '../debug.js';
+import { saveVolume } from '../volumes.js';
 
 // Blurs any items with focus.
 window.onpageshow = function (e) {
@@ -117,6 +118,42 @@ function switcher() {
         validSwitcherElements[i].classList.remove(classActive);
     }
 
+    // The position of the highlighted element, or -1 when nothing is highlighted.
+    function currentIndex() {
+        return validSwitcherElements.findIndex((element) => element.classList.contains(classFocus));
+    }
+
+    // Moves the highlight from one element to another, with the navigation sound.
+    function moveFocus(fromIndex, toIndex) {
+        validSwitcherElements[fromIndex].classList.remove(classFocus);
+        validSwitcherElements[fromIndex].blur();
+        validSwitcherElements[toIndex].focus();
+        validSwitcherElements[toIndex].classList.add(classFocus);
+        window.sound('fx.select');
+    }
+
+    // Marks the element active and clicks it once the sounds have played.
+    function selectElement(index) {
+        const element = validSwitcherElements[index];
+        element.classList.remove(classFocus);
+        element.classList.add(classActive);
+        window.removeEventListener('keydown', handleSwitchKey);
+        window.sound(
+            'fx.navigate',
+            function () {
+                const narration = element.dataset.audioSelect;
+                if (narration === undefined) {
+                    element.click();
+                } else {
+                    window.sound(narration, function () {
+                        element.click();
+                    });
+                }
+            },
+            true,
+        );
+    }
+
     let intervalId;
     if (validSwitcherElements.length > 0) {
         this.document.body.classList.add('switcher');
@@ -128,22 +165,14 @@ function switcher() {
             validSwitcherElements[currentFocusIndex].focus();
             validSwitcherElements[currentFocusIndex].classList.add(classFocus);
             validSwitcherElements[currentFocusIndex].addEventListener('keydown', handleSwitchKey);
-            // On interval, move to next element remove/add listeners:
+            // On interval, move to the next element and its listener:
             intervalId = setInterval(
                 () => {
-                    // Remove events and classes from the previous element.
-                    if (currentFocusIndex >= 0) {
-                        validSwitcherElements[currentFocusIndex].removeEventListener('keydown', handleSwitchKey);
-                        validSwitcherElements[currentFocusIndex].blur();
-                        validSwitcherElements[currentFocusIndex].classList.remove(classFocus);
-                    }
-                    // Move to the next element.
-                    currentFocusIndex = (currentFocusIndex + 1) % validSwitcherElements.length;
-                    // Focus on next element and add switcher class.
-                    validSwitcherElements[currentFocusIndex].addEventListener('keydown', handleSwitchKey);
-                    validSwitcherElements[currentFocusIndex].focus();
-                    validSwitcherElements[currentFocusIndex].classList.add(classFocus);
-                    window.sound('fx.select');
+                    const nextFocusIndex = (currentFocusIndex + 1) % validSwitcherElements.length;
+                    validSwitcherElements[currentFocusIndex].removeEventListener('keydown', handleSwitchKey);
+                    moveFocus(currentFocusIndex, nextFocusIndex);
+                    validSwitcherElements[nextFocusIndex].addEventListener('keydown', handleSwitchKey);
+                    currentFocusIndex = nextFocusIndex;
                 },
                 scanningSpeed * 1000 + transitionSpeed,
             );
@@ -174,29 +203,6 @@ function switcher() {
             removeSwitcherClasses();
         });
         return false;
-    }
-
-    function saveMusicVolume(volume) {
-        const postUrl = window.Laravel.playerAudio.updateVolumesUrl;
-        const playerUrl = window.Laravel.playerAudio.playerUrl;
-        const lastIndex = playerUrl.lastIndexOf('/');
-        const playerId = playerUrl.slice(lastIndex + 1);
-        const csrfToken = document.querySelector("meta[name='csrf-token']").content;
-        const data = {
-            _token: csrfToken,
-            player_id: playerId,
-            music_volume: volume,
-        };
-        const post = JSON.stringify(data);
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', postUrl, true);
-        xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
-        xhr.send(post);
-        xhr.onload = function () {
-            if (xhr.status === 201) {
-                log('Post successfully created!');
-            }
-        };
     }
 
     function handleSwitchKey(event) {
@@ -243,14 +249,14 @@ function switcher() {
                         if (event.key === '-' || event.key === '_') {
                             if (music !== null) {
                                 music.volume = Math.max(0, music.volume - 0.1);
-                                saveMusicVolume(music.volume);
+                                saveVolume('music_volume', music.volume);
                                 return false;
                             }
                         }
                         if (event.key === '=' || event.key === '+') {
                             if (music !== null) {
                                 music.volume = Math.min(1, music.volume + 0.1);
-                                saveMusicVolume(music.volume);
+                                saveVolume('music_volume', music.volume);
                                 return false;
                             }
                         }
@@ -260,84 +266,24 @@ function switcher() {
                 }
             }
         }
+        const focusedIndex = currentIndex();
         if (controlMode === 1) {
             // Automatic mode.
             event.preventDefault();
-            let currentFocusIndex = 0;
-            for (let i = 0; i < validSwitcherElements.length; i++) {
-                if (validSwitcherElements[i].classList.contains(classFocus)) {
-                    currentFocusIndex = i;
-                }
-            }
             if (returnKey === selectionButton) {
-                clearInterval(intervalId); // stop the interval
-                validSwitcherElements[currentFocusIndex].classList.remove(classFocus);
-                validSwitcherElements[currentFocusIndex].classList.add(classActive);
-                window.removeEventListener('keydown', handleSwitchKey);
-                window.sound(
-                    'fx.navigate',
-                    function () {
-                        if (validSwitcherElements[currentFocusIndex].hasAttribute('data-audio-select')) {
-                            const audioSelectValue =
-                                validSwitcherElements[currentFocusIndex].getAttribute('data-audio-select');
-                            window.sound(audioSelectValue, function () {
-                                validSwitcherElements[currentFocusIndex].click();
-                            });
-                        } else {
-                            validSwitcherElements[currentFocusIndex].click();
-                        }
-                        // return;
-                    },
-                    true,
-                );
+                clearInterval(intervalId);
+                selectElement(Math.max(0, focusedIndex));
             }
         } else {
-            // Manual mode.
+            // Manual mode. With nothing highlighted (after the escape modal), start from the first element.
             event.preventDefault();
-            let currentFocusIndex = 0;
-            let nextFocusIndex = 0;
-            for (let i = 0; i < validSwitcherElements.length; i++) {
-                if (validSwitcherElements[i].classList.contains(classFocus)) {
-                    currentFocusIndex = i;
-                    if (currentFocusIndex === validSwitcherElements.length - 1) {
-                        nextFocusIndex = 0;
-                    } else {
-                        nextFocusIndex = currentFocusIndex + 1;
-                    }
-                }
-            }
-            // Part 1. Navigate to the next element.
+            const currentFocusIndex = Math.max(0, focusedIndex);
             if (returnKey === navigationButton) {
-                validSwitcherElements[currentFocusIndex].classList.remove(classFocus);
-                validSwitcherElements[currentFocusIndex].blur();
-                validSwitcherElements[nextFocusIndex].focus();
-                validSwitcherElements[nextFocusIndex].classList.add(classFocus);
-                window.sound('fx.select');
+                const nextFocusIndex = focusedIndex === -1 ? 0 : (focusedIndex + 1) % validSwitcherElements.length;
+                moveFocus(currentFocusIndex, nextFocusIndex);
             }
-            // Part 2. Select the current element.
             if (returnKey === selectionButton) {
-                // Find the currently highlighted button and click it.
-                validSwitcherElements[currentFocusIndex].classList.remove(classFocus);
-                validSwitcherElements[currentFocusIndex].classList.add(classActive);
-                window.removeEventListener('keydown', handleSwitchKey);
-                // validSwitcherElements[currentFocusIndex].click();
-                // return;
-                window.sound(
-                    'fx.navigate',
-                    function () {
-                        if (validSwitcherElements[currentFocusIndex].hasAttribute('data-audio-select')) {
-                            const audioSelectValue =
-                                validSwitcherElements[currentFocusIndex].getAttribute('data-audio-select');
-                            window.sound(audioSelectValue, function () {
-                                validSwitcherElements[currentFocusIndex].click();
-                            });
-                        } else {
-                            validSwitcherElements[currentFocusIndex].click();
-                        }
-                        // return;
-                    },
-                    true,
-                );
+                selectElement(currentFocusIndex);
             }
         }
     }
