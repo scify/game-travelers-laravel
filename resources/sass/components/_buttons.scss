@@ -412,16 +412,16 @@ body.switcher {
 .btn-board.switcher-active > span.board-img.blank {
     background-image: linear-gradient(
         180deg,
-        hsl(30deg 17% 98%) 16%,
-        hsl(30deg 17% 97%) 50%,
-        hsl(30deg 17% 97%) 58%,
-        hsl(30deg 17% 96%) 61%,
-        hsl(30deg 17% 96%) 62%,
-        hsl(30deg 17% 95%) 64%,
-        hsl(30deg 18% 95%) 65%,
-        hsl(30deg 18% 94%) 69%,
-        hsl(30deg 18% 94%) 78%,
-        hsl(30deg 18% 93%) 100%
+        hsl(30deg, 17%, 98%) 16%,
+        hsl(30deg, 17%, 97%) 50%,
+        hsl(30deg, 17%, 97%) 58%,
+        hsl(30deg, 17%, 96%) 61%,
+        hsl(30deg, 17%, 96%) 62%,
+        hsl(30deg, 17%, 95%) 64%,
+        hsl(30deg, 18%, 95%) 65%,
+        hsl(30deg, 18%, 94%) 69%,
+        hsl(30deg, 18%, 94%) 78%,
+        hsl(30deg, 18%, 93%) 100%
     );
 }
 
