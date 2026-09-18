@@ -156,8 +156,8 @@
 import axios from 'axios';
 import { Modal } from 'bootstrap';
 import { markRaw } from 'vue';
-import { music, sound } from '@/audio.js';
-import { createDebugTools, emit, enabled as debugEnabled, log } from '@/debug.js';
+import { music, sound } from '@/lib/audio.js';
+import { createDebugTools, emit, enabled as debugEnabled, log } from '@/lib/debug.js';
 import BoardDebugStrip from '@/components/BoardDebugStrip.vue';
 
 export default {

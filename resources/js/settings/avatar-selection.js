@@ -6,7 +6,7 @@
  * - A submit button with the id=#submitButton.
  */
 
-import { log } from '@/debug.js';
+import { log } from '@/lib/debug.js';
 
 window.addEventListener('load', function () {
     let btnId;

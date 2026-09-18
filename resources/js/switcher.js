@@ -5,10 +5,10 @@
  */
 
 import { Modal } from 'bootstrap';
-import { music, sound } from '@/audio.js';
-import { log } from '@/debug.js';
-import { SwitcherKeys } from '@/keys.js';
-import { saveVolume } from '@/volumes.js';
+import { music, sound } from '@/lib/audio.js';
+import { log } from '@/lib/debug.js';
+import { SwitcherKeys } from '@/lib/keys.js';
+import { saveVolume } from '@/lib/volumes.js';
 
 // Blurs any items with focus.
 window.onpageshow = function (e) {

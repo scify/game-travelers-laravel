@@ -10,7 +10,7 @@
         elements as the settingsDifficultyNew.blade.php view.
         --}}
     @section('scripts')
-        @vite('resources/js/settings/index.js')
+        @vite('resources/js/settings.js')
     @endsection
 
     <form

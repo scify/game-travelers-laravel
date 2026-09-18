@@ -4,7 +4,7 @@
       All the Players are returned as <buttons> which act as radios in a virtual
       and accessible radiogroup. In order to use this component in your
       template, you have to make sure to include the related JavaScript asset:
-      @vite('resources/js/settings/index.js')
+      @vite('resources/js/settings.js')
     - Example use in a template:
       <x-selectPlayer :avatars=$players_with_avatars :selected-player-id=0 :tabindex=1 />
     - Parameters:

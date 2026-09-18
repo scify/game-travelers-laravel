@@ -5,9 +5,9 @@
  * which includes a list of all the keys which are relatively safe to use.
  */
 
-import { log } from '@/debug.js';
-import { SwitcherKeys } from '@/keys.js';
-import { trans } from '@/lang.js';
+import { log } from '@/lib/debug.js';
+import { SwitcherKeys } from '@/lib/keys.js';
+import { trans } from '@/lib/lang.js';
 
 (function () {
     'use strict';

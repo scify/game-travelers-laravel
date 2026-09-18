@@ -2,9 +2,9 @@
  * Range Labels Functions.
  */
 
-import { music, sound } from '@/audio.js';
-import { trans } from '@/lang.js';
-import { saveVolume } from '@/volumes.js';
+import { music, sound } from '@/lib/audio.js';
+import { trans } from '@/lib/lang.js';
+import { saveVolume } from '@/lib/volumes.js';
 
 window.addEventListener('load', function () {
     const rangeElements = document.querySelectorAll("input[type='range']");

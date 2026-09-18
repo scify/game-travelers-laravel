@@ -8,7 +8,7 @@
          @see resources/js/settings/dice-selection.js
     --}}
     @section('scripts')
-        @vite('resources/js/settings/index.js')
+        @vite('resources/js/settings.js')
     @endsection
 
     <!-- new player step 3/3 content -->

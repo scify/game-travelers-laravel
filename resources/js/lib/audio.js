@@ -1,4 +1,4 @@
-import { log } from '@/debug.js';
+import { log } from '@/lib/debug.js';
 
 // Experimental Audio Functions
 // Two audio channels: music() for music, sound() for narration and effects.

@@ -1,5 +1,5 @@
-import { music } from '@/audio.js';
-import { log } from '@/debug.js';
+import { music } from '@/lib/audio.js';
+import { log } from '@/lib/debug.js';
 
 window.addEventListener('load', switcher);
 function switcher() {

@@ -10,7 +10,7 @@
         @see resources/js/settings/avatar-selection.js
     --}}
     @section('scripts')
-        @vite('resources/js/settings/index.js')
+        @vite('resources/js/settings.js')
     @endsection
 
     <!-- new player step 1/3 content -->

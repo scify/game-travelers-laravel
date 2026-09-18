@@ -6,7 +6,7 @@
         @see resources/js/settings/key-assigner.js.
     --}}
     @section('scripts')
-        @vite('resources/js/settings/index.js')
+        @vite('resources/js/settings.js')
     @endsection
 
     <!-- new player step 2/3 content -->
