@@ -1,0 +1,15 @@
+/* Fonts, self-hosted through Fontsource */
+@use '@fontsource-utils/scss' as fontsource;
+@use '@fontsource-variable/manrope/scss/metadata' as manrope;
+
+// Manrope by Mikhail Sharanda, the variable build: every weight from one file
+// per script. Greek and Latin only; the game has no text in other scripts.
+@include fontsource.faces(
+    $metadata: manrope.$metadata,
+    $subsets: (
+        latin,
+        greek,
+    ),
+    $family: 'Manrope',
+    $directory: '@fontsource-variable/manrope/files'
+);
