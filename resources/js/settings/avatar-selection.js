@@ -28,7 +28,7 @@ window.addEventListener('load', function () {
                 if (userMenuButtonImage && !isNaN(idValue)) {
                     if (idValue > 0) {
                         console.log(idValue);
-                        let selectedButton = avatarsContainer.querySelector(`img[data-player-id='${idValue}'`);
+                        const selectedButton = avatarsContainer.querySelector(`img[data-player-id='${idValue}'`);
                         userMenuButtonImage.setAttribute('alt', 'Ενημερωμένο');
                         userMenuButtonImage.setAttribute('src', selectedButton.getAttribute('src'));
                         userMenuButtonLabel.textContent = selectedButton.getAttribute('data-player-name');

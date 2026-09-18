@@ -23,11 +23,13 @@
          * value remains unalatered).
          */
         function resetKeyAssigners(resetActive = true) {
-            if (!keyAssignersInputs) return;
+            if (!keyAssignersInputs) {
+                return;
+            }
             for (const resetInput of keyAssignersInputs) {
                 if (resetInput.value) {
-                    let resetInputId = resetInput.getAttribute('id');
-                    let keyAssignerButton = document.querySelector(`[data-sets-input=${resetInputId}]`);
+                    const resetInputId = resetInput.getAttribute('id');
+                    const keyAssignerButton = document.querySelector(`[data-sets-input=${resetInputId}]`);
                     if (keyAssignerButton) {
                         keyAssignerButton.classList.remove('invalid');
                         keyAssignerButton.setAttribute('data-key-selected', resetInput.value);
@@ -145,8 +147,8 @@
                             console.log('Error!');
                             returnKey = keyAssigner.getAttribute('data-key-selected');
                         }
-                        let setInputId = keyAssigner.getAttribute('data-sets-input');
-                        let setInput = document.getElementById(setInputId);
+                        const setInputId = keyAssigner.getAttribute('data-sets-input');
+                        const setInput = document.getElementById(setInputId);
                         // If this assigner's data-sets-input value is either
                         // controlManualSelectionButton or controlManualNavigationButton
                         // we make sure that they are not set to the same Key.
@@ -181,8 +183,8 @@
                                     returnKey === 'Space' ? 'Enter' : 'Space',
                                 );
                                 otherAssigner.textContent = returnKey === 'Space' ? 'Enter' : 'Space';
-                                let setOtherInputId = otherAssigner.getAttribute('data-sets-input');
-                                let setOtherInput = document.getElementById(setOtherInputId);
+                                const setOtherInputId = otherAssigner.getAttribute('data-sets-input');
+                                const setOtherInput = document.getElementById(setOtherInputId);
                                 setOtherInput.value = returnKey === 'Space' ? 'Enter' : 'Space';
                             }
                         }

@@ -56,8 +56,8 @@ function switcher() {
         manualSelectionButton = 'Enter';
         manualNavigationButton = 'Space';
     }
-    let selectionButton = controlMode === 1 ? automaticSelectionButton : manualSelectionButton;
-    let navigationButton = manualNavigationButton;
+    const selectionButton = controlMode === 1 ? automaticSelectionButton : manualSelectionButton;
+    const navigationButton = manualNavigationButton;
 
     // Configuration
     // Add delay for CSS transitions on top of the defined scanningSpeed. This
@@ -83,8 +83,8 @@ function switcher() {
             : null;
 
     function removeSwitcherClasses() {
-        var elements = document.getElementsByClassName(classFocus);
-        for (var i = 0; i < elements.length; i++) {
+        const elements = document.getElementsByClassName(classFocus);
+        for (let i = 0; i < elements.length; i++) {
             elements[i].classList.remove(classFocus);
         }
     }
@@ -146,7 +146,7 @@ function switcher() {
         } else {
             // Manual mode.
             // Select the first option by default.
-            let currentFocusIndex = 0;
+            const currentFocusIndex = 0;
             validSwitcherElements[currentFocusIndex].focus();
             validSwitcherElements[currentFocusIndex].classList.add(classFocus);
             // Note: Keydown for immediate reponse, instead of the keyup used
@@ -156,8 +156,8 @@ function switcher() {
     }
 
     function switcherModal() {
-        var switcherModalEl = document.getElementById('switcherModal');
-        var bsSwitcherModal =
+        const switcherModalEl = document.getElementById('switcherModal');
+        const bsSwitcherModal =
             // eslint-disable-next-line no-undef
             bootstrap.Modal.getOrCreateInstance(switcherModalEl, {
                 keyboard: false,
@@ -173,18 +173,18 @@ function switcher() {
     }
 
     function saveMusicVolume(volume) {
-        let postUrl = window.Laravel.playerAudio.updateVolumesUrl;
-        let playerUrl = window.Laravel.playerAudio.playerUrl;
-        let lastIndex = playerUrl.lastIndexOf('/');
-        let playerId = playerUrl.slice(lastIndex + 1);
-        let csrfToken = document.querySelector("meta[name='csrf-token']").content;
-        let data = {
+        const postUrl = window.Laravel.playerAudio.updateVolumesUrl;
+        const playerUrl = window.Laravel.playerAudio.playerUrl;
+        const lastIndex = playerUrl.lastIndexOf('/');
+        const playerId = playerUrl.slice(lastIndex + 1);
+        const csrfToken = document.querySelector("meta[name='csrf-token']").content;
+        const data = {
             _token: csrfToken,
             player_id: playerId,
             music_volume: volume,
         };
-        let post = JSON.stringify(data);
-        let xhr = new XMLHttpRequest();
+        const post = JSON.stringify(data);
+        const xhr = new XMLHttpRequest();
         xhr.open('POST', postUrl, true);
         xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
         xhr.send(post);
@@ -274,7 +274,7 @@ function switcher() {
                     'fx.navigate',
                     function () {
                         if (validSwitcherElements[currentFocusIndex].hasAttribute('data-audio-select')) {
-                            let audioSelectValue =
+                            const audioSelectValue =
                                 validSwitcherElements[currentFocusIndex].getAttribute('data-audio-select');
                             window.sound(audioSelectValue, function () {
                                 validSwitcherElements[currentFocusIndex].click();
@@ -322,7 +322,7 @@ function switcher() {
                     'fx.navigate',
                     function () {
                         if (validSwitcherElements[currentFocusIndex].hasAttribute('data-audio-select')) {
-                            let audioSelectValue =
+                            const audioSelectValue =
                                 validSwitcherElements[currentFocusIndex].getAttribute('data-audio-select');
                             window.sound(audioSelectValue, function () {
                                 validSwitcherElements[currentFocusIndex].click();

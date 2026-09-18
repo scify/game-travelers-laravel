@@ -5,16 +5,16 @@ window.addEventListener('load', function () {
     const rangeElements = document.querySelectorAll("input[type='range']");
 
     function saveVolumes(volume, isMusic) {
-        let postUrl = window.Laravel.playerAudio.updateVolumesUrl;
-        let playerUrl = window.Laravel.playerAudio.playerUrl;
-        let lastIndex = playerUrl.lastIndexOf('/');
-        let playerId = playerUrl.slice(lastIndex + 1);
-        let csrfToken = document.querySelector("meta[name='csrf-token']").content;
-        let data = isMusic
+        const postUrl = window.Laravel.playerAudio.updateVolumesUrl;
+        const playerUrl = window.Laravel.playerAudio.playerUrl;
+        const lastIndex = playerUrl.lastIndexOf('/');
+        const playerId = playerUrl.slice(lastIndex + 1);
+        const csrfToken = document.querySelector("meta[name='csrf-token']").content;
+        const data = isMusic
             ? { _token: csrfToken, player_id: playerId, music_volume: volume }
             : { _token: csrfToken, player_id: playerId, sound_volume: volume };
-        let post = JSON.stringify(data);
-        let xhr = new XMLHttpRequest();
+        const post = JSON.stringify(data);
+        const xhr = new XMLHttpRequest();
         xhr.open('POST', postUrl, true);
         xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
         xhr.send(post);

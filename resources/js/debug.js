@@ -77,13 +77,17 @@ export function createDebugTools({ state, keys, setVolumes, stateUrl }) {
             const deadline = Date.now() + 30000;
             while (Date.now() < deadline) {
                 const s = state();
-                if (s.gamePhase !== 2 || s.newPosition < 0) return false;
+                if (s.gamePhase !== 2 || s.newPosition < 0) {
+                    return false;
+                }
                 const usesNavigateKey = s.autoMove === 2 && s.movementMode !== 1;
                 if (!s.ignoreInput && s.blueShown && s.blueIndex === s.newPosition) {
                     press(keys().select);
                     return true;
                 }
-                if (usesNavigateKey && !s.ignoreInput && s.blueIndex >= 0) press(keys().navigate);
+                if (usesNavigateKey && !s.ignoreInput && s.blueIndex >= 0) {
+                    press(keys().navigate);
+                }
                 await wait(usesNavigateKey ? 150 : 50);
             }
             return false;

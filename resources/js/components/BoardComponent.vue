@@ -264,14 +264,22 @@ export default {
             }
         },
         computeBlueSrc() {
-            if (this.blueIndex === -1) return '';
-            else if (this.blueIndex === 0) return this.getSizePath() + 'blue_positions/0.png';
-            else if (this.showNumbers) return this.getSizePath() + 'blue_positions/' + this.blueIndex + '.png';
-            else return this.getSizePath() + 'blue_positions/' + this.blueIndex + '_colour.png';
+            if (this.blueIndex === -1) {
+                return '';
+            } else if (this.blueIndex === 0) {
+                return this.getSizePath() + 'blue_positions/0.png';
+            } else if (this.showNumbers) {
+                return this.getSizePath() + 'blue_positions/' + this.blueIndex + '.png';
+            } else {
+                return this.getSizePath() + 'blue_positions/' + this.blueIndex + '_colour.png';
+            }
         },
         computeCardSrc() {
-            if (this.cardName === '') return '';
-            else return this.getBoardPath() + 'cards/' + this.cardName + '.png';
+            if (this.cardName === '') {
+                return '';
+            } else {
+                return this.getBoardPath() + 'cards/' + this.cardName + '.png';
+            }
         },
         computeBackgroundSrc() {
             switch (this.gameEnd) {
@@ -280,12 +288,15 @@ export default {
                 case -1:
                     return "url('" + this.getLoseSrc() + "')";
                 default:
-                    if (this.showNumbers) return "url('" + this.getSizePath() + "board.png')";
-                    else return "url('" + this.getSizePath() + "board_colour.png')";
+                    if (this.showNumbers) {
+                        return "url('" + this.getSizePath() + "board.png')";
+                    } else {
+                        return "url('" + this.getSizePath() + "board_colour.png')";
+                    }
             }
         },
         computeInfoSrc() {
-            let path = '/images/boards/info/';
+            const path = '/images/boards/info/';
             switch (this.infoState) {
                 case 0:
                     return path + 'default_state.png';
@@ -316,17 +327,22 @@ export default {
     },
     methods: {
         init() {
-            if (this.diceType === 3) this.showNumbers = false;
+            if (this.diceType === 3) {
+                this.showNumbers = false;
+            }
             // need to roll
             this.winFrame1 = this.getBoardPath() + '/win/1.png';
             this.winFrame2 = this.getBoardPath() + '/win/2.png';
             this.winFrame3 = this.getBoardPath() + '/win/3.png';
             window.setTimeout(() => {
                 this.gameEnd = 0;
-                if (this.board === 1) this.music = window.music('music.great_ideas', this.musicVolume);
-                else if (this.board === 2)
+                if (this.board === 1) {
+                    this.music = window.music('music.great_ideas', this.musicVolume);
+                } else if (this.board === 2) {
                     this.music = window.music('music.in_the_land_of_make_believe', this.musicVolume);
-                else if (this.board === 3) this.music = window.music('music.movin_on', this.musicVolume);
+                } else if (this.board === 3) {
+                    this.music = window.music('music.movin_on', this.musicVolume);
+                }
 
                 this.showPawn1 = true;
                 this.showPawn2 = true;
@@ -335,10 +351,13 @@ export default {
                     this.rollAnimation = true;
 
                     if (this.firstPlayerTurn) {
-                        if (this.pos1 === 0) window.sound('sounds.game.start');
-                        else window.sound(this.getOurTurnSound());
+                        if (this.pos1 === 0) {
+                            window.sound('sounds.game.start');
+                        } else {
+                            window.sound(this.getOurTurnSound());
+                        }
                     } else {
-                        let self = this;
+                        const self = this;
                         window.sound(this.getOtherTurnSound(), function () {
                             self.sendToBackend();
                         });
@@ -363,7 +382,7 @@ export default {
             return false;
         },
         updateVolumes() {
-            let data = {
+            const data = {
                 player_id: this.playerId,
                 music_volume: this.musicVolume,
             };
@@ -379,7 +398,7 @@ export default {
                 });
         },
         sendToBackend() {
-            let data = {
+            const data = {
                 player_id: this.playerId,
                 game_id: this.gameId,
                 first_player_turn: this.firstPlayerTurn,
@@ -391,7 +410,7 @@ export default {
                 game_mode: this.gameMode,
                 board_id: this.board,
             };
-            let self = this;
+            const self = this;
             if (self.gamePhase === 1) {
                 this.rollingAnimation = true;
                 window.sound('sounds.game.dice', null, true);
@@ -412,7 +431,7 @@ export default {
                             self.debugEmit('ended', self.gameEnd);
                             self.music.pause();
                             if (self.gameEnd === 1) {
-                                let sound = window.sound('sounds.game.win');
+                                const sound = window.sound('sounds.game.win');
                                 sound.volume = 0.2;
                                 window.sound('sounds.game.win_[1-8]');
                                 window.setTimeout(() => {
@@ -425,13 +444,16 @@ export default {
                                     self.winFrame = 3;
                                 }, 2500);
                             } else {
-                                let sound = window.sound('sounds.game.defeat');
+                                const sound = window.sound('sounds.game.defeat');
                                 sound.volume = 0.2;
                                 window.sound('sounds.game.defeat_[1-3]');
                             }
                             window.setTimeout(() => {
-                                if (self.gameEnd === 1) self.showWin = true;
-                                else self.showLoose = true;
+                                if (self.gameEnd === 1) {
+                                    self.showWin = true;
+                                } else {
+                                    self.showLoose = true;
+                                }
                                 self.ignoreInput = false;
                             }, 1000);
                         } else {
@@ -449,24 +471,27 @@ export default {
                                     self.debugEmit('phase', 1);
 
                                     if (self.firstPlayerTurn) {
-                                        if (self.tutorial && self.pos1 === 4)
+                                        if (self.tutorial && self.pos1 === 4) {
                                             window.sound('sounds.tutorial.bravo_roll_again', function () {
                                                 self.ignoreInput = false;
                                             });
-                                        else
+                                        } else {
                                             window.sound(self.getOurTurnSound(), function () {
                                                 self.ignoreInput = false;
                                             });
-                                    } else
+                                        }
+                                    } else {
                                         window.sound(self.getOtherTurnSound(), function () {
-                                            if (self.gameMode === 2)
+                                            if (self.gameMode === 2) {
                                                 window.setTimeout(() => {
                                                     self.sendToBackend();
                                                 }, 1000);
+                                            }
                                         });
+                                    }
                                 } else {
                                     //draw a card
-                                    let card = self.cards[response.data.drawCard];
+                                    const card = self.cards[response.data.drawCard];
                                     self.cardName = card['name'];
                                     self.latestCardValue = card['value'];
                                     self.debugEmit('card', { name: card['name'], value: card['value'] });
@@ -478,11 +503,11 @@ export default {
                                 self.rollAnimation = true;
                                 self.gamePhase = 1;
                                 self.debugEmit('phase', 1);
-                                if (self.firstPlayerTurn)
+                                if (self.firstPlayerTurn) {
                                     window.sound(self.getOurTurnSound(), function () {
                                         self.ignoreInput = false;
                                     });
-                                else if (self.gameMode === 2) {
+                                } else if (self.gameMode === 2) {
                                     window.sound(self.getOtherTurnSound(), function () {
                                         self.sendToBackend();
                                     });
@@ -497,26 +522,41 @@ export default {
                 });
         },
         key_press(e) {
-            let self = this;
+            const self = this;
             let key = e.key;
             if (key === 'e' || key === 'E' || key === 'ε' || key === 'Ε') {
-                if (this.gameEnd === 0) window.location.href = this.continueUrl;
-                else if (this.gameEnd !== -100) window.location.href = this.boardUrl;
-            } else if (key === '-' || key === '_') this.decreaseMusic();
-            else if (key === '=' || key === '+') this.increaseMusic();
-            else if (key === 'n' || key === 'N' || key === 'ν' || key === 'Ν')
-                if (self.showNumbers) self.showNumbers = false;
-                else self.showNumbers = true;
-            else if (self.showPopUp == true) self.showPopUp = false;
-            else if (!this.ignoreInput) {
+                if (this.gameEnd === 0) {
+                    window.location.href = this.continueUrl;
+                } else if (this.gameEnd !== -100) {
+                    window.location.href = this.boardUrl;
+                }
+            } else if (key === '-' || key === '_') {
+                this.decreaseMusic();
+            } else if (key === '=' || key === '+') {
+                this.increaseMusic();
+            } else if (key === 'n' || key === 'N' || key === 'ν' || key === 'Ν') {
+                if (self.showNumbers) {
+                    self.showNumbers = false;
+                } else {
+                    self.showNumbers = true;
+                }
+            } else if (self.showPopUp == true) {
+                self.showPopUp = false;
+            } else if (!this.ignoreInput) {
                 log('Key pressed and NOT ignored:\t(' + e.key + ')');
-                if (key === ' ') key = 'Space';
+                if (key === ' ') {
+                    key = 'Space';
+                }
                 let isSelect = false;
                 let isNavigate = false;
-                if (this.selectKey === key) isSelect = true;
-                else if (this.autoMove === 2 && this.navigateKey === key) {
-                    if (this.movementMode === 1) isSelect = true;
-                    else isNavigate = true;
+                if (this.selectKey === key) {
+                    isSelect = true;
+                } else if (this.autoMove === 2 && this.navigateKey === key) {
+                    if (this.movementMode === 1) {
+                        isSelect = true;
+                    } else {
+                        isNavigate = true;
+                    }
                 }
                 this.debugEmit('input', { key, isSelect, isNavigate });
                 log(
@@ -548,15 +588,18 @@ export default {
                         this.gameMode,
                 );
                 if (isSelect || isNavigate) {
-                    if (this.gameEnd === 1 || this.gameEnd === -1) window.location.href = this.boardUrl;
-                    else if (this.gamePhase === 1) {
+                    if (this.gameEnd === 1 || this.gameEnd === -1) {
+                        window.location.href = this.boardUrl;
+                    } else if (this.gamePhase === 1) {
                         this.ignoreInput = true;
                         this.sendToBackend();
                     } else if (this.gamePhase === 2) {
                         if (isNavigate) {
                             window.sound('fx.select');
                             let initialPos = this.pos1;
-                            if (!this.firstPlayerTurn) initialPos = this.pos2;
+                            if (!this.firstPlayerTurn) {
+                                initialPos = this.pos2;
+                            }
                             this.blue_position_show = false;
                             let nextBlue = this.blueIndex + 1;
 
@@ -564,8 +607,9 @@ export default {
                                 (this.movementMode === 3 &&
                                     (nextBlue > this.getMaxBoardPosition() || nextBlue > initialPos + 6)) ||
                                 (this.movementMode === 2 && nextBlue > this.newPosition)
-                            )
+                            ) {
                                 nextBlue = initialPos;
+                            }
 
                             this.blueIndex = nextBlue;
                             this.blue_position_show = true;
@@ -641,9 +685,13 @@ export default {
                     if (nextSecond === this.scanningSpeed) {
                         nextSecond = 0;
                         let next_current = current + 1;
-                        if (next_current > end) next_current = start;
+                        if (next_current > end) {
+                            next_current = start;
+                        }
                         this.activate_blue_rotation(start, end, next_current, nextSecond);
-                    } else this.activate_blue_rotation(start, end, current, nextSecond);
+                    } else {
+                        this.activate_blue_rotation(start, end, current, nextSecond);
+                    }
                 }, 1000);
             } else {
                 this.blue_position_show = false;
@@ -655,26 +703,42 @@ export default {
             if (isDice) {
                 // show dice
                 if (value === 0) {
-                    if (this.diceType === 1) src += 'dice_numbers';
-                    else if (this.diceType === 2) src += 'dice_dots';
-                    else if (this.diceType === 3) src += 'dice_colours';
+                    if (this.diceType === 1) {
+                        src += 'dice_numbers';
+                    } else if (this.diceType === 2) {
+                        src += 'dice_dots';
+                    } else if (this.diceType === 3) {
+                        src += 'dice_colours';
+                    }
                 } else {
                     if (this.diceType === 3) {
-                        if (value === 1) src += 'o';
-                        else if (value === 2) src += 'g';
-                        else if (value === 3) src += 'b';
-                        else if (value === 4) src += 'p';
-                        else if (value === 5) src += 'r';
-                        else if (value === 6) src += 'y';
+                        if (value === 1) {
+                            src += 'o';
+                        } else if (value === 2) {
+                            src += 'g';
+                        } else if (value === 3) {
+                            src += 'b';
+                        } else if (value === 4) {
+                            src += 'p';
+                        } else if (value === 5) {
+                            src += 'r';
+                        } else if (value === 6) {
+                            src += 'y';
+                        }
                     } else {
                         src += value;
-                        if (this.diceType === 2) src += 'd';
+                        if (this.diceType === 2) {
+                            src += 'd';
+                        }
                     }
                 }
             } else {
                 //show cloud
-                if (value > 0) src += 'p';
-                else src += 'm';
+                if (value > 0) {
+                    src += 'p';
+                } else {
+                    src += 'm';
+                }
                 src += Math.abs(value);
             }
             this.center_src = src + '.png';
@@ -683,7 +747,9 @@ export default {
             this.debugEmit('selector', { target: newPosition });
             this.ignoreInput = false;
             let pos = this.pos1;
-            if (!this.firstPlayerTurn) pos = this.pos2;
+            if (!this.firstPlayerTurn) {
+                pos = this.pos2;
+            }
             if (this.movementMode === 1) {
                 this.ignoreInput = false;
                 this.blue_blinking_allowed = true;
@@ -714,8 +780,10 @@ export default {
                 if (this.autoMove === 1) {
                     this.blue_blinking_allowed = true;
                     let max = pos + 6;
-                    let max_value = this.getMaxBoardPosition();
-                    if (max > max_value) max = max_value;
+                    const max_value = this.getMaxBoardPosition();
+                    if (max > max_value) {
+                        max = max_value;
+                    }
                     this.activate_blue_rotation(pos, max, pos, 0);
                 } else {
                     this.blueIndex = pos;
@@ -725,28 +793,36 @@ export default {
             }
         },
         applyDiceRoll(newPosition, diceResult) {
-            let self = this;
+            const self = this;
             this.gamePhase = 2;
             this.mistakes = 0;
             this.newPosition = newPosition;
             this.setCenter(true, diceResult);
             this.debugEmit('rolled', { newPosition, diceResult });
-            if (this.gameMode === 2 && !this.firstPlayerTurn) this.applyCorrectMovement();
+            if (this.gameMode === 2 && !this.firstPlayerTurn) {
+                this.applyCorrectMovement();
+            }
             //check this in pvp
             else {
                 if (this.tutorial && this.firstPlayerTurn && this.tutorialYouKnowHowToPlayFlag === 0) {
                     if (this.pos1 === 0) {
                         let sound_forward = 'sounds.tutorial.Pink_Move_Forward';
-                        if (self.diceType !== 3) sound_forward = 'sounds.tutorial.Pawn_4_forward';
+                        if (self.diceType !== 3) {
+                            sound_forward = 'sounds.tutorial.Pawn_4_forward';
+                        }
                         window.sound(sound_forward, function () {
                             if (self.movementMode === 3) {
                                 self.blueIndex = 4;
                                 self.blue_position_show = true;
-                            } else self.activateSelector(newPosition);
+                            } else {
+                                self.activateSelector(newPosition);
+                            }
                             let we_should_go_here_sound = 'sounds.tutorial.Here_we_go_Pink';
-                            if (self.diceType !== 3) we_should_go_here_sound = 'sounds.tutorial.We_Should_Go_Here';
+                            if (self.diceType !== 3) {
+                                we_should_go_here_sound = 'sounds.tutorial.We_Should_Go_Here';
+                            }
                             window.sound(we_should_go_here_sound, function () {
-                                if (self.movementMode > 1)
+                                if (self.movementMode > 1) {
                                     window.sound('sounds.tutorial.Choose_this_Pawn_goes_there', function () {
                                         if (self.movementMode === 3) {
                                             self.blue_position_show = false;
@@ -754,12 +830,15 @@ export default {
                                             self.activateSelector(newPosition);
                                         }
                                     });
+                                }
                             });
                         });
                     } else if (this.pos1 === 4) {
                         if (self.movementMode === 3) {
                             let sound_to_play = 'sounds.tutorial.Yellow_Choose_Position';
-                            if (self.diceType !== 3) sound_to_play = 'sounds.tutorial.Roll_2_You_Choose_Now';
+                            if (self.diceType !== 3) {
+                                sound_to_play = 'sounds.tutorial.Roll_2_You_Choose_Now';
+                            }
                             window.sound(sound_to_play, function () {
                                 self.activateSelector(newPosition);
                             });
@@ -771,62 +850,80 @@ export default {
                             });
                             self.activateSelector(newPosition);
                         }
-                    } else this.activateSelector(newPosition);
-                } else this.activateSelector(newPosition);
+                    } else {
+                        this.activateSelector(newPosition);
+                    }
+                } else {
+                    this.activateSelector(newPosition);
+                }
             }
         },
         applyCorrectMovement() {
-            let newPosition = this.newPosition;
+            const newPosition = this.newPosition;
             this.newPosition = -1;
             this.ignoreInput = true;
             this.blueIndex = newPosition;
             this.blue_position_show = true;
             let current = this.pos2;
-            if (this.firstPlayerTurn) current = this.pos1;
+            if (this.firstPlayerTurn) {
+                current = this.pos1;
+            }
             this.activate_movement_rotation(newPosition, current);
         },
 
         activate_movement_rotation(end, current) {
             this.ignoreInput = true;
-            let self = this;
+            const self = this;
             if (this.firstPlayerTurn) {
                 this.showPawn1 = false;
-                if (end > current) this.pos1 = current + 1;
-                else this.pos1 = current - 1;
+                if (end > current) {
+                    this.pos1 = current + 1;
+                } else {
+                    this.pos1 = current - 1;
+                }
                 window.setTimeout(() => {
                     this.showPawn1 = true;
                     this.playStepSound();
                 }, 500);
                 window.setTimeout(() => {
-                    if (this.pos1 !== end) this.activate_movement_rotation(end, this.pos1);
-                    else {
+                    if (this.pos1 !== end) {
+                        this.activate_movement_rotation(end, this.pos1);
+                    } else {
                         this.debugEmit('moved', { position: this.pos1 });
                         if (this.tutorial && this.firstPlayerTurn) {
-                            if (this.pos1 === 9 && this.tutorialYouKnowHowToPlayFlag === 0)
+                            if (this.pos1 === 9 && this.tutorialYouKnowHowToPlayFlag === 0) {
                                 window.sound('sounds.tutorial.Aha_Lets_see', function () {
                                     self.tutorialYouKnowHowToPlayFlag += 1;
                                     self.sendToBackend();
                                 });
-                            else if (this.tutorialYouKnowHowToPlayFlag === 1) {
+                            } else if (this.tutorialYouKnowHowToPlayFlag === 1) {
                                 window.sound('sounds.tutorial.Now_you_know_how_to_play', function () {
                                     self.tutorialYouKnowHowToPlayFlag += 1;
                                     self.sendToBackend();
                                 });
-                            } else this.sendToBackend();
-                        } else this.sendToBackend();
+                            } else {
+                                this.sendToBackend();
+                            }
+                        } else {
+                            this.sendToBackend();
+                        }
                     }
                 }, 1000);
             } else {
                 this.showPawn2 = false;
-                if (end > current) this.pos2 = current + 1;
-                else this.pos2 = current - 1;
+                if (end > current) {
+                    this.pos2 = current + 1;
+                } else {
+                    this.pos2 = current - 1;
+                }
                 window.setTimeout(() => {
                     this.showPawn2 = true;
                     this.playStepSound();
                 }, 500);
                 window.setTimeout(() => {
-                    if (this.pos2 !== end) this.activate_movement_rotation(end, this.pos2);
-                    else {
+                    if (this.pos2 !== end) {
+                        this.activate_movement_rotation(end, this.pos2);
+                    } else {
                         this.debugEmit('moved', { position: this.pos2 });
                         this.sendToBackend();
                     }
@@ -834,26 +931,31 @@ export default {
             }
         },
         resolvePhase3() {
-            let self = this;
+            const self = this;
             this.ignoreInput = true;
             this.blue_blinking_allowed = false;
             this.cardName = '';
             let sound = 'sounds.cards.';
-            if (!this.firstPlayerTurn) sound += 'opponent_';
-            if (this.latestCardValue > 0)
+            if (!this.firstPlayerTurn) {
+                sound += 'opponent_';
+            }
+            if (this.latestCardValue > 0) {
                 window.sound(sound + 'F' + this.latestCardValue + this.getPawnSex(), function () {
                     self.latestCardValue = 0;
                     self.applyCorrectMovement();
                 });
-            else
+            } else {
                 window.sound(sound + 'B' + Math.abs(this.latestCardValue) + this.getPawnSex(), function () {
                     self.latestCardValue = 0;
                     self.applyCorrectMovement();
                 });
+            }
         },
         applyCardMovement() {
             let pos = this.pos1;
-            if (!this.firstPlayerTurn) pos = this.pos2;
+            if (!this.firstPlayerTurn) {
+                pos = this.pos2;
+            }
             pos += this.latestCardValue;
             this.gamePhase = 3;
             this.newPosition = pos;
@@ -867,28 +969,38 @@ export default {
         },
         getPawnSex() {
             if (this.firstPlayerTurn) {
-                if (this.pawn1 === 2 || this.pawn1 === 3 || this.pawn1 === 6) return '_g';
-                else return '_b';
+                if (this.pawn1 === 2 || this.pawn1 === 3 || this.pawn1 === 6) {
+                    return '_g';
+                } else {
+                    return '_b';
+                }
             } else {
-                if (this.pawn2 === 2 || this.pawn2 === 3 || this.pawn2 === 6) return '_g';
-                else return '_b';
+                if (this.pawn2 === 2 || this.pawn2 === 3 || this.pawn2 === 6) {
+                    return '_g';
+                } else {
+                    return '_b';
+                }
             }
         },
         playCardSound() {
-            let self = this;
+            const self = this;
             window.sound('sounds.cards.' + this.cardName + '_' + this.board + this.getPawnSex(), function () {
                 self.applyCardMovement();
             });
         },
         increaseMusic() {
             this.musicVolume += 0.1;
-            if (this.musicVolume > 1) this.musicVolume = 1.0;
+            if (this.musicVolume > 1) {
+                this.musicVolume = 1.0;
+            }
             this.music.volume = this.musicVolume;
             this.updateVolumes();
         },
         decreaseMusic() {
             this.musicVolume -= 0.1;
-            if (this.musicVolume <= 0) this.musicVolume = 0;
+            if (this.musicVolume <= 0) {
+                this.musicVolume = 0;
+            }
             this.music.volume = this.musicVolume;
             this.updateVolumes();
         },
@@ -899,31 +1011,45 @@ export default {
             return this.getBoardPath() + 'goal.png';
         },
         getExtrasSrc() {
-            if (this.board === 2) return this.getBoardPath() + 'extras.png';
-            else if (this.board === 3) {
-                if (this.boardSize === 3) return '';
-                else return this.getBoardPath() + 'extras.png';
-            } else return '';
+            if (this.board === 2) {
+                return this.getBoardPath() + 'extras.png';
+            } else if (this.board === 3) {
+                if (this.boardSize === 3) {
+                    return '';
+                } else {
+                    return this.getBoardPath() + 'extras.png';
+                }
+            } else {
+                return '';
+            }
         },
         getMaxBoardPosition() {
             let max_value = 15;
-            if (this.boardSize === 2) max_value = 30;
-            else if (this.boardSize === 3) max_value = 45;
+            if (this.boardSize === 2) {
+                max_value = 30;
+            } else if (this.boardSize === 3) {
+                max_value = 45;
+            }
             return max_value;
         },
         getRewardSound() {
             return 'sounds.game.reward_[1-11]';
         },
         getOurTurnSound() {
-            if (this.gameMode === 1) return 'sounds.game.our_turn_solo_[1-5]';
-            else return 'sounds.game.our_turn_[1-6]';
+            if (this.gameMode === 1) {
+                return 'sounds.game.our_turn_solo_[1-5]';
+            } else {
+                return 'sounds.game.our_turn_[1-6]';
+            }
         },
         getOtherTurnSound() {
             return 'sounds.game.other_turn_[1-8]';
         },
         // Debug mode, see resources/js/debug.js: the board publishes its progress and a snapshot of its state.
         debugEmit(event, payload) {
-            if (!this.debug) return;
+            if (!this.debug) {
+                return;
+            }
             this.debugLastEvent = event + ' ' + JSON.stringify(payload ?? null);
             emit(event, payload);
         },
@@ -956,8 +1082,12 @@ export default {
             };
         },
         setDebugVolumes(muted) {
-            if (window.Laravel.playerAudio) window.Laravel.playerAudio.playerSoundVolume = muted ? 0 : this.soundVolume;
-            if (this.music) this.music.volume = muted ? 0 : this.musicVolume;
+            if (window.Laravel.playerAudio) {
+                window.Laravel.playerAudio.playerSoundVolume = muted ? 0 : this.soundVolume;
+            }
+            if (this.music) {
+                this.music.volume = muted ? 0 : this.musicVolume;
+            }
         },
     },
 };
