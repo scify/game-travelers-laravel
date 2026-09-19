@@ -6,7 +6,7 @@ window.addEventListener('load', () => {
     if (diceImages.length) {
         for (const img of diceImages) {
             img.addEventListener('click', (event) => {
-                const checkboxId = event.target.getAttribute('data-for');
+                const checkboxId = event.target.dataset.for;
                 if (checkboxId) {
                     const checkbox = document.getElementById(checkboxId);
                     if (checkbox) {

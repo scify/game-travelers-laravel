@@ -75,7 +75,7 @@ window.addEventListener('load', function () {
         for (let i = 0; i < rangeElements.length; i++) {
             const element = rangeElements[i];
             const elementId = element.getAttribute('id');
-            const elementFunction = element.getAttribute('data-function');
+            const elementFunction = element.dataset.function;
             /* Volume Sliders */
             if (elementFunction === 'volume-slider') {
                 // Initialise music playback:

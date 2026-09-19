@@ -1,16 +1,18 @@
 /*
  * Group Setters Functions.
  */
+
+import { trans } from '@/lib/lang.js';
+
 window.addEventListener('load', function () {
-    // First, select all of the input fields with the data-role="groupSetter" attribute
+    // First, select all the input fields with the data-role="groupSetter" attribute
     const groupSetters = document.querySelectorAll("input[data-role='groupSetter']");
     if (groupSetters.length) {
         // Function
 
         function setGroupSetterStates(groupSetter) {
-            const enables = groupSetter.getAttribute('data-enables');
-            const disables = groupSetter.getAttribute('data-disables');
-            let dataKeySelected;
+            const enables = groupSetter.dataset.enables;
+            const disables = groupSetter.dataset.disables;
             if (groupSetter.checked) {
                 const enableEl = document.getElementById(enables);
                 enableEl.classList.remove('opacity-50');
@@ -19,12 +21,8 @@ window.addEventListener('load', function () {
                 if (enableBtns) {
                     for (const enableBtn of enableBtns) {
                         enableBtn.disabled = false;
-                        dataKeySelected = enableBtn.getAttribute('data-key-selected');
-                        if (dataKeySelected) {
-                            enableBtn.textContent = enableBtn.getAttribute('data-key-selected');
-                        } else {
-                            enableBtn.textContent = enableBtn.getAttribute('data-key-default');
-                        }
+                        const keySelected = enableBtn.dataset.keySelected;
+                        enableBtn.textContent = keySelected ? keySelected : enableBtn.dataset.keyDefault;
                     }
                 }
                 const disableEl = document.getElementById(disables);
@@ -34,7 +32,7 @@ window.addEventListener('load', function () {
                 if (disableBtns) {
                     for (const disableBtn of disableBtns) {
                         disableBtn.disabled = true;
-                        disableBtn.textContent = 'όρισε πλήκτρο';
+                        disableBtn.textContent = trans('messages.switcher.set_button');
                     }
                 }
             }

@@ -37,7 +37,7 @@ import { trans } from '@/lib/lang.js';
                     const keyAssignerButton = document.querySelector(`[data-sets-input=${resetInputId}]`);
                     if (keyAssignerButton) {
                         keyAssignerButton.classList.remove('invalid');
-                        keyAssignerButton.setAttribute('data-key-selected', resetInput.value);
+                        keyAssignerButton.dataset.keySelected = resetInput.value;
                         if (resetActive) {
                             keyAssignerButton.textContent = resetInput.value;
                         } else {
@@ -59,7 +59,7 @@ import { trans } from '@/lib/lang.js';
                 keyAssignerText === trans('messages.switcher.set_button_invalid') ||
                 keyAssignerText === trans('messages.switcher.set_button')
             ) {
-                keyAssignerText = keyAssigner.getAttribute('data-key-selected');
+                keyAssignerText = keyAssigner.dataset.keySelected;
             }
             keyAssigner.textContent = trans('messages.switcher.set_button_invalid');
             if (!keyAssigner.classList.contains('invalid')) {
@@ -90,7 +90,7 @@ import { trans } from '@/lib/lang.js';
                             event.stopPropagation();
                             // console.log("aborted");
                             keyAssigner.classList.remove('active');
-                            keyAssigner.textContent = keyAssigner.getAttribute('data-key-default');
+                            keyAssigner.textContent = keyAssigner.dataset.keyDefault;
                             // Revert to default though :(
                             resetKeyAssigners(true);
                             window.removeEventListener('keyup', assignerKeyUpHandler);
@@ -150,9 +150,9 @@ import { trans } from '@/lib/lang.js';
                         }
                         if (returnKey === 'Error') {
                             log('Error!');
-                            returnKey = keyAssigner.getAttribute('data-key-selected');
+                            returnKey = keyAssigner.dataset.keySelected;
                         }
-                        const setInputId = keyAssigner.getAttribute('data-sets-input');
+                        const setInputId = keyAssigner.dataset.setsInput;
                         const setInput = document.getElementById(setInputId);
                         // If this assigner's data-sets-input value is either
                         // controlManualSelectionButton or controlManualNavigationButton
@@ -171,7 +171,7 @@ import { trans } from '@/lib/lang.js';
                                 break;
                         }
                         if (otherAssigner) {
-                            if (returnKey === otherAssigner.getAttribute('data-key-selected')) {
+                            if (returnKey === otherAssigner.dataset.keySelected) {
                                 if (returnKey !== 'Space' && returnKey !== 'Enter') {
                                     invalidateKeyAssigner(keyAssigner);
                                     invalidateKeyAssigner(otherAssigner);
@@ -183,12 +183,9 @@ import { trans } from '@/lib/lang.js';
                                 // case the other assigner reverts to the
                                 // unassigned key.
                                 log('Switching Other Key Assigner.');
-                                otherAssigner.setAttribute(
-                                    'data-key-selected',
-                                    returnKey === 'Space' ? 'Enter' : 'Space',
-                                );
+                                otherAssigner.dataset.keySelected = returnKey === 'Space' ? 'Enter' : 'Space';
                                 otherAssigner.textContent = returnKey === 'Space' ? 'Enter' : 'Space';
-                                const setOtherInputId = otherAssigner.getAttribute('data-sets-input');
+                                const setOtherInputId = otherAssigner.dataset.setsInput;
                                 const setOtherInput = document.getElementById(setOtherInputId);
                                 setOtherInput.value = returnKey === 'Space' ? 'Enter' : 'Space';
                             }
@@ -198,7 +195,7 @@ import { trans } from '@/lib/lang.js';
                         window.removeEventListener('click', assignerClickHandler);
 
                         keyAssigner.textContent = returnKey;
-                        keyAssigner.setAttribute('data-key-selected', returnKey);
+                        keyAssigner.dataset.keySelected = returnKey;
                         setInput.value = returnKey;
                         keyAssigner.classList.remove('active');
                         // Removes self.

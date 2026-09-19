@@ -102,14 +102,14 @@ function switcher() {
     // Iterate through elements and check data-tabindex values.
     for (let i = 0; i < switcherElements.length; i++) {
         const element = switcherElements[i];
-        const tabindex = element.getAttribute('data-tabindex');
+        const tabindex = element.dataset.tabindex;
         if (Number.parseInt(tabindex) === Number(tabindex)) {
             validSwitcherElements.push(element);
         }
     }
     // Sort valid elements by data-tabindex value.
     validSwitcherElements.sort((a, b) => {
-        return a.getAttribute('data-tabindex') - b.getAttribute('data-tabindex');
+        return a.dataset.tabindex - b.dataset.tabindex;
     });
     // Remove any left-over switcher classes from all elements:
     for (let i = 0; i < validSwitcherElements.length; i++) {

@@ -31,10 +31,10 @@ window.addEventListener('load', function () {
                 if (userMenuButtonImage && !Number.isNaN(idValue)) {
                     if (idValue > 0) {
                         log(idValue);
-                        const selectedButton = avatarsContainer.querySelector(`img[data-player-id='${idValue}'`);
+                        const selectedButton = avatarsContainer.querySelector(`img[data-player-id='${idValue}']`);
                         userMenuButtonImage.setAttribute('alt', 'Ενημερωμένο');
                         userMenuButtonImage.setAttribute('src', selectedButton.getAttribute('src'));
-                        userMenuButtonLabel.textContent = selectedButton.getAttribute('data-player-name');
+                        userMenuButtonLabel.textContent = selectedButton.dataset.playerName;
                     }
                 }
             }
@@ -85,11 +85,11 @@ window.addEventListener('load', function () {
             function handleAvatarState(btn) {
                 let id;
                 // Get the button's role:
-                const role = btn.getAttribute('data-role');
+                const role = btn.dataset.role;
                 if (role && role === 'player') {
-                    id = btn.getAttribute('data-player-id');
+                    id = btn.dataset.playerId;
                 } else {
-                    id = btn.getAttribute('data-avatar-id');
+                    id = btn.dataset.avatarId;
                 }
                 // Get the selected avatar id and update the linked input field:
                 idInput.value = id;
@@ -115,11 +115,11 @@ window.addEventListener('load', function () {
                 // animateAvatarButtons(buttons);
             } else {
                 for (const btn of buttons) {
-                    const btnRole = btn.getAttribute('data-role');
+                    const btnRole = btn.dataset.role;
                     if (btnRole === 'player') {
-                        btnId = btn.getAttribute('data-player-id');
+                        btnId = btn.dataset.playerId;
                     } else {
-                        btnId = btn.getAttribute('data-avatar-id');
+                        btnId = btn.dataset.avatarId;
                     }
                     if (Number.parseInt(btnId) === initialFormIdValue) {
                         btn.classList.remove('faded');
