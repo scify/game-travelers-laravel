@@ -49,25 +49,21 @@
         <div class="section settings container-xxl px-4 px-sm-5 px-xl-6">
             <div id="settingsGroup" class="row">
                 <fieldset class="col-lg-8 field-group indicate-status">
+                    <legend class="field-legend fw-bold text-nowrap mb-3">
+                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Ο τρόπος που «κινείται» ο παίκτης στο παιχνίδι">
+                            Τρόπος πλοήγησης
+                        </span>
+                        <button
+                            class="btn-help"
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalSettingsControlType"
+                            aria-label="Πληροφορίες"
+                            tabindex="-1"
+                        ></button>
+                    </legend>
                     <div class="container-fluid">
-                        <div class="row">
-                            <div class="col">
-                                <legend class="field-legend fw-bold text-nowrap">
-                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Ο τρόπος που «κινείται» ο παίκτης στο παιχνίδι">
-                                        Τρόπος πλοήγησης
-                                    </span>
-                                    <button
-                                        class="btn-help"
-                                        type="button"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modalSettingsControlType"
-                                        aria-label="Πληροφορίες"
-                                        tabindex="-1"
-                                    ></button>
-                                </legend>
-                            </div>
-                        </div>
-                        <div class="row ms-1 mt-2">
+                        <div class="row ms-1">
                             <div class="col-lg-6 form-check">
                                 <input
                                     class="form-check-input field-input"
@@ -180,25 +176,21 @@
                     </div>
                 </fieldset>
                 <fieldset class="col-lg-4 mt-4 mt-lg-0">
+                    <legend class="field-legend fw-bold text-nowrap mb-3">
+                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Αφού κάνει λάθος ο παίκτης, ο υπολογιστής του δίνει βοήθεια...">
+                            Βοήθεια μετά από λάθος
+                        </span>
+                        <button
+                            class="btn-help"
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalSettingsHelpAfter"
+                            aria-label="Πληροφορίες"
+                            tabindex="-1"
+                        ></button>
+                    </legend>
                     <div class="container-fluid">
-                        <div class="row">
-                            <div class="col">
-                                <legend class="field-legend fw-bold text-nowrap">
-                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Αφού κάνει λάθος ο παίκτης, ο υπολογιστής του δίνει βοήθεια...">
-                                        Βοήθεια μετά από λάθος
-                                    </span>
-                                    <button
-                                        class="btn-help"
-                                        type="button"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modalSettingsHelpAfter"
-                                        aria-label="Πληροφορίες"
-                                        tabindex="-1"
-                                    ></button>
-                                </legend>
-                            </div>
-                        </div>
-                        <div class="row ms-1 mt-2">
+                        <div class="row ms-1">
                             <div class="col-12 form-check">
                                 <input class="form-check-input" type="radio" name="helpAfterTries" value="1" tabindex="30" id="helpAfterTries1" @if($help_after_tries == 1) checked @endif />
                                 <label class="form-check-label" for="helpAfterTries1">Μετά από 1 λάθος</label>
@@ -215,23 +207,19 @@
                     </div>
                 </fieldset>
                 <fieldset class="col-lg-12 mt-5 mt-sm-4 mt-lg-3 mb-5">
+                    <legend class="field-legend fw-bold text-nowrap mb-3">
+                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Πόσο γρήγορα γίνεται η αυτόματη σάρωση">Ταχύτητα σάρωσης</span>
+                        <button
+                            class="btn-help"
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalSettingsScanningSpeed"
+                            aria-label="Πληροφορίες"
+                            tabindex="-1"
+                        ></button>
+                    </legend>
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col">
-                                <legend class="field-legend fw-bold text-nowrap">
-                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Πόσο γρήγορα γίνεται η αυτόματη σάρωση">Ταχύτητα σάρωσης</span>
-                                    <button
-                                        class="btn-help"
-                                        type="button"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modalSettingsScanningSpeed"
-                                        aria-label="Πληροφορίες"
-                                        tabindex="-1"
-                                    ></button>
-                                </legend>
-                            </div>
-                        </div>
-                        <div class="row mt-2">
                             <div class="col col-md-6">
                                 <label class="form-label" for="scanningSpeed"><span>2</span> δευτερόλεπτα</label>
                                 <input

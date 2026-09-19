@@ -265,3 +265,8 @@ legend {
     display: block;
     position: relative;
 }
+
+// A legend is the first child of its fieldset, outside the grid its fields sit in; the half gutter aligns it with them.
+.field-legend {
+    padding-inline: calc(var(--bs-gutter-x, 1.5rem) * 0.5);
+}

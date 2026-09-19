@@ -74,7 +74,7 @@
         <div class="section settings container-xxl px-4 px-sm-5 px-xl-6">
             <div id="nameGroup" class="field @error('name') is-invalid @enderror settings-row row mb-5">
                 <div class="col-md-3">
-                    <label class="field-label extended big" for="playerName">
+                    <label class="field-label extended big" for="playerNameInput">
                         Όνομα παίκτη
                     </label>
                 </div>
@@ -113,9 +113,9 @@
                 id="avatarGroup"
             >
                 <div class="col-md-3">
-                    <legend class="field-label extended big" id="avatarGroupLabel">
+                    <div class="field-label fw-bold fs-5 pb-4 extended big" id="avatarGroupLabel">
                         Διάλεξε φατσούλα
-                    </legend>
+                    </div>
                 </div>
                 <div class="col-md-9">
                     <x-selectAvatar

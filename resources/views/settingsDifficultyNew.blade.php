@@ -99,25 +99,21 @@
         <div class="section settings container-xxl px-4 px-sm-5 px-xl-6">
             <div id="settingsGroup" class="row">
                 <fieldset class="col-lg-8">
+                    <legend class="field-legend fw-bold text-nowrap mb-3">
+                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Το ζάρι καθορίζει τον τρόπο μετακίνησης στις θέσεις του παιχνιδιού">
+                            Ζάρι
+                        </span>
+                        <button
+                            class="btn-help"
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalSettingsDice"
+                            aria-label="Πληροφορίες"
+                            tabindex="-1"
+                        ></button>
+                    </legend>
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col">
-                                <legend class="field-lenged fw-bold text-nowrap">
-                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Το ζάρι καθορίζει τον τρόπο μετακίνησης στις θέσεις του παιχνιδιού">
-                                        Ζάρι
-                                    </span>
-                                    <button
-                                        class="btn-help"
-                                        type="button"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modalSettingsDice"
-                                        aria-label="Πληροφορίες"
-                                        tabindex="-1"
-                                    ></button>
-                                </legend>
-                            </div>
-                        </div>
-                        <div class="row mt-2">
                             <div class="col">
                                 <div class="container-fluid">
                                     <div class="row dices">
@@ -201,25 +197,21 @@
                     </div>
                 </fieldset>
                 <fieldset class="col-lg-4 mt-5 mt-lg-0">
+                    <legend class="field-legend fw-bold text-nowrap mb-4">
+                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Η διάρκεια του παιχνιδιού εξαρτάται από τον αριθμό των θέσεων στην πίστα">
+                            Διάρκεια παιχνιδιού
+                        </span>
+                        <button
+                            class="btn-help"
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalSettingsDuration"
+                            aria-label="Πληροφορίες"
+                            tabindex="-1"
+                        ></button>
+                    </legend>
                     <div class="container-fluid">
-                        <div class="row">
-                            <div class="col">
-                                <legend class="field-legend fw-bold text-nowrap">
-                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Η διάρκεια του παιχνιδιού εξαρτάται από τον αριθμό των θέσεων στην πίστα">
-                                        Διάρκεια παιχνιδιού
-                                    </span>
-                                    <button
-                                        class="btn-help"
-                                        type="button"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modalSettingsDuration"
-                                        aria-label="Πληροφορίες"
-                                        tabindex="-1"
-                                    ></button>
-                                </legend>
-                            </div>
-                        </div>
-                        <div class="row ms-1 mt-3">
+                        <div class="row ms-1">
                             <div class="col-12 mt-1 form-check">
                                 <input class="form-check-input" type="radio" name="gameDuration" value="1" tabindex="4" id="gameDuration1" required @if($board_size == 1) checked @endif />
                                 <label class="form-check-label" for="gameDuration1">Σύντομη (15 θέσεις)</label>
@@ -235,26 +227,22 @@
                         </div>
                     </div>
                 </fieldset>
-                <fieldset class="col-md-4 mt-5">
+                <fieldset class="col-md-4 mt-5 me-4">
+                    <legend class="field-legend fw-bold text-nowrap mb-4">
+                        <span data-bs-toggle="tooltip" data-bs-placement="top" title=" Το επίπεδο δυσκολίας για τον παίκτη">
+                            Επίπεδο δυσκολίας
+                        </span>
+                        <button
+                            class="btn-help"
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalSettingsDifficultyLevel"
+                            aria-label="Πληροφορίες"
+                            tabindex="-1"
+                        ></button>
+                    </legend>
                     <div class="container-fluid">
-                        <div class="row">
-                            <div class="col">
-                                <legend class="field-legend fw-bold text-nowrap">
-                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title=" Το επίπεδο δυσκολίας για τον παίκτη">
-                                        Επίπεδο δυσκολίας
-                                    </span>
-                                    <button
-                                        class="btn-help"
-                                        type="button"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modalSettingsDifficultyLevel"
-                                        aria-label="Πληροφορίες"
-                                        tabindex="-1"
-                                    ></button>
-                                </legend>
-                            </div>
-                        </div>
-                        <div class="row ms-1 mt-3">
+                        <div class="row ms-1">
                             <div class="col-12 mt-1 form-check">
                                 <input class="form-check-input" type="radio" name="level" value="1" tabindex="70" id="level1" required @if($difficulty == 1) checked @endif />
                                 <label class="form-check-label" for="level1">Κανονικό</label>
@@ -267,25 +255,21 @@
                     </div>
                 </fieldset>
                 <fieldset class="col-md-4 mt-5 mb-4">
+                    <legend class="field-legend fw-bold mb-3">
+                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Ο τρόπος που «κινείται» ο παίκτης στο παιχνίδι">
+                            Μετακίνηση
+                        </span>
+                        <button
+                            class="btn-help"
+                            type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modalSettingsMovement"
+                            aria-label="Πληροφορίες"
+                            tabindex="-1"
+                        ></button>
+                    </legend>
                     <div class="container-fluid">
-                        <div class="row">
-                            <div class="col">
-                                <legend class="field-legend fw-bold">
-                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Ο τρόπος που «κινείται» ο παίκτης στο παιχνίδι">
-                                        Μετακίνηση
-                                    </span>
-                                    <button
-                                        class="btn-help"
-                                        type="button"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#modalSettingsMovement"
-                                        aria-label="Πληροφορίες"
-                                        tabindex="-1"
-                                    ></button>
-                                </legend>
-                            </div>
-                        </div>
-                        <div class="row ms-1 mt-2">
+                        <div class="row ms-1">
                             <div class="col-12 mt-1 form-check">
                                 <input class="form-check-input" type="radio" name="movement" value="1" tabindex="90" id="movement1" required @if($movement_mode == 1) checked @endif />
                                 <label class="form-check-label" for="movement1">Αυτόματη</label>
