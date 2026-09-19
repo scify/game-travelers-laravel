@@ -38,9 +38,9 @@ class PlayerProfileTest extends TestCase
     public function creating_player_redirects_to_its_controls(): void
     {
         $response = $this->actingAs($this->seededUser())
-            ->post(route('new.player', [0, 'user', 0]), ['name' => 'Μαρία', 'avatarId' => 3]);
+            ->post(route('new.player', [0, 'user', 0]), ['name' => 'Γιώργος', 'avatarId' => 3]);
 
-        $player = Player::query()->where('name', 'Μαρία')->firstOrFail();
+        $player = Player::query()->where('name', 'Γιώργος')->firstOrFail();
         $response->assertRedirect(route('controls.player', [$player->id, 'user', 0]));
     }
 

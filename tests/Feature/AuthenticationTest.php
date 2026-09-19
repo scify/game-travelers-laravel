@@ -18,6 +18,8 @@ class AuthenticationTest extends TestCase
 {
     use LazilyRefreshDatabase;
 
+    private const string REGISTRATION_EMAIL = 'new-player@example.org';
+
     protected $seed = true;
 
     /**
@@ -86,9 +88,9 @@ class AuthenticationTest extends TestCase
     {
         Notification::fake();
 
-        $this->post('/register', $this->registration())->assertRedirect(route('dashboard'));
+        $this->post(route('register'), $this->registration())->assertRedirect(route('dashboard'));
 
-        $user = User::query()->where('email', 'new-player@example.org')->firstOrFail();
+        $user = User::query()->where('email', self::REGISTRATION_EMAIL)->firstOrFail();
         $this->assertAuthenticatedAs($user);
         $this->assertFalse(Gate::forUser($user)->allows('manage-platform'));
         Notification::assertSentTo($user, UserRegistered::class);
@@ -101,9 +103,9 @@ class AuthenticationTest extends TestCase
         config()->set('mail.from.address', '');
         $log = Log::spy();
 
-        $this->post('/register', $this->registration())->assertRedirect(route('dashboard'));
+        $this->post(route('register'), $this->registration())->assertRedirect(route('dashboard'));
 
-        $user = User::query()->where('email', 'new-player@example.org')->firstOrFail();
+        $user = User::query()->where('email', self::REGISTRATION_EMAIL)->firstOrFail();
         $this->assertAuthenticatedAs($user);
         $log->shouldHaveReceived('error')->once();
     }
@@ -111,10 +113,10 @@ class AuthenticationTest extends TestCase
     #[Test]
     public function registration_rejects_wrong_captcha_answer(): void
     {
-        $this->post('/register', $this->registration(captcha: 8))->assertSessionHasErrors('captcha');
+        $this->post(route('register'), $this->registration(captcha: 8))->assertSessionHasErrors('captcha');
 
         $this->assertGuest();
-        $this->assertDatabaseMissing('users', ['email' => 'new-player@example.org']);
+        $this->assertDatabaseMissing('users', ['email' => self::REGISTRATION_EMAIL]);
     }
 
     #[Test]
@@ -133,7 +135,7 @@ class AuthenticationTest extends TestCase
     private function registration(int $captcha = 7): array
     {
         return [
-            'email' => 'new-player@example.org',
+            'email' => self::REGISTRATION_EMAIL,
             'password' => 'Passw0rd12',
             'password_confirmation' => 'Passw0rd12',
             'captchaNumber1' => 3,

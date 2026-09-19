@@ -9,6 +9,9 @@ use App\Repository\Repository;
 
 class PlayerRepository extends Repository
 {
+    /** Public path of all avatars. */
+    private const string AVATARS_PUBLIC_PATH = 'images/avatars';
+
     public function getModelClassName(): string
     {
         return Player::class;
@@ -24,7 +27,7 @@ class PlayerRepository extends Repository
                 'id' => 1, // Repeating id for convenience.
                 'asset' => 'boy-1', // Extensions .png, @2x.png and svg implied.
                 'description' => 'Φατσούλα αγοριού με καστανά μαλιά', // For "alt".
-                'public_path' => 'images/avatars', // Public path of all avatars.
+                'public_path' => self::AVATARS_PUBLIC_PATH,
                 'width' => $width, // Dimensions for all avatars (100x100px/1:1 ratio).
                 'height' => $height,
             ],
@@ -32,7 +35,7 @@ class PlayerRepository extends Repository
                 'id' => 2, // Repeating id for convenience.
                 'asset' => 'boy-2', // Extensions .png, @2x.png and svg implied.
                 'description' => 'Φατσούλα αγοριού με μαύρα μαλιά', // For "alt".
-                'public_path' => 'images/avatars', // Public path of all avatars.
+                'public_path' => self::AVATARS_PUBLIC_PATH,
                 'width' => $width, // Dimensions for all avatars (100x100px/1:1 ratio).
                 'height' => $height,
             ],
@@ -40,7 +43,7 @@ class PlayerRepository extends Repository
                 'id' => 3, // Repeating id for convenience.
                 'asset' => 'girl-1', // Extensions .png, @2x.png and svg implied.
                 'description' => 'Φατσούλα κοριτσιού με μαύρα μαλιά', // For "alt".
-                'public_path' => 'images/avatars', // Public path of all avatars.
+                'public_path' => self::AVATARS_PUBLIC_PATH,
                 'width' => $width, // Dimensions for all avatars (100x100px/1:1 ratio).
                 'height' => $height,
             ],
@@ -48,7 +51,7 @@ class PlayerRepository extends Repository
                 'id' => 4, // Repeating id for convenience.
                 'asset' => 'girl-2', // Extensions .png, @2x.png and svg implied.
                 'description' => 'Φατσούλα κοριτσιού με ξανθά μαλιά', // For "alt".
-                'public_path' => 'images/avatars', // Public path of all avatars.
+                'public_path' => self::AVATARS_PUBLIC_PATH,
                 'width' => $width, // Dimensions for all avatars (100x100px/1:1 ratio).
                 'height' => $height,
             ],
@@ -56,7 +59,7 @@ class PlayerRepository extends Repository
                 'id' => 5, // Repeating id for convenience.
                 'asset' => 'dog', // Extensions .png, @2x.png and svg implied.
                 'description' => 'Φατσούλα σκύλου', // For "alt".
-                'public_path' => 'images/avatars', // Public path of all avatars.
+                'public_path' => self::AVATARS_PUBLIC_PATH,
                 'width' => $width, // Dimensions for all avatars (100x100px/1:1 ratio).
                 'height' => $height,
             ],
@@ -64,7 +67,7 @@ class PlayerRepository extends Repository
                 'id' => 6, // Repeating id for convenience.
                 'asset' => 'cat', // Extensions .png, @2x.png and svg implied.
                 'description' => 'Φατσούλα γατούλας', // For "alt".
-                'public_path' => 'images/avatars', // Public path of all avatars.
+                'public_path' => self::AVATARS_PUBLIC_PATH,
                 'width' => $width, // Dimensions for all avatars (100x100px/1:1 ratio).
                 'height' => $height,
             ],
