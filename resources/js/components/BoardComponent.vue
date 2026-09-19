@@ -38,13 +38,7 @@
                     />
                     <img
                         :src="computeInfoSrc"
-                        style="
-                            z-index: 50;
-                            position: absolute;
-                            display: block;
-                            left: calc(50% - 500px);
-                            top: calc(50% - 340px);
-                        "
+                        :style="computeInfoStyle"
                         @mouseover="infoState = 1"
                         @mouseleave="infoState = 0"
                         @click="switcherModal()"
@@ -307,6 +301,20 @@ export default {
                 default:
                     return path + 'default_state.png';
             }
+        },
+        computeInfoStyle() {
+            // The hover artwork sits inside a padded canvas, 9px from its left
+            // edge and 6px from its top; the other states have no padding.
+            // Subtracting the padding keeps every state on the same corner.
+            const padding = this.infoState === 1 ? { left: 9, top: 6 } : { left: 0, top: 0 };
+
+            return {
+                zIndex: 50,
+                position: 'absolute',
+                display: 'block',
+                left: `calc(50% - ${500 + padding.left}px)`,
+                top: `calc(50% - ${340 + padding.top}px)`,
+            };
         },
     },
     mounted() {

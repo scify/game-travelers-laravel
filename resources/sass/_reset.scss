@@ -1,0 +1,81 @@
+/*
+  Custom Wordplate (aka "_scify") Reset.
+  Based on Josh W. Comeau's The CSS Reset, 2023.
+  @link https://www.joshwcomeau.com/css/custom-css-reset/
+ */
+
+/* Main reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+html {
+    text-size-adjust: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    padding: 0;
+    overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+    line-height: 1.1;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Behaves disabled buttons */
+button:disabled,
+button.disabled {
+    cursor: default;
+    pointer-events: none;
+}
+
+/* Isolates app's z-index */
+#root,
+#app {
+    isolation: isolate;
+
+    // The board layers are fixed-size artwork inside a border-box frame, so the
+    // content box is narrower than the art. Clamping would rescale every layer.
+    img {
+        max-width: initial;
+    }
+}

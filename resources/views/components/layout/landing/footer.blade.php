@@ -88,7 +88,7 @@
                 <span>{{ __('messages.development') }}</span>
                 <a href="https://scify.org">
                     <img
-                        class="img-fluid logo logo-h53 scify"
+                        class="img-fluid mx-auto logo logo-h53 scify"
                         srcset="{{ asset('images/logos/53h_scify@3x.png') }} 3x, {{ asset('images/logos/53h_scify@2x.png') }} 2x"
                         src="{{ asset('images/logos/53h_scify.png') }}"
                         width="40" height="53"
@@ -100,7 +100,7 @@
                 <span>{{ __('messages.sponsored_by') }}</span>
                 <a href="https://www.lafarge.gr">
                     <img
-                        class="img-fluid logo logo-h53 sponsor"
+                        class="img-fluid mx-auto logo logo-h53 sponsor"
                         srcset="{{ asset('images/logos/53h_heracles@3x.png') }} 3x, {{ asset('images/logos/53h_heracles@2x.png') }} 2x"
                         src="{{ asset('images/logos/53h_heracles.png') }}"
                         width="297" height="53"

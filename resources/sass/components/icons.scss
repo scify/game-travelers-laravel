@@ -7,7 +7,7 @@
     line-height: 1;
     padding: 0;
     margin: 0;
-    outline: none !important;
+    outline: none;
     border: none;
     border-radius: 50%;
     background: transparent;
@@ -18,19 +18,24 @@
             left: -0.5rem;
         }
     }
-}
 
-.kicon:hover {
-    color: var(--color-black);
-    background: hsla(40deg, 3%, 21%, 0.1);
-    box-shadow: 0 0 0 0.5rem hsla(40deg, 3%, 21%, 0.1);
-}
+    &:hover,
+    &:hover:active {
+        color: var(--color-black);
+        background: hsla(40deg, 3%, 21%, 0.1);
+        box-shadow: 0 0 0 0.5rem hsla(40deg, 3%, 21%, 0.1);
+    }
 
-.kicon:focus:not(:hover),
-.kicon:focus-visible:not(:hover) {
-    --bs-btn-focus-shadow-rgb: var(--trvl-btn-focus-shadow-rgb);
+    &:focus:not(:hover),
+    &:focus-visible:not(:hover) {
+        @include focus-ring;
+    }
 
-    box-shadow: 0 0 0 0.3rem rgba(var(--bs-btn-focus-shadow-rgb), 0.5);
+    svg {
+        width: 1.7rem; // 25px
+        height: 1.7rem;
+        box-shadow: none !important;
+    }
 }
 
 .kicon-chevron-left svg {
@@ -39,13 +44,4 @@
 
 .kicon-chevron-right svg {
     margin-left: -0.3rem;
-}
-
-.kicon svg {
-    width: 1.7rem; // 25px
-    height: 1.7rem;
-}
-
-.kicon svg {
-    box-shadow: none !important;
 }

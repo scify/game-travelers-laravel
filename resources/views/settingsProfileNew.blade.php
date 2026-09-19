@@ -87,7 +87,7 @@
                         value="{{ $name }}"
                         minlength="2" {{-- JS form validation --}}
                         maxlength="50"
-                        required="true"
+                        required
                         autocomplete="given-name"
                         autocapitalize="on"
                         spellcheck="false"

@@ -161,7 +161,7 @@
 
 .label-avatar {
     top: 0.5rem;
-    overflow-x: hidden;
+    overflow-x: clip;
     text-overflow: ellipsis;
     max-width: 120px;
 }

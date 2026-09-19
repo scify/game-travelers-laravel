@@ -12,8 +12,8 @@
     </script>
 @endsection
 
-<div id="app" class="d-flex align-items-center justify-content-center vh-100 w-100">
-    <div style="height: 768px; width: 1366px" class="border border-dark no-gutters">
+<div id="app" class="d-flex align-items-center vh-100 w-100">
+    <div style="height: 768px; width: 1366px" class="border border-dark no-gutters position-relative flex-shrink-0 m-auto">
         <board-component
             :player-id='{{ $player_id }}'
             :backend-url="'{{ route('to.backend') }}'"

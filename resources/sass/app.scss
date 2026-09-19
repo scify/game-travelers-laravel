@@ -1,5 +1,7 @@
 /* Travelers - Ταξιδιώτες Main SCSS Structure */
 
+@import 'reset';
+
 /* Imports */
 // Fonts
 // Manrope by Mikhail Saranda.
@@ -30,6 +32,9 @@ $bootstrap-icons-font-dir: 'bootstrap-icons/font/fonts';
 // Travelers base theme & CSS Variables
 @import 'base';
 
+// Custom mix-ins. Defined before the components, which include them.
+@import 'mixins';
+
 // Travelers base-theme components
 @import 'components/avatars';
 @import 'components/buttons';
@@ -40,9 +45,6 @@ $bootstrap-icons-font-dir: 'bootstrap-icons/font/fonts';
 
 // Misc CSS stylesheets
 @import 'decoration';
-
-// Custom mix-ins
-@import 'mixins';
 
 /* Global constants and Bootstrap extensions */
 body {
@@ -75,12 +77,7 @@ a:visited {
 
 a:focus-visible {
     // hsla(var(--trvl-shadow-focus-hsl), 0.75)
-    outline: hsla(0deg, 0%, 0%, 0.7) solid 0.3rem;
-}
-
-header img,
-footer img {
-    display: inline-block;
+    @include focus-ring;
 }
 
 kbd {
@@ -948,6 +945,15 @@ img.splash {
 
     &:hover {
         box-shadow: none;
+    }
+
+    &:focus-visible,
+    &:focus-visible[aria-expanded='true'] {
+        box-shadow: none;
+
+        img {
+            @include focus-ring;
+        }
     }
 
     &::after {

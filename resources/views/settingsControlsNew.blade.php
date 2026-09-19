@@ -132,7 +132,7 @@
                                                 data-key-selected="Enter" {{-- Updates via JS --}}
                                                 data-sets-input="controlAutomaticSelectionButton"
                                                 aria-label = "Ορισμός πλήκτρου επιλογής"
-                                                aria-description = "Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυυμείτε να γίνεται η επιλογή στο παιχνίδι"
+                                                aria-description = "Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυμείτε να γίνεται η επιλογή στο παιχνίδι"
                                                 tabindex="11"
                                             >
                                                 Space
@@ -177,7 +177,7 @@
                                                 data-key-selected="Enter" {{-- Updates via JS --}}
                                                 data-sets-input="controlManualSelectionButton"
                                                 aria-label = "Ορισμός πλήκτρου επιλογής"
-                                                aria-description = "Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυυμείτε να γίνεται η επιλογή στο παιχνίδι"
+                                                aria-description = "Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυμείτε να γίνεται η επιλογή στο παιχνίδι"
                                                 tabindex="21"
                                                 disabled
                                             >
@@ -200,7 +200,7 @@
                                                 data-key-selected="Space" {{-- Updates via JS --}}
                                                 data-sets-input="controlManualNavigationButton"
                                                 aria-label = "Ορισμός πλήκτρου πλοήγησης"
-                                                aria-description = "Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυυμείτε να γίνεται η πλοήγηση στο παιχνίδι"
+                                                aria-description = "Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυμείτε να γίνεται η πλοήγηση στο παιχνίδι"
                                                 tabindex="22"
                                                 disabled
                                             >

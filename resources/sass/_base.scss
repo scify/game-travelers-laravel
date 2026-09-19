@@ -60,6 +60,13 @@
     --trvl-footer-height: 40px;
     --trvl-footer-height-negative: calc(-1 * var(--trvl-footer-height));
     --trvl-transition: all ease-in 0.2s;
+
+    // v1.0 visible focus
+    --trvl-shadow-focus-hsl: var(--trvl-c-green-pale-hsl);
+
+    // v1.1 visible focus. The size is both the outline width and its offset.
+    --trvl-focus-ring-size: 0.3rem;
+    --trvl-focus-ring: rgba(var(--color-black-rgb), 0.7) var(--trvl-focus-ring-size) solid;
 }
 
 /* Traveler's default colour scheme */
@@ -93,7 +100,6 @@
     --trvl-btn-disabled-border-color: #6c6a65;
     --trvl-btn-hover-shadow-rgb: var(--color-gray-dark-rgb);
     --trvl-btn-focus-shadow-rgb: var(--trvl-c-green-pale-rgb);
-    --trvl-shadow-focus-hsl: var(--trvl-c-green-pale-hsl);
 
     // Dropdowns
     --trvl-dropdown-bg: var(--trvl-c-brown);

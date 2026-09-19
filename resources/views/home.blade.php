@@ -48,7 +48,7 @@
                         <div>
                             <a href="https://scify.org">
                                 <img
-                                    class="img-fluid logo logo-h74 scify"
+                                    class="img-fluid mx-auto logo logo-h74 scify"
                                     loading="lazy"
                                     srcset="{{ asset('images/logos/74h_scify@3x.png') }} 3x, {{ asset('images/logos/74h_scify@2x.png') }} 2x"
                                     src="{{ asset('images/logos/74h_scify.png') }}"
@@ -65,7 +65,7 @@
                             <a href="https://www.lafarge.gr">
                                 <!-- 263 x 74 -->
                                 <img
-                                    class="img-fluid logo logo-h74 sponsor"
+                                    class="img-fluid mx-auto logo logo-h74 sponsor"
                                     loading="lazy"
                                     srcset="{{ asset('images/logos/74h_heracles@3x.png') }} 3x, {{ asset('images/logos/74h_heracles@2x.png') }} 2x"
                                     src="{{ asset('images/logos/74h_heracles.png') }}"
@@ -444,7 +444,7 @@
                         <div class="row row-cols-1 row-cols-sm-3 gy-5 justify-content-around text-center">
                             <div>
                                 <a href="https://elepap.gr" target="_blank" rel="noopener">
-                                    <img class="img-fluid"
+                                    <img class="img-fluid mx-auto"
                                         loading="lazy"
                                         srcset="{{ asset('images/landing/partners/elepap@2x.png') }} 2x"
                                         src="{{ asset('images/landing/partners/elepap.png') }}"
@@ -455,7 +455,7 @@
                             </div>
                             <div>
                                 <a href="https://kasp.gr" target="_blank" rel="noopener">
-                                    <img class="img-fluid"
+                                    <img class="img-fluid mx-auto"
                                         loading="lazy"
                                         srcset="{{ asset('images/landing/partners/kasp@2x.png') }} 2x"
                                         src="{{ asset('images/landing/partners/kasp.png') }}"
@@ -472,7 +472,7 @@
                             </div>
                             <div class="d-none">
                                 <a href="https://www.kkppa.gr" target="_blank" rel="noopener">
-                                    <img class="img-fluid"
+                                    <img class="img-fluid mx-auto"
                                         loading="lazy"
                                         src="{{ asset('images/landing/partners/kkppa.png') }}"
                                         width="298" height="90"

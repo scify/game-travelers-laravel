@@ -15,6 +15,11 @@
     }
 }
 
+@mixin focus-ring {
+    outline: var(--trvl-focus-ring);
+    outline-offset: var(--trvl-focus-ring-size);
+}
+
 @mixin font-wrap-conditional($breakpoint: md) {
     line-height: 1.2;
 

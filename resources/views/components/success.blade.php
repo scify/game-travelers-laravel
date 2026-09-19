@@ -16,7 +16,7 @@
             <div class="d-flex justify-content-center pb-6 pb-sm-0">
                 @if(isset($url))
                     <a
-                        href="{{ $url ?? '/' }}"
+                        href="{{ $url }}"
                         class="confirmation-link confirmation-animation"
                         tabindex="1">
                         {{ __('messages.continue') }}

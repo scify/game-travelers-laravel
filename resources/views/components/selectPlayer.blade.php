@@ -24,7 +24,7 @@
         all to not add the button. This could be useful in case i.e. there is
         a limit on the total amount of players each user can have.
     - Instructions of use in a form:
-      The component contains a hidden <input>  with the id of
+      The component contains a hidden INPUT with the id of
       #avatarsContainerInput. The input's value is set to $selectedPlayerId
       (or 0 if no player is selected). If the user selects a player, then the
       input value is set to be equal to the unique player's player id (e.g. 4)

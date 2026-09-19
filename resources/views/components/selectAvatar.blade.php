@@ -19,7 +19,7 @@
         Forms. Equals to the unique avatar ID of a "checked" (aka selected)
         Avatar. Default value is 0 (user has not selected any avatars).
     - Instructions of use in a form:
-      The component contains a hidden <input>  with the id of
+      The component contains a hidden INPUT with the id of
       #avatarsContainerInput. The input's value is set to $selectedAvatarId
       (or 0 if no avatar is selected). If the user selects an avatar, then the
       input value is set to be equal to the unique avatars's avatar id (e.g. 4)
