@@ -153,28 +153,44 @@ function switcher() {
         );
     }
 
-    let intervalId;
+    // The scan's timer and the element it stands on. The help modal's buttons
+    // stop and restart the scan, so both outlive the block that starts it.
+    let intervalId = null;
+    let scanIndex = 0;
+
+    // Starts the automatic scan, unless it runs already or the mode is manual.
+    function startScanning() {
+        if (controlMode !== 1 || intervalId !== null) {
+            return;
+        }
+        intervalId = setInterval(
+            () => {
+                const nextFocusIndex = (scanIndex + 1) % validSwitcherElements.length;
+                validSwitcherElements[scanIndex].removeEventListener('keydown', handleSwitchKey);
+                moveFocus(scanIndex, nextFocusIndex);
+                validSwitcherElements[nextFocusIndex].addEventListener('keydown', handleSwitchKey);
+                scanIndex = nextFocusIndex;
+            },
+            scanningSpeed * 1000 + transitionSpeed,
+        );
+    }
+
+    // Stops the automatic scan and leaves the highlight where it stands.
+    function stopScanning() {
+        clearInterval(intervalId);
+        intervalId = null;
+    }
+
     if (validSwitcherElements.length > 0) {
         this.document.body.classList.add('switcher');
         if (controlMode === 1) {
             // Automatic mode (default).
             // Selection Button (default: Enter) clicks a highlighted option.
             // On start select the first element and add the listener:
-            let currentFocusIndex = 0;
-            validSwitcherElements[currentFocusIndex].focus();
-            validSwitcherElements[currentFocusIndex].classList.add(classFocus);
-            validSwitcherElements[currentFocusIndex].addEventListener('keydown', handleSwitchKey);
-            // On interval, move to the next element and its listener:
-            intervalId = setInterval(
-                () => {
-                    const nextFocusIndex = (currentFocusIndex + 1) % validSwitcherElements.length;
-                    validSwitcherElements[currentFocusIndex].removeEventListener('keydown', handleSwitchKey);
-                    moveFocus(currentFocusIndex, nextFocusIndex);
-                    validSwitcherElements[nextFocusIndex].addEventListener('keydown', handleSwitchKey);
-                    currentFocusIndex = nextFocusIndex;
-                },
-                scanningSpeed * 1000 + transitionSpeed,
-            );
+            validSwitcherElements[scanIndex].focus();
+            validSwitcherElements[scanIndex].classList.add(classFocus);
+            validSwitcherElements[scanIndex].addEventListener('keydown', handleSwitchKey);
+            startScanning();
         } else {
             // Manual mode.
             // Select the first option by default.
@@ -187,8 +203,22 @@ function switcher() {
         }
     }
 
+    // The help modal answers a player who reached for Tab. Its two buttons own
+    // the scan: one stops it, the other lets it carry on.
+    const switcherModalEl = document.getElementById('switcherModal');
+    if (switcherModalEl) {
+        switcherModalEl.querySelector('#switcherModalBreak')?.addEventListener('click', stopScanning);
+        switcherModalEl.querySelector('#switcherModalContinue')?.addEventListener('click', startScanning);
+        switcherModalEl.addEventListener('hidden.bs.modal', function () {
+            removeSwitcherClasses();
+            // Whichever button closed it, the player keeps a highlight to act on.
+            if (controlMode === 1) {
+                validSwitcherElements[scanIndex].classList.add(classFocus);
+            }
+        });
+    }
+
     function switcherModal() {
-        const switcherModalEl = document.getElementById('switcherModal');
         const bsSwitcherModal = Modal.getOrCreateInstance(switcherModalEl, {
             keyboard: false,
             focus: false,
@@ -196,9 +226,6 @@ function switcher() {
         });
         sound('fx.modal');
         bsSwitcherModal.show();
-        switcherModalEl.addEventListener('hidden.bs.modal', function () {
-            removeSwitcherClasses();
-        });
         return false;
     }
 
@@ -268,7 +295,7 @@ function switcher() {
             // Automatic mode.
             event.preventDefault();
             if (returnKey === selectionButton) {
-                clearInterval(intervalId);
+                stopScanning();
                 selectElement(Math.max(0, focusedIndex));
             }
         } else {

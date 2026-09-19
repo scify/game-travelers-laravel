@@ -71,17 +71,20 @@ if (isset($switcher) && is_array($switcher)) {
             <div class="modal-footer">
                 @if($switcher['controlMode']==1)
                     <button
-                        id="switcherModalBreak"
+                        id="switcherModalBreak" {{-- Stops the scan, see switcher.js --}}
                         type="button"
                         class="btn btn-danger"
                         data-bs-dismiss="modal"
-                        data-switcher-dismiss=""
-                         onclick="clearInterval(13);return false"
                     >
                         {{ __("messages.switcher.break") }}
                     </button>
                 @endif
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                <button
+                    id="switcherModalContinue" {{-- Restarts a stopped scan, see switcher.js --}}
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-dismiss="modal"
+                >
                     {{ __("messages.switcher.continue") }}
                 </button>
             </div>
