@@ -91,7 +91,6 @@
                     class="btn btn-round btn-sm btn-avatar-options"
                     data-role="button-add-player"
                     aria-label="Προσθήκη νέου παίκτη"
-                    tabindex="{{ $tabindex ?? '-1' }}"
                     href="{{ route('new.player', [ request()->player_id, request()->from, request()->game_id ]) }}"
                 >
                     <img

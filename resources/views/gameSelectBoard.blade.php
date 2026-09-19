@@ -64,7 +64,6 @@
                         <a
                             class="btn btn-primary btn-circle ms-auto responsive-expand"
                             href="{{ route("select.player", [0,"user", 0]) }}"
-                            tabindex="100"
                             data-tabindex="100"
                             type="submit"
                             id="backButton"

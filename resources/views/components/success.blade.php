@@ -18,7 +18,7 @@
                     <a
                         href="{{ $url }}"
                         class="confirmation-link confirmation-animation"
-                        tabindex="1">
+                    >
                         {{ __('messages.continue') }}
                     </a>
                 @else

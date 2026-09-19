@@ -112,7 +112,6 @@
                                     data-role="groupSetter" {{-- Used by JS --}}
                                     data-enables="controlType1Group" {{-- Read by JS = #id of options group--}}
                                     data-disables="controlType2Group" {{-- Read by JS = #id of options group --}}
-                                    tabindex="10"
                                     id="controlType1"
                                     @if($control_mode == 1) checked autofocus @endif
                                 />
@@ -133,7 +132,6 @@
                                                 data-sets-input="controlAutomaticSelectionButton"
                                                 aria-label = "Ορισμός πλήκτρου επιλογής"
                                                 aria-description = "Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυμείτε να γίνεται η επιλογή στο παιχνίδι"
-                                                tabindex="11"
                                             >
                                                 Space
                                             </button>
@@ -157,7 +155,6 @@
                                     data-role="groupSetter" {{-- Used by JS --}}
                                     data-enables="controlType2Group" {{-- Read by JS = #id of options group--}}
                                     data-disables="controlType1Group" {{-- Read by JS = #id of options group--}}
-                                    tabindex="20"
                                     id="controlType2"
                                     @if($control_mode == 2) checked autofocus @endif
                                 />
@@ -178,7 +175,6 @@
                                                 data-sets-input="controlManualSelectionButton"
                                                 aria-label = "Ορισμός πλήκτρου επιλογής"
                                                 aria-description = "Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυμείτε να γίνεται η επιλογή στο παιχνίδι"
-                                                tabindex="21"
                                                 disabled
                                             >
                                                 όρισε πλήκτρο
@@ -201,7 +197,6 @@
                                                 data-sets-input="controlManualNavigationButton"
                                                 aria-label = "Ορισμός πλήκτρου πλοήγησης"
                                                 aria-description = "Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυμείτε να γίνεται η πλοήγηση στο παιχνίδι"
-                                                tabindex="22"
                                                 disabled
                                             >
                                                 όρισε πλήκτρο
@@ -231,15 +226,15 @@
                     <div class="container-fluid">
                         <div class="row ms-1">
                             <div class="col-12 form-check">
-                                <input class="form-check-input" type="radio" name="helpAfterTries" value="1" tabindex="30" id="helpAfterTries1" @if($help_after_tries == 1) checked @endif />
+                                <input class="form-check-input" type="radio" name="helpAfterTries" value="1" id="helpAfterTries1" @if($help_after_tries == 1) checked @endif />
                                 <label class="form-check-label" for="helpAfterTries1">Μετά από 1 λάθος</label>
                             </div>
                             <div class="col-12 form-check mt-1">
-                                <input class="form-check-input" type="radio" name="helpAfterTries" value="2" tabindex="40" id="helpAfterTries2" @if($help_after_tries == 2) checked @endif />
+                                <input class="form-check-input" type="radio" name="helpAfterTries" value="2" id="helpAfterTries2" @if($help_after_tries == 2) checked @endif />
                                 <label class="form-check-label" for="helpAfterTries2">Μετά από 2 λάθη</label>
                             </div>
                             <div class="col-12 form-check mt-1">
-                                <input class="form-check-input" type="radio" name="helpAfterTries" value="3" tabindex="50" id="helpAfterTries3" @if($help_after_tries == 3) checked @endif />
+                                <input class="form-check-input" type="radio" name="helpAfterTries" value="3" id="helpAfterTries3" @if($help_after_tries == 3) checked @endif />
                                 <label class="form-check-label" for="helpAfterTries3">Μετά από 3 λάθη</label>
                             </div>
                         </div>
@@ -269,7 +264,6 @@
                                     min="1"
                                     max="8"
                                     step="1"
-                                    tabindex="60"
                                     id="scanningSpeed"
                                 />
                                 <!-- decorative ruler hidden for aria-->
@@ -293,7 +287,6 @@
                 <button
                     class="btn btn-primary btn-lg responsive-expand"
                     id="submitButton"
-                    tabindex="200"
                     type="submit"
                     name="submit"
                     value="save"

@@ -12,7 +12,7 @@
             <div class="col-lg-3 order-lg-2">
                 <div class="ps-4 ps-md-6 ps-lg-0 pt-4">
                     {{ __("messages.login_prompt") }}<br/>
-                    <a href="{{ route('login') }}" tabindex="6">{{ __("messages.login") }}</a>
+                    <a href="{{ route('login') }}">{{ __("messages.login") }}</a>
                 </div>
             </div>
             <div class="col-lg-9 order-lg-1">
@@ -50,7 +50,6 @@
                                 autocomplete="email"
                                 autocapitalize="off"
                                 spellcheck="false"
-                                tabindex="1"
                                 id="email"
                             />
                             <div class="field-description"></div>
@@ -80,7 +79,6 @@
                                         aria-required="true"
                                         aria-label="{{ __('messages.password_label') }}"
                                         aria-describedby="password-description"
-                                        tabindex="2"
                                         id="password"
                                     />
                                 </div>
@@ -102,7 +100,6 @@
                                         aria-required="true"
                                         aria-label="{{ __('messages.password_validation_label') }}"
                                         aria-describedby="password-description"
-                                        tabindex="3"
                                         id="password_confirmation"
                                     />
                                 </div>
@@ -141,7 +138,6 @@
                                 aria-describedby="captcha-description"
                                 autocomplete="off"
                                 spellcheck="false"
-                                tabindex="4"
                                 id="captcha"
                             />
                             <div class="field-description" id="captcha-description">
@@ -150,7 +146,7 @@
                         </div>
                         <!-- / captcha -->
                         <div class="form-actions p-2 pb-5 pb-xl-0 text-center">
-                            <button class="btn btn-lg btn-primary text-nowrap responsive-expand" tabindex="5"
+                            <button class="btn btn-lg btn-primary text-nowrap responsive-expand"
                                     type="submit" id="submit">{{ __("messages.register") }}
                             </button>
                         </div>

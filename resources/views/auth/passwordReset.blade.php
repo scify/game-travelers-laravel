@@ -44,7 +44,6 @@
                                 autocomplete="email"
                                 autocapitalize="off"
                                 spellcheck="false"
-                                tabindex="1"
                                 id="email"
                             />
                         </div>
@@ -53,7 +52,6 @@
                         <div class="form-actions p-4 text-center">
                             <button
                                 class="btn btn-lg btn-primary text-nowrap responsive-expand"
-                                tabindex="2"
                                 type="submit"
                             >{{ __('messages.password_reset') }}</button>
                         </div>

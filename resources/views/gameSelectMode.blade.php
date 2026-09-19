@@ -70,7 +70,6 @@
                             href="{{ route('select.board', [ request()->player_id, 'board', request()->game_id ]) }}"
                             id="backButton"
                             data-tabindex="100"
-                            tabindex="100"
                         >
                             <span>πίσω</span>
                         </a>

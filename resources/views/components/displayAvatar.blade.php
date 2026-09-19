@@ -23,7 +23,6 @@
     aria-label="{{ $avatar['description'] ?? 'Φατσούλα' }}"
     aria-checked="{{ $avatarChecked ?? 'false' }}" {{-- Altered by JS --}}
     id="radio-avatar-button-{{ $tabindex ?? 0 }}"
-    tabindex="{{ $tabindex ?? '-1' }}"
 >
     <img
         srcset="{{ asset($avatar['public_path'] . '/' . $avatar['asset'] . '@@2x.png') }} 2x"

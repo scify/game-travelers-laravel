@@ -64,7 +64,6 @@
                                         aria-required="true"
                                         aria-label="{{ __('messages.password_new_label') }}"
                                         aria-describedby="password-description"
-                                        tabindex="1"
                                         id="password"
                                     />
                                 </div>
@@ -89,7 +88,6 @@
                                         aria-required="true"
                                         aria-label="{{ __('messages.password_new_validation_label') }}"
                                         aria-describedby="password-description"
-                                        tabindex="2"
                                         id="password_confirmation"
                                     />
                                 </div>
@@ -105,7 +103,6 @@
                         <div class="form-actions p-4 text-center">
                             <button
                                 class="btn btn-lg btn-primary text-nowrap responsive-expand"
-                                tabindex="3"
                                 type="submit"
                             >{{ __("messages.password_change") }}</button>
                         </div>

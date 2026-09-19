@@ -60,7 +60,6 @@
                             href="{{ route("select.player", [0,"user", 0]) }}"
                             id="backButton"
                             data-tabindex="1000"
-                            tabindex="1000"
                         >
                             <span>πίσω</span>
                         </a>

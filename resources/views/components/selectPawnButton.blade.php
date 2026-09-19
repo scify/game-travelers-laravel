@@ -19,7 +19,6 @@
 @endphp
 <div class="col-6 col-sm-4 col-xl-3 pawn">
     <button class="btn btn-pawn pawn-button pawn-button-{{ $pawnId }} @isset($comingsoon)disabled @endisset @isset($selected_by_other_player)selected-by-other-player @endisset "
-        tabindex="{{ $tabindex ?? '-1' }}"
         data-tabindex="{{ $tabindex ?? '-1' }}"
         name="pawn"
         value="{{ $pawnId ?? '0' }}"

@@ -11,7 +11,7 @@
             <div class="col-md-3 order-md-2">
                 <div class="ps-4 ps-md-0 pt-4">
                     {{ __("messages.registration_prompt") }}<br />
-                    <a href="{{ url('/register') }}" tabindex="6">{{ __("messages.registration") }}</a>
+                    <a href="{{ url('/register') }}">{{ __("messages.registration") }}</a>
                 </div>
             </div>
             <div class="col-md-9 order-md-1">
@@ -34,7 +34,6 @@
                                 autocomplete="email"
                                 autocapitalize="off"
                                 spellcheck="false"
-                                tabindex="1"
                                 id="email" />
                         </div>
                         <div class="field p-4">
@@ -49,7 +48,6 @@
                                 autocapitalize="off"
                                 spellcheck="false"
                                 aria-label="{{ __("messages.password_label") }}"
-                                tabindex="2"
                                 id="password"
                             />
                         </div>
@@ -57,10 +55,10 @@
                             <div class="row">
                                 <div class="field col-sm-6 col-md-12 col-lg-6 text-start text-nowrap">
                                     <label class="field-label form-check-label" for="remember">{{ __("messages.stay_online") }}</label>
-                                    <input class="field-input form-check-input ms-2" type="checkbox" tabindex="3" name="remember" id="remember">
+                                    <input class="field-input form-check-input ms-2" type="checkbox" name="remember" id="remember">
                                 </div>
                                 <div class="col-sm-6 col-md-12 col-lg-6 pt-2 pt-sm-0 pt-md-2 pt-lg-0 text-start-end-start-end">
-                                    <a href="{{ route('password.request') }}" tabindex="5">{{ __("messages.password_reset_prompt") }}</a>
+                                    <a href="{{ route('password.request') }}">{{ __("messages.password_reset_prompt") }}</a>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +67,7 @@
                             <div>{{ __("messages.game_note") }}</div>
                         </div>
                         <div class="form-actions pb-5 pb-xl-0 p-3 text-center">
-                            <button class="btn btn-primary btn-lg text-nowrap responsive-expand" tabindex="4" type="submit" id="submit">{{ __("messages.login") }}</button>
+                            <button class="btn btn-primary btn-lg text-nowrap responsive-expand" type="submit" id="submit">{{ __("messages.login") }}</button>
                         </div>
                     </div>
                 </form>

@@ -63,7 +63,6 @@
                             href="{{ route('select.pawn', [ request()->player_id, 'mode', request()->game_id ])}}"
                             id="backButton"
                             data-tabindex="1000"
-                            tabindex="1000"
                         >
                             <span>πίσω</span>
                         </a>

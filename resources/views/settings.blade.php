@@ -42,20 +42,20 @@
                 <div class="section gamesettings background-group-3--flowers container-xxl px-4">
 
                     <div class="buttonstack vstack gap-4 pt-4 mx-auto settings-options text-center">
-                        <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="profile" tabindex="1">
+                        <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="profile">
                             <span class="balloon"></span> Προφίλ παίκτη
                         </button>
-                        <button class="btn btn-lg btn-primary btn-balloon d-none" type="submit" name="submit" value="audio" tabindex="2">
+                        <button class="btn btn-lg btn-primary btn-balloon d-none" type="submit" name="submit" value="audio">
                             <span class="balloon"></span> Μουσική & ήχος
                         </button>
-                        <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="controls" tabindex="3">
+                        <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="controls">
                             <span class="balloon"></span> Πλοήγηση
                         </button>
-                        <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="difficulty" tabindex="4">
+                        <button class="btn btn-lg btn-primary btn-balloon" type="submit" name="submit" value="difficulty">
                             <span class="balloon"></span> Επίπεδο δυσκολίας
                         </button>
                         <!-- delete player button -->
-                        <button class="btn btn-lg btn-danger btn-balloon" type="button" data-bs-toggle="modal" data-bs-target="#modalPlayerDelete" tabindex="5">
+                        <button class="btn btn-lg btn-danger btn-balloon" type="button" data-bs-toggle="modal" data-bs-target="#modalPlayerDelete">
                             <span class="balloon"></span> Διαγραφή παίκτη
                         </button> {{-- Modal located outside this messy nest. --}}
                         <!-- / delete player button -->

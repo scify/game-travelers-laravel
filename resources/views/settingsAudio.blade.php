@@ -68,7 +68,6 @@
                                 min="0" {{--Used by JS--}}
                                 max="1" {{--Used by JS--}}
                                 step="0.1" {{--Used by JS--}}
-                                tabindex="1"
                                 class="form-range form-volume-slider"
                                 id="musicVolumeSlider"
                                 />
@@ -93,7 +92,6 @@
                                     min="0"
                                     max="1"
                                     step="0.1"
-                                    tabindex="2"
                                     id="soundVolumeSlider"
                                     class="form-range form-volume-slider"
                                 />
@@ -132,7 +130,6 @@
                     <button
                         class="btn btn-primary btn-lg responsive-expand"
                         id="submitButton"
-                        tabindex="200"
                         type="submit"
                         name="submit"
                         value="save"

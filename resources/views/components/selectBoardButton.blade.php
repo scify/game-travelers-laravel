@@ -2,7 +2,6 @@
 <div class="col board">
     <button
         class="btn btn-board board-button @isset($comingsoon)disabled @endisset"
-        tabindex="{{ $tabindex ?? '-1' }}"
         data-tabindex="{{ $tabindex ?? '-1' }}"
         data-audio-focus="{{ $audioFocus }}"
         data-audio-select="{{ $audioSelect }}"

@@ -102,7 +102,6 @@
                             value="start"
                             type="submit"
                             id="submitButton" {{-- ID Used by JS --}}
-                            tabindex="1000" {{--- Shall we set a 999 player limit? --}}
                             disabled {{-- Altered via JS (form validation) --}}
                         >
                             παίξε
@@ -120,7 +119,6 @@
                             value="settings"
                             type="submit"
                             id="secondaryButton" {{-- ID Used by JS --}}
-                            tabindex="1001"
                             disabled {{-- Altered via JS (form validation) --}}
                         >
                             ρυθμίσεις

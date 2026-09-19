@@ -8,7 +8,6 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
             data-bs-offset="-50,-40" {{-- unfortunately, in pixels --}}
-            tabindex="3333" {{-- set to a value to be focusable, but high enough to always come after any form --}}
             {{-- @TODO: Fix ARIA issues introduced by using an image. --}}
         >
             <img

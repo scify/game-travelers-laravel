@@ -70,7 +70,6 @@
                         autocomplete="given-name"
                         autocapitalize="on"
                         spellcheck="false"
-                        tabindex="1"
                         autofocus
                         id="playerNameInput" {{-- ID Used by JS --}}
                     />
@@ -112,7 +111,6 @@
                     value="submit"
                     type="submit"
                     id="submitButton" {{-- ID Used by JS --}}
-                    tabindex="120"
                     disabled {{-- Altered via JS (form validation) --}}
                 >
                    αποθήκευση
