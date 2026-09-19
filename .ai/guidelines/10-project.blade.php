@@ -33,6 +33,26 @@ Business logic lives in `app/BusinessLogicLayer/` (managers) and data access in 
 
 **Build output:** Vite writes `public/build/`; everything in `public/` is generated and ignored by git, except `.htaccess`, `index.php`, `favicon.ico`, `images/`, `audio/` and `vendor/` (assets published by the cookie consent package). Never edit generated files; change `resources/` and rebuild.
 
+### The board
+
+The board is a fixed stack of artwork, 1366 by 768 pixels. It does not scale, reflow or adapt to the viewport, and there is no separate small-screen layout. Every layer is a PNG drawn at the full board size and placed on top of the previous one.
+
+`resources/views/board.blade.php` renders the frame that holds the stack. Three classes on that frame are load-bearing, and removing any of them moves artwork:
+
+- `position-relative` makes the frame the containing block. Every layer is absolutely positioned, and the two layers that carry explicit offsets use `calc(50% - ...)`. Without a positioned ancestor those percentages resolve against the viewport, so the elements drift as the window changes size and only land correctly at one window width.
+- `flex-shrink-0` holds the frame at its declared width. Every child is absolutely positioned, so the frame has a min-content width of zero and the flex container would otherwise collapse it.
+- `m-auto`, with no `justify-content` on the flex container, centres the frame while there is free space and collapses to zero when there is none. An overflowing board then starts at the left edge and all of it can be reached by scrolling. Centring through `justify-content` splits the overflow instead, and content placed left of the origin cannot be scrolled to.
+
+Layers with no `left` or `top` sit at their static position, the top-left of the frame content box, which is what stacks the artwork. Only the info button and the card carry explicit offsets.
+
+The rule `#app img { max-width: initial }` in `resources/sass/_reset.scss` is load-bearing. The frame is a border-box with a 1px border, so its content box is 2 pixels narrower than the artwork, and the reset rule `max-width: 100%` would rescale every layer to fit.
+
+Overlay artwork can sit inside a padded canvas. Measure where the artwork begins inside its file before positioning a state image, rather than assuming it fills the file. The info button shows both cases: the resting state fills its file, while the hover state begins 9 pixels from the left edge and 6 from the top, so the style subtracts that padding and both states share one corner.
+
+Artwork lives in `public/images/boards/board_{n}/`, with `size_{n}` variants for board length. Cards are 344 by 482 pixels in every board and every mode. The info button states are shared across boards in `public/images/boards/info/`.
+
+When changing anything on the board, measure positions relative to the frame rather than to the viewport, and take the same measurements at several window widths. One layer carries a one second animation, so two screenshots of the same state never match exactly; a pixel comparison has to allow for it.
+
 ### Code style, project specifics
 
 - **PHP:** Laravel Pint under `pint.json`: Laravel preset plus `declare(strict_types=1)`, strict comparisons and `mb_` string functions.
