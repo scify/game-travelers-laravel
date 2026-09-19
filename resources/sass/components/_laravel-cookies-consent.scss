@@ -20,9 +20,7 @@ body #scify-cookie-consent-floating-button {
     --scify-cookies-bg-color: var(--trvl-bg-light);
     --scify-cookies-text-color: var(--trvl-color);
 
-    // Links as in the game. The accent for checked switches and open
-    // accordion titles is the palette's dark cyan, the one colour with
-    // enough contrast on the light surface (4.95:1).
+    // Links as in the game; dark cyan (4.91:1) for switches and accordions.
     --scify-cookies-primary-color: var(--trvl-c-cyan-dark);
     --scify-cookies-link-color: var(--trvl-link);
     --scify-cookies-link-hover-color: var(--trvl-c-cyan-dark);
@@ -45,14 +43,12 @@ body #scify-cookie-consent-floating-button {
     --scify-cookies-btn-hover-text-color: var(--trvl-btn-hover-color);
     --scify-cookies-btn-hover-border-color: var(--trvl-btn-hover-border-color);
 
-    // The floating button: the accent rather than the buttons' black, which
-    // is too bold for a corner. Dark cyan is the palette's one green that
-    // passes 3:1 on the light surface; the pale green does not.
+    // The floating button: deep green (4.52:1), no colour change on hover.
     --scify-cookies-floating-btn-bg-color: var(--trvl-btn-bg);
-    --scify-cookies-floating-btn-text-color: var(--trvl-c-cyan-dark);
-    --scify-cookies-floating-btn-border-color: var(--trvl-c-cyan-dark);
-    --scify-cookies-floating-btn-hover-bg-color: var(--trvl-c-green-light);
-    --scify-cookies-floating-btn-hover-text-color: var(--trvl-c-cyan-dark);
+    --scify-cookies-floating-btn-text-color: var(--trvl-c-green-deep);
+    --scify-cookies-floating-btn-border-color: var(--trvl-c-green-deep);
+    --scify-cookies-floating-btn-hover-bg-color: var(--trvl-btn-bg);
+    --scify-cookies-floating-btn-hover-text-color: var(--trvl-c-green-deep);
 
     // The "preferences saved" toast.
     --scify-cookies-success-message-bg-color: var(--trvl-c-green-light);
