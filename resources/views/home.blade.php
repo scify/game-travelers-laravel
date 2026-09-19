@@ -44,23 +44,23 @@
             <div class="landing-made-by container-lg text-center pt-5 pb-5">
                 <div class="row">
                     <div class="col-12 col-md-5 pt-5 pt-md-0 order-2 order-md-1 scify">
-                        <div>Ανάπτυξη</div>
+                        <div>{{ __('messages.development') }}</div>
                         <div>
-                            <a href="https://www.scify.gr">
+                            <a href="https://scify.org">
                                 <img
                                     class="img-fluid logo logo-h74 scify"
                                     loading="lazy"
                                     srcset="{{ asset('images/logos/74h_scify@3x.png') }} 3x, {{ asset('images/logos/74h_scify@2x.png') }} 2x"
                                     src="{{ asset('images/logos/74h_scify.png') }}"
                                     width="56" height="74"
-                                    alt="SciFY - Science for You"
+                                    alt="{{ __('messages.developer_logo_alt') }}"
                                 >
                             </a>
                         </div>
                     </div>
                     <div class="col-0 col-md-2 order-2" aria-hidden="true"></div>
                     <div class="col-12 col-md-5 order-1 order-md-3 sponsor">
-                        <div class="text-nowrap">Ευγενική χορηγία</div>
+                        <div class="text-nowrap">{{ __('messages.sponsored_by') }}</div>
                         <div>
                             <a href="https://www.lafarge.gr">
                                 <!-- 263 x 74 -->
@@ -70,7 +70,7 @@
                                     srcset="{{ asset('images/logos/74h_heracles@3x.png') }} 3x, {{ asset('images/logos/74h_heracles@2x.png') }} 2x"
                                     src="{{ asset('images/logos/74h_heracles.png') }}"
                                     width="414" height="74"
-                                    alt="Ηρακλής - Όμιλος εταιριών"
+                                    alt="{{ __('messages.sponsor_logo_alt') }}"
                                 >
                             </a>
                         </div>

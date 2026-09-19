@@ -1,4 +1,4 @@
-<!-- /resources/views/layout/landing/footer.blade.php -->
+{{-- /resources/views/components/layout/landing/footer.blade.php --}}
 <div aria-hidden="true" class="trvl-curve trvl-curve--footer trvl-curve--footer--color trvl-curve--footer--color--green bg-light">
     <div class="trvl-curve trvl-curve--footer trvl-curve--footer--dash">
         &nbsp;
@@ -11,26 +11,29 @@
 
             <div class="trvl-landing-footer--links flex-grow-1">
                 <ul>
-                    <li><a href="http://www.scify.gr/site/el/contact" target="_blank" rel="noopener">Επικοινώνησε μαζί μας</a></li>
+                    <li>
+                        <a href="https://scify.org/#footer-form" target="_blank" rel="noopener">
+                            {{ __('messages.contact_us') }}
+                        </a>
+                    </li>
                     <li><a href="{{ route('credits') }}">{{ __('messages.credits') }}</a></li>
                     <li>
-                        <a href="https://go.scify.gr/game-travellers-privacy-policy-gr" target="_blank" rel="noopener">
-                            {{ __("messages.privacy_policy")}}
+                        <a href="https://go.scify.org/game-travellers-privacy-policy-gr" target="_blank" rel="noopener">
+                            {{ __('messages.privacy_policy') }}
                         </a>
                     </li>
                     <li>
-                        <a href="https://go.scify.gr/game-travellers-cookies-policy-gr" target="_blank" rel="noopener">
-                            {{ __("messages.cookies_policy")}}
+                        <a href="https://go.scify.org/game-travellers-cookies-policy-gr" target="_blank" rel="noopener">
+                            {{ __('messages.cookies_policy') }}
                         </a>
                     </li>
                     <li>
-                        <a href="https://go.scify.gr/game-travellers-terms-of-use-gr" target="_blank" rel="noopener">
-                            {{ __("messages.terms_of_use")}}
+                        <a href="https://go.scify.org/game-travellers-terms-of-use-gr" target="_blank" rel="noopener">
+                            {{ __('messages.terms_of_use') }}
                         </a>
                     </li>
                     <li>
-                        <a href="javascript:void(0);" onclick="toggleCookieBanner()" onkeyup="if (event.key === 'Enter') toggleCookieBanner()"
-                           role="button" aria-label="{{ __('cookies_consent::messages.cookies_settings') }}">
+                        <a href="#consent-settings">
                             {{ __('cookies_consent::messages.cookies_settings') }}
                         </a>
                     </li>
@@ -39,7 +42,7 @@
 
             <div class="trvl-landing-footer--social pt-2 pt-sm-0">
                 <div class="social-container">
-                    Ακολούθησέ μας
+                    {{ __('messages.follow_us') }}
                     <ul class="social-links">
                         <li class="social-links--linkedin">
                             <a href="https://linkedin.com/company/scify-not-for-profit-company" target="_blank" rel="noopener noreferrer">
@@ -48,7 +51,7 @@
                                     srcset="{{ asset('images/landing/social/linkedin@2x.png') }} 2x"
                                     src="{{ asset('images/landing/social/linkedin.png') }}"
                                     width="36" height="36"
-                                    alt="Connect with us on LinkedIn"
+                                    alt="{{ __('messages.follow_us_on', ['network' => 'LinkedIn']) }}"
                                 >
                             </a>
                         </li>
@@ -59,7 +62,7 @@
                                     srcset="{{ asset('images/landing/social/twitter@2x.png') }} 2x"
                                     src="{{ asset('images/landing/social/twitter.png') }}"
                                     width="36" height="30"
-                                    alt="Follow us on Twitter"
+                                    alt="{{ __('messages.follow_us_on', ['network' => 'Twitter']) }}"
                                 >
                             </a>
                         </li>
@@ -70,7 +73,7 @@
                                     srcset="{{ asset('images/landing/social/facebook@2x.png') }} 2x"
                                     src="{{ asset('images/landing/social/facebook.png') }}"
                                     width="35" height="35"
-                                    alt="Find us on Facebook"
+                                    alt="{{ __('messages.follow_us_on', ['network' => 'Facebook']) }}"
                                 >
                             </a>
                         </li>
@@ -82,26 +85,26 @@
         <div class="trvl-landing-footer--row--2 pt-3 pt-sm-2 footer-credits">
 
             <div class="scify text-center">
-                <span>Ανάπτυξη</span>
-                <a href="https://www.scify.gr">
+                <span>{{ __('messages.development') }}</span>
+                <a href="https://scify.org">
                     <img
                         class="img-fluid logo logo-h53 scify"
                         srcset="{{ asset('images/logos/53h_scify@3x.png') }} 3x, {{ asset('images/logos/53h_scify@2x.png') }} 2x"
                         src="{{ asset('images/logos/53h_scify.png') }}"
                         width="40" height="53"
-                        alt="SciFY - Science for You"
+                        alt="{{ __('messages.developer_logo_alt') }}"
                     >
                 </a>
             </div>
             <div class="sponsor text-center">
-                <span>Ευγενική χορηγία</span>
+                <span>{{ __('messages.sponsored_by') }}</span>
                 <a href="https://www.lafarge.gr">
                     <img
                         class="img-fluid logo logo-h53 sponsor"
                         srcset="{{ asset('images/logos/53h_heracles@3x.png') }} 3x, {{ asset('images/logos/53h_heracles@2x.png') }} 2x"
                         src="{{ asset('images/logos/53h_heracles.png') }}"
                         width="297" height="53"
-                        alt="Ηρακλής - Όμιλος εταιριών"
+                        alt="{{ __('messages.sponsor_logo_alt') }}"
                     >
                 </a>
             </div>
