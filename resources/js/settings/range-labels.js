@@ -72,8 +72,7 @@ window.addEventListener('load', function () {
     }
 
     if (rangeElements.length) {
-        for (let i = 0; i < rangeElements.length; i++) {
-            const element = rangeElements[i];
+        for (const element of rangeElements) {
             const elementId = element.getAttribute('id');
             const elementFunction = element.dataset.function;
             /* Volume Sliders */

@@ -461,62 +461,60 @@ export default {
                                 }
                                 this.ignoreInput = false;
                             }, 1000);
-                        } else {
-                            if (this.gamePhase === 1) {
-                                window.setTimeout(() => {
-                                    this.applyDiceRoll(response.data.newPosition, response.data.diceResult);
-                                    this.rollingAnimation = false;
-                                }, 1000);
-                            } else if (this.gamePhase === 2) {
-                                this.firstPlayerTurn = response.data.firstPlayerTurn;
-                                if (response.data.drawCard === 0) {
-                                    this.setCenter(true, 0);
-                                    this.rollAnimation = true;
-                                    this.gamePhase = 1;
-                                    this.debugEmit('phase', 1);
-
-                                    if (this.firstPlayerTurn) {
-                                        if (this.tutorial && this.pos1 === 4) {
-                                            sound('sounds.tutorial.bravo_roll_again', () => {
-                                                this.ignoreInput = false;
-                                            });
-                                        } else {
-                                            sound(this.getOurTurnSound(), () => {
-                                                this.ignoreInput = false;
-                                            });
-                                        }
-                                    } else {
-                                        sound(this.getOtherTurnSound(), () => {
-                                            if (this.gameMode === 2) {
-                                                window.setTimeout(() => {
-                                                    this.sendToBackend();
-                                                }, 1000);
-                                            }
-                                        });
-                                    }
-                                } else {
-                                    //draw a card
-                                    const card = this.cards[response.data.drawCard];
-                                    this.cardName = card['name'];
-                                    this.latestCardValue = card['value'];
-                                    this.debugEmit('card', { name: card['name'], value: card['value'] });
-                                    this.playCardSound();
-                                }
-                            } else if (this.gamePhase === 3) {
-                                this.firstPlayerTurn = response.data.firstPlayerTurn;
+                        } else if (this.gamePhase === 1) {
+                            window.setTimeout(() => {
+                                this.applyDiceRoll(response.data.newPosition, response.data.diceResult);
+                                this.rollingAnimation = false;
+                            }, 1000);
+                        } else if (this.gamePhase === 2) {
+                            this.firstPlayerTurn = response.data.firstPlayerTurn;
+                            if (response.data.drawCard === 0) {
                                 this.setCenter(true, 0);
                                 this.rollAnimation = true;
                                 this.gamePhase = 1;
                                 this.debugEmit('phase', 1);
+
                                 if (this.firstPlayerTurn) {
-                                    sound(this.getOurTurnSound(), () => {
-                                        this.ignoreInput = false;
-                                    });
-                                } else if (this.gameMode === 2) {
+                                    if (this.tutorial && this.pos1 === 4) {
+                                        sound('sounds.tutorial.bravo_roll_again', () => {
+                                            this.ignoreInput = false;
+                                        });
+                                    } else {
+                                        sound(this.getOurTurnSound(), () => {
+                                            this.ignoreInput = false;
+                                        });
+                                    }
+                                } else {
                                     sound(this.getOtherTurnSound(), () => {
-                                        this.sendToBackend();
+                                        if (this.gameMode === 2) {
+                                            window.setTimeout(() => {
+                                                this.sendToBackend();
+                                            }, 1000);
+                                        }
                                     });
                                 }
+                            } else {
+                                //draw a card
+                                const card = this.cards[response.data.drawCard];
+                                this.cardName = card['name'];
+                                this.latestCardValue = card['value'];
+                                this.debugEmit('card', { name: card['name'], value: card['value'] });
+                                this.playCardSound();
+                            }
+                        } else if (this.gamePhase === 3) {
+                            this.firstPlayerTurn = response.data.firstPlayerTurn;
+                            this.setCenter(true, 0);
+                            this.rollAnimation = true;
+                            this.gamePhase = 1;
+                            this.debugEmit('phase', 1);
+                            if (this.firstPlayerTurn) {
+                                sound(this.getOurTurnSound(), () => {
+                                    this.ignoreInput = false;
+                                });
+                            } else if (this.gameMode === 2) {
+                                sound(this.getOtherTurnSound(), () => {
+                                    this.sendToBackend();
+                                });
                             }
                         }
                     }
@@ -714,26 +712,24 @@ export default {
                     } else if (this.diceType === 3) {
                         src += 'dice_colours';
                     }
+                } else if (this.diceType === 3) {
+                    if (value === 1) {
+                        src += 'o';
+                    } else if (value === 2) {
+                        src += 'g';
+                    } else if (value === 3) {
+                        src += 'b';
+                    } else if (value === 4) {
+                        src += 'p';
+                    } else if (value === 5) {
+                        src += 'r';
+                    } else if (value === 6) {
+                        src += 'y';
+                    }
                 } else {
-                    if (this.diceType === 3) {
-                        if (value === 1) {
-                            src += 'o';
-                        } else if (value === 2) {
-                            src += 'g';
-                        } else if (value === 3) {
-                            src += 'b';
-                        } else if (value === 4) {
-                            src += 'p';
-                        } else if (value === 5) {
-                            src += 'r';
-                        } else if (value === 6) {
-                            src += 'y';
-                        }
-                    } else {
-                        src += value;
-                        if (this.diceType === 2) {
-                            src += 'd';
-                        }
+                    src += value;
+                    if (this.diceType === 2) {
+                        src += 'd';
                     }
                 }
             } else {
@@ -806,59 +802,57 @@ export default {
                 this.applyCorrectMovement();
             }
             //check this in pvp
-            else {
-                if (this.tutorial && this.firstPlayerTurn && this.tutorialYouKnowHowToPlayFlag === 0) {
-                    if (this.pos1 === 0) {
-                        let sound_forward = 'sounds.tutorial.Pink_Move_Forward';
-                        if (this.diceType !== 3) {
-                            sound_forward = 'sounds.tutorial.Pawn_4_forward';
-                        }
-                        sound(sound_forward, () => {
-                            if (this.movementMode === 3) {
-                                this.blueIndex = 4;
-                                this.blue_position_show = true;
-                            } else {
-                                this.activateSelector(newPosition);
-                            }
-                            let we_should_go_here_sound = 'sounds.tutorial.Here_we_go_Pink';
-                            if (this.diceType !== 3) {
-                                we_should_go_here_sound = 'sounds.tutorial.We_Should_Go_Here';
-                            }
-                            sound(we_should_go_here_sound, () => {
-                                if (this.movementMode > 1) {
-                                    sound('sounds.tutorial.Choose_this_Pawn_goes_there', () => {
-                                        if (this.movementMode === 3) {
-                                            this.blue_position_show = false;
-                                            this.blueIndex = -1;
-                                            this.activateSelector(newPosition);
-                                        }
-                                    });
-                                }
-                            });
-                        });
-                    } else if (this.pos1 === 4) {
+            else if (this.tutorial && this.firstPlayerTurn && this.tutorialYouKnowHowToPlayFlag === 0) {
+                if (this.pos1 === 0) {
+                    let sound_forward = 'sounds.tutorial.Pink_Move_Forward';
+                    if (this.diceType !== 3) {
+                        sound_forward = 'sounds.tutorial.Pawn_4_forward';
+                    }
+                    sound(sound_forward, () => {
                         if (this.movementMode === 3) {
-                            let sound_to_play = 'sounds.tutorial.Yellow_Choose_Position';
-                            if (this.diceType !== 3) {
-                                sound_to_play = 'sounds.tutorial.Roll_2_You_Choose_Now';
-                            }
-                            sound(sound_to_play, () => {
-                                this.activateSelector(newPosition);
-                            });
+                            this.blueIndex = 4;
+                            this.blue_position_show = true;
                         } else {
-                            sound('sounds.tutorial.We_Should_Go_Here', () => {
-                                if (this.movementMode > 1) {
-                                    sound('sounds.tutorial.Choose_this_Pawn_goes_there');
-                                }
-                            });
                             this.activateSelector(newPosition);
                         }
+                        let we_should_go_here_sound = 'sounds.tutorial.Here_we_go_Pink';
+                        if (this.diceType !== 3) {
+                            we_should_go_here_sound = 'sounds.tutorial.We_Should_Go_Here';
+                        }
+                        sound(we_should_go_here_sound, () => {
+                            if (this.movementMode > 1) {
+                                sound('sounds.tutorial.Choose_this_Pawn_goes_there', () => {
+                                    if (this.movementMode === 3) {
+                                        this.blue_position_show = false;
+                                        this.blueIndex = -1;
+                                        this.activateSelector(newPosition);
+                                    }
+                                });
+                            }
+                        });
+                    });
+                } else if (this.pos1 === 4) {
+                    if (this.movementMode === 3) {
+                        let sound_to_play = 'sounds.tutorial.Yellow_Choose_Position';
+                        if (this.diceType !== 3) {
+                            sound_to_play = 'sounds.tutorial.Roll_2_You_Choose_Now';
+                        }
+                        sound(sound_to_play, () => {
+                            this.activateSelector(newPosition);
+                        });
                     } else {
+                        sound('sounds.tutorial.We_Should_Go_Here', () => {
+                            if (this.movementMode > 1) {
+                                sound('sounds.tutorial.Choose_this_Pawn_goes_there');
+                            }
+                        });
                         this.activateSelector(newPosition);
                     }
                 } else {
                     this.activateSelector(newPosition);
                 }
+            } else {
+                this.activateSelector(newPosition);
             }
         },
         applyCorrectMovement() {
@@ -975,12 +969,10 @@ export default {
                 } else {
                     return '_b';
                 }
+            } else if (this.pawn2 === 2 || this.pawn2 === 3 || this.pawn2 === 6) {
+                return '_g';
             } else {
-                if (this.pawn2 === 2 || this.pawn2 === 3 || this.pawn2 === 6) {
-                    return '_g';
-                } else {
-                    return '_b';
-                }
+                return '_b';
             }
         },
         playCardSound() {

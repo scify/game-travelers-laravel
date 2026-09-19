@@ -62,18 +62,16 @@ window.addEventListener('load', function () {
                     const nameValue = nameInput.value;
                     submitButton.disabled = !(nameValue.length >= 2 && !Number.isNaN(idValue) && idValue > 0);
                     // If !nameInput, then we are updating/selectin player.
+                } else if (!Number.isNaN(idValue) && idValue > 0) {
+                    updateUserMenuButton(idValue);
+                    submitButton.disabled = false;
+                    if (secondaryButton) {
+                        secondaryButton.disabled = false;
+                    }
                 } else {
-                    if (!Number.isNaN(idValue) && idValue > 0) {
-                        updateUserMenuButton(idValue);
-                        submitButton.disabled = false;
-                        if (secondaryButton) {
-                            secondaryButton.disabled = false;
-                        }
-                    } else {
-                        submitButton.disabled = true;
-                        if (secondaryButton) {
-                            secondaryButton.disabled = true;
-                        }
+                    submitButton.disabled = true;
+                    if (secondaryButton) {
+                        secondaryButton.disabled = true;
                     }
                 }
             }

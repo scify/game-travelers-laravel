@@ -40,10 +40,8 @@ import { trans } from '@/lib/lang.js';
                         keyAssignerButton.dataset.keySelected = resetInput.value;
                         if (resetActive) {
                             keyAssignerButton.textContent = resetInput.value;
-                        } else {
-                            if (!keyAssignerButton.classList.contains('active')) {
-                                keyAssignerButton.textContent = resetInput.value;
-                            }
+                        } else if (!keyAssignerButton.classList.contains('active')) {
+                            keyAssignerButton.textContent = resetInput.value;
                         }
                     }
                 }
@@ -112,7 +110,7 @@ import { trans } from '@/lib/lang.js';
                             const charCode = event.key.charCodeAt(0);
                             if (event.key.length > 1 && charCode < 128) {
                                 // Key is "named" (e.g. LeftAlt):
-                                if (allowedList.indexOf(event.code) !== -1) {
+                                if (allowedList.includes(event.code)) {
                                     returnKey = event.code;
                                     log('Key Code accepted.');
                                 } else {
@@ -121,28 +119,24 @@ import { trans } from '@/lib/lang.js';
                                     invalidateKeyAssigner(keyAssigner);
                                     return false;
                                 }
+                            } else if (charCode === 32) {
+                                // Key is equal to a unicode character. Space is
+                                // one of the unicode characters which is read
+                                // as " ". To make our life easier, we simply
+                                // convert it to "Space".
+                                log('Space accepted');
+                                returnKey = 'Space';
+                            } else if (allowedList.includes(event.key)) {
+                                log('Key accepted');
+                                returnKey = event.key;
                             } else {
-                                // Key is equal to a unicode character:
-                                if (charCode === 32) {
-                                    // Space is one of the unicode characters
-                                    // which is read as " ". To make our life
-                                    // easier, we simply convert it to "Space".
-                                    log('Space accepted');
-                                    returnKey = 'Space';
-                                } else {
-                                    if (allowedList.indexOf(event.key) !== -1) {
-                                        log('Key accepted');
-                                        returnKey = event.key;
-                                    } else {
-                                        keyAssigner.classList.add('invalid');
-                                        log(`Not accepted key ${event.key}.`);
-                                        invalidateKeyAssigner(keyAssigner);
-                                        return false;
-                                    }
-                                }
+                                keyAssigner.classList.add('invalid');
+                                log(`Not accepted key ${event.key}.`);
+                                invalidateKeyAssigner(keyAssigner);
+                                return false;
                             }
                         }
-                        if (returnKey.indexOf('Enter') !== -1) {
+                        if (returnKey.includes('Enter')) {
                             if (keyAssigner.classList.contains('first-trigger')) {
                                 keyAssigner.classList.remove('first-trigger');
                                 return false;

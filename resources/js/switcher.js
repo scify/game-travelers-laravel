@@ -14,8 +14,8 @@ import { saveVolume } from '@/lib/volumes.js';
 window.onpageshow = function (e) {
     if (e.persisted) {
         const allElements = document.querySelectorAll('*');
-        for (let i = 0; i < allElements.length; i++) {
-            allElements[i].blur();
+        for (const element of allElements) {
+            element.blur();
         }
         switcher();
     }
@@ -87,9 +87,10 @@ function switcher() {
             : null;
 
     function removeSwitcherClasses() {
-        const elements = document.getElementsByClassName(classFocus);
-        for (let i = 0; i < elements.length; i++) {
-            elements[i].classList.remove(classFocus);
+        // The list has to be static: a live HTMLCollection shrinks as the class
+        // is removed, and an index walking forward then steps over elements.
+        for (const element of document.querySelectorAll(`.${classFocus}`)) {
+            element.classList.remove(classFocus);
         }
     }
 
@@ -100,8 +101,7 @@ function switcher() {
     }
 
     // Iterate through elements and check data-tabindex values.
-    for (let i = 0; i < switcherElements.length; i++) {
-        const element = switcherElements[i];
+    for (const element of switcherElements) {
         const tabindex = element.dataset.tabindex;
         if (Number.parseInt(tabindex) === Number(tabindex)) {
             validSwitcherElements.push(element);
@@ -112,9 +112,9 @@ function switcher() {
         return a.dataset.tabindex - b.dataset.tabindex;
     });
     // Remove any left-over switcher classes from all elements:
-    for (let i = 0; i < validSwitcherElements.length; i++) {
-        validSwitcherElements[i].classList.remove(classFocus);
-        validSwitcherElements[i].classList.remove(classActive);
+    for (const element of validSwitcherElements) {
+        element.classList.remove(classFocus);
+        element.classList.remove(classActive);
     }
 
     // The position of the highlighted element, or -1 when nothing is highlighted.
@@ -240,54 +240,49 @@ function switcher() {
             // event.code checks
             if (event.key.length > 1 && charCode < 128) {
                 // Key is "named" (e.g. LeftAlt):
-                if (escapeList.indexOf(event.code) !== -1) {
+                if (escapeList.includes(event.code)) {
                     event.preventDefault();
                     switcherModal();
                     return false;
                 }
-                if (allowedList.indexOf(event.code) !== -1) {
+                if (allowedList.includes(event.code)) {
                     log('Key-code accepted.');
                     returnKey = event.code;
                 } else {
                     log(`Not accepted key-code ${event.code}`);
                     return false;
                 }
+            } else if (charCode === 32) {
+                // The event.key checks start here. Space is one of the Unicode
+                // characters which is read as " ". To make our life easier, we
+                // simply convert it to "Space".
+                log('Space accepted');
+                returnKey = 'Space';
+            } else if (allowedList.includes(event.key)) {
+                log('Key accepted.');
+                returnKey = event.key;
             } else {
-                // event.key checks
-                if (charCode === 32) {
-                    // Space is one of the Unicode characters
-                    // which is read as " ". To make our life
-                    // easier, we simply convert it to "Space".
-                    log('Space accepted');
-                    returnKey = 'Space';
-                } else {
-                    if (allowedList.indexOf(event.key) !== -1) {
-                        log('Key accepted.');
-                        returnKey = event.key;
-                    } else {
-                        if (escapeList.indexOf(event.key) !== -1) {
-                            event.preventDefault();
-                            switcherModal();
-                            return false;
-                        }
-                        if (event.key === '-' || event.key === '_') {
-                            if (backgroundMusic !== null) {
-                                backgroundMusic.volume = Math.max(0, backgroundMusic.volume - 0.1);
-                                saveVolume('music_volume', backgroundMusic.volume);
-                                return false;
-                            }
-                        }
-                        if (event.key === '=' || event.key === '+') {
-                            if (backgroundMusic !== null) {
-                                backgroundMusic.volume = Math.min(1, backgroundMusic.volume + 0.1);
-                                saveVolume('music_volume', backgroundMusic.volume);
-                                return false;
-                            }
-                        }
-                        log(`Not accepted key ${event.key}`);
+                if (escapeList.includes(event.key)) {
+                    event.preventDefault();
+                    switcherModal();
+                    return false;
+                }
+                if (event.key === '-' || event.key === '_') {
+                    if (backgroundMusic !== null) {
+                        backgroundMusic.volume = Math.max(0, backgroundMusic.volume - 0.1);
+                        saveVolume('music_volume', backgroundMusic.volume);
                         return false;
                     }
                 }
+                if (event.key === '=' || event.key === '+') {
+                    if (backgroundMusic !== null) {
+                        backgroundMusic.volume = Math.min(1, backgroundMusic.volume + 0.1);
+                        saveVolume('music_volume', backgroundMusic.volume);
+                        return false;
+                    }
+                }
+                log(`Not accepted key ${event.key}`);
+                return false;
             }
         }
         const focusedIndex = currentIndex();

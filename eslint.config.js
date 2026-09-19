@@ -20,6 +20,7 @@ export default defineConfig(
         rules: {
             curly: ['error', 'all'],
             eqeqeq: ['error', 'always'],
+            'no-lonely-if': 'error',
             'no-restricted-globals': [
                 'error',
                 { name: 'isFinite', message: 'Use Number.isFinite.' },

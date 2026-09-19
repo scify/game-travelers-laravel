@@ -2,7 +2,6 @@ import { log } from '@/lib/debug.js';
 
 // Experimental Audio Functions
 // Two audio channels: music() for music, sound() for narration and effects.
-// @todo: Old World, Solasta, SpellForce Conquest of Eo @IMPORTANT
 
 let travelersSounds = [];
 
@@ -35,7 +34,7 @@ export function music(audioFile, volumeOverride = false, audioLoop = true) {
         return;
     }
     const folders = audioFile.split('.');
-    const found = folders.reduce((obj, key) => obj && obj[key], window.Laravel.audioFiles);
+    const found = folders.reduce((obj, key) => obj?.[key], window.Laravel.audioFiles);
     if (!found) {
         log('Sound file not found');
         return;
@@ -44,16 +43,11 @@ export function music(audioFile, volumeOverride = false, audioLoop = true) {
     const folderPath = '/audio/' + folders.join('/');
     const audio = new Audio(folderPath + '/' + filename);
 
-    let audioVolume = 1;
     // Set the audioVolume according to player's wishes, if any.
-    if (
-        window.Laravel.playerAudio &&
-        window.Laravel.playerAudio.playerMusicVolume !== undefined &&
-        typeof window.Laravel.playerAudio.playerMusicVolume === 'number' &&
-        window.Laravel.playerAudio.playerMusicVolume >= 0 &&
-        window.Laravel.playerAudio.playerMusicVolume <= 1
-    ) {
-        audioVolume = window.Laravel.playerAudio.playerMusicVolume;
+    const playerMusicVolume = window.Laravel.playerAudio?.playerMusicVolume;
+    let audioVolume = 1;
+    if (typeof playerMusicVolume === 'number' && playerMusicVolume >= 0 && playerMusicVolume <= 1) {
+        audioVolume = playerMusicVolume;
     }
     // Override volume settings no matter what:
     if (volumeOverride !== false) {
@@ -134,7 +128,7 @@ export function sound(audioFile, callback = null, interrupt = false, volumeOverr
                 for (let i = 1; i <= lastNumber + 20; i++) {
                     playerFolders[playerFolders.length - 1] = lastPart.replace(lastNumber, i);
                     const playerAudioFound = playerFolders.reduce(
-                        (obj, key) => obj && obj[key],
+                        (obj, key) => obj?.[key],
                         window.Laravel.playerAudio.playerAudioFiles,
                     );
                     if (playerAudioFound) {
@@ -147,7 +141,7 @@ export function sound(audioFile, callback = null, interrupt = false, volumeOverr
                 }
             } else {
                 const playerAudioNoDigitFound = playerFolders.reduce(
-                    (obj, key) => obj && obj[key],
+                    (obj, key) => obj?.[key],
                     window.Laravel.playerAudio.playerAudioFiles,
                 );
                 if (playerAudioNoDigitFound) {
@@ -176,7 +170,7 @@ export function sound(audioFile, callback = null, interrupt = false, volumeOverr
     }
     // Check if Default sound exists.
     const folders = audioFile.split('.');
-    const found = folders.reduce((obj, key) => obj && obj[key], window.Laravel.audioFiles);
+    const found = folders.reduce((obj, key) => obj?.[key], window.Laravel.audioFiles);
     if (!found) {
         log('Sound file not found');
         return;
@@ -210,15 +204,10 @@ export function sound(audioFile, callback = null, interrupt = false, volumeOverr
         }
     };
     // Set the audioVolume according to player's wishes, if any.
+    const playerSoundVolume = window.Laravel.playerAudio?.playerSoundVolume;
     let audioVolume = 1;
-    if (
-        window.Laravel.playerAudio &&
-        window.Laravel.playerAudio.playerSoundVolume !== undefined &&
-        typeof window.Laravel.playerAudio.playerSoundVolume === 'number' &&
-        window.Laravel.playerAudio.playerSoundVolume >= 0 &&
-        window.Laravel.playerAudio.playerSoundVolume <= 1
-    ) {
-        audioVolume = window.Laravel.playerAudio.playerSoundVolume;
+    if (typeof playerSoundVolume === 'number' && playerSoundVolume >= 0 && playerSoundVolume <= 1) {
+        audioVolume = playerSoundVolume;
     }
     // Override volume settings no matter what:
     if (volumeOverride !== false) {
