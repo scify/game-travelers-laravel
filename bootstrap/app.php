@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
-use Illuminate\Foundation\Configuration\Middleware;
 use Sentry\Laravel\Integration;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -13,9 +12,8 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__ . '/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware): void {
-        // The framework's defaults: the guest middleware finds the dashboard route by its name.
-    })
+    // The framework's defaults: the guest middleware finds the dashboard route by its name.
+    ->withMiddleware()
     ->withExceptions(function (Exceptions $exceptions): void {
         Integration::handles($exceptions);
     })->create();
