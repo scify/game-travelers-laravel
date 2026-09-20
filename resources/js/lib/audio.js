@@ -154,7 +154,7 @@ export function sound(audioFile, callback = null, interrupt = false, volumeOverr
     }
 
     // Almost Random Sound (tm) playback.
-    const match = audioFile.match(/\[([0-9]+)-([0-9]+)]/);
+    const match = /\[(\d+)-(\d+)]/.exec(audioFile);
     if (match) {
         let start = Number.parseInt(match[1], 10);
         let end = Number.parseInt(match[2], 10);
