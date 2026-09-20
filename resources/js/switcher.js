@@ -113,8 +113,7 @@ function switcher() {
     });
     // Remove any left-over switcher classes from all elements:
     for (const element of validSwitcherElements) {
-        element.classList.remove(classFocus);
-        element.classList.remove(classActive);
+        element.classList.remove(classFocus, classActive);
     }
 
     // The position of the highlighted element, or -1 when nothing is highlighted.

@@ -197,8 +197,7 @@ import { trans } from '@/lib/lang.js';
                     }
                     // Set keyAssigner to active
                     keyAssigner.textContent = trans('messages.switcher.set_button');
-                    keyAssigner.classList.add('active');
-                    keyAssigner.classList.add('first-trigger');
+                    keyAssigner.classList.add('active', 'first-trigger');
                     // Cancel the whole thing by a single click of the mouse:
                     window.addEventListener('click', assignerClickHandler);
                     // When a button is clicked, ask user to press a key:
