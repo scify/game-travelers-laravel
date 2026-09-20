@@ -119,25 +119,12 @@ return [
         'set_button_invalid' => 'μη αποδεκτό', // invalid button (please keep it short)
     ],
 
-    // Most of the following strings have already been moved to validation as
-    // custom rules and have been commented out from this file.
-    // @todo Fix password_token_error to somehow inject this:
-    // <li>{{ __("messages.password_token_error") }}
-    //    <a href="{{ route('password.request') }}">
-    //      {{ __("messages.password_token_error_link") }}.
-    //    </a>
-    // </li>
-    // Until then we are using the same error via passwords.token without the
-    // helpful link.
-    //
     // 'error_email_exists' => 'Υπάρχει ήδη λογαριασμός με αυτό το email.',
     // 'error_password_chars' => 'Το συνθηματικό πρέπει να αποτελείται από τουλάχιστον 8 χαρακτήρες.',
     // 'error_password_letter' => 'Το συνθηματικό πρέπει να περιέχει τουλάχιστον ένα γράμμα.',
     // 'error_password_symbol' => 'Το συνθηματικό πρέπει να περιέχει τουλάχιστον ένα σύμβολο.',
     // 'error_password_digit' => 'Το συνθηματικό πρέπει να περιέχει τουλάχιστον έναν αριθμό.',
     // 'error_password_match' => 'Τα δύο συνθηματικά δεν είναι ίδια.',
-    'password_token_error' => 'Το διακριτικό δεν είναι πλέον έγκυρο. Θα πρέπει να ξεκινήσετε εκ νέου τη διαδικασία:',
-    'password_token_error_link' => 'Ανάκτηση κωδικού.',
     // 'error_password_captcha' => 'Το άρθροισμα δεν είναι σωστό.',
     'unauthorized_action' => 'Μη εξουσιοδοτημένη ενέργεια',
 ];

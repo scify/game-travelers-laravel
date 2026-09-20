@@ -29,7 +29,6 @@
                             <div class="form-alert alert alert-danger" id="form-alert">
                                 {{ __("messages.error_form") }}
                                 <ul>
-                                    {{-- Note: @see messages.password_token_error --}}
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
                                     @endforeach

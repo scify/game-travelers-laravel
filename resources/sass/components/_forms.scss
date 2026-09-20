@@ -75,9 +75,6 @@ fieldset input[type='radio']:not(:checked) + label {
     font-weight: 300;
 }
 
-/* Upload inputs */
-// @todo
-
 /* Inputs: Ranges */
 // Visual Volume Decorative Slider
 .volume-slider {
@@ -149,8 +146,7 @@ input[type='radio'] {
     background-color: var(--trvl-bg) !important;
     background-image: none !important;
     filter: none !important;
-    margin: 0;
-    margin-right: 0.5em;
+    margin: 0 0.5em 0 0;
     font: inherit;
     color: currentcolor;
     width: 1em;
@@ -212,7 +208,8 @@ input[type='checkbox'] {
 
 // Inputs: Text & numeric
 input {
-    outline: none; // @TODO: Outlines for focus
+    outline: none;
+
     &:focus:not([type='range']),
     &:focus-visible:not([type='range']),
     &:focus-within:not([type='range']) {

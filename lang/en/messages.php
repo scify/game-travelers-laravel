@@ -119,25 +119,12 @@ return [
         'set_button_invalid' => 'invalid key', // invalid button (please keep it short)
     ],
 
-    // Most of the following strings have already been moved to validation as
-    // custom rules and have been commented out from this file.
-    // @todo Fix password_token_error to somehow inject this:
-    // <li>{{ __("messages.password_token_error") }}
-    //    <a href="{{ route('password.request') }}">
-    //      {{ __("messages.password_token_error_link") }}.
-    //    </a>
-    // </li>
-    // Until then we are using the same error via passwords.token without the
-    // helpful link.
-    //
     // 'error_email_exists' => 'The email is already in use by another user of the platform.',
     // 'error_password_chars' => 'Password should have 8 or more characters.',
     // 'error_password_letter' => 'Password should have at least 1 letter.',
     // 'error_password_symbol' => 'Password should have at least 1 symbol.',
     // 'error_password_digit' => 'Password should have at least 1 digit.',
     // 'error_password_match' => 'Passwords do not match.',
-    'password_token_error' => 'Unfortunately, your password reset request has expired.',
-    'password_token_error_link' => 'Start over the process of reseting your password.',
     // 'error_password_captcha' => 'Incorrect CAPTCHA value.',
     'unauthorized_action' => 'Unauthorized action',
 ];

@@ -8,7 +8,6 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
             data-bs-offset="-50,-40" {{-- unfortunately, in pixels --}}
-            {{-- @TODO: Fix ARIA issues introduced by using an image. --}}
         >
             <img
                 id="userMenuButtonImage"
@@ -27,10 +26,9 @@
                 {{ $playerName ?? "Επιλογές" }}
             </span>
         </button>
-        {{--@TODO: Fix offset.WARNING!Due to manual offset via data - bs - offset
-        in combination with the z - index values, these menu options can't be
-            longer than Αλλαγή παίκτη(~12 chars) or the box will run wild.
-            --}}
+        {{-- The manual data-bs-offset above, combined with the z-index values,
+             limits the width here: a menu option longer than "Αλλαγή παίκτη"
+             (about 12 characters) makes the box run wild. --}}
         <ul class="user-menu dropdown-menu dropdown-menu-start" aria-labelledby="userMenuButton">
             @if(isset($playerName))
             <li>

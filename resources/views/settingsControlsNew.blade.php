@@ -122,7 +122,6 @@
                                             επιλογή
                                         </div>
                                         <div class="col">
-                                            <!-- @TODO: Accessibility -->
                                             <button
                                                 type="button"
                                                 class="btn btn-sm btn-light rounded-pill key-assigner"
@@ -165,7 +164,6 @@
                                             επιλογή
                                         </div>
                                         <div class="col pb-1">
-                                            <!-- @TODO: Accessibility -->
                                             <button
                                                 type="button"
                                                 class="btn btn-sm btn-light rounded-pill key-assigner"
@@ -187,7 +185,6 @@
                                             πλοήγηση
                                         </div>
                                         <div class="col pb-1">
-                                            <!-- @TODO: Accessibility -->
                                             <button
                                                 type="button"
                                                 class="btn btn-sm btn-light rounded-pill key-assigner"
