@@ -7,13 +7,22 @@ let travelersSounds = [];
 
 /**
  * Random integer between min and max, both included.
+ *
+ * Draws at or above the limit are discarded, so no outcome is more likely.
+ *
  * @param {number} min
  * @param {number} max
  * @returns {number}
  */
 export function randomInt(min, max) {
-    const [value] = crypto.getRandomValues(new Uint32Array(1));
-    return min + Math.floor((value / 2 ** 32) * (max - min + 1));
+    const range = max - min + 1;
+    const limit = 2 ** 32 - (2 ** 32 % range);
+    const buffer = new Uint32Array(1);
+    let value;
+    do {
+        [value] = crypto.getRandomValues(buffer);
+    } while (value >= limit);
+    return min + (value % range);
 }
 
 /**
