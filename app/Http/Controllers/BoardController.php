@@ -17,7 +17,7 @@ class BoardController extends Controller
 {
     public function __construct(protected PlayerRepository $playerRepository, protected GameRepository $gameRepository) {}
 
-    public function play(Request $request, int $player_id, int $game_id): Factory|View
+    public function play(int $player_id, int $game_id): Factory|View
     {
         abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
         $player = $this->playerRepository->allWhere(['id' => $player_id]);
