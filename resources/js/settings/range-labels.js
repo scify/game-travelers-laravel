@@ -94,17 +94,11 @@ window.addEventListener('load', function () {
                         let volumeKeyDown = false;
                         switch (event.key) {
                             case '_':
-                                backgroundMusic.volume = Math.max(0, backgroundMusic.volume - 0.1);
-                                volumeKeyDown = true;
-                                break;
                             case '-':
                                 backgroundMusic.volume = Math.max(0, backgroundMusic.volume - 0.1);
                                 volumeKeyDown = true;
                                 break;
                             case '=':
-                                backgroundMusic.volume = Math.min(1, backgroundMusic.volume + 0.1);
-                                volumeKeyDown = true;
-                                break;
                             case '+':
                                 backgroundMusic.volume = Math.min(1, backgroundMusic.volume + 0.1);
                                 volumeKeyDown = true;

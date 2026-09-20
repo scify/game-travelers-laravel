@@ -38,9 +38,8 @@ import { trans } from '@/lib/lang.js';
                     if (keyAssignerButton) {
                         keyAssignerButton.classList.remove('invalid');
                         keyAssignerButton.dataset.keySelected = resetInput.value;
-                        if (resetActive) {
-                            keyAssignerButton.textContent = resetInput.value;
-                        } else if (!keyAssignerButton.classList.contains('active')) {
+                        // An active assigner keeps its text during a partial reset.
+                        if (resetActive || !keyAssignerButton.classList.contains('active')) {
                             keyAssignerButton.textContent = resetInput.value;
                         }
                     }
