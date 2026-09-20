@@ -22,12 +22,9 @@ class CustomAudioController extends Controller
      * I am pretty sure that this function returns some values which might be
      * helpful when the back-end is trully implemented.
      */
-    public function audioShow(Request $request, int $player_id, string $back_route, int $game_id): Factory|\Illuminate\Contracts\View\View
+    public function audioShow(int $player_id, string $back_route, int $game_id): Factory|\Illuminate\Contracts\View\View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
-
-        if ($this->customAudioManager->userExists($player_id)) {
-        }
 
         $player = $this->playerRepository->find($player_id, ['name', 'avatar_id', 'music_volume', 'sound_volume']);
         $name = $player->name;
