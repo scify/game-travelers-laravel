@@ -77,6 +77,24 @@ window.addEventListener('load', function () {
             }
 
             /**
+             * Clears the rejection the server rendered on the name field.
+             *
+             * The message, the styling and the invalid state all describe a
+             * name that is no longer in the box, so they go together on the
+             * first edit and the next submit decides again.
+             */
+            function clearNameError() {
+                const nameGroup = document.getElementById('nameGroup');
+                const nameError = document.getElementById('alert');
+                nameGroup?.classList.remove('is-invalid');
+                nameInput.removeAttribute('aria-invalid');
+                nameInput.removeAttribute('aria-describedby');
+                if (nameError) {
+                    nameError.hidden = true;
+                }
+            }
+
+            /**
              * Avatar handler function.
              */
 
@@ -135,7 +153,10 @@ window.addEventListener('load', function () {
             // Add event listeners:
             // Add an event listener to playerName input to trigger form validation.
             if (nameInput) {
-                nameInput.addEventListener('input', updateSubmitButtonState);
+                nameInput.addEventListener('input', function () {
+                    updateSubmitButtonState();
+                    clearNameError();
+                });
             }
             // Add event listeners to the avatar buttons.
             for (const btn of buttons) {

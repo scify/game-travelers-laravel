@@ -68,6 +68,7 @@ The suite never touches the network. `Tests\TestCase` calls `Http::preventStrayR
 
 ## Assertions
 
+- Name the values that cross from the action into the assertion. A local variable used in both places says the two are the same value on purpose; two matching literals only look alike, and the reader has to compare them character by character. It also makes a deliberate difference visible, as in `' ' . $name . ' '` posted against `$name` read back, and shows which request field becomes which column, as in `'board_size' => $gameDuration`. `tests/Feature/PlayerProfileTest.php` is the worked example.
 - Strict: `assertSame()` over `assertEquals()` when the type matters.
 - Database: `assertDatabaseHas()`, `assertDatabaseMissing()`, `assertDatabaseCount()`.
 - HTTP: `assertOk()`, `assertRedirect()`, `assertForbidden()`, `assertStatus()`. One request per test method; a flow becomes several tests, each starting from its own state through `startedGame()`; a loop becomes a data provider.

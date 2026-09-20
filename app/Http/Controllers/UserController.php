@@ -91,7 +91,7 @@ class UserController extends Controller
         }
 
         if ($name_found) {
-            return back()->withErrors(['name' => ['exists']]);
+            return back()->withInput()->withErrors(['name' => ['exists']]);
         }
 
         if ($player_id === 0) {

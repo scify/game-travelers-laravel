@@ -63,21 +63,21 @@
                         class="field-input extended underlined big"
                         type="text"
                         name="name"
-                        value="{{ $name }}" {{-- Read by JS --}}
+                        value="{{ old('name', $name) }}" {{-- Read by JS --}}
                         minlength="2" {{-- JS form validation --}}
                         maxlength="50"
                         required
                         autocomplete="given-name"
                         autocapitalize="on"
                         spellcheck="false"
-                        autofocus
+                        @error('name') aria-invalid="true" aria-describedby="alert" @enderror
                         id="playerNameInput" {{-- ID Used by JS --}}
                     />
                     @error('name')
                     <div class="field-description big" id="alert">
                         <strong id="alertMessage">
-                            Ουπς! Αυτό το όνομα είναι «πιασμένο». Συνέχισε με το
-                            προτεινόμενο ή δοκίμασε κάποιο διαφορετικό.
+                            Ουπς! Αυτό το όνομα είναι «πιασμένο». Δοκίμασε κάποιο
+                            διαφορετικό.
                         </strong>
                     </div>
                     @enderror
@@ -98,7 +98,7 @@
                 <div class="col-md-9">
                     <x-selectAvatar
                         :avatars=$avatars {{-- @see ../../docs/exampleData.php --}}
-                        :selectedAvatarId=$selectedAvatarId {{-- player['avatarid'] --}}
+                        :selectedAvatarId="old('avatarId', $selectedAvatarId)" {{-- player['avatarid'] --}}
                         :tabindex=2
                     />
                 </div>

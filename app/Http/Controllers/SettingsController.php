@@ -96,7 +96,7 @@ class SettingsController extends Controller
         }
 
         if ($name_found) {
-            return back()->withErrors(['name' => ['exists']]);
+            return back()->withInput()->withErrors(['name' => ['exists']]);
         }
 
         $entry = ['name' => $name, 'avatar_id' => $avatar_id];
