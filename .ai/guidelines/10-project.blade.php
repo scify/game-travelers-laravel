@@ -6,7 +6,7 @@
 
 Web board game for children with disabilities, live at [taxidiotes.scify.org](https://taxidiotes.scify.org/). Every screen is driven by two keys, navigate and select, with a configurable scanning speed, so the game can be played with switches.
 
-Laravel {{ explode('.', app()->version())[0] }} application. Blade renders every page; a single Vue 2 component renders the game board. Styles are Bootstrap 5.3 and Sass, compiled by Laravel Mix (webpack 5). The default language is Greek with English as fallback. The timezone is Europe/Athens.
+Laravel {{ explode('.', app()->version())[0] }} application. Blade renders every page; Vue 3 renders the game board. Styles are Bootstrap 5.3 and Sass, compiled by Vite. The default language is Greek with English as fallback. The timezone is Europe/Athens.
 
 ### Every installation is someone else's
 
