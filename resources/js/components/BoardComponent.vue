@@ -12,6 +12,7 @@
                     <img
                         v-if="computeCardSrc.length > 0"
                         :src="computeCardSrc"
+                        alt=""
                         style="
                             z-index: 10;
                             position: absolute;
@@ -25,15 +26,18 @@
                     <img
                         v-if="blueIndex !== 0"
                         :src="getStartSrc()"
+                        alt=""
                         style="z-index: 4; position: absolute; display: block"
                     />
                     <img
                         :src="getGoalSrc()"
+                        alt=""
                         style="z-index: 4; position: absolute; display: block"
                     />
                     <img
                         v-if="getExtrasSrc().length > 0"
                         :src="getExtrasSrc()"
+                        alt=""
                         style="z-index: 4; position: absolute; display: block"
                     />
                     <img
@@ -55,6 +59,7 @@
                         <img
                             v-if="blue_position_show"
                             :src="computeBlueSrc"
+                            alt=""
                             style="z-index: 2; position: absolute; display: block"
                         />
                     </Transition>
@@ -62,6 +67,7 @@
                         <img
                             v-if="showPawn1"
                             :src="computePawn1Src"
+                            alt=""
                             style="z-index: 5; position: absolute; display: block"
                         />
                     </Transition>
@@ -70,17 +76,20 @@
                             <img
                                 v-if="showPawn2"
                                 :src="computePawn2Src"
+                                alt=""
                                 style="z-index: 5; position: absolute; display: block"
                             />
                         </Transition>
                     </div>
                     <img
                         :src="computeLeftSrc"
+                        alt=""
                         style="z-index: 5; position: absolute; display: block"
                     />
                     <div v-if="gameMode > 1">
                         <img
                             :src="computeRightSrc"
+                            alt=""
                             style="z-index: 5; position: absolute; display: block"
                         />
                     </div>
@@ -92,6 +101,7 @@
                                 'move-up-down': rollAnimation,
                             }"
                             :src="center_src"
+                            alt=""
                             style="z-index: 5; position: absolute; display: block"
                         />
                     </Transition>
@@ -110,6 +120,7 @@
                     <img
                         v-if="winFrame > 0"
                         :src="winFrame1"
+                        alt=""
                         style="z-index: 2; position: absolute; display: block"
                     />
                 </Transition>
@@ -117,6 +128,7 @@
                     <img
                         v-if="winFrame > 1"
                         :src="winFrame2"
+                        alt=""
                         style="z-index: 2; position: absolute; display: block"
                     />
                 </Transition>
@@ -124,6 +136,7 @@
                     <img
                         v-if="winFrame > 2"
                         :src="winFrame3"
+                        alt=""
                         style="z-index: 2; position: absolute; display: block"
                     />
                 </Transition>
