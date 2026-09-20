@@ -59,7 +59,7 @@ class AuthenticationTest extends TestCase
     {
         $this->actingAs($this->seededUser())
             ->get(route('dashboard'))
-            ->assertRedirect(route('select.player', [0, 'user', 0]));
+            ->assertRedirect(route('select.player', [0, 0]));
     }
 
     #[Test]

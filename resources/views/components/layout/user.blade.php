@@ -1,3 +1,4 @@
+@use('App\Enums\SetupStep')
 <!-- /resources/views/layout/user.blade.php -->
 <div class="user-col">
     <div class="user-dropdown dropdown">
@@ -32,14 +33,17 @@
         <ul class="user-menu dropdown-menu dropdown-menu-start" aria-labelledby="userMenuButton">
             @if(isset($playerName))
             <li>
-                <a class="user-menu-item dropdown-item" href="{{ route('select.player', [0,'user', 0]) }}">
+                <a class="user-menu-item dropdown-item" href="{{ route('select.player', [0, 0]) }}">
                 Αλλαγή παίκτη
                 </a>
             </li>
             @endif
             @if(isset($showSettings))
+            {{-- A setup page is named by its own route; a settings page passes
+                 on the name it was given, so no page ever names another. --}}
+            @php($back = SetupStep::forRoute(request()->route()?->getName()) ?? request()->route('back'))
             <li>
-                <a class="user-menu-item dropdown-item" href="{{ route('settings', [ request()->player_id, request()->from, request()->game_id ]) }}">
+                <a class="user-menu-item dropdown-item" href="{{ route('settings.index', [ request()->player_id, $back, request()->game_id ]) }}">
                     Ρυθμίσεις
                 </a>
             </li>

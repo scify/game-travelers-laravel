@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Enums\SetupStep;
 use App\Models\Player;
 use App\Repository\Game\GameRepository;
 use App\Repository\Player\PlayerRepository;
@@ -16,7 +15,7 @@ class SetupGameController extends Controller
 {
     public function __construct(protected PlayerRepository $playerRepository, protected GameRepository $gameRepository) {}
 
-    public function continueShow(Request $request, int $player_id, string $from, int $game_id): Factory|\Illuminate\Contracts\View\View
+    public function continueShow(Request $request, int $player_id, int $game_id): Factory|\Illuminate\Contracts\View\View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
         $players = $this->playerRepository->allWhere(['id' => $player_id]);
@@ -32,7 +31,7 @@ class SetupGameController extends Controller
         return view('gameSelectExisting', ['switcher' => $switcher, 'playerAudio' => $playerAudio]);
     }
 
-    public function continueSave(Request $request, int $player_id, string $from, int $game_id)
+    public function continueSave(Request $request, int $player_id, int $game_id)
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
         $selected = (int) $request->only('option')['option'];
@@ -41,14 +40,14 @@ class SetupGameController extends Controller
             $entry = ['active' => false];
             $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
 
-            return to_route('select.board', [$player_id, SetupStep::Board, 0]);
+            return to_route('select.board', [$player_id, 0]);
         }
 
         return to_route('board', [$player_id, $game_id]);
 
     }
 
-    public function boardShow(Request $request, int $player_id, string $from, int $game_id)
+    public function boardShow(Request $request, int $player_id, int $game_id)
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -70,7 +69,7 @@ class SetupGameController extends Controller
         return view('gameSelectBoard', ['switcher' => $switcher, 'playerAudio' => $playerAudio, 'boards' => $boards]);
     }
 
-    public function boardSave(Request $request, int $player_id, string $from, int $game_id)
+    public function boardSave(Request $request, int $player_id, int $game_id)
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -91,10 +90,10 @@ class SetupGameController extends Controller
             $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
         }
 
-        return to_route('select.mode', [$player_id, SetupStep::Mode, $game_id]);
+        return to_route('select.mode', [$player_id, $game_id]);
     }
 
-    public function modeShow(Request $request, int $player_id, string $from, int $game_id)
+    public function modeShow(Request $request, int $player_id, int $game_id)
     {
         abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -115,7 +114,7 @@ class SetupGameController extends Controller
         return view('gameSelectMode', ['switcher' => $switcher, 'playerAudio' => $playerAudio]);
     }
 
-    public function modeSave(Request $request, int $player_id, string $from, int $game_id)
+    public function modeSave(Request $request, int $player_id, int $game_id)
     {
         abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -123,10 +122,10 @@ class SetupGameController extends Controller
         $entry = ['mode_id' => $selected_mode_id];
         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
 
-        return to_route('select.pawn', [$player_id, SetupStep::Pawn, $game_id]);
+        return to_route('select.pawn', [$player_id, $game_id]);
     }
 
-    public function pawnShow(Request $request, int $player_id, string $from, int $game_id)
+    public function pawnShow(Request $request, int $player_id, int $game_id)
     {
         abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -151,7 +150,7 @@ class SetupGameController extends Controller
         return view('gameSelectPawn', ['board' => $board, 'pawns' => $pawns, 'switcher' => $switcher, 'playerAudio' => $playerAudio]);
     }
 
-    public function pawnSave(Request $request, int $player_id, string $from, int $game_id)
+    public function pawnSave(Request $request, int $player_id, int $game_id)
     {
         abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -163,14 +162,14 @@ class SetupGameController extends Controller
         $mode = $game[0]->mode_id;
 
         if ($mode === 1) {
-            return to_route('select.options', [$player_id, SetupStep::Option, $game_id]);
+            return to_route('select.options', [$player_id, $game_id]);
         }
 
-        return to_route('select.pawnTwo', [$player_id, SetupStep::PawnTwo, $game_id]);
+        return to_route('select.pawnTwo', [$player_id, $game_id]);
 
     }
 
-    public function pawnTwoShow(Request $request, int $player_id, string $from, int $game_id)
+    public function pawnTwoShow(Request $request, int $player_id, int $game_id)
     {
         abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -205,7 +204,7 @@ class SetupGameController extends Controller
         );
     }
 
-    public function pawnTwoSave(Request $request, int $player_id, string $from, int $game_id)
+    public function pawnTwoSave(Request $request, int $player_id, int $game_id)
     {
         abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -213,10 +212,10 @@ class SetupGameController extends Controller
         $entry = ['pawn_id_2' => $selected_pawn_id_2];
         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
 
-        return to_route('select.options', [$player_id, SetupStep::Option, $game_id]);
+        return to_route('select.options', [$player_id, $game_id]);
     }
 
-    public function optionsShow(Request $request, int $player_id, string $from, int $game_id)
+    public function optionsShow(Request $request, int $player_id, int $game_id)
     {
         abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
         if ($this->checkIfActiveGameHasStarted($game_id)) {
@@ -237,7 +236,7 @@ class SetupGameController extends Controller
         return view('gameSelectOptions', ['switcher' => $switcher, 'playerAudio' => $playerAudio]);
     }
 
-    public function optionsSave(Request $request, int $player_id, string $from, int $game_id)
+    public function optionsSave(Request $request, int $player_id, int $game_id)
     {
         abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
 

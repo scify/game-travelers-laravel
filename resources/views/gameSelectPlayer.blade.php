@@ -25,7 +25,7 @@
         --}}
     <form
         method="post"
-        action="{{ route('select.player', ['player_id' => 0, 'from' => 'login', 'game_id' => 0]) }}"
+        action="{{ route('select.player', ['player_id' => 0, 'game_id' => 0]) }}"
         class="
         form
         @error('player') is-invalid @enderror {{-- one field, one error --}}

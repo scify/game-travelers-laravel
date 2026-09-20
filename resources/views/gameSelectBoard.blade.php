@@ -14,7 +14,7 @@
     @endsection
 
     <form method="post"
-          action="{{ route('select.board', [ request()->player_id, request()->from, request()->game_id ]) }}"
+          action="{{ route('select.board', [ request()->player_id, request()->game_id ]) }}"
     >
         @csrf
 
@@ -63,7 +63,7 @@
                     <div class="d-flex flex-auto">
                         <a
                             class="btn btn-primary btn-circle ms-auto responsive-expand"
-                            href="{{ route("select.player", [0,"user", 0]) }}"
+                            href="{{ route("select.player", [0, 0]) }}"
                             data-tabindex="100"
                             type="submit"
                             id="backButton"

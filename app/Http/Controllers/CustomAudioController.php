@@ -86,7 +86,7 @@ class CustomAudioController extends Controller
         $sound_volume = (float) $input['soundVolume'];
         $this->updateVolumesToDB($player_id, $music_volume, $sound_volume);
 
-        return to_route('settings', [$player_id, $back_route, $game_id]);
+        return to_route('settings.index', [$player_id, $back_route, $game_id]);
     }
 
     public function uploadCustomAudioFile(Request $request): ResponseFactory|Response

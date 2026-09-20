@@ -20,7 +20,7 @@
                 <x-linkButtonBack
                     :label="'Επιστροφή στις ρυθμίσεις'"
                     :align="'left'"
-                    :url="route('settings', [ request()->player_id, request()->from, request()->game_id ] )"
+                    :url="route('settings.index', [ request()->player_id, request()->back, request()->game_id ] )"
                 />
             </div>
             <div class="col-10 text-center" id="currentPageHeader">
@@ -44,7 +44,7 @@
             <!-- music & sound volume -->
             <form
                 method="post" {{-- should be post, get is for testing --}}
-                action="{{ route('settings.audio', [ request()->player_id, request()->from, request()->game_id ]) }}"
+                action="{{ route('settings.audio', [ request()->player_id, request()->back, request()->game_id ]) }}"
                 id="settingsAudio"
             >
                 @csrf

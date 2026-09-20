@@ -19,7 +19,7 @@ class EnsureIdsAreValidTest extends TestCase
     public function player_id_zero_passes_through(): void
     {
         $this->actingAs($this->seededUser())
-            ->get(route('new.player', [0, 'user', 0]))
+            ->get(route('new.player', [0, 0]))
             ->assertOk();
     }
 
@@ -27,7 +27,7 @@ class EnsureIdsAreValidTest extends TestCase
     public function unknown_player_is_forbidden(): void
     {
         $this->actingAs($this->seededUser())
-            ->get(route('settings', [999, 'user', 0]))
+            ->get(route('settings.index', [999, 'user', 0]))
             ->assertForbidden();
     }
 
@@ -35,7 +35,7 @@ class EnsureIdsAreValidTest extends TestCase
     public function player_owned_by_another_user_is_forbidden(): void
     {
         $this->actingAs($this->seededAdmin())
-            ->get(route('select.board', [1, 'board', 0]))
+            ->get(route('select.board', [1, 0]))
             ->assertForbidden();
     }
 
@@ -46,7 +46,7 @@ class EnsureIdsAreValidTest extends TestCase
         $otherGame = $this->startedGame($otherPlayer);
 
         $this->actingAs($this->seededUser())
-            ->get(route('select.mode', [1, 'mode', $otherGame->id]))
+            ->get(route('select.mode', [1, $otherGame->id]))
             ->assertForbidden();
     }
 
@@ -56,7 +56,7 @@ class EnsureIdsAreValidTest extends TestCase
         $finished = $this->startedGame($this->seededPlayer(), ['active' => false]);
 
         $this->actingAs($this->seededUser())
-            ->get(route('select.mode', [1, 'mode', $finished->id]))
-            ->assertRedirect(route('select.board', [1, 'board', 0]));
+            ->get(route('select.mode', [1, $finished->id]))
+            ->assertRedirect(route('select.board', [1, 0]));
     }
 }

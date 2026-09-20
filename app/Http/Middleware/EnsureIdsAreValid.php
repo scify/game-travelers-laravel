@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Http\Middleware;
 
-use App\Enums\SetupStep;
 use App\Repository\Game\GameRepository;
 use App\Repository\Player\PlayerRepository;
 use Closure;
@@ -38,7 +37,7 @@ class EnsureIdsAreValid
         } elseif ($game_id !== 0) {
             if (! $this->gameRepository->gameExists($game_id, $user_id)) {
                 if ($this->gameRepository->gameExistsAsInactive($game_id, $user_id)) {
-                    return to_route('select.board', [$player_id, SetupStep::Board, 0]);
+                    return to_route('select.board', [$player_id, 0]);
                 }
 
                 abort(403, __('messages.unauthorized_action'));

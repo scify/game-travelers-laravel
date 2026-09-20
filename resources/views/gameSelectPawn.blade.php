@@ -17,7 +17,7 @@
     @endsection
 
     <form method="post"
-        action="{{ route('select.pawn', [ request()->player_id, request()->from, request()->game_id ]) }}"
+        action="{{ route('select.pawn', [ request()->player_id, request()->game_id ]) }}"
     >
         @csrf
 
@@ -59,7 +59,7 @@
                     <div class="d-flex flex-auto mt-4 mt-sm-0">
                         <a
                             class="btn btn-primary btn-circle ms-auto responsive-expand"
-                            href="{{ route('select.mode', [ request()->player_id, 'mode', request()->game_id ])}}"
+                            href="{{ route('select.mode', [ request()->player_id, request()->game_id ])}}"
                             id="backButton"
                             data-tabindex="1000"
                         >

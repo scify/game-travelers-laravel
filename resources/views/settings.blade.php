@@ -9,7 +9,7 @@
 
     <form
         method="post" {{-- should be post, get is for testing --}}
-    action="{{ route('settings', [ request()->player_id, request()->from, request()->game_id ]) }}"
+    action="{{ route('settings.index', [ request()->player_id, request()->back, request()->game_id ]) }}"
         id="settingsControls" {{-- unused id --}}
     >
         @csrf
