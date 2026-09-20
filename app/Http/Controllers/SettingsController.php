@@ -14,7 +14,7 @@ class SettingsController extends Controller
 {
     public function __construct(protected PlayerRepository $playerRepository) {}
 
-    public function settingsShow(int $player_id, SetupStep $back, ?int $game_id = null): Factory|\Illuminate\Contracts\View\View
+    public function settingsShow(int $player_id, SetupStep $back): Factory|\Illuminate\Contracts\View\View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -59,7 +59,7 @@ class SettingsController extends Controller
         }
     }
 
-    public function profileShow(int $player_id, SetupStep $back, ?int $game_id = null): Factory|\Illuminate\Contracts\View\View
+    public function profileShow(int $player_id, SetupStep $back): Factory|\Illuminate\Contracts\View\View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -101,7 +101,7 @@ class SettingsController extends Controller
 
     }
 
-    public function controlsShow(int $player_id, SetupStep $back, ?int $game_id = null): Factory|\Illuminate\Contracts\View\View
+    public function controlsShow(int $player_id, SetupStep $back): Factory|\Illuminate\Contracts\View\View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -154,7 +154,7 @@ class SettingsController extends Controller
         return to_route('settings.index', [$player_id, $back, $game_id]);
     }
 
-    public function difficultyShow(int $player_id, SetupStep $back, ?int $game_id = null)
+    public function difficultyShow(int $player_id, SetupStep $back)
     {
         if ($player_id === 0) {
             return to_route('select.player');

@@ -15,7 +15,7 @@ class SetupGameController extends Controller
 {
     public function __construct(protected PlayerRepository $playerRepository, protected GameRepository $gameRepository) {}
 
-    public function continueShow(int $player_id, int $game_id): Factory|\Illuminate\Contracts\View\View
+    public function continueShow(int $player_id): Factory|\Illuminate\Contracts\View\View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
         $players = $this->playerRepository->allWhere(['id' => $player_id]);
