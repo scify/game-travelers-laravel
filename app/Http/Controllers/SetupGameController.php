@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\SetupStep;
 use App\Models\Player;
 use App\Repository\Game\GameRepository;
 use App\Repository\Player\PlayerRepository;
@@ -40,7 +41,7 @@ class SetupGameController extends Controller
             $entry = ['active' => false];
             $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
 
-            return to_route('select.board', [$player_id, 'board', 0]);
+            return to_route('select.board', [$player_id, SetupStep::Board, 0]);
         }
 
         return to_route('board', [$player_id, $game_id]);
@@ -90,7 +91,7 @@ class SetupGameController extends Controller
             $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
         }
 
-        return to_route('select.mode', [$player_id, 'mode', $game_id]);
+        return to_route('select.mode', [$player_id, SetupStep::Mode, $game_id]);
     }
 
     public function modeShow(Request $request, int $player_id, string $from, int $game_id)
@@ -122,7 +123,7 @@ class SetupGameController extends Controller
         $entry = ['mode_id' => $selected_mode_id];
         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
 
-        return to_route('select.pawn', [$player_id, 'pawn', $game_id]);
+        return to_route('select.pawn', [$player_id, SetupStep::Pawn, $game_id]);
     }
 
     public function pawnShow(Request $request, int $player_id, string $from, int $game_id)
@@ -162,10 +163,10 @@ class SetupGameController extends Controller
         $mode = $game[0]->mode_id;
 
         if ($mode === 1) {
-            return to_route('select.options', [$player_id, 'option', $game_id]);
+            return to_route('select.options', [$player_id, SetupStep::Option, $game_id]);
         }
 
-        return to_route('select.pawnTwo', [$player_id, 'pawn-two', $game_id]);
+        return to_route('select.pawnTwo', [$player_id, SetupStep::PawnTwo, $game_id]);
 
     }
 
@@ -212,7 +213,7 @@ class SetupGameController extends Controller
         $entry = ['pawn_id_2' => $selected_pawn_id_2];
         $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
 
-        return to_route('select.options', [$player_id, 'option', $game_id]);
+        return to_route('select.options', [$player_id, SetupStep::Option, $game_id]);
     }
 
     public function optionsShow(Request $request, int $player_id, string $from, int $game_id)

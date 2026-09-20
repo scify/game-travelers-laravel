@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\SetupStep;
 use App\Repository\Game\GameRepository;
 use App\Repository\Player\PlayerRepository;
 use Illuminate\Contracts\View\Factory;
@@ -46,22 +47,22 @@ class UserController extends Controller
         if ($action === 'start') {
             $active_games = $this->gameRepository->allWhere(['player_id' => $selected_player_id, 'active' => true], ['id', 'started']);
             if ($active_games->isEmpty()) {
-                return to_route('select.board', ['player_id' => $selected_player_id, 'from' => 'board', 'game_id' => 0]);
+                return to_route('select.board', ['player_id' => $selected_player_id, 'from' => SetupStep::Board, 'game_id' => 0]);
             }
 
             $active_game_id = $active_games[0]->id;
             if ($active_games[0]->started) {
-                return to_route('select.continue', ['player_id' => $selected_player_id, 'from' => 'continue', 'game_id' => $active_game_id]);
+                return to_route('select.continue', ['player_id' => $selected_player_id, 'from' => SetupStep::Continue, 'game_id' => $active_game_id]);
             }
 
             $this->gameRepository->delete($active_game_id);
 
-            return to_route('select.board', ['player_id' => $selected_player_id, 'from' => 'board', 'game_id' => 0]);
+            return to_route('select.board', ['player_id' => $selected_player_id, 'from' => SetupStep::Board, 'game_id' => 0]);
 
         }
 
         if ($action === 'settings') {
-            return to_route('settings', ['player_id' => $selected_player_id, 'from' => 'user', 'game_id' => 0]);
+            return to_route('settings', ['player_id' => $selected_player_id, 'from' => SetupStep::User, 'game_id' => 0]);
         }
 
         abort(403, __('messages.unauthorized_action'));

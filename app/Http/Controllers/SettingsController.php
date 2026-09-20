@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Enums\SetupStep;
 use App\Repository\Player\PlayerRepository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
@@ -33,14 +34,14 @@ class SettingsController extends Controller
         switch ($action) {
             case 'back':
                 return match ($back_route) {
-                    'user' => to_route('select.player', [0, 'user', 0]),
-                    'continue' => to_route('select.continue', [$player_id, 'continue', $game_id]),
-                    'board' => to_route('select.board', [$player_id, 'board', $game_id]),
-                    'mode' => to_route('select.mode', [$player_id, 'mode', $game_id]),
-                    'pawn' => to_route('select.pawn', [$player_id, 'pawn', $game_id]),
-                    'pawn-two' => to_route('select.pawnTwo', [$player_id, 'pawn-two', $game_id]),
-                    'option' => to_route('select.options', [$player_id, 'option', $game_id]),
-                    default => to_route('select.player', [0, 'user', 0]),
+                    'user' => to_route('select.player', [0, SetupStep::User, 0]),
+                    'continue' => to_route('select.continue', [$player_id, SetupStep::Continue, $game_id]),
+                    'board' => to_route('select.board', [$player_id, SetupStep::Board, $game_id]),
+                    'mode' => to_route('select.mode', [$player_id, SetupStep::Mode, $game_id]),
+                    'pawn' => to_route('select.pawn', [$player_id, SetupStep::Pawn, $game_id]),
+                    'pawn-two' => to_route('select.pawnTwo', [$player_id, SetupStep::PawnTwo, $game_id]),
+                    'option' => to_route('select.options', [$player_id, SetupStep::Option, $game_id]),
+                    default => to_route('select.player', [0, SetupStep::User, 0]),
                 };
 
             case 'profile':
@@ -58,7 +59,7 @@ class SettingsController extends Controller
             case 'deletePlayer':
                 $this->playerRepository->delete($player_id);
 
-                return to_route('select.player', [0, 'user', 0]);
+                return to_route('select.player', [0, SetupStep::User, 0]);
             default:
                 abort(403, __('messages.unauthorized_action'));
         }
@@ -162,7 +163,7 @@ class SettingsController extends Controller
     public function difficultyShow(Request $request, int $player_id, string $back_route, int $game_id)
     {
         if ($player_id === 0) {
-            return to_route('select.player', [0, 'user', 0]);
+            return to_route('select.player', [0, SetupStep::User, 0]);
         }
 
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id', 'dice_type', 'board_size', 'difficulty', 'movement_mode']);
