@@ -40,21 +40,15 @@
                         alt=""
                         style="z-index: 4; position: absolute; display: block"
                     />
+                    <!-- Mouse only, by design: an alt and nothing else. No role, no tabindex, no key handler. -->
                     <img
                         :src="computeInfoSrc"
                         :style="computeInfoStyle"
-                        @mouseover="infoState = 1"
-                        @mouseleave="infoState = 0"
+                        alt="Πλήκτρα ελέγχου"
+                        @mouseenter="showInfoLabel()"
+                        @mouseleave="hideInfoLabel()"
                         @click="switcherModal()"
                     />
-                    <Transition name="fade">
-                        <img
-                            v-if="showPopUp"
-                            src="/images/boards/info/pop_up.png"
-                            style="z-index: 100; position: absolute; display: block"
-                            @click="showPopUp = false"
-                        />
-                    </Transition>
                     <Transition name="fade-blue">
                         <img
                             v-if="blue_position_show"
@@ -244,7 +238,7 @@ export default {
             winFrame2: '',
             winFrame3: '',
             infoState: 0,
-            showPopUp: false,
+            infoHoverTimer: null,
             showNumbers: true,
             debug: debugEnabled(),
             debugTools: null,
@@ -389,6 +383,18 @@ export default {
                     this.sendToBackend();
                 }
             }, 500);
+        },
+        // The label waits a moment before it appears, so a pointer crossing the
+        // board on its way somewhere else does not flash it.
+        showInfoLabel() {
+            window.clearTimeout(this.infoHoverTimer);
+            this.infoHoverTimer = window.setTimeout(() => {
+                this.infoState = 1;
+            }, 100);
+        },
+        hideInfoLabel() {
+            window.clearTimeout(this.infoHoverTimer);
+            this.infoState = 0;
         },
         switcherModal() {
             const switcherModalEl = document.getElementById('switcherModal');
@@ -555,8 +561,6 @@ export default {
                 } else {
                     this.showNumbers = true;
                 }
-            } else if (this.showPopUp) {
-                this.showPopUp = false;
             } else if (!this.ignoreInput) {
                 log('Key pressed and NOT ignored:\t(' + e.key + ')');
                 if (key === ' ') {

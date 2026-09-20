@@ -51,6 +51,8 @@ Overlay artwork can sit inside a padded canvas. Measure where the artwork begins
 
 Artwork lives in `public/images/boards/board_{n}/`, with `size_{n}` variants for board length. Cards are 344 by 482 pixels in every board and every mode. The info button states are shared across boards in `public/images/boards/info/`.
 
+Every layer is artwork and carries an empty `alt`, so assistive technology skips it. The info image is the one exception: it is a control, it opens the help modal on click, and it sits outside the keyboard and switch paths by design. It carries an alt naming what its hover artwork shows, and nothing else: no role, no tabindex, no key handler. The focus state file beside it is unused, because nothing focuses it.
+
 When changing anything on the board, measure positions relative to the frame rather than to the viewport, and take the same measurements at several window widths. One layer carries a one second animation, so two screenshots of the same state never match exactly; a pixel comparison has to allow for it.
 
 ### Code style, project specifics
