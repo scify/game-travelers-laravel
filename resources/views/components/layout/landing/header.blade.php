@@ -7,7 +7,6 @@
                     class="img-fluid"
                     src="{{ asset('images/logo_blue.svg') }}"
                     width="358" height="195"
-                    role="img"
                     alt="{{ __('messages.app_name') }}"
                 >
             </a>
