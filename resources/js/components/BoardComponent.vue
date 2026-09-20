@@ -232,6 +232,8 @@ export default {
             stepSoundSwitch: true,
             tutorialYouKnowHowToPlayFlag: 0,
             music: null,
+            musicTimer: null,
+            keyDownHandler: null,
             showWin: false,
             showLoose: false,
             winFrame: 0,
@@ -328,9 +330,8 @@ export default {
     mounted() {
         log('Component mounted.');
         // Keydown, because keypress never fires for a named key such as ArrowRight.
-        window.addEventListener('keydown', (e) => {
-            this.handleKeyDown(e);
-        });
+        this.keyDownHandler = (e) => this.handleKeyDown(e);
+        window.addEventListener('keydown', this.keyDownHandler);
         if (this.debug) {
             this.debugTools = markRaw(
                 createDebugTools({
@@ -344,6 +345,12 @@ export default {
         }
         this.init();
     },
+    beforeUnmount() {
+        window.removeEventListener('keydown', this.keyDownHandler);
+        window.clearTimeout(this.musicTimer);
+        window.clearTimeout(this.infoHoverTimer);
+        this.music?.pause();
+    },
     methods: {
         init() {
             if (this.diceType === 3) {
@@ -353,7 +360,7 @@ export default {
             this.winFrame1 = this.getBoardPath() + '/win/1.png';
             this.winFrame2 = this.getBoardPath() + '/win/2.png';
             this.winFrame3 = this.getBoardPath() + '/win/3.png';
-            window.setTimeout(() => {
+            this.musicTimer = window.setTimeout(() => {
                 this.gameEnd = 0;
                 if (this.board === 1) {
                     this.music = music('music.great_ideas', this.musicVolume);
@@ -576,9 +583,7 @@ export default {
                         isNavigate = true;
                     }
                 }
-                // The board claims the key only while nothing else holds the
-                // focus, so a press never scrolls the page and a focused
-                // control keeps its own behaviour.
+                // Not when a control has the focus: it keeps its own behaviour.
                 if ((isSelect || isNavigate) && e.target === document.body) {
                     e.preventDefault();
                 }

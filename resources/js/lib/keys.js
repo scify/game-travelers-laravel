@@ -150,10 +150,8 @@ export const SwitcherKeys = {
 /**
  * The key an event carries, in the form the settings store it.
  *
- * A named key (ArrowRight, NumpadEnter) is read from the event code, because
- * the key value of the numeric keypad repeats the value of another key. The
- * space bar reads as " " and is stored as "Space". Every other key is the
- * character itself. Returns null when the event carries no key.
+ * A named key comes from the event code, because the numeric keypad repeats
+ * another key's value. The space bar reads as " " and is stored as "Space".
  */
 export function storedKey(event) {
     if (!event.key.length) {

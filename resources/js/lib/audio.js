@@ -4,6 +4,7 @@ import { log } from '@/lib/debug.js';
 // Two audio channels: music() for music, sound() for narration and effects.
 
 let travelersSounds = [];
+let travelersMusic = null;
 
 /**
  * Random integer between min and max, both included.
@@ -51,6 +52,9 @@ export function music(audioFile, volumeOverride = false, audioLoop = true) {
     const filename = folders.pop() + '.mp3';
     const folderPath = '/audio/' + folders.join('/');
     const audio = new Audio(folderPath + '/' + filename);
+
+    travelersMusic?.pause();
+    travelersMusic = audio;
 
     // Set the audioVolume according to player's wishes, if any.
     const playerMusicVolume = window.Laravel.playerAudio?.playerMusicVolume;
