@@ -52,6 +52,27 @@ Test names describe the behaviour, not the setup. The runner shows only the meth
 - Every name must survive a zero-context read: read it as a stranger before landing it.
 - The seed to copy is `tests/Feature/CookiePolicyTest.php`; when unsure, copy its shape.
 
+## Naming values that cross
+
+A value the test both sends and asserts is named once and used twice. Two matching literals only look alike, and the reader has to compare them character by character to learn whether sameness is the point. A name says it is.
+
+The payoff is largest where the two differ on purpose. A name posted with padding and read back trimmed states the trimming in the code:
+
+```php
+['name' => ' ' . $name . ' ']            // act
+Player::query()->where('name', $name)    // assert
+```
+
+Same where a posted value lands in a differently named column: `'gameDuration' => $gameDuration` sent against `'board_size' => $gameDuration` asserted, where the shared name states which one became which.
+
+Two limits, and one thing that looks like a fault and is not.
+
+- This is not literal deduplication. A literal repeated without crossing from the act into an assertion stays a literal.
+- Only values originating in the test qualify. A value travelling the other way, from the code into the assertion, is hand-authored and never imported (see Organising Tests).
+- Where the crossing makes an assertion read as a tautology, that is the rule working. Do not inline the literal again to hide it.
+
+`tests/Feature/PlayerProfileTest.php` is the worked example.
+
 ## Attributes
 
 - `#[Test]` on every test method.
@@ -68,7 +89,6 @@ The suite never touches the network. `Tests\TestCase` calls `Http::preventStrayR
 
 ## Assertions
 
-- Name the values that cross from the action into the assertion. A local variable used in both places says the two are the same value on purpose; two matching literals only look alike, and the reader has to compare them character by character. It also makes a deliberate difference visible, as in `' ' . $name . ' '` posted against `$name` read back, and shows which request field becomes which column, as in `'board_size' => $gameDuration`. `tests/Feature/PlayerProfileTest.php` is the worked example.
 - Strict: `assertSame()` over `assertEquals()` when the type matters.
 - Database: `assertDatabaseHas()`, `assertDatabaseMissing()`, `assertDatabaseCount()`.
 - HTTP: `assertOk()`, `assertRedirect()`, `assertForbidden()`, `assertStatus()`. One request per test method; a flow becomes several tests, each starting from its own state through `startedGame()`; a loop becomes a data provider.
