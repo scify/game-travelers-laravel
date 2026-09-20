@@ -46,27 +46,6 @@
             @php
                 // Make sure we have a starting tab to index...
                 $tabindex = $tabindex ?? $loop->index; $tabindex++;
-                // @TODO: Implement avatar/width calcs in Controller/Model.
-                // Regardless of the actual avatar's width and height (100x100),
-                // this template requires an 88x88 pixels avatar, while the
-                // Create new player requires them to be at 100x100 pixels. The
-                // model should store the actual width/height, and the Route
-                // should provide the rendered width and height. In other news
-                // these two overrides should happen at the Route for now and
-                // they shall be removed from this template.
-                $avatar = $avatars[$player["avatar_id"]];
-                $avatar['width'] = 88;
-                $avatar['height'] = 88;
-                // Determine if this avatar is the selected one.
-                // @TODO: Implement avatarChecked = true in Controller/Route.
-                // This check should/could also be done on the Route. People
-                // say that it's not good practice to add php to the templates.
-                $avatarChecked = false;
-                if (isset($selectedPlayerId)) {
-                    if ($player['id'] == $selectedPlayerId) {
-                        $avatarChecked = true;
-                    }
-                }
             @endphp
 
             <div class="avatar-col col-4 col-sm-3 col-xl-2 align-self-start">
@@ -74,16 +53,13 @@
                     :avatar='$avatars[$player["avatar_id"]]'
                     :id='$player["id"]'
                     :name='$player["name"]'
-                    :avatar-checked=$avatarChecked
+                    :avatar-checked="$player['id'] === (int) ($selectedPlayerId ?? 0)"
                     :tabindex=$tabindex
                     :button-size='"btn-sm"'
                     :role='"player"'
                 />
 
             </div>
-            @php
-                unset($avatarChecked);
-            @endphp
         @endforeach
         @isset($showAddPlayer)
             <div class="avatar-col col-4 col-sm-3 col-md-3 col-xl-2 align-self-start">

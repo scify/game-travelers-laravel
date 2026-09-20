@@ -21,7 +21,7 @@
     @endif @endisset
     role="radio"
     aria-label="{{ $avatar['description'] ?? 'Φατσούλα' }}"
-    aria-checked="{{ $avatarChecked ?? 'false' }}" {{-- Altered by JS --}}
+    aria-checked="{{ ($avatarChecked ?? false) ? 'true' : 'false' }}" {{-- Altered by JS --}}
     id="radio-avatar-button-{{ $tabindex ?? 0 }}"
 >
     <img

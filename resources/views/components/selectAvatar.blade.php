@@ -32,19 +32,11 @@
             @php
                 // Calculate the tabindex of the avatar.
                 $tabindex = $tabindex ?? $loop->index; $tabindex++;
-                // Determine if this avatar is the selected one.
-                // @TODO: Implement avatarChecked = true in Controller/Model.
-                $avatarChecked = false;
-                if (isset($selectedAvatarId)) {
-                    if ($avatar['id'] == $selectedAvatarId) {
-                        $avatarChecked = true;
-                    }
-                }
             @endphp
             <div class="avatar-col col col-lg-2">
                 <x-displayAvatar
                     :avatar=$avatar
-                    :avatar-checked=$avatarChecked
+                    :avatar-checked="$avatar['id'] === (int) ($selectedAvatarId ?? 0)"
                     :tabindex=$tabindex
                     :role='"avatar"'
                     :hide-label=true
