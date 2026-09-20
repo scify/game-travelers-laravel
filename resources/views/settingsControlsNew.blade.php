@@ -118,19 +118,20 @@
                                 <label class="form-check-label field-label medium" for="controlType1">Αυτόματος</label>
                                 <div class="field-subgroup container-fluid gx-0 gy-5 pt-3" id="controlType1Group">
                                     <div class="row">
-                                        <div class="col">
+                                        <div class="col" id="controlAutomaticSelectionLabel">
                                             επιλογή
                                         </div>
                                         <div class="col">
                                             <button
                                                 type="button"
+                                                id="controlAutomaticSelectionAssigner"
                                                 class="btn btn-sm btn-light rounded-pill key-assigner"
                                                 data-role="keyAssigner" {{-- Used by JS --}}
                                                 data-key-default="Enter" {{-- Read by JS --}}
                                                 data-key-selected="Enter" {{-- Updates via JS --}}
                                                 data-sets-input="controlAutomaticSelectionButton"
-                                                aria-label = "Ορισμός πλήκτρου επιλογής"
-                                                aria-description = "Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυμείτε να γίνεται η επιλογή στο παιχνίδι"
+                                                aria-labelledby="controlAutomaticSelectionLabel controlAutomaticSelectionAssigner"
+                                                aria-description="Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυμείτε να γίνεται η επιλογή στο παιχνίδι"
                                             >
                                                 Space
                                             </button>
@@ -160,19 +161,20 @@
                                 <label class="form-check-label field-label medium" for="controlType2">Χειροκίνητος</label>
                                 <div class="field-subgroup container-fluid gx-0 gy-5 pt-3" id="controlType2Group">
                                     <div class="row">
-                                        <div class="col">
+                                        <div class="col" id="controlManualSelectionLabel">
                                             επιλογή
                                         </div>
                                         <div class="col pb-1">
                                             <button
                                                 type="button"
+                                                id="controlManualSelectionAssigner"
                                                 class="btn btn-sm btn-light rounded-pill key-assigner"
                                                 data-role="keyAssigner" {{-- Used by JS --}}
                                                 data-key-default="Enter" {{-- Read by JS --}}
                                                 data-key-selected="Enter" {{-- Updates via JS --}}
                                                 data-sets-input="controlManualSelectionButton"
-                                                aria-label = "Ορισμός πλήκτρου επιλογής"
-                                                aria-description = "Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυμείτε να γίνεται η επιλογή στο παιχνίδι"
+                                                aria-labelledby="controlManualSelectionLabel controlManualSelectionAssigner"
+                                                aria-description="Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυμείτε να γίνεται η επιλογή στο παιχνίδι"
                                                 disabled
                                             >
                                                 όρισε πλήκτρο
@@ -181,19 +183,20 @@
                                         </div>
                                     </div>
                                     <div class="row mt-2">
-                                        <div class="col">
+                                        <div class="col" id="controlManualNavigationLabel">
                                             πλοήγηση
                                         </div>
                                         <div class="col pb-1">
                                             <button
                                                 type="button"
+                                                id="controlManualNavigationAssigner"
                                                 class="btn btn-sm btn-light rounded-pill key-assigner"
                                                 data-role="keyAssigner" {{-- Used by JS --}}
                                                 data-key-default="Space" {{-- Read by JS --}}
                                                 data-key-selected="Space" {{-- Updates via JS --}}
                                                 data-sets-input="controlManualNavigationButton"
-                                                aria-label = "Ορισμός πλήκτρου πλοήγησης"
-                                                aria-description = "Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυμείτε να γίνεται η πλοήγηση στο παιχνίδι"
+                                                aria-labelledby="controlManualNavigationLabel controlManualNavigationAssigner"
+                                                aria-description="Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυμείτε να γίνεται η πλοήγηση στο παιχνίδι"
                                                 disabled
                                             >
                                                 όρισε πλήκτρο
