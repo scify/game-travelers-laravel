@@ -19,7 +19,7 @@ class EnsureIdsAreValidTest extends TestCase
     public function player_id_zero_passes_through(): void
     {
         $this->actingAs($this->seededUser())
-            ->get(route('new.player', [0, 0]))
+            ->get(route('create.profile', [0, 0]))
             ->assertOk();
     }
 

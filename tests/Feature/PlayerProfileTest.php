@@ -19,7 +19,7 @@ class PlayerProfileTest extends TestCase
     public function new_player_form_opens(): void
     {
         $this->actingAs($this->seededUser())
-            ->get(route('new.player', [0, 0]))
+            ->get(route('create.profile', [0, 0]))
             ->assertOk();
     }
 
@@ -30,7 +30,7 @@ class PlayerProfileTest extends TestCase
         $avatarId = 3;
 
         $this->actingAs($this->seededUser())
-            ->post(route('new.player', [0, 0]), ['name' => ' ' . $name . ' ', 'avatarId' => $avatarId]);
+            ->post(route('create.profile', [0, 0]), ['name' => ' ' . $name . ' ', 'avatarId' => $avatarId]);
 
         $player = Player::query()->where('name', $name)->firstOrFail();
         $this->assertSame(2, $player->user_id);
@@ -43,16 +43,16 @@ class PlayerProfileTest extends TestCase
         $name = 'Γιώργος';
 
         $response = $this->actingAs($this->seededUser())
-            ->post(route('new.player', [0, 0]), ['name' => $name, 'avatarId' => 3]);
+            ->post(route('create.profile', [0, 0]), ['name' => $name, 'avatarId' => 3]);
 
         $player = Player::query()->where('name', $name)->firstOrFail();
-        $response->assertRedirect(route('controls.player', [$player->id, 0]));
+        $response->assertRedirect(route('create.controls', [$player->id, 0]));
     }
 
     #[Test]
     public function duplicate_player_name_is_rejected_case_insensitively(): void
     {
-        $newPlayer = route('new.player', [0, 0]);
+        $newPlayer = route('create.profile', [0, 0]);
         $taken = 'κώστας παπ.';
 
         $this->actingAs($this->seededUser())
@@ -122,7 +122,7 @@ class PlayerProfileTest extends TestCase
         $scanningSpeed = 3;
 
         $this->actingAs($this->seededUser())
-            ->post(route('controls.player', [1, 0]), [
+            ->post(route('create.controls', [1, 0]), [
                 'controlType' => $controlType,
                 'controlAutomaticSelectionButton' => 'Enter',
                 'controlManualSelectionButton' => $selectionKey,
@@ -131,7 +131,7 @@ class PlayerProfileTest extends TestCase
                 'scanningSpeed' => $scanningSpeed,
                 'submit' => 'next',
             ])
-            ->assertRedirect(route('difficulty.player', [1, 0]));
+            ->assertRedirect(route('create.difficulty', [1, 0]));
 
         $this->assertDatabaseHas('players', [
             'id' => 1,
@@ -152,7 +152,7 @@ class PlayerProfileTest extends TestCase
         $movement = 3;
 
         $this->actingAs($this->seededUser())
-            ->post(route('difficulty.player', [1, 0]), [
+            ->post(route('create.difficulty', [1, 0]), [
                 'dice' => $dice,
                 'gameDuration' => $gameDuration,
                 'level' => $level,

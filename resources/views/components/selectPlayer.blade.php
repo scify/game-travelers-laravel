@@ -67,7 +67,7 @@
                     class="btn btn-round btn-sm btn-avatar-options"
                     data-role="button-add-player"
                     aria-label="Προσθήκη νέου παίκτη"
-                    href="{{ route('new.player', [ request()->player_id, request()->game_id ]) }}"
+                    href="{{ route('create.profile', [ request()->player_id, request()->game_id ]) }}"
                 >
                     <img
                         src="{{ asset('images/icons/plus90.svg') }}"

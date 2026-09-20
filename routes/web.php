@@ -7,6 +7,7 @@ declare(strict_types=1);
  * Contains App's web routes.
  */
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\CreatePlayerController;
 use App\Http\Controllers\CustomAudioController;
 use App\Http\Controllers\Debug\GameStateController;
 use App\Http\Controllers\HomeController;
@@ -93,15 +94,16 @@ Route::middleware('auth')->group(function (): void {
             Route::post('audio/{player_id}/{back}/{game_id}', [CustomAudioController::class, 'audioSave'])->name('audio');*/
         });
 
-        // The new player wizard. Its three steps do not share a prefix yet.
-        Route::get('/create/player/{player_id}/{game_id}', [UserController::class, 'newPlayer'])->name('new.player');
-        Route::post('/create/player/{player_id}/{game_id}', [UserController::class, 'savePlayer'])->name('new.player');
+        Route::prefix('create')->name('create.')->group(function (): void {
+            Route::get('profile/{player_id}/{game_id}', [CreatePlayerController::class, 'profileShow'])->name('profile');
+            Route::post('profile/{player_id}/{game_id}', [CreatePlayerController::class, 'profileSave'])->name('profile');
 
-        Route::get('/controls/player/{player_id}/{game_id}', [UserController::class, 'controlsConfigure'])->name('controls.player');
-        Route::post('/controls/player/{player_id}/{game_id}', [UserController::class, 'controlsSave'])->name('controls.player');
+            Route::get('controls/{player_id}/{game_id}', [CreatePlayerController::class, 'controlsShow'])->name('controls');
+            Route::post('controls/{player_id}/{game_id}', [CreatePlayerController::class, 'controlsSave'])->name('controls');
 
-        Route::get('/difficulty/player/{player_id}/{game_id}', [UserController::class, 'difficultyConfigure'])->name('difficulty.player');
-        Route::post('/difficulty/player/{player_id}/{game_id}', [UserController::class, 'difficultySave'])->name('difficulty.player');
+            Route::get('difficulty/{player_id}/{game_id}', [CreatePlayerController::class, 'difficultyShow'])->name('difficulty');
+            Route::post('difficulty/{player_id}/{game_id}', [CreatePlayerController::class, 'difficultySave'])->name('difficulty');
+        });
 
         Route::get('board/{player_id}/{game_id}', [BoardController::class, 'play'])->name('board');
     });

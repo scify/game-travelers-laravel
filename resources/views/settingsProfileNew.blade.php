@@ -16,7 +16,7 @@
     <!-- new player step 1/3 content -->
     <form
         method="post"
-        action="{{ route('new.player', [ request()->player_id, request()->game_id ]) }}"
+        action="{{ route('create.profile', [ request()->player_id, request()->game_id ]) }}"
         id="settingsProfileNew" {{-- unused id --}}
     >
         @csrf
