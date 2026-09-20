@@ -113,6 +113,25 @@ class PlayerProfileTest extends TestCase
     }
 
     #[Test]
+    public function controls_form_shows_saved_keys(): void
+    {
+        $selectionKey = 'a';
+        $navigationKey = 'b';
+
+        Player::query()->where('id', 1)->update([
+            'auto' => 2,
+            'select_key' => $selectionKey,
+            'navigate_key' => $navigationKey,
+        ]);
+
+        $this->actingAs($this->seededUser())
+            ->get(route('create.controls', [1]))
+            ->assertOk()
+            ->assertSeeHtml('name="controlManualSelectionButton" value="' . $selectionKey . '"')
+            ->assertSeeHtml('name="controlManualNavigationButton" value="' . $navigationKey . '"');
+    }
+
+    #[Test]
     public function saving_controls_continues_to_difficulty(): void
     {
         $controlType = 2;
@@ -141,6 +160,27 @@ class PlayerProfileTest extends TestCase
             'help_after_x_mistakes' => $helpAfterTries,
             'scanning_speed' => $scanningSpeed,
         ]);
+    }
+
+    #[Test]
+    public function difficulty_form_shows_saved_choices(): void
+    {
+        $gameDuration = 3;
+        $movement = 1;
+
+        Player::query()->where('id', 1)->update([
+            'board_size' => $gameDuration,
+            'movement_mode' => $movement,
+        ]);
+
+        $response = $this->actingAs($this->seededUser())
+            ->get(route('create.difficulty', [1]));
+
+        $response->assertOk();
+
+        $page = $response->getContent() ?: '';
+        $this->assertMatchesRegularExpression('/id="gameDuration' . $gameDuration . '"[^>]*\schecked/', $page);
+        $this->assertMatchesRegularExpression('/id="movement' . $movement . '"[^>]*\schecked/', $page);
     }
 
     #[Test]

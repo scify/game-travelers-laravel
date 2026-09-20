@@ -33,6 +33,20 @@ class SetupSettingsLinkTest extends TestCase
         ];
     }
 
+    /**
+     * Every settings page that carries the step through to the settings menu.
+     *
+     * @return array<string, array{route: string}>
+     */
+    public static function settingsPageProvider(): array
+    {
+        return [
+            'profile' => ['route' => 'settings.profile'],
+            'controls' => ['route' => 'settings.controls'],
+            'difficulty' => ['route' => 'settings.difficulty'],
+        ];
+    }
+
     #[Test]
     #[DataProvider('setupPageProvider')]
     public function settings_link_carries_step_of_page_it_sits_on(string $route, string $step): void
@@ -51,19 +65,32 @@ class SetupSettingsLinkTest extends TestCase
     }
 
     #[Test]
-    public function settings_link_on_settings_page_passes_step_through(): void
+    #[DataProvider('settingsPageProvider')]
+    public function settings_link_on_settings_page_passes_step_through(string $route): void
     {
         $game = $this->unstartedGame();
+        $step = 'pawn';
 
         $response = $this->actingAs($this->seededUser())
-            ->get(route('settings.profile', [$game->player_id, 'pawn', $game->id]));
+            ->get(route($route, [$game->player_id, $step, $game->id]));
 
         $response->assertOk();
 
         $this->assertSame(
-            route('settings.index', [$game->player_id, 'pawn', $game->id]),
+            route('settings.index', [$game->player_id, $step, $game->id]),
             $this->settingsLinkOf($response->getContent() ?: ''),
         );
+    }
+
+    #[Test]
+    public function settings_page_shows_player_name(): void
+    {
+        $game = $this->unstartedGame();
+
+        $this->actingAs($this->seededUser())
+            ->get(route('settings.index', [$game->player_id, 'pawn', $game->id]))
+            ->assertOk()
+            ->assertSee('Κώστας Παπ');
     }
 
     #[Test]
