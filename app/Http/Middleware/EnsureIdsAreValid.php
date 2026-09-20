@@ -24,27 +24,36 @@ class EnsureIdsAreValid
      */
     public function handle(Request $request, Closure $next)
     {
-        $parameters = $request->route()->parameters;
-        $player_id = (int) $parameters['player_id'];
-        $game_id = (int) $parameters['game_id'];
+        $player_id = $this->id($request, 'player_id');
+        $game_id = $this->id($request, 'game_id');
         $user_id = auth()->id();
-        if ($player_id === 0) {
+
+        // No player in the route means none has been chosen, so there is
+        // nothing here to check yet.
+        if ($player_id === null) {
             return $next($request);
         }
 
-        if (! $this->playerRepository->playerExists($player_id, $user_id)) {
-            abort(403, __('messages.unauthorized_action'));
-        } elseif ($game_id !== 0) {
-            if (! $this->gameRepository->gameExists($game_id, $user_id)) {
-                if ($this->gameRepository->gameExistsAsInactive($game_id, $user_id)) {
-                    return to_route('select.board', [$player_id, 0]);
-                }
+        abort_unless($this->playerRepository->playerExists($player_id, $user_id), 403, __('messages.unauthorized_action'));
 
-                abort(403, __('messages.unauthorized_action'));
-
+        if ($game_id !== null && ! $this->gameRepository->gameExists($game_id, $user_id)) {
+            if ($this->gameRepository->gameExistsAsInactive($game_id, $user_id)) {
+                return to_route('select.board', [$player_id]);
             }
+
+            abort(403, __('messages.unauthorized_action'));
         }
 
         return $next($request);
+    }
+
+    /**
+     * A route parameter as an integer, or null where the segment is absent.
+     */
+    private function id(Request $request, string $name): ?int
+    {
+        $value = $request->route()?->parameter($name);
+
+        return $value === null ? null : (int) $value;
     }
 }

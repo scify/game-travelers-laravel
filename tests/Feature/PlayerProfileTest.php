@@ -19,7 +19,7 @@ class PlayerProfileTest extends TestCase
     public function new_player_form_opens(): void
     {
         $this->actingAs($this->seededUser())
-            ->get(route('create.profile', [0, 0]))
+            ->get(route('create.profile'))
             ->assertOk();
     }
 
@@ -30,7 +30,7 @@ class PlayerProfileTest extends TestCase
         $avatarId = 3;
 
         $this->actingAs($this->seededUser())
-            ->post(route('create.profile', [0, 0]), ['name' => ' ' . $name . ' ', 'avatarId' => $avatarId]);
+            ->post(route('create.profile'), ['name' => ' ' . $name . ' ', 'avatarId' => $avatarId]);
 
         $player = Player::query()->where('name', $name)->firstOrFail();
         $this->assertSame(2, $player->user_id);
@@ -43,16 +43,16 @@ class PlayerProfileTest extends TestCase
         $name = 'Γιώργος';
 
         $response = $this->actingAs($this->seededUser())
-            ->post(route('create.profile', [0, 0]), ['name' => $name, 'avatarId' => 3]);
+            ->post(route('create.profile'), ['name' => $name, 'avatarId' => 3]);
 
         $player = Player::query()->where('name', $name)->firstOrFail();
-        $response->assertRedirect(route('create.controls', [$player->id, 0]));
+        $response->assertRedirect(route('create.controls', [$player->id]));
     }
 
     #[Test]
     public function duplicate_player_name_is_rejected_case_insensitively(): void
     {
-        $newPlayer = route('create.profile', [0, 0]);
+        $newPlayer = route('create.profile');
         $taken = 'κώστας παπ.';
 
         $this->actingAs($this->seededUser())
@@ -72,8 +72,8 @@ class PlayerProfileTest extends TestCase
         $avatarId = 6;
 
         $this->actingAs($this->seededUser())
-            ->post(route('settings.profile', [1, 'user', 0]), ['name' => $name, 'avatarId' => $avatarId])
-            ->assertRedirect(route('settings.index', [1, 'user', 0]));
+            ->post(route('settings.profile', [1, 'user']), ['name' => $name, 'avatarId' => $avatarId])
+            ->assertRedirect(route('settings.index', [1, 'user']));
 
         $this->assertDatabaseHas('players', ['id' => 1, 'name' => $name, 'avatar_id' => $avatarId]);
     }
@@ -81,7 +81,7 @@ class PlayerProfileTest extends TestCase
     #[Test]
     public function renaming_player_to_name_of_another_player_is_rejected_case_insensitively(): void
     {
-        $profile = route('settings.profile', [1, 'user', 0]);
+        $profile = route('settings.profile', [1, 'user']);
         $taken = 'ΝΊΚΗ ΚΑΡΑΓ.';
 
         $this->actingAs($this->seededUser())
@@ -97,7 +97,7 @@ class PlayerProfileTest extends TestCase
     #[Test]
     public function renaming_player_with_taken_name_returns_typed_name_and_chosen_avatar(): void
     {
-        $profile = route('settings.profile', [1, 'user', 0]);
+        $profile = route('settings.profile', [1, 'user']);
         $taken = 'ΝΊΚΗ ΚΑΡΑΓ.';
         $avatarId = 2;
 
@@ -122,7 +122,7 @@ class PlayerProfileTest extends TestCase
         $scanningSpeed = 3;
 
         $this->actingAs($this->seededUser())
-            ->post(route('create.controls', [1, 0]), [
+            ->post(route('create.controls', [1]), [
                 'controlType' => $controlType,
                 'controlAutomaticSelectionButton' => 'Enter',
                 'controlManualSelectionButton' => $selectionKey,
@@ -131,7 +131,7 @@ class PlayerProfileTest extends TestCase
                 'scanningSpeed' => $scanningSpeed,
                 'submit' => 'next',
             ])
-            ->assertRedirect(route('create.difficulty', [1, 0]));
+            ->assertRedirect(route('create.difficulty', [1]));
 
         $this->assertDatabaseHas('players', [
             'id' => 1,
@@ -152,14 +152,14 @@ class PlayerProfileTest extends TestCase
         $movement = 3;
 
         $this->actingAs($this->seededUser())
-            ->post(route('create.difficulty', [1, 0]), [
+            ->post(route('create.difficulty', [1]), [
                 'dice' => $dice,
                 'gameDuration' => $gameDuration,
                 'level' => $level,
                 'movement' => $movement,
                 'submit' => 'save',
             ])
-            ->assertRedirect(route('select.player', [0, 0]));
+            ->assertRedirect(route('select.player'));
 
         $this->assertDatabaseHas('players', [
             'id' => 1,

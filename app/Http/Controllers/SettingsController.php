@@ -14,7 +14,7 @@ class SettingsController extends Controller
 {
     public function __construct(protected PlayerRepository $playerRepository) {}
 
-    public function settingsShow(Request $request, int $player_id, SetupStep $back, int $game_id): Factory|\Illuminate\Contracts\View\View
+    public function settingsShow(Request $request, int $player_id, SetupStep $back, ?int $game_id = null): Factory|\Illuminate\Contracts\View\View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -28,13 +28,13 @@ class SettingsController extends Controller
         return view('settings', ['name' => $name, 'player_id' => $player_id]);
     }
 
-    public function settingsSelect(Request $request, int $player_id, SetupStep $back, int $game_id)
+    public function settingsSelect(Request $request, int $player_id, SetupStep $back, ?int $game_id = null)
     {
         $action = $request->only('submit')['submit'];
         switch ($action) {
             case 'back':
                 return match ($back) {
-                    SetupStep::User => to_route($back->routeName(), [0, 0]),
+                    SetupStep::User => to_route($back->routeName()),
                     SetupStep::Continue, SetupStep::Board, SetupStep::Mode, SetupStep::Pawn, SetupStep::PawnTwo, SetupStep::Option => to_route($back->routeName(), [$player_id, $game_id]),
                 };
 
@@ -53,13 +53,13 @@ class SettingsController extends Controller
             case 'deletePlayer':
                 $this->playerRepository->delete($player_id);
 
-                return to_route('select.player', [0, 0]);
+                return to_route('select.player');
             default:
                 abort(403, __('messages.unauthorized_action'));
         }
     }
 
-    public function profileShow(Request $request, int $player_id, SetupStep $back, int $game_id): Factory|\Illuminate\Contracts\View\View
+    public function profileShow(Request $request, int $player_id, SetupStep $back, ?int $game_id = null): Factory|\Illuminate\Contracts\View\View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -74,7 +74,7 @@ class SettingsController extends Controller
         return view('settingsProfile', ['name' => $name, 'selectedAvatarId' => $avatar_id, 'avatars' => $this->playerRepository->getAvatars()]);
     }
 
-    public function profileSave(Request $request, int $player_id, SetupStep $back, int $game_id)
+    public function profileSave(Request $request, int $player_id, SetupStep $back, ?int $game_id = null)
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -101,7 +101,7 @@ class SettingsController extends Controller
 
     }
 
-    public function controlsShow(Request $request, int $player_id, SetupStep $back, int $game_id): Factory|\Illuminate\Contracts\View\View
+    public function controlsShow(Request $request, int $player_id, SetupStep $back, ?int $game_id = null): Factory|\Illuminate\Contracts\View\View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -132,7 +132,7 @@ class SettingsController extends Controller
         return view('settingsControls', ['name' => $name, 'control_mode' => $control_mode, 'control_auto_select' => $control_auto_select, 'control_manual_select' => $control_manual_select, 'control_manual_nav' => $control_manual_nav, 'help_after_tries' => $help_after_tries, 'scanning_speed' => $scanning_speed]);
     }
 
-    public function controlsSave(Request $request, int $player_id, SetupStep $back, int $game_id)
+    public function controlsSave(Request $request, int $player_id, SetupStep $back, ?int $game_id = null)
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -154,10 +154,10 @@ class SettingsController extends Controller
         return to_route('settings.index', [$player_id, $back, $game_id]);
     }
 
-    public function difficultyShow(Request $request, int $player_id, SetupStep $back, int $game_id)
+    public function difficultyShow(Request $request, int $player_id, SetupStep $back, ?int $game_id = null)
     {
         if ($player_id === 0) {
-            return to_route('select.player', [0, 0]);
+            return to_route('select.player');
         }
 
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id', 'dice_type', 'board_size', 'difficulty', 'movement_mode']);
@@ -176,7 +176,7 @@ class SettingsController extends Controller
         return view('settingsDifficulty', ['name' => $name, 'dice_type' => $dice_type, 'board_size' => $board_size, 'difficulty' => $difficulty, 'movement_mode' => $movement_mode]);
     }
 
-    public function difficultySave(Request $request, int $player_id, SetupStep $back, int $game_id)
+    public function difficultySave(Request $request, int $player_id, SetupStep $back, ?int $game_id = null)
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 

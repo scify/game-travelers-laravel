@@ -33,7 +33,7 @@ class GameSetupTest extends TestCase
     public function selecting_board_creates_game_and_asks_for_mode(): void
     {
         $response = $this->actingAs($this->seededUser())
-            ->post(route('select.board', [1, 0]), ['board' => 1]);
+            ->post(route('select.board', [1]), ['board' => 1]);
 
         $game = Game::query()->where('player_id', 1)->firstOrFail();
         $response->assertRedirect(route('select.mode', [1, $game->id]));
@@ -129,7 +129,7 @@ class GameSetupTest extends TestCase
         $game = $this->startedGame($this->seededPlayer(), ['started' => false, 'board_id' => 2]);
 
         $this->actingAs($this->seededUser())
-            ->post(route('select.board', [1, 0]), ['board' => 3])
+            ->post(route('select.board', [1]), ['board' => 3])
             ->assertRedirect(route('select.mode', [1, $game->id]));
 
         $this->assertSame(1, Game::query()->where('player_id', 1)->count());

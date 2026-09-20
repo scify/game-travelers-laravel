@@ -40,14 +40,14 @@ class SetupGameController extends Controller
             $entry = ['active' => false];
             $this->gameRepository->updateOrCreate(['id' => $game_id], $entry);
 
-            return to_route('select.board', [$player_id, 0]);
+            return to_route('select.board', [$player_id]);
         }
 
         return to_route('board', [$player_id, $game_id]);
 
     }
 
-    public function boardShow(Request $request, int $player_id, int $game_id)
+    public function boardShow(Request $request, int $player_id, ?int $game_id = null)
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -69,14 +69,14 @@ class SetupGameController extends Controller
         return view('gameSelectBoard', ['switcher' => $switcher, 'playerAudio' => $playerAudio, 'boards' => $boards]);
     }
 
-    public function boardSave(Request $request, int $player_id, int $game_id)
+    public function boardSave(Request $request, int $player_id, ?int $game_id = null)
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
         $user_id = auth()->user()->id;
         $selected_board_id = (int) $request->only('board')['board'];
         $entry = ['user_id' => $user_id, 'player_id' => $player_id, 'board_id' => $selected_board_id];
-        if ($game_id === 0) {
+        if ($game_id === null || $game_id === 0) {
             // check if an active game already exists
             $active_games = $this->gameRepository->allWhere(['player_id' => $player_id, 'active' => true], ['id']);
             if ($active_games->isEmpty()) {
@@ -291,9 +291,9 @@ class SetupGameController extends Controller
         ];
     }
 
-    private function checkIfActiveGameHasStarted(int $game_id)
+    private function checkIfActiveGameHasStarted(?int $game_id)
     {
-        if ($game_id === 0) {
+        if ($game_id === null || $game_id === 0) {
             return false;
         }
 

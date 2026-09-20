@@ -19,7 +19,7 @@
             :backend-url="'{{ route('to.backend') }}'"
             :update-volumes-url="'{{ route('audio.updateVolumes') }}'"
             :continue-url="'{{ route('select.continue', [$player_id, $game_id]) }}'"
-            :board-url="'{{ route('select.board', [$player_id, 0]) }}'"
+            :board-url="'{{ route('select.board', [$player_id]) }}'"
             :game-id='{{ $game_id }}'
             :player-data='@json($player_data)'
             :game-data='@json($game_data)'

@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function __construct(protected PlayerRepository $playerRepository, protected GameRepository $gameRepository) {}
 
-    public function show(Request $request, int $player_id, int $game_id): Factory|View
+    public function show(Request $request): Factory|View
     {
         $user_id = auth()->user()->id;
         $players = $this->playerRepository->allWhere(['user_id' => $user_id]);
@@ -33,7 +33,7 @@ class UserController extends Controller
         return view('gameSelectPlayer', ['players' => $players_info, 'avatars' => $this->playerRepository->getAvatars()]);
     }
 
-    public function select(Request $request, int $player_id, int $game_id)
+    public function select(Request $request)
     {
         $selected_player_id = (int) $request->only('player')['player'];
         $action = $request->only('submit')['submit'];
@@ -47,22 +47,22 @@ class UserController extends Controller
         if ($action === 'start') {
             $active_games = $this->gameRepository->allWhere(['player_id' => $selected_player_id, 'active' => true], ['id', 'started']);
             if ($active_games->isEmpty()) {
-                return to_route('select.board', ['player_id' => $selected_player_id, 'game_id' => 0]);
+                return to_route('select.board', [$selected_player_id]);
             }
 
             $active_game_id = $active_games[0]->id;
             if ($active_games[0]->started) {
-                return to_route('select.continue', ['player_id' => $selected_player_id, 'game_id' => $active_game_id]);
+                return to_route('select.continue', [$selected_player_id, $active_game_id]);
             }
 
             $this->gameRepository->delete($active_game_id);
 
-            return to_route('select.board', ['player_id' => $selected_player_id, 'game_id' => 0]);
+            return to_route('select.board', [$selected_player_id]);
 
         }
 
         if ($action === 'settings') {
-            return to_route('settings.index', ['player_id' => $selected_player_id, 'back' => SetupStep::User, 'game_id' => 0]);
+            return to_route('settings.index', [$selected_player_id, SetupStep::User]);
         }
 
         abort(403, __('messages.unauthorized_action'));

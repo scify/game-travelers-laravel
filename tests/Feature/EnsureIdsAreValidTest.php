@@ -16,10 +16,10 @@ class EnsureIdsAreValidTest extends TestCase
     protected $seed = true;
 
     #[Test]
-    public function player_id_zero_passes_through(): void
+    public function route_without_player_passes_through(): void
     {
         $this->actingAs($this->seededUser())
-            ->get(route('create.profile', [0, 0]))
+            ->get(route('create.profile'))
             ->assertOk();
     }
 
@@ -27,7 +27,7 @@ class EnsureIdsAreValidTest extends TestCase
     public function unknown_player_is_forbidden(): void
     {
         $this->actingAs($this->seededUser())
-            ->get(route('settings.index', [999, 'user', 0]))
+            ->get(route('settings.index', [999, 'user']))
             ->assertForbidden();
     }
 
@@ -35,7 +35,7 @@ class EnsureIdsAreValidTest extends TestCase
     public function player_owned_by_another_user_is_forbidden(): void
     {
         $this->actingAs($this->seededAdmin())
-            ->get(route('select.board', [1, 0]))
+            ->get(route('select.board', [1]))
             ->assertForbidden();
     }
 
@@ -57,6 +57,6 @@ class EnsureIdsAreValidTest extends TestCase
 
         $this->actingAs($this->seededUser())
             ->get(route('select.mode', [1, $finished->id]))
-            ->assertRedirect(route('select.board', [1, 0]));
+            ->assertRedirect(route('select.board', [1]));
     }
 }

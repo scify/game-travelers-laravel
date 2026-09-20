@@ -50,19 +50,24 @@ Route::middleware(['auth'])->group(function (): void {
     });
 });
 
+// Ids are digits. Without this a segment such as "profile" reads as a player
+// id, and a route matches a path meant for the one nested under it.
+Route::pattern('player_id', '[0-9]+');
+Route::pattern('game_id', '[0-9]+');
+
 // Integrated pages
 Route::middleware('auth')->group(function (): void {
     // Choosing a player carries no ids yet, so the guard has nothing to read.
-    Route::get('/select/player/{player_id}/{game_id}', [UserController::class, 'show'])->name('select.player');
-    Route::post('/select/player/{player_id}/{game_id}', [UserController::class, 'select'])->name('select.player');
+    Route::get('/select/player', [UserController::class, 'show'])->name('select.player');
+    Route::post('/select/player', [UserController::class, 'select'])->name('select.player');
 
     Route::middleware(EnsureIdsAreValid::class)->group(function (): void {
         Route::prefix('select')->name('select.')->group(function (): void {
             Route::get('continue/{player_id}/{game_id}', [SetupGameController::class, 'continueShow'])->name('continue');
             Route::post('continue/{player_id}/{game_id}', [SetupGameController::class, 'continueSave'])->name('continue');
 
-            Route::get('board/{player_id}/{game_id}', [SetupGameController::class, 'boardShow'])->name('board');
-            Route::post('board/{player_id}/{game_id}', [SetupGameController::class, 'boardSave'])->name('board');
+            Route::get('board/{player_id}/{game_id?}', [SetupGameController::class, 'boardShow'])->name('board');
+            Route::post('board/{player_id}/{game_id?}', [SetupGameController::class, 'boardSave'])->name('board');
 
             Route::get('mode/{player_id}/{game_id}', [SetupGameController::class, 'modeShow'])->name('mode');
             Route::post('mode/{player_id}/{game_id}', [SetupGameController::class, 'modeSave'])->name('mode');
@@ -78,37 +83,37 @@ Route::middleware('auth')->group(function (): void {
         });
 
         Route::prefix('settings')->name('settings.')->group(function (): void {
-            Route::get('{player_id}/{back}/{game_id}', [SettingsController::class, 'settingsShow'])->name('index');
-            Route::post('{player_id}/{back}/{game_id}', [SettingsController::class, 'settingsSelect'])->name('index');
+            Route::get('{player_id}/{back}/{game_id?}', [SettingsController::class, 'settingsShow'])->name('index');
+            Route::post('{player_id}/{back}/{game_id?}', [SettingsController::class, 'settingsSelect'])->name('index');
 
-            Route::get('profile/{player_id}/{back}/{game_id}', [SettingsController::class, 'profileShow'])->name('profile');
-            Route::post('profile/{player_id}/{back}/{game_id}', [SettingsController::class, 'profileSave'])->name('profile');
+            Route::get('profile/{player_id}/{back}/{game_id?}', [SettingsController::class, 'profileShow'])->name('profile');
+            Route::post('profile/{player_id}/{back}/{game_id?}', [SettingsController::class, 'profileSave'])->name('profile');
 
-            Route::get('controls/{player_id}/{back}/{game_id}', [SettingsController::class, 'controlsShow'])->name('controls');
-            Route::post('controls/{player_id}/{back}/{game_id}', [SettingsController::class, 'controlsSave'])->name('controls');
+            Route::get('controls/{player_id}/{back}/{game_id?}', [SettingsController::class, 'controlsShow'])->name('controls');
+            Route::post('controls/{player_id}/{back}/{game_id?}', [SettingsController::class, 'controlsSave'])->name('controls');
 
-            Route::get('difficulty/{player_id}/{back}/{game_id}', [SettingsController::class, 'difficultyShow'])->name('difficulty');
-            Route::post('difficulty/{player_id}/{back}/{game_id}', [SettingsController::class, 'difficultySave'])->name('difficulty');
+            Route::get('difficulty/{player_id}/{back}/{game_id?}', [SettingsController::class, 'difficultyShow'])->name('difficulty');
+            Route::post('difficulty/{player_id}/{back}/{game_id?}', [SettingsController::class, 'difficultySave'])->name('difficulty');
 
-            /*Route::get('audio/{player_id}/{back}/{game_id}', [CustomAudioController::class, 'audioShow'])->name('audio');
-            Route::post('audio/{player_id}/{back}/{game_id}', [CustomAudioController::class, 'audioSave'])->name('audio');*/
+            /*Route::get('audio/{player_id}/{back}/{game_id?}', [CustomAudioController::class, 'audioShow'])->name('audio');
+            Route::post('audio/{player_id}/{back}/{game_id?}', [CustomAudioController::class, 'audioSave'])->name('audio');*/
         });
 
         Route::prefix('create')->name('create.')->group(function (): void {
-            Route::get('profile/{player_id}/{game_id}', [CreatePlayerController::class, 'profileShow'])->name('profile');
-            Route::post('profile/{player_id}/{game_id}', [CreatePlayerController::class, 'profileSave'])->name('profile');
+            Route::get('profile/{player_id?}', [CreatePlayerController::class, 'profileShow'])->name('profile');
+            Route::post('profile/{player_id?}', [CreatePlayerController::class, 'profileSave'])->name('profile');
 
-            Route::get('controls/{player_id}/{game_id}', [CreatePlayerController::class, 'controlsShow'])->name('controls');
-            Route::post('controls/{player_id}/{game_id}', [CreatePlayerController::class, 'controlsSave'])->name('controls');
+            Route::get('controls/{player_id}', [CreatePlayerController::class, 'controlsShow'])->name('controls');
+            Route::post('controls/{player_id}', [CreatePlayerController::class, 'controlsSave'])->name('controls');
 
-            Route::get('difficulty/{player_id}/{game_id}', [CreatePlayerController::class, 'difficultyShow'])->name('difficulty');
-            Route::post('difficulty/{player_id}/{game_id}', [CreatePlayerController::class, 'difficultySave'])->name('difficulty');
+            Route::get('difficulty/{player_id}', [CreatePlayerController::class, 'difficultyShow'])->name('difficulty');
+            Route::post('difficulty/{player_id}', [CreatePlayerController::class, 'difficultySave'])->name('difficulty');
         });
 
         Route::get('board/{player_id}/{game_id}', [BoardController::class, 'play'])->name('board');
     });
 
-    Route::get('home', fn () => to_route('select.player', [0, 0]))->name('dashboard');
+    Route::get('home', fn () => to_route('select.player'))->name('dashboard');
 
     Route::get('logout', fn (): Factory|View => view('logoutDummy'))->name('dummy.logout');
 

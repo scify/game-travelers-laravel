@@ -33,7 +33,7 @@
         <ul class="user-menu dropdown-menu dropdown-menu-start" aria-labelledby="userMenuButton">
             @if(isset($playerName))
             <li>
-                <a class="user-menu-item dropdown-item" href="{{ route('select.player', [0, 0]) }}">
+                <a class="user-menu-item dropdown-item" href="{{ route('select.player') }}">
                 Αλλαγή παίκτη
                 </a>
             </li>

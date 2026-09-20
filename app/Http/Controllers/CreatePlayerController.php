@@ -16,11 +16,11 @@ class CreatePlayerController extends Controller
 {
     public function __construct(protected PlayerRepository $playerRepository) {}
 
-    public function profileShow(Request $request, int $player_id, int $game_id): Factory|View
+    public function profileShow(Request $request, ?int $player_id = null): Factory|View
     {
         $name = '';
         $avatar_id = 0;
-        if ($player_id !== 0) {
+        if ($player_id !== null) {
             $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id']);
             if ($players->isNotEmpty()) {
                 $name = $players[0]->name;
@@ -31,7 +31,7 @@ class CreatePlayerController extends Controller
         return view('settingsProfileNew', ['name' => $name, 'selectedAvatarId' => $avatar_id, 'avatars' => $this->playerRepository->getAvatars()]);
     }
 
-    public function profileSave(Request $request, int $player_id, int $game_id)
+    public function profileSave(Request $request, ?int $player_id = null)
     {
         $user_id = auth()->user()->id;
         $input = $request->only('name', 'avatarId');
@@ -49,7 +49,7 @@ class CreatePlayerController extends Controller
             return back()->withInput()->withErrors(['name' => ['exists']]);
         }
 
-        if ($player_id === 0) {
+        if ($player_id === null) {
             $entry = ['user_id' => $user_id, 'name' => $name, 'avatar_id' => $avatar_id];
             $player = $this->playerRepository->create($entry);
             $player_id = $player->id;
@@ -58,11 +58,11 @@ class CreatePlayerController extends Controller
             $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
         }
 
-        return to_route('create.controls', [$player_id, 0]);
+        return to_route('create.controls', [$player_id]);
 
     }
 
-    public function controlsShow(Request $request, int $player_id, int $game_id): Factory|View
+    public function controlsShow(Request $request, int $player_id): Factory|View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
         $control_mode = 1;
@@ -90,7 +90,7 @@ class CreatePlayerController extends Controller
         return view('settingsControlsNew', ['control_mode' => $control_mode, 'control_auto_select' => $control_auto_select, 'control_manual_select' => $control_manual_select, 'control_manual_nav' => $control_manual_nav, 'help_after_tries' => $help_after_tries, 'scanning_speed' => $scanning_speed]);
     }
 
-    public function controlsSave(Request $request, int $player_id, int $game_id = 0)
+    public function controlsSave(Request $request, int $player_id)
     {
         $input = $request->only('controlType', 'controlAutomaticSelectionButton', 'controlManualSelectionButton', 'controlManualNavigationButton', 'helpAfterTries', 'scanningSpeed');
         $control_mode = (int) $input['controlType'];
@@ -109,18 +109,18 @@ class CreatePlayerController extends Controller
         $action = $request->only('submit')['submit'];
 
         if ($action === 'back' || $action === 'profile') {
-            return to_route('create.profile', [$player_id, 0]);
+            return to_route('create.profile', [$player_id]);
         }
 
         if ($action === 'next' || $action === 'save') {
-            return to_route('create.difficulty', [$player_id, 0]);
+            return to_route('create.difficulty', [$player_id]);
         }
 
         abort(403, __('messages.unauthorized_action'));
 
     }
 
-    public function difficultyShow(Request $request, int $player_id, int $game_id = 0): Factory|View
+    public function difficultyShow(Request $request, int $player_id): Factory|View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
         $dice_type = 1;
@@ -138,7 +138,7 @@ class CreatePlayerController extends Controller
         return view('settingsDifficultyNew', ['dice_type' => $dice_type, 'board_size' => $board_size, 'difficulty' => $difficulty, 'movement_mode' => $movement_mode]);
     }
 
-    public function difficultySave(Request $request, int $player_id, int $game_id = 0)
+    public function difficultySave(Request $request, int $player_id)
     {
         $input = $request->only('dice', 'gameDuration', 'level', 'movement');
         $dice_type = (int) $input['dice'];
@@ -150,15 +150,15 @@ class CreatePlayerController extends Controller
         $this->playerRepository->updateOrCreate(['id' => $player_id], $entry);
         $action = $request->only('submit')['submit'];
         if ($action === 'profile') {
-            return to_route('create.profile', [$player_id, 0]);
+            return to_route('create.profile', [$player_id]);
         }
 
         if ($action === 'back' || $action === 'controls') {
-            return to_route('create.controls', [$player_id, 0]);
+            return to_route('create.controls', [$player_id]);
         }
 
         if ($action === 'save') {
-            return to_route('select.player', [0, 0]);
+            return to_route('select.player');
         }
 
         abort(403, __('messages.unauthorized_action'));
