@@ -78,7 +78,7 @@
                                     data-enables="controlType1Group" {{-- Read by JS = #id of options group--}}
                                     data-disables="controlType2Group" {{-- Read by JS = #id of options group --}}
                                     id="controlType1"
-                                    @if($control_mode == 1) checked autofocus @endif
+                                    @if($control_mode == 1) checked @endif
                                 />
                                 <label class="form-check-label field-label medium" for="controlType1">Αυτόματος</label>
                                 <div class="field-subgroup container-fluid gx-0 gy-5 pt-3" id="controlType1Group">
@@ -121,7 +121,7 @@
                                     data-enables="controlType2Group" {{-- Read by JS = #id of options group--}}
                                     data-disables="controlType1Group" {{-- Read by JS = #id of options group--}}
                                     id="controlType2"
-                                    @if($control_mode == 2) checked autofocus @endif
+                                    @if($control_mode == 2) checked @endif
                                 />
                                 <label class="form-check-label field-label medium" for="controlType2">Χειροκίνητος</label>
                                 <div class="field-subgroup container-fluid gx-0 gy-5 pt-3" id="controlType2Group">

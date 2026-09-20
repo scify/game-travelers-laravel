@@ -86,7 +86,7 @@
                                                     value="1"
                                                     id="dice1" {{-- Read by JS --}}
                                                     required
-                                                    @if($dice_type == 1) checked autofocus @endif
+                                                    @if($dice_type == 1) checked @endif
                                                 />
                                             <label class="form-check-label" for="dice1">Νούμερα</label>
                                             </div>
@@ -109,7 +109,7 @@
                                                     name="dice"
                                                     value="2"
                                                     id="dice2" {{-- Read by JS --}}
-                                                    @if($dice_type == 2) checked autofocus @endif
+                                                    @if($dice_type == 2) checked @endif
                                                 >
                                                 <label class="form-check-label" for="dice2">Κουκίδες</label>
                                             </div>
@@ -132,7 +132,7 @@
                                                     name="dice"
                                                     value="3"
                                                     id="dice3" {{-- Read by JS --}}
-                                                    @if($dice_type == 3) checked autofocus @endif
+                                                    @if($dice_type == 3) checked @endif
                                                 >
                                                 <label class="form-check-label" for="dice3">Χρώματα</label>
                                             </div>
