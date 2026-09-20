@@ -5,7 +5,6 @@ export const SwitcherKeys = {
         'Enter',
         'Space',
         'NumpadEnter',
-        'ArrowUp',
         '.',
         'ArrowDown',
         'ArrowLeft',
@@ -147,3 +146,26 @@ export const SwitcherKeys = {
         'Backspace',
     ],
 };
+
+/**
+ * The key an event carries, in the form the settings store it.
+ *
+ * A named key (ArrowRight, NumpadEnter) is read from the event code, because
+ * the key value of the numeric keypad repeats the value of another key. The
+ * space bar reads as " " and is stored as "Space". Every other key is the
+ * character itself. Returns null when the event carries no key.
+ */
+export function storedKey(event) {
+    if (!event.key.length) {
+        return null;
+    }
+    const charCode = event.key.charCodeAt(0);
+    if (event.key.length > 1 && charCode < 128) {
+        return event.code;
+    }
+    if (charCode === 32) {
+        return 'Space';
+    }
+
+    return event.key;
+}

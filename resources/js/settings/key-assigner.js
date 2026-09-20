@@ -6,7 +6,7 @@
  */
 
 import { log } from '@/lib/debug.js';
-import { SwitcherKeys } from '@/lib/keys.js';
+import { SwitcherKeys, storedKey } from '@/lib/keys.js';
 import { trans } from '@/lib/lang.js';
 
 (function () {
@@ -100,37 +100,16 @@ import { trans } from '@/lib/lang.js';
                         const allowedList = SwitcherKeys.allowedList;
                         // Override the default behavior of keys.
                         event.preventDefault();
-                        // When a key is pressed, get its key value.
-                        // Note: Even if extremely useful, `event.which` and
-                        // `event.keyCode` are deprecated. Instead we rely on
-                        // `.key` and `.code`.
-                        // @see https://www.toptal.com/developers/keycode/for/Space
-                        if (event.key.length) {
-                            const charCode = event.key.charCodeAt(0);
-                            if (event.key.length > 1 && charCode < 128) {
-                                // Key is "named" (e.g. LeftAlt):
-                                if (allowedList.includes(event.code)) {
-                                    returnKey = event.code;
-                                    log('Key Code accepted.');
-                                } else {
-                                    keyAssigner.classList.add('invalid');
-                                    log('Not accepted key code.');
-                                    invalidateKeyAssigner(keyAssigner);
-                                    return false;
-                                }
-                            } else if (charCode === 32) {
-                                // Key is equal to a unicode character. Space is
-                                // one of the unicode characters which is read
-                                // as " ". To make our life easier, we simply
-                                // convert it to "Space".
-                                log('Space accepted');
-                                returnKey = 'Space';
-                            } else if (allowedList.includes(event.key)) {
-                                log('Key accepted');
-                                returnKey = event.key;
+                        // When a key is pressed, store it in the form the
+                        // switcher and the board read it back (@see keys.js).
+                        const pressedKey = storedKey(event);
+                        if (pressedKey !== null) {
+                            if (allowedList.includes(pressedKey)) {
+                                log(`Key accepted: ${pressedKey}`);
+                                returnKey = pressedKey;
                             } else {
                                 keyAssigner.classList.add('invalid');
-                                log(`Not accepted key ${event.key}.`);
+                                log(`Not accepted key ${pressedKey}.`);
                                 invalidateKeyAssigner(keyAssigner);
                                 return false;
                             }

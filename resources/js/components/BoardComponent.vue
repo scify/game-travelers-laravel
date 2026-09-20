@@ -159,6 +159,7 @@ import { Modal } from 'bootstrap';
 import { markRaw } from 'vue';
 import { music, sound } from '@/lib/audio.js';
 import { createDebugTools, emit, enabled as debugEnabled, log } from '@/lib/debug.js';
+import { storedKey } from '@/lib/keys.js';
 import BoardDebugStrip from '@/components/BoardDebugStrip.vue';
 
 export default {
@@ -326,8 +327,9 @@ export default {
     },
     mounted() {
         log('Component mounted.');
-        window.addEventListener('keypress', (e) => {
-            this.key_press(e);
+        // Keydown, because keypress never fires for a named key such as ArrowRight.
+        window.addEventListener('keydown', (e) => {
+            this.handleKeyDown(e);
         });
         if (this.debug) {
             this.debugTools = markRaw(
@@ -543,8 +545,8 @@ export default {
                     alert(error);
                 });
         },
-        key_press(e) {
-            let key = e.key;
+        handleKeyDown(e) {
+            const key = e.key;
             if (key === 'e' || key === 'E' || key === 'ε' || key === 'Ε') {
                 if (this.gameEnd === 0) {
                     window.location.href = this.continueUrl;
@@ -561,23 +563,33 @@ export default {
                 } else {
                     this.showNumbers = true;
                 }
-            } else if (!this.ignoreInput) {
-                log('Key pressed and NOT ignored:\t(' + e.key + ')');
-                if (key === ' ') {
-                    key = 'Space';
-                }
+            } else {
+                const pressedKey = storedKey(e);
                 let isSelect = false;
                 let isNavigate = false;
-                if (this.selectKey === key) {
+                if (this.selectKey === pressedKey) {
                     isSelect = true;
-                } else if (this.autoMove === 2 && this.navigateKey === key) {
+                } else if (this.autoMove === 2 && this.navigateKey === pressedKey) {
                     if (this.movementMode === 1) {
                         isSelect = true;
                     } else {
                         isNavigate = true;
                     }
                 }
-                this.debugEmit('input', { key, isSelect, isNavigate });
+                // The board claims the key only while nothing else holds the
+                // focus, so a press never scrolls the page and a focused
+                // control keeps its own behaviour.
+                if ((isSelect || isNavigate) && e.target === document.body) {
+                    e.preventDefault();
+                }
+                if (this.ignoreInput) {
+                    log('Key pressed and IGNORED:\t(' + pressedKey + ')');
+                    this.debugEmit('input', { key: pressedKey, ignored: true });
+
+                    return;
+                }
+                log('Key pressed and NOT ignored:\t(' + pressedKey + ')');
+                this.debugEmit('input', { key: pressedKey, isSelect, isNavigate });
                 log(
                     'isSelect:\t' +
                         isSelect +
@@ -666,9 +678,6 @@ export default {
                         this.resolvePhase3();
                     }
                 }
-            } else {
-                log('Key pressed and IGNORED:\t(' + e.key + ')');
-                this.debugEmit('input', { key: e.key, ignored: true });
             }
         },
         playStepSound() {

@@ -7,7 +7,7 @@
 import { Modal } from 'bootstrap';
 import { music, sound } from '@/lib/audio.js';
 import { log } from '@/lib/debug.js';
-import { SwitcherKeys } from '@/lib/keys.js';
+import { SwitcherKeys, storedKey } from '@/lib/keys.js';
 import { saveVolume } from '@/lib/volumes.js';
 
 // Blurs any items with focus.
@@ -231,59 +231,35 @@ function switcher() {
     function handleSwitchKey(event) {
         const allowedList = SwitcherKeys.allowedList;
         const escapeList = SwitcherKeys.escapeList;
-        let returnKey;
-        // Note that even if extremely useful, event.keyCode is deprecated.
-        // Instead, we parse the event.key (@see key-assigner.js).
-        if (event.key.length) {
-            const charCode = event.key.charCodeAt(0);
-            // event.code checks
-            if (event.key.length > 1 && charCode < 128) {
-                // Key is "named" (e.g. LeftAlt):
-                if (escapeList.includes(event.code)) {
-                    event.preventDefault();
-                    switcherModal();
-                    return false;
-                }
-                if (allowedList.includes(event.code)) {
-                    log('Key-code accepted.');
-                    returnKey = event.code;
-                } else {
-                    log(`Not accepted key-code ${event.code}`);
-                    return false;
-                }
-            } else if (charCode === 32) {
-                // The event.key checks start here. Space is one of the Unicode
-                // characters which is read as " ". To make our life easier, we
-                // simply convert it to "Space".
-                log('Space accepted');
-                returnKey = 'Space';
-            } else if (allowedList.includes(event.key)) {
-                log('Key accepted.');
-                returnKey = event.key;
-            } else {
-                if (escapeList.includes(event.key)) {
-                    event.preventDefault();
-                    switcherModal();
-                    return false;
-                }
-                if (event.key === '-' || event.key === '_') {
-                    if (backgroundMusic !== null) {
-                        backgroundMusic.volume = Math.max(0, backgroundMusic.volume - 0.1);
-                        saveVolume('music_volume', backgroundMusic.volume);
-                        return false;
-                    }
-                }
-                if (event.key === '=' || event.key === '+') {
-                    if (backgroundMusic !== null) {
-                        backgroundMusic.volume = Math.min(1, backgroundMusic.volume + 0.1);
-                        saveVolume('music_volume', backgroundMusic.volume);
-                        return false;
-                    }
-                }
-                log(`Not accepted key ${event.key}`);
-                return false;
-            }
+        // The key is read the same way the settings stored it (@see keys.js).
+        const returnKey = storedKey(event);
+        if (returnKey === null) {
+            return false;
         }
+        if (escapeList.includes(returnKey)) {
+            event.preventDefault();
+            switcherModal();
+            return false;
+        }
+        if (!allowedList.includes(returnKey)) {
+            if (returnKey === '-' || returnKey === '_') {
+                if (backgroundMusic !== null) {
+                    backgroundMusic.volume = Math.max(0, backgroundMusic.volume - 0.1);
+                    saveVolume('music_volume', backgroundMusic.volume);
+                    return false;
+                }
+            }
+            if (returnKey === '=' || returnKey === '+') {
+                if (backgroundMusic !== null) {
+                    backgroundMusic.volume = Math.min(1, backgroundMusic.volume + 0.1);
+                    saveVolume('music_volume', backgroundMusic.volume);
+                    return false;
+                }
+            }
+            log(`Not accepted key ${returnKey}`);
+            return false;
+        }
+        log(`Key accepted: ${returnKey}`);
         const focusedIndex = currentIndex();
         if (controlMode === 1) {
             // Automatic mode.

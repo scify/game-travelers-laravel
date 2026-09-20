@@ -49,7 +49,9 @@ export function emit(event, payload) {
 
 /** A real keyboard event, so the test takes the same path as a switch press. */
 export function press(key) {
-    window.dispatchEvent(new KeyboardEvent('keypress', { key: key === 'Space' ? ' ' : key }));
+    // Both values, because a named key is read from the code (@see keys.js).
+    const pressed = key === 'Space' ? { key: ' ', code: 'Space' } : { key, code: key };
+    window.dispatchEvent(new KeyboardEvent('keydown', { ...pressed, bubbles: true, cancelable: true }));
 }
 
 const wait = (ms) => new Promise((resolve) => window.setTimeout(resolve, ms));
