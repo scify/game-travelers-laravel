@@ -8,9 +8,15 @@ Web board game for children with disabilities, live at [taxidiotes.scify.org](ht
 
 Laravel {{ explode('.', app()->version())[0] }} application. Blade renders every page; Vue 3 renders the game board. Styles are Bootstrap 5.3 and Sass, compiled by Vite. The default language is Greek with English as fallback. The timezone is Europe/Athens.
 
+### Users and players
+
+A user signs in and creates players. A player has a name, an avatar and its own controls: two keys, a scanning speed, a difficulty. Other people exist around the game and have no name in it: code, comments and commit messages say user and player, and invent no other word for a person.
+
+A player's controls are always respected. The keys a player is given reach the game whatever else is happening, and nothing overrides or silences them.
+
 ### Every installation is someone else's
 
-This repository is open source and installed by others, each with their own app name, domain, analytics id and mail setup. A change here changes every installation, not one site. Nothing in `config/`, `resources/` or `lang/` may assume a particular installation: no names, hosts, ids or cookie names spelt out. Whatever differs between installations comes from `.env`, is documented in `.env.example`, and when two settings must agree it is derived once, from that source, in code that is tested (see `app/Support/CookieNames.php`). Prefer the framework's defaults to pinned values.
+This is open source and other people run it, each with their own app name, domain, analytics id and mail setup. A change here changes all of them. Nothing in `config/`, `resources/` or `lang/` names one installation: no app names, hosts, ids or cookie names. What differs comes from `.env` and is documented in `.env.example`. Two settings that must agree are derived from one source in code, never typed twice. Prefer the framework's defaults to pinned values.
 
 ### Architecture
 
