@@ -82,7 +82,7 @@ class UserManager
         return $this->userRepository->delete($id);
     }
 
-    public function get_admin_users()
+    public function getAdminUsers()
     {
         $users = $this->userRepository->getUsersWithAdminRoleStatus(-1);
 
