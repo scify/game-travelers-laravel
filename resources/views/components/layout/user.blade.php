@@ -39,8 +39,7 @@
             @endif
             @if(isset($showSettings))
             <li>
-                <a class="user-menu-item dropdown-item" href="{{ route('settings', [ request()->player_id, request()->from, request()->game_id ]) }}"
-                   aria-description="Ρυθμίσεις για τον παίκτη">
+                <a class="user-menu-item dropdown-item" href="{{ route('settings', [ request()->player_id, request()->from, request()->game_id ]) }}">
                     Ρυθμίσεις
                 </a>
             </li>
@@ -48,8 +47,6 @@
             <li>
                 {{--href should be the log - out page--}}
                 <a class="user-menu-item dropdown-item" href="#"
-                   title="Αποσύνδεση και έξοδος από το παιχνίδι"
-                   aria-description="Αποσύνδεση και έξοδος από το παιχνίδι"
                    data-bs-toggle="modal" data-bs-target="#modalLogout"
                 >
                     Έξοδος

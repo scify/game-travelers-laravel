@@ -62,6 +62,10 @@
                             tabindex="-1"
                         ></button>
                     </legend>
+                    {{-- Descriptions for the key assigners below. A hidden element that aria-describedby
+                         names is still read, and aria-hidden keeps it out of the page's reading order. --}}
+                    <p class="visually-hidden" aria-hidden="true" id="keyAssignerSelectionHint">Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυμείτε να γίνεται η επιλογή στο παιχνίδι</p>
+                    <p class="visually-hidden" aria-hidden="true" id="keyAssignerNavigationHint">Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυμείτε να γίνεται η πλοήγηση στο παιχνίδι</p>
                     <div class="container-fluid">
                         <div class="row ms-1">
                             <div class="col-lg-6 form-check">
@@ -92,7 +96,7 @@
                                                 data-key-selected="Enter" {{-- Updates via JS --}}
                                                 data-sets-input="controlAutomaticSelectionButton"
                                                 aria-labelledby="controlAutomaticSelectionLabel controlAutomaticSelectionAssigner"
-                                                aria-description="Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυμείτε να γίνεται η επιλογή στο παιχνίδι"
+                                                aria-describedby="keyAssignerSelectionHint"
                                             >
                                                 Space
                                             </button>
@@ -135,7 +139,7 @@
                                                 data-key-selected="Enter" {{-- Updates via JS --}}
                                                 data-sets-input="controlManualSelectionButton"
                                                 aria-labelledby="controlManualSelectionLabel controlManualSelectionAssigner"
-                                                aria-description="Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυμείτε να γίνεται η επιλογή στο παιχνίδι"
+                                                aria-describedby="keyAssignerSelectionHint"
                                                 disabled
                                             >
                                                 όρισε πλήκτρο
@@ -157,7 +161,7 @@
                                                 data-key-selected="Space" {{-- Updates via JS --}}
                                                 data-sets-input="controlManualNavigationButton"
                                                 aria-labelledby="controlManualNavigationLabel controlManualNavigationAssigner"
-                                                aria-description="Αμέσως μόλις πιέσετε αυτό το πλήκτρο, πιέστε το πλήκτρο στο πληκτρολόγιο με το οποίο επιθυμείτε να γίνεται η πλοήγηση στο παιχνίδι"
+                                                aria-describedby="keyAssignerNavigationHint"
                                                 disabled
                                             >
                                                 όρισε πλήκτρο
