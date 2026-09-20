@@ -384,8 +384,6 @@ section.landing {
             box-shadow:
                 0 0.25em 0.1em 0.4em rgba(var(--trvl-c-dark-rgb), 0.03),
                 0.5em 1em 0.8em rgba(var(--trvl-c-dark-rgb), 0.03);
-
-            // 0 0.33em 0.66em rgba(var(--trvl-c-dark-rgb), 0.12);
         }
     }
 
@@ -845,14 +843,6 @@ img.splash {
         color: var(--trvl-color);
     }
 
-    /*
-    .settings-row:nth-child(2) {
-        margin-bottom: 2.5em;
-    }
-    .settings-row:last-child {
-        margin-bottom: 5em;
-    }
-    */
     h2 {
         font-size: 1.5em;
     }
@@ -964,8 +954,6 @@ img.splash {
         right: 36px;
         bottom: 24px;
         transition: all 0.1s ease-in-out;
-
-        // vertical-align: 0.75em;
     }
 
     &[aria-expanded='true'] img {
@@ -1176,7 +1164,6 @@ img.splash {
 
 // Footer
 .trvl-footer {
-    // bottom: 50px;
     position: relative;
 
     .small {
@@ -1286,28 +1273,6 @@ img.splash {
     footer {
         padding: 0 !important;
     }
-
-    /*    .trvl-footer {
-        .d-flex {
-            position: relative;
-            width: 180px;
-            left: 0;
-            flex-direction: column !important;
-            margin: 0 auto;
-            div {
-                width: 180px;
-                text-align: center;
-                margin-top: 0.75rem;
-            }
-            div.scify {
-                margin-top: 2rem;
-            }
-        }
-        img {
-            width: auto;
-            height: auto;
-        }
-    } */
 }
 
 // Footer optimization for specific routes:

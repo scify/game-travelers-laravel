@@ -53,11 +53,8 @@ $form-range-thumb-box-shadow: 0 0.1rem 0.25rem rgba(#000, 0.1);
 $form-range-thumb-focus-box-shadow:
     0 0 0 1px $body-bg,
     0 0 0 0.3rem rgb(120, 181, 148);
-
-// $form-range-thumb-focus-box-shadow-width:  $input-focus-width; // For focus box shadow issue in Edge
 $form-range-thumb-active-bg: tint-color(#383735, 70%);
 
-// $form-range-thumb-disabled-bg:             $gray-500;
 // Note:
 // Web design is thankfully moving back to CSS and its variables which have
 // become far more popular than their Sass counterparts as they are far more

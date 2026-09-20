@@ -1,8 +1,6 @@
 .gamesettings .avatar-col,
 .gamestart .avatar-col {
     min-height: 160px;
-
-    // min-width: 140px;
 }
 
 .avatars-row {
@@ -176,7 +174,6 @@ button[role='radio'].selected + label {
 
 .btn-avatar:hover > .label-avatar,
 .btn-avatar-options:hover > .label-avatar-options {
-    // scale: 0.9;
     color: rgba(var(--trvl-color-rgb), 1);
 }
 
