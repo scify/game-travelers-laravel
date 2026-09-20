@@ -38,7 +38,7 @@ class UserController extends Controller
         $action = $request->only('submit')['submit'];
         if ($action === 'start') {
             $active_games = $this->gameRepository->allWhere(['player_id' => $player_id, 'active' => true], ['id', 'started']);
-            if (count($active_games) === 0) {
+            if ($active_games->isEmpty()) {
                 return to_route('select.board', ['player_id' => $player_id, 'from' => 'board', 'game_id' => 0]);
             }
 
@@ -67,7 +67,7 @@ class UserController extends Controller
         $avatar_id = 0;
         if ($player_id !== 0) {
             $players = $this->playerRepository->allWhere(['id' => $player_id], ['name', 'avatar_id']);
-            if (count($players) > 0) {
+            if ($players->isNotEmpty()) {
                 $name = $players[0]->name;
                 $avatar_id = $players[0]->avatar_id;
             }
@@ -117,7 +117,7 @@ class UserController extends Controller
         $help_after_tries = 3;
         $scanning_speed = 2;
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['auto', 'select_key', 'navigate_key', 'help_after_x_mistakes', 'scanning_speed']);
-        if (count($players) > 0) {
+        if ($players->isNotEmpty()) {
             $control_mode = $players[0]->auto;
             $control_select = $players[0]->select_key;
             $control_nav = $players[0]->navigate_key;
@@ -173,7 +173,7 @@ class UserController extends Controller
         $difficulty = 1;
         $movement_mode = 2;
         $players = $this->playerRepository->allWhere(['id' => $player_id], ['dice_type', 'board_size', 'difficulty', 'movement_mode']);
-        if (count($players) > 0) {
+        if ($players->isNotEmpty()) {
             $dice_type = $players[0]->dice_type;
             $board_size = $players[0]->board_size;
             $difficulty = $players[0]->difficulty;

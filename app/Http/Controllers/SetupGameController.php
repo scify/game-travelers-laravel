@@ -79,7 +79,7 @@ class SetupGameController extends Controller
         if ($game_id === 0) {
             // check if an active game already exists
             $active_games = $this->gameRepository->allWhere(['player_id' => $player_id, 'active' => true], ['id']);
-            if (count($active_games) === 0) {
+            if ($active_games->isEmpty()) {
                 $game = $this->gameRepository->create($entry);
                 $game_id = $game->id;
             } else {
