@@ -34,27 +34,34 @@ class UserController extends Controller
 
     public function select(Request $request, int $player_id, string $from, int $game_id)
     {
-        $player_id = $request->only('player')['player'];
+        $selected_player_id = (int) $request->only('player')['player'];
         $action = $request->only('submit')['submit'];
+        // This page chooses a player, so the route carries none and the guard
+        // middleware has nothing to check. The chosen player is checked here.
+        abort_if(
+            $selected_player_id !== 0 && ! $this->playerRepository->playerExists($selected_player_id, (int) auth()->id()),
+            403,
+            __('messages.unauthorized_action')
+        );
         if ($action === 'start') {
-            $active_games = $this->gameRepository->allWhere(['player_id' => $player_id, 'active' => true], ['id', 'started']);
+            $active_games = $this->gameRepository->allWhere(['player_id' => $selected_player_id, 'active' => true], ['id', 'started']);
             if ($active_games->isEmpty()) {
-                return to_route('select.board', ['player_id' => $player_id, 'from' => 'board', 'game_id' => 0]);
+                return to_route('select.board', ['player_id' => $selected_player_id, 'from' => 'board', 'game_id' => 0]);
             }
 
-            $game_id = $active_games[0]->id;
+            $active_game_id = $active_games[0]->id;
             if ($active_games[0]->started) {
-                return to_route('select.continue', ['player_id' => $player_id, 'from' => 'continue', 'game_id' => $game_id]);
+                return to_route('select.continue', ['player_id' => $selected_player_id, 'from' => 'continue', 'game_id' => $active_game_id]);
             }
 
-            $this->gameRepository->delete($game_id);
+            $this->gameRepository->delete($active_game_id);
 
-            return to_route('select.board', ['player_id' => $player_id, 'from' => 'board', 'game_id' => 0]);
+            return to_route('select.board', ['player_id' => $selected_player_id, 'from' => 'board', 'game_id' => 0]);
 
         }
 
         if ($action === 'settings') {
-            return to_route('settings', ['player_id' => $player_id, 'from' => 'user', 'game_id' => 0]);
+            return to_route('settings', ['player_id' => $selected_player_id, 'from' => 'user', 'game_id' => 0]);
         }
 
         abort(403, __('messages.unauthorized_action'));

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
@@ -52,6 +53,19 @@ class PlayerSelectionTest extends TestCase
             ->assertRedirect(route('select.board', [1, 'board', 0]));
 
         $this->assertDatabaseMissing('games', ['id' => $game->id]);
+    }
+
+    #[Test]
+    public function starting_with_player_owned_by_another_user_is_forbidden(): void
+    {
+        $player = $this->seededPlayer();
+        $game = $this->startedGame($player, ['started' => false]);
+
+        $this->actingAs(User::factory()->create())
+            ->post(route('select.player', [0, 'user', 0]), ['player' => $player->id, 'submit' => 'start'])
+            ->assertForbidden();
+
+        $this->assertDatabaseHas('games', ['id' => $game->id]);
     }
 
     #[Test]
