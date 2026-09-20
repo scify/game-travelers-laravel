@@ -54,7 +54,7 @@
                 </div>
                 <div class="my-4 mx-2">
                     <div class="volume-slider">
-                        <label class="form-label" for="musicVolume">Μουσική</label>
+                        <label class="form-label" for="musicVolumeSlider">Μουσική</label>
                         <div class="position-relative">
                             <div>
                                 <input
@@ -80,7 +80,7 @@
                 </div>
                 <div class="my-4 mx-2">
                     <div class="volume-slider">
-                        <label class="form-label" for="soundVolume">Ήχος</label>
+                        <label class="form-label" for="soundVolumeSlider">Ήχος</label>
                         <div class="position-relative">
                             <div>
                                 <input
