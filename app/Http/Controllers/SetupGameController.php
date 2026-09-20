@@ -15,7 +15,7 @@ class SetupGameController extends Controller
 {
     public function __construct(protected PlayerRepository $playerRepository, protected GameRepository $gameRepository) {}
 
-    public function continueShow(Request $request, int $player_id, int $game_id): Factory|\Illuminate\Contracts\View\View
+    public function continueShow(int $player_id, int $game_id): Factory|\Illuminate\Contracts\View\View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
         $players = $this->playerRepository->allWhere(['id' => $player_id]);
@@ -47,7 +47,7 @@ class SetupGameController extends Controller
 
     }
 
-    public function boardShow(Request $request, int $player_id, ?int $game_id = null)
+    public function boardShow(int $player_id, ?int $game_id = null)
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -93,7 +93,7 @@ class SetupGameController extends Controller
         return to_route('select.mode', [$player_id, $game_id]);
     }
 
-    public function modeShow(Request $request, int $player_id, int $game_id)
+    public function modeShow(int $player_id, int $game_id)
     {
         abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -125,7 +125,7 @@ class SetupGameController extends Controller
         return to_route('select.pawn', [$player_id, $game_id]);
     }
 
-    public function pawnShow(Request $request, int $player_id, int $game_id)
+    public function pawnShow(int $player_id, int $game_id)
     {
         abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -169,7 +169,7 @@ class SetupGameController extends Controller
 
     }
 
-    public function pawnTwoShow(Request $request, int $player_id, int $game_id)
+    public function pawnTwoShow(int $player_id, int $game_id)
     {
         abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
 
@@ -215,7 +215,7 @@ class SetupGameController extends Controller
         return to_route('select.options', [$player_id, $game_id]);
     }
 
-    public function optionsShow(Request $request, int $player_id, int $game_id)
+    public function optionsShow(int $player_id, int $game_id)
     {
         abort_if($player_id === 0 || $game_id === 0, 403, __('messages.unauthorized_action'));
         if ($this->checkIfActiveGameHasStarted($game_id)) {

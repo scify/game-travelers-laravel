@@ -16,7 +16,7 @@ class CreatePlayerController extends Controller
 {
     public function __construct(protected PlayerRepository $playerRepository) {}
 
-    public function profileShow(Request $request, ?int $player_id = null): Factory|View
+    public function profileShow(?int $player_id = null): Factory|View
     {
         $name = '';
         $avatar_id = 0;
@@ -62,7 +62,7 @@ class CreatePlayerController extends Controller
 
     }
 
-    public function controlsShow(Request $request, int $player_id): Factory|View
+    public function controlsShow(int $player_id): Factory|View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
         $control_mode = 1;
@@ -120,7 +120,7 @@ class CreatePlayerController extends Controller
 
     }
 
-    public function difficultyShow(Request $request, int $player_id): Factory|View
+    public function difficultyShow(int $player_id): Factory|View
     {
         abort_if($player_id === 0, 403, __('messages.unauthorized_action'));
         $dice_type = 1;

@@ -15,7 +15,7 @@ class UserController extends Controller
 {
     public function __construct(protected PlayerRepository $playerRepository, protected GameRepository $gameRepository) {}
 
-    public function show(Request $request): Factory|View
+    public function show(): Factory|View
     {
         $user_id = auth()->user()->id;
         $players = $this->playerRepository->allWhere(['user_id' => $user_id]);
