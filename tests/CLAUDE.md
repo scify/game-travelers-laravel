@@ -69,6 +69,7 @@ Two limits, and one thing that looks like a fault and is not.
 
 - This is not literal deduplication. A literal repeated without crossing from the act into an assertion stays a literal.
 - Only values originating in the test qualify. A value travelling the other way, from the code into the assertion, is hand-authored and never imported (see Organising Tests).
+- A test may perform the inverse of the operation under test, never the operation itself. Composing the padding to prove trimming is the easy direction, done in the test so the hard one can be asserted. Computing `'seconds' => $minutes * 60` to prove a conversion is the same operation the code performs, which makes the implementation its own oracle. Compose what the code parses; state what the code computes.
 - Where the crossing makes an assertion read as a tautology, that is the rule working. Do not inline the literal again to hide it.
 
 `tests/Feature/PlayerProfileTest.php` is the worked example.
