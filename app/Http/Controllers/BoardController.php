@@ -160,12 +160,8 @@ class BoardController extends Controller
             }
 
             if ($game_phase !== $db_game_phase) {
-                $first_player_turn_new_value = true;
-                if ($game_mode > 1) { // switch player only if the game is not solo
-                    if ($first_player_turn) {
-                        $first_player_turn_new_value = false;
-                    }
-                }
+                // In a solo game, player 1 always plays. Otherwise the turn passes.
+                $first_player_turn_new_value = $game_mode > 1 ? ! $first_player_turn : true;
 
                 $entry = ['latest_random_result' => 0, 'game_phase' => 2, 'location_1' => $active_player_pos, 'first_player_turn' => $first_player_turn_new_value];
                 if (! $first_player_turn) {
@@ -183,12 +179,8 @@ class BoardController extends Controller
 
         if ($game_phase === 3) { // move performed by card
             if ($game_phase !== $db_game_phase) {
-                $first_player_turn_new_value = true;
-                if ($game_mode > 1) { // switch player only if the game is not solo
-                    if ($first_player_turn) {
-                        $first_player_turn_new_value = false;
-                    }
-                }
+                // In a solo game, player 1 always plays. Otherwise the turn passes.
+                $first_player_turn_new_value = $game_mode > 1 ? ! $first_player_turn : true;
 
                 $entry = ['latest_random_result' => 0, 'game_phase' => 3, 'location_1' => $active_player_pos, 'first_player_turn' => $first_player_turn_new_value];
                 if (! $first_player_turn) {
