@@ -127,6 +127,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Seed Password
+    |--------------------------------------------------------------------------
+    |
+    | The password given to the accounts the database seeders create. The
+    | seeders are development data and the deployment never runs them.
+    |
+    */
+
+    'seed_password' => env('DEFAULT_USER_PASSWORD_FOR_SEED'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Google Analytics
     |--------------------------------------------------------------------------
     |

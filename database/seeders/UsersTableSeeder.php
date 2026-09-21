@@ -14,25 +14,29 @@ class UsersTableSeeder extends Seeder
     public function run(): void
     {
         echo "\nRunning User Seeder...\n";
-        echo env('DEFAULT_USER_PASSWORD_FOR_SEED') . "\n";
+        echo config()->string('app.seed_password') . "\n";
 
-        $data = [
-            [
-                'id' => 1,
-                'email' => 'admin-taxidiotes@scify.org',
-                'password' => bcrypt(env('DEFAULT_USER_PASSWORD_FOR_SEED')),
-            ],
-            [
-                'id' => 2,
-                'email' => 'user-taxidiotes@scify.org',
-                'password' => bcrypt(env('DEFAULT_USER_PASSWORD_FOR_SEED')),
-            ],
-        ];
+        // Seeds only an empty users table, so existing accounts are never touched.
+        $existing_ids = $this->userRepository->allWhere([], ['id'])->pluck('id')->all();
+        if (count($existing_ids) === 0) {
+            $data = [
+                [
+                    'id' => 1,
+                    'email' => 'admin-taxidiotes@scify.org',
+                    'password' => bcrypt(config()->string('app.seed_password')),
+                ],
+                [
+                    'id' => 2,
+                    'email' => 'user-taxidiotes@scify.org',
+                    'password' => bcrypt(config()->string('app.seed_password')),
+                ],
+            ];
 
-        foreach ($data as $user) {
-            $user = $this->userRepository->updateOrCreate(['id' => $user['id']],
-                $user);
-            echo "\nAdded User: " . $user->name . ' with email: ' . $user->email . "\n";
+            foreach ($data as $user) {
+                $user = $this->userRepository->updateOrCreate(['id' => $user['id']],
+                    $user);
+                echo "\nAdded User: " . $user->email . "\n";
+            }
         }
     }
 }
