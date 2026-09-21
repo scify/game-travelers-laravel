@@ -11,16 +11,17 @@ use Illuminate\Support\Facades\Cache;
 
 #[Description('Clears the audios cache')]
 #[Signature('audios:clear')]
-class ClearAudioCache extends Command
+final class ClearAudioCache extends Command
 {
     /**
      * Execute the console command.
      */
     public function handle(): int
     {
-        $res = Cache::forget('audioFiles');
-        echo 'Clear: ' . $res . "\n\n";
+        // A false return means the list was not cached, which is not a failure.
+        $cleared = Cache::forget('audioFiles');
+        $this->info($cleared ? 'Audio file cache cleared.' : 'No audio file cache to clear.');
 
-        return $res;
+        return self::SUCCESS;
     }
 }
