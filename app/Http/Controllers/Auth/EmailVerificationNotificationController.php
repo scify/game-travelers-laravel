@@ -5,24 +5,23 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class EmailVerificationNotificationController extends Controller
 {
     /**
      * Send a new email verification notification.
-     *
-     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): never
     {
-        if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('dashboard', absolute: false));
-        }
+        abort(501);
 
-        $request->user()->sendEmailVerificationNotification();
-
-        return back()->with('status', 'verification-link-sent');
+        // if ($request->user()->hasVerifiedEmail()) {
+        //     return redirect()->intended(route('dashboard', absolute: false));
+        // }
+        //
+        // $request->user()->sendEmailVerificationNotification();
+        //
+        // return back()->with('status', 'verification-link-sent');
     }
 }

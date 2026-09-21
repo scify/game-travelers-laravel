@@ -3,13 +3,9 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\ConfirmablePasswordController;
-use App\Http\Controllers\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Route;
@@ -42,21 +38,26 @@ Route::middleware('guest')->group(function (): void {
 });
 
 Route::middleware('auth')->group(function (): void {
-    Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
-        ->name('verification.notice');
-
-    Route::get('verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
-        ->middleware(['signed', 'throttle:6,1'])
-        ->name('verification.verify');
-
-    Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-        ->middleware('throttle:6,1')
-        ->name('verification.send');
-
-    Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
-        ->name('password.confirm');
-
-    Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
+    // The framework's scaffolding for email verification and password confirmation.
+    // Neither is active: User does not implement MustVerifyEmail, nothing uses the
+    // password.confirm middleware, and the routes render auth.verify-email and
+    // auth.confirm-password, which are not built.
+    //
+    // Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
+    //     ->name('verification.notice');
+    //
+    // Route::get('verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
+    //     ->middleware(['signed', 'throttle:6,1'])
+    //     ->name('verification.verify');
+    //
+    // Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+    //     ->middleware('throttle:6,1')
+    //     ->name('verification.send');
+    //
+    // Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
+    //     ->name('password.confirm');
+    //
+    // Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
