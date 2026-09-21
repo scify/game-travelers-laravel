@@ -61,6 +61,16 @@ class BoardController extends Controller
         return view('board', ['player_id' => $player_id, 'playerAudio' => $playerAudio, 'game_id' => $game_id, 'player_data' => $player_data, 'game_data' => $game_data, 'cards' => $this->getCards($game[0]->board_id), 'debug_state_url' => $debug_state_url]);
     }
 
+    /**
+     * Receives the board state and returns what the board does next.
+     *
+     * games.latest_random_result holds a different value in each phase: in
+     * game_phase 1 the square the next roll reaches, in game_phase 2 on a card
+     * square the index of the card to draw. A card index selects the artwork,
+     * and the movement is the value field in getCards().
+     *
+     * @see \App\Http\Requests\Debug\SetGameStateRequest::gameAttributes()
+     */
     public function fromVue(Request $request): ResponseFactory|Response|null
     {
         $user_id = auth()->user()->id;
@@ -226,7 +236,7 @@ class BoardController extends Controller
             if ($pos === 6) {
                 return 9;
             }
-        } elseif ($tutorial_mode && ! $first_player_turn) {
+        } elseif ($tutorial_mode) {
             if ($pos === 0) {
                 return 1;
             }

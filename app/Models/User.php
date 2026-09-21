@@ -30,7 +30,7 @@ class User extends Authenticatable
     /**
      * The relationships that are loaded by default
      *
-     * @var array
+     * @var list<string>
      */
     protected $with = ['roles'];
 
