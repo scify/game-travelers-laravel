@@ -11,24 +11,30 @@ additional_fqdns: []
 database:
     type: mysql
     version: "8.0"
-# Uploaded files live in storage/, outside the web root.
+# Uploaded files live in storage/, outside the web root. The path is relative
+# to the docroot: a plain "storage" would mean public/storage, which then
+# blocks the symlink artisan storage:link puts there.
 upload_dirs:
-    - storage
+    - ../storage
 use_dns_when_possible: true
 timezone: Europe/Athens
 composer_version: "2"
-web_environment: []
 # Node.js version. Must match .nvmrc; the post-start hook below keeps them in step.
 nodejs_version: "24.21.0"
 corepack_enable: false
 # Vite's development server, reached by the browser through the DDEV router.
-# The https port is VITE_DEV_PORT in .env (see vite.config.js); each project
-# on the same machine needs its own pair.
+# Three numbers must be equal: container_port, where Vite listens inside the
+# container; https_port, where the browser reaches it; and VITE_DEV_PORT, which
+# vite.config.js uses for the listen port and for the origin. http_port only
+# has to be free. Each project on one machine needs its own set.
+# vite.config.js reads VITE_DEV_PORT from the environment, not from .env.
 web_extra_exposed_ports:
     - name: vite
       container_port: 5151
       http_port: 5150
       https_port: 5151
+web_environment:
+    - VITE_DEV_PORT=5151
 ddev_version_constraint: ">= 1.25.3"
 hooks:
     post-start:

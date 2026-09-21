@@ -15,7 +15,7 @@ export default defineConfig(({ command, mode }) => {
     const port = Number(env.VITE_DEV_PORT);
     if (ddev && !port) {
         throw new Error(
-            'Set VITE_DEV_PORT in .env to the https port exposed by web_extra_exposed_ports in .ddev/config.yaml.',
+            'Set VITE_DEV_PORT in web_environment in .ddev/config.yaml, equal to container_port and https_port.',
         );
     }
 
