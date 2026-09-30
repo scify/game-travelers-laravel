@@ -25,7 +25,7 @@
         --}}
     <form
         method="post"
-        action="{{ route('select.player') }}"
+        action="{{ route('select.player.save') }}"
         class="
         form
         @error('player') is-invalid @enderror {{-- one field, one error --}}

@@ -15,7 +15,7 @@
 
     <form
         method="post"
-        action="{{ route('settings.controls', [ request()->player_id, request()->back, request()->game_id ]) }}"
+        action="{{ route('settings.controls.save', [ request()->player_id, request()->back, request()->game_id ]) }}"
         id="settingsControls"
     >
         @csrf

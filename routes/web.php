@@ -59,41 +59,41 @@ Route::pattern('game_id', '[0-9]+');
 Route::middleware('auth')->group(function (): void {
     // Choosing a player carries no ids yet, so the guard has nothing to read.
     Route::get('/select/player', [UserController::class, 'show'])->name('select.player');
-    Route::post('/select/player', [UserController::class, 'select'])->name('select.player');
+    Route::post('/select/player', [UserController::class, 'select'])->name('select.player.save');
 
     Route::middleware(EnsureIdsAreValid::class)->group(function (): void {
         Route::prefix('select')->name('select.')->group(function (): void {
             Route::get('continue/{player_id}/{game_id}', [SetupGameController::class, 'continueShow'])->name('continue');
-            Route::post('continue/{player_id}/{game_id}', [SetupGameController::class, 'continueSave'])->name('continue');
+            Route::post('continue/{player_id}/{game_id}', [SetupGameController::class, 'continueSave'])->name('continue.save');
 
             Route::get('board/{player_id}/{game_id?}', [SetupGameController::class, 'boardShow'])->name('board');
-            Route::post('board/{player_id}/{game_id?}', [SetupGameController::class, 'boardSave'])->name('board');
+            Route::post('board/{player_id}/{game_id?}', [SetupGameController::class, 'boardSave'])->name('board.save');
 
             Route::get('mode/{player_id}/{game_id}', [SetupGameController::class, 'modeShow'])->name('mode');
-            Route::post('mode/{player_id}/{game_id}', [SetupGameController::class, 'modeSave'])->name('mode');
+            Route::post('mode/{player_id}/{game_id}', [SetupGameController::class, 'modeSave'])->name('mode.save');
 
             Route::get('pawn/{player_id}/{game_id}', [SetupGameController::class, 'pawnShow'])->name('pawn');
-            Route::post('pawn/{player_id}/{game_id}', [SetupGameController::class, 'pawnSave'])->name('pawn');
+            Route::post('pawn/{player_id}/{game_id}', [SetupGameController::class, 'pawnSave'])->name('pawn.save');
 
             Route::get('pawn-two/{player_id}/{game_id}', [SetupGameController::class, 'pawnTwoShow'])->name('pawnTwo');
-            Route::post('pawn-two/{player_id}/{game_id}', [SetupGameController::class, 'pawnTwoSave'])->name('pawnTwo');
+            Route::post('pawn-two/{player_id}/{game_id}', [SetupGameController::class, 'pawnTwoSave'])->name('pawnTwo.save');
 
             Route::get('options/{player_id}/{game_id}', [SetupGameController::class, 'optionsShow'])->name('options');
-            Route::post('options/{player_id}/{game_id}', [SetupGameController::class, 'optionsSave'])->name('options');
+            Route::post('options/{player_id}/{game_id}', [SetupGameController::class, 'optionsSave'])->name('options.save');
         });
 
         Route::prefix('settings')->name('settings.')->group(function (): void {
             Route::get('{player_id}/{back}/{game_id?}', [SettingsController::class, 'settingsShow'])->name('index');
-            Route::post('{player_id}/{back}/{game_id?}', [SettingsController::class, 'settingsSelect'])->name('index');
+            Route::post('{player_id}/{back}/{game_id?}', [SettingsController::class, 'settingsSelect'])->name('index.save');
 
             Route::get('profile/{player_id}/{back}/{game_id?}', [SettingsController::class, 'profileShow'])->name('profile');
-            Route::post('profile/{player_id}/{back}/{game_id?}', [SettingsController::class, 'profileSave'])->name('profile');
+            Route::post('profile/{player_id}/{back}/{game_id?}', [SettingsController::class, 'profileSave'])->name('profile.save');
 
             Route::get('controls/{player_id}/{back}/{game_id?}', [SettingsController::class, 'controlsShow'])->name('controls');
-            Route::post('controls/{player_id}/{back}/{game_id?}', [SettingsController::class, 'controlsSave'])->name('controls');
+            Route::post('controls/{player_id}/{back}/{game_id?}', [SettingsController::class, 'controlsSave'])->name('controls.save');
 
             Route::get('difficulty/{player_id}/{back}/{game_id?}', [SettingsController::class, 'difficultyShow'])->name('difficulty');
-            Route::post('difficulty/{player_id}/{back}/{game_id?}', [SettingsController::class, 'difficultySave'])->name('difficulty');
+            Route::post('difficulty/{player_id}/{back}/{game_id?}', [SettingsController::class, 'difficultySave'])->name('difficulty.save');
 
             /*Route::get('audio/{player_id}/{back}/{game_id?}', [CustomAudioController::class, 'audioShow'])->name('audio');
             Route::post('audio/{player_id}/{back}/{game_id?}', [CustomAudioController::class, 'audioSave'])->name('audio');*/
@@ -101,13 +101,13 @@ Route::middleware('auth')->group(function (): void {
 
         Route::prefix('create')->name('create.')->group(function (): void {
             Route::get('profile/{player_id?}', [CreatePlayerController::class, 'profileShow'])->name('profile');
-            Route::post('profile/{player_id?}', [CreatePlayerController::class, 'profileSave'])->name('profile');
+            Route::post('profile/{player_id?}', [CreatePlayerController::class, 'profileSave'])->name('profile.save');
 
             Route::get('controls/{player_id}', [CreatePlayerController::class, 'controlsShow'])->name('controls');
-            Route::post('controls/{player_id}', [CreatePlayerController::class, 'controlsSave'])->name('controls');
+            Route::post('controls/{player_id}', [CreatePlayerController::class, 'controlsSave'])->name('controls.save');
 
             Route::get('difficulty/{player_id}', [CreatePlayerController::class, 'difficultyShow'])->name('difficulty');
-            Route::post('difficulty/{player_id}', [CreatePlayerController::class, 'difficultySave'])->name('difficulty');
+            Route::post('difficulty/{player_id}', [CreatePlayerController::class, 'difficultySave'])->name('difficulty.save');
         });
 
         Route::get('board/{player_id}/{game_id}', [BoardController::class, 'play'])->name('board');

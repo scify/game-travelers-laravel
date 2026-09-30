@@ -33,7 +33,7 @@ class GameSetupTest extends TestCase
     public function selecting_board_creates_game_and_asks_for_mode(): void
     {
         $response = $this->actingAs($this->seededUser())
-            ->post(route('select.board', [1]), ['board' => 1]);
+            ->post(route('select.board.save', [1]), ['board' => 1]);
 
         $game = Game::query()->where('player_id', 1)->firstOrFail();
         $response->assertRedirect(route('select.mode', [1, $game->id]));
@@ -46,7 +46,7 @@ class GameSetupTest extends TestCase
         $game = $this->startedGame($this->seededPlayer(), ['started' => false, 'mode_id' => 2]);
 
         $this->actingAs($this->seededUser())
-            ->post(route('select.mode', [1, $game->id]), ['mode' => 1])
+            ->post(route('select.mode.save', [1, $game->id]), ['mode' => 1])
             ->assertRedirect(route('select.pawn', [1, $game->id]));
 
         $this->assertDatabaseHas('games', ['id' => $game->id, 'mode_id' => 1]);
@@ -58,7 +58,7 @@ class GameSetupTest extends TestCase
         $game = $this->startedGame($this->seededPlayer(), ['started' => false, 'mode_id' => 1, 'pawn_id_1' => 0, 'pawn_id_2' => 0]);
 
         $this->actingAs($this->seededUser())
-            ->post(route('select.pawn', [1, $game->id]), ['pawn' => 1])
+            ->post(route('select.pawn.save', [1, $game->id]), ['pawn' => 1])
             ->assertRedirect(route('select.options', [1, $game->id]));
 
         $this->assertDatabaseHas('games', ['id' => $game->id, 'pawn_id_1' => 1]);
@@ -70,7 +70,7 @@ class GameSetupTest extends TestCase
         $game = $this->startedGame($this->seededPlayer(), ['started' => false, 'mode_id' => 2, 'pawn_id_1' => 0, 'pawn_id_2' => 0]);
 
         $this->actingAs($this->seededUser())
-            ->post(route('select.pawn', [1, $game->id]), ['pawn' => 1])
+            ->post(route('select.pawn.save', [1, $game->id]), ['pawn' => 1])
             ->assertRedirect(route('select.pawnTwo', [1, $game->id]));
 
         $this->assertDatabaseHas('games', ['id' => $game->id, 'pawn_id_1' => 1]);
@@ -82,7 +82,7 @@ class GameSetupTest extends TestCase
         $game = $this->startedGame($this->seededPlayer(), ['started' => false, 'mode_id' => 2, 'pawn_id_1' => 1, 'pawn_id_2' => 0]);
 
         $this->actingAs($this->seededUser())
-            ->post(route('select.pawnTwo', [1, $game->id]), ['pawn' => 2])
+            ->post(route('select.pawnTwo.save', [1, $game->id]), ['pawn' => 2])
             ->assertRedirect(route('select.options', [1, $game->id]));
 
         $this->assertDatabaseHas('games', ['id' => $game->id, 'pawn_id_1' => 1, 'pawn_id_2' => 2]);
@@ -94,7 +94,7 @@ class GameSetupTest extends TestCase
         $game = $this->startedGame($this->seededPlayer(), ['started' => false, 'use_tutorial' => true, 'selected_board_size' => 1]);
 
         $this->actingAs($this->seededUser())
-            ->post(route('select.options', [1, $game->id]), ['option' => 2])
+            ->post(route('select.options.save', [1, $game->id]), ['option' => 2])
             ->assertRedirect(route('board', [1, $game->id]));
 
         $this->assertDatabaseHas('games', ['id' => $game->id, 'use_tutorial' => 0, 'started' => 1, 'selected_board_size' => 2]);
@@ -106,7 +106,7 @@ class GameSetupTest extends TestCase
         $game = $this->startedGame($this->seededPlayer(), ['started' => false]);
 
         $this->actingAs($this->seededUser())
-            ->post(route('select.options', [1, $game->id]), ['option' => 1])
+            ->post(route('select.options.save', [1, $game->id]), ['option' => 1])
             ->assertRedirect(route('board', [1, $game->id]));
 
         $this->assertDatabaseHas('games', ['id' => $game->id, 'use_tutorial' => 1, 'started' => 1]);
@@ -129,7 +129,7 @@ class GameSetupTest extends TestCase
         $game = $this->startedGame($this->seededPlayer(), ['started' => false, 'board_id' => 2]);
 
         $this->actingAs($this->seededUser())
-            ->post(route('select.board', [1]), ['board' => 3])
+            ->post(route('select.board.save', [1]), ['board' => 3])
             ->assertRedirect(route('select.mode', [1, $game->id]));
 
         $this->assertSame(1, Game::query()->where('player_id', 1)->count());

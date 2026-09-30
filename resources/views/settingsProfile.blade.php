@@ -19,7 +19,7 @@
 
     <form
         method="post"
-        action="{{ route('settings.profile', [ request()->player_id, request()->back, request()->game_id ] ) }}"
+        action="{{ route('settings.profile.save', [ request()->player_id, request()->back, request()->game_id ] ) }}"
         id="settingsProfile"
     >
     @csrf

@@ -15,7 +15,7 @@
 
     <form
         method="post" {{-- should be post, get is for testing --}}
-        action="{{ route('settings.difficulty', [ request()->player_id, request()->back, request()->game_id ]) }}"
+        action="{{ route('settings.difficulty.save', [ request()->player_id, request()->back, request()->game_id ]) }}"
         id="settingsDifficulty"
     >
         @csrf

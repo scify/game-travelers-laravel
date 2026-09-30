@@ -12,7 +12,7 @@
     @endsection
 
     <form method="post"
-        action="{{ route('select.continue', [ request()->player_id, request()->game_id ]) }}" {{-- dont forget the back button! --}}
+        action="{{ route('select.continue.save', [ request()->player_id, request()->game_id ]) }}" {{-- dont forget the back button! --}}
     >
         @csrf
 

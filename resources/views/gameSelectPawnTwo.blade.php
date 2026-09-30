@@ -17,7 +17,7 @@
     @endsection
 
     <form method="post"
-        action="{{ route('select.pawnTwo', [ request()->player_id, request()->game_id ]) }}"
+        action="{{ route('select.pawnTwo.save', [ request()->player_id, request()->game_id ]) }}"
     >
         @csrf
 

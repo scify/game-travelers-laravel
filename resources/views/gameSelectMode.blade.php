@@ -14,7 +14,7 @@
     @endsection
 
     <form method="post"
-        action="{{ route('select.mode', [ request()->player_id, request()->game_id ]) }}"
+        action="{{ route('select.mode.save', [ request()->player_id, request()->game_id ]) }}"
     >
         @csrf
 

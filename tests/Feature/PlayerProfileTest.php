@@ -30,7 +30,7 @@ class PlayerProfileTest extends TestCase
         $avatarId = 3;
 
         $this->actingAs($this->seededUser())
-            ->post(route('create.profile'), ['name' => ' ' . $name . ' ', 'avatarId' => $avatarId]);
+            ->post(route('create.profile.save'), ['name' => ' ' . $name . ' ', 'avatarId' => $avatarId]);
 
         $player = Player::query()->where('name', $name)->firstOrFail();
         $this->assertSame(2, $player->user_id);
@@ -43,7 +43,7 @@ class PlayerProfileTest extends TestCase
         $name = 'Γιώργος';
 
         $response = $this->actingAs($this->seededUser())
-            ->post(route('create.profile'), ['name' => $name, 'avatarId' => 3]);
+            ->post(route('create.profile.save'), ['name' => $name, 'avatarId' => 3]);
 
         $player = Player::query()->where('name', $name)->firstOrFail();
         $response->assertRedirect(route('create.controls', [$player->id]));
@@ -57,7 +57,7 @@ class PlayerProfileTest extends TestCase
 
         $this->actingAs($this->seededUser())
             ->from($newPlayer)
-            ->post($newPlayer, ['name' => $taken, 'avatarId' => 3])
+            ->post(route('create.profile.save'), ['name' => $taken, 'avatarId' => 3])
             ->assertRedirect($newPlayer)
             ->assertSessionHasErrors('name')
             ->assertSessionHasInput('name', $taken);
@@ -72,7 +72,7 @@ class PlayerProfileTest extends TestCase
         $avatarId = 6;
 
         $this->actingAs($this->seededUser())
-            ->post(route('settings.profile', [1, 'user']), ['name' => $name, 'avatarId' => $avatarId])
+            ->post(route('settings.profile.save', [1, 'user']), ['name' => $name, 'avatarId' => $avatarId])
             ->assertRedirect(route('settings.index', [1, 'user']));
 
         $this->assertDatabaseHas('players', ['id' => 1, 'name' => $name, 'avatar_id' => $avatarId]);
@@ -86,7 +86,7 @@ class PlayerProfileTest extends TestCase
 
         $this->actingAs($this->seededUser())
             ->from($profile)
-            ->post($profile, ['name' => $taken, 'avatarId' => 5])
+            ->post(route('settings.profile.save', [1, 'user']), ['name' => $taken, 'avatarId' => 5])
             ->assertRedirect($profile)
             ->assertSessionHasErrors('name')
             ->assertSessionHasInput('name', $taken);
@@ -104,7 +104,7 @@ class PlayerProfileTest extends TestCase
         $this->actingAs($this->seededUser())
             ->from($profile)
             ->followingRedirects()
-            ->post($profile, ['name' => $taken, 'avatarId' => $avatarId])
+            ->post(route('settings.profile.save', [1, 'user']), ['name' => $taken, 'avatarId' => $avatarId])
             ->assertOk()
             ->assertSeeHtml('value="' . $taken . '"')
             ->assertSeeHtml('data-value="' . $avatarId . '"');
@@ -141,7 +141,7 @@ class PlayerProfileTest extends TestCase
         $scanningSpeed = 3;
 
         $this->actingAs($this->seededUser())
-            ->post(route('create.controls', [1]), [
+            ->post(route('create.controls.save', [1]), [
                 'controlType' => $controlType,
                 'controlAutomaticSelectionButton' => 'Enter',
                 'controlManualSelectionButton' => $selectionKey,
@@ -192,7 +192,7 @@ class PlayerProfileTest extends TestCase
         $movement = 3;
 
         $this->actingAs($this->seededUser())
-            ->post(route('create.difficulty', [1]), [
+            ->post(route('create.difficulty.save', [1]), [
                 'dice' => $dice,
                 'gameDuration' => $gameDuration,
                 'level' => $level,

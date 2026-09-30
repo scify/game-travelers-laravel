@@ -29,7 +29,7 @@ class PlayerSelectionTest extends TestCase
     public function starting_without_active_game_goes_to_board_selection(): void
     {
         $this->actingAs($this->seededUser())
-            ->post(route('select.player'), ['player' => 1, 'submit' => 'start'])
+            ->post(route('select.player.save'), ['player' => 1, 'submit' => 'start'])
             ->assertRedirect(route('select.board', [1]));
     }
 
@@ -39,7 +39,7 @@ class PlayerSelectionTest extends TestCase
         $game = $this->startedGame($this->seededPlayer());
 
         $this->actingAs($this->seededUser())
-            ->post(route('select.player'), ['player' => 1, 'submit' => 'start'])
+            ->post(route('select.player.save'), ['player' => 1, 'submit' => 'start'])
             ->assertRedirect(route('select.continue', [1, $game->id]));
     }
 
@@ -49,7 +49,7 @@ class PlayerSelectionTest extends TestCase
         $game = $this->startedGame($this->seededPlayer(), ['started' => false]);
 
         $this->actingAs($this->seededUser())
-            ->post(route('select.player'), ['player' => 1, 'submit' => 'start'])
+            ->post(route('select.player.save'), ['player' => 1, 'submit' => 'start'])
             ->assertRedirect(route('select.board', [1]));
 
         $this->assertDatabaseMissing('games', ['id' => $game->id]);
@@ -62,7 +62,7 @@ class PlayerSelectionTest extends TestCase
         $game = $this->startedGame($player, ['started' => false]);
 
         $this->actingAs(User::factory()->create())
-            ->post(route('select.player'), ['player' => $player->id, 'submit' => 'start'])
+            ->post(route('select.player.save'), ['player' => $player->id, 'submit' => 'start'])
             ->assertForbidden();
 
         $this->assertDatabaseHas('games', ['id' => $game->id]);
@@ -72,7 +72,7 @@ class PlayerSelectionTest extends TestCase
     public function settings_button_opens_player_settings(): void
     {
         $this->actingAs($this->seededUser())
-            ->post(route('select.player'), ['player' => 1, 'submit' => 'settings'])
+            ->post(route('select.player.save'), ['player' => 1, 'submit' => 'settings'])
             ->assertRedirect(route('settings.index', [1, 'user']));
     }
 
@@ -80,7 +80,7 @@ class PlayerSelectionTest extends TestCase
     public function unknown_action_is_forbidden(): void
     {
         $this->actingAs($this->seededUser())
-            ->post(route('select.player'), ['player' => 1, 'submit' => 'bogus'])
+            ->post(route('select.player.save'), ['player' => 1, 'submit' => 'bogus'])
             ->assertForbidden();
     }
 }
