@@ -52,8 +52,16 @@ _ide_helper_models.php
 # Laravel Boost: generated per developer, see the README
 .agents
 .claude
+/.amp
+/.factory
 /.github/copilot-instructions.md
+/.github/skills
+/.grok
+/.junie
+/.kiro
 /.mcp.json
+/.pi
 /AGENTS.md
 /CLAUDE.md
 /boost.json
+/opencode.json
