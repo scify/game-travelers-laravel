@@ -35,6 +35,12 @@ web_extra_exposed_ports:
       https_port: 5151
 web_environment:
     - VITE_DEV_PORT=5151
+    # How an agent on the host reaches PHP, Composer, npm and vendor/bin through
+    # DDEV. Laravel Boost reads them; see config/boost.php.
+    - BOOST_PHP_EXECUTABLE_PATH=ddev
+    - BOOST_COMPOSER_EXECUTABLE_PATH=ddev composer
+    - BOOST_NPM_EXECUTABLE_PATH=ddev npm
+    - BOOST_VENDOR_BIN_EXECUTABLE_PATH=ddev exec vendor/bin/
 ddev_version_constraint: ">= 1.25.3"
 hooks:
     post-start:

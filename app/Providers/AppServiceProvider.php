@@ -33,10 +33,11 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Let Boost's MCP server reach PHP inside a DDEV container.
      *
-     * A developer on DDEV sets boost.executable_paths.php to "ddev", so the
-     * generated agent files and the MCP command run through DDEV from the host.
-     * The MCP server itself already runs inside the container, where "ddev" does
-     * not exist, so its tool executor falls back to Boost's PHP_BINARY default.
+     * Under DDEV, .ddev/config.yaml sets boost.executable_paths.php to "ddev",
+     * so the generated agent files and the MCP command run through DDEV from
+     * the host. The MCP server itself already runs inside the container, where
+     * "ddev" is a stub that prints a hint and exits 0, so its tool executor
+     * falls back to Boost's PHP_BINARY default.
      * Boost is a development dependency; without it the method returns early.
      */
     private function bindBoost(): void

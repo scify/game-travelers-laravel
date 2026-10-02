@@ -201,7 +201,7 @@ php artisan boost:install
 
 After a change in `.ai/guidelines/`, run `php artisan boost:update` to refresh the generated file.
 
-If your PHP does not run on the machine where your agent runs, for example under DDEV, set the `BOOST_*_EXECUTABLE_PATH` variables in `.env` before installing. They are listed at the end of `.env.example`.
+Under DDEV, your agent runs on your machine and PHP runs in the container. `.ddev/config.yaml` sets the `BOOST_*_EXECUTABLE_PATH` variables that tell Boost so; a local PHP needs none of them.
 
 ## How to contribute
 - Send us a pull request describing your improvements/fixes/features
