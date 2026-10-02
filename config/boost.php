@@ -79,6 +79,8 @@ return [
     | Boost uses. While configured, they take precedence over the automatic
     | discovery mechanism. When undefined, your system defaults are used.
     |
+    | The "php" entry has two uses; see AppServiceProvider::bindBoost().
+    |
     */
 
     'executable_paths' => [
@@ -113,6 +115,6 @@ return [
     |
     */
 
-    'browser_log_levels' => explode(',', env('BOOST_BROWSER_LOG_LEVELS', 'error,warning,info,debug')),
+    'browser_log_levels' => explode(',', (string) env('BOOST_BROWSER_LOG_LEVELS', 'error,warning,info,debug')),
 
 ];

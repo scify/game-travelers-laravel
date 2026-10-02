@@ -13,7 +13,13 @@
     below the block.
 
     boost.json (project root) names the targets: agents (claude_code writes
-    CLAUDE.md, codex writes AGENTS.md), guidelines, skills.
+    CLAUDE.md, codex writes AGENTS.md), guidelines, skills. Each developer
+    writes their own with boost:install; like the files it produces, it is not
+    committed.
+
+    Only the root CLAUDE.md and AGENTS.md are generated. The CLAUDE.md files in
+    subdirectories are written by hand and committed. Nothing renders them, so
+    they name commands in the local form, as the README does.
 
     WRITING A MODULE
 
@@ -25,8 +31,10 @@
 
     These are Blade templates. A literal @ compiles as a directive, so wrap it:
     `@verbatim` ... `@endverbatim`. Never hardcode a local runner; the $assist
-    helpers resolve through executable_paths in config/boost.php and print the
-    right one per project.
+    helpers resolve through executable_paths in config/boost.php, which reads
+    the BOOST_*_EXECUTABLE_PATH variables from the environment (DDEV's
+    web_environment, or .env), so each developer's file prints their own
+    runner.
 
     Levers available to a template: PHP_VERSION, app()->version(),
     method_exists() and class_exists() (pass the class as a string, not ::class),
@@ -63,5 +71,6 @@
 --}}
 ## AI Guidelines
 
-This project uses Laravel Boost. `CLAUDE.md` and `AGENTS.md` are generated: edit
-the sources in `.ai/guidelines/`, then run `{{ $assist->artisanCommand('boost:update') }}`.
+This project uses Laravel Boost. `CLAUDE.md` and `AGENTS.md` are generated per
+developer and not committed: edit the sources in `.ai/guidelines/`, then run
+`{{ $assist->artisanCommand('boost:update') }}`.
