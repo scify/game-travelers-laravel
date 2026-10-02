@@ -10,8 +10,8 @@ The Laravel 13 web application of the Taxidiotes game.
 ## Requirements
 
 - **PHP 8.4.1** or newer, with the extensions `ctype`, `curl`, `dom`, `fileinfo`, `filter`, `hash`, `mbstring`, `openssl`, `pcre`, `pdo`, `pdo_mysql`, `session`, `tokenizer`, and `xml`. The list in `composer.json` is the one that counts. With `platform-check` on, an older version is rejected as the application loads.
-- **Composer 2**.
-- **MySQL 8.0**. The test suite runs on SQLite in memory and needs no database server.
+- **Composer 2.10** or newer, required by `composer.json` for a development install.
+- **MySQL 8.0**. The test suite runs on SQLite in memory: it needs the `pdo_sqlite` extension and no database server.
 - **Node.js 24.21.0** or newer, the version in `.nvmrc` (`nvm use` selects it), and **npm 11.19.0** or newer. `.npmrc` sets `engine-strict`: npm refuses to install on an older version.
 - A **web server** with `public/` as the document root, for example the Apache configuration below, or `php artisan serve` while developing.
 - Optional, for local development only: **[DDEV](https://ddev.com/)**. `.ddev/config.yaml` is part of the repository and provides the PHP, MySQL, and Node.js versions above in containers. A development machine that uses DDEV needs none of them installed. Prefix the commands below with `ddev`: the first one starts the project and writes `.env` for the container.

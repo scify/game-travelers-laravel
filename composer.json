@@ -29,7 +29,9 @@
         "symfony/mailgun-mailer": "^8.1.6"
     },
     "require-dev": {
+        "ext-pdo_sqlite": "*",
         "ext-simplexml": "*",
+        "composer": "^2.10",
         "driftingly/rector-laravel": "^2.5.0",
         "fakerphp/faker": "^1.24.1",
         "larastan/larastan": "^3.10.0",
