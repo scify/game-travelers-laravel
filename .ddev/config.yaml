@@ -20,7 +20,7 @@ use_dns_when_possible: true
 timezone: Europe/Athens
 composer_version: "2"
 # Node.js version. Must match .nvmrc; the post-start hook below keeps them in step.
-nodejs_version: "24.21.0"
+nodejs_version: "24.22.1"
 corepack_enable: false
 # Vite's development server, reached by the browser through the DDEV router.
 # Three numbers must be equal: container_port, where Vite listens inside the
